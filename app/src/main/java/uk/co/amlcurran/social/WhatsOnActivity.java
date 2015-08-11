@@ -76,24 +76,32 @@ public class WhatsOnActivity extends AppCompatActivity {
             }
         })
                 .filter(neverFilter())
-                .map(new Func1<Cursor, CalendarItem>() {
-                    @Override
-                    public CalendarItem call(Cursor cursor) {
-                        String title = cursor.getString(cursor.getColumnIndex(CalendarContract.Events.TITLE));
-                        long status = cursor.getLong(cursor.getColumnIndex(CalendarContract.Instances.STATUS));
-                        return new CalendarItem(title, status);
-                    }
-                })
+                .map(convertToItem())
                 .toList()
-                .map(new Func1<List<CalendarItem>, CalendarSource>() {
-                    @Override
-                    public CalendarSource call(List<CalendarItem> calendarItems) {
-                        return new CalendarSource(calendarItems);
-                    }
-                })
+                .map(convertToSource())
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(Schedulers.io())
                 .subscribe(adapter);
+    }
+
+    private static Func1<List<CalendarItem>, CalendarSource> convertToSource() {
+        return new Func1<List<CalendarItem>, CalendarSource>() {
+            @Override
+            public CalendarSource call(List<CalendarItem> calendarItems) {
+                return new CalendarSource(calendarItems);
+            }
+        };
+    }
+
+    private static Func1<Cursor, CalendarItem> convertToItem() {
+        return new Func1<Cursor, CalendarItem>() {
+            @Override
+            public CalendarItem call(Cursor cursor) {
+                String title = cursor.getString(cursor.getColumnIndex(CalendarContract.Events.TITLE));
+                long status = cursor.getLong(cursor.getColumnIndex(CalendarContract.Instances.STATUS));
+                return new CalendarItem(title, status);
+            }
+        };
     }
 
     private static Func1<Cursor, Boolean> neverFilter() {
@@ -105,7 +113,7 @@ public class WhatsOnActivity extends AppCompatActivity {
         };
     }
 
-    private class CalendarSource implements ItemSource<CalendarItem> {
+    private static class CalendarSource implements ItemSource<CalendarItem> {
 
         private final List<CalendarItem> calendarItems;
 
@@ -124,7 +132,7 @@ public class WhatsOnActivity extends AppCompatActivity {
         }
     }
 
-    private class CalendarItem {
+    private static class CalendarItem {
         private final String title;
         private final long status;
 
