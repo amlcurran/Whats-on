@@ -4,4 +4,6 @@ public interface CalendarItem {
     String title();
 
     long startDay();
+
+    boolean isEmpty();
 }

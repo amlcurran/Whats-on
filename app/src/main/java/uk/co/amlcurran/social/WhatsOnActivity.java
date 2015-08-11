@@ -21,7 +21,6 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
-import uk.co.amlcurran.social.bootstrap.ItemSource;
 
 public class WhatsOnActivity extends AppCompatActivity {
 
@@ -40,7 +39,7 @@ public class WhatsOnActivity extends AppCompatActivity {
         setContentView(R.layout.activity_whats_on);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list_whats_on);
-        WhatsOnAdapter adapter = new WhatsOnAdapter(LayoutInflater.from(this), new CalendarSource(Collections.<CalendarItem>emptyList()));
+        WhatsOnAdapter adapter = new WhatsOnAdapter(LayoutInflater.from(this), new CalendarSource(Collections.<CalendarItem>emptyList(), 14));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
@@ -73,17 +72,17 @@ public class WhatsOnActivity extends AppCompatActivity {
                 .filter(neverFilter())
                 .map(convertToItem())
                 .toList()
-                .map(convertToSource())
+                .map(convertToSource(14))
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(Schedulers.io())
                 .subscribe(adapter);
     }
 
-    private static Func1<List<CalendarItem>, CalendarSource> convertToSource() {
+    static Func1<List<CalendarItem>, CalendarSource> convertToSource(final int size) {
         return new Func1<List<CalendarItem>, CalendarSource>() {
             @Override
             public CalendarSource call(List<CalendarItem> calendarItems) {
-                return new CalendarSource(calendarItems);
+                return new CalendarSource(calendarItems, size);
             }
         };
     }
@@ -109,25 +108,6 @@ public class WhatsOnActivity extends AppCompatActivity {
         };
     }
 
-    private static class CalendarSource implements ItemSource<CalendarItem> {
-
-        private final List<CalendarItem> calendarItems;
-
-        public CalendarSource(List<CalendarItem> calendarItems) {
-            this.calendarItems = calendarItems;
-        }
-
-        @Override
-        public int count() {
-            return calendarItems.size();
-        }
-
-        @Override
-        public CalendarItem itemAt(int position) {
-            return calendarItems.get(position);
-        }
-    }
-
     private static class EventCalendarItem implements CalendarItem {
         private final String title;
         private final long status;
@@ -147,6 +127,11 @@ public class WhatsOnActivity extends AppCompatActivity {
         @Override
         public long startDay() {
             return startDay;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return false;
         }
     }
 
