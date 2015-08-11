@@ -8,12 +8,12 @@ import rx.Observer;
 import uk.co.amlcurran.social.bootstrap.BasicViewHolder;
 import uk.co.amlcurran.social.bootstrap.ItemSource;
 
-public class WhatsOnAdapter<Source extends ItemSource<CalendarItem>> extends RecyclerView.Adapter<BasicViewHolder<CalendarItem>> implements Observer<Source> {
+public class WhatsOnAdapter extends RecyclerView.Adapter<BasicViewHolder<CalendarItem>> implements Observer<ItemSource<CalendarItem>> {
     private final LayoutInflater layoutInflater;
     private final BasicViewHolder.Binder<CalendarItem> binder;
-    private Source source;
+    private ItemSource<CalendarItem> source;
 
-    public WhatsOnAdapter(LayoutInflater layoutInflater, Source firstSource) {
+    public WhatsOnAdapter(LayoutInflater layoutInflater, ItemSource<CalendarItem> firstSource) {
         this.layoutInflater = layoutInflater;
         this.binder = new BasicViewHolder.Binder<CalendarItem>() {
             @Override
@@ -50,7 +50,7 @@ public class WhatsOnAdapter<Source extends ItemSource<CalendarItem>> extends Rec
     }
 
     @Override
-    public void onNext(Source source) {
+    public void onNext(ItemSource<CalendarItem> source) {
         this.source = source;
         notifyDataSetChanged();
     }

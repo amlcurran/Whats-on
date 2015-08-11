@@ -40,7 +40,7 @@ public class WhatsOnActivity extends AppCompatActivity {
         setContentView(R.layout.activity_whats_on);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list_whats_on);
-        WhatsOnAdapter<CalendarSource, CalendarItem> adapter = new WhatsOnAdapter<>(LayoutInflater.from(this), new CalendarSource(Collections.<CalendarItem>emptyList()));
+        WhatsOnAdapter adapter = new WhatsOnAdapter(LayoutInflater.from(this), new CalendarSource(Collections.<CalendarItem>emptyList()));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
