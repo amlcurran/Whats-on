@@ -44,7 +44,7 @@ public class WhatsOnActivity extends AppCompatActivity {
         RxAdapter<CalendarSource, CalendarItem> adapter = new RxAdapter<>(LayoutInflater.from(this), new BasicViewHolder.Binder<CalendarItem>() {
             @Override
             public String bindItem(CalendarItem item) {
-                return item.toString();
+                return item.title();
             }
         }, new CalendarSource(Collections.<CalendarItem>emptyList()));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -142,8 +142,8 @@ public class WhatsOnActivity extends AppCompatActivity {
         }
 
         @Override
-        public String toString() {
-            return title + " " + status;
+        public String title() {
+            return title;
         }
     }
 
