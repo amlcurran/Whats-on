@@ -99,7 +99,7 @@ public class WhatsOnActivity extends AppCompatActivity {
             public CalendarItem call(Cursor cursor) {
                 String title = cursor.getString(cursor.getColumnIndex(CalendarContract.Events.TITLE));
                 long status = cursor.getLong(cursor.getColumnIndex(CalendarContract.Instances.STATUS));
-                return new CalendarItem(title, status);
+                return new EventCalendarItem(title, status);
             }
         };
     }
@@ -132,11 +132,11 @@ public class WhatsOnActivity extends AppCompatActivity {
         }
     }
 
-    private static class CalendarItem {
+    private static class EventCalendarItem implements CalendarItem {
         private final String title;
         private final long status;
 
-        public CalendarItem(String title, long status) {
+        public EventCalendarItem(String title, long status) {
             this.title = title;
             this.status = status;
         }
