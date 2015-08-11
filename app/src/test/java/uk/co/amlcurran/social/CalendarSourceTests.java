@@ -20,21 +20,36 @@ public class CalendarSourceTests {
     @Test
     public void testOneDayWithOneItemIsNotEmpty() {
         List<CalendarItem> items = new ArrayList<>();
-        items.add(new TestCalendarItem());
+        items.add(new TestCalendarItem(0));
         CalendarSource calendarSource = WhatsOnActivity.convertToSource(1).call(items);
 
         assertThat(calendarSource.isEmptyAt(0)).isFalse();
     }
 
+    @Test
+    public void testTwoDaysWithOneItemOnDayTwoIsEmptyOnDayOne() {
+        List<CalendarItem> items = new ArrayList<>();
+        items.add(new TestCalendarItem(1));
+        CalendarSource calendarSource = WhatsOnActivity.convertToSource(2).call(items);
+
+        assertThat(calendarSource.isEmptyAt(0)).isTrue();
+    }
+
     private static class TestCalendarItem implements CalendarItem {
+        private final int startDay;
+
+        public TestCalendarItem(int startDay) {
+            this.startDay = startDay;
+        }
+
         @Override
         public String title() {
             return null;
         }
 
         @Override
-        public long startDay() {
-            return 0;
+        public int startDay() {
+            return startDay;
         }
 
         @Override

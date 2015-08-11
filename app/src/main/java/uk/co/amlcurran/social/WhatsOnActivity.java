@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.annotation.Nullable;
+import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +14,6 @@ import android.view.LayoutInflater;
 
 import org.joda.time.DateTime;
 
-import java.util.Collections;
 import java.util.List;
 
 import rx.Observable;
@@ -39,7 +39,7 @@ public class WhatsOnActivity extends AppCompatActivity {
         setContentView(R.layout.activity_whats_on);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list_whats_on);
-        WhatsOnAdapter adapter = new WhatsOnAdapter(LayoutInflater.from(this), new CalendarSource(Collections.<CalendarItem>emptyList(), 14));
+        WhatsOnAdapter adapter = new WhatsOnAdapter(LayoutInflater.from(this), new CalendarSource(new SparseArrayCompat<CalendarItem>(0), 14));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
@@ -82,7 +82,11 @@ public class WhatsOnActivity extends AppCompatActivity {
         return new Func1<List<CalendarItem>, CalendarSource>() {
             @Override
             public CalendarSource call(List<CalendarItem> calendarItems) {
-                return new CalendarSource(calendarItems, size);
+                SparseArrayCompat<CalendarItem> itemArray = new SparseArrayCompat<>();
+                for (CalendarItem item : calendarItems) {
+                    itemArray.put(item.startDay(), item);
+                }
+                return new CalendarSource(itemArray, size);
             }
         };
     }
@@ -93,7 +97,7 @@ public class WhatsOnActivity extends AppCompatActivity {
             public CalendarItem call(Cursor cursor) {
                 String title = cursor.getString(cursor.getColumnIndex(CalendarContract.Events.TITLE));
                 long status = cursor.getLong(cursor.getColumnIndex(CalendarContract.Instances.STATUS));
-                long startDay = cursor.getLong(cursor.getColumnIndex(CalendarContract.Instances.START_DAY));
+                int startDay = cursor.getInt(cursor.getColumnIndex(CalendarContract.Instances.START_DAY));
                 return new EventCalendarItem(title, status, startDay);
             }
         };
@@ -111,9 +115,9 @@ public class WhatsOnActivity extends AppCompatActivity {
     private static class EventCalendarItem implements CalendarItem {
         private final String title;
         private final long status;
-        private final long startDay;
+        private final int startDay;
 
-        public EventCalendarItem(String title, long status, long startDay) {
+        public EventCalendarItem(String title, long status, int startDay) {
             this.title = title;
             this.status = status;
             this.startDay = startDay;
@@ -125,7 +129,7 @@ public class WhatsOnActivity extends AppCompatActivity {
         }
 
         @Override
-        public long startDay() {
+        public int startDay() {
             return startDay;
         }
 

@@ -7,7 +7,7 @@ public class EmptyCalendarItem implements CalendarItem {
     }
 
     @Override
-    public long startDay() {
+    public int startDay() {
         return 0;
     }
 

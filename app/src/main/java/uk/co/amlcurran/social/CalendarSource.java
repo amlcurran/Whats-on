@@ -1,15 +1,15 @@
 package uk.co.amlcurran.social;
 
-import java.util.List;
+import android.support.v4.util.SparseArrayCompat;
 
 import uk.co.amlcurran.social.bootstrap.ItemSource;
 
 class CalendarSource implements ItemSource<CalendarItem> {
 
-    private final List<CalendarItem> calendarItems;
+    private final SparseArrayCompat<CalendarItem> calendarItems;
     private final int daysSize;
 
-    public CalendarSource(List<CalendarItem> calendarItems, int daysSize) {
+    public CalendarSource(SparseArrayCompat<CalendarItem> calendarItems, int daysSize) {
         this.calendarItems = calendarItems;
         this.daysSize = daysSize;
     }
@@ -25,6 +25,6 @@ class CalendarSource implements ItemSource<CalendarItem> {
     }
 
     public boolean isEmptyAt(int position) {
-        return position >= calendarItems.size();
+        return calendarItems.get(position) == null;
     }
 }
