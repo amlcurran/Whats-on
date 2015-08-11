@@ -21,9 +21,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
-import uk.co.amlcurran.social.bootstrap.BasicViewHolder;
 import uk.co.amlcurran.social.bootstrap.ItemSource;
-import uk.co.amlcurran.social.bootstrap.RxAdapter;
 
 public class WhatsOnActivity extends AppCompatActivity {
 
@@ -42,12 +40,7 @@ public class WhatsOnActivity extends AppCompatActivity {
         setContentView(R.layout.activity_whats_on);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list_whats_on);
-        RxAdapter<CalendarSource, CalendarItem> adapter = new RxAdapter<>(LayoutInflater.from(this), new BasicViewHolder.Binder<CalendarItem>() {
-            @Override
-            public String bindItem(CalendarItem item) {
-                return item.title();
-            }
-        }, new CalendarSource(Collections.<CalendarItem>emptyList()));
+        WhatsOnAdapter<CalendarSource, CalendarItem> adapter = new WhatsOnAdapter<>(LayoutInflater.from(this), new CalendarSource(Collections.<CalendarItem>emptyList()));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
