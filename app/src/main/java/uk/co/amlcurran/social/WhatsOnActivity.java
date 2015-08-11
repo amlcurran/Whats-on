@@ -1,6 +1,8 @@
 package uk.co.amlcurran.social;
 
+import android.content.ContentUris;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.annotation.Nullable;
@@ -30,6 +32,7 @@ public class WhatsOnActivity extends AppCompatActivity {
             CalendarContract.Events.TITLE,
             CalendarContract.Instances.START_MINUTE,
             CalendarContract.Instances.END_MINUTE,
+            CalendarContract.Instances.STATUS
     };
 
     @Override
@@ -51,31 +54,34 @@ public class WhatsOnActivity extends AppCompatActivity {
             @Override
             public void call(Subscriber<? super Cursor> subscriber) {
                 long now = new DateTime().getMillis();
-                long time = new DateTime().minusDays(7).getMillis();
-                Cursor calendarCursor = CalendarContract.Instances.query(getContentResolver(), PROJECTION, time, now);
-                System.out.println("Calendar size " + calendarCursor.getCount());
-                while (calendarCursor.moveToNext()){
+                long nextWeek = new DateTime().plusDays(14).getMillis();
+
+                Uri.Builder builder = CalendarContract.Instances.CONTENT_URI.buildUpon();
+                ContentUris.appendId(builder, now);
+                ContentUris.appendId(builder, nextWeek);
+
+                long fivePm = 17 * 60;
+                long elevenPm = 23 * 60;
+
+                String selection = String.format("%1$s >= %2$d AND %3$s <= %4$d",
+                        CalendarContract.Instances.START_MINUTE, fivePm,
+                        CalendarContract.Instances.END_MINUTE, elevenPm);
+
+                Cursor calendarCursor = getContentResolver().query(builder.build(), PROJECTION, selection, null, null);
+                while (calendarCursor.moveToNext()) {
                     subscriber.onNext(calendarCursor);
                 }
                 subscriber.onCompleted();
                 calendarCursor.close();
             }
         })
-                .filter(new Func1<Cursor, Boolean>() {
-                    @Override
-                    public Boolean call(Cursor cursor) {
-                        long fivePm = 17 * 60;
-                        long tenPm = 23 * 60;
-                        boolean isPastFive = cursor.getLong(cursor.getColumnIndex(CalendarContract.Instances.START_MINUTE)) >= fivePm;
-                        boolean isBeforeEleven = cursor.getLong(cursor.getColumnIndex(CalendarContract.Instances.END_MINUTE)) <= tenPm;
-                        return isPastFive && isBeforeEleven;
-                    }
-                })
+                .filter(neverFilter())
                 .map(new Func1<Cursor, CalendarItem>() {
                     @Override
                     public CalendarItem call(Cursor cursor) {
                         String title = cursor.getString(cursor.getColumnIndex(CalendarContract.Events.TITLE));
-                        return new CalendarItem(title);
+                        long status = cursor.getLong(cursor.getColumnIndex(CalendarContract.Instances.STATUS));
+                        return new CalendarItem(title, status);
                     }
                 })
                 .toList()
@@ -88,6 +94,15 @@ public class WhatsOnActivity extends AppCompatActivity {
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(Schedulers.io())
                 .subscribe(adapter);
+    }
+
+    private static Func1<Cursor, Boolean> neverFilter() {
+        return new Func1<Cursor, Boolean>() {
+            @Override
+            public Boolean call(Cursor cursor) {
+                return true;
+            }
+        };
     }
 
     private class CalendarSource implements ItemSource<CalendarItem> {
@@ -111,14 +126,16 @@ public class WhatsOnActivity extends AppCompatActivity {
 
     private class CalendarItem {
         private final String title;
+        private final long status;
 
-        public CalendarItem(String title) {
+        public CalendarItem(String title, long status) {
             this.title = title;
+            this.status = status;
         }
 
         @Override
         public String toString() {
-            return title;
+            return title + " " + status;
         }
     }
 
