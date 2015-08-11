@@ -11,9 +11,10 @@ public class RxAdapter<Source extends ItemSource<Item>, Item> extends RecyclerVi
     private final BasicViewHolder.Binder<Item> binder;
     private Source source;
 
-    public RxAdapter(LayoutInflater layoutInflater, BasicViewHolder.Binder<Item> binder) {
+    public RxAdapter(LayoutInflater layoutInflater, BasicViewHolder.Binder<Item> binder, Source firstSource) {
         this.layoutInflater = layoutInflater;
         this.binder = binder;
+        this.source = firstSource;
     }
 
     @Override
