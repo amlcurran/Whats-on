@@ -1,6 +1,12 @@
 package uk.co.amlcurran.social;
 
 public class EmptyCalendarItem implements CalendarItem {
+    private final int position;
+
+    public EmptyCalendarItem(int position) {
+        this.position = position;
+    }
+
     @Override
     public String title() {
         return "Empty";
@@ -8,7 +14,7 @@ public class EmptyCalendarItem implements CalendarItem {
 
     @Override
     public int startDay() {
-        return 0;
+        return position;
     }
 
     @Override

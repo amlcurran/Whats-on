@@ -83,12 +83,23 @@ public class WhatsOnActivity extends AppCompatActivity {
             @Override
             public CalendarSource call(List<CalendarItem> calendarItems) {
                 SparseArrayCompat<CalendarItem> itemArray = new SparseArrayCompat<>();
+                int lowestStartDay = getLowestStartDay(calendarItems);
                 for (CalendarItem item : calendarItems) {
-                    itemArray.put(item.startDay(), item);
+                    itemArray.put(item.startDay() - lowestStartDay, item);
                 }
                 return new CalendarSource(itemArray, size);
             }
         };
+    }
+
+    private static int getLowestStartDay(List<CalendarItem> calendarItems) {
+        int lowest = Integer.MAX_VALUE;
+        for (CalendarItem item : calendarItems) {
+            if (lowest > item.startDay()) {
+                lowest = item.startDay();
+            }
+        }
+        return lowest;
     }
 
     private static Func1<Cursor, CalendarItem> convertToItem() {

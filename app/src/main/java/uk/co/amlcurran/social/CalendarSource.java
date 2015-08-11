@@ -21,7 +21,7 @@ class CalendarSource implements ItemSource<CalendarItem> {
 
     @Override
     public CalendarItem itemAt(int position) {
-        return calendarItems.get(position);
+        return calendarItems.get(position, new EmptyCalendarItem(position));
     }
 
     public boolean isEmptyAt(int position) {
