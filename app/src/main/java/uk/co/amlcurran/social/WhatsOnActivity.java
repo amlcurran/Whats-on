@@ -31,6 +31,7 @@ public class WhatsOnActivity extends AppCompatActivity {
             CalendarContract.Events._ID,
             CalendarContract.Events.TITLE,
             CalendarContract.Instances.START_MINUTE,
+            CalendarContract.Instances.START_DAY,
             CalendarContract.Instances.END_MINUTE,
             CalendarContract.Instances.STATUS
     };
@@ -53,11 +54,12 @@ public class WhatsOnActivity extends AppCompatActivity {
         Observable.create(new Observable.OnSubscribe<Cursor>() {
             @Override
             public void call(Subscriber<? super Cursor> subscriber) {
-                long now = new DateTime().getMillis();
-                long nextWeek = new DateTime().plusDays(14).getMillis();
+                DateTime now = new DateTime();
+                long nowMillis = now.getMillis();
+                long nextWeek = now.plusDays(14).getMillis();
 
                 Uri.Builder builder = CalendarContract.Instances.CONTENT_URI.buildUpon();
-                ContentUris.appendId(builder, now);
+                ContentUris.appendId(builder, nowMillis);
                 ContentUris.appendId(builder, nextWeek);
 
                 long fivePm = 17 * 60;
@@ -99,7 +101,8 @@ public class WhatsOnActivity extends AppCompatActivity {
             public CalendarItem call(Cursor cursor) {
                 String title = cursor.getString(cursor.getColumnIndex(CalendarContract.Events.TITLE));
                 long status = cursor.getLong(cursor.getColumnIndex(CalendarContract.Instances.STATUS));
-                return new EventCalendarItem(title, status);
+                long startDay = cursor.getLong(cursor.getColumnIndex(CalendarContract.Instances.START_DAY));
+                return new EventCalendarItem(title, status, startDay);
             }
         };
     }
@@ -135,15 +138,22 @@ public class WhatsOnActivity extends AppCompatActivity {
     private static class EventCalendarItem implements CalendarItem {
         private final String title;
         private final long status;
+        private final long startDay;
 
-        public EventCalendarItem(String title, long status) {
+        public EventCalendarItem(String title, long status, long startDay) {
             this.title = title;
             this.status = status;
+            this.startDay = startDay;
         }
 
         @Override
         public String title() {
             return title;
+        }
+
+        @Override
+        public long startDay() {
+            return startDay;
         }
     }
 
