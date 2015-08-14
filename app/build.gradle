@@ -28,4 +28,5 @@ dependencies {
     compile 'io.reactivex:rxandroid:0.25.0'
     testCompile 'junit:junit:4.12'
     testCompile 'org.easytesting:fest-assert-core:2.0M10'
+    compile project(':core')
 }
