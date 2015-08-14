@@ -5,33 +5,37 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import rx.Observer;
-import uk.co.amlcurran.social.bootstrap.BasicViewHolder;
 import uk.co.amlcurran.social.bootstrap.ItemSource;
 
-public class WhatsOnAdapter extends RecyclerView.Adapter<BasicViewHolder<CalendarItem>> implements Observer<ItemSource<CalendarItem>> {
+public class WhatsOnAdapter extends RecyclerView.Adapter<CalendarItemViewHolder> implements Observer<ItemSource<CalendarItem>> {
+    private static final int TYPE_EVENT = 0;
+    private static final int TYPE_EMPTY = 1;
     private final LayoutInflater layoutInflater;
-    private final BasicViewHolder.Binder<CalendarItem> binder;
     private ItemSource<CalendarItem> source;
 
     public WhatsOnAdapter(LayoutInflater layoutInflater, ItemSource<CalendarItem> firstSource) {
         this.layoutInflater = layoutInflater;
-        this.binder = new BasicViewHolder.Binder<CalendarItem>() {
-            @Override
-            public String bindItem(CalendarItem item) {
-                return item.title();
-            }
-        };
         this.source = firstSource;
     }
 
     @Override
-    public BasicViewHolder<CalendarItem> onCreateViewHolder(ViewGroup parent, int viewType) {
-        return BasicViewHolder.from(layoutInflater, parent, binder);
+    public CalendarItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == TYPE_EVENT) {
+            return new EventViewHolder(layoutInflater.inflate(android.R.layout.simple_list_item_1, parent, false));
+        } else {
+            return new EmptyViewHolder(layoutInflater.inflate(R.layout.item_empty, parent, false));
+        }
     }
 
     @Override
-    public void onBindViewHolder(BasicViewHolder<CalendarItem> holder, int position) {
-        holder.bind(source.itemAt(position));
+    public void onBindViewHolder(CalendarItemViewHolder holder, int position) {
+        if (getItemViewType(position) != TYPE_EMPTY) {
+            EventCalendarItem eventCalendarItem = (EventCalendarItem) source.itemAt(position);
+            ((EventViewHolder) holder).bind(eventCalendarItem);
+        } else {
+            EmptyCalendarItem item = ((EmptyCalendarItem) source.itemAt(position));
+            ((EmptyViewHolder) holder).bind(item);
+        }
     }
 
     @Override
@@ -42,6 +46,11 @@ public class WhatsOnAdapter extends RecyclerView.Adapter<BasicViewHolder<Calenda
     @Override
     public void onCompleted() {
 
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return source.itemAt(position).isEmpty() ? TYPE_EMPTY : TYPE_EVENT;
     }
 
     @Override
