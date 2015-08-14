@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="48dip">
+              android:layout_height="64dip">
 
     <TextView
             android:layout_width="match_parent"
@@ -13,5 +13,7 @@
             android:gravity="center_vertical"
             android:paddingStart="16dip"
             android:paddingEnd="16dip"
-            android:textColor="@color/secondary_text_default_material_light"/>
+            android:textColor="@color/secondary_text_default_material_light"
+            android:background="@drawable/empty_border"
+            android:layout_margin="4dip"/>
 </LinearLayout>
