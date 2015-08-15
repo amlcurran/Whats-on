@@ -18,13 +18,11 @@ import uk.co.amlcurran.social.bootstrap.ItemSource;
 
 public class EventsRepository {
     private static String[] PROJECTION = new String[]{
-            CalendarContract.Events._ID,
             CalendarContract.Events.TITLE,
-            CalendarContract.Instances.START_MINUTE,
             CalendarContract.Instances.START_DAY,
-            CalendarContract.Instances.END_MINUTE,
             CalendarContract.Events.SELF_ATTENDEE_STATUS,
-            CalendarContract.Events.DTSTART
+            CalendarContract.Events.DTSTART,
+            CalendarContract.Instances.EVENT_ID
     };
     private final ContentResolver contentResolver;
 
@@ -74,10 +72,10 @@ public class EventsRepository {
             @Override
             public CalendarItem call(Cursor cursor) {
                 String title = cursor.getString(cursor.getColumnIndex(CalendarContract.Events.TITLE));
-                long status = cursor.getLong(cursor.getColumnIndex(CalendarContract.Instances.SELF_ATTENDEE_STATUS));
                 int startDay = cursor.getInt(cursor.getColumnIndex(CalendarContract.Instances.START_DAY));
-                long eventId = cursor.getLong(cursor.getColumnIndex(CalendarContract.Events._ID));
+                long status = cursor.getLong(cursor.getColumnIndex(CalendarContract.Instances.SELF_ATTENDEE_STATUS));
                 long startTime = cursor.getLong(cursor.getColumnIndex(CalendarContract.Events.DTSTART));
+                long eventId = cursor.getLong(cursor.getColumnIndex(CalendarContract.Instances.EVENT_ID));
                 return new EventCalendarItem(eventId, title, status, startDay, startTime);
             }
         };
