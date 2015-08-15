@@ -11,17 +11,19 @@ public class WhatsOnAdapter extends RecyclerView.Adapter<CalendarItemViewHolder>
     private static final int TYPE_EVENT = 0;
     private static final int TYPE_EMPTY = 1;
     private final LayoutInflater layoutInflater;
+    private final EventSelectedListener eventSelectedListener;
     private ItemSource<CalendarItem> source;
 
-    public WhatsOnAdapter(LayoutInflater layoutInflater, ItemSource<CalendarItem> firstSource) {
+    public WhatsOnAdapter(LayoutInflater layoutInflater, EventSelectedListener eventSelectedListener, ItemSource<CalendarItem> firstSource) {
         this.layoutInflater = layoutInflater;
+        this.eventSelectedListener = eventSelectedListener;
         this.source = firstSource;
     }
 
     @Override
     public CalendarItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_EVENT) {
-            return new EventViewHolder(layoutInflater.inflate(R.layout.item_event, parent, false));
+            return new EventViewHolder(layoutInflater.inflate(R.layout.item_event, parent, false), eventSelectedListener);
         } else {
             return new EmptyViewHolder(layoutInflater.inflate(R.layout.item_empty, parent, false));
         }
@@ -63,5 +65,12 @@ public class WhatsOnAdapter extends RecyclerView.Adapter<CalendarItemViewHolder>
         this.source = source;
         notifyDataSetChanged();
     }
+
+    public interface EventSelectedListener {
+        void eventSelected(EventCalendarItem calendarItem);
+
+        void emptySelected(EmptyCalendarItem calendarItem);
+    }
+
 }
 
