@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 import java.util.List;
 
@@ -51,6 +52,12 @@ public class WhatsOnActivity extends AppCompatActivity {
             public void emptySelected(EmptyCalendarItem calendarItem) {
                 Intent intent = new Intent(Intent.ACTION_INSERT);
                 intent.setData(CalendarContract.Events.CONTENT_URI);
+                DateTime dateTime = DateTime.now(DateTimeZone.getDefault()).withTimeAtStartOfDay();
+                DateTime day = dateTime.plusDays(calendarItem.startDay());
+                DateTime startTime = day.plusHours(17);
+                DateTime endTime = day.plusHours(22);
+                intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime.getMillis());
+                intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getMillis());
                 startActivity(intent);
             }
 
@@ -58,10 +65,11 @@ public class WhatsOnActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
+        final DateTime now = new DateTime();
+
         Observable.create(new Observable.OnSubscribe<Cursor>() {
             @Override
             public void call(Subscriber<? super Cursor> subscriber) {
-                DateTime now = new DateTime();
                 long nowMillis = now.getMillis();
                 long nextWeek = now.plusDays(14).getMillis();
 
