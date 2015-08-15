@@ -4,9 +4,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 public class EmptyViewHolder extends CalendarItemViewHolder<EmptyCalendarItem> {
 
+    public static final DateTimeFormatter DAY_FORMATTER = DateTimeFormat.forPattern("EEE");
     private final TextView textView;
     private final WhatsOnAdapter.EventSelectedListener eventSelectedListener;
 
@@ -18,7 +20,7 @@ public class EmptyViewHolder extends CalendarItemViewHolder<EmptyCalendarItem> {
 
     @Override
     public void bind(final EmptyCalendarItem item) {
-        textView.setText("AIM EMPTY INNIT " + DateTimeFormat.forPattern("EEE").print(item.startTime()));
+        textView.setText(DAY_FORMATTER.print(item.startTime()) + ": Nothing on");
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

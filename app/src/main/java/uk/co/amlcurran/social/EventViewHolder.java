@@ -3,8 +3,12 @@ package uk.co.amlcurran.social;
 import android.view.View;
 import android.widget.TextView;
 
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 public class EventViewHolder extends CalendarItemViewHolder<EventCalendarItem> {
 
+    public static final DateTimeFormatter DAY_FORMATTER = DateTimeFormat.forPattern("EEE");
     private final TextView textView;
     private final WhatsOnAdapter.EventSelectedListener eventSelectedListener;
 
@@ -16,7 +20,7 @@ public class EventViewHolder extends CalendarItemViewHolder<EventCalendarItem> {
 
     @Override
     public void bind(final EventCalendarItem item) {
-        textView.setText(item.title());
+        textView.setText(DAY_FORMATTER.print(item.startTime()) + ": " + item.title());
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
