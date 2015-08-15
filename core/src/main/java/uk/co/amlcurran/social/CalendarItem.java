@@ -5,5 +5,7 @@ public interface CalendarItem {
 
     int startDay();
 
+    long startTime();
+
     boolean isEmpty();
 }

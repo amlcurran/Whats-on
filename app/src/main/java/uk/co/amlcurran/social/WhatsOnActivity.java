@@ -24,6 +24,7 @@ public class WhatsOnActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_whats_on);
+        DateTime now = DateTime.now(DateTimeZone.getDefault());
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list_whats_on);
         WhatsOnAdapter adapter = new WhatsOnAdapter(LayoutInflater.from(this), new WhatsOnAdapter.EventSelectedListener() {
@@ -46,11 +47,10 @@ public class WhatsOnActivity extends AppCompatActivity {
                 startActivity(intent);
             }
 
-        }, new CalendarSource(new SparseArrayCompat<CalendarItem>(0), 0));
+        }, new CalendarSource(new SparseArrayCompat<CalendarItem>(0), 0, now));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        DateTime now = DateTime.now(DateTimeZone.getDefault());
 
         new EventsRepository(getContentResolver()).queryEventsFrom(now, 14)
                 .subscribeOn(AndroidSchedulers.mainThread())

@@ -3,6 +3,8 @@ package uk.co.amlcurran.social;
 import android.view.View;
 import android.widget.TextView;
 
+import org.joda.time.format.DateTimeFormat;
+
 public class EmptyViewHolder extends CalendarItemViewHolder<EmptyCalendarItem> {
 
     private final TextView textView;
@@ -16,7 +18,7 @@ public class EmptyViewHolder extends CalendarItemViewHolder<EmptyCalendarItem> {
 
     @Override
     public void bind(final EmptyCalendarItem item) {
-        textView.setText("AIM EMPTY INNIT");
+        textView.setText("AIM EMPTY INNIT " + DateTimeFormat.forPattern("EEE").print(item.startTime()));
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

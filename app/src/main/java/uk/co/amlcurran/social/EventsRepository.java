@@ -23,7 +23,8 @@ public class EventsRepository {
             CalendarContract.Instances.START_MINUTE,
             CalendarContract.Instances.START_DAY,
             CalendarContract.Instances.END_MINUTE,
-            CalendarContract.Events.SELF_ATTENDEE_STATUS
+            CalendarContract.Events.SELF_ATTENDEE_STATUS,
+            CalendarContract.Events.DTSTART
     };
     private final ContentResolver contentResolver;
 
@@ -65,7 +66,7 @@ public class EventsRepository {
         })
                 .map(convertToItem())
                 .toList()
-                .map(convertToSource(numberOfDays));
+                .map(convertToSource(now, numberOfDays));
     }
 
     private static Func1<Cursor, CalendarItem> convertToItem() {
@@ -76,12 +77,13 @@ public class EventsRepository {
                 long status = cursor.getLong(cursor.getColumnIndex(CalendarContract.Instances.SELF_ATTENDEE_STATUS));
                 int startDay = cursor.getInt(cursor.getColumnIndex(CalendarContract.Instances.START_DAY));
                 long eventId = cursor.getLong(cursor.getColumnIndex(CalendarContract.Events._ID));
-                return new EventCalendarItem(eventId, title, status, startDay);
+                long startTime = cursor.getLong(cursor.getColumnIndex(CalendarContract.Events.DTSTART));
+                return new EventCalendarItem(eventId, title, status, startDay, startTime);
             }
         };
     }
 
-    static Func1<List<CalendarItem>, ItemSource<CalendarItem>> convertToSource(final int size) {
+    static Func1<List<CalendarItem>, ItemSource<CalendarItem>> convertToSource(final DateTime now, final int size) {
         return new Func1<List<CalendarItem>, ItemSource<CalendarItem>>() {
             @Override
             public ItemSource<CalendarItem> call(List<CalendarItem> calendarItems) {
@@ -90,7 +92,7 @@ public class EventsRepository {
                 for (CalendarItem item : calendarItems) {
                     itemArray.put(item.startDay() - lowestStartDay, item);
                 }
-                return new CalendarSource(itemArray, size);
+                return new CalendarSource(itemArray, size, now);
             }
         };
     }

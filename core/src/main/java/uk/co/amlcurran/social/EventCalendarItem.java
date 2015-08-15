@@ -5,12 +5,14 @@ class EventCalendarItem implements CalendarItem {
     private final String title;
     private final long status;
     private final int startDay;
+    private final long startTime;
 
-    public EventCalendarItem(long eventId, String title, long status, int startDay) {
+    public EventCalendarItem(long eventId, String title, long status, int startDay, long startTime) {
         this.eventId = eventId;
         this.title = title;
         this.status = status;
         this.startDay = startDay;
+        this.startTime = startTime;
     }
 
     public long id() {
@@ -25,6 +27,11 @@ class EventCalendarItem implements CalendarItem {
     @Override
     public int startDay() {
         return startDay;
+    }
+
+    @Override
+    public long startTime() {
+        return startTime;
     }
 
     @Override
