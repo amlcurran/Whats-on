@@ -30,7 +30,8 @@ public class WhatsOnActivity extends AppCompatActivity {
             CalendarContract.Instances.START_MINUTE,
             CalendarContract.Instances.START_DAY,
             CalendarContract.Instances.END_MINUTE,
-            CalendarContract.Instances.STATUS
+            CalendarContract.Instances.STATUS,
+            CalendarContract.Instances.SELF_ATTENDEE_STATUS
     };
 
     @Override
@@ -57,9 +58,10 @@ public class WhatsOnActivity extends AppCompatActivity {
                 long fivePm = 17 * 60;
                 long elevenPm = 23 * 60;
 
-                String selection = String.format("%1$s >= %2$d AND %3$s <= %4$d",
+                String selection = String.format("%1$s >= %2$d AND %3$s <= %4$d AND %5$s <> %6$d",
                         CalendarContract.Instances.START_MINUTE, fivePm,
-                        CalendarContract.Instances.END_MINUTE, elevenPm);
+                        CalendarContract.Instances.END_MINUTE, elevenPm,
+                        CalendarContract.Instances.SELF_ATTENDEE_STATUS, CalendarContract.Instances.STATUS_CANCELED);
 
                 Cursor calendarCursor = getContentResolver().query(builder.build(), PROJECTION, selection, null, null);
                 while (calendarCursor.moveToNext()) {
@@ -107,7 +109,7 @@ public class WhatsOnActivity extends AppCompatActivity {
             @Override
             public CalendarItem call(Cursor cursor) {
                 String title = cursor.getString(cursor.getColumnIndex(CalendarContract.Events.TITLE));
-                long status = cursor.getLong(cursor.getColumnIndex(CalendarContract.Instances.STATUS));
+                long status = cursor.getLong(cursor.getColumnIndex(CalendarContract.Instances.SELF_ATTENDEE_STATUS));
                 int startDay = cursor.getInt(cursor.getColumnIndex(CalendarContract.Instances.START_DAY));
                 return new EventCalendarItem(title, status, startDay);
             }
