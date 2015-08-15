@@ -25,7 +25,7 @@ public class WhatsOnAdapter extends RecyclerView.Adapter<CalendarItemViewHolder>
         if (viewType == TYPE_EVENT) {
             return new EventViewHolder(layoutInflater.inflate(R.layout.item_event, parent, false), eventSelectedListener);
         } else {
-            return new EmptyViewHolder(layoutInflater.inflate(R.layout.item_empty, parent, false));
+            return new EmptyViewHolder(layoutInflater.inflate(R.layout.item_empty, parent, false), eventSelectedListener);
         }
     }
 

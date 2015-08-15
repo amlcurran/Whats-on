@@ -6,14 +6,22 @@ import android.widget.TextView;
 public class EmptyViewHolder extends CalendarItemViewHolder<EmptyCalendarItem> {
 
     private final TextView textView;
+    private final WhatsOnAdapter.EventSelectedListener eventSelectedListener;
 
-    public EmptyViewHolder(View itemView) {
+    public EmptyViewHolder(View itemView, WhatsOnAdapter.EventSelectedListener eventSelectedListener) {
         super(itemView);
-        textView = ((TextView) itemView.findViewById(R.id.textView));
+        this.eventSelectedListener = eventSelectedListener;
+        this.textView = ((TextView) itemView.findViewById(R.id.textView));
     }
 
     @Override
-    public void bind(EmptyCalendarItem item) {
+    public void bind(final EmptyCalendarItem item) {
         textView.setText("AIM EMPTY INNIT");
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eventSelectedListener.emptySelected(item);
+            }
+        });
     }
 }

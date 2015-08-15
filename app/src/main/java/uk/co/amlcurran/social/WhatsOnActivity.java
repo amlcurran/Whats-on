@@ -26,7 +26,7 @@ import rx.schedulers.Schedulers;
 public class WhatsOnActivity extends AppCompatActivity {
 
     private static String[] PROJECTION = new String[]{
-            CalendarContract.Events.ORIGINAL_ID,
+            CalendarContract.Events._ID,
             CalendarContract.Events.TITLE,
             CalendarContract.Instances.START_MINUTE,
             CalendarContract.Instances.START_DAY,
@@ -43,14 +43,17 @@ public class WhatsOnActivity extends AppCompatActivity {
         WhatsOnAdapter adapter = new WhatsOnAdapter(LayoutInflater.from(this), new WhatsOnAdapter.EventSelectedListener() {
             @Override
             public void eventSelected(EventCalendarItem calendarItem) {
-                Uri eventUri = ContentUris.withAppendedId(CalendarContract.Instances.CONTENT_URI, calendarItem.id());
+                Uri eventUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, calendarItem.id());
                 startActivity(new Intent(Intent.ACTION_VIEW).setData(eventUri));
             }
 
             @Override
             public void emptySelected(EmptyCalendarItem calendarItem) {
-
+                Intent intent = new Intent(Intent.ACTION_INSERT);
+                intent.setData(CalendarContract.Events.CONTENT_URI);
+                startActivity(intent);
             }
+
         }, new CalendarSource(new SparseArrayCompat<CalendarItem>(0), 14));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
@@ -122,7 +125,7 @@ public class WhatsOnActivity extends AppCompatActivity {
                 String title = cursor.getString(cursor.getColumnIndex(CalendarContract.Events.TITLE));
                 long status = cursor.getLong(cursor.getColumnIndex(CalendarContract.Instances.SELF_ATTENDEE_STATUS));
                 int startDay = cursor.getInt(cursor.getColumnIndex(CalendarContract.Instances.START_DAY));
-                long eventId = cursor.getLong(cursor.getColumnIndexOrThrow(CalendarContract.Events._ID));
+                long eventId = cursor.getLong(cursor.getColumnIndex(CalendarContract.Events._ID));
                 return new EventCalendarItem(eventId, title, status, startDay);
             }
         };
