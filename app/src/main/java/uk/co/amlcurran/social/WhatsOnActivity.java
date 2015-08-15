@@ -2,7 +2,6 @@ package uk.co.amlcurran.social;
 
 import android.content.ContentUris;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
@@ -16,24 +15,10 @@ import android.view.LayoutInflater;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
-import java.util.List;
-
-import rx.Observable;
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 public class WhatsOnActivity extends AppCompatActivity {
-
-    private static String[] PROJECTION = new String[]{
-            CalendarContract.Events._ID,
-            CalendarContract.Events.TITLE,
-            CalendarContract.Instances.START_MINUTE,
-            CalendarContract.Instances.START_DAY,
-            CalendarContract.Instances.END_MINUTE,
-            CalendarContract.Events.SELF_ATTENDEE_STATUS
-    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,91 +46,16 @@ public class WhatsOnActivity extends AppCompatActivity {
                 startActivity(intent);
             }
 
-        }, new CalendarSource(new SparseArrayCompat<CalendarItem>(0), 14));
+        }, new CalendarSource(new SparseArrayCompat<CalendarItem>(0), 0));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        final DateTime now = new DateTime();
+        DateTime now = DateTime.now(DateTimeZone.getDefault());
 
-        Observable.create(new Observable.OnSubscribe<Cursor>() {
-            @Override
-            public void call(Subscriber<? super Cursor> subscriber) {
-                long nowMillis = now.getMillis();
-                long nextWeek = now.plusDays(14).getMillis();
-
-                Uri.Builder builder = CalendarContract.Instances.CONTENT_URI.buildUpon();
-                ContentUris.appendId(builder, nowMillis);
-                ContentUris.appendId(builder, nextWeek);
-
-                long fivePm = 17 * 60;
-                long elevenPm = 23 * 60;
-
-                String selection = String.format("%1$s >= %2$d AND %3$s <= %4$d AND %5$s <> %6$d",
-                        CalendarContract.Instances.START_MINUTE, fivePm,
-                        CalendarContract.Instances.END_MINUTE, elevenPm,
-                        CalendarContract.Instances.SELF_ATTENDEE_STATUS, CalendarContract.Instances.STATUS_CANCELED);
-
-                Cursor calendarCursor = getContentResolver().query(builder.build(), PROJECTION, selection, null, null);
-                while (calendarCursor.moveToNext()) {
-                    subscriber.onNext(calendarCursor);
-                }
-                subscriber.onCompleted();
-                calendarCursor.close();
-            }
-        })
-                .filter(neverFilter())
-                .map(convertToItem())
-                .toList()
-                .map(convertToSource(14))
+        new EventsRepository(getContentResolver()).queryEventsFrom(now, 14)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(Schedulers.io())
                 .subscribe(adapter);
-    }
-
-    static Func1<List<CalendarItem>, CalendarSource> convertToSource(final int size) {
-        return new Func1<List<CalendarItem>, CalendarSource>() {
-            @Override
-            public CalendarSource call(List<CalendarItem> calendarItems) {
-                SparseArrayCompat<CalendarItem> itemArray = new SparseArrayCompat<>();
-                int lowestStartDay = getLowestStartDay(calendarItems);
-                for (CalendarItem item : calendarItems) {
-                    itemArray.put(item.startDay() - lowestStartDay, item);
-                }
-                return new CalendarSource(itemArray, size);
-            }
-        };
-    }
-
-    private static int getLowestStartDay(List<CalendarItem> calendarItems) {
-        int lowest = Integer.MAX_VALUE;
-        for (CalendarItem item : calendarItems) {
-            if (lowest > item.startDay()) {
-                lowest = item.startDay();
-            }
-        }
-        return lowest;
-    }
-
-    private static Func1<Cursor, CalendarItem> convertToItem() {
-        return new Func1<Cursor, CalendarItem>() {
-            @Override
-            public CalendarItem call(Cursor cursor) {
-                String title = cursor.getString(cursor.getColumnIndex(CalendarContract.Events.TITLE));
-                long status = cursor.getLong(cursor.getColumnIndex(CalendarContract.Instances.SELF_ATTENDEE_STATUS));
-                int startDay = cursor.getInt(cursor.getColumnIndex(CalendarContract.Instances.START_DAY));
-                long eventId = cursor.getLong(cursor.getColumnIndex(CalendarContract.Events._ID));
-                return new EventCalendarItem(eventId, title, status, startDay);
-            }
-        };
-    }
-
-    private static Func1<Cursor, Boolean> neverFilter() {
-        return new Func1<Cursor, Boolean>() {
-            @Override
-            public Boolean call(Cursor cursor) {
-                return true;
-            }
-        };
     }
 
 }
