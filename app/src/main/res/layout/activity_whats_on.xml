@@ -7,5 +7,9 @@
     <android.support.v7.widget.RecyclerView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/list_whats_on"/>
+            android:id="@+id/list_whats_on"
+            android:paddingTop="@dimen/item_margin_half"
+            android:paddingBottom="@dimen/item_margin_half"
+            android:clipChildren="false"
+            android:clipToPadding="false"/>
 </LinearLayout>

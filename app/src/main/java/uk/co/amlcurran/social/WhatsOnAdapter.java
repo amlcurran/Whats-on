@@ -21,7 +21,7 @@ public class WhatsOnAdapter extends RecyclerView.Adapter<CalendarItemViewHolder>
     @Override
     public CalendarItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_EVENT) {
-            return new EventViewHolder(layoutInflater.inflate(android.R.layout.simple_list_item_1, parent, false));
+            return new EventViewHolder(layoutInflater.inflate(R.layout.item_event, parent, false));
         } else {
             return new EmptyViewHolder(layoutInflater.inflate(R.layout.item_empty, parent, false));
         }

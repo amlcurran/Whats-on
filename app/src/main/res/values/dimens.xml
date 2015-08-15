@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="item_margin">8dip</dimen>
+    <dimen name="item_margin_half">4dip</dimen>
+    <dimen name="item_height">64dip</dimen>
+</resources>
