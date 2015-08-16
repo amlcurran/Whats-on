@@ -8,6 +8,7 @@ import android.provider.CalendarContract;
 import android.support.v4.util.SparseArrayCompat;
 
 import org.joda.time.DateTime;
+import org.joda.time.Days;
 
 import java.util.List;
 
@@ -72,11 +73,9 @@ public class EventsRepository {
             @Override
             public CalendarItem call(Cursor cursor) {
                 String title = cursor.getString(cursor.getColumnIndex(CalendarContract.Events.TITLE));
-                int startDay = cursor.getInt(cursor.getColumnIndex(CalendarContract.Instances.START_DAY));
-                long status = cursor.getLong(cursor.getColumnIndex(CalendarContract.Instances.SELF_ATTENDEE_STATUS));
                 long startTime = cursor.getLong(cursor.getColumnIndex(CalendarContract.Events.DTSTART));
                 long eventId = cursor.getLong(cursor.getColumnIndex(CalendarContract.Instances.EVENT_ID));
-                return new EventCalendarItem(eventId, title, status, startDay, startTime);
+                return new EventCalendarItem(eventId, title, startTime);
             }
         };
     }
@@ -86,22 +85,13 @@ public class EventsRepository {
             @Override
             public ItemSource<CalendarItem> call(List<CalendarItem> calendarItems) {
                 SparseArrayCompat<CalendarItem> itemArray = new SparseArrayCompat<>();
-                int lowestStartDay = getLowestStartDay(calendarItems);
+                int epochToNow = Days.daysBetween(CalendarItem.EPOCH, now).getDays();
                 for (CalendarItem item : calendarItems) {
-                    itemArray.put(item.startDay() - lowestStartDay, item);
+                    itemArray.put(item.startDay() - epochToNow, item);
                 }
                 return new CalendarSource(itemArray, size, now);
             }
         };
     }
 
-    private static int getLowestStartDay(List<CalendarItem> calendarItems) {
-        int lowest = Integer.MAX_VALUE;
-        for (CalendarItem item : calendarItems) {
-            if (lowest > item.startDay()) {
-                lowest = item.startDay();
-            }
-        }
-        return lowest;
-    }
 }
