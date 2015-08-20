@@ -45,10 +45,12 @@ public class EventsRepository {
                 long fivePm = 17 * 60;
                 long elevenPm = 23 * 60;
 
-                String selection = String.format("%1$s >= %2$d AND %3$s <= %4$d AND %5$s <> %6$d",
-                        CalendarContract.Instances.START_MINUTE, fivePm,
-                        CalendarContract.Instances.END_MINUTE, elevenPm,
-                        CalendarContract.Instances.SELF_ATTENDEE_STATUS, CalendarContract.Instances.STATUS_CANCELED);
+                String endsBefore = String.format("%1$s < %2$d", CalendarContract.Instances.END_MINUTE, fivePm);
+                String startsAfter = String.format("%1$s > %2$d", CalendarContract.Instances.START_MINUTE, elevenPm);
+                String selection = String.format("(NOT (%1$s OR %2$s)) AND %3$s <> %4$d AND %5$s == %6$d",
+                        endsBefore, startsAfter,
+                        CalendarContract.Instances.SELF_ATTENDEE_STATUS, CalendarContract.Instances.STATUS_CANCELED,
+                        CalendarContract.Instances.ALL_DAY, 0);
 
                 Cursor calendarCursor = contentResolver.query(builder.build(), PROJECTION, selection, null, null);
                 if (calendarCursor == null) {
