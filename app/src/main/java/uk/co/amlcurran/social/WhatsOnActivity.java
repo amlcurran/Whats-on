@@ -1,10 +1,12 @@
 package uk.co.amlcurran.social;
 
+import android.Manifest;
 import android.content.ContentUris;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -20,14 +22,19 @@ import rx.schedulers.Schedulers;
 
 public class WhatsOnActivity extends AppCompatActivity {
 
+    private static final int REQUEST_CODE_REQUEST_CALENDAR = 1;
+    private Permissions permissions;
+    private WhatsOnAdapter adapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_whats_on);
-        DateTime now = DateTime.now(DateTimeZone.getDefault());
+        permissions = new Permissions(this);
+        final DateTime now = DateTime.now(DateTimeZone.getDefault());
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list_whats_on);
-        WhatsOnAdapter adapter = new WhatsOnAdapter(LayoutInflater.from(this), new WhatsOnAdapter.EventSelectedListener() {
+        adapter = new WhatsOnAdapter(LayoutInflater.from(this), new WhatsOnAdapter.EventSelectedListener() {
             @Override
             public void eventSelected(EventCalendarItem calendarItem) {
                 Uri eventUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, calendarItem.id());
@@ -51,11 +58,29 @@ public class WhatsOnActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
+        permissions.requestPermission(REQUEST_CODE_REQUEST_CALENDAR, Manifest.permission.READ_CALENDAR, new Permissions.OnPermissionRequestListener() {
+            @Override
+            public void onPermissionGranted() {
+                load(now, adapter);
+            }
 
+            @Override
+            public void onPermissionDenied() {
+
+            }
+        });
+    }
+
+    private void load(DateTime now, WhatsOnAdapter adapter) {
         new EventsRepository(getContentResolver()).queryEventsFrom(now, 14)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(Schedulers.io())
                 .subscribe(adapter);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        this.permissions.onRequestPermissionResult(requestCode, permissions, grantResults);
     }
 
 }
