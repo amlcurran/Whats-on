@@ -1,6 +1,6 @@
 package uk.co.amlcurran.social;
 
-public interface TimeCreator {
+public interface TimeRepository {
     int endOfBorderTimeInMinutes();
 
     int startOfBorderTimeInMinutes();

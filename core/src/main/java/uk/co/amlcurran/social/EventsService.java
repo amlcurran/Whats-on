@@ -8,22 +8,22 @@ import rx.functions.Func1;
 import uk.co.amlcurran.social.core.SparseArray;
 
 public class EventsService {
-    private final TimeCreator timeCreator;
+    private final TimeRepository timeRepository;
     private final EventsRepository eventsRepository;
 
-    public EventsService(TimeCreator dateCreator, EventsRepository eventsRepository) {
+    public EventsService(TimeRepository dateCreator, EventsRepository eventsRepository) {
         this.eventsRepository = eventsRepository;
-        this.timeCreator = dateCreator;
+        this.timeRepository = dateCreator;
     }
 
     public Observable<CalendarSource> queryEventsFrom(Time now, final int numberOfDays) {
         return Observable.create(new Observable.OnSubscribe<EventRepositoryAccessor>() {
             @Override
             public void call(Subscriber<? super EventRepositoryAccessor> subscriber) {
-                Time nowTime = timeCreator.startOfToday();
+                Time nowTime = timeRepository.startOfToday();
                 Time nextWeek = nowTime.plusDays(numberOfDays);
-                long fivePm = timeCreator.startOfBorderTimeInMinutes();
-                long elevenPm = timeCreator.endOfBorderTimeInMinutes();
+                long fivePm = timeRepository.startOfBorderTimeInMinutes();
+                long elevenPm = timeRepository.endOfBorderTimeInMinutes();
 
                 EventRepositoryAccessor accessor = eventsRepository.queryEvents(subscriber, fivePm, elevenPm, nowTime, nextWeek);
                 if (accessor == null) return;

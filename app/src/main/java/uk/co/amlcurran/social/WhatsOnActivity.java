@@ -78,7 +78,7 @@ public class WhatsOnActivity extends AppCompatActivity {
 
     private void load(DateTime now, Observer<CalendarSource> calendarSourceObserver) {
         AndroidEventsRepository eventsRepository = new AndroidEventsRepository(getContentResolver());
-        AndroidTimeCreator dateCreator = new AndroidTimeCreator();
+        AndroidTimeRepository dateCreator = new AndroidTimeRepository();
         new EventsService(dateCreator, eventsRepository)
                 .queryEventsFrom(new JodaTime(now), 14)
                 .subscribeOn(AndroidSchedulers.mainThread())

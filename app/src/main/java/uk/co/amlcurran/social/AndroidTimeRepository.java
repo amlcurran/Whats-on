@@ -2,7 +2,7 @@ package uk.co.amlcurran.social;
 
 import org.joda.time.DateTime;
 
-public class AndroidTimeCreator implements TimeCreator {
+public class AndroidTimeRepository implements TimeRepository {
 
     @Override
     public int endOfBorderTimeInMinutes() {
