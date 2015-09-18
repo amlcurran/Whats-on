@@ -6,9 +6,12 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+
 import rx.Subscriber;
 
-public class AndroidCalendarContractEventsRepository implements EventsRepository {
+public class AndroidEventsRepository implements EventsRepository {
 
     private static String[] PROJECTION = new String[]{
             CalendarContract.Events.TITLE,
@@ -19,7 +22,7 @@ public class AndroidCalendarContractEventsRepository implements EventsRepository
     };
     private final ContentResolver contentResolver;
 
-    public AndroidCalendarContractEventsRepository(ContentResolver contentResolver) {
+    public AndroidEventsRepository(ContentResolver contentResolver) {
         this.contentResolver = contentResolver;
     }
 
@@ -82,6 +85,11 @@ public class AndroidCalendarContractEventsRepository implements EventsRepository
         @Override
         public void endAccess() {
             calendarCursor.close();
+        }
+
+        @Override
+        public Time getStartTime() {
+            return new JodaTime(new DateTime(getDtStart(), DateTimeZone.getDefault()));
         }
     }
 

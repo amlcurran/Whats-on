@@ -1,7 +1,5 @@
 package uk.co.amlcurran.social;
 
-import org.joda.time.DateTime;
-
 import java.util.List;
 
 import rx.Observable;
@@ -18,7 +16,7 @@ public class EventsService {
         this.timeCreator = dateCreator;
     }
 
-    public Observable<CalendarSource> queryEventsFrom(final DateTime now, final int numberOfDays) {
+    public Observable<CalendarSource> queryEventsFrom(Time now, final int numberOfDays) {
         return Observable.create(new Observable.OnSubscribe<EventRepositoryAccessor>() {
             @Override
             public void call(Subscriber<? super EventRepositoryAccessor> subscriber) {
@@ -39,7 +37,7 @@ public class EventsService {
         })
                 .map(convertToItem())
                 .toList()
-                .map(convertToSource(new Time(now), numberOfDays));
+                .map(convertToSource(now, numberOfDays));
     }
 
     private static Func1<EventRepositoryAccessor, CalendarItem> convertToItem() {
@@ -47,9 +45,10 @@ public class EventsService {
             @Override
             public CalendarItem call(EventRepositoryAccessor accessor) {
                 String title = accessor.getTitle();
-                long startTime = accessor.getDtStart();
                 long eventId = Long.valueOf(accessor.getEventIdentifier());
-                return new EventCalendarItem(eventId, title, startTime);
+                long startTime = accessor.getDtStart();
+                Time time = accessor.getStartTime();
+                return new EventCalendarItem(eventId, title, startTime, time);
             }
         };
     }

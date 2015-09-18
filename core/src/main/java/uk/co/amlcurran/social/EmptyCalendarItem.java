@@ -1,7 +1,5 @@
 package uk.co.amlcurran.social;
 
-import org.joda.time.DateTime;
-
 public class EmptyCalendarItem implements CalendarItem {
     private final int position;
     private final Time startTime;

@@ -37,7 +37,7 @@ public class WhatsOnActivity extends AppCompatActivity {
         final DateTime now = DateTime.now(DateTimeZone.getDefault());
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list_whats_on);
-        adapter = new WhatsOnAdapter(LayoutInflater.from(this), eventSelectedListener, new CalendarSource(new SparseArray<CalendarItem>(), 0, new Time(DateTime.now())));
+        adapter = new WhatsOnAdapter(LayoutInflater.from(this), eventSelectedListener, new CalendarSource(new SparseArray<CalendarItem>(), 0, new JodaTime(DateTime.now())));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
@@ -77,7 +77,10 @@ public class WhatsOnActivity extends AppCompatActivity {
     };
 
     private void load(DateTime now, Observer<CalendarSource> calendarSourceObserver) {
-        new EventsService(new AndroidTimeCreator(), new AndroidCalendarContractEventsRepository(getContentResolver())).queryEventsFrom(now, 14)
+        AndroidEventsRepository eventsRepository = new AndroidEventsRepository(getContentResolver());
+        AndroidTimeCreator dateCreator = new AndroidTimeCreator();
+        new EventsService(dateCreator, eventsRepository)
+                .queryEventsFrom(new JodaTime(now), 14)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(Schedulers.io())
                 .subscribe(calendarSourceObserver);

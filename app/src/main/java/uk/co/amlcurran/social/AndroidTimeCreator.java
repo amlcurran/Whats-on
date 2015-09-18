@@ -16,6 +16,6 @@ public class AndroidTimeCreator implements TimeCreator {
 
     @Override
     public Time startOfToday() {
-        return new Time(DateTime.now().withTimeAtStartOfDay());
+        return new JodaTime(DateTime.now().withTimeAtStartOfDay());
     }
 }
