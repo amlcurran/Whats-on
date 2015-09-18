@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
+import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import uk.co.amlcurran.social.core.SparseArray;
@@ -36,27 +37,7 @@ public class WhatsOnActivity extends AppCompatActivity {
         final DateTime now = DateTime.now(DateTimeZone.getDefault());
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list_whats_on);
-        adapter = new WhatsOnAdapter(LayoutInflater.from(this), new WhatsOnAdapter.EventSelectedListener() {
-            @Override
-            public void eventSelected(EventCalendarItem calendarItem) {
-                Uri eventUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, calendarItem.id());
-                startActivity(new Intent(Intent.ACTION_VIEW).setData(eventUri));
-            }
-
-            @Override
-            public void emptySelected(EmptyCalendarItem calendarItem) {
-                Intent intent = new Intent(Intent.ACTION_INSERT);
-                intent.setData(CalendarContract.Events.CONTENT_URI);
-                DateTime dateTime = DateTime.now(DateTimeZone.getDefault()).withTimeAtStartOfDay();
-                DateTime day = dateTime.plusDays(calendarItem.startDay());
-                DateTime startTime = day.plusHours(17);
-                DateTime endTime = day.plusHours(22);
-                intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime.getMillis());
-                intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getMillis());
-                startActivity(intent);
-            }
-
-        }, new CalendarSource(new SparseArray<CalendarItem>(), 0, new Time(DateTime.now())));
+        adapter = new WhatsOnAdapter(LayoutInflater.from(this), eventSelectedListener, new CalendarSource(new SparseArray<CalendarItem>(), 0, new Time(DateTime.now())));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
@@ -73,11 +54,33 @@ public class WhatsOnActivity extends AppCompatActivity {
         });
     }
 
-    private void load(DateTime now, WhatsOnAdapter adapter) {
+    private final WhatsOnAdapter.EventSelectedListener eventSelectedListener = new WhatsOnAdapter.EventSelectedListener() {
+        @Override
+        public void eventSelected(EventCalendarItem calendarItem) {
+            Uri eventUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, calendarItem.id());
+            startActivity(new Intent(Intent.ACTION_VIEW).setData(eventUri));
+        }
+
+        @Override
+        public void emptySelected(EmptyCalendarItem calendarItem) {
+            Intent intent = new Intent(Intent.ACTION_INSERT);
+            intent.setData(CalendarContract.Events.CONTENT_URI);
+            DateTime dateTime = DateTime.now(DateTimeZone.getDefault()).withTimeAtStartOfDay();
+            DateTime day = dateTime.plusDays(calendarItem.startDay());
+            DateTime startTime = day.plusHours(17);
+            DateTime endTime = day.plusHours(22);
+            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime.getMillis());
+            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getMillis());
+            startActivity(intent);
+        }
+
+    };
+
+    private void load(DateTime now, Observer<CalendarSource> calendarSourceObserver) {
         new EventsService(new AndroidTimeCreator(), new AndroidCalendarContractEventsRepository(getContentResolver())).queryEventsFrom(now, 14)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(Schedulers.io())
-                .subscribe(adapter);
+                .subscribe(calendarSourceObserver);
     }
 
     @Override
