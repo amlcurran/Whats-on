@@ -1,15 +1,14 @@
 package uk.co.amlcurran.social;
 
-import android.support.v4.util.SparseArrayCompat;
-
 import org.joda.time.DateTime;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Func1;
-import uk.co.amlcurran.social.core.ItemSource;
+import uk.co.amlcurran.social.core.SparseArray;
 
 public class EventsService {
     private final DateCreator dateCreator;
@@ -60,7 +59,7 @@ public class EventsService {
         return new Func1<List<CalendarItem>, CalendarSource>() {
             @Override
             public CalendarSource call(List<CalendarItem> calendarItems) {
-                SparseArrayCompat<CalendarItem> itemArray = new SparseArrayCompat<>();
+                SparseArray<CalendarItem> itemArray = new SparseArray<>(size);
                 int epochToNow = now.daysSinceEpoch();
                 for (CalendarItem item : calendarItems) {
                     itemArray.put(item.startDay() - epochToNow, item);

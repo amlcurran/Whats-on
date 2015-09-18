@@ -1,14 +1,14 @@
 package uk.co.amlcurran.social;
 
-import android.support.v4.util.SparseArrayCompat;
+import uk.co.amlcurran.social.core.SparseArray;
 
 class CalendarSource {
 
-    private final SparseArrayCompat<CalendarItem> calendarItems;
+    private final SparseArray<CalendarItem> calendarItems;
     private final int daysSize;
     private final Time now;
 
-    public CalendarSource(SparseArrayCompat<CalendarItem> calendarItems, int daysSize, Time now) {
+    public CalendarSource(SparseArray<CalendarItem> calendarItems, int daysSize, Time now) {
         this.calendarItems = calendarItems;
         this.daysSize = daysSize;
         this.now = now;
@@ -19,7 +19,11 @@ class CalendarSource {
     }
 
     public CalendarItem itemAt(int position) {
-        return calendarItems.get(position, new EmptyCalendarItem(position, now.plusDays(position)));
+        CalendarItem calendarItem = calendarItems.get(position);
+        if (calendarItem == null) {
+            return new EmptyCalendarItem(position, now.plusDays(position));
+        }
+        return calendarItem;
     }
 
     public boolean isEmptyAt(int position) {
