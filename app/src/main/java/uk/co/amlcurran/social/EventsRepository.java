@@ -23,7 +23,7 @@ public class EventsRepository {
         this.contentResolver = contentResolver;
     }
 
-    public EventsService.EventRepositoryAccessor queryEvents(Subscriber<? super EventsService.EventRepositoryAccessor> subscriber, long fivePm, long elevenPm, long nowMillis, long nextWeek) {
+    public EventRepositoryAccessor queryEvents(Subscriber<? super EventRepositoryAccessor> subscriber, long fivePm, long elevenPm, long nowMillis, long nextWeek) {
         Uri.Builder builder = CalendarContract.Instances.CONTENT_URI.buildUpon();
         ContentUris.appendId(builder, nowMillis);
         ContentUris.appendId(builder, nextWeek);
@@ -43,7 +43,7 @@ public class EventsRepository {
         return new CursorEventRepositoryAccessor(calendarCursor);
     }
 
-    private class CursorEventRepositoryAccessor implements EventsService.EventRepositoryAccessor {
+    private class CursorEventRepositoryAccessor implements EventRepositoryAccessor {
 
         private final Cursor calendarCursor;
         private final int titleColumnIndex;
