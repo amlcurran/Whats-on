@@ -2,7 +2,6 @@ package uk.co.amlcurran.social;
 
 import org.joda.time.DateTime;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
@@ -11,22 +10,22 @@ import rx.functions.Func1;
 import uk.co.amlcurran.social.core.SparseArray;
 
 public class EventsService {
-    private final DateCreator dateCreator;
+    private final TimeCreator timeCreator;
     private final EventsRepository eventsRepository;
 
-    public EventsService(DateCreator dateCreator, EventsRepository eventsRepository) {
+    public EventsService(TimeCreator dateCreator, EventsRepository eventsRepository) {
         this.eventsRepository = eventsRepository;
-        this.dateCreator = dateCreator;
+        this.timeCreator = dateCreator;
     }
 
     public Observable<CalendarSource> queryEventsFrom(final DateTime now, final int numberOfDays) {
         return Observable.create(new Observable.OnSubscribe<EventRepositoryAccessor>() {
             @Override
             public void call(Subscriber<? super EventRepositoryAccessor> subscriber) {
-                Time nowTime = dateCreator.startOfToday(now);
+                Time nowTime = timeCreator.startOfToday();
                 Time nextWeek = nowTime.plusDays(numberOfDays);
-                long fivePm = dateCreator.startOfBorderTimeInMinutes();
-                long elevenPm = dateCreator.endOfBorderTimeInMinutes();
+                long fivePm = timeCreator.startOfBorderTimeInMinutes();
+                long elevenPm = timeCreator.endOfBorderTimeInMinutes();
 
                 EventRepositoryAccessor accessor = eventsRepository.queryEvents(subscriber, fivePm, elevenPm, nowTime, nextWeek);
                 if (accessor == null) return;
