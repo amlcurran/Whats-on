@@ -15,11 +15,6 @@ public class AndroidTimeCreator implements TimeCreator {
     }
 
     @Override
-    public long startOfDayPlusDays(DateTime now, int numberOfDays) {
-        return now.withTimeAtStartOfDay().plusDays(numberOfDays).getMillis();
-    }
-
-    @Override
     public Time startOfToday() {
         return new Time(DateTime.now().withTimeAtStartOfDay());
     }
