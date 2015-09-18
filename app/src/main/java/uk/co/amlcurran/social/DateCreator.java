@@ -16,7 +16,7 @@ public class DateCreator {
         return now.withTimeAtStartOfDay().plusDays(numberOfDays).getMillis();
     }
 
-    long startOfDay(DateTime now) {
-        return now.withTimeAtStartOfDay().getMillis();
+    Time startOfToday(DateTime now) {
+        return new Time(DateTime.now().withTimeAtStartOfDay());
     }
 }

@@ -56,7 +56,7 @@ public class WhatsOnActivity extends AppCompatActivity {
                 startActivity(intent);
             }
 
-        }, new CalendarSource(new SparseArrayCompat<CalendarItem>(0), 0, now));
+        }, new CalendarSource(new SparseArrayCompat<CalendarItem>(0), 0, new Time(DateTime.now())));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 

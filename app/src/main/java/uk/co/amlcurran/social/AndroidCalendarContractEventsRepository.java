@@ -24,10 +24,11 @@ public class AndroidCalendarContractEventsRepository implements EventsRepository
     }
 
     @Override
-    public EventRepositoryAccessor queryEvents(Subscriber<? super EventRepositoryAccessor> subscriber, long fivePm, long elevenPm, long nowMillis, long nextWeek) {
+    public EventRepositoryAccessor queryEvents(Subscriber<? super EventRepositoryAccessor> subscriber, long fivePm, long elevenPm,
+                                               Time searchStart, Time searchEnd) {
         Uri.Builder builder = CalendarContract.Instances.CONTENT_URI.buildUpon();
-        ContentUris.appendId(builder, nowMillis);
-        ContentUris.appendId(builder, nextWeek);
+        ContentUris.appendId(builder, searchStart.getMillis());
+        ContentUris.appendId(builder, searchEnd.getMillis());
 
         String endsBefore = String.format("%1$s < %2$d", CalendarContract.Instances.END_MINUTE, fivePm);
         String startsAfter = String.format("%1$s > %2$d", CalendarContract.Instances.START_MINUTE, elevenPm);

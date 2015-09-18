@@ -4,9 +4,9 @@ import org.joda.time.DateTime;
 
 public class EmptyCalendarItem implements CalendarItem {
     private final int position;
-    private final DateTime startTime;
+    private final Time startTime;
 
-    public EmptyCalendarItem(int position, DateTime startTime) {
+    public EmptyCalendarItem(int position, Time startTime) {
         this.position = position;
         this.startTime = startTime;
     }

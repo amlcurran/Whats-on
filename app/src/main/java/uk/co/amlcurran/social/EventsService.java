@@ -3,7 +3,6 @@ package uk.co.amlcurran.social;
 import android.support.v4.util.SparseArrayCompat;
 
 import org.joda.time.DateTime;
-import org.joda.time.Days;
 
 import java.util.List;
 
@@ -25,12 +24,12 @@ public class EventsService {
         return Observable.create(new Observable.OnSubscribe<EventRepositoryAccessor>() {
             @Override
             public void call(Subscriber<? super EventRepositoryAccessor> subscriber) {
-                long nowMillis = dateCreator.startOfDay(now);
-                long nextWeek = dateCreator.startOfDayPlusDays(now, numberOfDays);
+                Time nowTime = dateCreator.startOfToday(now);
+                Time nextWeek = nowTime.plusDays(numberOfDays);
                 long fivePm = dateCreator.startOfBorderTimeInMinutes();
                 long elevenPm = dateCreator.endOfBorderTimeInMinutes();
 
-                EventRepositoryAccessor accessor = eventsRepository.queryEvents(subscriber, fivePm, elevenPm, nowMillis, nextWeek);
+                EventRepositoryAccessor accessor = eventsRepository.queryEvents(subscriber, fivePm, elevenPm, nowTime, nextWeek);
                 if (accessor == null) return;
 
                 while (accessor.nextItem()) {
@@ -42,7 +41,7 @@ public class EventsService {
         })
                 .map(convertToItem())
                 .toList()
-                .map(convertToSource(now, numberOfDays));
+                .map(convertToSource(new Time(now), numberOfDays));
     }
 
     private static Func1<EventRepositoryAccessor, CalendarItem> convertToItem() {
@@ -57,12 +56,12 @@ public class EventsService {
         };
     }
 
-    static Func1<List<CalendarItem>, ItemSource<CalendarItem>> convertToSource(final DateTime now, final int size) {
+    static Func1<List<CalendarItem>, ItemSource<CalendarItem>> convertToSource(final Time now, final int size) {
         return new Func1<List<CalendarItem>, ItemSource<CalendarItem>>() {
             @Override
             public ItemSource<CalendarItem> call(List<CalendarItem> calendarItems) {
                 SparseArrayCompat<CalendarItem> itemArray = new SparseArrayCompat<>();
-                int epochToNow = Days.daysBetween(CalendarItem.EPOCH, now).getDays();
+                int epochToNow = now.daysSinceEpoch();
                 for (CalendarItem item : calendarItems) {
                     itemArray.put(item.startDay() - epochToNow, item);
                 }

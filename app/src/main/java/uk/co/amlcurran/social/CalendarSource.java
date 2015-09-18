@@ -2,17 +2,15 @@ package uk.co.amlcurran.social;
 
 import android.support.v4.util.SparseArrayCompat;
 
-import org.joda.time.DateTime;
-
 import uk.co.amlcurran.social.bootstrap.ItemSource;
 
 class CalendarSource implements ItemSource<CalendarItem> {
 
     private final SparseArrayCompat<CalendarItem> calendarItems;
     private final int daysSize;
-    private final DateTime now;
+    private final Time now;
 
-    public CalendarSource(SparseArrayCompat<CalendarItem> calendarItems, int daysSize, DateTime now) {
+    public CalendarSource(SparseArrayCompat<CalendarItem> calendarItems, int daysSize, Time now) {
         this.calendarItems = calendarItems;
         this.daysSize = daysSize;
         this.now = now;
