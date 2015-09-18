@@ -20,7 +20,7 @@ public class EventsService {
         this.dateCreator = dateCreator;
     }
 
-    public Observable<ItemSource<CalendarItem>> queryEventsFrom(final DateTime now, final int numberOfDays) {
+    public Observable<CalendarSource> queryEventsFrom(final DateTime now, final int numberOfDays) {
         return Observable.create(new Observable.OnSubscribe<EventRepositoryAccessor>() {
             @Override
             public void call(Subscriber<? super EventRepositoryAccessor> subscriber) {
@@ -56,10 +56,10 @@ public class EventsService {
         };
     }
 
-    static Func1<List<CalendarItem>, ItemSource<CalendarItem>> convertToSource(final Time now, final int size) {
-        return new Func1<List<CalendarItem>, ItemSource<CalendarItem>>() {
+    static Func1<List<CalendarItem>, CalendarSource> convertToSource(final Time now, final int size) {
+        return new Func1<List<CalendarItem>, CalendarSource>() {
             @Override
-            public ItemSource<CalendarItem> call(List<CalendarItem> calendarItems) {
+            public CalendarSource call(List<CalendarItem> calendarItems) {
                 SparseArrayCompat<CalendarItem> itemArray = new SparseArrayCompat<>();
                 int epochToNow = now.daysSinceEpoch();
                 for (CalendarItem item : calendarItems) {

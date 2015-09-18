@@ -2,9 +2,7 @@ package uk.co.amlcurran.social;
 
 import android.support.v4.util.SparseArrayCompat;
 
-import uk.co.amlcurran.social.core.ItemSource;
-
-class CalendarSource implements ItemSource<CalendarItem> {
+class CalendarSource {
 
     private final SparseArrayCompat<CalendarItem> calendarItems;
     private final int daysSize;
@@ -16,12 +14,10 @@ class CalendarSource implements ItemSource<CalendarItem> {
         this.now = now;
     }
 
-    @Override
     public int count() {
         return daysSize;
     }
 
-    @Override
     public CalendarItem itemAt(int position) {
         return calendarItems.get(position, new EmptyCalendarItem(position, now.plusDays(position)));
     }

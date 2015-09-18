@@ -5,16 +5,15 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import rx.Observer;
-import uk.co.amlcurran.social.core.ItemSource;
 
-public class WhatsOnAdapter extends RecyclerView.Adapter<CalendarItemViewHolder> implements Observer<ItemSource<CalendarItem>> {
+public class WhatsOnAdapter extends RecyclerView.Adapter<CalendarItemViewHolder> implements Observer<CalendarSource> {
     private static final int TYPE_EVENT = 0;
     private static final int TYPE_EMPTY = 1;
     private final LayoutInflater layoutInflater;
     private final EventSelectedListener eventSelectedListener;
-    private ItemSource<CalendarItem> source;
+    private CalendarSource source;
 
-    public WhatsOnAdapter(LayoutInflater layoutInflater, EventSelectedListener eventSelectedListener, ItemSource<CalendarItem> firstSource) {
+    public WhatsOnAdapter(LayoutInflater layoutInflater, EventSelectedListener eventSelectedListener, CalendarSource firstSource) {
         this.layoutInflater = layoutInflater;
         this.eventSelectedListener = eventSelectedListener;
         this.source = firstSource;
@@ -61,7 +60,7 @@ public class WhatsOnAdapter extends RecyclerView.Adapter<CalendarItemViewHolder>
     }
 
     @Override
-    public void onNext(ItemSource<CalendarItem> source) {
+    public void onNext(CalendarSource source) {
         this.source = source;
         notifyDataSetChanged();
     }
