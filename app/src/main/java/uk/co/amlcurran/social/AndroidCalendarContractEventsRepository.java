@@ -8,7 +8,7 @@ import android.provider.CalendarContract;
 
 import rx.Subscriber;
 
-public class EventsRepository {
+public class AndroidCalendarContractEventsRepository implements EventsRepository {
 
     private static String[] PROJECTION = new String[]{
             CalendarContract.Events.TITLE,
@@ -19,10 +19,11 @@ public class EventsRepository {
     };
     private final ContentResolver contentResolver;
 
-    public EventsRepository(ContentResolver contentResolver) {
+    public AndroidCalendarContractEventsRepository(ContentResolver contentResolver) {
         this.contentResolver = contentResolver;
     }
 
+    @Override
     public EventRepositoryAccessor queryEvents(Subscriber<? super EventRepositoryAccessor> subscriber, long fivePm, long elevenPm, long nowMillis, long nextWeek) {
         Uri.Builder builder = CalendarContract.Instances.CONTENT_URI.buildUpon();
         ContentUris.appendId(builder, nowMillis);
