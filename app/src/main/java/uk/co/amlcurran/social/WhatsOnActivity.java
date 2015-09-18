@@ -74,7 +74,7 @@ public class WhatsOnActivity extends AppCompatActivity {
     }
 
     private void load(DateTime now, WhatsOnAdapter adapter) {
-        new EventsRepository(getContentResolver()).queryEventsFrom(now, 14)
+        new EventsService(new DateCreator(), new EventsRepository(getContentResolver())).queryEventsFrom(now, 14)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(Schedulers.io())
                 .subscribe(adapter);
