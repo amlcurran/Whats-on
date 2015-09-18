@@ -2,7 +2,7 @@ package uk.co.amlcurran.social;
 
 import android.support.v4.util.SparseArrayCompat;
 
-import uk.co.amlcurran.social.bootstrap.ItemSource;
+import uk.co.amlcurran.social.core.ItemSource;
 
 class CalendarSource implements ItemSource<CalendarItem> {
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import rx.Observer;
+import uk.co.amlcurran.social.core.ItemSource;
 
 public class RxAdapter<Source extends ItemSource<Item>, Item> extends RecyclerView.Adapter<BasicViewHolder<Item>> implements Observer<Source> {
     private final LayoutInflater layoutInflater;

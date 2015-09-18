@@ -9,7 +9,7 @@ import java.util.List;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Func1;
-import uk.co.amlcurran.social.bootstrap.ItemSource;
+import uk.co.amlcurran.social.core.ItemSource;
 
 public class EventsService {
     private final DateCreator dateCreator;

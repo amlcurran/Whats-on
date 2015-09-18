@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import rx.Observer;
-import uk.co.amlcurran.social.bootstrap.ItemSource;
+import uk.co.amlcurran.social.core.ItemSource;
 
 public class WhatsOnAdapter extends RecyclerView.Adapter<CalendarItemViewHolder> implements Observer<ItemSource<CalendarItem>> {
     private static final int TYPE_EVENT = 0;

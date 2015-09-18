@@ -1,4 +1,4 @@
-package uk.co.amlcurran.social.bootstrap;
+package uk.co.amlcurran.social.core;
 
 public interface ItemSource<T> {
 
