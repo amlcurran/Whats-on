@@ -13,6 +13,8 @@
 		86CAD4A71BACC9B1009C9CFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4A51BACC9B1009C9CFD /* Main.storyboard */; };
 		86CAD4A91BACC9B1009C9CFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */; };
 		86CAD4AC1BACC9B1009C9CFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4AA1BACC9B1009C9CFD /* LaunchScreen.storyboard */; };
+		86CAD4B81BACCB07009C9CFD /* ObjCTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD4B71BACCB07009C9CFD /* ObjCTime.m */; settings = {ASSET_TAGS = (); }; };
+		86CAD4C51BAD5F63009C9CFD /* libWhatsOnCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86CAD4C41BAD5F63009C9CFD /* libWhatsOnCore.a */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,18 @@
 		86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		86CAD4AB1BACC9B1009C9CFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86CAD4AD1BACC9B1009C9CFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		86CAD4B61BACCB07009C9CFD /* ObjCTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjCTime.h; sourceTree = "<group>"; };
+		86CAD4B71BACCB07009C9CFD /* ObjCTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCTime.m; sourceTree = "<group>"; };
+		86CAD4BA1BAD5F37009C9CFD /* CalendarItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarItem.h; sourceTree = "<group>"; };
+		86CAD4BB1BAD5F37009C9CFD /* CalendarSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarSource.h; sourceTree = "<group>"; };
+		86CAD4BC1BAD5F37009C9CFD /* ContainerHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContainerHelpers.h; sourceTree = "<group>"; };
+		86CAD4BD1BAD5F37009C9CFD /* EmptyCalendarItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmptyCalendarItem.h; sourceTree = "<group>"; };
+		86CAD4BE1BAD5F37009C9CFD /* EventCalendarItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventCalendarItem.h; sourceTree = "<group>"; };
+		86CAD4BF1BAD5F37009C9CFD /* EventRepositoryAccessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventRepositoryAccessor.h; sourceTree = "<group>"; };
+		86CAD4C01BAD5F37009C9CFD /* SparseArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SparseArray.h; sourceTree = "<group>"; };
+		86CAD4C21BAD5F37009C9CFD /* TimeRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeRepository.h; sourceTree = "<group>"; };
+		86CAD4C31BAD5F4A009C9CFD /* Time.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Time.h; sourceTree = "<group>"; };
+		86CAD4C41BAD5F63009C9CFD /* libWhatsOnCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWhatsOnCore.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86CAD4C51BAD5F63009C9CFD /* libWhatsOnCore.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +73,7 @@
 		86CAD49B1BACC9B1009C9CFD /* whatson */ = {
 			isa = PBXGroup;
 			children = (
+				86CAD4B91BAD5F29009C9CFD /* core */,
 				86CAD49F1BACC9B1009C9CFD /* AppDelegate.h */,
 				86CAD4A01BACC9B1009C9CFD /* AppDelegate.m */,
 				86CAD4A21BACC9B1009C9CFD /* ViewController.h */,
@@ -67,6 +83,8 @@
 				86CAD4AA1BACC9B1009C9CFD /* LaunchScreen.storyboard */,
 				86CAD4AD1BACC9B1009C9CFD /* Info.plist */,
 				86CAD49C1BACC9B1009C9CFD /* Supporting Files */,
+				86CAD4B61BACCB07009C9CFD /* ObjCTime.h */,
+				86CAD4B71BACCB07009C9CFD /* ObjCTime.m */,
 			);
 			path = whatson;
 			sourceTree = "<group>";
@@ -77,6 +95,23 @@
 				86CAD49D1BACC9B1009C9CFD /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		86CAD4B91BAD5F29009C9CFD /* core */ = {
+			isa = PBXGroup;
+			children = (
+				86CAD4C41BAD5F63009C9CFD /* libWhatsOnCore.a */,
+				86CAD4BA1BAD5F37009C9CFD /* CalendarItem.h */,
+				86CAD4BB1BAD5F37009C9CFD /* CalendarSource.h */,
+				86CAD4BC1BAD5F37009C9CFD /* ContainerHelpers.h */,
+				86CAD4BD1BAD5F37009C9CFD /* EmptyCalendarItem.h */,
+				86CAD4BE1BAD5F37009C9CFD /* EventCalendarItem.h */,
+				86CAD4BF1BAD5F37009C9CFD /* EventRepositoryAccessor.h */,
+				86CAD4C01BAD5F37009C9CFD /* SparseArray.h */,
+				86CAD4C31BAD5F4A009C9CFD /* Time.h */,
+				86CAD4C21BAD5F37009C9CFD /* TimeRepository.h */,
+			);
+			name = core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +186,7 @@
 			files = (
 				86CAD4A41BACC9B1009C9CFD /* ViewController.m in Sources */,
 				86CAD4A11BACC9B1009C9CFD /* AppDelegate.m in Sources */,
+				86CAD4B81BACCB07009C9CFD /* ObjCTime.m in Sources */,
 				86CAD49E1BACC9B1009C9CFD /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,8 +299,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = "~/bin/include";
 				INFOPLIST_FILE = whatson/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/whatson",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -274,8 +315,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = "~/bin/include";
 				INFOPLIST_FILE = whatson/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/whatson",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

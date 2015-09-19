@@ -7,8 +7,11 @@
 //
 
 #import "ViewController.h"
+#import <EventKit/EventKit.h>
 
 @interface ViewController ()
+
+@property EKEventStore *eventStore;
 
 @end
 
@@ -16,7 +19,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    self.eventStore = [[EKEventStore alloc] init];
+    [self.eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError * _Nullable error) {
+        if (granted) {
+            NSLog(@"Go nuts");
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

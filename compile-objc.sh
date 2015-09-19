@@ -1,6 +1,6 @@
 mkdir -p build/ios/objc
 echo '...transpilin'
-j2objc -d build/ios/objc -sourcepath core/src/main/java/ `find core/src/main/java/ -name '*.java'`
+j2objc --build-closure -d build/ios/objc -sourcepath ./rxjava-1.0.13-sources.jar:./core/src/main/java/ `find core/src/main/java/ -name '*.java'`
 echo
 
 echo '...compilin'
