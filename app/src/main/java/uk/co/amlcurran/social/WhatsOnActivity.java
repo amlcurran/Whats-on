@@ -18,7 +18,7 @@ import android.view.MenuItem;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
-import rx.Observer;
+import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import uk.co.amlcurran.social.core.SparseArray;
@@ -28,12 +28,19 @@ public class WhatsOnActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_REQUEST_CALENDAR = 1;
     private Permissions permissions;
     private WhatsOnAdapter adapter;
+    private Events events;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_whats_on);
         permissions = new Permissions(this);
+        AndroidEventsRepository eventsRepository = new AndroidEventsRepository(getContentResolver());
+        AndroidTimeRepository dateCreator = new AndroidTimeRepository();
+        Scheduler mainThread = AndroidSchedulers.mainThread();
+        Scheduler background = Schedulers.io();
+        events = new Events(eventsRepository, dateCreator, mainThread, background);
+
         final DateTime now = DateTime.now(DateTimeZone.getDefault());
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list_whats_on);
@@ -44,7 +51,7 @@ public class WhatsOnActivity extends AppCompatActivity {
         permissions.requestPermission(REQUEST_CODE_REQUEST_CALENDAR, Manifest.permission.READ_CALENDAR, new Permissions.OnPermissionRequestListener() {
             @Override
             public void onPermissionGranted() {
-                load(now, adapter);
+                events.load(new JodaTime(now), adapter);
             }
 
             @Override
@@ -75,16 +82,6 @@ public class WhatsOnActivity extends AppCompatActivity {
         }
 
     };
-
-    private void load(DateTime now, Observer<CalendarSource> calendarSourceObserver) {
-        AndroidEventsRepository eventsRepository = new AndroidEventsRepository(getContentResolver());
-        AndroidTimeRepository dateCreator = new AndroidTimeRepository();
-        new EventsService(dateCreator, eventsRepository)
-                .queryEventsFrom(new JodaTime(now), 14)
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(Schedulers.io())
-                .subscribe(calendarSourceObserver);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
