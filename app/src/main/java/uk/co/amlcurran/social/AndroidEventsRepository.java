@@ -9,8 +9,6 @@ import android.provider.CalendarContract;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
-import rx.Subscriber;
-
 public class AndroidEventsRepository implements EventsRepository {
 
     private static String[] PROJECTION = new String[]{
@@ -27,7 +25,7 @@ public class AndroidEventsRepository implements EventsRepository {
     }
 
     @Override
-    public EventRepositoryAccessor queryEvents(Subscriber<? super EventRepositoryAccessor> subscriber, long fivePm, long elevenPm,
+    public EventRepositoryAccessor queryEvents(long fivePm, long elevenPm,
                                                Time searchStart, Time searchEnd) {
         Uri.Builder builder = CalendarContract.Instances.CONTENT_URI.buildUpon();
         ContentUris.appendId(builder, searchStart.getMillis());
@@ -41,10 +39,6 @@ public class AndroidEventsRepository implements EventsRepository {
                 CalendarContract.Instances.ALL_DAY, 0);
 
         Cursor calendarCursor = contentResolver.query(builder.build(), PROJECTION, selection, null, null);
-        if (calendarCursor == null) {
-            subscriber.onError(new NullPointerException("Calendar cursor was null!"));
-            return null;
-        }
         return new CursorEventRepositoryAccessor(calendarCursor);
     }
 

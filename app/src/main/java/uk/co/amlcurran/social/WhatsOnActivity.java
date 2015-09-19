@@ -39,7 +39,7 @@ public class WhatsOnActivity extends AppCompatActivity {
         AndroidTimeRepository dateCreator = new AndroidTimeRepository();
         Scheduler mainThread = AndroidSchedulers.mainThread();
         Scheduler background = Schedulers.io();
-        events = new Events(eventsRepository, dateCreator, mainThread, background);
+        events = new Events(mainThread, background, new EventsService(dateCreator, eventsRepository));
 
         final DateTime now = DateTime.now(DateTimeZone.getDefault());
 
