@@ -3,25 +3,27 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/EventsRepository.java
 //
 
-#ifndef _UkCoAmlcurranSocialEventsRepository_H_
-#define _UkCoAmlcurranSocialEventsRepository_H_
+#ifndef _SCEventsRepository_H_
+#define _SCEventsRepository_H_
 
 #include "J2ObjC_header.h"
 
-@protocol UkCoAmlcurranSocialEventRepositoryAccessor;
-@protocol UkCoAmlcurranSocialTime;
+@protocol SCEventRepositoryAccessor;
+@protocol SCTime;
 
-@protocol UkCoAmlcurranSocialEventsRepository < NSObject, JavaObject >
+@protocol SCEventsRepository < NSObject, JavaObject >
 
-- (id<UkCoAmlcurranSocialEventRepositoryAccessor>)queryEventsWithLong:(jlong)fivePm
-                                                             withLong:(jlong)elevenPm
-                                          withUkCoAmlcurranSocialTime:(id<UkCoAmlcurranSocialTime>)searchStartTime
-                                          withUkCoAmlcurranSocialTime:(id<UkCoAmlcurranSocialTime>)searchEndTime;
+- (id<SCEventRepositoryAccessor>)queryEventsWithLong:(jlong)fivePm
+                                            withLong:(jlong)elevenPm
+                                          withSCTime:(id<SCTime>)searchStartTime
+                                          withSCTime:(id<SCTime>)searchEndTime;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(UkCoAmlcurranSocialEventsRepository)
+J2OBJC_EMPTY_STATIC_INIT(SCEventsRepository)
 
-J2OBJC_TYPE_LITERAL_HEADER(UkCoAmlcurranSocialEventsRepository)
+J2OBJC_TYPE_LITERAL_HEADER(SCEventsRepository)
 
-#endif // _UkCoAmlcurranSocialEventsRepository_H_
+#define UkCoAmlcurranSocialEventsRepository SCEventsRepository
+
+#endif // _SCEventsRepository_H_

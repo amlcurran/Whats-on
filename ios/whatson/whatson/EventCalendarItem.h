@@ -3,22 +3,22 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/EventCalendarItem.java
 //
 
-#ifndef _UkCoAmlcurranSocialEventCalendarItem_H_
-#define _UkCoAmlcurranSocialEventCalendarItem_H_
+#ifndef _SCEventCalendarItem_H_
+#define _SCEventCalendarItem_H_
 
 #include "J2ObjC_header.h"
 #include "uk/co/amlcurran/social/CalendarItem.h"
 
-@protocol UkCoAmlcurranSocialTime;
+@protocol SCTime;
 
-@interface UkCoAmlcurranSocialEventCalendarItem : NSObject < UkCoAmlcurranSocialCalendarItem >
+@interface SCEventCalendarItem : NSObject < SCCalendarItem >
 
 #pragma mark Public
 
 - (instancetype)initWithLong:(jlong)eventId
                 withNSString:(NSString *)title
                     withLong:(jlong)startTime
- withUkCoAmlcurranSocialTime:(id<UkCoAmlcurranSocialTime>)time;
+                  withSCTime:(id<SCTime>)time;
 
 - (jlong)id__;
 
@@ -32,12 +32,14 @@
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(UkCoAmlcurranSocialEventCalendarItem)
+J2OBJC_EMPTY_STATIC_INIT(SCEventCalendarItem)
 
-FOUNDATION_EXPORT void UkCoAmlcurranSocialEventCalendarItem_initWithLong_withNSString_withLong_withUkCoAmlcurranSocialTime_(UkCoAmlcurranSocialEventCalendarItem *self, jlong eventId, NSString *title, jlong startTime, id<UkCoAmlcurranSocialTime> time);
+FOUNDATION_EXPORT void SCEventCalendarItem_initWithLong_withNSString_withLong_withSCTime_(SCEventCalendarItem *self, jlong eventId, NSString *title, jlong startTime, id<SCTime> time);
 
-FOUNDATION_EXPORT UkCoAmlcurranSocialEventCalendarItem *new_UkCoAmlcurranSocialEventCalendarItem_initWithLong_withNSString_withLong_withUkCoAmlcurranSocialTime_(jlong eventId, NSString *title, jlong startTime, id<UkCoAmlcurranSocialTime> time) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT SCEventCalendarItem *new_SCEventCalendarItem_initWithLong_withNSString_withLong_withSCTime_(jlong eventId, NSString *title, jlong startTime, id<SCTime> time) NS_RETURNS_RETAINED;
 
-J2OBJC_TYPE_LITERAL_HEADER(UkCoAmlcurranSocialEventCalendarItem)
+J2OBJC_TYPE_LITERAL_HEADER(SCEventCalendarItem)
 
-#endif // _UkCoAmlcurranSocialEventCalendarItem_H_
+typedef SCEventCalendarItem UkCoAmlcurranSocialEventCalendarItem;
+
+#endif // _SCEventCalendarItem_H_

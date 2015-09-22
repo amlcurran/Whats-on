@@ -3,12 +3,12 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/CalendarItem.java
 //
 
-#ifndef _UkCoAmlcurranSocialCalendarItem_H_
-#define _UkCoAmlcurranSocialCalendarItem_H_
+#ifndef _SCCalendarItem_H_
+#define _SCCalendarItem_H_
 
 #include "J2ObjC_header.h"
 
-@protocol UkCoAmlcurranSocialCalendarItem < NSObject, JavaObject >
+@protocol SCCalendarItem < NSObject, JavaObject >
 
 - (NSString *)title;
 
@@ -20,8 +20,10 @@
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(UkCoAmlcurranSocialCalendarItem)
+J2OBJC_EMPTY_STATIC_INIT(SCCalendarItem)
 
-J2OBJC_TYPE_LITERAL_HEADER(UkCoAmlcurranSocialCalendarItem)
+J2OBJC_TYPE_LITERAL_HEADER(SCCalendarItem)
 
-#endif // _UkCoAmlcurranSocialCalendarItem_H_
+#define UkCoAmlcurranSocialCalendarItem SCCalendarItem
+
+#endif // _SCCalendarItem_H_

@@ -3,14 +3,14 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/Time.java
 //
 
-#ifndef _UkCoAmlcurranSocialTime_H_
-#define _UkCoAmlcurranSocialTime_H_
+#ifndef _SCTime_H_
+#define _SCTime_H_
 
 #include "J2ObjC_header.h"
 
-@protocol UkCoAmlcurranSocialTime < NSObject, JavaObject >
+@protocol SCTime < NSObject, JavaObject >
 
-- (id<UkCoAmlcurranSocialTime>)plusDaysWithInt:(jint)days;
+- (id<SCTime>)plusDaysWithInt:(jint)days;
 
 - (jint)daysSinceEpoch;
 
@@ -18,8 +18,10 @@
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(UkCoAmlcurranSocialTime)
+J2OBJC_EMPTY_STATIC_INIT(SCTime)
 
-J2OBJC_TYPE_LITERAL_HEADER(UkCoAmlcurranSocialTime)
+J2OBJC_TYPE_LITERAL_HEADER(SCTime)
 
-#endif // _UkCoAmlcurranSocialTime_H_
+#define UkCoAmlcurranSocialTime SCTime
+
+#endif // _SCTime_H_

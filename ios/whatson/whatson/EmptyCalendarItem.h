@@ -3,20 +3,20 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/EmptyCalendarItem.java
 //
 
-#ifndef _UkCoAmlcurranSocialEmptyCalendarItem_H_
-#define _UkCoAmlcurranSocialEmptyCalendarItem_H_
+#ifndef _SCEmptyCalendarItem_H_
+#define _SCEmptyCalendarItem_H_
 
 #include "J2ObjC_header.h"
 #include "uk/co/amlcurran/social/CalendarItem.h"
 
-@protocol UkCoAmlcurranSocialTime;
+@protocol SCTime;
 
-@interface UkCoAmlcurranSocialEmptyCalendarItem : NSObject < UkCoAmlcurranSocialCalendarItem >
+@interface SCEmptyCalendarItem : NSObject < SCCalendarItem >
 
 #pragma mark Public
 
 - (instancetype)initWithInt:(jint)position
-withUkCoAmlcurranSocialTime:(id<UkCoAmlcurranSocialTime>)startTime;
+                 withSCTime:(id<SCTime>)startTime;
 
 - (jboolean)isEmpty;
 
@@ -28,12 +28,14 @@ withUkCoAmlcurranSocialTime:(id<UkCoAmlcurranSocialTime>)startTime;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(UkCoAmlcurranSocialEmptyCalendarItem)
+J2OBJC_EMPTY_STATIC_INIT(SCEmptyCalendarItem)
 
-FOUNDATION_EXPORT void UkCoAmlcurranSocialEmptyCalendarItem_initWithInt_withUkCoAmlcurranSocialTime_(UkCoAmlcurranSocialEmptyCalendarItem *self, jint position, id<UkCoAmlcurranSocialTime> startTime);
+FOUNDATION_EXPORT void SCEmptyCalendarItem_initWithInt_withSCTime_(SCEmptyCalendarItem *self, jint position, id<SCTime> startTime);
 
-FOUNDATION_EXPORT UkCoAmlcurranSocialEmptyCalendarItem *new_UkCoAmlcurranSocialEmptyCalendarItem_initWithInt_withUkCoAmlcurranSocialTime_(jint position, id<UkCoAmlcurranSocialTime> startTime) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT SCEmptyCalendarItem *new_SCEmptyCalendarItem_initWithInt_withSCTime_(jint position, id<SCTime> startTime) NS_RETURNS_RETAINED;
 
-J2OBJC_TYPE_LITERAL_HEADER(UkCoAmlcurranSocialEmptyCalendarItem)
+J2OBJC_TYPE_LITERAL_HEADER(SCEmptyCalendarItem)
 
-#endif // _UkCoAmlcurranSocialEmptyCalendarItem_H_
+typedef SCEmptyCalendarItem UkCoAmlcurranSocialEmptyCalendarItem;
+
+#endif // _SCEmptyCalendarItem_H_

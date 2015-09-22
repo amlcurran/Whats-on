@@ -3,37 +3,39 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/CalendarSource.java
 //
 
-#ifndef _UkCoAmlcurranSocialCalendarSource_H_
-#define _UkCoAmlcurranSocialCalendarSource_H_
+#ifndef _SCCalendarSource_H_
+#define _SCCalendarSource_H_
 
 #include "J2ObjC_header.h"
 
 @class UkCoAmlcurranSocialCoreSparseArray;
-@protocol UkCoAmlcurranSocialCalendarItem;
-@protocol UkCoAmlcurranSocialTime;
+@protocol SCCalendarItem;
+@protocol SCTime;
 
-@interface UkCoAmlcurranSocialCalendarSource : NSObject
+@interface SCCalendarSource : NSObject
 
 #pragma mark Public
 
 - (instancetype)initWithUkCoAmlcurranSocialCoreSparseArray:(UkCoAmlcurranSocialCoreSparseArray *)calendarItems
                                                    withInt:(jint)daysSize
-                               withUkCoAmlcurranSocialTime:(id<UkCoAmlcurranSocialTime>)now;
+                                                withSCTime:(id<SCTime>)now;
 
 - (jint)count;
 
 - (jboolean)isEmptyAtWithInt:(jint)position;
 
-- (id<UkCoAmlcurranSocialCalendarItem>)itemAtWithInt:(jint)position;
+- (id<SCCalendarItem>)itemAtWithInt:(jint)position;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(UkCoAmlcurranSocialCalendarSource)
+J2OBJC_EMPTY_STATIC_INIT(SCCalendarSource)
 
-FOUNDATION_EXPORT void UkCoAmlcurranSocialCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withUkCoAmlcurranSocialTime_(UkCoAmlcurranSocialCalendarSource *self, UkCoAmlcurranSocialCoreSparseArray *calendarItems, jint daysSize, id<UkCoAmlcurranSocialTime> now);
+FOUNDATION_EXPORT void SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTime_(SCCalendarSource *self, UkCoAmlcurranSocialCoreSparseArray *calendarItems, jint daysSize, id<SCTime> now);
 
-FOUNDATION_EXPORT UkCoAmlcurranSocialCalendarSource *new_UkCoAmlcurranSocialCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withUkCoAmlcurranSocialTime_(UkCoAmlcurranSocialCoreSparseArray *calendarItems, jint daysSize, id<UkCoAmlcurranSocialTime> now) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT SCCalendarSource *new_SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTime_(UkCoAmlcurranSocialCoreSparseArray *calendarItems, jint daysSize, id<SCTime> now) NS_RETURNS_RETAINED;
 
-J2OBJC_TYPE_LITERAL_HEADER(UkCoAmlcurranSocialCalendarSource)
+J2OBJC_TYPE_LITERAL_HEADER(SCCalendarSource)
 
-#endif // _UkCoAmlcurranSocialCalendarSource_H_
+typedef SCCalendarSource UkCoAmlcurranSocialCalendarSource;
+
+#endif // _SCCalendarSource_H_

@@ -3,14 +3,14 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/EventRepositoryAccessor.java
 //
 
-#ifndef _UkCoAmlcurranSocialEventRepositoryAccessor_H_
-#define _UkCoAmlcurranSocialEventRepositoryAccessor_H_
+#ifndef _SCEventRepositoryAccessor_H_
+#define _SCEventRepositoryAccessor_H_
 
 #include "J2ObjC_header.h"
 
-@protocol UkCoAmlcurranSocialTime;
+@protocol SCTime;
 
-@protocol UkCoAmlcurranSocialEventRepositoryAccessor < NSObject, JavaObject >
+@protocol SCEventRepositoryAccessor < NSObject, JavaObject >
 
 - (NSString *)getTitle;
 
@@ -22,12 +22,14 @@
 
 - (void)endAccess;
 
-- (id<UkCoAmlcurranSocialTime>)getStartTime;
+- (id<SCTime>)getStartTime;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(UkCoAmlcurranSocialEventRepositoryAccessor)
+J2OBJC_EMPTY_STATIC_INIT(SCEventRepositoryAccessor)
 
-J2OBJC_TYPE_LITERAL_HEADER(UkCoAmlcurranSocialEventRepositoryAccessor)
+J2OBJC_TYPE_LITERAL_HEADER(SCEventRepositoryAccessor)
 
-#endif // _UkCoAmlcurranSocialEventRepositoryAccessor_H_
+#define UkCoAmlcurranSocialEventRepositoryAccessor SCEventRepositoryAccessor
+
+#endif // _SCEventRepositoryAccessor_H_

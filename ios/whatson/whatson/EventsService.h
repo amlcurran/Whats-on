@@ -3,34 +3,36 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/EventsService.java
 //
 
-#ifndef _UkCoAmlcurranSocialEventsService_H_
-#define _UkCoAmlcurranSocialEventsService_H_
+#ifndef _SCEventsService_H_
+#define _SCEventsService_H_
 
 #include "J2ObjC_header.h"
 
-@class UkCoAmlcurranSocialCalendarSource;
-@protocol UkCoAmlcurranSocialEventsRepository;
-@protocol UkCoAmlcurranSocialTime;
-@protocol UkCoAmlcurranSocialTimeRepository;
+@class SCCalendarSource;
+@protocol SCEventsRepository;
+@protocol SCTime;
+@protocol SCTimeRepository;
 
-@interface UkCoAmlcurranSocialEventsService : NSObject
+@interface SCEventsService : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithUkCoAmlcurranSocialTimeRepository:(id<UkCoAmlcurranSocialTimeRepository>)dateCreator
-                  withUkCoAmlcurranSocialEventsRepository:(id<UkCoAmlcurranSocialEventsRepository>)eventsRepository;
+- (instancetype)initWithSCTimeRepository:(id<SCTimeRepository>)dateCreator
+                  withSCEventsRepository:(id<SCEventsRepository>)eventsRepository;
 
-- (UkCoAmlcurranSocialCalendarSource *)getCalendarSourceWithInt:(jint)numberOfDays
-                                    withUkCoAmlcurranSocialTime:(id<UkCoAmlcurranSocialTime>)now;
+- (SCCalendarSource *)getCalendarSourceWithInt:(jint)numberOfDays
+                                    withSCTime:(id<SCTime>)now;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(UkCoAmlcurranSocialEventsService)
+J2OBJC_EMPTY_STATIC_INIT(SCEventsService)
 
-FOUNDATION_EXPORT void UkCoAmlcurranSocialEventsService_initWithUkCoAmlcurranSocialTimeRepository_withUkCoAmlcurranSocialEventsRepository_(UkCoAmlcurranSocialEventsService *self, id<UkCoAmlcurranSocialTimeRepository> dateCreator, id<UkCoAmlcurranSocialEventsRepository> eventsRepository);
+FOUNDATION_EXPORT void SCEventsService_initWithSCTimeRepository_withSCEventsRepository_(SCEventsService *self, id<SCTimeRepository> dateCreator, id<SCEventsRepository> eventsRepository);
 
-FOUNDATION_EXPORT UkCoAmlcurranSocialEventsService *new_UkCoAmlcurranSocialEventsService_initWithUkCoAmlcurranSocialTimeRepository_withUkCoAmlcurranSocialEventsRepository_(id<UkCoAmlcurranSocialTimeRepository> dateCreator, id<UkCoAmlcurranSocialEventsRepository> eventsRepository) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT SCEventsService *new_SCEventsService_initWithSCTimeRepository_withSCEventsRepository_(id<SCTimeRepository> dateCreator, id<SCEventsRepository> eventsRepository) NS_RETURNS_RETAINED;
 
-J2OBJC_TYPE_LITERAL_HEADER(UkCoAmlcurranSocialEventsService)
+J2OBJC_TYPE_LITERAL_HEADER(SCEventsService)
 
-#endif // _UkCoAmlcurranSocialEventsService_H_
+typedef SCEventsService UkCoAmlcurranSocialEventsService;
+
+#endif // _SCEventsService_H_

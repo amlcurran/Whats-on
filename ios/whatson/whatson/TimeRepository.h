@@ -3,25 +3,27 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/TimeRepository.java
 //
 
-#ifndef _UkCoAmlcurranSocialTimeRepository_H_
-#define _UkCoAmlcurranSocialTimeRepository_H_
+#ifndef _SCTimeRepository_H_
+#define _SCTimeRepository_H_
 
 #include "J2ObjC_header.h"
 
-@protocol UkCoAmlcurranSocialTime;
+@protocol SCTime;
 
-@protocol UkCoAmlcurranSocialTimeRepository < NSObject, JavaObject >
+@protocol SCTimeRepository < NSObject, JavaObject >
 
 - (jint)endOfBorderTimeInMinutes;
 
 - (jint)startOfBorderTimeInMinutes;
 
-- (id<UkCoAmlcurranSocialTime>)startOfToday;
+- (id<SCTime>)startOfToday;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(UkCoAmlcurranSocialTimeRepository)
+J2OBJC_EMPTY_STATIC_INIT(SCTimeRepository)
 
-J2OBJC_TYPE_LITERAL_HEADER(UkCoAmlcurranSocialTimeRepository)
+J2OBJC_TYPE_LITERAL_HEADER(SCTimeRepository)
 
-#endif // _UkCoAmlcurranSocialTimeRepository_H_
+#define UkCoAmlcurranSocialTimeRepository SCTimeRepository
+
+#endif // _SCTimeRepository_H_

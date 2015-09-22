@@ -8,6 +8,9 @@
 
 #import "ViewController.h"
 #import <EventKit/EventKit.h>
+#import "SCIEventStoreRepository.h"
+#import "SCNSDateBasedTime.h"
+#import "EventRepositoryAccessor.h"
 
 @interface ViewController ()
 
@@ -22,7 +25,14 @@
     self.eventStore = [[EKEventStore alloc] init];
     [self.eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError * _Nullable error) {
         if (granted) {
-            NSLog(@"Go nuts");
+            SCIEventStoreRepository *repo = [[SCIEventStoreRepository alloc] init];
+            NSDate *now = [[NSDate alloc] init];
+            NSDate *twoWeeksTime = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:14 toDate:now options:0];
+            SCNSDateBasedTime *nowTime = [[SCNSDateBasedTime alloc] initWithNSDate:now];
+            id<SCEventRepositoryAccessor> accessor = [repo queryEventsWithLong:0 withLong:0 withSCTime:nowTime withSCTime:[[SCNSDateBasedTime alloc] initWithNSDate:twoWeeksTime]];
+            while ([accessor nextItem]) {
+                NSLog(@"Something!");
+            }
         }
     }];
 }
