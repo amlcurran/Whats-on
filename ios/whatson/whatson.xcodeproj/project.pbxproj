@@ -36,7 +36,7 @@
 		86CAD4F11BADF6F6009C9CFD /* SCNSDateBasedTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNSDateBasedTime.m; sourceTree = "<group>"; };
 		86CAD4F31BAF3B43009C9CFD /* SCIEventStoreRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCIEventStoreRepository.h; sourceTree = "<group>"; };
 		86CAD4F41BAF3B43009C9CFD /* SCIEventStoreRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCIEventStoreRepository.m; sourceTree = "<group>"; };
-		86E09A9A1BB69F6A00D5A809 /* uk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = uk; sourceTree = "<group>"; };
+		86E09A9A1BB69F6A00D5A809 /* uk */ = {isa = PBXFileReference; lastKnownFileType = folder; name = uk; path = /Users/amlcurran/Projects/Social/ios/whatson/whatson/uk; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +69,7 @@
 		86CAD49B1BACC9B1009C9CFD /* whatson */ = {
 			isa = PBXGroup;
 			children = (
-				86E09A9A1BB69F6A00D5A809 /* uk */,
+				86E09AB31BB6A75700D5A809 /* core */,
 				86CAD49F1BACC9B1009C9CFD /* AppDelegate.h */,
 				86CAD4A01BACC9B1009C9CFD /* AppDelegate.m */,
 				86CAD4A21BACC9B1009C9CFD /* ViewController.h */,
@@ -95,6 +95,13 @@
 				86CAD49D1BACC9B1009C9CFD /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		86E09AB31BB6A75700D5A809 /* core */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
