@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "EventsRepository.h"
-#import "Time.h"
+#import "uk/co/amlcurran/social/EventsRepository.h"
+#import "uk/co/amlcurran/social/Time.h"
 
 @interface SCIEventStoreRepository : NSObject<SCEventsRepository>
 

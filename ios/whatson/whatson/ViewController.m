@@ -10,7 +10,7 @@
 #import <EventKit/EventKit.h>
 #import "SCIEventStoreRepository.h"
 #import "SCNSDateBasedTime.h"
-#import "EventRepositoryAccessor.h"
+#import "uk/co/amlcurran/social/EventRepositoryAccessor.h"
 
 @interface ViewController ()
 

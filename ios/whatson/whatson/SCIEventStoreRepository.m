@@ -8,7 +8,7 @@
 
 #import "SCIEventStoreRepository.h"
 #import <EventKit/EventKit.h>
-#import "EventRepositoryAccessor.h"
+#import "uk/co/amlcurran/social/EventRepositoryAccessor.h"
 
 @interface SCIEKEventAccessor : NSObject<SCEventRepositoryAccessor>
 

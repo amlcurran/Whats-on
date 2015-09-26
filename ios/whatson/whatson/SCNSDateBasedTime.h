@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Time.h"
+#import "uk/co/amlcurran/social/Time.h"
 
 @interface SCNSDateBasedTime : NSObject <SCTime>
 
