@@ -12,9 +12,8 @@
 #include "EventsService.h"
 #include "J2ObjC_source.h"
 #include "SparseArray.h"
-#include "ScTime.h"
+#include "SCTime.h"
 #include "TimeRepository.h"
-#include "java/lang/Long.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
 
@@ -47,10 +46,10 @@ J2OBJC_FIELD_SETTER(SCEventsService, eventsRepository_, id<SCEventsRepository>)
   id<JavaUtilList> calendarItems = new_JavaUtilArrayList_init();
   while ([((id<SCEventRepositoryAccessor>) nil_chk(accessor)) nextItem]) {
     NSString *title = [accessor getTitle];
-    jlong eventId = [JavaLangLong_valueOfWithNSString_([accessor getEventIdentifier]) longLongValue];
+    NSString *eventId = [accessor getEventIdentifier];
     jlong startTime = [accessor getDtStart];
     id<SCTime> time = [accessor getStartTime];
-    [calendarItems addWithId:new_SCEventCalendarItem_initWithLong_withNSString_withLong_withSCTime_(eventId, title, startTime, time)];
+    [calendarItems addWithId:new_SCEventCalendarItem_initWithNSString_withNSString_withLong_withSCTime_(eventId, title, startTime, time)];
   }
   UkCoAmlcurranSocialCoreSparseArray *itemArray = new_UkCoAmlcurranSocialCoreSparseArray_initWithInt_(numberOfDays);
   jint epochToNow = [((id<SCTime>) nil_chk(now)) daysSinceEpoch];

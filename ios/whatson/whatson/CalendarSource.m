@@ -9,7 +9,7 @@
 #include "EmptyCalendarItem.h"
 #include "J2ObjC_source.h"
 #include "SparseArray.h"
-#include "ScTime.h"
+#include "SCTime.h"
 
 @interface SCCalendarSource () {
  @public

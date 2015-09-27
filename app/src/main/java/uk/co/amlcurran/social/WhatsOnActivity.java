@@ -64,7 +64,8 @@ public class WhatsOnActivity extends AppCompatActivity {
     private final WhatsOnAdapter.EventSelectedListener eventSelectedListener = new WhatsOnAdapter.EventSelectedListener() {
         @Override
         public void eventSelected(EventCalendarItem calendarItem) {
-            Uri eventUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, calendarItem.id());
+            long id = Long.valueOf(calendarItem.id());
+            Uri eventUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, id);
             startActivity(new Intent(Intent.ACTION_VIEW).setData(eventUri));
         }
 

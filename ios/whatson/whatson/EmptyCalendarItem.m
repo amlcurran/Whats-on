@@ -6,7 +6,7 @@
 
 #include "EmptyCalendarItem.h"
 #include "J2ObjC_source.h"
-#include "ScTime.h"
+#include "SCTime.h"
 
 @interface SCEmptyCalendarItem () {
  @public

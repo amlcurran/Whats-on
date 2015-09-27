@@ -1,19 +1,19 @@
 package uk.co.amlcurran.social;
 
 class EventCalendarItem implements CalendarItem {
-    private final long eventId;
+    private final String eventId;
     private final String title;
     private final long startTime;
     private final Time start;
 
-    public EventCalendarItem(long eventId, String title, long startTime, Time time) {
+    public EventCalendarItem(String eventId, String title, long startTime, Time time) {
         this.eventId = eventId;
         this.title = title;
         this.startTime = startTime;
         this.start = time;
     }
 
-    public long id() {
+    public String id() {
         return eventId;
     }
 

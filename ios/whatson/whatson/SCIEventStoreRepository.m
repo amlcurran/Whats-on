@@ -8,6 +8,7 @@
 
 #import "SCIEventStoreRepository.h"
 #import <EventKit/EventKit.h>
+#import "SCNSDateBasedTime.h"
 #import "EventRepositoryAccessor.h"
 
 @interface SCIEKEventAccessor : NSObject<SCEventRepositoryAccessor>
@@ -32,22 +33,22 @@
 
 - (NSString *)getTitle
 {
-    return @"hello!";
+    return [self currentEvent].title;
 }
 
 - (jlong)getDtStart
 {
-    return 0;
+    return [[self currentEvent].startDate timeIntervalSince1970] * 1000;
 }
 
 - (NSString *)getEventIdentifier
 {
-    return @"id";
+    return [self currentEvent].eventIdentifier;
 }
 
 - (jboolean)nextItem
 {
-    if (self.currentPosition < [self.events count]) {
+    if (self.currentPosition < [self.events count] - 1) {
         self.currentPosition++;
         return true;
     }
@@ -61,7 +62,12 @@
 
 - (id<SCTime>)getStartTime
 {
-    return nil;
+    return [[SCNSDateBasedTime alloc] initWithNSDate:[self currentEvent].startDate];
+}
+
+- (EKEvent *)currentEvent
+{
+    return ((EKEvent *) [[self events] objectAtIndex:self.currentPosition]);
 }
 
 @end

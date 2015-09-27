@@ -29,8 +29,9 @@
 
 - (id<SCTime>)plusDaysWithInt:(jint)days
 {
-    double seconds = days * 24 * 60 * 60;
-    NSDate *newDate = [self.date dateByAddingTimeInterval:seconds];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    components.day = days;
+    NSDate *newDate =  [self.calendar dateByAddingComponents:components toDate:self.date options:0];
     return [[SCNSDateBasedTime alloc] initWithNSDate:newDate];
 }
 

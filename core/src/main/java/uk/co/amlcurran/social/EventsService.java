@@ -24,7 +24,7 @@ public class EventsService {
         List<CalendarItem> calendarItems = new ArrayList<>();
         while (accessor.nextItem()) {
             String title = accessor.getTitle();
-            long eventId = Long.valueOf(accessor.getEventIdentifier());
+            String eventId = accessor.getEventIdentifier();
             long startTime = accessor.getDtStart();
             Time time = accessor.getStartTime();
             calendarItems.add(new EventCalendarItem(eventId, title, startTime, time));
