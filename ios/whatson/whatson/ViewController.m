@@ -20,6 +20,7 @@
 
 @property EKEventStore *eventStore;
 @property SCCalendarSource *calendarSource;
+@property (nonatomic, strong) NSDateFormatter *formatter;
 
 @end
 
@@ -27,6 +28,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.formatter = [[NSDateFormatter alloc] init];
+    self.formatter.dateFormat = @"EEE";
+    
     self.title = @"What's On";
     self.tableView.dataSource = self;
     self.eventStore = [[EKEventStore alloc] init];
@@ -60,7 +64,7 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"day" forIndexPath:indexPath];
     id<SCCalendarItem> item = [self.calendarSource itemAtWithInt:indexPath.row];
-    [cell textLabel].text = [item title];
+    [cell textLabel].text = [NSString stringWithFormat:@"%@: %@", [self.formatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:(item.startTime / 1000)]], [item title]];
     return cell;
 }
 
