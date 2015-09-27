@@ -48,6 +48,9 @@
 
 - (jboolean)nextItem
 {
+    if ([self.events count] == 0) {
+        return false;
+    }
     if (self.currentPosition < [self.events count] - 1) {
         self.currentPosition++;
         return true;
@@ -84,7 +87,6 @@
     NSDate *endTime = [[NSDate alloc] initWithTimeIntervalSince1970:([searchEndTime getMillis] / 1000)];
     NSPredicate *search = [eventStore predicateForEventsWithStartDate:startTime endDate:endTime calendars:nil];
     NSArray *array = [eventStore eventsMatchingPredicate:search];
-    NSLog(@"%lu", [array count]);
     return [[SCIEKEventAccessor alloc] initWithEventItems:array];
 }
 
