@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--What's On-->
         <scene sceneID="Tzk-q4-yIm">
             <objects>
-                <navigationController id="EbX-9H-VTp" sceneMemberID="viewController">
+                <navigationController title="What's On" id="EbX-9H-VTp" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Nrg-hR-8yB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -21,10 +21,10 @@
             </objects>
             <point key="canvasLocation" x="-477" y="-48"/>
         </scene>
-        <!--View Controller-->
+        <!--What's On-->
         <scene sceneID="WfP-M7-DHX">
             <objects>
-                <tableViewController id="UYg-nW-vQR" customClass="ViewController" sceneMemberID="viewController">
+                <tableViewController title="What's On" id="UYg-nW-vQR" customClass="ViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="aSs-fX-YLA">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -27,6 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"What's On";
     self.tableView.dataSource = self;
     self.eventStore = [[EKEventStore alloc] init];
     [self.eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError * _Nullable error) {
