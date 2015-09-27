@@ -87,7 +87,10 @@
     NSDate *endTime = [[NSDate alloc] initWithTimeIntervalSince1970:([searchEndTime getMillis] / 1000)];
     NSPredicate *search = [eventStore predicateForEventsWithStartDate:startTime endDate:endTime calendars:nil];
     NSArray *array = [eventStore eventsMatchingPredicate:search];
-    return [[SCIEKEventAccessor alloc] initWithEventItems:array];
+    NSArray *filtered = [array filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+        return ((EKEvent *) evaluatedObject).allDay == false;
+    }]];
+    return [[SCIEKEventAccessor alloc] initWithEventItems:filtered];
 }
 
 
