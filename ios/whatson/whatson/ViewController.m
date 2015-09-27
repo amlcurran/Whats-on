@@ -10,11 +10,11 @@
 #import <EventKit/EventKit.h>
 #import "SCIEventStoreRepository.h"
 #import "SCNSDateBasedTime.h"
-#import "uk/co/amlcurran/social/EventRepositoryAccessor.h"
-#import "uk/co/amlcurran/social/EventsService.h"
+#import "EventRepositoryAccessor.h"
+#import "EventsService.h"
 #import "SCITimeRepository.h"
-#import "uk/co/amlcurran/social/CalendarItem.h"
-#import "uk/co/amlcurran/social/CalendarSource.h"
+#import "CalendarItem.h"
+#import "CalendarSource.h"
 
 @interface ViewController () <UITableViewDataSource>
 

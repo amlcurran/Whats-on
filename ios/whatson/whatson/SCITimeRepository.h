@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "uk/co/amlcurran/social/TimeRepository.h"
-#import "uk/co/amlcurran/social/Time.h"
+#import "TimeRepository.h"
+#import "Time.h"
 
 @interface SCITimeRepository : NSObject <SCTimeRepository>
 
