@@ -16,7 +16,7 @@
 #import "CalendarItem.h"
 #import "CalendarSource.h"
 
-@interface ViewController () <UITableViewDataSource>
+@interface ViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property EKEventStore *eventStore;
 @property SCCalendarSource *calendarSource;
@@ -30,22 +30,35 @@
     [super viewDidLoad];
     self.formatter = [[NSDateFormatter alloc] init];
     self.formatter.dateFormat = @"EEE";
+    self.eventStore = [[EKEventStore alloc] init];
     
     self.title = @"What's On";
     self.tableView.dataSource = self;
-    self.eventStore = [[EKEventStore alloc] init];
+    self.tableView.delegate = self;
     [self.eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError * _Nullable error) {
         if (granted) {
-            SCIEventStoreRepository *repo = [[SCIEventStoreRepository alloc] init];
-            NSDate *now = [[NSDate alloc] init];
-            SCNSDateBasedTime *nowTime = [[SCNSDateBasedTime alloc] initWithNSDate:now];
-            SCITimeRepository *timeRepo = [[SCITimeRepository alloc] init];
-            SCEventsService *service = [[SCEventsService alloc] initWithSCTimeRepository:timeRepo withSCEventsRepository:repo];
-            SCCalendarSource *source = [service getCalendarSourceWithInt:14 withSCTime:nowTime];
-            self.calendarSource = source;
-            [self.tableView reloadData];
+            [self fetchEventsWithCompletionBlock:^(SCCalendarSource *source) {
+                self.calendarSource = source;
+                [self.tableView reloadData];
+            }];
         }
     }];
+}
+
+- (void)fetchEventsWithCompletionBlock:(void (^)(SCCalendarSource *))completionBlock
+{
+    dispatch_queue_t backgroundQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(backgroundQueue, ^{
+        SCIEventStoreRepository *repo = [[SCIEventStoreRepository alloc] init];
+        NSDate *now = [[NSDate alloc] init];
+        SCNSDateBasedTime *nowTime = [[SCNSDateBasedTime alloc] initWithNSDate:now];
+        SCITimeRepository *timeRepo = [[SCITimeRepository alloc] init];
+        SCEventsService *service = [[SCEventsService alloc] initWithSCTimeRepository:timeRepo withSCEventsRepository:repo];
+        SCCalendarSource *source = [service getCalendarSourceWithInt:14 withSCTime:nowTime];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completionBlock(source);
+        });
+    });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,6 +77,7 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"day" forIndexPath:indexPath];
     id<SCCalendarItem> item = [self.calendarSource itemAtWithInt:indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell textLabel].text = [NSString stringWithFormat:@"%@: %@", [self.formatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:(item.startTime / 1000)]], [item title]];
     return cell;
 }
