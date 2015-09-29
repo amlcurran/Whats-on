@@ -33,7 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		86CAD4991BACC9B1009C9CFD /* whatson.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = whatson.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		86CAD4991BACC9B1009C9CFD /* What's On.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "What's On.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86CAD49D1BACC9B1009C9CFD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		86CAD49F1BACC9B1009C9CFD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		86CAD4A01BACC9B1009C9CFD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -104,7 +104,7 @@
 		86CAD49A1BACC9B1009C9CFD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				86CAD4991BACC9B1009C9CFD /* whatson.app */,
+				86CAD4991BACC9B1009C9CFD /* What's On.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -186,7 +186,7 @@
 			);
 			name = whatson;
 			productName = whatson;
-			productReference = 86CAD4991BACC9B1009C9CFD /* whatson.app */;
+			productReference = 86CAD4991BACC9B1009C9CFD /* What's On.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -387,7 +387,7 @@
 					/Users/amlcurran/bin/lib/libjre_emul.a,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "What's On";
 			};
 			name = Debug;
 		};
@@ -415,7 +415,7 @@
 					/Users/amlcurran/bin/lib/libjre_emul.a,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "What's On";
 			};
 			name = Release;
 		};

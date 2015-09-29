@@ -31,6 +31,9 @@
     self.formatter = [[NSDateFormatter alloc] init];
     self.formatter.dateFormat = @"EEE";
     self.eventStore = [[EKEventStore alloc] init];
+
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.561 blue:0.486 alpha:1];
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithWhite:1 alpha:0.8];
     
     self.title = @"What's On";
     self.tableView.dataSource = self;
