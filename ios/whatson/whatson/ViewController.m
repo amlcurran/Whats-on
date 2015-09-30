@@ -88,7 +88,11 @@
     NSString *threeLetterDay = [self.formatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:(item.startTime / 1000)]];
     NSString *formatted = [NSString stringWithFormat:@"%@ - %@", threeLetterDay, [item title]];
     NSMutableAttributedString *coloured = [[NSMutableAttributedString alloc] initWithString:formatted];
-    [coloured addAttribute:NSForegroundColorAttributeName value:self.dayColor range:NSMakeRange(0, 3)];
+    if ([item isEmpty]) {
+        [coloured addAttribute:NSForegroundColorAttributeName value:self.dayColor range:NSMakeRange(0, coloured.length)];
+    } else {
+        [coloured addAttribute:NSForegroundColorAttributeName value:self.dayColor range:NSMakeRange(0, 3)];
+    }
     [[cell textLabel] setAttributedText:coloured];
     return cell;
 }
