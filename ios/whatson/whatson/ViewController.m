@@ -15,8 +15,11 @@
 #import "SCITimeRepository.h"
 #import "CalendarItem.h"
 #import "CalendarSource.h"
+#import "EventCalendarItem.h"
 
-@interface ViewController () <UITableViewDataSource, UITableViewDelegate>
+@import EventKitUI;
+
+@interface ViewController () <UITableViewDataSource, UITableViewDelegate, EKEventEditViewDelegate>
 
 @property EKEventStore *eventStore;
 @property SCCalendarSource *calendarSource;
@@ -90,12 +93,28 @@
     return cell;
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([[self.calendarSource itemAtWithInt:indexPath.row] isEmpty]) {
-        return nil;
+    EKEventStore *eventStore = [[EKEventStore alloc] init];
+    id<SCCalendarItem> item = [self.calendarSource itemAtWithInt:indexPath.row];
+    if ([item isEmpty]) {
+        EKEvent *newEvent = [EKEvent eventWithEventStore:eventStore];
+        EKEventEditViewController *editController = [[EKEventEditViewController alloc] init];
+        editController.eventStore = eventStore;
+        editController.event = newEvent;
+        editController.editViewDelegate = self;
+        [self.navigationController presentViewController:editController animated:YES completion:nil];
+    } else {
+        EKEvent *event = [eventStore eventWithIdentifier:((SCEventCalendarItem*) item).id__];
+        EKEventViewController *eventDisplayer = [[EKEventViewController alloc] init];
+        eventDisplayer.event = event;
+        [self.navigationController pushViewController:eventDisplayer animated:YES];
     }
-    return indexPath;
+}
+
+- (void)eventEditViewController:(EKEventEditViewController *)controller didCompleteWithAction:(EKEventEditViewAction)action
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
