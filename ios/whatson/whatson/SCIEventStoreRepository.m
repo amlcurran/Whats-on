@@ -108,7 +108,6 @@
         NSDateComponents *endComponents = [calendar components:NSCalendarUnitHour fromDate:event.endDate];
         endComponents.timeZone = [NSTimeZone defaultTimeZone];
         bool endsBefore = endComponents.hour <= 17;
-        NSLog(@"%@ ends at %@", event.title, endsBefore ? @"ended" : @"not ended");
         NSDateComponents *startComponents = [calendar components:NSCalendarUnitHour fromDate:event.startDate];
         startComponents.timeZone = [NSTimeZone defaultTimeZone];
         bool startsAfter = startComponents.hour > 23;
