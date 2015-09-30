@@ -75,7 +75,22 @@
 
 @end
 
+@interface SCIEventStoreRepository()
+
+@property (nonatomic, strong) NSCalendar *calendar;
+
+@end
+
 @implementation SCIEventStoreRepository
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _calendar = [NSCalendar currentCalendar];
+    }
+    return self;
+}
 
 - (id<SCEventRepositoryAccessor>)queryEventsWithLong:(jlong)fivePm
                                             withLong:(jlong)elevenPm
@@ -87,8 +102,17 @@
     NSDate *endTime = [[NSDate alloc] initWithTimeIntervalSince1970:([searchEndTime getMillis] / 1000)];
     NSPredicate *search = [eventStore predicateForEventsWithStartDate:startTime endDate:endTime calendars:nil];
     NSArray *array = [eventStore eventsMatchingPredicate:search];
+    __block NSCalendar *calendar = self.calendar;
     NSArray *filtered = [array filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        return ((EKEvent *) evaluatedObject).allDay == false;
+        EKEvent *event = (EKEvent *) evaluatedObject;
+        NSDateComponents *endComponents = [calendar components:NSCalendarUnitHour fromDate:event.endDate];
+        endComponents.timeZone = [NSTimeZone defaultTimeZone];
+        bool endsBefore = endComponents.hour <= 17;
+        NSLog(@"%@ ends at %@", event.title, endsBefore ? @"ended" : @"not ended");
+        NSDateComponents *startComponents = [calendar components:NSCalendarUnitHour fromDate:event.startDate];
+        startComponents.timeZone = [NSTimeZone defaultTimeZone];
+        bool startsAfter = startComponents.hour > 23;
+        return !(endsBefore || startsAfter) && event.allDay == false;
     }]];
     return [[SCIEKEventAccessor alloc] initWithEventItems:filtered];
 }
