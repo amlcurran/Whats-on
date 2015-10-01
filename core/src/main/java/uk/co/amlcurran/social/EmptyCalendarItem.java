@@ -20,8 +20,8 @@ public class EmptyCalendarItem implements CalendarItem {
     }
 
     @Override
-    public long startTime() {
-        return startTime.getMillis();
+    public Time startTime() {
+        return startTime;
     }
 
     @Override

@@ -20,7 +20,7 @@ public class EventViewHolder extends CalendarItemViewHolder<EventCalendarItem> {
 
     @Override
     public void bind(final EventCalendarItem item) {
-        textView.setText(DAY_FORMATTER.print(item.startTime()) + ": " + item.title());
+        textView.setText(DAY_FORMATTER.print(item.startTime().getMillis()) + ": " + item.title());
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

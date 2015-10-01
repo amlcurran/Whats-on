@@ -25,9 +25,8 @@ public class EventsService {
         while (accessor.nextItem()) {
             String title = accessor.getTitle();
             String eventId = accessor.getEventIdentifier();
-            long startTime = accessor.getDtStart();
             Time time = accessor.getStartTime();
-            calendarItems.add(new EventCalendarItem(eventId, title, startTime, time));
+            calendarItems.add(new EventCalendarItem(eventId, title, time));
         }
 
         SparseArray<CalendarItem> itemArray = new SparseArray<>(numberOfDays);

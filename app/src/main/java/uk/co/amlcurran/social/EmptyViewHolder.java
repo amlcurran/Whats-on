@@ -20,7 +20,7 @@ public class EmptyViewHolder extends CalendarItemViewHolder<EmptyCalendarItem> {
 
     @Override
     public void bind(final EmptyCalendarItem item) {
-        textView.setText(DAY_FORMATTER.print(item.startTime()) + ": Nothing on");
+        textView.setText(DAY_FORMATTER.print(item.startTime().getMillis()) + ": Nothing on");
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

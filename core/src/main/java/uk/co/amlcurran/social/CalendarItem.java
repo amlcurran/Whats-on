@@ -6,7 +6,7 @@ public interface CalendarItem {
 
     int startDay();
 
-    long startTime();
+    Time startTime();
 
     boolean isEmpty();
 }

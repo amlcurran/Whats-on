@@ -62,11 +62,6 @@ public class AndroidEventsRepository implements EventsRepository {
         }
 
         @Override
-        public long getDtStart() {
-            return calendarCursor.getLong(dtStartColumnIndex);
-        }
-
-        @Override
         public String getEventIdentifier() {
             return calendarCursor.getString(eventIdColumnIndex);
         }
@@ -83,7 +78,8 @@ public class AndroidEventsRepository implements EventsRepository {
 
         @Override
         public Time getStartTime() {
-            return new JodaTime(new DateTime(getDtStart(), DateTimeZone.getDefault()));
+            long startMillis = calendarCursor.getLong(dtStartColumnIndex);
+            return new JodaTime(new DateTime(startMillis, DateTimeZone.getDefault()));
         }
     }
 

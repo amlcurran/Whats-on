@@ -3,13 +3,11 @@ package uk.co.amlcurran.social;
 class EventCalendarItem implements CalendarItem {
     private final String eventId;
     private final String title;
-    private final long startTime;
     private final Time start;
 
-    public EventCalendarItem(String eventId, String title, long startTime, Time time) {
+    public EventCalendarItem(String eventId, String title, Time time) {
         this.eventId = eventId;
         this.title = title;
-        this.startTime = startTime;
         this.start = time;
     }
 
@@ -28,8 +26,8 @@ class EventCalendarItem implements CalendarItem {
     }
 
     @Override
-    public long startTime() {
-        return startTime;
+    public Time startTime() {
+        return start;
     }
 
     @Override
