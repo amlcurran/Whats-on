@@ -36,11 +36,6 @@
     return [self currentEvent].title;
 }
 
-- (jlong)getDtStart
-{
-    return [[self currentEvent].startDate timeIntervalSince1970] * 1000;
-}
-
 - (NSString *)getEventIdentifier
 {
     return [self currentEvent].eventIdentifier;
