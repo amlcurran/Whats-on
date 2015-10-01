@@ -21,11 +21,6 @@ class EventCalendarItem implements CalendarItem {
     }
 
     @Override
-    public int startDay() {
-        return start.daysSinceEpoch();
-    }
-
-    @Override
     public Time startTime() {
         return start;
     }

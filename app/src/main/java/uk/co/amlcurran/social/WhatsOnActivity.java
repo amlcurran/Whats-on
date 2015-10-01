@@ -74,7 +74,7 @@ public class WhatsOnActivity extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_INSERT);
             intent.setData(CalendarContract.Events.CONTENT_URI);
             DateTime dateTime = DateTime.now(DateTimeZone.getDefault()).withTimeAtStartOfDay();
-            DateTime day = dateTime.plusDays(calendarItem.startDay());
+            DateTime day = dateTime.plusDays(calendarItem.startTime().daysSinceEpoch());
             DateTime startTime = day.plusHours(17);
             DateTime endTime = day.plusHours(22);
             intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime.getMillis());

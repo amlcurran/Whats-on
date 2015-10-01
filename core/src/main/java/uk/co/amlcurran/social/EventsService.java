@@ -32,7 +32,7 @@ public class EventsService {
         SparseArray<CalendarItem> itemArray = new SparseArray<>(numberOfDays);
         int epochToNow = now.daysSinceEpoch();
         for (CalendarItem item : calendarItems) {
-            itemArray.put(item.startDay() - epochToNow, item);
+            itemArray.put(item.startTime().daysSinceEpoch() - epochToNow, item);
         }
 
         CalendarSource calendarSource = new CalendarSource(itemArray, numberOfDays, now);

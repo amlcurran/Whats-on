@@ -15,11 +15,6 @@ public class EmptyCalendarItem implements CalendarItem {
     }
 
     @Override
-    public int startDay() {
-        return position;
-    }
-
-    @Override
     public Time startTime() {
         return startTime;
     }
