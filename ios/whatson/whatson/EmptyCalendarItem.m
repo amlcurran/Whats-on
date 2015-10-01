@@ -6,7 +6,7 @@
 
 #include "EmptyCalendarItem.h"
 #include "J2ObjC_source.h"
-#include "SCTime.h"
+#include "Time.h"
 
 @interface SCEmptyCalendarItem () {
  @public
@@ -34,8 +34,8 @@ J2OBJC_FIELD_SETTER(SCEmptyCalendarItem, startTime__, id<SCTime>)
   return position_;
 }
 
-- (jlong)startTime {
-  return [((id<SCTime>) nil_chk(startTime__)) getMillis];
+- (id<SCTime>)startTime {
+  return startTime__;
 }
 
 - (jboolean)isEmpty {
@@ -47,7 +47,7 @@ J2OBJC_FIELD_SETTER(SCEmptyCalendarItem, startTime__, id<SCTime>)
     { "initWithInt:withSCTime:", "EmptyCalendarItem", NULL, 0x1, NULL, NULL },
     { "title", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
     { "startDay", NULL, "I", 0x1, NULL, NULL },
-    { "startTime", NULL, "J", 0x1, NULL, NULL },
+    { "startTime", NULL, "Luk.co.amlcurran.social.Time;", 0x1, NULL, NULL },
     { "isEmpty", NULL, "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {

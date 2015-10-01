@@ -16,13 +16,12 @@
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "getTitle", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "getDtStart", NULL, "J", 0x401, NULL, NULL },
     { "getEventIdentifier", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
     { "nextItem", NULL, "Z", 0x401, NULL, NULL },
     { "endAccess", NULL, "V", 0x401, NULL, NULL },
     { "getStartTime", NULL, "Luk.co.amlcurran.social.Time;", 0x401, NULL, NULL },
   };
-  static const J2ObjcClassInfo _SCEventRepositoryAccessor = { 2, "EventRepositoryAccessor", "uk.co.amlcurran.social", NULL, 0x609, 6, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _SCEventRepositoryAccessor = { 2, "EventRepositoryAccessor", "uk.co.amlcurran.social", NULL, 0x609, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_SCEventRepositoryAccessor;
 }
 

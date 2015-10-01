@@ -22,7 +22,7 @@
 
 - (jint)startDay;
 
-- (jlong)startTime;
+- (id<SCTime>)startTime;
 
 - (NSString *)title;
 

@@ -8,13 +8,15 @@
 
 #include "J2ObjC_header.h"
 
+@protocol SCTime;
+
 @protocol SCCalendarItem < NSObject, JavaObject >
 
 - (NSString *)title;
 
 - (jint)startDay;
 
-- (jlong)startTime;
+- (id<SCTime>)startTime;
 
 - (jboolean)isEmpty;
 

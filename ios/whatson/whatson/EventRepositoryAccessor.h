@@ -14,8 +14,6 @@
 
 - (NSString *)getTitle;
 
-- (jlong)getDtStart;
-
 - (NSString *)getEventIdentifier;
 
 - (jboolean)nextItem;
