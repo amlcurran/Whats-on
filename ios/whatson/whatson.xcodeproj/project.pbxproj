@@ -18,9 +18,9 @@
 		86C19EB61BBF26A600BBCDF6 /* SCTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EA91BBF26A600BBCDF6 /* SCTime.m */; settings = {ASSET_TAGS = (); }; };
 		86C19EB71BBF26A600BBCDF6 /* SparseArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EAB1BBF26A600BBCDF6 /* SparseArray.m */; settings = {ASSET_TAGS = (); }; };
 		86C19EB81BBF26A600BBCDF6 /* TimeRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EAD1BBF26A600BBCDF6 /* TimeRepository.m */; settings = {ASSET_TAGS = (); }; };
+		86C19EBF1BBF28E600BBCDF6 /* WhatsOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		86CAD49E1BACC9B1009C9CFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD49D1BACC9B1009C9CFD /* main.m */; };
 		86CAD4A11BACC9B1009C9CFD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD4A01BACC9B1009C9CFD /* AppDelegate.m */; };
-		86CAD4A41BACC9B1009C9CFD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD4A31BACC9B1009C9CFD /* ViewController.m */; };
 		86CAD4A71BACC9B1009C9CFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4A51BACC9B1009C9CFD /* Main.storyboard */; };
 		86CAD4A91BACC9B1009C9CFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */; };
 		86CAD4AC1BACC9B1009C9CFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4AA1BACC9B1009C9CFD /* LaunchScreen.storyboard */; };
@@ -55,12 +55,12 @@
 		86C19EAB1BBF26A600BBCDF6 /* SparseArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SparseArray.m; sourceTree = "<group>"; };
 		86C19EAC1BBF26A600BBCDF6 /* TimeRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeRepository.h; sourceTree = "<group>"; };
 		86C19EAD1BBF26A600BBCDF6 /* TimeRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeRepository.m; sourceTree = "<group>"; };
+		86C19EB91BBF287500BBCDF6 /* whatson-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "whatson-Bridging-Header.h"; sourceTree = "<group>"; };
+		86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WhatsOnViewController.swift; path = whatson/WhatsOnViewController.swift; sourceTree = "<group>"; };
 		86CAD4991BACC9B1009C9CFD /* What's On.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "What's On.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86CAD49D1BACC9B1009C9CFD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		86CAD49F1BACC9B1009C9CFD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		86CAD4A01BACC9B1009C9CFD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		86CAD4A21BACC9B1009C9CFD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		86CAD4A31BACC9B1009C9CFD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		86CAD4A61BACC9B1009C9CFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		86CAD4AB1BACC9B1009C9CFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -93,11 +93,13 @@
 		86CAD4901BACC9B1009C9CFD = {
 			isa = PBXGroup;
 			children = (
+				86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */,
 				86DE0FEA1BB88646004E20B5 /* libz.tbd */,
 				86DE0FE81BB8863D004E20B5 /* Security.framework */,
 				86DE0FE61BB885E8004E20B5 /* libicucore.tbd */,
 				86CAD49B1BACC9B1009C9CFD /* whatson */,
 				86CAD49A1BACC9B1009C9CFD /* Products */,
+				86C19EB91BBF287500BBCDF6 /* whatson-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -115,8 +117,6 @@
 				86E09AB31BB6A75700D5A809 /* core */,
 				86CAD49F1BACC9B1009C9CFD /* AppDelegate.h */,
 				86CAD4A01BACC9B1009C9CFD /* AppDelegate.m */,
-				86CAD4A21BACC9B1009C9CFD /* ViewController.h */,
-				86CAD4A31BACC9B1009C9CFD /* ViewController.m */,
 				86CAD4A51BACC9B1009C9CFD /* Main.storyboard */,
 				86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */,
 				86CAD4AA1BACC9B1009C9CFD /* LaunchScreen.storyboard */,
@@ -195,6 +195,7 @@
 		86CAD4911BACC9B1009C9CFD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Alex Curran";
 				TargetAttributes = {
@@ -242,10 +243,10 @@
 				86C19EB11BBF26A600BBCDF6 /* EmptyCalendarItem.m in Sources */,
 				86C19EB31BBF26A600BBCDF6 /* EventRepositoryAccessor.m in Sources */,
 				86C19EB81BBF26A600BBCDF6 /* TimeRepository.m in Sources */,
-				86CAD4A41BACC9B1009C9CFD /* ViewController.m in Sources */,
 				86CAD4F51BAF3B43009C9CFD /* SCIEventStoreRepository.m in Sources */,
 				86C19EB51BBF26A600BBCDF6 /* EventsService.m in Sources */,
 				86C19EB71BBF26A600BBCDF6 /* SparseArray.m in Sources */,
+				86C19EBF1BBF28E600BBCDF6 /* WhatsOnViewController.swift in Sources */,
 				86C19EB01BBF26A600BBCDF6 /* ContainerHelpers.m in Sources */,
 				86CAD4F21BADF6F6009C9CFD /* SCNSDateBasedTime.m in Sources */,
 				86C19EAE1BBF26A600BBCDF6 /* CalendarItem.m in Sources */,
@@ -367,6 +368,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"~/bin/include",
@@ -388,6 +390,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson;
 				PRODUCT_NAME = "What's On";
+				SWIFT_OBJC_BRIDGING_HEADER = "whatson-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -395,6 +399,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"~/bin/include",
@@ -416,6 +421,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson;
 				PRODUCT_NAME = "What's On";
+				SWIFT_OBJC_BRIDGING_HEADER = "whatson-Bridging-Header.h";
 			};
 			name = Release;
 		};
