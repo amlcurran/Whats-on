@@ -3,12 +3,12 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/EventRepositoryAccessor.java
 //
 
-
 #include "EventRepositoryAccessor.h"
 #include "J2ObjC_source.h"
-#include "Time.h"
+#include "SCTime.h"
 
 @interface SCEventRepositoryAccessor : NSObject
+
 @end
 
 @implementation SCEventRepositoryAccessor

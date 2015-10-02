@@ -3,8 +3,8 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/core/SparseArray.java
 //
 
-#ifndef _UkCoAmlcurranSocialCoreSparseArray_H_
-#define _UkCoAmlcurranSocialCoreSparseArray_H_
+#ifndef _SparseArray_H_
+#define _SparseArray_H_
 
 #include "J2ObjC_header.h"
 
@@ -69,4 +69,4 @@ FOUNDATION_EXPORT UkCoAmlcurranSocialCoreSparseArray *new_UkCoAmlcurranSocialCor
 
 J2OBJC_TYPE_LITERAL_HEADER(UkCoAmlcurranSocialCoreSparseArray)
 
-#endif // _UkCoAmlcurranSocialCoreSparseArray_H_
+#endif // _SparseArray_H_

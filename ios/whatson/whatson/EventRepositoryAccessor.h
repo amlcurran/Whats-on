@@ -3,8 +3,8 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/EventRepositoryAccessor.java
 //
 
-#ifndef _SCEventRepositoryAccessor_H_
-#define _SCEventRepositoryAccessor_H_
+#ifndef _EventRepositoryAccessor_H_
+#define _EventRepositoryAccessor_H_
 
 #include "J2ObjC_header.h"
 
@@ -30,4 +30,4 @@ J2OBJC_TYPE_LITERAL_HEADER(SCEventRepositoryAccessor)
 
 #define UkCoAmlcurranSocialEventRepositoryAccessor SCEventRepositoryAccessor
 
-#endif // _SCEventRepositoryAccessor_H_
+#endif // _EventRepositoryAccessor_H_

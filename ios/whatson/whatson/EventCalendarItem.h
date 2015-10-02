@@ -3,8 +3,8 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/EventCalendarItem.java
 //
 
-#ifndef _SCEventCalendarItem_H_
-#define _SCEventCalendarItem_H_
+#ifndef _EventCalendarItem_H_
+#define _EventCalendarItem_H_
 
 #include "CalendarItem.h"
 #include "J2ObjC_header.h"
@@ -23,8 +23,6 @@
 
 - (jboolean)isEmpty;
 
-- (jint)startDay;
-
 - (id<SCTime>)startTime;
 
 - (NSString *)title;
@@ -39,6 +37,6 @@ FOUNDATION_EXPORT SCEventCalendarItem *new_SCEventCalendarItem_initWithNSString_
 
 J2OBJC_TYPE_LITERAL_HEADER(SCEventCalendarItem)
 
-typedef SCEventCalendarItem UkCoAmlcurranSocialEventCalendarItem;
+@compatibility_alias UkCoAmlcurranSocialEventCalendarItem SCEventCalendarItem;
 
-#endif // _SCEventCalendarItem_H_
+#endif // _EventCalendarItem_H_

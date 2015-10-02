@@ -3,7 +3,6 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/core/SparseArray.java
 //
 
-
 #include "ContainerHelpers.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
@@ -39,10 +38,12 @@ J2OBJC_INITIALIZED_DEFN(UkCoAmlcurranSocialCoreSparseArray)
 
 @implementation UkCoAmlcurranSocialCoreSparseArray
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   UkCoAmlcurranSocialCoreSparseArray_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)initialCapacity {
   UkCoAmlcurranSocialCoreSparseArray_initWithInt_(self, initialCapacity);
@@ -81,7 +82,7 @@ J2OBJC_INITIALIZED_DEFN(UkCoAmlcurranSocialCoreSparseArray)
   if (i >= 0) {
     if (IOSObjectArray_Get(nil_chk(mValues_), i) != UkCoAmlcurranSocialCoreSparseArray_DELETED_) {
       (void) IOSObjectArray_Set(mValues_, i, UkCoAmlcurranSocialCoreSparseArray_DELETED_);
-      mGarbage_ = YES;
+      mGarbage_ = true;
     }
   }
 }
@@ -93,7 +94,7 @@ J2OBJC_INITIALIZED_DEFN(UkCoAmlcurranSocialCoreSparseArray)
 - (void)removeAtWithInt:(jint)index {
   if (IOSObjectArray_Get(nil_chk(mValues_), index) != UkCoAmlcurranSocialCoreSparseArray_DELETED_) {
     (void) IOSObjectArray_Set(mValues_, index, UkCoAmlcurranSocialCoreSparseArray_DELETED_);
-    mGarbage_ = YES;
+    mGarbage_ = true;
   }
 }
 
@@ -196,7 +197,7 @@ J2OBJC_INITIALIZED_DEFN(UkCoAmlcurranSocialCoreSparseArray)
     (void) IOSObjectArray_Set(nil_chk(values), i, nil);
   }
   mSize_ = 0;
-  mGarbage_ = NO;
+  mGarbage_ = false;
 }
 
 - (void)appendWithInt:(jint)key
@@ -279,11 +280,11 @@ J2OBJC_INITIALIZED_DEFN(UkCoAmlcurranSocialCoreSparseArray)
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "DELETED_", NULL, 0x1a, "Ljava.lang.Object;", &UkCoAmlcurranSocialCoreSparseArray_DELETED_, NULL,  },
-    { "mGarbage_", NULL, 0x2, "Z", NULL, NULL,  },
-    { "mKeys_", NULL, 0x2, "[I", NULL, NULL,  },
-    { "mValues_", NULL, 0x2, "[Ljava.lang.Object;", NULL, NULL,  },
-    { "mSize_", NULL, 0x2, "I", NULL, NULL,  },
+    { "DELETED_", NULL, 0x1a, "Ljava.lang.Object;", &UkCoAmlcurranSocialCoreSparseArray_DELETED_, NULL, .constantValue.asLong = 0 },
+    { "mGarbage_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
+    { "mKeys_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
+    { "mValues_", NULL, 0x2, "[Ljava.lang.Object;", NULL, NULL, .constantValue.asLong = 0 },
+    { "mSize_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _UkCoAmlcurranSocialCoreSparseArray = { 2, "SparseArray", "uk.co.amlcurran.social.core", NULL, 0x1, 20, methods, 5, fields, 0, NULL, 0, NULL, NULL, "<E:Ljava/lang/Object;>Ljava/lang/Object;" };
   return &_UkCoAmlcurranSocialCoreSparseArray;
@@ -303,10 +304,10 @@ UkCoAmlcurranSocialCoreSparseArray *new_UkCoAmlcurranSocialCoreSparseArray_init(
 
 void UkCoAmlcurranSocialCoreSparseArray_initWithInt_(UkCoAmlcurranSocialCoreSparseArray *self, jint initialCapacity) {
   (void) NSObject_init(self);
-  self->mGarbage_ = NO;
+  self->mGarbage_ = false;
   if (initialCapacity == 0) {
-    self->mKeys_ = UkCoAmlcurranSocialCoreContainerHelpers_get_EMPTY_INTS_();
-    self->mValues_ = UkCoAmlcurranSocialCoreContainerHelpers_get_EMPTY_OBJECTS_();
+    self->mKeys_ = JreLoadStatic(UkCoAmlcurranSocialCoreContainerHelpers, EMPTY_INTS_);
+    self->mValues_ = JreLoadStatic(UkCoAmlcurranSocialCoreContainerHelpers, EMPTY_OBJECTS_);
   }
   else {
     initialCapacity = UkCoAmlcurranSocialCoreContainerHelpers_idealIntArraySizeWithInt_(initialCapacity);
@@ -338,7 +339,7 @@ void UkCoAmlcurranSocialCoreSparseArray_gc(UkCoAmlcurranSocialCoreSparseArray *s
       o++;
     }
   }
-  self->mGarbage_ = NO;
+  self->mGarbage_ = false;
   self->mSize_ = o;
 }
 

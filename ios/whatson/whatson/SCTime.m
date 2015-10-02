@@ -3,11 +3,11 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/Time.java
 //
 
-
 #include "J2ObjC_source.h"
-#include "Time.h"
+#include "SCTime.h"
 
 @interface SCTime : NSObject
+
 @end
 
 @implementation SCTime

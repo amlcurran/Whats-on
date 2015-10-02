@@ -3,13 +3,12 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/CalendarSource.java
 //
 
-
 #include "CalendarItem.h"
 #include "CalendarSource.h"
 #include "EmptyCalendarItem.h"
 #include "J2ObjC_source.h"
 #include "SparseArray.h"
-#include "Time.h"
+#include "SCTime.h"
 
 @interface SCCalendarSource () {
  @public
@@ -56,9 +55,9 @@ J2OBJC_FIELD_SETTER(SCCalendarSource, now_, id<SCTime>)
     { "isEmptyAtWithInt:", "isEmptyAt", "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "calendarItems_", NULL, 0x12, "Luk.co.amlcurran.social.core.SparseArray;", NULL, "Luk/co/amlcurran/social/core/SparseArray<Luk/co/amlcurran/social/CalendarItem;>;",  },
-    { "daysSize_", NULL, 0x12, "I", NULL, NULL,  },
-    { "now_", NULL, 0x12, "Luk.co.amlcurran.social.Time;", NULL, NULL,  },
+    { "calendarItems_", NULL, 0x12, "Luk.co.amlcurran.social.core.SparseArray;", NULL, "Luk/co/amlcurran/social/core/SparseArray<Luk/co/amlcurran/social/CalendarItem;>;", .constantValue.asLong = 0 },
+    { "daysSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "now_", NULL, 0x12, "Luk.co.amlcurran.social.Time;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _SCCalendarSource = { 2, "CalendarSource", "uk.co.amlcurran.social", NULL, 0x0, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_SCCalendarSource;

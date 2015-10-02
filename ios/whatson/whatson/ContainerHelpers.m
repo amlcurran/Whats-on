@@ -3,7 +3,6 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/core/ContainerHelpers.java
 //
 
-
 #include "ContainerHelpers.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
@@ -46,10 +45,12 @@ IOSObjectArray *UkCoAmlcurranSocialCoreContainerHelpers_EMPTY_OBJECTS_;
   return UkCoAmlcurranSocialCoreContainerHelpers_binarySearchWithLongArray_withInt_withLong_(array, size, value);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   UkCoAmlcurranSocialCoreContainerHelpers_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [UkCoAmlcurranSocialCoreContainerHelpers class]) {
@@ -71,9 +72,9 @@ IOSObjectArray *UkCoAmlcurranSocialCoreContainerHelpers_EMPTY_OBJECTS_;
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_INTS_", NULL, 0x18, "[I", &UkCoAmlcurranSocialCoreContainerHelpers_EMPTY_INTS_, NULL,  },
-    { "EMPTY_LONGS_", NULL, 0x18, "[J", &UkCoAmlcurranSocialCoreContainerHelpers_EMPTY_LONGS_, NULL,  },
-    { "EMPTY_OBJECTS_", NULL, 0x18, "[Ljava.lang.Object;", &UkCoAmlcurranSocialCoreContainerHelpers_EMPTY_OBJECTS_, NULL,  },
+    { "EMPTY_INTS_", NULL, 0x18, "[I", &UkCoAmlcurranSocialCoreContainerHelpers_EMPTY_INTS_, NULL, .constantValue.asLong = 0 },
+    { "EMPTY_LONGS_", NULL, 0x18, "[J", &UkCoAmlcurranSocialCoreContainerHelpers_EMPTY_LONGS_, NULL, .constantValue.asLong = 0 },
+    { "EMPTY_OBJECTS_", NULL, 0x18, "[Ljava.lang.Object;", &UkCoAmlcurranSocialCoreContainerHelpers_EMPTY_OBJECTS_, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _UkCoAmlcurranSocialCoreContainerHelpers = { 2, "ContainerHelpers", "uk.co.amlcurran.social.core", NULL, 0x1, 7, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_UkCoAmlcurranSocialCoreContainerHelpers;
@@ -93,7 +94,7 @@ jint UkCoAmlcurranSocialCoreContainerHelpers_idealLongArraySizeWithInt_(jint nee
 
 jint UkCoAmlcurranSocialCoreContainerHelpers_idealByteArraySizeWithInt_(jint need) {
   UkCoAmlcurranSocialCoreContainerHelpers_initialize();
-  for (jint i = 4; i < 32; i++) if (need <= (LShift32(1, i)) - 12) return (LShift32(1, i)) - 12;
+  for (jint i = 4; i < 32; i++) if (need <= (JreLShift32(1, i)) - 12) return (JreLShift32(1, i)) - 12;
   return need;
 }
 
@@ -107,7 +108,7 @@ jint UkCoAmlcurranSocialCoreContainerHelpers_binarySearchWithIntArray_withInt_wi
   jint lo = 0;
   jint hi = size - 1;
   while (lo <= hi) {
-    jint mid = URShift32((lo + hi), 1);
+    jint mid = JreURShift32((lo + hi), 1);
     jint midVal = IOSIntArray_Get(nil_chk(array), mid);
     if (midVal < value) {
       lo = mid + 1;
@@ -127,7 +128,7 @@ jint UkCoAmlcurranSocialCoreContainerHelpers_binarySearchWithLongArray_withInt_w
   jint lo = 0;
   jint hi = size - 1;
   while (lo <= hi) {
-    jint mid = URShift32((lo + hi), 1);
+    jint mid = JreURShift32((lo + hi), 1);
     jlong midVal = IOSLongArray_Get(nil_chk(array), mid);
     if (midVal < value) {
       lo = mid + 1;

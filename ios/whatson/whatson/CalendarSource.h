@@ -3,8 +3,8 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/CalendarSource.java
 //
 
-#ifndef _SCCalendarSource_H_
-#define _SCCalendarSource_H_
+#ifndef _CalendarSource_H_
+#define _CalendarSource_H_
 
 #include "J2ObjC_header.h"
 
@@ -36,6 +36,6 @@ FOUNDATION_EXPORT SCCalendarSource *new_SCCalendarSource_initWithUkCoAmlcurranSo
 
 J2OBJC_TYPE_LITERAL_HEADER(SCCalendarSource)
 
-typedef SCCalendarSource UkCoAmlcurranSocialCalendarSource;
+@compatibility_alias UkCoAmlcurranSocialCalendarSource SCCalendarSource;
 
-#endif // _SCCalendarSource_H_
+#endif // _CalendarSource_H_

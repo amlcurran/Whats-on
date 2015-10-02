@@ -3,8 +3,8 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/core/ContainerHelpers.java
 //
 
-#ifndef _UkCoAmlcurranSocialCoreContainerHelpers_H_
-#define _UkCoAmlcurranSocialCoreContainerHelpers_H_
+#ifndef _ContainerHelpers_H_
+#define _ContainerHelpers_H_
 
 #include "J2ObjC_header.h"
 
@@ -68,4 +68,4 @@ FOUNDATION_EXPORT UkCoAmlcurranSocialCoreContainerHelpers *new_UkCoAmlcurranSoci
 
 J2OBJC_TYPE_LITERAL_HEADER(UkCoAmlcurranSocialCoreContainerHelpers)
 
-#endif // _UkCoAmlcurranSocialCoreContainerHelpers_H_
+#endif // _ContainerHelpers_H_

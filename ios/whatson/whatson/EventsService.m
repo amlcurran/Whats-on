@@ -3,7 +3,6 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/EventsService.java
 //
 
-
 #include "CalendarItem.h"
 #include "CalendarSource.h"
 #include "EventCalendarItem.h"
@@ -12,7 +11,7 @@
 #include "EventsService.h"
 #include "J2ObjC_source.h"
 #include "SparseArray.h"
-#include "Time.h"
+#include "SCTime.h"
 #include "TimeRepository.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
@@ -53,7 +52,7 @@ J2OBJC_FIELD_SETTER(SCEventsService, eventsRepository_, id<SCEventsRepository>)
   UkCoAmlcurranSocialCoreSparseArray *itemArray = new_UkCoAmlcurranSocialCoreSparseArray_initWithInt_(numberOfDays);
   jint epochToNow = [((id<SCTime>) nil_chk(now)) daysSinceEpoch];
   for (id<SCCalendarItem> __strong item in calendarItems) {
-    [itemArray putWithInt:[((id<SCCalendarItem>) nil_chk(item)) startDay] - epochToNow withId:item];
+    [itemArray putWithInt:[((id<SCTime>) nil_chk([((id<SCCalendarItem>) nil_chk(item)) startTime])) daysSinceEpoch] - epochToNow withId:item];
   }
   SCCalendarSource *calendarSource = new_SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTime_(itemArray, numberOfDays, now);
   [accessor endAccess];
@@ -66,8 +65,8 @@ J2OBJC_FIELD_SETTER(SCEventsService, eventsRepository_, id<SCEventsRepository>)
     { "getCalendarSourceWithInt:withSCTime:", "getCalendarSource", "Luk.co.amlcurran.social.CalendarSource;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "timeRepository_", NULL, 0x12, "Luk.co.amlcurran.social.TimeRepository;", NULL, NULL,  },
-    { "eventsRepository_", NULL, 0x12, "Luk.co.amlcurran.social.EventsRepository;", NULL, NULL,  },
+    { "timeRepository_", NULL, 0x12, "Luk.co.amlcurran.social.TimeRepository;", NULL, NULL, .constantValue.asLong = 0 },
+    { "eventsRepository_", NULL, 0x12, "Luk.co.amlcurran.social.EventsRepository;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _SCEventsService = { 2, "EventsService", "uk.co.amlcurran.social", NULL, 0x1, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_SCEventsService;

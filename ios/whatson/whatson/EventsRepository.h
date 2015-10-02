@@ -3,8 +3,8 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/EventsRepository.java
 //
 
-#ifndef _SCEventsRepository_H_
-#define _SCEventsRepository_H_
+#ifndef _EventsRepository_H_
+#define _EventsRepository_H_
 
 #include "J2ObjC_header.h"
 
@@ -26,4 +26,4 @@ J2OBJC_TYPE_LITERAL_HEADER(SCEventsRepository)
 
 #define UkCoAmlcurranSocialEventsRepository SCEventsRepository
 
-#endif // _SCEventsRepository_H_
+#endif // _EventsRepository_H_

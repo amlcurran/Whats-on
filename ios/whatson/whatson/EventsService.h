@@ -3,8 +3,8 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/EventsService.java
 //
 
-#ifndef _SCEventsService_H_
-#define _SCEventsService_H_
+#ifndef _EventsService_H_
+#define _EventsService_H_
 
 #include "J2ObjC_header.h"
 
@@ -33,6 +33,6 @@ FOUNDATION_EXPORT SCEventsService *new_SCEventsService_initWithSCTimeRepository_
 
 J2OBJC_TYPE_LITERAL_HEADER(SCEventsService)
 
-typedef SCEventsService UkCoAmlcurranSocialEventsService;
+@compatibility_alias UkCoAmlcurranSocialEventsService SCEventsService;
 
-#endif // _SCEventsService_H_
+#endif // _EventsService_H_

@@ -3,22 +3,21 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/EventCalendarItem.java
 //
 
-
 #include "EventCalendarItem.h"
 #include "J2ObjC_source.h"
-#include "Time.h"
+#include "SCTime.h"
 
 @interface SCEventCalendarItem () {
  @public
   NSString *eventId_;
-  NSString *title__;
+  NSString *title_;
   id<SCTime> start_;
 }
 
 @end
 
 J2OBJC_FIELD_SETTER(SCEventCalendarItem, eventId_, NSString *)
-J2OBJC_FIELD_SETTER(SCEventCalendarItem, title__, NSString *)
+J2OBJC_FIELD_SETTER(SCEventCalendarItem, title_, NSString *)
 J2OBJC_FIELD_SETTER(SCEventCalendarItem, start_, id<SCTime>)
 
 @implementation SCEventCalendarItem
@@ -35,11 +34,7 @@ J2OBJC_FIELD_SETTER(SCEventCalendarItem, start_, id<SCTime>)
 }
 
 - (NSString *)title {
-  return title__;
-}
-
-- (jint)startDay {
-  return [((id<SCTime>) nil_chk(start_)) daysSinceEpoch];
+  return title_;
 }
 
 - (id<SCTime>)startTime {
@@ -47,7 +42,7 @@ J2OBJC_FIELD_SETTER(SCEventCalendarItem, start_, id<SCTime>)
 }
 
 - (jboolean)isEmpty {
-  return NO;
+  return false;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -55,16 +50,15 @@ J2OBJC_FIELD_SETTER(SCEventCalendarItem, start_, id<SCTime>)
     { "initWithNSString:withNSString:withSCTime:", "EventCalendarItem", NULL, 0x1, NULL, NULL },
     { "id__", "id", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "title", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "startDay", NULL, "I", 0x1, NULL, NULL },
     { "startTime", NULL, "Luk.co.amlcurran.social.Time;", 0x1, NULL, NULL },
     { "isEmpty", NULL, "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "eventId_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL,  },
-    { "title__", "title", 0x12, "Ljava.lang.String;", NULL, NULL,  },
-    { "start_", NULL, 0x12, "Luk.co.amlcurran.social.Time;", NULL, NULL,  },
+    { "eventId_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "title_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
+    { "start_", NULL, 0x12, "Luk.co.amlcurran.social.Time;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _SCEventCalendarItem = { 2, "EventCalendarItem", "uk.co.amlcurran.social", NULL, 0x0, 6, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _SCEventCalendarItem = { 2, "EventCalendarItem", "uk.co.amlcurran.social", NULL, 0x0, 5, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_SCEventCalendarItem;
 }
 
@@ -73,7 +67,7 @@ J2OBJC_FIELD_SETTER(SCEventCalendarItem, start_, id<SCTime>)
 void SCEventCalendarItem_initWithNSString_withNSString_withSCTime_(SCEventCalendarItem *self, NSString *eventId, NSString *title, id<SCTime> time) {
   (void) NSObject_init(self);
   self->eventId_ = eventId;
-  self->title__ = title;
+  self->title_ = title;
   self->start_ = time;
 }
 

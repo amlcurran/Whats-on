@@ -3,12 +3,12 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/TimeRepository.java
 //
 
-
 #include "J2ObjC_source.h"
-#include "Time.h"
+#include "SCTime.h"
 #include "TimeRepository.h"
 
 @interface SCTimeRepository : NSObject
+
 @end
 
 @implementation SCTimeRepository

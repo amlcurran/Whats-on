@@ -3,8 +3,8 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/TimeRepository.java
 //
 
-#ifndef _SCTimeRepository_H_
-#define _SCTimeRepository_H_
+#ifndef _TimeRepository_H_
+#define _TimeRepository_H_
 
 #include "J2ObjC_header.h"
 
@@ -26,4 +26,4 @@ J2OBJC_TYPE_LITERAL_HEADER(SCTimeRepository)
 
 #define UkCoAmlcurranSocialTimeRepository SCTimeRepository
 
-#endif // _SCTimeRepository_H_
+#endif // _TimeRepository_H_

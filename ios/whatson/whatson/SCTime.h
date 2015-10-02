@@ -3,8 +3,8 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/Time.java
 //
 
-#ifndef _SCTime_H_
-#define _SCTime_H_
+#ifndef _Time_H_
+#define _Time_H_
 
 #include "J2ObjC_header.h"
 
@@ -24,4 +24,4 @@ J2OBJC_TYPE_LITERAL_HEADER(SCTime)
 
 #define UkCoAmlcurranSocialTime SCTime
 
-#endif // _SCTime_H_
+#endif // _Time_H_

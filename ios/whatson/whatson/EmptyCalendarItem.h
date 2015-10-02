@@ -3,8 +3,8 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/EmptyCalendarItem.java
 //
 
-#ifndef _SCEmptyCalendarItem_H_
-#define _SCEmptyCalendarItem_H_
+#ifndef _EmptyCalendarItem_H_
+#define _EmptyCalendarItem_H_
 
 #include "CalendarItem.h"
 #include "J2ObjC_header.h"
@@ -20,8 +20,6 @@
 
 - (jboolean)isEmpty;
 
-- (jint)startDay;
-
 - (id<SCTime>)startTime;
 
 - (NSString *)title;
@@ -36,6 +34,6 @@ FOUNDATION_EXPORT SCEmptyCalendarItem *new_SCEmptyCalendarItem_initWithInt_withS
 
 J2OBJC_TYPE_LITERAL_HEADER(SCEmptyCalendarItem)
 
-typedef SCEmptyCalendarItem UkCoAmlcurranSocialEmptyCalendarItem;
+@compatibility_alias UkCoAmlcurranSocialEmptyCalendarItem SCEmptyCalendarItem;
 
-#endif // _SCEmptyCalendarItem_H_
+#endif // _EmptyCalendarItem_H_
