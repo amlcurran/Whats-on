@@ -35,7 +35,7 @@ public class EventsService {
             itemArray.put(item.startTime().daysSinceEpoch() - epochToNow, item);
         }
 
-        CalendarSource calendarSource = new CalendarSource(itemArray, numberOfDays, now);
+        CalendarSource calendarSource = new CalendarSource(timeRepository, itemArray, numberOfDays, now);
         accessor.endAccess();
         return calendarSource;
     }

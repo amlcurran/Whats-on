@@ -27,4 +27,9 @@ public class JodaTime implements Time {
     public long getMillis() {
         return dateTime.getMillis();
     }
+
+    @Override
+    public Time plusHours(int hours) {
+        return new JodaTime(dateTime.plusHours(hours));
+    }
 }

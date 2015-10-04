@@ -6,4 +6,6 @@ public interface Time {
     int daysSinceEpoch();
 
     long getMillis();
+
+    Time plusHours(int hours);
 }
