@@ -94,8 +94,8 @@
                                           withSCTime:(id<SCTime>)searchEndTime
 {
     EKEventStore *eventStore = [[EKEventStore alloc] init];
-    NSDate *startTime = [[NSDate alloc] initWithTimeIntervalSince1970:([searchStartTime getMillis] / 1000)];
-    NSDate *endTime = [[NSDate alloc] initWithTimeIntervalSince1970:([searchEndTime getMillis] / 1000)];
+    NSDate *startTime = [SCNSDateBasedTime dateFromTime:searchStartTime];
+    NSDate *endTime = [SCNSDateBasedTime dateFromTime:searchEndTime];
     NSPredicate *search = [eventStore predicateForEventsWithStartDate:startTime endDate:endTime calendars:nil];
     NSArray *array = [eventStore eventsMatchingPredicate:search];
     __block NSCalendar *calendar = self.calendar;

@@ -13,4 +13,6 @@
 
 - (instancetype)initWithNSDate:(NSDate *)date;
 
++ (NSDate *)dateFromTime:(id<SCTime>)time;
+
 @end

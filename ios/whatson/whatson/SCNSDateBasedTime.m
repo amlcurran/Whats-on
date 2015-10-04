@@ -54,4 +54,10 @@
     return [[SCNSDateBasedTime alloc] initWithNSDate:newDate];
 }
 
++ (NSDate *)dateFromTime:(id<SCTime>)time
+{
+    NSTimeInterval seconds = [time getMillis] / 1000.0;
+    return [NSDate dateWithTimeIntervalSince1970:seconds];
+}
+
 @end
