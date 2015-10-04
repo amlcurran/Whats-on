@@ -20,7 +20,7 @@
     
     NSArray <UIApplicationShortcutItem *> *currentShortcuts = application.shortcutItems;
     if ([currentShortcuts count] == 0) {
-        NSMutableArray <UIApplicationShortcutItem *> *updatedShortcuts = [currentShortcuts mutableCopy];
+        NSMutableArray <UIApplicationShortcutItem *> *updatedShortcuts = [[NSMutableArray alloc] init];
         UIMutableApplicationShortcutItem *newItem = [[UIMutableApplicationShortcutItem alloc] initWithType:@"new-tomorrow" localizedTitle:@"Add event tomorrow"];
         [updatedShortcuts addObject:newItem];
         [application setShortcutItems:updatedShortcuts];
