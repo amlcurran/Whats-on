@@ -32,11 +32,12 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate {
         navigationController?.navigationBar.tintColor = UIColor(white: 1, alpha: 0.8);
         
         title = "What's On";
-        eventStore.requestAccessToEntityType(.Event) { (success, error) -> Void in
-            self.fetchEvents({ (source) -> Void in
-                self.calendarSource = source;
-                self.tableView.reloadData();
-            })
+    }
+    
+    func eventsChanged() {
+        self.fetchEvents { (source) -> Void in
+            self.calendarSource = source;
+            self.tableView.reloadData();
         }
     }
     
@@ -53,10 +54,18 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"eventsChanged", name: EKEventStoreChangedNotification, object: eventStore);
+        eventStore.requestAccessToEntityType(.Event) { (success, error) -> Void in
+            self.fetchEvents({ (source) -> Void in
+                self.calendarSource = source;
+                self.tableView.reloadData();
+            })
+        }
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated);
+        NSNotificationCenter.defaultCenter().removeObserver(self);
     }
     
     override func didReceiveMemoryWarning() {
