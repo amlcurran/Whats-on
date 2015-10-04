@@ -31,15 +31,9 @@
     [application setShortcutItems:updatedShortcuts];
     
     UIApplicationShortcutItem *item = launchOptions[UIApplicationLaunchOptionsShortcutItemKey];
-    if ([item.type isEqualToString:@"new-tomorrow"]) {
-        EKEventEditViewController *editController = [[EKEventEditViewController alloc] init];
-        editController.eventStore = [EKEventStore new];
-        [self.window.rootViewController presentViewController:editController animated:YES completion:nil];
-        return NO;
-    } else if ([item.type isEqualToString:@"on-today"]) {
-        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Uh oh!" message:@"You've not implemented this yet" preferredStyle:UIAlertControllerStyleAlert];
-        [self.window.rootViewController presentViewController:controller animated:YES completion:nil];
-        return YES;
+    if (item) {
+        [self.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
+        return ![self handleShortcutItem:item];
     }
     return YES;
 }
@@ -49,19 +43,23 @@
     [self handleShortcutItem:shortcutItem];
 }
 
-- (void)handleShortcutItem:(UIApplicationShortcutItem *)item
+- (BOOL)handleShortcutItem:(UIApplicationShortcutItem *)item
 {
     if ([item.type isEqualToString:@"new-tomorrow"]) {
         EKEvent *event = [EKEvent eventWithEventStore:[[EKEventStore alloc] init]];
         NSDate *date = [[NSCalendar currentCalendar] dateBySettingHour:17 minute:0 second:0 ofDate:[NSDate new] options:0];
         event.startDate = date;
         EKEventEditViewController *editController = [[EKEventEditViewController alloc] init];
+        editController.editViewDelegate = self;
         editController.eventStore = [EKEventStore new];
         [self.window.rootViewController presentViewController:editController animated:YES completion:nil];
+        return YES;
     } else if ([item.type isEqualToString:@"on-today"]) {
         UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Uh oh!" message:@"You've not implemented this yet" preferredStyle:UIAlertControllerStyleAlert];
         [self.window.rootViewController presentViewController:controller animated:YES completion:nil];
+        return NO;
     }
+    return NO;
 }
 
 - (void)eventEditViewController:(EKEventEditViewController *)controller didCompleteWithAction:(EKEventEditViewAction)action
