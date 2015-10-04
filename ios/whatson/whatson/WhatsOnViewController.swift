@@ -67,7 +67,7 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("day", forIndexPath: indexPath);
         let item = self.calendarSource!.itemAtWithInt(jint(indexPath.row));
-        let startTime = NSDate(timeIntervalSince1970: NSTimeInterval(item.startTime().getMillis()));
+        let startTime = NSDate(timeIntervalSince1970: NSTimeInterval(item.startTime().getMillis() / 1000));
         let formatted = String(format: "%@ - %@", dateFormatter .stringFromDate(startTime), item.title());
         let colouredString = NSMutableAttributedString(string: formatted);
         if (item.isEmpty()) {
