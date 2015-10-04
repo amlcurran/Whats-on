@@ -11,14 +11,16 @@
 @class UkCoAmlcurranSocialCoreSparseArray;
 @protocol SCCalendarItem;
 @protocol SCTime;
+@protocol SCTimeRepository;
 
 @interface SCCalendarSource : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithUkCoAmlcurranSocialCoreSparseArray:(UkCoAmlcurranSocialCoreSparseArray *)calendarItems
-                                                   withInt:(jint)daysSize
-                                                withSCTime:(id<SCTime>)now;
+- (instancetype)initWithSCTimeRepository:(id<SCTimeRepository>)timeRepository
+  withUkCoAmlcurranSocialCoreSparseArray:(UkCoAmlcurranSocialCoreSparseArray *)calendarItems
+                                 withInt:(jint)daysSize
+                              withSCTime:(id<SCTime>)now;
 
 - (jint)count;
 
@@ -30,9 +32,9 @@
 
 J2OBJC_EMPTY_STATIC_INIT(SCCalendarSource)
 
-FOUNDATION_EXPORT void SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTime_(SCCalendarSource *self, UkCoAmlcurranSocialCoreSparseArray *calendarItems, jint daysSize, id<SCTime> now);
+FOUNDATION_EXPORT void SCCalendarSource_initWithSCTimeRepository_withUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTime_(SCCalendarSource *self, id<SCTimeRepository> timeRepository, UkCoAmlcurranSocialCoreSparseArray *calendarItems, jint daysSize, id<SCTime> now);
 
-FOUNDATION_EXPORT SCCalendarSource *new_SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTime_(UkCoAmlcurranSocialCoreSparseArray *calendarItems, jint daysSize, id<SCTime> now) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT SCCalendarSource *new_SCCalendarSource_initWithSCTimeRepository_withUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTime_(id<SCTimeRepository> timeRepository, UkCoAmlcurranSocialCoreSparseArray *calendarItems, jint daysSize, id<SCTime> now) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(SCCalendarSource)
 

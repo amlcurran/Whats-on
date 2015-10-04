@@ -91,9 +91,8 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate {
         if item!.isEmpty() {
             let newEvent = EKEvent(eventStore: eventStore);
             let startTime = item?.startTime();
-            let intervalTime = startTime?.plusHoursWithInt(17);
-            let timeInterval = (intervalTime?.getMillis())! / 1000;
-            let startDate = NSDate(timeIntervalSince1970: NSTimeInterval(timeInterval));
+            let intervalTime = (startTime?.getMillis())! / 1000;
+            let startDate = NSDate(timeIntervalSince1970: NSTimeInterval(intervalTime));
             let editController = EKEventEditViewController();
             newEvent.startDate = startDate;
             editController.eventStore = eventStore;

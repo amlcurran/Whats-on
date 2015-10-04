@@ -54,7 +54,7 @@ J2OBJC_FIELD_SETTER(SCEventsService, eventsRepository_, id<SCEventsRepository>)
   for (id<SCCalendarItem> __strong item in calendarItems) {
     [itemArray putWithInt:[((id<SCTime>) nil_chk([((id<SCCalendarItem>) nil_chk(item)) startTime])) daysSinceEpoch] - epochToNow withId:item];
   }
-  SCCalendarSource *calendarSource = new_SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTime_(itemArray, numberOfDays, now);
+  SCCalendarSource *calendarSource = new_SCCalendarSource_initWithSCTimeRepository_withUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTime_(timeRepository_, itemArray, numberOfDays, now);
   [accessor endAccess];
   return calendarSource;
 }
