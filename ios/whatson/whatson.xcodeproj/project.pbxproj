@@ -7,17 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		86C19EAE1BBF26A600BBCDF6 /* CalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C19E991BBF26A600BBCDF6 /* CalendarItem.m */; };
-		86C19EAF1BBF26A600BBCDF6 /* CalendarSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C19E9B1BBF26A600BBCDF6 /* CalendarSource.m */; };
-		86C19EB01BBF26A600BBCDF6 /* ContainerHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C19E9D1BBF26A600BBCDF6 /* ContainerHelpers.m */; };
-		86C19EB11BBF26A600BBCDF6 /* EmptyCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C19E9F1BBF26A600BBCDF6 /* EmptyCalendarItem.m */; };
-		86C19EB21BBF26A600BBCDF6 /* EventCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EA11BBF26A600BBCDF6 /* EventCalendarItem.m */; };
-		86C19EB31BBF26A600BBCDF6 /* EventRepositoryAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EA31BBF26A600BBCDF6 /* EventRepositoryAccessor.m */; };
-		86C19EB41BBF26A600BBCDF6 /* EventsRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EA51BBF26A600BBCDF6 /* EventsRepository.m */; };
-		86C19EB51BBF26A600BBCDF6 /* EventsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EA71BBF26A600BBCDF6 /* EventsService.m */; };
-		86C19EB61BBF26A600BBCDF6 /* SCTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EA91BBF26A600BBCDF6 /* SCTime.m */; };
-		86C19EB71BBF26A600BBCDF6 /* SparseArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EAB1BBF26A600BBCDF6 /* SparseArray.m */; };
-		86C19EB81BBF26A600BBCDF6 /* TimeRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EAD1BBF26A600BBCDF6 /* TimeRepository.m */; };
+		869DA67D1BC14D3000A1FAB7 /* CalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 869DA6661BC14D3000A1FAB7 /* CalendarItem.m */; };
+		869DA67E1BC14D3000A1FAB7 /* CalendarSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 869DA6681BC14D3000A1FAB7 /* CalendarSource.m */; };
+		869DA67F1BC14D3000A1FAB7 /* ContainerHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 869DA66A1BC14D3000A1FAB7 /* ContainerHelpers.m */; };
+		869DA6801BC14D3000A1FAB7 /* EmptyCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 869DA66C1BC14D3000A1FAB7 /* EmptyCalendarItem.m */; };
+		869DA6811BC14D3000A1FAB7 /* EventCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 869DA66E1BC14D3000A1FAB7 /* EventCalendarItem.m */; };
+		869DA6821BC14D3000A1FAB7 /* EventRepositoryAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 869DA6701BC14D3000A1FAB7 /* EventRepositoryAccessor.m */; };
+		869DA6831BC14D3000A1FAB7 /* EventsRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 869DA6721BC14D3000A1FAB7 /* EventsRepository.m */; };
+		869DA6841BC14D3000A1FAB7 /* EventsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 869DA6741BC14D3000A1FAB7 /* EventsService.m */; };
+		869DA6861BC14D3000A1FAB7 /* SparseArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 869DA6781BC14D3000A1FAB7 /* SparseArray.m */; };
+		869DA6881BC14D3000A1FAB7 /* TimeRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 869DA67C1BC14D3000A1FAB7 /* TimeRepository.m */; };
+		869DA68B1BC14DFB00A1FAB7 /* SCTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 869DA68A1BC14DFB00A1FAB7 /* SCTime.m */; };
 		86C19EBF1BBF28E600BBCDF6 /* WhatsOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */; };
 		86CAD49E1BACC9B1009C9CFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD49D1BACC9B1009C9CFD /* main.m */; };
 		86CAD4A11BACC9B1009C9CFD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD4A01BACC9B1009C9CFD /* AppDelegate.m */; };
@@ -33,28 +33,28 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		86C19E981BBF26A600BBCDF6 /* CalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarItem.h; sourceTree = "<group>"; };
-		86C19E991BBF26A600BBCDF6 /* CalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarItem.m; sourceTree = "<group>"; };
-		86C19E9A1BBF26A600BBCDF6 /* CalendarSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarSource.h; sourceTree = "<group>"; };
-		86C19E9B1BBF26A600BBCDF6 /* CalendarSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarSource.m; sourceTree = "<group>"; };
-		86C19E9C1BBF26A600BBCDF6 /* ContainerHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerHelpers.h; sourceTree = "<group>"; };
-		86C19E9D1BBF26A600BBCDF6 /* ContainerHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerHelpers.m; sourceTree = "<group>"; };
-		86C19E9E1BBF26A600BBCDF6 /* EmptyCalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyCalendarItem.h; sourceTree = "<group>"; };
-		86C19E9F1BBF26A600BBCDF6 /* EmptyCalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyCalendarItem.m; sourceTree = "<group>"; };
-		86C19EA01BBF26A600BBCDF6 /* EventCalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventCalendarItem.h; sourceTree = "<group>"; };
-		86C19EA11BBF26A600BBCDF6 /* EventCalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventCalendarItem.m; sourceTree = "<group>"; };
-		86C19EA21BBF26A600BBCDF6 /* EventRepositoryAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventRepositoryAccessor.h; sourceTree = "<group>"; };
-		86C19EA31BBF26A600BBCDF6 /* EventRepositoryAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventRepositoryAccessor.m; sourceTree = "<group>"; };
-		86C19EA41BBF26A600BBCDF6 /* EventsRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsRepository.h; sourceTree = "<group>"; };
-		86C19EA51BBF26A600BBCDF6 /* EventsRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsRepository.m; sourceTree = "<group>"; };
-		86C19EA61BBF26A600BBCDF6 /* EventsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsService.h; sourceTree = "<group>"; };
-		86C19EA71BBF26A600BBCDF6 /* EventsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsService.m; sourceTree = "<group>"; };
-		86C19EA81BBF26A600BBCDF6 /* SCTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTime.h; sourceTree = "<group>"; };
-		86C19EA91BBF26A600BBCDF6 /* SCTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTime.m; sourceTree = "<group>"; };
-		86C19EAA1BBF26A600BBCDF6 /* SparseArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SparseArray.h; sourceTree = "<group>"; };
-		86C19EAB1BBF26A600BBCDF6 /* SparseArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SparseArray.m; sourceTree = "<group>"; };
-		86C19EAC1BBF26A600BBCDF6 /* TimeRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeRepository.h; sourceTree = "<group>"; };
-		86C19EAD1BBF26A600BBCDF6 /* TimeRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeRepository.m; sourceTree = "<group>"; };
+		869DA6651BC14D3000A1FAB7 /* CalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarItem.h; sourceTree = "<group>"; };
+		869DA6661BC14D3000A1FAB7 /* CalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarItem.m; sourceTree = "<group>"; };
+		869DA6671BC14D3000A1FAB7 /* CalendarSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarSource.h; sourceTree = "<group>"; };
+		869DA6681BC14D3000A1FAB7 /* CalendarSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarSource.m; sourceTree = "<group>"; };
+		869DA6691BC14D3000A1FAB7 /* ContainerHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerHelpers.h; sourceTree = "<group>"; };
+		869DA66A1BC14D3000A1FAB7 /* ContainerHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerHelpers.m; sourceTree = "<group>"; };
+		869DA66B1BC14D3000A1FAB7 /* EmptyCalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyCalendarItem.h; sourceTree = "<group>"; };
+		869DA66C1BC14D3000A1FAB7 /* EmptyCalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyCalendarItem.m; sourceTree = "<group>"; };
+		869DA66D1BC14D3000A1FAB7 /* EventCalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventCalendarItem.h; sourceTree = "<group>"; };
+		869DA66E1BC14D3000A1FAB7 /* EventCalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventCalendarItem.m; sourceTree = "<group>"; };
+		869DA66F1BC14D3000A1FAB7 /* EventRepositoryAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventRepositoryAccessor.h; sourceTree = "<group>"; };
+		869DA6701BC14D3000A1FAB7 /* EventRepositoryAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventRepositoryAccessor.m; sourceTree = "<group>"; };
+		869DA6711BC14D3000A1FAB7 /* EventsRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsRepository.h; sourceTree = "<group>"; };
+		869DA6721BC14D3000A1FAB7 /* EventsRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsRepository.m; sourceTree = "<group>"; };
+		869DA6731BC14D3000A1FAB7 /* EventsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsService.h; sourceTree = "<group>"; };
+		869DA6741BC14D3000A1FAB7 /* EventsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsService.m; sourceTree = "<group>"; };
+		869DA6771BC14D3000A1FAB7 /* SparseArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SparseArray.h; sourceTree = "<group>"; };
+		869DA6781BC14D3000A1FAB7 /* SparseArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SparseArray.m; sourceTree = "<group>"; };
+		869DA67B1BC14D3000A1FAB7 /* TimeRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeRepository.h; sourceTree = "<group>"; };
+		869DA67C1BC14D3000A1FAB7 /* TimeRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeRepository.m; sourceTree = "<group>"; };
+		869DA6891BC14DFB00A1FAB7 /* SCTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTime.h; sourceTree = "<group>"; };
+		869DA68A1BC14DFB00A1FAB7 /* SCTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTime.m; sourceTree = "<group>"; };
 		86C19EB91BBF287500BBCDF6 /* whatson-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "whatson-Bridging-Header.h"; sourceTree = "<group>"; };
 		86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WhatsOnViewController.swift; path = whatson/WhatsOnViewController.swift; sourceTree = "<group>"; };
 		86CAD4991BACC9B1009C9CFD /* What's On.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "What's On.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,28 +143,28 @@
 		86E09AB31BB6A75700D5A809 /* core */ = {
 			isa = PBXGroup;
 			children = (
-				86C19E981BBF26A600BBCDF6 /* CalendarItem.h */,
-				86C19E991BBF26A600BBCDF6 /* CalendarItem.m */,
-				86C19E9A1BBF26A600BBCDF6 /* CalendarSource.h */,
-				86C19E9B1BBF26A600BBCDF6 /* CalendarSource.m */,
-				86C19E9C1BBF26A600BBCDF6 /* ContainerHelpers.h */,
-				86C19E9D1BBF26A600BBCDF6 /* ContainerHelpers.m */,
-				86C19E9E1BBF26A600BBCDF6 /* EmptyCalendarItem.h */,
-				86C19E9F1BBF26A600BBCDF6 /* EmptyCalendarItem.m */,
-				86C19EA01BBF26A600BBCDF6 /* EventCalendarItem.h */,
-				86C19EA11BBF26A600BBCDF6 /* EventCalendarItem.m */,
-				86C19EA21BBF26A600BBCDF6 /* EventRepositoryAccessor.h */,
-				86C19EA31BBF26A600BBCDF6 /* EventRepositoryAccessor.m */,
-				86C19EA41BBF26A600BBCDF6 /* EventsRepository.h */,
-				86C19EA51BBF26A600BBCDF6 /* EventsRepository.m */,
-				86C19EA61BBF26A600BBCDF6 /* EventsService.h */,
-				86C19EA71BBF26A600BBCDF6 /* EventsService.m */,
-				86C19EA81BBF26A600BBCDF6 /* SCTime.h */,
-				86C19EA91BBF26A600BBCDF6 /* SCTime.m */,
-				86C19EAA1BBF26A600BBCDF6 /* SparseArray.h */,
-				86C19EAB1BBF26A600BBCDF6 /* SparseArray.m */,
-				86C19EAC1BBF26A600BBCDF6 /* TimeRepository.h */,
-				86C19EAD1BBF26A600BBCDF6 /* TimeRepository.m */,
+				869DA6651BC14D3000A1FAB7 /* CalendarItem.h */,
+				869DA6661BC14D3000A1FAB7 /* CalendarItem.m */,
+				869DA6671BC14D3000A1FAB7 /* CalendarSource.h */,
+				869DA6681BC14D3000A1FAB7 /* CalendarSource.m */,
+				869DA6691BC14D3000A1FAB7 /* ContainerHelpers.h */,
+				869DA66A1BC14D3000A1FAB7 /* ContainerHelpers.m */,
+				869DA66B1BC14D3000A1FAB7 /* EmptyCalendarItem.h */,
+				869DA66C1BC14D3000A1FAB7 /* EmptyCalendarItem.m */,
+				869DA66D1BC14D3000A1FAB7 /* EventCalendarItem.h */,
+				869DA66E1BC14D3000A1FAB7 /* EventCalendarItem.m */,
+				869DA66F1BC14D3000A1FAB7 /* EventRepositoryAccessor.h */,
+				869DA6701BC14D3000A1FAB7 /* EventRepositoryAccessor.m */,
+				869DA6711BC14D3000A1FAB7 /* EventsRepository.h */,
+				869DA6721BC14D3000A1FAB7 /* EventsRepository.m */,
+				869DA6731BC14D3000A1FAB7 /* EventsService.h */,
+				869DA6741BC14D3000A1FAB7 /* EventsService.m */,
+				869DA6891BC14DFB00A1FAB7 /* SCTime.h */,
+				869DA68A1BC14DFB00A1FAB7 /* SCTime.m */,
+				869DA6771BC14D3000A1FAB7 /* SparseArray.h */,
+				869DA6781BC14D3000A1FAB7 /* SparseArray.m */,
+				869DA67B1BC14D3000A1FAB7 /* TimeRepository.h */,
+				869DA67C1BC14D3000A1FAB7 /* TimeRepository.m */,
 			);
 			name = core;
 			sourceTree = "<group>";
@@ -240,23 +240,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86C19EB11BBF26A600BBCDF6 /* EmptyCalendarItem.m in Sources */,
-				86C19EB31BBF26A600BBCDF6 /* EventRepositoryAccessor.m in Sources */,
-				86C19EB81BBF26A600BBCDF6 /* TimeRepository.m in Sources */,
+				869DA68B1BC14DFB00A1FAB7 /* SCTime.m in Sources */,
+				869DA6801BC14D3000A1FAB7 /* EmptyCalendarItem.m in Sources */,
+				869DA6821BC14D3000A1FAB7 /* EventRepositoryAccessor.m in Sources */,
 				86CAD4F51BAF3B43009C9CFD /* SCIEventStoreRepository.m in Sources */,
-				86C19EB51BBF26A600BBCDF6 /* EventsService.m in Sources */,
-				86C19EB71BBF26A600BBCDF6 /* SparseArray.m in Sources */,
 				86C19EBF1BBF28E600BBCDF6 /* WhatsOnViewController.swift in Sources */,
-				86C19EB01BBF26A600BBCDF6 /* ContainerHelpers.m in Sources */,
+				869DA6841BC14D3000A1FAB7 /* EventsService.m in Sources */,
+				869DA6861BC14D3000A1FAB7 /* SparseArray.m in Sources */,
+				869DA67F1BC14D3000A1FAB7 /* ContainerHelpers.m in Sources */,
 				86CAD4F21BADF6F6009C9CFD /* SCNSDateBasedTime.m in Sources */,
-				86C19EAE1BBF26A600BBCDF6 /* CalendarItem.m in Sources */,
+				869DA67D1BC14D3000A1FAB7 /* CalendarItem.m in Sources */,
 				86CAD4A11BACC9B1009C9CFD /* AppDelegate.m in Sources */,
 				86CAD49E1BACC9B1009C9CFD /* main.m in Sources */,
-				86C19EB21BBF26A600BBCDF6 /* EventCalendarItem.m in Sources */,
-				86C19EAF1BBF26A600BBCDF6 /* CalendarSource.m in Sources */,
+				869DA6811BC14D3000A1FAB7 /* EventCalendarItem.m in Sources */,
+				869DA67E1BC14D3000A1FAB7 /* CalendarSource.m in Sources */,
+				869DA6881BC14D3000A1FAB7 /* TimeRepository.m in Sources */,
 				86CAD4EF1BADF68F009C9CFD /* SCITimeRepository.m in Sources */,
-				86C19EB61BBF26A600BBCDF6 /* SCTime.m in Sources */,
-				86C19EB41BBF26A600BBCDF6 /* EventsRepository.m in Sources */,
+				869DA6831BC14D3000A1FAB7 /* EventsRepository.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

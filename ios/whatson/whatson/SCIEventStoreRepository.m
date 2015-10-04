@@ -60,7 +60,8 @@
 
 - (id<SCTime>)getStartTime
 {
-    return [[SCNSDateBasedTime alloc] initWithNSDate:[self currentEvent].startDate];
+    NSDate *date = [self currentEvent].startDate;
+    return [[SCNSDateBasedTime alloc] initWithNSDate:date];
 }
 
 - (EKEvent *)currentEvent

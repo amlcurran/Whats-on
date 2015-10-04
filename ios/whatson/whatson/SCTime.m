@@ -17,8 +17,9 @@
     { "plusDaysWithInt:", "plusDays", "Luk.co.amlcurran.social.Time;", 0x401, NULL, NULL },
     { "daysSinceEpoch", NULL, "I", 0x401, NULL, NULL },
     { "getMillis", NULL, "J", 0x401, NULL, NULL },
+    { "plusHoursWithInt:", "plusHours", "Luk.co.amlcurran.social.Time;", 0x401, NULL, NULL },
   };
-  static const J2ObjcClassInfo _SCTime = { 2, "Time", "uk.co.amlcurran.social", NULL, 0x609, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _SCTime = { 2, "Time", "uk.co.amlcurran.social", NULL, 0x609, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_SCTime;
 }
 

@@ -38,7 +38,7 @@ J2OBJC_FIELD_SETTER(SCCalendarSource, now_, id<SCTime>)
 - (id<SCCalendarItem>)itemAtWithInt:(jint)position {
   id<SCCalendarItem> calendarItem = [((UkCoAmlcurranSocialCoreSparseArray *) nil_chk(calendarItems_)) getWithInt:position];
   if (calendarItem == nil) {
-    return new_SCEmptyCalendarItem_initWithInt_withSCTime_(position, [((id<SCTime>) nil_chk(now_)) plusDaysWithInt:position]);
+    return new_SCEmptyCalendarItem_initWithInt_withSCTime_(position, [((id<SCTime>) nil_chk([((id<SCTime>) nil_chk(now_)) plusDaysWithInt:position])) plusHoursWithInt:17]);
   }
   return calendarItem;
 }

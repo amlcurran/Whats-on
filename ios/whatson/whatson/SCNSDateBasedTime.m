@@ -46,4 +46,12 @@
     return [_date timeIntervalSince1970] * 1000;
 }
 
+- (id<SCTime>)plusHoursWithInt:(jint)hours
+{
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    components.hour = components.hour + hours;
+    NSDate *newDate =  [self.calendar dateByAddingComponents:components toDate:self.date options:0];
+    return [[SCNSDateBasedTime alloc] initWithNSDate:newDate];
+}
+
 @end

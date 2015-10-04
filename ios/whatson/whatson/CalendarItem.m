@@ -5,7 +5,7 @@
 
 #include "CalendarItem.h"
 #include "J2ObjC_source.h"
-#include "SCTime.h"
+#include "Time.h"
 
 @interface SCCalendarItem : NSObject
 

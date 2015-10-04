@@ -4,7 +4,7 @@
 //
 
 #include "J2ObjC_source.h"
-#include "SCTime.h"
+#include "Time.h"
 #include "TimeRepository.h"
 
 @interface SCTimeRepository : NSObject

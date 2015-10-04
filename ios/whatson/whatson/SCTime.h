@@ -16,6 +16,8 @@
 
 - (jlong)getMillis;
 
+- (id<SCTime>)plusHoursWithInt:(jint)hours;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(SCTime)
