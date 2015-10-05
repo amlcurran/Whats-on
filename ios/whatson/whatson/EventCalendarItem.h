@@ -17,7 +17,10 @@
 
 - (instancetype)initWithNSString:(NSString *)eventId
                     withNSString:(NSString *)title
-                      withSCTime:(id<SCTime>)time;
+                      withSCTime:(id<SCTime>)time
+                      withSCTime:(id<SCTime>)endTime;
+
+- (id<SCTime>)endTime;
 
 - (NSString *)id__;
 
@@ -31,9 +34,9 @@
 
 J2OBJC_EMPTY_STATIC_INIT(SCEventCalendarItem)
 
-FOUNDATION_EXPORT void SCEventCalendarItem_initWithNSString_withNSString_withSCTime_(SCEventCalendarItem *self, NSString *eventId, NSString *title, id<SCTime> time);
+FOUNDATION_EXPORT void SCEventCalendarItem_initWithNSString_withNSString_withSCTime_withSCTime_(SCEventCalendarItem *self, NSString *eventId, NSString *title, id<SCTime> time, id<SCTime> endTime);
 
-FOUNDATION_EXPORT SCEventCalendarItem *new_SCEventCalendarItem_initWithNSString_withNSString_withSCTime_(NSString *eventId, NSString *title, id<SCTime> time) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT SCEventCalendarItem *new_SCEventCalendarItem_initWithNSString_withNSString_withSCTime_withSCTime_(NSString *eventId, NSString *title, id<SCTime> time, id<SCTime> endTime) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(SCEventCalendarItem)
 

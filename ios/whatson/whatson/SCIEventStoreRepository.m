@@ -64,6 +64,12 @@
     return [[SCNSDateBasedTime alloc] initWithNSDate:date];
 }
 
+- (id<SCTime>)getEndTime
+{
+    NSDate *date = [self currentEvent].endDate;
+    return [[SCNSDateBasedTime alloc] initWithNSDate:date];
+}
+
 - (EKEvent *)currentEvent
 {
     return ((EKEvent *) [[self events] objectAtIndex:self.currentPosition]);

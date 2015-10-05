@@ -15,8 +15,10 @@
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)position
-                 withSCTime:(id<SCTime>)startTime;
+- (instancetype)initWithSCTime:(id<SCTime>)startTime
+                    withSCTime:(id<SCTime>)endTime;
+
+- (id<SCTime>)endTime;
 
 - (jboolean)isEmpty;
 
@@ -28,9 +30,9 @@
 
 J2OBJC_EMPTY_STATIC_INIT(SCEmptyCalendarItem)
 
-FOUNDATION_EXPORT void SCEmptyCalendarItem_initWithInt_withSCTime_(SCEmptyCalendarItem *self, jint position, id<SCTime> startTime);
+FOUNDATION_EXPORT void SCEmptyCalendarItem_initWithSCTime_withSCTime_(SCEmptyCalendarItem *self, id<SCTime> startTime, id<SCTime> endTime);
 
-FOUNDATION_EXPORT SCEmptyCalendarItem *new_SCEmptyCalendarItem_initWithInt_withSCTime_(jint position, id<SCTime> startTime) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT SCEmptyCalendarItem *new_SCEmptyCalendarItem_initWithSCTime_withSCTime_(id<SCTime> startTime, id<SCTime> endTime) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(SCEmptyCalendarItem)
 

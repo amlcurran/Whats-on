@@ -16,6 +16,8 @@
 
 - (id<SCTime>)startTime;
 
+- (id<SCTime>)endTime;
+
 - (jboolean)isEmpty;
 
 @end

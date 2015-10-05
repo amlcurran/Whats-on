@@ -47,14 +47,15 @@ J2OBJC_FIELD_SETTER(SCEventsService, eventsRepository_, id<SCEventsRepository>)
     NSString *title = [accessor getTitle];
     NSString *eventId = [accessor getEventIdentifier];
     id<SCTime> time = [accessor getStartTime];
-    [calendarItems addWithId:new_SCEventCalendarItem_initWithNSString_withNSString_withSCTime_(eventId, title, time)];
+    id<SCTime> endTime = [accessor getEndTime];
+    [calendarItems addWithId:new_SCEventCalendarItem_initWithNSString_withNSString_withSCTime_withSCTime_(eventId, title, time, endTime)];
   }
   UkCoAmlcurranSocialCoreSparseArray *itemArray = new_UkCoAmlcurranSocialCoreSparseArray_initWithInt_(numberOfDays);
   jint epochToNow = [((id<SCTime>) nil_chk(now)) daysSinceEpoch];
   for (id<SCCalendarItem> __strong item in calendarItems) {
     [itemArray putWithInt:[((id<SCTime>) nil_chk([((id<SCCalendarItem>) nil_chk(item)) startTime])) daysSinceEpoch] - epochToNow withId:item];
   }
-  SCCalendarSource *calendarSource = new_SCCalendarSource_initWithSCTimeRepository_withUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTime_(timeRepository_, itemArray, numberOfDays, now);
+  SCCalendarSource *calendarSource = new_SCCalendarSource_initWithSCTimeRepository_withUkCoAmlcurranSocialCoreSparseArray_withInt_(timeRepository_, itemArray, numberOfDays);
   [accessor endAccess];
   return calendarSource;
 }

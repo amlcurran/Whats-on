@@ -9,19 +9,20 @@
 
 @interface SCEmptyCalendarItem () {
  @public
-  jint position_;
   id<SCTime> startTime_;
+  id<SCTime> endTime_;
 }
 
 @end
 
 J2OBJC_FIELD_SETTER(SCEmptyCalendarItem, startTime_, id<SCTime>)
+J2OBJC_FIELD_SETTER(SCEmptyCalendarItem, endTime_, id<SCTime>)
 
 @implementation SCEmptyCalendarItem
 
-- (instancetype)initWithInt:(jint)position
-                 withSCTime:(id<SCTime>)startTime {
-  SCEmptyCalendarItem_initWithInt_withSCTime_(self, position, startTime);
+- (instancetype)initWithSCTime:(id<SCTime>)startTime
+                    withSCTime:(id<SCTime>)endTime {
+  SCEmptyCalendarItem_initWithSCTime_withSCTime_(self, startTime, endTime);
   return self;
 }
 
@@ -33,36 +34,41 @@ J2OBJC_FIELD_SETTER(SCEmptyCalendarItem, startTime_, id<SCTime>)
   return startTime_;
 }
 
+- (id<SCTime>)endTime {
+  return endTime_;
+}
+
 - (jboolean)isEmpty {
   return true;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withSCTime:", "EmptyCalendarItem", NULL, 0x1, NULL, NULL },
+    { "initWithSCTime:withSCTime:", "EmptyCalendarItem", NULL, 0x1, NULL, NULL },
     { "title", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
     { "startTime", NULL, "Luk.co.amlcurran.social.Time;", 0x1, NULL, NULL },
+    { "endTime", NULL, "Luk.co.amlcurran.social.Time;", 0x1, NULL, NULL },
     { "isEmpty", NULL, "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "position_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "startTime_", NULL, 0x12, "Luk.co.amlcurran.social.Time;", NULL, NULL, .constantValue.asLong = 0 },
+    { "endTime_", NULL, 0x12, "Luk.co.amlcurran.social.Time;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _SCEmptyCalendarItem = { 2, "EmptyCalendarItem", "uk.co.amlcurran.social", NULL, 0x1, 4, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _SCEmptyCalendarItem = { 2, "EmptyCalendarItem", "uk.co.amlcurran.social", NULL, 0x1, 5, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_SCEmptyCalendarItem;
 }
 
 @end
 
-void SCEmptyCalendarItem_initWithInt_withSCTime_(SCEmptyCalendarItem *self, jint position, id<SCTime> startTime) {
+void SCEmptyCalendarItem_initWithSCTime_withSCTime_(SCEmptyCalendarItem *self, id<SCTime> startTime, id<SCTime> endTime) {
   (void) NSObject_init(self);
-  self->position_ = position;
   self->startTime_ = startTime;
+  self->endTime_ = endTime;
 }
 
-SCEmptyCalendarItem *new_SCEmptyCalendarItem_initWithInt_withSCTime_(jint position, id<SCTime> startTime) {
+SCEmptyCalendarItem *new_SCEmptyCalendarItem_initWithSCTime_withSCTime_(id<SCTime> startTime, id<SCTime> endTime) {
   SCEmptyCalendarItem *self = [SCEmptyCalendarItem alloc];
-  SCEmptyCalendarItem_initWithInt_withSCTime_(self, position, startTime);
+  SCEmptyCalendarItem_initWithSCTime_withSCTime_(self, startTime, endTime);
   return self;
 }
 
