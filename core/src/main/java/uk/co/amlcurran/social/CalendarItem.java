@@ -6,5 +6,7 @@ public interface CalendarItem {
 
     Time startTime();
 
+    Time endTime();
+
     boolean isEmpty();
 }

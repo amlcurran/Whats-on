@@ -47,12 +47,14 @@ public class AndroidEventsRepository implements EventsRepository {
         private final Cursor calendarCursor;
         private final int titleColumnIndex;
         private final int dtStartColumnIndex;
+        private final int dtEndColumnIndex;
         private final int eventIdColumnIndex;
 
         public CursorEventRepositoryAccessor(Cursor calendarCursor) {
             this.calendarCursor = calendarCursor;
             this.titleColumnIndex = calendarCursor.getColumnIndexOrThrow(CalendarContract.Events.TITLE);
             this.dtStartColumnIndex = calendarCursor.getColumnIndexOrThrow(CalendarContract.Events.DTSTART);
+            this.dtEndColumnIndex = calendarCursor.getColumnIndexOrThrow(CalendarContract.Events.DTEND);
             this.eventIdColumnIndex = calendarCursor.getColumnIndexOrThrow(CalendarContract.Instances.EVENT_ID);
         }
 
@@ -80,6 +82,12 @@ public class AndroidEventsRepository implements EventsRepository {
         public Time getStartTime() {
             long startMillis = calendarCursor.getLong(dtStartColumnIndex);
             return new JodaTime(new DateTime(startMillis, DateTimeZone.getDefault()));
+        }
+
+        @Override
+        public Time getEndTime() {
+            long endMillis = calendarCursor.getLong(dtEndColumnIndex);
+            return new JodaTime(new DateTime(endMillis, DateTimeZone.getDefault()));
         }
     }
 

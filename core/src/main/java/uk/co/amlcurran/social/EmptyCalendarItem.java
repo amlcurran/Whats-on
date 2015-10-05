@@ -1,12 +1,13 @@
 package uk.co.amlcurran.social;
 
 public class EmptyCalendarItem implements CalendarItem {
-    private final int position;
-    private final Time startTime;
 
-    public EmptyCalendarItem(int position, Time startTime) {
-        this.position = position;
+    private final Time startTime;
+    private final Time endTime;
+
+    public EmptyCalendarItem(Time startTime, Time endTime) {
         this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     @Override
@@ -17,6 +18,11 @@ public class EmptyCalendarItem implements CalendarItem {
     @Override
     public Time startTime() {
         return startTime;
+    }
+
+    @Override
+    public Time endTime() {
+        return endTime;
     }
 
     @Override

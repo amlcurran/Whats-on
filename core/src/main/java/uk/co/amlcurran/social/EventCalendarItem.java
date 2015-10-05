@@ -4,11 +4,13 @@ class EventCalendarItem implements CalendarItem {
     private final String eventId;
     private final String title;
     private final Time start;
+    private final Time endTime;
 
-    public EventCalendarItem(String eventId, String title, Time time) {
+    public EventCalendarItem(String eventId, String title, Time time, Time endTime) {
         this.eventId = eventId;
         this.title = title;
         this.start = time;
+        this.endTime = endTime;
     }
 
     public String id() {
@@ -23,6 +25,11 @@ class EventCalendarItem implements CalendarItem {
     @Override
     public Time startTime() {
         return start;
+    }
+
+    @Override
+    public Time endTime() {
+        return endTime;
     }
 
     @Override

@@ -26,7 +26,8 @@ public class EventsService {
             String title = accessor.getTitle();
             String eventId = accessor.getEventIdentifier();
             Time time = accessor.getStartTime();
-            calendarItems.add(new EventCalendarItem(eventId, title, time));
+            Time endTime = accessor.getEndTime();
+            calendarItems.add(new EventCalendarItem(eventId, title, time, endTime));
         }
 
         SparseArray<CalendarItem> itemArray = new SparseArray<>(numberOfDays);
@@ -35,7 +36,7 @@ public class EventsService {
             itemArray.put(item.startTime().daysSinceEpoch() - epochToNow, item);
         }
 
-        CalendarSource calendarSource = new CalendarSource(timeRepository, itemArray, numberOfDays, now);
+        CalendarSource calendarSource = new CalendarSource(timeRepository, itemArray, numberOfDays);
         accessor.endAccess();
         return calendarSource;
     }

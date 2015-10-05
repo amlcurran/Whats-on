@@ -10,4 +10,6 @@ public interface EventRepositoryAccessor {
     void endAccess();
 
     Time getStartTime();
+
+    Time getEndTime();
 }
