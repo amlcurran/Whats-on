@@ -49,15 +49,24 @@
 - (id<SCTime>)plusHoursWithInt:(jint)hours
 {
     NSDateComponents *components = [[NSDateComponents alloc] init];
-    components.hour = components.hour + hours;
+    components.hour = hours;
     NSDate *newDate =  [self.calendar dateByAddingComponents:components toDate:self.date options:0];
     return [[SCNSDateBasedTime alloc] initWithNSDate:newDate];
+}
+
+- (NSString *)description
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateStyle = NSDateFormatterLongStyle;
+    return [formatter stringFromDate:self.date];
 }
 
 + (NSDate *)dateFromTime:(id<SCTime>)time
 {
     NSTimeInterval seconds = [time getMillis] / 1000.0;
-    return [NSDate dateWithTimeIntervalSince1970:seconds];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *beginning = [NSDate dateWithTimeIntervalSince1970:0];
+    return [calendar dateByAddingUnit:NSCalendarUnitSecond value:seconds toDate:beginning options:0];
 }
 
 @end
