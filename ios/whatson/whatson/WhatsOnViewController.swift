@@ -10,7 +10,7 @@ import UIKit
 import EventKit
 import EventKitUI
 
-class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate {
+class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIViewControllerPreviewingDelegate {
     
     var dateFormatter : NSDateFormatter!;
     var eventStore : EKEventStore!;
@@ -20,6 +20,9 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if traitCollection.forceTouchCapability == .Available {
+            registerForPreviewingWithDelegate(self, sourceView: self.tableView);
+        }
         dateFormatter = NSDateFormatter();
         dateFormatter.dateFormat = "EEE";
         eventStore = EKEventStore();
@@ -121,6 +124,42 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate {
     
     func eventEditViewController(controller: EKEventEditViewController, didCompleteWithAction action: EKEventEditViewAction) {
         self.navigationController?.dismissViewControllerAnimated(true, completion: nil);
+    }
+    
+    // MARK - peek and pop
+    
+    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = tableView.indexPathForRowAtPoint(location),
+            cell = tableView.cellForRowAtIndexPath(indexPath) else {
+                return nil
+        }
+        
+        let item = self.calendarSource?.itemAtWithInt(jint(indexPath.row));
+        
+        previewingContext.sourceRect = cell.frame;
+        
+        if item!.isEmpty() {
+            let newEvent = EKEvent(eventStore: eventStore);
+            let startDate = SCNSDateBasedTime.dateFromTime(item?.startTime());
+            let endDate = SCNSDateBasedTime.dateFromTime(item?.endTime());
+            let editController = EKEventEditViewController();
+            newEvent.startDate = startDate;
+            newEvent.endDate = endDate;
+            editController.eventStore = eventStore;
+            editController.event = newEvent;
+            editController.editViewDelegate = self;
+            return editController;
+        } else {
+            let itemId = (item as! SCEventCalendarItem).id__();
+            let event = eventStore.eventWithIdentifier(itemId);
+            let showController = EKEventViewController();
+            showController.event = event!;
+            return showController;
+        }
+    }
+    
+    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+        self.navigationController?.pushViewController(viewControllerToCommit, animated: true);
     }
     
     /*
