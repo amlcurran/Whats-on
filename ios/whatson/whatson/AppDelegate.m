@@ -18,6 +18,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    if (([[[UIDevice currentDevice] systemVersion] compare:@"9.0" options:NSNumericSearch] != NSOrderedAscending)) {
     NSMutableArray <UIApplicationShortcutItem *> *updatedShortcuts = [[NSMutableArray alloc] init];
     
     UIMutableApplicationShortcutItem *newItem = [[UIMutableApplicationShortcutItem alloc] initWithType:@"new-tomorrow" localizedTitle:@"Add event tomorrow"];
@@ -34,6 +35,7 @@
     if (item) {
         [self.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
         return ![self handleShortcutItem:item];
+    }
     }
     return YES;
 }

@@ -20,8 +20,12 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if traitCollection.forceTouchCapability == .Available {
-            registerForPreviewingWithDelegate(self, sourceView: self.tableView);
+        if #available(iOS 9.0, *) {
+            if traitCollection.forceTouchCapability == .Available {
+                registerForPreviewingWithDelegate(self, sourceView: self.tableView);
+            }
+        } else {
+            // Fallback on earlier versions
         }
         dateFormatter = NSDateFormatter();
         dateFormatter.dateFormat = "EEE";
@@ -150,7 +154,11 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
         
         let item = self.calendarSource?.itemAtWithInt(jint(indexPath.row));
         
-        previewingContext.sourceRect = cell.frame;
+        if #available(iOS 9.0, *) {
+            previewingContext.sourceRect = cell.frame
+        } else {
+            return nil;
+        };
         
         if item!.isEmpty() {
             return nil;
