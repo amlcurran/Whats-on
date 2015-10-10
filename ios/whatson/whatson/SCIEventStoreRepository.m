@@ -14,7 +14,7 @@
 @interface SCIEKEventAccessor : NSObject<SCEventRepositoryAccessor>
 
 @property (nonatomic, strong) NSArray *events;
-@property (nonatomic, assign) int currentPosition;
+@property (nonatomic, assign) NSInteger currentPosition;
 
 - (instancetype)initWithEventItems:(NSArray *)items;
 
@@ -27,6 +27,7 @@
     self = [super init];
     if (self) {
         _events = items;
+        _currentPosition = -1;
     }
     return self;
 }
@@ -46,7 +47,7 @@
     if ([self.events count] == 0) {
         return false;
     }
-    if (self.currentPosition < [self.events count] - 1) {
+    if (self.currentPosition < (int) [self.events count] - 1) {
         self.currentPosition++;
         return true;
     }
@@ -55,7 +56,7 @@
 
 - (void)endAccess
 {
-    
+    self.currentPosition = -1;
 }
 
 - (id<SCTime>)getStartTime

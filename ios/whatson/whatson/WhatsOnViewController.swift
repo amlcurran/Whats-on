@@ -101,32 +101,46 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let item = self.calendarSource?.itemAtWithInt(jint(indexPath.row));
         if item!.isEmpty() {
-            let newEvent = EKEvent(eventStore: eventStore);
-            let startDate = SCNSDateBasedTime.dateFromTime(item?.startTime());
-            let endDate = SCNSDateBasedTime.dateFromTime(item?.endTime());
-            let editController = EKEventEditViewController();
-            newEvent.startDate = startDate;
-            newEvent.endDate = endDate;
-            editController.eventStore = eventStore;
-            editController.event = newEvent;
-            editController.editViewDelegate = self;
-            self.navigationController?.presentViewController(editController, animated: true, completion: nil);
+            let addController = addEventController(item!);
+            self.navigationController?.presentViewController(addController, animated: true, completion: nil);
         } else {
-            let itemId = (item as! SCEventCalendarItem).id__();
-            let event = eventStore.eventWithIdentifier(itemId);
-            let showController = EKEventViewController();
-            showController.event = event!;
-            self.navigationController?.pushViewController(showController, animated: true);
+            let editController = editEventController(item as! SCEventCalendarItem);
+            if (editController != nil) {
+                self.navigationController?.pushViewController(editController!, animated: true);
+            }
         }
     }
     
-    // MARK - edit view delegate
+    func addEventController(calendarItem: SCCalendarItem) -> UIViewController {
+        let newEvent = EKEvent(eventStore: eventStore);
+        let startDate = SCNSDateBasedTime.dateFromTime(calendarItem.startTime());
+        let endDate = SCNSDateBasedTime.dateFromTime(calendarItem.endTime());
+        let editController = EKEventEditViewController();
+        newEvent.startDate = startDate;
+        newEvent.endDate = endDate;
+        editController.eventStore = eventStore;
+        editController.event = newEvent;
+        editController.editViewDelegate = self;
+        return editController;
+    }
+    
+    func editEventController(calendarItem: SCEventCalendarItem) -> UIViewController? {
+        let itemId = calendarItem.id__();
+        guard let event = eventStore.eventWithIdentifier(itemId) else {
+            return nil
+        }
+        let showController = EKEventViewController();
+        showController.event = event;
+        return showController;
+    }
+    
+    // MARK: - edit view delegate
     
     func eventEditViewController(controller: EKEventEditViewController, didCompleteWithAction action: EKEventEditViewAction) {
         self.navigationController?.dismissViewControllerAnimated(true, completion: nil);
     }
     
-    // MARK - peek and pop
+    // MARK: - peek and pop
     
     func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard let indexPath = tableView.indexPathForRowAtPoint(location),
@@ -139,22 +153,9 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
         previewingContext.sourceRect = cell.frame;
         
         if item!.isEmpty() {
-            let newEvent = EKEvent(eventStore: eventStore);
-            let startDate = SCNSDateBasedTime.dateFromTime(item?.startTime());
-            let endDate = SCNSDateBasedTime.dateFromTime(item?.endTime());
-            let editController = EKEventEditViewController();
-            newEvent.startDate = startDate;
-            newEvent.endDate = endDate;
-            editController.eventStore = eventStore;
-            editController.event = newEvent;
-            editController.editViewDelegate = self;
-            return editController;
+            return addEventController(item!);
         } else {
-            let itemId = (item as! SCEventCalendarItem).id__();
-            let event = eventStore.eventWithIdentifier(itemId);
-            let showController = EKEventViewController();
-            showController.event = event!;
-            return showController;
+            return editEventController(item as! SCEventCalendarItem);
         }
     }
     
