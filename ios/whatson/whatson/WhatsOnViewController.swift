@@ -153,7 +153,7 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
         previewingContext.sourceRect = cell.frame;
         
         if item!.isEmpty() {
-            return addEventController(item!);
+            return nil;
         } else {
             return editEventController(item as! SCEventCalendarItem);
         }
