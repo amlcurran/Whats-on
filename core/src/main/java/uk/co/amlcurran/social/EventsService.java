@@ -30,10 +30,13 @@ public class EventsService {
             calendarItems.add(new EventCalendarItem(eventId, title, time, endTime));
         }
 
-        SparseArray<CalendarItem> itemArray = new SparseArray<>(numberOfDays);
+        SparseArray<CalendarSlot> itemArray = new SparseArray<>(numberOfDays);
         int epochToNow = now.daysSinceEpoch();
         for (CalendarItem item : calendarItems) {
-            itemArray.put(item.startTime().daysSinceEpoch() - epochToNow, item);
+            int key = item.startTime().daysSinceEpoch() - epochToNow;
+            CalendarSlot slot = itemArray.get(key, new CalendarSlot());
+            slot.addItem(item);
+            itemArray.put(key, slot);
         }
 
         CalendarSource calendarSource = new CalendarSource(timeRepository, itemArray, numberOfDays);

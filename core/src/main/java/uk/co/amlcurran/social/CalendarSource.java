@@ -5,10 +5,10 @@ import uk.co.amlcurran.social.core.SparseArray;
 class CalendarSource {
 
     private final TimeRepository timeRepository;
-    private final SparseArray<CalendarItem> calendarItems;
+    private final SparseArray<CalendarSlot> calendarItems;
     private final int daysSize;
 
-    public CalendarSource(TimeRepository timeRepository, SparseArray<CalendarItem> calendarItems, int daysSize) {
+    public CalendarSource(TimeRepository timeRepository, SparseArray<CalendarSlot> calendarItems, int daysSize) {
         this.timeRepository = timeRepository;
         this.calendarItems = calendarItems;
         this.daysSize = daysSize;
@@ -19,7 +19,7 @@ class CalendarSource {
     }
 
     public CalendarItem itemAt(int position) {
-        CalendarItem calendarItem = calendarItems.get(position);
+        CalendarItem calendarItem = calendarItems.get(position).item();
         if (calendarItem == null) {
             return new EmptyCalendarItem(startOfTodayBlock(position), endOfTodayBlock(position));
         }
