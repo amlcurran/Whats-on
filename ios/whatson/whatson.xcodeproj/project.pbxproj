@@ -19,6 +19,7 @@
 		8618A5191BDA8F0C00A4845E /* SparseArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8618A50A1BDA8F0C00A4845E /* SparseArray.m */; };
 		8618A51A1BDA8F0C00A4845E /* SCTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 8618A50C1BDA8F0C00A4845E /* SCTime.m */; };
 		8618A51B1BDA8F0C00A4845E /* TimeRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 8618A50E1BDA8F0C00A4845E /* TimeRepository.m */; };
+		8618A51F1BDA92F900A4845E /* CalendarSourceViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */; };
 		86C19EBF1BBF28E600BBCDF6 /* WhatsOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */; };
 		86CAD49E1BACC9B1009C9CFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD49D1BACC9B1009C9CFD /* main.m */; };
 		86CAD4A11BACC9B1009C9CFD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD4A01BACC9B1009C9CFD /* AppDelegate.m */; };
@@ -58,6 +59,7 @@
 		8618A50C1BDA8F0C00A4845E /* SCTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTime.m; sourceTree = "<group>"; };
 		8618A50D1BDA8F0C00A4845E /* TimeRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeRepository.h; sourceTree = "<group>"; };
 		8618A50E1BDA8F0C00A4845E /* TimeRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeRepository.m; sourceTree = "<group>"; };
+		8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSourceViewCell.swift; sourceTree = "<group>"; };
 		86C19EB91BBF287500BBCDF6 /* whatson-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "whatson-Bridging-Header.h"; sourceTree = "<group>"; };
 		86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WhatsOnViewController.swift; path = whatson/WhatsOnViewController.swift; sourceTree = "<group>"; };
 		86CAD4991BACC9B1009C9CFD /* What's On.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "What's On.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +133,7 @@
 				86CAD4F11BADF6F6009C9CFD /* SCNSDateBasedTime.m */,
 				86CAD4F31BAF3B43009C9CFD /* SCIEventStoreRepository.h */,
 				86CAD4F41BAF3B43009C9CFD /* SCIEventStoreRepository.m */,
+				8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */,
 			);
 			path = whatson;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				86CAD4F21BADF6F6009C9CFD /* SCNSDateBasedTime.m in Sources */,
 				8618A50F1BDA8F0C00A4845E /* CalendarItem.m in Sources */,
 				86CAD4A11BACC9B1009C9CFD /* AppDelegate.m in Sources */,
+				8618A51F1BDA92F900A4845E /* CalendarSourceViewCell.swift in Sources */,
 				8618A5121BDA8F0C00A4845E /* ContainerHelpers.m in Sources */,
 				8618A5151BDA8F0C00A4845E /* EventRepositoryAccessor.m in Sources */,
 				8618A5171BDA8F0C00A4845E /* EventsService.m in Sources */,

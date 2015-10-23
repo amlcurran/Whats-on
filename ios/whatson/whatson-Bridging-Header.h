@@ -10,3 +10,4 @@
 #import "SCNSDateBasedTime.h"
 #import "CalendarItem.h"
 #import "EventCalendarItem.h"
+#import "CalendarSlot.h"
