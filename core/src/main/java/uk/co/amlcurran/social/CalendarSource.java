@@ -19,11 +19,13 @@ class CalendarSource {
     }
 
     public CalendarItem itemAt(int position) {
-        CalendarItem calendarItem = calendarItems.get(position).firstItem();
-        if (calendarItem == null) {
-            return new EmptyCalendarItem(startOfTodayBlock(position), endOfTodayBlock(position));
+        CalendarSlot calendarSlot = calendarItems.get(position);
+        if (calendarSlot == null || calendarSlot.isEmpty()) {
+            Time startTime = startOfTodayBlock(position);
+            Time endTime = endOfTodayBlock(position);
+            return new EmptyCalendarItem(startTime, endTime);
         }
-        return calendarItem;
+        return calendarSlot.firstItem();
     }
 
     private Time startOfTodayBlock(int position) {

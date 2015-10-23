@@ -17,4 +17,8 @@ public class CalendarSlot {
     public int count() {
         return calendarItems.size();
     }
+
+    public boolean isEmpty() {
+        return calendarItems.isEmpty();
+    }
 }
