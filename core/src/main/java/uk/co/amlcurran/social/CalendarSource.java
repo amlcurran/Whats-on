@@ -19,7 +19,7 @@ class CalendarSource {
     }
 
     public CalendarItem itemAt(int position) {
-        CalendarItem calendarItem = calendarItems.get(position).item();
+        CalendarItem calendarItem = calendarItems.get(position).firstItem();
         if (calendarItem == null) {
             return new EmptyCalendarItem(startOfTodayBlock(position), endOfTodayBlock(position));
         }
@@ -34,4 +34,7 @@ class CalendarSource {
         return timeRepository.startOfToday().plusDays(position).plusHours(23);
     }
 
+    public CalendarSlot slotAt(int position) {
+        return calendarItems.get(position);
+    }
 }
