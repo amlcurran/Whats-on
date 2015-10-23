@@ -83,23 +83,8 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("day", forIndexPath: indexPath) as! CalendarSourceViewCell;
         let item = self.calendarSource!.itemAtWithInt(jint(indexPath.row));
-        let startTime = NSDate(timeIntervalSince1970: NSTimeInterval(item.startTime().getMillis() / 1000));
-        let formatted = String(format: "%@ - %@", dateFormatter.stringFromDate(startTime), item.title());
-        let colouredString = NSMutableAttributedString(string: formatted);
-        if (item.isEmpty()) {
-            colouredString.addAttribute(NSForegroundColorAttributeName, value: self.dayColor, range: NSMakeRange(0, colouredString.length));
-        } else {
-            colouredString.addAttribute(NSForegroundColorAttributeName, value: self.dayColor, range: NSMakeRange(0, 3));
-        }
-        cell.mainLabel.attributedText = colouredString;
-        
         let slot = self.calendarSource!.slotAtWithInt(jint(indexPath.row));
-        if (slot != nil && slot.count() > 1) {
-            cell.numberLabel.text = String(format: "+%lu", slot.count() - 1);
-            cell.numberLabel.hidden = false;
-        } else {
-            cell.numberLabel.hidden = true;
-        }
+        cell.bind(item, slot: slot);
         return cell;
     }
     
