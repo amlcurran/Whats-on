@@ -8,6 +8,7 @@
 
 #include "J2ObjC_header.h"
 
+@class SCCalendarSlot;
 @class UkCoAmlcurranSocialCoreSparseArray;
 @protocol SCCalendarItem;
 @protocol SCTimeRepository;
@@ -23,6 +24,8 @@
 - (jint)count;
 
 - (id<SCCalendarItem>)itemAtWithInt:(jint)position;
+
+- (SCCalendarSlot *)slotAtWithInt:(jint)position;
 
 @end
 

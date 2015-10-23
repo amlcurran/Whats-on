@@ -4,6 +4,7 @@
 //
 
 #include "CalendarItem.h"
+#include "CalendarSlot.h"
 #include "CalendarSource.h"
 #include "EventCalendarItem.h"
 #include "EventRepositoryAccessor.h"
@@ -53,7 +54,10 @@ J2OBJC_FIELD_SETTER(SCEventsService, eventsRepository_, id<SCEventsRepository>)
   UkCoAmlcurranSocialCoreSparseArray *itemArray = new_UkCoAmlcurranSocialCoreSparseArray_initWithInt_(numberOfDays);
   jint epochToNow = [((id<SCTime>) nil_chk(now)) daysSinceEpoch];
   for (id<SCCalendarItem> __strong item in calendarItems) {
-    [itemArray putWithInt:[((id<SCTime>) nil_chk([((id<SCCalendarItem>) nil_chk(item)) startTime])) daysSinceEpoch] - epochToNow withId:item];
+    jint key = [((id<SCTime>) nil_chk([((id<SCCalendarItem>) nil_chk(item)) startTime])) daysSinceEpoch] - epochToNow;
+    SCCalendarSlot *slot = [itemArray getWithInt:key withId:new_SCCalendarSlot_init()];
+    [((SCCalendarSlot *) nil_chk(slot)) addItemWithSCCalendarItem:item];
+    [itemArray putWithInt:key withId:slot];
   }
   SCCalendarSource *calendarSource = new_SCCalendarSource_initWithSCTimeRepository_withUkCoAmlcurranSocialCoreSparseArray_withInt_(timeRepository_, itemArray, numberOfDays);
   [accessor endAccess];
