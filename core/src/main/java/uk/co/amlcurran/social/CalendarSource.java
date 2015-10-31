@@ -37,6 +37,6 @@ class CalendarSource {
     }
 
     public CalendarSlot slotAt(int position) {
-        return calendarItems.get(position);
+        return calendarItems.get(position, new CalendarSlot());
     }
 }
