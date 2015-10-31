@@ -1,9 +1,9 @@
 package uk.co.amlcurran.social;
 
 public interface TimeRepository {
-    int endOfBorderTimeInMinutes();
+    TimeOfDay borderTimeEnd();
 
-    int startOfBorderTimeInMinutes();
+    TimeOfDay borderTimeStart();
 
     Time startOfToday();
 }

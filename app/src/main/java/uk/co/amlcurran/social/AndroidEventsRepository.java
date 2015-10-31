@@ -25,14 +25,14 @@ public class AndroidEventsRepository implements EventsRepository {
     }
 
     @Override
-    public EventRepositoryAccessor queryEvents(long fivePm, long elevenPm,
+    public EventRepositoryAccessor queryEvents(TimeOfDay fivePm, TimeOfDay elevenPm,
                                                Time searchStart, Time searchEnd) {
         Uri.Builder builder = CalendarContract.Instances.CONTENT_URI.buildUpon();
         ContentUris.appendId(builder, searchStart.getMillis());
         ContentUris.appendId(builder, searchEnd.getMillis());
 
-        String endsBefore = String.format("%1$s < %2$d", CalendarContract.Instances.END_MINUTE, fivePm);
-        String startsAfter = String.format("%1$s > %2$d", CalendarContract.Instances.START_MINUTE, elevenPm);
+        String endsBefore = String.format("%1$s < %2$d", CalendarContract.Instances.END_MINUTE, fivePm.toMinutes());
+        String startsAfter = String.format("%1$s > %2$d", CalendarContract.Instances.START_MINUTE, elevenPm.toMinutes());
         String selection = String.format("(NOT (%1$s OR %2$s)) AND %3$s <> %4$d AND %5$s == %6$d",
                 endsBefore, startsAfter,
                 CalendarContract.Instances.SELF_ATTENDEE_STATUS, CalendarContract.Instances.STATUS_CANCELED,

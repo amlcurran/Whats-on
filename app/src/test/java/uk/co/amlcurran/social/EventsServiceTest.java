@@ -28,12 +28,12 @@ public class EventsServiceTest {
 
     private static class MyTimeRepository implements TimeRepository {
         @Override
-        public int endOfBorderTimeInMinutes() {
+        public int borderTimeEnd() {
             return 23 * 60;
         }
 
         @Override
-        public int startOfBorderTimeInMinutes() {
+        public int borderTimeStart() {
             return 17 * 60;
         }
 

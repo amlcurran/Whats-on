@@ -5,13 +5,13 @@ import org.joda.time.DateTime;
 public class AndroidTimeRepository implements TimeRepository {
 
     @Override
-    public int endOfBorderTimeInMinutes() {
-        return 23 * 60;
+    public TimeOfDay borderTimeEnd() {
+        return TimeOfDay.fromHours(23);
     }
 
     @Override
-    public int startOfBorderTimeInMinutes() {
-        return 17 * 60;
+    public TimeOfDay borderTimeStart() {
+        return TimeOfDay.fromHours(17);
     }
 
     @Override

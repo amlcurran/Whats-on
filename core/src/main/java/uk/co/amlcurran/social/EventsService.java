@@ -17,8 +17,8 @@ public class EventsService {
     public CalendarSource getCalendarSource(final int numberOfDays, final Time now) {
         Time nowTime = timeRepository.startOfToday();
         Time nextWeek = nowTime.plusDays(numberOfDays);
-        long fivePm = timeRepository.startOfBorderTimeInMinutes();
-        long elevenPm = timeRepository.endOfBorderTimeInMinutes();
+        TimeOfDay fivePm = timeRepository.borderTimeStart();
+        TimeOfDay elevenPm = timeRepository.borderTimeEnd();
 
         EventRepositoryAccessor accessor = eventsRepository.queryEvents(fivePm, elevenPm, nowTime, nextWeek);
         List<CalendarItem> calendarItems = new ArrayList<>();
