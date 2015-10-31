@@ -16,7 +16,7 @@ public class CalendarSourceTests {
         List<CalendarItem> items = new ArrayList<>();
         CalendarSource calendarSource = getSource(items, 1);
 
-        assertThat(calendarSource.slotAt(0).isEmpty()).isTrue();
+        assertThat(calendarSource.isEmptySlot(0)).isTrue();
     }
 
     private CalendarSource getSource(List<CalendarItem> items, int numberOfItems) {
@@ -39,7 +39,7 @@ public class CalendarSourceTests {
         items.add(new TestCalendarItem());
         CalendarSource calendarSource = getSource(items, 1);
 
-        assertThat(calendarSource.slotAt(0).isEmpty()).isFalse();
+        assertThat(calendarSource.isEmptySlot(0)).isFalse();
     }
 
     @Test
@@ -48,7 +48,7 @@ public class CalendarSourceTests {
         items.add(new TestCalendarItem());
         CalendarSource calendarSource = getSource(items, 2, 1);
 
-        assertThat(calendarSource.slotAt(0).isEmpty()).isTrue();
+        assertThat(calendarSource.isEmptySlot(0)).isTrue();
     }
 
     @Test
@@ -57,7 +57,7 @@ public class CalendarSourceTests {
         items.add(new TestCalendarItem());
         CalendarSource calendarSource = getSource(items, 2, 0);
 
-        assertThat(calendarSource.slotAt(0).isEmpty()).isFalse();
+        assertThat(calendarSource.isEmptySlot(0)).isFalse();
     }
 
 }

@@ -39,4 +39,8 @@ class CalendarSource {
     public CalendarSlot slotAt(int position) {
         return calendarItems.get(position, new CalendarSlot());
     }
+
+    public boolean isEmptySlot(int position) {
+        return slotAt(position).isEmpty();
+    }
 }
