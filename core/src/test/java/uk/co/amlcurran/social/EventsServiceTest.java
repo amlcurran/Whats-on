@@ -20,7 +20,7 @@ public class EventsServiceTest {
 
     private static class MyEventsRepository implements EventsRepository {
         @Override
-        public EventRepositoryAccessor queryEvents(long fivePm, long elevenPm, Time searchStartTime, Time searchEndTime) {
+        public EventRepositoryAccessor queryEvents(TimeOfDay fivePm, TimeOfDay elevenPm, Time searchStartTime, Time searchEndTime) {
             return new TestAccessor(Arrays.asList("event1", "event2"));
         }
 
@@ -28,13 +28,13 @@ public class EventsServiceTest {
 
     private static class MyTimeRepository implements TimeRepository {
         @Override
-        public int borderTimeEnd() {
-            return 23 * 60;
+        public TimeOfDay borderTimeEnd() {
+            return TimeOfDay.fromHours(23);
         }
 
         @Override
-        public int borderTimeStart() {
-            return 17 * 60;
+        public TimeOfDay borderTimeStart() {
+            return TimeOfDay.fromHours(17);
         }
 
         @Override
