@@ -23,6 +23,8 @@
 
 - (jint)count;
 
+- (jboolean)isEmptySlotWithInt:(jint)position;
+
 - (id<SCCalendarItem>)itemAtWithInt:(jint)position;
 
 - (SCCalendarSlot *)slotAtWithInt:(jint)position;

@@ -7,6 +7,7 @@
 #include "EventsRepository.h"
 #include "J2ObjC_source.h"
 #include "Time.h"
+#include "TimeOfDay.h"
 
 @interface SCEventsRepository : NSObject
 
@@ -16,7 +17,7 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "queryEventsWithLong:withLong:withSCTime:withSCTime:", "queryEvents", "Luk.co.amlcurran.social.EventRepositoryAccessor;", 0x401, NULL, NULL },
+    { "queryEventsWithSCTimeOfDay:withSCTimeOfDay:withSCTime:withSCTime:", "queryEvents", "Luk.co.amlcurran.social.EventRepositoryAccessor;", 0x401, NULL, NULL },
   };
   static const J2ObjcClassInfo _SCEventsRepository = { 2, "EventsRepository", "uk.co.amlcurran.social", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_SCEventsRepository;

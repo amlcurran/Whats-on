@@ -13,6 +13,7 @@
 #include "J2ObjC_source.h"
 #include "SparseArray.h"
 #include "SCTime.h"
+#include "TimeOfDay.h"
 #include "TimeRepository.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
@@ -40,9 +41,9 @@ J2OBJC_FIELD_SETTER(SCEventsService, eventsRepository_, id<SCEventsRepository>)
                                     withSCTime:(id<SCTime>)now {
   id<SCTime> nowTime = [((id<SCTimeRepository>) nil_chk(timeRepository_)) startOfToday];
   id<SCTime> nextWeek = [((id<SCTime>) nil_chk(nowTime)) plusDaysWithInt:numberOfDays];
-  jlong fivePm = [timeRepository_ startOfBorderTimeInMinutes];
-  jlong elevenPm = [timeRepository_ endOfBorderTimeInMinutes];
-  id<SCEventRepositoryAccessor> accessor = [((id<SCEventsRepository>) nil_chk(eventsRepository_)) queryEventsWithLong:fivePm withLong:elevenPm withSCTime:nowTime withSCTime:nextWeek];
+  SCTimeOfDay *fivePm = [timeRepository_ borderTimeStart];
+  SCTimeOfDay *elevenPm = [timeRepository_ borderTimeEnd];
+  id<SCEventRepositoryAccessor> accessor = [((id<SCEventsRepository>) nil_chk(eventsRepository_)) queryEventsWithSCTimeOfDay:fivePm withSCTimeOfDay:elevenPm withSCTime:nowTime withSCTime:nextWeek];
   id<JavaUtilList> calendarItems = new_JavaUtilArrayList_init();
   while ([((id<SCEventRepositoryAccessor>) nil_chk(accessor)) nextItem]) {
     NSString *title = [accessor getTitle];

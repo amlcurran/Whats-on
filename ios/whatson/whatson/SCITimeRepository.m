@@ -8,6 +8,7 @@
 
 #import "SCITimeRepository.h"
 #import "SCNSDateBasedTime.h"
+#import "TimeOfDay.h"
 
 @implementation SCITimeRepository
 
@@ -19,6 +20,16 @@
 - (jint)startOfBorderTimeInMinutes
 {
     return 17 * 60;
+}
+
+- (SCTimeOfDay *)borderTimeEnd
+{
+    return [SCTimeOfDay fromHoursWithInt:23];
+}
+
+- (SCTimeOfDay *)borderTimeStart
+{
+    return [SCTimeOfDay fromHoursWithInt:17];
 }
 
 - (id<SCTime>)startOfToday

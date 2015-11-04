@@ -64,7 +64,11 @@ __attribute__((unused)) static id<SCTime> SCCalendarSource_endOfTodayBlockWithIn
 }
 
 - (SCCalendarSlot *)slotAtWithInt:(jint)position {
-  return [((UkCoAmlcurranSocialCoreSparseArray *) nil_chk(calendarItems_)) getWithInt:position];
+  return [((UkCoAmlcurranSocialCoreSparseArray *) nil_chk(calendarItems_)) getWithInt:position withId:new_SCCalendarSlot_init()];
+}
+
+- (jboolean)isEmptySlotWithInt:(jint)position {
+  return [((SCCalendarSlot *) nil_chk([self slotAtWithInt:position])) isEmpty];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -75,13 +79,14 @@ __attribute__((unused)) static id<SCTime> SCCalendarSource_endOfTodayBlockWithIn
     { "startOfTodayBlockWithInt:", "startOfTodayBlock", "Luk.co.amlcurran.social.Time;", 0x2, NULL, NULL },
     { "endOfTodayBlockWithInt:", "endOfTodayBlock", "Luk.co.amlcurran.social.Time;", 0x2, NULL, NULL },
     { "slotAtWithInt:", "slotAt", "Luk.co.amlcurran.social.CalendarSlot;", 0x1, NULL, NULL },
+    { "isEmptySlotWithInt:", "isEmptySlot", "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "timeRepository_", NULL, 0x12, "Luk.co.amlcurran.social.TimeRepository;", NULL, NULL, .constantValue.asLong = 0 },
     { "calendarItems_", NULL, 0x12, "Luk.co.amlcurran.social.core.SparseArray;", NULL, "Luk/co/amlcurran/social/core/SparseArray<Luk/co/amlcurran/social/CalendarSlot;>;", .constantValue.asLong = 0 },
     { "daysSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _SCCalendarSource = { 2, "CalendarSource", "uk.co.amlcurran.social", NULL, 0x0, 6, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _SCCalendarSource = { 2, "CalendarSource", "uk.co.amlcurran.social", NULL, 0x0, 7, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_SCCalendarSource;
 }
 

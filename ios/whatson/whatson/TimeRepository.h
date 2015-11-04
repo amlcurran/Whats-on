@@ -8,13 +8,14 @@
 
 #include "J2ObjC_header.h"
 
+@class SCTimeOfDay;
 @protocol SCTime;
 
 @protocol SCTimeRepository < NSObject, JavaObject >
 
-- (jint)endOfBorderTimeInMinutes;
+- (SCTimeOfDay *)borderTimeEnd;
 
-- (jint)startOfBorderTimeInMinutes;
+- (SCTimeOfDay *)borderTimeStart;
 
 - (id<SCTime>)startOfToday;
 
