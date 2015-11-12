@@ -108,11 +108,11 @@
     __block NSCalendar *calendar = self.calendar;
     NSArray *filtered = [array filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
         EKEvent *event = (EKEvent *) evaluatedObject;
-        NSDateComponents *endComponents = [calendar components:NSCalendarUnitHour fromDate:event.endDate];
+        NSDateComponents *endComponents = [calendar components:NSCalendarUnitHour|NSCalendarUnitDay fromDate:event.endDate];
         endComponents.timeZone = [NSTimeZone defaultTimeZone];
-        bool endsBefore = endComponents.hour <= 17;
-        NSDateComponents *startComponents = [calendar components:NSCalendarUnitHour fromDate:event.startDate];
+        NSDateComponents *startComponents = [calendar components:NSCalendarUnitHour|NSCalendarUnitDay fromDate:event.startDate];
         startComponents.timeZone = [NSTimeZone defaultTimeZone];
+        bool endsBefore = endComponents.hour <= 17 && endComponents.day == startComponents.day;
         bool startsAfter = startComponents.hour > 23;
         return !(endsBefore || startsAfter) && event.allDay == false;
     }]];
