@@ -52,8 +52,8 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
     func fetchEvents(completion: (SCCalendarSource -> Void)) {
         let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         dispatch_async(queue) {
-            let now = NSDate();
-            let source = self.eventService.getCalendarSourceWithInt(14, withSCTime:NSDateCalculator().now());
+            let now = NSDateCalculator().now();
+            let source = self.eventService.getCalendarSourceWithInt(14, withSCTime:now);
             dispatch_async(dispatch_get_main_queue()) {
                 completion(source);
             };
