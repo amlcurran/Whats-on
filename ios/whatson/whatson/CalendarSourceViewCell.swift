@@ -28,7 +28,11 @@ class CalendarSourceViewCell : UITableViewCell {
             colouredString.addAttribute(NSForegroundColorAttributeName, value: dayColor, range: NSMakeRange(0, 3));
         }
         
+//        self.bounds = CGRectInset(self.frame, 16, 16);
         mainLabel.attributedText = colouredString;
+        self.layer.borderWidth = 2;
+        self.layer.borderColor = UIColor.blackColor().colorWithAlphaComponent(0.10).CGColor;
+        self.layer.cornerRadius = 8;
         
         if (slot != nil && slot!.count() > 1) {
             numberLabel.text = String(format: "+%lu", slot!.count() - 1);
