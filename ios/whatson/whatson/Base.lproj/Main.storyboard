@@ -42,6 +42,7 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PeJ-6L-GYm">
                                             <rect key="frame" x="16" y="11" width="510" height="20.5"/>
+                                            <color key="backgroundColor" red="1" green="0.030793504433243246" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -61,7 +62,7 @@
                                         <constraint firstItem="PeJ-6L-GYm" firstAttribute="top" secondItem="cKg-bD-A25" secondAttribute="topMargin" constant="3" id="68S-Al-1kx"/>
                                         <constraint firstItem="PeJ-6L-GYm" firstAttribute="leading" secondItem="cKg-bD-A25" secondAttribute="leadingMargin" constant="8" id="7hy-g2-951"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="T3U-Vm-wBq" secondAttribute="trailing" constant="16" id="CTU-O0-zR0"/>
-                                        <constraint firstItem="T3U-Vm-wBq" firstAttribute="leading" secondItem="PeJ-6L-GYm" secondAttribute="trailing" constant="8" id="nJR-qX-ha8"/>
+                                        <constraint firstItem="T3U-Vm-wBq" firstAttribute="leading" secondItem="PeJ-6L-GYm" secondAttribute="trailing" constant="8" identifier="middleMargin" id="nJR-qX-ha8"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>

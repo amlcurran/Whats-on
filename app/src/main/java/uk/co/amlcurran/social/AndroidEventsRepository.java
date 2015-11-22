@@ -6,9 +6,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
 
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-
 public class AndroidEventsRepository implements EventsRepository {
 
     private static String[] PROJECTION = new String[]{
@@ -39,23 +36,25 @@ public class AndroidEventsRepository implements EventsRepository {
                 CalendarContract.Instances.ALL_DAY, 0);
 
         Cursor calendarCursor = contentResolver.query(builder.build(), PROJECTION, selection, null, null);
-        return new CursorEventRepositoryAccessor(calendarCursor);
+        return new CursorEventRepositoryAccessor(calendarCursor, new JodaCalculator());
     }
 
-    private class CursorEventRepositoryAccessor implements EventRepositoryAccessor {
+    private static class CursorEventRepositoryAccessor implements EventRepositoryAccessor {
 
         private final Cursor calendarCursor;
         private final int titleColumnIndex;
         private final int dtStartColumnIndex;
         private final int dtEndColumnIndex;
         private final int eventIdColumnIndex;
+        private final TimeCalculator timeCalculator;
 
-        public CursorEventRepositoryAccessor(Cursor calendarCursor) {
+        public CursorEventRepositoryAccessor(Cursor calendarCursor, TimeCalculator timeCalculator) {
             this.calendarCursor = calendarCursor;
             this.titleColumnIndex = calendarCursor.getColumnIndexOrThrow(CalendarContract.Events.TITLE);
             this.dtStartColumnIndex = calendarCursor.getColumnIndexOrThrow(CalendarContract.Events.DTSTART);
             this.dtEndColumnIndex = calendarCursor.getColumnIndexOrThrow(CalendarContract.Events.DTEND);
             this.eventIdColumnIndex = calendarCursor.getColumnIndexOrThrow(CalendarContract.Instances.EVENT_ID);
+            this.timeCalculator = timeCalculator;
         }
 
         @Override
@@ -81,13 +80,13 @@ public class AndroidEventsRepository implements EventsRepository {
         @Override
         public Time getStartTime() {
             long startMillis = calendarCursor.getLong(dtStartColumnIndex);
-            return new JodaTime(new DateTime(startMillis, DateTimeZone.getDefault()));
+            return new Time(startMillis, timeCalculator);
         }
 
         @Override
         public Time getEndTime() {
             long endMillis = calendarCursor.getLong(dtEndColumnIndex);
-            return new JodaTime(new DateTime(endMillis, DateTimeZone.getDefault()));
+            return new Time(endMillis, timeCalculator);
         }
     }
 
