@@ -13,6 +13,7 @@ public class AndroidEventsRepository implements EventsRepository {
             CalendarContract.Instances.START_DAY,
             CalendarContract.Events.SELF_ATTENDEE_STATUS,
             CalendarContract.Events.DTSTART,
+            CalendarContract.Events.DTEND,
             CalendarContract.Instances.EVENT_ID
     };
     private final ContentResolver contentResolver;
