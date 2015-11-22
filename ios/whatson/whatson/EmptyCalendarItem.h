@@ -9,20 +9,20 @@
 #include "CalendarItem.h"
 #include "J2ObjC_header.h"
 
-@protocol SCTime;
+@class SCTime;
 
 @interface SCEmptyCalendarItem : NSObject < SCCalendarItem >
 
 #pragma mark Public
 
-- (instancetype)initWithSCTime:(id<SCTime>)startTime
-                    withSCTime:(id<SCTime>)endTime;
+- (instancetype)initWithSCTime:(SCTime *)startTime
+                    withSCTime:(SCTime *)endTime;
 
-- (id<SCTime>)endTime;
+- (SCTime *)endTime;
 
 - (jboolean)isEmpty;
 
-- (id<SCTime>)startTime;
+- (SCTime *)startTime;
 
 - (NSString *)title;
 
@@ -30,9 +30,9 @@
 
 J2OBJC_EMPTY_STATIC_INIT(SCEmptyCalendarItem)
 
-FOUNDATION_EXPORT void SCEmptyCalendarItem_initWithSCTime_withSCTime_(SCEmptyCalendarItem *self, id<SCTime> startTime, id<SCTime> endTime);
+FOUNDATION_EXPORT void SCEmptyCalendarItem_initWithSCTime_withSCTime_(SCEmptyCalendarItem *self, SCTime *startTime, SCTime *endTime);
 
-FOUNDATION_EXPORT SCEmptyCalendarItem *new_SCEmptyCalendarItem_initWithSCTime_withSCTime_(id<SCTime> startTime, id<SCTime> endTime) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT SCEmptyCalendarItem *new_SCEmptyCalendarItem_initWithSCTime_withSCTime_(SCTime *startTime, SCTime *endTime) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(SCEmptyCalendarItem)
 

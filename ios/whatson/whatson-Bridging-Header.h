@@ -7,7 +7,7 @@
 #import "SCIEventStoreRepository.h"
 #import "SCITimeRepository.h"
 #import "EventsService.h"
-#import "SCNSDateBasedTime.h"
 #import "CalendarItem.h"
+#import "TimeCalculator.h"
 #import "EventCalendarItem.h"
 #import "CalendarSlot.h"

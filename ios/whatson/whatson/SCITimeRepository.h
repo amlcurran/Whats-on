@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "TimeRepository.h"
-#import "Time.h"
+#import "SCTime.h"
 
 @interface SCITimeRepository : NSObject <SCTimeRepository>
 

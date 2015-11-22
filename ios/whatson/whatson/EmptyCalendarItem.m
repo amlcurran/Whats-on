@@ -5,23 +5,23 @@
 
 #include "EmptyCalendarItem.h"
 #include "J2ObjC_source.h"
-#include "Time.h"
+#include "SCTime.h"
 
 @interface SCEmptyCalendarItem () {
  @public
-  id<SCTime> startTime_;
-  id<SCTime> endTime_;
+  SCTime *startTime_;
+  SCTime *endTime_;
 }
 
 @end
 
-J2OBJC_FIELD_SETTER(SCEmptyCalendarItem, startTime_, id<SCTime>)
-J2OBJC_FIELD_SETTER(SCEmptyCalendarItem, endTime_, id<SCTime>)
+J2OBJC_FIELD_SETTER(SCEmptyCalendarItem, startTime_, SCTime *)
+J2OBJC_FIELD_SETTER(SCEmptyCalendarItem, endTime_, SCTime *)
 
 @implementation SCEmptyCalendarItem
 
-- (instancetype)initWithSCTime:(id<SCTime>)startTime
-                    withSCTime:(id<SCTime>)endTime {
+- (instancetype)initWithSCTime:(SCTime *)startTime
+                    withSCTime:(SCTime *)endTime {
   SCEmptyCalendarItem_initWithSCTime_withSCTime_(self, startTime, endTime);
   return self;
 }
@@ -30,11 +30,11 @@ J2OBJC_FIELD_SETTER(SCEmptyCalendarItem, endTime_, id<SCTime>)
   return @"Empty";
 }
 
-- (id<SCTime>)startTime {
+- (SCTime *)startTime {
   return startTime_;
 }
 
-- (id<SCTime>)endTime {
+- (SCTime *)endTime {
   return endTime_;
 }
 
@@ -60,13 +60,13 @@ J2OBJC_FIELD_SETTER(SCEmptyCalendarItem, endTime_, id<SCTime>)
 
 @end
 
-void SCEmptyCalendarItem_initWithSCTime_withSCTime_(SCEmptyCalendarItem *self, id<SCTime> startTime, id<SCTime> endTime) {
+void SCEmptyCalendarItem_initWithSCTime_withSCTime_(SCEmptyCalendarItem *self, SCTime *startTime, SCTime *endTime) {
   (void) NSObject_init(self);
   self->startTime_ = startTime;
   self->endTime_ = endTime;
 }
 
-SCEmptyCalendarItem *new_SCEmptyCalendarItem_initWithSCTime_withSCTime_(id<SCTime> startTime, id<SCTime> endTime) {
+SCEmptyCalendarItem *new_SCEmptyCalendarItem_initWithSCTime_withSCTime_(SCTime *startTime, SCTime *endTime) {
   SCEmptyCalendarItem *self = [SCEmptyCalendarItem alloc];
   SCEmptyCalendarItem_initWithSCTime_withSCTime_(self, startTime, endTime);
   return self;

@@ -4,7 +4,7 @@
 //
 
 #include "J2ObjC_source.h"
-#include "Time.h"
+#include "SCTime.h"
 #include "TimeOfDay.h"
 #include "TimeRepository.h"
 

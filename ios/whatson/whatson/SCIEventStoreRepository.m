@@ -8,13 +8,15 @@
 
 #import "SCIEventStoreRepository.h"
 #import <EventKit/EventKit.h>
-#import "SCNSDateBasedTime.h"
 #import "EventRepositoryAccessor.h"
+#import "TimeCalculator.h"
+#import "What_s_On-Swift.h"
 
 @interface SCIEKEventAccessor : NSObject<SCEventRepositoryAccessor>
 
 @property (nonatomic, strong) NSArray *events;
 @property (nonatomic, assign) NSInteger currentPosition;
+@property (nonatomic, strong) NSDateCalculator *timeCalculator;
 
 - (instancetype)initWithEventItems:(NSArray *)items;
 
@@ -28,6 +30,7 @@
     if (self) {
         _events = items;
         _currentPosition = -1;
+        _timeCalculator = [[NSDateCalculator alloc] init];
     }
     return self;
 }
@@ -59,16 +62,16 @@
     self.currentPosition = -1;
 }
 
-- (id<SCTime>)getStartTime
+- (SCTime *)getStartTime
 {
     NSDate *date = [self currentEvent].startDate;
-    return [[SCNSDateBasedTime alloc] initWithNSDate:date];
+    return [self.timeCalculator time:date];
 }
 
-- (id<SCTime>)getEndTime
+- (SCTime *)getEndTime
 {
     NSDate *date = [self currentEvent].endDate;
-    return [[SCNSDateBasedTime alloc] initWithNSDate:date];
+    return [self.timeCalculator time:date];
 }
 
 - (EKEvent *)currentEvent
@@ -81,6 +84,7 @@
 @interface SCIEventStoreRepository()
 
 @property (nonatomic, strong) NSCalendar *calendar;
+@property (nonatomic, strong) NSDateCalculator *calculator;
 
 @end
 
@@ -91,18 +95,19 @@
     self = [super init];
     if (self) {
         _calendar = [NSCalendar currentCalendar];
+        _calculator = [[NSDateCalculator alloc] init];
     }
     return self;
 }
 
 - (id<SCEventRepositoryAccessor>)queryEventsWithSCTimeOfDay:(SCTimeOfDay *)fivePm
                                             withSCTimeOfDay:(SCTimeOfDay *)elevenPm
-                                                 withSCTime:(id<SCTime>)searchStartTime
-                                                 withSCTime:(id<SCTime>)searchEndTime
+                                                 withSCTime:(SCTime *)searchStartTime
+                                                 withSCTime:(SCTime *)searchEndTime
 {
     EKEventStore *eventStore = [[EKEventStore alloc] init];
-    NSDate *startTime = [SCNSDateBasedTime dateFromTime:searchStartTime];
-    NSDate *endTime = [SCNSDateBasedTime dateFromTime:searchEndTime];
+    NSDate *startTime =  [self.calculator date:searchStartTime];
+    NSDate *endTime = [self.calculator date:searchEndTime];
     NSPredicate *search = [eventStore predicateForEventsWithStartDate:startTime endDate:endTime calendars:nil];
     NSArray *array = [eventStore eventsMatchingPredicate:search];
     __block NSCalendar *calendar = self.calendar;
