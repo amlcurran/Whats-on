@@ -13,9 +13,9 @@ class CalendarSourceViewCell : UITableViewCell {
 
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
-    @IBOutlet weak var marginConstraint: NSLayoutConstraint!
-    @IBOutlet weak var widthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var mainMarginConstraint: NSLayoutConstraint!
+    @IBOutlet var marginConstraint: NSLayoutConstraint!
+    @IBOutlet var widthConstraint: NSLayoutConstraint!
+    @IBOutlet var mainMarginConstraint: NSLayoutConstraint!
     
     let dateFormatter = NSDateFormatter();
 
