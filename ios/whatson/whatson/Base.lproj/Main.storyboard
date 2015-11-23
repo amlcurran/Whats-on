@@ -63,11 +63,20 @@
                                         <constraint firstItem="PeJ-6L-GYm" firstAttribute="leading" secondItem="cKg-bD-A25" secondAttribute="leadingMargin" constant="8" id="7hy-g2-951"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="T3U-Vm-wBq" secondAttribute="trailing" constant="16" id="CTU-O0-zR0"/>
                                         <constraint firstItem="T3U-Vm-wBq" firstAttribute="leading" secondItem="PeJ-6L-GYm" secondAttribute="trailing" constant="8" identifier="middleMargin" id="nJR-qX-ha8"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="PeJ-6L-GYm" secondAttribute="trailing" constant="16" id="yb7-VY-Gl7"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="yb7-VY-Gl7"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="mainLabel" destination="PeJ-6L-GYm" id="Pn8-bC-2hO"/>
+                                    <outlet property="mainMarginConstraint" destination="yb7-VY-Gl7" id="VfE-Mz-gIy"/>
+                                    <outlet property="marginConstraint" destination="nJR-qX-ha8" id="wIf-YJ-4ZL"/>
                                     <outlet property="numberLabel" destination="T3U-Vm-wBq" id="bKo-1O-aLn"/>
+                                    <outlet property="widthConstraint" destination="igD-fF-NfT" id="6qx-PA-9ih"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
