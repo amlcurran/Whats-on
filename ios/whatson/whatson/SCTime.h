@@ -8,22 +8,33 @@
 
 #include "J2ObjC_header.h"
 
-@protocol SCTime < NSObject, JavaObject >
+@protocol SCTimeCalculator;
 
-- (id<SCTime>)plusDaysWithInt:(jint)days;
+@interface SCTime : NSObject
+
+#pragma mark Public
+
+- (instancetype)initWithLong:(jlong)millis
+        withSCTimeCalculator:(id<SCTimeCalculator>)timeCalculator;
 
 - (jint)daysSinceEpoch;
 
 - (jlong)getMillis;
 
-- (id<SCTime>)plusHoursWithInt:(jint)hours;
+- (SCTime *)plusDaysWithInt:(jint)days;
+
+- (SCTime *)plusHoursWithInt:(jint)hours;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(SCTime)
 
+FOUNDATION_EXPORT void SCTime_initWithLong_withSCTimeCalculator_(SCTime *self, jlong millis, id<SCTimeCalculator> timeCalculator);
+
+FOUNDATION_EXPORT SCTime *new_SCTime_initWithLong_withSCTimeCalculator_(jlong millis, id<SCTimeCalculator> timeCalculator) NS_RETURNS_RETAINED;
+
 J2OBJC_TYPE_LITERAL_HEADER(SCTime)
 
-#define UkCoAmlcurranSocialTime SCTime
+@compatibility_alias UkCoAmlcurranSocialTime SCTime;
 
 #endif // _Time_H_

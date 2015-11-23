@@ -8,7 +8,7 @@
 
 #include "J2ObjC_header.h"
 
-@protocol SCTime;
+@class SCTime;
 
 @protocol SCEventRepositoryAccessor < NSObject, JavaObject >
 
@@ -20,9 +20,9 @@
 
 - (void)endAccess;
 
-- (id<SCTime>)getStartTime;
+- (SCTime *)getStartTime;
 
-- (id<SCTime>)getEndTime;
+- (SCTime *)getEndTime;
 
 @end
 

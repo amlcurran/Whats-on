@@ -16,6 +16,6 @@ public class AndroidTimeRepository implements TimeRepository {
 
     @Override
     public Time startOfToday() {
-        return new JodaTime(DateTime.now().withTimeAtStartOfDay());
+        return new Time(DateTime.now().withTimeAtStartOfDay().getMillis(), new JodaCalculator());
     }
 }

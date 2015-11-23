@@ -7,10 +7,25 @@
 //
 
 #import "SCITimeRepository.h"
-#import "SCNSDateBasedTime.h"
 #import "TimeOfDay.h"
+#import "What_s_On-Swift.h"
+
+@interface SCITimeRepository()
+
+@property (nonatomic, strong) NSDateCalculator *calculator;
+
+@end
 
 @implementation SCITimeRepository
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _calculator = [[NSDateCalculator alloc] init];
+    }
+    return self;
+}
 
 - (jint)endOfBorderTimeInMinutes
 {
@@ -32,7 +47,7 @@
     return [SCTimeOfDay fromHoursWithInt:17];
 }
 
-- (id<SCTime>)startOfToday
+- (SCTime *)startOfToday
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:( NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitDay | NSCalendarUnitMinute | NSCalendarUnitSecond ) fromDate:[[NSDate alloc] init]];
@@ -42,7 +57,7 @@
     [components setSecond:0];
     
     NSDate *date = [calendar dateFromComponents:components];
-    return [[SCNSDateBasedTime alloc] initWithNSDate:date];
+    return [self.calculator time:date];
 }
 
 @end

@@ -8,16 +8,16 @@
 
 #include "J2ObjC_header.h"
 
+@class SCTime;
 @class SCTimeOfDay;
 @protocol SCEventRepositoryAccessor;
-@protocol SCTime;
 
 @protocol SCEventsRepository < NSObject, JavaObject >
 
 - (id<SCEventRepositoryAccessor>)queryEventsWithSCTimeOfDay:(SCTimeOfDay *)fivePm
                                             withSCTimeOfDay:(SCTimeOfDay *)elevenPm
-                                                 withSCTime:(id<SCTime>)searchStartTime
-                                                 withSCTime:(id<SCTime>)searchEndTime;
+                                                 withSCTime:(SCTime *)searchStartTime
+                                                 withSCTime:(SCTime *)searchEndTime;
 
 @end
 

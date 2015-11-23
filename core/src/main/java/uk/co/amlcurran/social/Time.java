@@ -1,11 +1,29 @@
 package uk.co.amlcurran.social;
 
-public interface Time {
-    Time plusDays(int days);
+public class Time {
 
-    int daysSinceEpoch();
+    private final TimeCalculator timeCalculator;
+    private final long millis;
 
-    long getMillis();
+    public Time(long millis, TimeCalculator timeCalculator) {
+        this.millis = millis;
+        this.timeCalculator = timeCalculator;
+    }
 
-    Time plusHours(int hours);
+    public Time plusDays(int days) {
+        return timeCalculator.plusDays(days, this);
+    }
+
+    public int daysSinceEpoch() {
+        return timeCalculator.getDays(this);
+    }
+
+    public long getMillis() {
+        return millis;
+    }
+
+    public Time plusHours(int hours) {
+        return timeCalculator.plusHours(this, hours);
+    }
+
 }

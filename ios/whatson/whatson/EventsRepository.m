@@ -6,7 +6,7 @@
 #include "EventRepositoryAccessor.h"
 #include "EventsRepository.h"
 #include "J2ObjC_source.h"
-#include "Time.h"
+#include "SCTime.h"
 #include "TimeOfDay.h"
 
 @interface SCEventsRepository : NSObject

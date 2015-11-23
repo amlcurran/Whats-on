@@ -38,9 +38,9 @@ J2OBJC_FIELD_SETTER(SCEventsService, eventsRepository_, id<SCEventsRepository>)
 }
 
 - (SCCalendarSource *)getCalendarSourceWithInt:(jint)numberOfDays
-                                    withSCTime:(id<SCTime>)now {
-  id<SCTime> nowTime = [((id<SCTimeRepository>) nil_chk(timeRepository_)) startOfToday];
-  id<SCTime> nextWeek = [((id<SCTime>) nil_chk(nowTime)) plusDaysWithInt:numberOfDays];
+                                    withSCTime:(SCTime *)now {
+  SCTime *nowTime = [((id<SCTimeRepository>) nil_chk(timeRepository_)) startOfToday];
+  SCTime *nextWeek = [((SCTime *) nil_chk(nowTime)) plusDaysWithInt:numberOfDays];
   SCTimeOfDay *fivePm = [timeRepository_ borderTimeStart];
   SCTimeOfDay *elevenPm = [timeRepository_ borderTimeEnd];
   id<SCEventRepositoryAccessor> accessor = [((id<SCEventsRepository>) nil_chk(eventsRepository_)) queryEventsWithSCTimeOfDay:fivePm withSCTimeOfDay:elevenPm withSCTime:nowTime withSCTime:nextWeek];
@@ -48,14 +48,14 @@ J2OBJC_FIELD_SETTER(SCEventsService, eventsRepository_, id<SCEventsRepository>)
   while ([((id<SCEventRepositoryAccessor>) nil_chk(accessor)) nextItem]) {
     NSString *title = [accessor getTitle];
     NSString *eventId = [accessor getEventIdentifier];
-    id<SCTime> time = [accessor getStartTime];
-    id<SCTime> endTime = [accessor getEndTime];
+    SCTime *time = [accessor getStartTime];
+    SCTime *endTime = [accessor getEndTime];
     [calendarItems addWithId:new_SCEventCalendarItem_initWithNSString_withNSString_withSCTime_withSCTime_(eventId, title, time, endTime)];
   }
   UkCoAmlcurranSocialCoreSparseArray *itemArray = new_UkCoAmlcurranSocialCoreSparseArray_initWithInt_(numberOfDays);
-  jint epochToNow = [((id<SCTime>) nil_chk(now)) daysSinceEpoch];
+  jint epochToNow = [((SCTime *) nil_chk(now)) daysSinceEpoch];
   for (id<SCCalendarItem> __strong item in calendarItems) {
-    jint key = [((id<SCTime>) nil_chk([((id<SCCalendarItem>) nil_chk(item)) startTime])) daysSinceEpoch] - epochToNow;
+    jint key = [((SCTime *) nil_chk([((id<SCCalendarItem>) nil_chk(item)) startTime])) daysSinceEpoch] - epochToNow;
     SCCalendarSlot *slot = [itemArray getWithInt:key withId:new_SCCalendarSlot_init()];
     [((SCCalendarSlot *) nil_chk(slot)) addItemWithSCCalendarItem:item];
     [itemArray putWithInt:key withId:slot];

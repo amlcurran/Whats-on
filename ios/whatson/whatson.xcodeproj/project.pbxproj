@@ -8,19 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		8618A51F1BDA92F900A4845E /* CalendarSourceViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */; };
-		865299051BEA3E280015706B /* CalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 865298EC1BEA3E280015706B /* CalendarItem.m */; };
-		865299061BEA3E280015706B /* CalendarSlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 865298EE1BEA3E280015706B /* CalendarSlot.m */; };
-		865299071BEA3E280015706B /* CalendarSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 865298F01BEA3E280015706B /* CalendarSource.m */; };
-		865299081BEA3E280015706B /* ContainerHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 865298F21BEA3E280015706B /* ContainerHelpers.m */; };
-		865299091BEA3E280015706B /* EmptyCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 865298F41BEA3E280015706B /* EmptyCalendarItem.m */; };
-		8652990A1BEA3E280015706B /* EventCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 865298F61BEA3E280015706B /* EventCalendarItem.m */; };
-		8652990B1BEA3E280015706B /* EventRepositoryAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 865298F81BEA3E280015706B /* EventRepositoryAccessor.m */; };
-		8652990C1BEA3E280015706B /* EventsRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 865298FA1BEA3E280015706B /* EventsRepository.m */; };
-		8652990D1BEA3E280015706B /* EventsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 865298FC1BEA3E280015706B /* EventsService.m */; };
-		8652990E1BEA3E280015706B /* SparseArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 865298FE1BEA3E280015706B /* SparseArray.m */; };
-		8652990F1BEA3E280015706B /* SCTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 865299001BEA3E280015706B /* SCTime.m */; };
-		865299101BEA3E280015706B /* TimeOfDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 865299021BEA3E280015706B /* TimeOfDay.m */; };
-		865299111BEA3E280015706B /* TimeRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 865299041BEA3E280015706B /* TimeRepository.m */; };
+		864561B41C026FEC00ADDE44 /* CalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 864561991C026FEC00ADDE44 /* CalendarItem.m */; };
+		864561B51C026FEC00ADDE44 /* CalendarSlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8645619B1C026FEC00ADDE44 /* CalendarSlot.m */; };
+		864561B61C026FEC00ADDE44 /* CalendarSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8645619D1C026FEC00ADDE44 /* CalendarSource.m */; };
+		864561B71C026FEC00ADDE44 /* ContainerHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 8645619F1C026FEC00ADDE44 /* ContainerHelpers.m */; };
+		864561B81C026FEC00ADDE44 /* EmptyCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 864561A11C026FEC00ADDE44 /* EmptyCalendarItem.m */; };
+		864561B91C026FEC00ADDE44 /* EventCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 864561A31C026FEC00ADDE44 /* EventCalendarItem.m */; };
+		864561BA1C026FEC00ADDE44 /* EventRepositoryAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 864561A51C026FEC00ADDE44 /* EventRepositoryAccessor.m */; };
+		864561BB1C026FEC00ADDE44 /* EventsRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 864561A71C026FEC00ADDE44 /* EventsRepository.m */; };
+		864561BC1C026FEC00ADDE44 /* EventsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 864561A91C026FEC00ADDE44 /* EventsService.m */; };
+		864561BD1C026FEC00ADDE44 /* SparseArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 864561AB1C026FEC00ADDE44 /* SparseArray.m */; };
+		864561BE1C026FEC00ADDE44 /* SCTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 864561AD1C026FEC00ADDE44 /* SCTime.m */; };
+		864561BF1C026FEC00ADDE44 /* TimeCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 864561AF1C026FEC00ADDE44 /* TimeCalculator.m */; };
+		864561C01C026FEC00ADDE44 /* TimeOfDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 864561B11C026FEC00ADDE44 /* TimeOfDay.m */; };
+		864561C11C026FEC00ADDE44 /* TimeRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 864561B31C026FEC00ADDE44 /* TimeRepository.m */; };
+		864561C31C02709800ADDE44 /* NSDateCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864561C21C02709800ADDE44 /* NSDateCalculator.swift */; };
 		86C19EBF1BBF28E600BBCDF6 /* WhatsOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */; };
 		86CAD49E1BACC9B1009C9CFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD49D1BACC9B1009C9CFD /* main.m */; };
 		86CAD4A11BACC9B1009C9CFD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD4A01BACC9B1009C9CFD /* AppDelegate.m */; };
@@ -28,7 +30,6 @@
 		86CAD4A91BACC9B1009C9CFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */; };
 		86CAD4AC1BACC9B1009C9CFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4AA1BACC9B1009C9CFD /* LaunchScreen.storyboard */; };
 		86CAD4EF1BADF68F009C9CFD /* SCITimeRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD4EE1BADF68F009C9CFD /* SCITimeRepository.m */; };
-		86CAD4F21BADF6F6009C9CFD /* SCNSDateBasedTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD4F11BADF6F6009C9CFD /* SCNSDateBasedTime.m */; };
 		86CAD4F51BAF3B43009C9CFD /* SCIEventStoreRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD4F41BAF3B43009C9CFD /* SCIEventStoreRepository.m */; };
 		86DE0FE71BB885E8004E20B5 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DE0FE61BB885E8004E20B5 /* libicucore.tbd */; };
 		86DE0FE91BB8863D004E20B5 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DE0FE81BB8863D004E20B5 /* Security.framework */; };
@@ -37,32 +38,35 @@
 
 /* Begin PBXFileReference section */
 		8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSourceViewCell.swift; sourceTree = "<group>"; };
-		865298EB1BEA3E280015706B /* CalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarItem.h; sourceTree = "<group>"; };
-		865298EC1BEA3E280015706B /* CalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarItem.m; sourceTree = "<group>"; };
-		865298ED1BEA3E280015706B /* CalendarSlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarSlot.h; sourceTree = "<group>"; };
-		865298EE1BEA3E280015706B /* CalendarSlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarSlot.m; sourceTree = "<group>"; };
-		865298EF1BEA3E280015706B /* CalendarSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarSource.h; sourceTree = "<group>"; };
-		865298F01BEA3E280015706B /* CalendarSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarSource.m; sourceTree = "<group>"; };
-		865298F11BEA3E280015706B /* ContainerHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerHelpers.h; sourceTree = "<group>"; };
-		865298F21BEA3E280015706B /* ContainerHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerHelpers.m; sourceTree = "<group>"; };
-		865298F31BEA3E280015706B /* EmptyCalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyCalendarItem.h; sourceTree = "<group>"; };
-		865298F41BEA3E280015706B /* EmptyCalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyCalendarItem.m; sourceTree = "<group>"; };
-		865298F51BEA3E280015706B /* EventCalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventCalendarItem.h; sourceTree = "<group>"; };
-		865298F61BEA3E280015706B /* EventCalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventCalendarItem.m; sourceTree = "<group>"; };
-		865298F71BEA3E280015706B /* EventRepositoryAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventRepositoryAccessor.h; sourceTree = "<group>"; };
-		865298F81BEA3E280015706B /* EventRepositoryAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventRepositoryAccessor.m; sourceTree = "<group>"; };
-		865298F91BEA3E280015706B /* EventsRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsRepository.h; sourceTree = "<group>"; };
-		865298FA1BEA3E280015706B /* EventsRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsRepository.m; sourceTree = "<group>"; };
-		865298FB1BEA3E280015706B /* EventsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsService.h; sourceTree = "<group>"; };
-		865298FC1BEA3E280015706B /* EventsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsService.m; sourceTree = "<group>"; };
-		865298FD1BEA3E280015706B /* SparseArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SparseArray.h; sourceTree = "<group>"; };
-		865298FE1BEA3E280015706B /* SparseArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SparseArray.m; sourceTree = "<group>"; };
-		865298FF1BEA3E280015706B /* SCTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTime.h; sourceTree = "<group>"; };
-		865299001BEA3E280015706B /* SCTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTime.m; sourceTree = "<group>"; };
-		865299011BEA3E280015706B /* TimeOfDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeOfDay.h; sourceTree = "<group>"; };
-		865299021BEA3E280015706B /* TimeOfDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeOfDay.m; sourceTree = "<group>"; };
-		865299031BEA3E280015706B /* TimeRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeRepository.h; sourceTree = "<group>"; };
-		865299041BEA3E280015706B /* TimeRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeRepository.m; sourceTree = "<group>"; };
+		864561981C026FEC00ADDE44 /* CalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarItem.h; sourceTree = "<group>"; };
+		864561991C026FEC00ADDE44 /* CalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarItem.m; sourceTree = "<group>"; };
+		8645619A1C026FEC00ADDE44 /* CalendarSlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarSlot.h; sourceTree = "<group>"; };
+		8645619B1C026FEC00ADDE44 /* CalendarSlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarSlot.m; sourceTree = "<group>"; };
+		8645619C1C026FEC00ADDE44 /* CalendarSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarSource.h; sourceTree = "<group>"; };
+		8645619D1C026FEC00ADDE44 /* CalendarSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarSource.m; sourceTree = "<group>"; };
+		8645619E1C026FEC00ADDE44 /* ContainerHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerHelpers.h; sourceTree = "<group>"; };
+		8645619F1C026FEC00ADDE44 /* ContainerHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerHelpers.m; sourceTree = "<group>"; };
+		864561A01C026FEC00ADDE44 /* EmptyCalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyCalendarItem.h; sourceTree = "<group>"; };
+		864561A11C026FEC00ADDE44 /* EmptyCalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyCalendarItem.m; sourceTree = "<group>"; };
+		864561A21C026FEC00ADDE44 /* EventCalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventCalendarItem.h; sourceTree = "<group>"; };
+		864561A31C026FEC00ADDE44 /* EventCalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventCalendarItem.m; sourceTree = "<group>"; };
+		864561A41C026FEC00ADDE44 /* EventRepositoryAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventRepositoryAccessor.h; sourceTree = "<group>"; };
+		864561A51C026FEC00ADDE44 /* EventRepositoryAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventRepositoryAccessor.m; sourceTree = "<group>"; };
+		864561A61C026FEC00ADDE44 /* EventsRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsRepository.h; sourceTree = "<group>"; };
+		864561A71C026FEC00ADDE44 /* EventsRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsRepository.m; sourceTree = "<group>"; };
+		864561A81C026FEC00ADDE44 /* EventsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsService.h; sourceTree = "<group>"; };
+		864561A91C026FEC00ADDE44 /* EventsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsService.m; sourceTree = "<group>"; };
+		864561AA1C026FEC00ADDE44 /* SparseArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SparseArray.h; sourceTree = "<group>"; };
+		864561AB1C026FEC00ADDE44 /* SparseArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SparseArray.m; sourceTree = "<group>"; };
+		864561AC1C026FEC00ADDE44 /* SCTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTime.h; sourceTree = "<group>"; };
+		864561AD1C026FEC00ADDE44 /* SCTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTime.m; sourceTree = "<group>"; };
+		864561AE1C026FEC00ADDE44 /* TimeCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeCalculator.h; sourceTree = "<group>"; };
+		864561AF1C026FEC00ADDE44 /* TimeCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeCalculator.m; sourceTree = "<group>"; };
+		864561B01C026FEC00ADDE44 /* TimeOfDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeOfDay.h; sourceTree = "<group>"; };
+		864561B11C026FEC00ADDE44 /* TimeOfDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeOfDay.m; sourceTree = "<group>"; };
+		864561B21C026FEC00ADDE44 /* TimeRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeRepository.h; sourceTree = "<group>"; };
+		864561B31C026FEC00ADDE44 /* TimeRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeRepository.m; sourceTree = "<group>"; };
+		864561C21C02709800ADDE44 /* NSDateCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateCalculator.swift; sourceTree = "<group>"; };
 		86C19EB91BBF287500BBCDF6 /* whatson-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "whatson-Bridging-Header.h"; sourceTree = "<group>"; };
 		86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WhatsOnViewController.swift; path = whatson/WhatsOnViewController.swift; sourceTree = "<group>"; };
 		86CAD4991BACC9B1009C9CFD /* What's On.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "What's On.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,8 +79,6 @@
 		86CAD4AD1BACC9B1009C9CFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86CAD4ED1BADF68F009C9CFD /* SCITimeRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCITimeRepository.h; sourceTree = "<group>"; };
 		86CAD4EE1BADF68F009C9CFD /* SCITimeRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCITimeRepository.m; sourceTree = "<group>"; };
-		86CAD4F01BADF6F6009C9CFD /* SCNSDateBasedTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNSDateBasedTime.h; sourceTree = "<group>"; };
-		86CAD4F11BADF6F6009C9CFD /* SCNSDateBasedTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNSDateBasedTime.m; sourceTree = "<group>"; };
 		86CAD4F31BAF3B43009C9CFD /* SCIEventStoreRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCIEventStoreRepository.h; sourceTree = "<group>"; };
 		86CAD4F41BAF3B43009C9CFD /* SCIEventStoreRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCIEventStoreRepository.m; sourceTree = "<group>"; };
 		86DE0FE61BB885E8004E20B5 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
@@ -132,11 +134,10 @@
 				86CAD49C1BACC9B1009C9CFD /* Supporting Files */,
 				86CAD4ED1BADF68F009C9CFD /* SCITimeRepository.h */,
 				86CAD4EE1BADF68F009C9CFD /* SCITimeRepository.m */,
-				86CAD4F01BADF6F6009C9CFD /* SCNSDateBasedTime.h */,
-				86CAD4F11BADF6F6009C9CFD /* SCNSDateBasedTime.m */,
 				86CAD4F31BAF3B43009C9CFD /* SCIEventStoreRepository.h */,
 				86CAD4F41BAF3B43009C9CFD /* SCIEventStoreRepository.m */,
 				8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */,
+				864561C21C02709800ADDE44 /* NSDateCalculator.swift */,
 			);
 			path = whatson;
 			sourceTree = "<group>";
@@ -152,32 +153,34 @@
 		86E09AB31BB6A75700D5A809 /* core */ = {
 			isa = PBXGroup;
 			children = (
-				865298EB1BEA3E280015706B /* CalendarItem.h */,
-				865298EC1BEA3E280015706B /* CalendarItem.m */,
-				865298ED1BEA3E280015706B /* CalendarSlot.h */,
-				865298EE1BEA3E280015706B /* CalendarSlot.m */,
-				865298EF1BEA3E280015706B /* CalendarSource.h */,
-				865298F01BEA3E280015706B /* CalendarSource.m */,
-				865298F11BEA3E280015706B /* ContainerHelpers.h */,
-				865298F21BEA3E280015706B /* ContainerHelpers.m */,
-				865298F31BEA3E280015706B /* EmptyCalendarItem.h */,
-				865298F41BEA3E280015706B /* EmptyCalendarItem.m */,
-				865298F51BEA3E280015706B /* EventCalendarItem.h */,
-				865298F61BEA3E280015706B /* EventCalendarItem.m */,
-				865298F71BEA3E280015706B /* EventRepositoryAccessor.h */,
-				865298F81BEA3E280015706B /* EventRepositoryAccessor.m */,
-				865298F91BEA3E280015706B /* EventsRepository.h */,
-				865298FA1BEA3E280015706B /* EventsRepository.m */,
-				865298FB1BEA3E280015706B /* EventsService.h */,
-				865298FC1BEA3E280015706B /* EventsService.m */,
-				865298FD1BEA3E280015706B /* SparseArray.h */,
-				865298FE1BEA3E280015706B /* SparseArray.m */,
-				865298FF1BEA3E280015706B /* SCTime.h */,
-				865299001BEA3E280015706B /* SCTime.m */,
-				865299011BEA3E280015706B /* TimeOfDay.h */,
-				865299021BEA3E280015706B /* TimeOfDay.m */,
-				865299031BEA3E280015706B /* TimeRepository.h */,
-				865299041BEA3E280015706B /* TimeRepository.m */,
+				864561981C026FEC00ADDE44 /* CalendarItem.h */,
+				864561991C026FEC00ADDE44 /* CalendarItem.m */,
+				8645619A1C026FEC00ADDE44 /* CalendarSlot.h */,
+				8645619B1C026FEC00ADDE44 /* CalendarSlot.m */,
+				8645619C1C026FEC00ADDE44 /* CalendarSource.h */,
+				8645619D1C026FEC00ADDE44 /* CalendarSource.m */,
+				8645619E1C026FEC00ADDE44 /* ContainerHelpers.h */,
+				8645619F1C026FEC00ADDE44 /* ContainerHelpers.m */,
+				864561A01C026FEC00ADDE44 /* EmptyCalendarItem.h */,
+				864561A11C026FEC00ADDE44 /* EmptyCalendarItem.m */,
+				864561A21C026FEC00ADDE44 /* EventCalendarItem.h */,
+				864561A31C026FEC00ADDE44 /* EventCalendarItem.m */,
+				864561A41C026FEC00ADDE44 /* EventRepositoryAccessor.h */,
+				864561A51C026FEC00ADDE44 /* EventRepositoryAccessor.m */,
+				864561A61C026FEC00ADDE44 /* EventsRepository.h */,
+				864561A71C026FEC00ADDE44 /* EventsRepository.m */,
+				864561A81C026FEC00ADDE44 /* EventsService.h */,
+				864561A91C026FEC00ADDE44 /* EventsService.m */,
+				864561AA1C026FEC00ADDE44 /* SparseArray.h */,
+				864561AB1C026FEC00ADDE44 /* SparseArray.m */,
+				864561AC1C026FEC00ADDE44 /* SCTime.h */,
+				864561AD1C026FEC00ADDE44 /* SCTime.m */,
+				864561AE1C026FEC00ADDE44 /* TimeCalculator.h */,
+				864561AF1C026FEC00ADDE44 /* TimeCalculator.m */,
+				864561B01C026FEC00ADDE44 /* TimeOfDay.h */,
+				864561B11C026FEC00ADDE44 /* TimeOfDay.m */,
+				864561B21C026FEC00ADDE44 /* TimeRepository.h */,
+				864561B31C026FEC00ADDE44 /* TimeRepository.m */,
 			);
 			name = core;
 			sourceTree = "<group>";
@@ -253,26 +256,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8652990D1BEA3E280015706B /* EventsService.m in Sources */,
+				864561C01C026FEC00ADDE44 /* TimeOfDay.m in Sources */,
+				864561BC1C026FEC00ADDE44 /* EventsService.m in Sources */,
 				86CAD4F51BAF3B43009C9CFD /* SCIEventStoreRepository.m in Sources */,
 				86C19EBF1BBF28E600BBCDF6 /* WhatsOnViewController.swift in Sources */,
-				865299051BEA3E280015706B /* CalendarItem.m in Sources */,
-				865299081BEA3E280015706B /* ContainerHelpers.m in Sources */,
-				86CAD4F21BADF6F6009C9CFD /* SCNSDateBasedTime.m in Sources */,
-				865299061BEA3E280015706B /* CalendarSlot.m in Sources */,
-				8652990C1BEA3E280015706B /* EventsRepository.m in Sources */,
-				8652990F1BEA3E280015706B /* SCTime.m in Sources */,
-				865299091BEA3E280015706B /* EmptyCalendarItem.m in Sources */,
-				865299111BEA3E280015706B /* TimeRepository.m in Sources */,
+				864561B41C026FEC00ADDE44 /* CalendarItem.m in Sources */,
+				864561B71C026FEC00ADDE44 /* ContainerHelpers.m in Sources */,
+				864561B51C026FEC00ADDE44 /* CalendarSlot.m in Sources */,
+				864561BB1C026FEC00ADDE44 /* EventsRepository.m in Sources */,
+				864561BE1C026FEC00ADDE44 /* SCTime.m in Sources */,
+				864561B81C026FEC00ADDE44 /* EmptyCalendarItem.m in Sources */,
 				86CAD4A11BACC9B1009C9CFD /* AppDelegate.m in Sources */,
-				8652990E1BEA3E280015706B /* SparseArray.m in Sources */,
-				865299071BEA3E280015706B /* CalendarSource.m in Sources */,
-				865299101BEA3E280015706B /* TimeOfDay.m in Sources */,
+				864561BD1C026FEC00ADDE44 /* SparseArray.m in Sources */,
+				864561B61C026FEC00ADDE44 /* CalendarSource.m in Sources */,
+				864561C11C026FEC00ADDE44 /* TimeRepository.m in Sources */,
 				8618A51F1BDA92F900A4845E /* CalendarSourceViewCell.swift in Sources */,
+				864561C31C02709800ADDE44 /* NSDateCalculator.swift in Sources */,
+				864561BF1C026FEC00ADDE44 /* TimeCalculator.m in Sources */,
 				86CAD49E1BACC9B1009C9CFD /* main.m in Sources */,
 				86CAD4EF1BADF68F009C9CFD /* SCITimeRepository.m in Sources */,
-				8652990A1BEA3E280015706B /* EventCalendarItem.m in Sources */,
-				8652990B1BEA3E280015706B /* EventRepositoryAccessor.m in Sources */,
+				864561B91C026FEC00ADDE44 /* EventCalendarItem.m in Sources */,
+				864561BA1C026FEC00ADDE44 /* EventRepositoryAccessor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +389,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"~/bin/include",
@@ -417,6 +422,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"~/bin/include",

@@ -17,6 +17,7 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
     var dayColor : UIColor!;
     var calendarSource : SCCalendarSource?;
     var eventService : SCEventsService!;
+    let timeCalculator = NSDateCalculator();
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,8 +52,8 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
     func fetchEvents(completion: (SCCalendarSource -> Void)) {
         let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         dispatch_async(queue) {
-            let now = NSDate();
-            let source = self.eventService.getCalendarSourceWithInt(14, withSCTime:SCNSDateBasedTime(NSDate: now));
+            let now = NSDateCalculator().now();
+            let source = self.eventService.getCalendarSourceWithInt(14, withSCTime:now);
             dispatch_async(dispatch_get_main_queue()) {
                 completion(source);
             };
@@ -110,8 +111,8 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
     
     func addEventController(calendarItem: SCCalendarItem) -> UIViewController {
         let newEvent = EKEvent(eventStore: eventStore);
-        let startDate = SCNSDateBasedTime.dateFromTime(calendarItem.startTime());
-        let endDate = SCNSDateBasedTime.dateFromTime(calendarItem.endTime());
+        let startDate = timeCalculator.date(calendarItem.startTime());
+        let endDate = timeCalculator.date(calendarItem.endTime());
         let editController = EKEventEditViewController();
         newEvent.startDate = startDate;
         newEvent.endDate = endDate;

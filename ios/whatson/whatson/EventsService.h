@@ -9,8 +9,8 @@
 #include "J2ObjC_header.h"
 
 @class SCCalendarSource;
+@class SCTime;
 @protocol SCEventsRepository;
-@protocol SCTime;
 @protocol SCTimeRepository;
 
 @interface SCEventsService : NSObject
@@ -21,7 +21,7 @@
                   withSCEventsRepository:(id<SCEventsRepository>)eventsRepository;
 
 - (SCCalendarSource *)getCalendarSourceWithInt:(jint)numberOfDays
-                                    withSCTime:(id<SCTime>)now;
+                                    withSCTime:(SCTime *)now;
 
 @end
 

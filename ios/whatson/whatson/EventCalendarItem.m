@@ -5,29 +5,29 @@
 
 #include "EventCalendarItem.h"
 #include "J2ObjC_source.h"
-#include "Time.h"
+#include "SCTime.h"
 
 @interface SCEventCalendarItem () {
  @public
   NSString *eventId_;
   NSString *title_;
-  id<SCTime> start_;
-  id<SCTime> endTime_;
+  SCTime *start_;
+  SCTime *endTime_;
 }
 
 @end
 
 J2OBJC_FIELD_SETTER(SCEventCalendarItem, eventId_, NSString *)
 J2OBJC_FIELD_SETTER(SCEventCalendarItem, title_, NSString *)
-J2OBJC_FIELD_SETTER(SCEventCalendarItem, start_, id<SCTime>)
-J2OBJC_FIELD_SETTER(SCEventCalendarItem, endTime_, id<SCTime>)
+J2OBJC_FIELD_SETTER(SCEventCalendarItem, start_, SCTime *)
+J2OBJC_FIELD_SETTER(SCEventCalendarItem, endTime_, SCTime *)
 
 @implementation SCEventCalendarItem
 
 - (instancetype)initWithNSString:(NSString *)eventId
                     withNSString:(NSString *)title
-                      withSCTime:(id<SCTime>)time
-                      withSCTime:(id<SCTime>)endTime {
+                      withSCTime:(SCTime *)time
+                      withSCTime:(SCTime *)endTime {
   SCEventCalendarItem_initWithNSString_withNSString_withSCTime_withSCTime_(self, eventId, title, time, endTime);
   return self;
 }
@@ -40,11 +40,11 @@ J2OBJC_FIELD_SETTER(SCEventCalendarItem, endTime_, id<SCTime>)
   return title_;
 }
 
-- (id<SCTime>)startTime {
+- (SCTime *)startTime {
   return start_;
 }
 
-- (id<SCTime>)endTime {
+- (SCTime *)endTime {
   return endTime_;
 }
 
@@ -73,7 +73,7 @@ J2OBJC_FIELD_SETTER(SCEventCalendarItem, endTime_, id<SCTime>)
 
 @end
 
-void SCEventCalendarItem_initWithNSString_withNSString_withSCTime_withSCTime_(SCEventCalendarItem *self, NSString *eventId, NSString *title, id<SCTime> time, id<SCTime> endTime) {
+void SCEventCalendarItem_initWithNSString_withNSString_withSCTime_withSCTime_(SCEventCalendarItem *self, NSString *eventId, NSString *title, SCTime *time, SCTime *endTime) {
   (void) NSObject_init(self);
   self->eventId_ = eventId;
   self->title_ = title;
@@ -81,7 +81,7 @@ void SCEventCalendarItem_initWithNSString_withNSString_withSCTime_withSCTime_(SC
   self->endTime_ = endTime;
 }
 
-SCEventCalendarItem *new_SCEventCalendarItem_initWithNSString_withNSString_withSCTime_withSCTime_(NSString *eventId, NSString *title, id<SCTime> time, id<SCTime> endTime) {
+SCEventCalendarItem *new_SCEventCalendarItem_initWithNSString_withNSString_withSCTime_withSCTime_(NSString *eventId, NSString *title, SCTime *time, SCTime *endTime) {
   SCEventCalendarItem *self = [SCEventCalendarItem alloc];
   SCEventCalendarItem_initWithNSString_withNSString_withSCTime_withSCTime_(self, eventId, title, time, endTime);
   return self;
