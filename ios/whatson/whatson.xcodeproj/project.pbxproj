@@ -23,9 +23,9 @@
 		864561C01C026FEC00ADDE44 /* TimeOfDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 864561B11C026FEC00ADDE44 /* TimeOfDay.m */; };
 		864561C11C026FEC00ADDE44 /* TimeRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 864561B31C026FEC00ADDE44 /* TimeRepository.m */; };
 		864561C31C02709800ADDE44 /* NSDateCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864561C21C02709800ADDE44 /* NSDateCalculator.swift */; };
+		86A9C2CB1C444468009281A0 /* WhatsOnAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */; };
 		86C19EBF1BBF28E600BBCDF6 /* WhatsOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */; };
 		86CAD49E1BACC9B1009C9CFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD49D1BACC9B1009C9CFD /* main.m */; };
-		86CAD4A11BACC9B1009C9CFD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD4A01BACC9B1009C9CFD /* AppDelegate.m */; };
 		86CAD4A71BACC9B1009C9CFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4A51BACC9B1009C9CFD /* Main.storyboard */; };
 		86CAD4A91BACC9B1009C9CFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */; };
 		86CAD4AC1BACC9B1009C9CFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4AA1BACC9B1009C9CFD /* LaunchScreen.storyboard */; };
@@ -67,12 +67,11 @@
 		864561B21C026FEC00ADDE44 /* TimeRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeRepository.h; sourceTree = "<group>"; };
 		864561B31C026FEC00ADDE44 /* TimeRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeRepository.m; sourceTree = "<group>"; };
 		864561C21C02709800ADDE44 /* NSDateCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateCalculator.swift; sourceTree = "<group>"; };
+		86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsOnAppDelegate.swift; sourceTree = "<group>"; };
 		86C19EB91BBF287500BBCDF6 /* whatson-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "whatson-Bridging-Header.h"; sourceTree = "<group>"; };
 		86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WhatsOnViewController.swift; path = whatson/WhatsOnViewController.swift; sourceTree = "<group>"; };
 		86CAD4991BACC9B1009C9CFD /* What's On.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "What's On.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86CAD49D1BACC9B1009C9CFD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		86CAD49F1BACC9B1009C9CFD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		86CAD4A01BACC9B1009C9CFD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		86CAD4A61BACC9B1009C9CFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		86CAD4AB1BACC9B1009C9CFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -125,8 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				86E09AB31BB6A75700D5A809 /* core */,
-				86CAD49F1BACC9B1009C9CFD /* AppDelegate.h */,
-				86CAD4A01BACC9B1009C9CFD /* AppDelegate.m */,
 				86CAD4A51BACC9B1009C9CFD /* Main.storyboard */,
 				86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */,
 				86CAD4AA1BACC9B1009C9CFD /* LaunchScreen.storyboard */,
@@ -138,6 +135,7 @@
 				86CAD4F41BAF3B43009C9CFD /* SCIEventStoreRepository.m */,
 				8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */,
 				864561C21C02709800ADDE44 /* NSDateCalculator.swift */,
+				86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */,
 			);
 			path = whatson;
 			sourceTree = "<group>";
@@ -266,9 +264,9 @@
 				864561BB1C026FEC00ADDE44 /* EventsRepository.m in Sources */,
 				864561BE1C026FEC00ADDE44 /* SCTime.m in Sources */,
 				864561B81C026FEC00ADDE44 /* EmptyCalendarItem.m in Sources */,
-				86CAD4A11BACC9B1009C9CFD /* AppDelegate.m in Sources */,
 				864561BD1C026FEC00ADDE44 /* SparseArray.m in Sources */,
 				864561B61C026FEC00ADDE44 /* CalendarSource.m in Sources */,
+				86A9C2CB1C444468009281A0 /* WhatsOnAppDelegate.swift in Sources */,
 				864561C11C026FEC00ADDE44 /* TimeRepository.m in Sources */,
 				8618A51F1BDA92F900A4845E /* CalendarSourceViewCell.swift in Sources */,
 				864561C31C02709800ADDE44 /* NSDateCalculator.swift in Sources */,
