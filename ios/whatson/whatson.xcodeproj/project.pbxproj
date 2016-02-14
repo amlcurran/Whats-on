@@ -33,6 +33,7 @@
 		86CAD4EF1BADF68F009C9CFD /* SCITimeRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD4EE1BADF68F009C9CFD /* SCITimeRepository.m */; };
 		86CAD4F51BAF3B43009C9CFD /* SCIEventStoreRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD4F41BAF3B43009C9CFD /* SCIEventStoreRepository.m */; };
 		86D751131C7128EB00C0A607 /* RoundedRectBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */; };
+		86D751151C71316D00C0A607 /* UIColor+WhatsOn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D751141C71316D00C0A607 /* UIColor+WhatsOn.swift */; };
 		86DE0FE71BB885E8004E20B5 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DE0FE61BB885E8004E20B5 /* libicucore.tbd */; };
 		86DE0FE91BB8863D004E20B5 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DE0FE81BB8863D004E20B5 /* Security.framework */; };
 		86DE0FEB1BB88646004E20B5 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DE0FEA1BB88646004E20B5 /* libz.tbd */; };
@@ -84,6 +85,7 @@
 		86CAD4F31BAF3B43009C9CFD /* SCIEventStoreRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCIEventStoreRepository.h; sourceTree = "<group>"; };
 		86CAD4F41BAF3B43009C9CFD /* SCIEventStoreRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCIEventStoreRepository.m; sourceTree = "<group>"; };
 		86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedRectBorderView.swift; sourceTree = "<group>"; };
+		86D751141C71316D00C0A607 /* UIColor+WhatsOn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+WhatsOn.swift"; sourceTree = "<group>"; };
 		86DE0FE61BB885E8004E20B5 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		86DE0FE81BB8863D004E20B5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		86DE0FEA1BB88646004E20B5 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -142,6 +144,7 @@
 				86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */,
 				8626FCDF1C63FBF800640079 /* CalendarCell.xib */,
 				86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */,
+				86D751141C71316D00C0A607 /* UIColor+WhatsOn.swift */,
 			);
 			path = whatson;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				864561BB1C026FEC00ADDE44 /* EventsRepository.m in Sources */,
 				86D751131C7128EB00C0A607 /* RoundedRectBorderView.swift in Sources */,
 				864561BE1C026FEC00ADDE44 /* SCTime.m in Sources */,
+				86D751151C71316D00C0A607 /* UIColor+WhatsOn.swift in Sources */,
 				864561B81C026FEC00ADDE44 /* EmptyCalendarItem.m in Sources */,
 				864561BD1C026FEC00ADDE44 /* SparseArray.m in Sources */,
 				864561B61C026FEC00ADDE44 /* CalendarSource.m in Sources */,

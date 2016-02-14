@@ -19,7 +19,7 @@ class CalendarSourceViewCell : UITableViewCell {
 
     @IBOutlet weak var topSpacingConstraint: NSLayoutConstraint!
     let dayColor = UIColor.blackColor().colorWithAlphaComponent(0.54);
-    @IBOutlet weak var `internal`: UIView!
+    @IBOutlet weak var roundedView: UIView!
     
     func bind(item : SCCalendarItem, slot : SCCalendarSlot?) {
         dateFormatter.dateFormat = "EEE";
@@ -27,21 +27,52 @@ class CalendarSourceViewCell : UITableViewCell {
         let formatted = String(format: "%@ - %@", dateFormatter.stringFromDate(startTime), item.title());
         let colouredString = NSMutableAttributedString(string: formatted);
         if (item.isEmpty()) {
-            colouredString.addAttribute(NSForegroundColorAttributeName, value: dayColor, range: NSMakeRange(0, colouredString.length));
+            colouredString.addAttribute(NSForegroundColorAttributeName, value: UIColor.lowTextColor(slot), range: NSMakeRange(0, colouredString.length));
         } else {
-            colouredString.addAttribute(NSForegroundColorAttributeName, value: dayColor, range: NSMakeRange(0, 3));
+            colouredString.addAttribute(NSForegroundColorAttributeName, value: UIColor.lowTextColor(slot), range: NSMakeRange(0, 3));
         }
+        mainLabel.textColor = UIColor.mainTextColor(slot)
         mainLabel.attributedText = colouredString;
-//        
-        if (slot != nil && slot!.count() > 1) {
+        
+        roundedView.backgroundColor = UIColor.cellColor(slot)
+        if (slot?.count() > 1) {
             numberLabel.text = String(format: "+%lu more event", slot!.count() - 1);
             numberLabel.hidden = false;
+            numberLabel.textColor = UIColor.lowTextColor(slot)
             centreInParentConstraint.active = false;
             topSpacingConstraint.active = true;
         } else {
             numberLabel.hidden = true;
             centreInParentConstraint.active = true;
             topSpacingConstraint.active = false;
+        }
+    }
+    
+}
+
+private extension UIColor {
+    
+    static func cellColor(slot: SCCalendarSlot?) -> UIColor {
+        if (slot?.count() > 1) {
+            return UIColor.appColor();
+        } else {
+            return UIColor.clearColor();
+        }
+    }
+    
+    static func mainTextColor(slot: SCCalendarSlot?) -> UIColor {
+        if (slot?.count() > 1) {
+            return UIColor.whiteColor();
+        } else {
+            return UIColor.blackColor();
+        }
+    }
+    
+    static func lowTextColor(slot: SCCalendarSlot?) -> UIColor {
+        if (slot?.count() > 1) {
+            return UIColor.whiteColor().colorWithAlphaComponent(0.54);
+        } else {
+            return UIColor.blackColor().colorWithAlphaComponent(0.54);
         }
     }
     

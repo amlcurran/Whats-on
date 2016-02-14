@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="430" height="91"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" horizontalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="KQw-Si-KcT" customClass="RoundedRectBorderView" customModule="What_s_On" customModuleProvider="target">
+                <view contentMode="scaleToFill" horizontalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="KQw-Si-KcT" userLabel="Rounded View" customClass="RoundedRectBorderView" customModule="What_s_On" customModuleProvider="target">
                     <rect key="frame" x="8" y="4" width="414" height="83"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQR-YP-nr4" userLabel="Main Label">
@@ -66,9 +66,9 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="centreInParentConstraint" destination="TG8-lX-yb2" id="lQ2-oE-rbE"/>
-                <outlet property="internal" destination="KQw-Si-KcT" id="F4F-Mk-9cC"/>
                 <outlet property="mainLabel" destination="gQR-YP-nr4" id="e2C-ge-QND"/>
                 <outlet property="numberLabel" destination="lGK-hT-cIj" id="V8n-pI-odE"/>
+                <outlet property="roundedView" destination="KQw-Si-KcT" id="liA-dW-VTV"/>
                 <outlet property="topSpacingConstraint" destination="MPh-k3-dhv" id="mBf-hb-QMd"/>
             </connections>
             <point key="canvasLocation" x="319" y="-16.5"/>
