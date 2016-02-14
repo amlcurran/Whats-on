@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8618A51F1BDA92F900A4845E /* CalendarSourceViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */; };
+		8626FCE01C63FBF800640079 /* CalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8626FCDF1C63FBF800640079 /* CalendarCell.xib */; };
 		864561B41C026FEC00ADDE44 /* CalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 864561991C026FEC00ADDE44 /* CalendarItem.m */; };
 		864561B51C026FEC00ADDE44 /* CalendarSlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8645619B1C026FEC00ADDE44 /* CalendarSlot.m */; };
 		864561B61C026FEC00ADDE44 /* CalendarSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8645619D1C026FEC00ADDE44 /* CalendarSource.m */; };
@@ -31,6 +32,7 @@
 		86CAD4AC1BACC9B1009C9CFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4AA1BACC9B1009C9CFD /* LaunchScreen.storyboard */; };
 		86CAD4EF1BADF68F009C9CFD /* SCITimeRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD4EE1BADF68F009C9CFD /* SCITimeRepository.m */; };
 		86CAD4F51BAF3B43009C9CFD /* SCIEventStoreRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD4F41BAF3B43009C9CFD /* SCIEventStoreRepository.m */; };
+		86D751131C7128EB00C0A607 /* RoundedRectBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */; };
 		86DE0FE71BB885E8004E20B5 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DE0FE61BB885E8004E20B5 /* libicucore.tbd */; };
 		86DE0FE91BB8863D004E20B5 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DE0FE81BB8863D004E20B5 /* Security.framework */; };
 		86DE0FEB1BB88646004E20B5 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DE0FEA1BB88646004E20B5 /* libz.tbd */; };
@@ -38,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSourceViewCell.swift; sourceTree = "<group>"; };
+		8626FCDF1C63FBF800640079 /* CalendarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarCell.xib; sourceTree = "<group>"; };
 		864561981C026FEC00ADDE44 /* CalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarItem.h; sourceTree = "<group>"; };
 		864561991C026FEC00ADDE44 /* CalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarItem.m; sourceTree = "<group>"; };
 		8645619A1C026FEC00ADDE44 /* CalendarSlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarSlot.h; sourceTree = "<group>"; };
@@ -80,6 +83,7 @@
 		86CAD4EE1BADF68F009C9CFD /* SCITimeRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCITimeRepository.m; sourceTree = "<group>"; };
 		86CAD4F31BAF3B43009C9CFD /* SCIEventStoreRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCIEventStoreRepository.h; sourceTree = "<group>"; };
 		86CAD4F41BAF3B43009C9CFD /* SCIEventStoreRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCIEventStoreRepository.m; sourceTree = "<group>"; };
+		86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedRectBorderView.swift; sourceTree = "<group>"; };
 		86DE0FE61BB885E8004E20B5 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		86DE0FE81BB8863D004E20B5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		86DE0FEA1BB88646004E20B5 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -136,6 +140,8 @@
 				8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */,
 				864561C21C02709800ADDE44 /* NSDateCalculator.swift */,
 				86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */,
+				8626FCDF1C63FBF800640079 /* CalendarCell.xib */,
+				86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */,
 			);
 			path = whatson;
 			sourceTree = "<group>";
@@ -215,6 +221,7 @@
 				TargetAttributes = {
 					86CAD4981BACC9B1009C9CFD = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = LW2EJ7FEBP;
 					};
 				};
 			};
@@ -244,6 +251,7 @@
 				86CAD4AC1BACC9B1009C9CFD /* LaunchScreen.storyboard in Resources */,
 				86CAD4A91BACC9B1009C9CFD /* Assets.xcassets in Resources */,
 				86CAD4A71BACC9B1009C9CFD /* Main.storyboard in Resources */,
+				8626FCE01C63FBF800640079 /* CalendarCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +270,7 @@
 				864561B71C026FEC00ADDE44 /* ContainerHelpers.m in Sources */,
 				864561B51C026FEC00ADDE44 /* CalendarSlot.m in Sources */,
 				864561BB1C026FEC00ADDE44 /* EventsRepository.m in Sources */,
+				86D751131C7128EB00C0A607 /* RoundedRectBorderView.swift in Sources */,
 				864561BE1C026FEC00ADDE44 /* SCTime.m in Sources */,
 				864561B81C026FEC00ADDE44 /* EmptyCalendarItem.m in Sources */,
 				864561BD1C026FEC00ADDE44 /* SparseArray.m in Sources */,
@@ -387,6 +396,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
@@ -420,6 +430,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
