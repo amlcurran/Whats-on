@@ -43,9 +43,8 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
         
         let newCellNib = UINib.init(nibName: "CalendarCell", bundle: NSBundle.mainBundle());
         self.tableView.registerNib(newCellNib, forCellReuseIdentifier: "day");
-        self.tableView.rowHeight = 56;
+        self.tableView.rowHeight = 60;
         self.tableView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
-//        self.tableView.estimatedRowHeight = 56;
     }
     
     func eventsChanged() {

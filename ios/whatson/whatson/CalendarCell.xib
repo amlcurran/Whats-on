@@ -7,33 +7,36 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CalendarSourceViewCell" customModule="What_s_On" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="430" height="166"/>
+        <view contentMode="scaleToFill" placeholderIntrinsicWidth="430" placeholderIntrinsicHeight="159" id="iN0-l3-epB" customClass="CalendarSourceViewCell" customModule="What_s_On" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="430" height="91"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KQw-Si-KcT" customClass="RoundedRectBorderView" customModule="What_s_On" customModuleProvider="target">
-                    <rect key="frame" x="8" y="4" width="414" height="158"/>
+                <view contentMode="scaleToFill" horizontalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="KQw-Si-KcT" customClass="RoundedRectBorderView" customModule="What_s_On" customModuleProvider="target">
+                    <rect key="frame" x="8" y="4" width="414" height="83"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQR-YP-nr4" userLabel="Main Label">
-                            <rect key="frame" x="8" y="68.5" width="348" height="21"/>
+                            <rect key="frame" x="8" y="8" width="398" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lGK-hT-cIj">
-                            <rect key="frame" x="364" y="68.5" width="42" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <rect key="frame" x="8" y="31" width="398" height="14.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="gQR-YP-nr4" firstAttribute="leading" secondItem="KQw-Si-KcT" secondAttribute="leading" constant="8" id="0Mm-dN-ti0"/>
+                        <constraint firstItem="lGK-hT-cIj" firstAttribute="trailing" secondItem="gQR-YP-nr4" secondAttribute="trailing" id="3g7-lf-VK2"/>
                         <constraint firstAttribute="trailing" secondItem="lGK-hT-cIj" secondAttribute="trailing" constant="8" id="43C-c8-Ghz"/>
-                        <constraint firstItem="lGK-hT-cIj" firstAttribute="baseline" secondItem="gQR-YP-nr4" secondAttribute="baseline" id="64a-YL-5FN"/>
-                        <constraint firstItem="lGK-hT-cIj" firstAttribute="leading" secondItem="gQR-YP-nr4" secondAttribute="trailing" constant="8" id="QUN-iE-v91"/>
-                        <constraint firstItem="gQR-YP-nr4" firstAttribute="centerY" secondItem="KQw-Si-KcT" secondAttribute="centerY" id="z9p-X5-kb3"/>
+                        <constraint firstItem="gQR-YP-nr4" firstAttribute="top" secondItem="KQw-Si-KcT" secondAttribute="top" constant="8" id="MPh-k3-dhv"/>
+                        <constraint firstItem="gQR-YP-nr4" firstAttribute="centerY" secondItem="KQw-Si-KcT" secondAttribute="centerY" id="TG8-lX-yb2"/>
+                        <constraint firstItem="lGK-hT-cIj" firstAttribute="top" secondItem="gQR-YP-nr4" secondAttribute="bottom" constant="2" id="hMF-uW-dMQ"/>
+                        <constraint firstAttribute="trailing" secondItem="gQR-YP-nr4" secondAttribute="trailing" constant="8" id="n3d-qN-qdj"/>
+                        <constraint firstItem="lGK-hT-cIj" firstAttribute="leading" secondItem="gQR-YP-nr4" secondAttribute="leading" id="u3V-e1-uYc"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -46,6 +49,11 @@
                             <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="TG8-lX-yb2"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -57,11 +65,13 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="centreInParentConstraint" destination="TG8-lX-yb2" id="lQ2-oE-rbE"/>
                 <outlet property="internal" destination="KQw-Si-KcT" id="F4F-Mk-9cC"/>
                 <outlet property="mainLabel" destination="gQR-YP-nr4" id="e2C-ge-QND"/>
                 <outlet property="numberLabel" destination="lGK-hT-cIj" id="V8n-pI-odE"/>
+                <outlet property="topSpacingConstraint" destination="MPh-k3-dhv" id="mBf-hb-QMd"/>
             </connections>
-            <point key="canvasLocation" x="319" y="21"/>
+            <point key="canvasLocation" x="319" y="-16.5"/>
         </view>
     </objects>
 </document>
