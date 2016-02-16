@@ -16,6 +16,7 @@ class WhatsOnAppDelegate : NSObject, UIApplicationDelegate, EKEventEditViewDeleg
     lazy var window = UIWindow() as UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+        self.window?.tintColor = UIColor.appColor()
         if #available(iOS 9.1, *) {
             updateTouchShortcuts(application)
             guard let options = launchOptions, let launchShortcut = options[UIApplicationLaunchOptionsShortcutItemKey] as? UIApplicationShortcutItem else {
