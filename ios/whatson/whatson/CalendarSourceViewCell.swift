@@ -53,7 +53,7 @@ class CalendarSourceViewCell : UITableViewCell {
 private extension UIColor {
     
     static func cellColor(slot: SCCalendarSlot?) -> UIColor {
-        if (slot?.count() > 1) {
+        if (slot?.count() > 0) {
             return UIColor.appColor();
         } else {
             return UIColor.clearColor();
@@ -61,7 +61,7 @@ private extension UIColor {
     }
     
     static func mainTextColor(slot: SCCalendarSlot?) -> UIColor {
-        if (slot?.count() > 1) {
+        if (slot?.count() > 0) {
             return UIColor.whiteColor();
         } else {
             return UIColor.blackColor();
@@ -69,7 +69,7 @@ private extension UIColor {
     }
     
     static func lowTextColor(slot: SCCalendarSlot?) -> UIColor {
-        if (slot?.count() > 1) {
+        if (slot?.count() > 0) {
             return UIColor.whiteColor().colorWithAlphaComponent(0.54);
         } else {
             return UIColor.blackColor().colorWithAlphaComponent(0.54);
