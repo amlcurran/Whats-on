@@ -13,5 +13,9 @@ extension UIColor {
     static func appColor() -> UIColor {
         return UIColor(red: 0.0, green: 0.561, blue: 0.486, alpha: 1)
     }
+    
+    static func eightyWhite() -> UIColor {
+        return UIColor(white: 1, alpha: 0.8)
+    }
 
 }

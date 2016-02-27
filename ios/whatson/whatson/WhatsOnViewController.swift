@@ -36,8 +36,8 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
         let eventRepo = SCIEventStoreRepository();
         eventService = SCEventsService(SCTimeRepository: timeRepo, withSCEventsRepository: eventRepo);
         
-        navigationController?.navigationBar.barTintColor = UIColor(red: 0.0, green: 0.561, blue: 0.486, alpha: 1);
-        navigationController?.navigationBar.tintColor = UIColor(white: 1, alpha: 0.8);
+        navigationController?.navigationBar.barTintColor = UIColor.appColor()
+        navigationController?.navigationBar.tintColor = UIColor.eightyWhite();
         
         title = "What's On";
         
@@ -102,9 +102,11 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let item = self.calendarSource?.itemAtWithInt(jint(indexPath.row));
-        if item!.isEmpty() {
-            let addController = addEventController(item!);
+        guard let item = self.calendarSource?.itemAtWithInt(jint(indexPath.row)) else {
+            preconditionFailure("Calendar didn't have item at expected index \(indexPath.row)")
+        }
+        if item.isEmpty() {
+            let addController = addEventController(item);
             self.navigationController?.presentViewController(addController, animated: true, completion: nil);
         } else {
             let editController = editEventController(item as! SCEventCalendarItem);
@@ -147,11 +149,10 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
     
     func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard let indexPath = tableView.indexPathForRowAtPoint(location),
-            cell = tableView.cellForRowAtIndexPath(indexPath) else {
+            cell = tableView.cellForRowAtIndexPath(indexPath),
+            item = self.calendarSource?.itemAtWithInt(jint(indexPath.row)) else {
                 return nil
         }
-        
-        let item = self.calendarSource?.itemAtWithInt(jint(indexPath.row));
         
         if #available(iOS 9.0, *) {
             previewingContext.sourceRect = cell.frame
@@ -159,10 +160,12 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
             return nil;
         };
         
-        if item!.isEmpty() {
+        if item.isEmpty() {
             return nil;
         } else {
-            return editEventController(item as! SCEventCalendarItem);
+            let vc = editEventController(item as! SCEventCalendarItem)
+            vc?.preferredContentSize = self.view.frame.size
+            return vc
         }
     }
     
