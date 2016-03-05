@@ -21,9 +21,13 @@ class CalendarSourceViewCell : UITableViewCell {
     let dayColor = UIColor.blackColor().colorWithAlphaComponent(0.54);
     @IBOutlet weak var roundedView: UIView!
     
+    var empty : Bool = true
+    
     func bind(item : SCCalendarItem, slot : SCCalendarSlot?) {
+        self.empty = slot?.isEmpty() ?? false
+        self.selectionStyle = .None
         dateFormatter.dateFormat = "EEE";
-        let startTime = NSDate(timeIntervalSince1970: NSTimeInterval(item.startTime().getMillis() / 1000));
+        let startTime = NSDate.dateFromTime(item.startTime());
         let formatted = String(format: "%@ - %@", dateFormatter.stringFromDate(startTime), item.title());
         let colouredString = NSMutableAttributedString(string: formatted);
         if (item.isEmpty()) {
@@ -34,7 +38,6 @@ class CalendarSourceViewCell : UITableViewCell {
         mainLabel.textColor = UIColor.mainTextColor(slot)
         mainLabel.attributedText = colouredString;
         
-        roundedView.backgroundColor = UIColor.cellColor(slot)
         if (slot?.count() > 1) {
             numberLabel.text = String(format: "+%lu more event", slot!.count() - 1);
             numberLabel.hidden = false;
@@ -48,15 +51,39 @@ class CalendarSourceViewCell : UITableViewCell {
         }
     }
     
+    override func setSelected(selected: Bool, animated: Bool) {
+        if (selected) {
+            roundedView.backgroundColor = UIColor.selectedCellColor(self)
+        } else {
+            roundedView.backgroundColor = UIColor.cellColor(self)
+        }
+    }
+    
+    override func setHighlighted(highlighted: Bool, animated: Bool) {
+        if (highlighted) {
+            roundedView.backgroundColor = UIColor.selectedCellColor(self)
+        } else {
+            roundedView.backgroundColor = UIColor.cellColor(self)
+        }
+    }
+    
 }
 
 private extension UIColor {
     
-    static func cellColor(slot: SCCalendarSlot?) -> UIColor {
-        if (slot?.count() > 0) {
-            return UIColor.appColor();
+    static func selectedCellColor(cell: CalendarSourceViewCell) -> UIColor {
+        if (!cell.empty) {
+            return UIColor.appColor().colorWithAlphaComponent(0.4);
         } else {
-            return UIColor.clearColor();
+            return UIColor.appColor().colorWithAlphaComponent(0.2);
+        }
+    }
+    
+    static func cellColor(cell: CalendarSourceViewCell) -> UIColor {
+        if (!cell.empty) {
+            return UIColor.appColor()
+        } else {
+            return UIColor.whiteColor()
         }
     }
     
@@ -68,8 +95,24 @@ private extension UIColor {
         }
     }
     
+    static func selectedMainTextColor(cell: CalendarSourceViewCell) -> UIColor {
+        if (!cell.empty) {
+            return UIColor.whiteColor();
+        } else {
+            return UIColor.blackColor();
+        }
+    }
+    
     static func lowTextColor(slot: SCCalendarSlot?) -> UIColor {
         if (slot?.count() > 0) {
+            return UIColor.whiteColor().colorWithAlphaComponent(0.54);
+        } else {
+            return UIColor.blackColor().colorWithAlphaComponent(0.54);
+        }
+    }
+    
+    static func selectedLowTextColor(cell: CalendarSourceViewCell) -> UIColor {
+        if (!cell.empty) {
             return UIColor.whiteColor().colorWithAlphaComponent(0.54);
         } else {
             return UIColor.blackColor().colorWithAlphaComponent(0.54);
