@@ -14,12 +14,10 @@ class CalendarSourceViewCell : UITableViewCell {
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var centreInParentConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topSpacingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var roundedView: UIView!
     
     let dateFormatter = NSDateFormatter();
-
-    @IBOutlet weak var topSpacingConstraint: NSLayoutConstraint!
-    let dayColor = UIColor.blackColor().colorWithAlphaComponent(0.54);
-    @IBOutlet weak var roundedView: UIView!
     
     var empty : Bool = true
     
@@ -31,9 +29,11 @@ class CalendarSourceViewCell : UITableViewCell {
         let formatted = String(format: "%@ - %@", dateFormatter.stringFromDate(startTime), item.title());
         let colouredString = NSMutableAttributedString(string: formatted);
         if (item.isEmpty()) {
-            colouredString.addAttribute(NSForegroundColorAttributeName, value: UIColor.lowTextColor(slot), range: NSMakeRange(0, colouredString.length));
+            let lowRange = NSRange(location: 0, length: colouredString.length)
+            colouredString.addAttribute(NSForegroundColorAttributeName, value: UIColor.lowTextColor(slot), range: lowRange);
         } else {
-            colouredString.addAttribute(NSForegroundColorAttributeName, value: UIColor.lowTextColor(slot), range: NSMakeRange(0, 3));
+            let lowRange = NSRange(location: 0, length: 3)
+            colouredString.addAttribute(NSForegroundColorAttributeName, value: UIColor.lowTextColor(slot), range: lowRange);
         }
         mainLabel.textColor = UIColor.mainTextColor(slot)
         mainLabel.attributedText = colouredString;
