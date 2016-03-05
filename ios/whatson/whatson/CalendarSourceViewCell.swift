@@ -20,11 +20,21 @@ class CalendarSourceViewCell : UITableViewCell {
     let dateFormatter = NSDateFormatter();
     
     var empty : Bool = true
-    
+
+    @available(iOS 3.0, *) override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        dateFormatter.dateFormat = "EEE"
+        selectionStyle = .None
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        dateFormatter.dateFormat = "EEE"
+        selectionStyle = .None
+    }
+
     func bind(item : SCCalendarItem, slot : SCCalendarSlot?) {
         self.empty = slot?.isEmpty() ?? false
-        self.selectionStyle = .None
-        dateFormatter.dateFormat = "EEE";
         let startTime = NSDate.dateFromTime(item.startTime());
         let formatted = String(format: "%@ - %@", dateFormatter.stringFromDate(startTime), item.title());
         let colouredString = NSMutableAttributedString(string: formatted);
