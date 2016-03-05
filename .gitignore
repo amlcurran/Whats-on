@@ -1,11 +1,12 @@
 .gradle
 /local.properties
-/.idea
+/.idea/
 .DS_Store
 /build
 /captures
 *.iml
 ios/whatson/DerivedData
+ios/whatson/.idea
 ios/core/whatson-core/DerivedData/
 ios/whatson/whatson.xcodeproj/project.xcworkspace/xcuserdata/amlcurran.xcuserdatad/UserInterfaceState.xcuserstate
 

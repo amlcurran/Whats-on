@@ -15,12 +15,14 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
     var dateFormatter : NSDateFormatter!;
     var eventStore : EKEventStore!;
     var dayColor : UIColor!;
+    var presenter : WhatsOnPresenter!
     var calendarSource : SCCalendarSource?;
     var eventService : SCEventsService!;
     let timeCalculator = NSDateCalculator();
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        eventStore = EKEventStore()
         if #available(iOS 9.0, *) {
             if traitCollection.forceTouchCapability == .Available {
                 registerForPreviewingWithDelegate(self, sourceView: self.tableView);
@@ -30,11 +32,11 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
         }
         dateFormatter = NSDateFormatter();
         dateFormatter.dateFormat = "EEE";
-        eventStore = EKEventStore();
         dayColor = UIColor.blackColor().colorWithAlphaComponent(0.54);
         let timeRepo = SCITimeRepository();
         let eventRepo = SCIEventStoreRepository();
         eventService = SCEventsService(SCTimeRepository: timeRepo, withSCEventsRepository: eventRepo);
+        presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService)
         
         navigationController?.navigationBar.barTintColor = UIColor.appColor()
         navigationController?.navigationBar.tintColor = UIColor.eightyWhite();
@@ -48,32 +50,15 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
     }
     
     func eventsChanged() {
-        self.fetchEvents { (source) -> Void in
-            self.calendarSource = source;
-            self.tableView.reloadData();
+        self.presenter.fetchEvents { (source) -> Void in
+            self.didUpdateSource(source)
         }
-    }
-    
-    func fetchEvents(completion: (SCCalendarSource -> Void)) {
-        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        dispatch_async(queue) {
-            let now = NSDateCalculator().now();
-            let source = self.eventService.getCalendarSourceWithInt(14, withSCTime:now);
-            dispatch_async(dispatch_get_main_queue()) {
-                completion(source);
-            };
-        };
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"eventsChanged", name: EKEventStoreChangedNotification, object: eventStore);
-        eventStore.requestAccessToEntityType(.Event) { (success, error) -> Void in
-            self.fetchEvents({ (source) -> Void in
-                self.calendarSource = source;
-                self.tableView.reloadData();
-            })
-        }
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"eventsChanged", name: EKEventStoreChangedNotification, object: eventStore)
+        presenter.beginPresenting(self)
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -190,4 +175,17 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
     
 */
 
+}
+
+extension WhatsOnViewController: WhatsOnPresenterDelegate {
+
+    func didUpdateSource(source: SCCalendarSource) {
+        self.calendarSource = source;
+        self.tableView.reloadData();
+    }
+
+    func failedToAccessCalendar(error: NSError?) {
+        // TODO implement
+    }
+    
 }
