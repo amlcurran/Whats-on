@@ -42,9 +42,7 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
         title = "What's On";
         
         let newCellNib = UINib.init(nibName: "CalendarCell", bundle: NSBundle.mainBundle());
-        let fullCellNib = UINib.init(nibName: "FullCalendarCell", bundle: NSBundle.mainBundle());
         self.tableView.registerNib(newCellNib, forCellReuseIdentifier: "day");
-        self.tableView.registerNib(fullCellNib, forCellReuseIdentifier: "full");
         self.tableView.rowHeight = 60;
         self.tableView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
     }
@@ -93,16 +91,10 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
             item = self.calendarSource?.itemAtWithInt(jint(indexPath.row)) else {
             preconditionFailure("Accessing a slot which doesn't exist")
         }
-        
-        if (slot.isEmpty()) {
+
             let cell = tableView.dequeueReusableCellWithIdentifier("day", forIndexPath: indexPath) as! CalendarSourceViewCell;
             cell.bind(item, slot: slot);
             return cell;
-        } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("full", forIndexPath: indexPath) as! CalendarSourceViewCell;
-            cell.bind(item, slot: slot);
-            return cell;
-        }
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

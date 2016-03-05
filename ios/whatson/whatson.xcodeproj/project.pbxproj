@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8614BABC1C8258C500A3E570 /* FullCalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8614BABB1C8258C500A3E570 /* FullCalendarCell.xib */; };
 		8614BABE1C825B7A00A3E570 /* NSDate+Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8614BABD1C825B7A00A3E570 /* NSDate+Time.swift */; };
 		8618A51F1BDA92F900A4845E /* CalendarSourceViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */; };
 		8626FCE01C63FBF800640079 /* CalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8626FCDF1C63FBF800640079 /* CalendarCell.xib */; };
@@ -42,7 +41,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8614BABB1C8258C500A3E570 /* FullCalendarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FullCalendarCell.xib; sourceTree = "<group>"; };
 		8614BABD1C825B7A00A3E570 /* NSDate+Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Time.swift"; sourceTree = "<group>"; };
 		8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSourceViewCell.swift; sourceTree = "<group>"; };
 		8626FCDF1C63FBF800640079 /* CalendarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarCell.xib; sourceTree = "<group>"; };
@@ -147,7 +145,6 @@
 				8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */,
 				864561C21C02709800ADDE44 /* NSDateCalculator.swift */,
 				86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */,
-				8614BABB1C8258C500A3E570 /* FullCalendarCell.xib */,
 				8626FCDF1C63FBF800640079 /* CalendarCell.xib */,
 				86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */,
 				86D751141C71316D00C0A607 /* UIColor+WhatsOn.swift */,
@@ -260,7 +257,6 @@
 				86CAD4AC1BACC9B1009C9CFD /* LaunchScreen.storyboard in Resources */,
 				86CAD4A91BACC9B1009C9CFD /* Assets.xcassets in Resources */,
 				86CAD4A71BACC9B1009C9CFD /* Main.storyboard in Resources */,
-				8614BABC1C8258C500A3E570 /* FullCalendarCell.xib in Resources */,
 				8626FCE01C63FBF800640079 /* CalendarCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
