@@ -57,7 +57,7 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"eventsChanged", name: EKEventStoreChangedNotification, object: eventStore)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(eventsChanged), name: EKEventStoreChangedNotification, object: eventStore)
         presenter.beginPresenting(self)
     }
     
