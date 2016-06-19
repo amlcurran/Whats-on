@@ -3,9 +3,13 @@ import EventKit
 import MapKit
 
 class EventDetailsViewController: UIViewController {
-    @IBOutlet weak var titleLabel: UILabel!
     
-    private let event: EKEvent?
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var locationMapView: MKMapView!
+    @IBOutlet weak var mapHeightConstraint: NSLayoutConstraint!
+    
+    private let event: EKEvent
     
     init(event: EKEvent) {
         self.event = event
@@ -13,8 +17,7 @@ class EventDetailsViewController: UIViewController {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        self.event = nil
-        super.init(coder: aDecoder)
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func viewDidLoad() {
@@ -22,34 +25,15 @@ class EventDetailsViewController: UIViewController {
         self.view.backgroundColor = .white()
         self.navigationItem.title = "Event details"
         
-//        let titleLabel = UILabel()
-//        let locationLabel = UILabel()
-//        let map = MKMapView(frame: .zero)
-//        let stackView = UIStackView(arrangedSubviews: [titleLabel, locationLabel, map])
-//        stackView.axis = .vertical
-//        stackView.alignment = .fill
-//        
-//        let scrollView = UIScrollView()
-//        scrollView.addSubview(stackView)
-//        self.view.addSubview(scrollView)
-//        
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//        scrollView.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        _ = scrollView.constrainToSuperview(edge: .leading, withOffset: 12)
-//        _ = scrollView.constrainToSuperview(edge: .trailing, withOffset: 12)
-//        _ = scrollView.constrainToSuperview(edge: .top)
-//        _ = scrollView.constrainToSuperview(edge: .bottom)
-//        
-//        _ = stackView.constrainToSuperview(edge: .leading)
-//        _ = stackView.constrainToSuperview(edge: .trailing)
-//        _ = stackView.constrainToSuperview(edge: .top)
-//        
-//        _ = map.constrain(height: 160)
-//        _ = map.constrainToSuperview(edge: .leading)
-//        _ = map.constrainToSuperview(edge: .trailing)
-//        
-        titleLabel.text = event?.title
+        titleLabel.text = event.title
+        locationLabel.text = event.location
+        
+        if let location = event.structuredLocation?.geoLocation {
+            let region = MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+            locationMapView.setRegion(region, animated: false)
+        } else {
+            mapHeightConstraint.constant = 0
+        }
     }
 
 }

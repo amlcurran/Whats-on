@@ -8,6 +8,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EventDetailsViewController" customModule="What_s_On" customModuleProvider="target">
             <connections>
+                <outlet property="locationLabel" destination="Ixe-S0-bJP" id="gDS-IU-SAG"/>
+                <outlet property="locationMapView" destination="jex-nH-yrR" id="KON-YV-wdC"/>
+                <outlet property="mapHeightConstraint" destination="ftB-Wa-x1I" id="bnj-mm-OxP"/>
                 <outlet property="titleLabel" destination="KIl-53-2n1" id="MNb-5T-Ol0"/>
                 <outlet property="view" destination="FNn-WJ-2rd" id="f8y-1O-9yt"/>
             </connections>
