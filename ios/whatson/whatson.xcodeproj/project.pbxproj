@@ -39,6 +39,8 @@
 		86F849931D046277007C41B0 /* TimeCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F849831D046277007C41B0 /* TimeCalculator.m */; };
 		86F849941D046277007C41B0 /* TimeOfDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F849851D046277007C41B0 /* TimeOfDay.m */; };
 		86F849951D046277007C41B0 /* TimeRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F849871D046277007C41B0 /* TimeRepository.m */; };
+		86F849991D046A3E007C41B0 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */; };
+		86F8499B1D046AAE007C41B0 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +96,8 @@
 		86F849861D046277007C41B0 /* TimeRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeRepository.h; path = ../../../build/ios/objc/TimeRepository.h; sourceTree = "<group>"; };
 		86F849871D046277007C41B0 /* TimeRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimeRepository.m; path = ../../../build/ios/objc/TimeRepository.m; sourceTree = "<group>"; };
 		86F849961D046418007C41B0 /* libjre_emul.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjre_emul.a; path = ../../../j2objc/lib/libjre_emul.a; sourceTree = "<group>"; };
+		86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
+		86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +157,8 @@
 				8626FCDF1C63FBF800640079 /* CalendarCell.xib */,
 				86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */,
 				86D751141C71316D00C0A607 /* UIColor+WhatsOn.swift */,
+				86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */,
+				86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */,
 			);
 			path = whatson;
 			sourceTree = "<group>";
@@ -275,6 +281,7 @@
 			files = (
 				86CAD4F51BAF3B43009C9CFD /* SCIEventStoreRepository.m in Sources */,
 				86C19EBF1BBF28E600BBCDF6 /* WhatsOnViewController.swift in Sources */,
+				86F849991D046A3E007C41B0 /* EventDetailsViewController.swift in Sources */,
 				86F849931D046277007C41B0 /* TimeCalculator.m in Sources */,
 				8614BABE1C825B7A00A3E570 /* NSDate+Time.swift in Sources */,
 				86D751131C7128EB00C0A607 /* RoundedRectBorderView.swift in Sources */,
@@ -284,6 +291,7 @@
 				86F8498C1D046277007C41B0 /* EmptyCalendarItem.m in Sources */,
 				86F849921D046277007C41B0 /* SCTime.m in Sources */,
 				86F849951D046277007C41B0 /* TimeRepository.m in Sources */,
+				86F8499B1D046AAE007C41B0 /* UIView+Constraints.swift in Sources */,
 				86F849911D046277007C41B0 /* SparseArray.m in Sources */,
 				86F467F91C8AFFA500147F2E /* WhatsOnPresenter.swift in Sources */,
 				86D751151C71316D00C0A607 /* UIColor+WhatsOn.swift in Sources */,
@@ -419,7 +427,7 @@
 					"./uk/co/amlcurran/social/**",
 				);
 				INFOPLIST_FILE = whatson/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -452,7 +460,7 @@
 					"./uk/co/amlcurran/social/**",
 				);
 				INFOPLIST_FILE = whatson/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
