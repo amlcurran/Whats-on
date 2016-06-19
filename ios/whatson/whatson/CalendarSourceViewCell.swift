@@ -17,26 +17,26 @@ class CalendarSourceViewCell : UITableViewCell {
     @IBOutlet weak var topSpacingConstraint: NSLayoutConstraint!
     @IBOutlet weak var roundedView: UIView!
     
-    let dateFormatter = NSDateFormatter();
+    let dateFormatter = DateFormatter();
     
     var empty : Bool = true
 
     @available(iOS 3.0, *) override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         dateFormatter.dateFormat = "EEE"
-        selectionStyle = .None
+        selectionStyle = .none
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         dateFormatter.dateFormat = "EEE"
-        selectionStyle = .None
+        selectionStyle = .none
     }
 
-    func bind(item : SCCalendarItem, slot : SCCalendarSlot?) {
+    func bind(_ item : SCCalendarItem, slot : SCCalendarSlot?) {
         self.empty = slot?.isEmpty() ?? false
-        let startTime = NSDate.dateFromTime(item.startTime());
-        let formatted = String(format: "%@ - %@", dateFormatter.stringFromDate(startTime), item.title());
+        let startTime = Date.dateFromTime(item.startTime());
+        let formatted = String(format: "%@ - %@", dateFormatter.string(from: startTime), item.title());
         let colouredString = NSMutableAttributedString(string: formatted);
         if (item.isEmpty()) {
             let lowRange = NSRange(location: 0, length: colouredString.length)
@@ -50,18 +50,18 @@ class CalendarSourceViewCell : UITableViewCell {
         
         if (slot?.count() > 1) {
             numberLabel.text = String(format: "+%lu more event", slot!.count() - 1);
-            numberLabel.hidden = false;
+            numberLabel.isHidden = false;
             numberLabel.textColor = UIColor.lowTextColor(slot)
-            centreInParentConstraint.active = false;
-            topSpacingConstraint.active = true;
+            centreInParentConstraint.isActive = false;
+            topSpacingConstraint.isActive = true;
         } else {
-            numberLabel.hidden = true;
-            centreInParentConstraint.active = true;
-            topSpacingConstraint.active = false;
+            numberLabel.isHidden = true;
+            centreInParentConstraint.isActive = true;
+            topSpacingConstraint.isActive = false;
         }
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         if (selected) {
             roundedView.backgroundColor = UIColor.selectedCellColor(self)
         } else {
@@ -69,7 +69,7 @@ class CalendarSourceViewCell : UITableViewCell {
         }
     }
     
-    override func setHighlighted(highlighted: Bool, animated: Bool) {
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         if (highlighted) {
             roundedView.backgroundColor = UIColor.selectedCellColor(self)
         } else {
@@ -81,51 +81,51 @@ class CalendarSourceViewCell : UITableViewCell {
 
 private extension UIColor {
     
-    static func selectedCellColor(cell: CalendarSourceViewCell) -> UIColor {
+    static func selectedCellColor(_ cell: CalendarSourceViewCell) -> UIColor {
         if (!cell.empty) {
-            return UIColor.appColor().colorWithAlphaComponent(0.4);
+            return UIColor.appColor().withAlphaComponent(0.4);
         } else {
-            return UIColor.appColor().colorWithAlphaComponent(0.2);
+            return UIColor.appColor().withAlphaComponent(0.2);
         }
     }
     
-    static func cellColor(cell: CalendarSourceViewCell) -> UIColor {
+    static func cellColor(_ cell: CalendarSourceViewCell) -> UIColor {
         if (!cell.empty) {
             return UIColor.appColor()
         } else {
-            return UIColor.whiteColor()
+            return UIColor.white()
         }
     }
     
-    static func mainTextColor(slot: SCCalendarSlot?) -> UIColor {
+    static func mainTextColor(_ slot: SCCalendarSlot?) -> UIColor {
         if (slot?.count() > 0) {
-            return UIColor.whiteColor();
+            return UIColor.white();
         } else {
-            return UIColor.blackColor();
+            return UIColor.black();
         }
     }
     
-    static func selectedMainTextColor(cell: CalendarSourceViewCell) -> UIColor {
+    static func selectedMainTextColor(_ cell: CalendarSourceViewCell) -> UIColor {
         if (!cell.empty) {
-            return UIColor.whiteColor();
+            return UIColor.white();
         } else {
-            return UIColor.blackColor();
+            return UIColor.black();
         }
     }
     
-    static func lowTextColor(slot: SCCalendarSlot?) -> UIColor {
+    static func lowTextColor(_ slot: SCCalendarSlot?) -> UIColor {
         if (slot?.count() > 0) {
-            return UIColor.whiteColor().colorWithAlphaComponent(0.54);
+            return UIColor.white().withAlphaComponent(0.54);
         } else {
-            return UIColor.blackColor().colorWithAlphaComponent(0.54);
+            return UIColor.black().withAlphaComponent(0.54);
         }
     }
     
-    static func selectedLowTextColor(cell: CalendarSourceViewCell) -> UIColor {
+    static func selectedLowTextColor(_ cell: CalendarSourceViewCell) -> UIColor {
         if (!cell.empty) {
-            return UIColor.whiteColor().colorWithAlphaComponent(0.54);
+            return UIColor.white().withAlphaComponent(0.54);
         } else {
-            return UIColor.blackColor().colorWithAlphaComponent(0.54);
+            return UIColor.black().withAlphaComponent(0.54);
         }
     }
     

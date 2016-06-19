@@ -13,9 +13,9 @@ import EventKitUI
 
 class WhatsOnAppDelegate : NSObject, UIApplicationDelegate, EKEventEditViewDelegate {
     
-    lazy var window = UIWindow() as UIWindow?
+    var window = UIWindow() as UIWindow?
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         self.window?.tintColor = UIColor.appColor()
         if #available(iOS 9.1, *) {
             updateTouchShortcuts(application)
@@ -24,7 +24,7 @@ class WhatsOnAppDelegate : NSObject, UIApplicationDelegate, EKEventEditViewDeleg
             }
             
             let rootViewController = self.rootViewController()
-            rootViewController?.dismissViewControllerAnimated(true, completion: nil)
+            rootViewController?.dismiss(animated: true, completion: nil)
             return handleShortcutItem(launchShortcut)
         } else {
             return true;
@@ -36,22 +36,22 @@ class WhatsOnAppDelegate : NSObject, UIApplicationDelegate, EKEventEditViewDeleg
     }
     
     @available(iOS 9.1, *)
-    func updateTouchShortcuts(application: UIApplication) {
+    func updateTouchShortcuts(_ application: UIApplication) {
         var newIcons = [UIApplicationShortcutItem]()
-        let newEventTommorrow = UIMutableApplicationShortcutItem(type: "new-tomorrow", localizedTitle: "Add event tomorrow", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: UIApplicationShortcutIconType.Add), userInfo: nil)
-        let onToday = UIMutableApplicationShortcutItem(type: "on-today", localizedTitle: "On today", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: UIApplicationShortcutIconType.Date), userInfo: nil);
+        let newEventTommorrow = UIMutableApplicationShortcutItem(type: "new-tomorrow", localizedTitle: "Add event tomorrow", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: UIApplicationShortcutIconType.add), userInfo: nil)
+        let onToday = UIMutableApplicationShortcutItem(type: "on-today", localizedTitle: "On today", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: UIApplicationShortcutIconType.date), userInfo: nil);
         newIcons.append(newEventTommorrow)
         newIcons.append(onToday)
         application.shortcutItems = newIcons;
     }
     
     @available(iOS 9.0, *)
-    func handleShortcutItem(shortcutItem: UIApplicationShortcutItem) -> Bool {
+    func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
         if (shortcutItem.type == "new-tomorrow") {
             let eventStore = EKEventStore()
             let event = EKEvent(eventStore: eventStore)
-            let startDate = NSCalendar.currentCalendar().dateBySettingHour(17, minute: 0, second: 0, ofDate: NSDate(), options: NSCalendarOptions.init(rawValue: 0))
-            let endDate = NSCalendar.currentCalendar().dateBySettingHour(23, minute: 0, second: 0, ofDate: NSDate(), options: NSCalendarOptions.init(rawValue: 0))
+            let startDate = Calendar.current().date(bySettingHour: 17, minute: 0, second: 0, of: Date(), options: Calendar.Options.init(rawValue: 0))
+            let endDate = Calendar.current().date(bySettingHour: 23, minute: 0, second: 0, of: Date(), options: Calendar.Options.init(rawValue: 0))
             event.startDate = startDate!
             event.endDate = endDate!
             
@@ -59,25 +59,25 @@ class WhatsOnAppDelegate : NSObject, UIApplicationDelegate, EKEventEditViewDeleg
             editController.eventStore = eventStore
             editController.event = event
             let rootViewController = self.rootViewController()
-            rootViewController?.presentViewController(editController, animated: false, completion: nil)
+            rootViewController?.present(editController, animated: false, completion: nil)
             return true
         } else if (shortcutItem.type == "on-today") {
-            let alertController = UIAlertController(title: "Uh oh!", message: "You've not implemented this yet", preferredStyle: .Alert)
-            let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            let alertController = UIAlertController(title: "Uh oh!", message: "You've not implemented this yet", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(action)
-            self.rootViewController()?.presentViewController(alertController, animated: true, completion: nil)
+            self.rootViewController()?.present(alertController, animated: true, completion: nil)
             return false
         }
         return false
     }
     
     @available(iOS 9.0, *)
-    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
-        handleShortcutItem(shortcutItem)
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+        _ = handleShortcutItem(shortcutItem)
     }
     
-    func eventEditViewController(controller: EKEventEditViewController, didCompleteWithAction action: EKEventEditViewAction) {
-        self.rootViewController()?.dismissViewControllerAnimated(true, completion: nil)
+    func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
+        self.rootViewController()?.dismiss(animated: true, completion: nil)
     }
     
 }

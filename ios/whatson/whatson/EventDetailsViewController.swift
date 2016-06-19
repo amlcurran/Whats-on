@@ -16,7 +16,7 @@ class EventDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .whiteColor()
+        self.view.backgroundColor = .white()
         self.navigationItem.title = "Event details"
         
         let titleLabel = UILabel()
@@ -30,13 +30,13 @@ class EventDetailsViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        scrollView.constrainToSuperview(edge: .Leading, withOffset: 12)
-        scrollView.constrainToSuperview(edge: .Trailing, withOffset: 12)
-        scrollView.constrainToSuperview(edge: .Top)
-        scrollView.constrainToSuperview(edge: .Bottom)
+        _ = scrollView.constrainToSuperview(edge: .leading, withOffset: 12)
+        _ = scrollView.constrainToSuperview(edge: .trailing, withOffset: 12)
+        _ = scrollView.constrainToSuperview(edge: .top)
+        _ = scrollView.constrainToSuperview(edge: .bottom)
         
-        stackView.constrainToSuperview(edge: .Leading)
-        stackView.constrainToSuperview(edge: .Trailing)
+        _ = stackView.constrainToSuperview(edge: .leading)
+        _ = stackView.constrainToSuperview(edge: .trailing)
         
         titleLabel.text = event.title
     }

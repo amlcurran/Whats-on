@@ -8,10 +8,10 @@
 
 import UIKit
 
-extension NSDate {
+extension Date {
     
-    static func dateFromTime(time: SCTime) -> NSDate {
-        return NSDate(timeIntervalSince1970: NSTimeInterval(time.getMillis() / 1000))
+    static func dateFromTime(_ time: SCTime) -> Date {
+        return Date(timeIntervalSince1970: TimeInterval(time.getMillis() / 1000))
     }
 
 }

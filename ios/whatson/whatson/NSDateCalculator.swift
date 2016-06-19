@@ -10,46 +10,46 @@ import Foundation
 
 public class NSDateCalculator : NSObject, SCTimeCalculator {
     
-    let calendar : NSCalendar;
-    private let noOptions = NSCalendarOptions(rawValue: 0);
+    let calendar : Calendar;
+    private let noOptions = Calendar.Options(rawValue: 0);
     
     override init() {
-        calendar = NSCalendar.currentCalendar();
+        calendar = Calendar.current();
         super.init();
     }
     
     func now() -> SCTime {
-        let millis = jlong(NSDate().timeIntervalSince1970 * 1000);
-        return SCTime(long: millis, withSCTimeCalculator: self);
+        let millis = jlong(Date().timeIntervalSince1970 * 1000);
+        return SCTime(long: millis, with: self);
     }
     
-    @objc public func plusDaysWithInt(days: jint, withSCTime time: SCTime!) -> SCTime! {
-        let components = NSDateComponents();
+    @objc public func plusDays(with days: jint, with time: SCTime!) -> SCTime! {
+        var components = DateComponents();
         components.day = Int(days);
         let timeAsDate = date(time);
-        let newDate = calendar.dateByAddingComponents(components, toDate: timeAsDate, options: noOptions);
-        return SCTime(long: jlong(newDate!.timeIntervalSince1970 * 1000), withSCTimeCalculator: self);
+        let newDate = calendar.date(byAdding: components, to: timeAsDate, options: noOptions);
+        return SCTime(long: jlong(newDate!.timeIntervalSince1970 * 1000), with: self);
     }
     
-    @objc public func getDaysWithSCTime(time: SCTime!) -> jint {
-        let difference = self.calendar.components(.Day, fromDate: NSDate(timeIntervalSince1970: 0), toDate: date(time), options: noOptions);
-        return jint(difference.day);
+    @objc public func getDaysWith(_ time: SCTime!) -> jint {
+        let difference = self.calendar.components(.day, from: Date(timeIntervalSince1970: 0), to: date(time), options: noOptions);
+        return jint(difference.day!);
     }
     
-    @objc public func plusHoursWithSCTime(time: SCTime!, withInt hours: jint) -> SCTime! {
-        let components = NSDateComponents();
+    @objc public func plusHours(with time: SCTime!, with hours: jint) -> SCTime! {
+        var components = DateComponents();
         components.hour = Int(hours);
         let timeAsDate = date(time);
-        let newDate = calendar.dateByAddingComponents(components, toDate: timeAsDate, options: noOptions);
-        return SCTime(long: jlong(newDate!.timeIntervalSince1970 * 1000), withSCTimeCalculator: self);
+        let newDate = calendar.date(byAdding: components, to: timeAsDate, options: noOptions);
+        return SCTime(long: jlong(newDate!.timeIntervalSince1970 * 1000), with: self);
     }
     
-    internal func date(time: SCTime) -> NSDate {
-        return NSDate(timeIntervalSince1970: (Double(time.getMillis()) / 1000.0));
+    internal func date(_ time: SCTime) -> Date {
+        return Date(timeIntervalSince1970: (Double(time.getMillis()) / 1000.0));
     }
     
-    internal func time(date: NSDate) -> SCTime {
-        return SCTime(long: jlong(date.timeIntervalSince1970 * 1000), withSCTimeCalculator: self);
+    internal func time(_ date: Date) -> SCTime {
+        return SCTime(long: jlong(date.timeIntervalSince1970 * 1000), with: self);
     }
     
     /*
