@@ -118,8 +118,9 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
         guard let event = eventStore.event(withIdentifier: itemId!) else {
             return nil
         }
-        let showController = EKEventViewController();
-        showController.event = event;
+//        let showController = EKEventViewController();
+//        showController.event = event;
+        let showController = EventDetailsViewController(event: event)
         return showController;
     }
     
