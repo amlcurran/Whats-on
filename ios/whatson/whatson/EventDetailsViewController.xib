@@ -11,6 +11,7 @@
                 <outlet property="locationLabel" destination="Ixe-S0-bJP" id="gDS-IU-SAG"/>
                 <outlet property="locationMapView" destination="jex-nH-yrR" id="KON-YV-wdC"/>
                 <outlet property="mapHeightConstraint" destination="ftB-Wa-x1I" id="bnj-mm-OxP"/>
+                <outlet property="timingLabel" destination="HnI-bt-KKF" id="8de-sL-8kX"/>
                 <outlet property="titleLabel" destination="KIl-53-2n1" id="MNb-5T-Ol0"/>
                 <outlet property="view" destination="FNn-WJ-2rd" id="f8y-1O-9yt"/>
             </connections>
@@ -22,12 +23,12 @@
             <subviews>
                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="128" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z1R-7q-UZ4">
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.87" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIl-53-2n1">
+                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.87" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Event title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIl-53-2n1">
                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.54000000000000004" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ixe-S0-bJP">
+                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.54000000000000004" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ixe-S0-bJP">
                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -37,18 +38,26 @@
                                 <constraint firstAttribute="height" constant="128" id="ftB-Wa-x1I"/>
                             </constraints>
                         </mapView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HnI-bt-KKF">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="HnI-bt-KKF" firstAttribute="leading" secondItem="z1R-7q-UZ4" secondAttribute="leadingMargin" id="7OV-2c-ceD"/>
                         <constraint firstAttribute="trailingMargin" secondItem="KIl-53-2n1" secondAttribute="trailing" id="AD0-Ue-qAZ"/>
                         <constraint firstItem="KIl-53-2n1" firstAttribute="top" secondItem="z1R-7q-UZ4" secondAttribute="topMargin" id="DdZ-n6-XZ9"/>
                         <constraint firstAttribute="trailing" secondItem="jex-nH-yrR" secondAttribute="trailing" id="RbE-CY-UnB"/>
+                        <constraint firstItem="HnI-bt-KKF" firstAttribute="top" secondItem="jex-nH-yrR" secondAttribute="bottom" constant="16" id="eHq-ek-dXO"/>
                         <constraint firstAttribute="trailingMargin" secondItem="Ixe-S0-bJP" secondAttribute="trailing" id="hvc-R0-tVQ"/>
                         <constraint firstItem="jex-nH-yrR" firstAttribute="top" secondItem="Ixe-S0-bJP" secondAttribute="bottom" constant="16" id="i3J-rK-IkW"/>
                         <constraint firstItem="Ixe-S0-bJP" firstAttribute="leading" secondItem="z1R-7q-UZ4" secondAttribute="leadingMargin" id="iAS-oc-FU6"/>
                         <constraint firstItem="KIl-53-2n1" firstAttribute="leading" secondItem="z1R-7q-UZ4" secondAttribute="leadingMargin" id="iEu-3E-MRo"/>
                         <constraint firstItem="jex-nH-yrR" firstAttribute="leading" secondItem="z1R-7q-UZ4" secondAttribute="leading" id="ta6-OE-X0P"/>
                         <constraint firstItem="Ixe-S0-bJP" firstAttribute="top" secondItem="KIl-53-2n1" secondAttribute="bottom" constant="4" id="wQo-IM-pnY"/>
+                        <constraint firstAttribute="trailingMargin" secondItem="HnI-bt-KKF" secondAttribute="trailing" id="xoG-5C-kz1"/>
                     </constraints>
                     <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
                 </view>

@@ -6,6 +6,7 @@ class EventDetailsViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var timingLabel: UILabel!
     @IBOutlet weak var locationMapView: MKMapView!
     @IBOutlet weak var mapHeightConstraint: NSLayoutConstraint!
     
@@ -27,6 +28,7 @@ class EventDetailsViewController: UIViewController {
         
         titleLabel.text = event.title
         locationLabel.text = event.location
+        timingLabel.text = "From \(event.startDate.formatAsTime()) to \(event.endDate.formatAsTime())"
         
         if let location = event.structuredLocation?.geoLocation {
             let region = MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
@@ -36,6 +38,17 @@ class EventDetailsViewController: UIViewController {
         }
     }
 
+}
+
+private extension Date {
+    
+    private func formatAsTime() -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .noStyle
+        formatter.timeStyle = .shortStyle
+        return formatter.string(from: self)
+    }
+    
 }
 
 
