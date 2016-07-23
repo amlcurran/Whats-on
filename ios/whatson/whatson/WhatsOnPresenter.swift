@@ -1,11 +1,3 @@
-//
-//  WhatsOnPresenter.swift
-//  whatson
-//
-//  Created by Alex on 05/03/2016.
-//  Copyright © 2016 Alex Curran. All rights reserved.
-//
-
 import UIKit
 import EventKit
 import EventKitUI
@@ -46,8 +38,8 @@ class WhatsOnPresenter {
         let queue = DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosDefault);
         queue.async {
             let now = NSDateCalculator().now();
-            let source = self.eventService.getCalendarSource(with: 14, with:now);
-            DispatchQueue.main.async { [weak source] in
+            let source = self.eventService.getCalendarSource(with: 14, with: now)
+            DispatchQueue.main.async {
                 if let source = source {
                     completion(source);
                 }
