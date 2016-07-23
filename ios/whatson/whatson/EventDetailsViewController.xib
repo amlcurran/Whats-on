@@ -35,7 +35,7 @@
                         </label>
                         <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="jex-nH-yrR">
                             <constraints>
-                                <constraint firstAttribute="height" constant="128" id="ftB-Wa-x1I"/>
+                                <constraint firstAttribute="height" constant="160" id="ftB-Wa-x1I"/>
                             </constraints>
                         </mapView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HnI-bt-KKF">
