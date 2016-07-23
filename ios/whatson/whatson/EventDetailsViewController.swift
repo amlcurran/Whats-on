@@ -10,6 +10,7 @@ class EventDetailsViewController: UIViewController {
     @IBOutlet weak var locationMapView: MKMapView!
     @IBOutlet weak var mapHeightConstraint: NSLayoutConstraint!
     
+    private let geocoder = CLGeocoder()
     private let event: EKEvent
     
     init(event: EKEvent) {
@@ -44,8 +45,8 @@ private extension Date {
     
     private func formatAsTime() -> String {
         let formatter = DateFormatter()
-        formatter.dateStyle = .noStyle
-        formatter.timeStyle = .shortStyle
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
         return formatter.string(from: self)
     }
     

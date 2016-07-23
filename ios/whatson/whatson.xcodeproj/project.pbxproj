@@ -241,8 +241,8 @@
 				TargetAttributes = {
 					86CAD4981BACC9B1009C9CFD = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = LW2EJ7FEBP;
-						DevelopmentTeamName = "Alexander Curran (Personal Team)";
+						DevelopmentTeam = 3H3SBN3AYY;
+						DevelopmentTeamName = "Alexander Curran";
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};

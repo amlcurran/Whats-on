@@ -14,7 +14,7 @@ public class NSDateCalculator : NSObject, SCTimeCalculator {
     private let noOptions = Calendar.Options(rawValue: 0);
     
     override init() {
-        calendar = Calendar.current();
+        calendar = Calendar.current;
         super.init();
     }
     

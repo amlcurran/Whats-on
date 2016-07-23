@@ -50,8 +50,8 @@ class WhatsOnAppDelegate : NSObject, UIApplicationDelegate, EKEventEditViewDeleg
         if (shortcutItem.type == "new-tomorrow") {
             let eventStore = EKEventStore()
             let event = EKEvent(eventStore: eventStore)
-            let startDate = Calendar.current().date(bySettingHour: 17, minute: 0, second: 0, of: Date(), options: Calendar.Options.init(rawValue: 0))
-            let endDate = Calendar.current().date(bySettingHour: 23, minute: 0, second: 0, of: Date(), options: Calendar.Options.init(rawValue: 0))
+            let startDate = Calendar.current.date(bySettingHour: 17, minute: 0, second: 0, of: Date(), options: Calendar.Options.init(rawValue: 0))
+            let endDate = Calendar.current.date(bySettingHour: 23, minute: 0, second: 0, of: Date(), options: Calendar.Options.init(rawValue: 0))
             event.startDate = startDate!
             event.endDate = endDate!
             
