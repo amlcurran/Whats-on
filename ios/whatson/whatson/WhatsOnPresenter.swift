@@ -14,6 +14,7 @@ class WhatsOnPresenter {
 
     let eventStore: EKEventStore
     let eventService: SCEventsService
+    private weak var delegate: WhatsOnPresenterDelegate? = nil
 
     init(eventStore: EKEventStore, eventService: SCEventsService) {
         self.eventStore = eventStore
@@ -21,18 +22,27 @@ class WhatsOnPresenter {
     }
 
     func beginPresenting(_ delegate: WhatsOnPresenterDelegate) {
-        eventStore.requestAccess(to: .event) { (access: Bool, error: NSError?) -> Void in
+        self.delegate = delegate
+        eventStore.requestAccess(to: .event) { [weak self] (access, error) in
             if (access) {
-                self.fetchEvents({ (source: SCCalendarSource) -> Void in
-                    delegate.didUpdateSource(source)
-                })
+                self?.refreshEvents()
             } else {
-                delegate.failedToAccessCalendar(error)
+                self?.delegate?.failedToAccessCalendar(error)
             }
         }
     }
+    
+    func stopPresenting() {
+        self.delegate = nil
+    }
+    
+    func refreshEvents() {
+        fetchEvents({ [weak self] (source) in
+            self?.delegate?.didUpdateSource(source)
+        })
+    }
 
-    func fetchEvents(_ completion: ((SCCalendarSource) -> Void)) {
+    private func fetchEvents(_ completion: ((SCCalendarSource) -> Void)) {
         let queue = DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosDefault);
         queue.async {
             let now = NSDateCalculator().now();
@@ -47,7 +57,7 @@ class WhatsOnPresenter {
 
 }
 
-protocol WhatsOnPresenterDelegate {
+protocol WhatsOnPresenterDelegate: class {
     func didUpdateSource(_ source: SCCalendarSource)
     func failedToAccessCalendar(_ error: NSError?)
 }

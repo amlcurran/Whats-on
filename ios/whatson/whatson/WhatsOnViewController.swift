@@ -10,7 +10,7 @@ import UIKit
 import EventKit
 import EventKitUI
 
-class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIViewControllerPreviewingDelegate {
+class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIViewControllerPreviewingDelegate, WhatsOnPresenterDelegate {
     
     var dateFormatter : DateFormatter!;
     var eventStore : EKEventStore!;
@@ -39,27 +39,26 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
         
         title = "What's On";
         
-        let newCellNib = UINib.init(nibName: "CalendarCell", bundle: Bundle.main());
+        let newCellNib = UINib.init(nibName: "CalendarCell", bundle: Bundle.main);
         self.tableView.register(newCellNib, forCellReuseIdentifier: "day");
         self.tableView.rowHeight = 60;
         self.tableView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
     }
     
     func eventsChanged() {
-        self.presenter.fetchEvents { (source) -> Void in
-            self.didUpdateSource(source)
-        }
+        presenter.refreshEvents()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated);
-        NotificationCenter.default().addObserver(self, selector:#selector(eventsChanged), name: NSNotification.Name.EKEventStoreChanged, object: eventStore)
+        NotificationCenter.default.addObserver(self, selector:#selector(eventsChanged), name: NSNotification.Name.EKEventStoreChanged, object: eventStore)
         presenter.beginPresenting(self)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated);
-        NotificationCenter.default().removeObserver(self);
+        NotificationCenter.default.removeObserver(self);
+        presenter.stopPresenting()
     }
     
     override func didReceiveMemoryWarning() {
@@ -69,13 +68,13 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let slot = self.calendarSource?.slotAt(with: jint((indexPath as NSIndexPath).row)),
-            item = self.calendarSource?.itemAt(with: jint((indexPath as NSIndexPath).row)) else {
+            let item = self.calendarSource?.itemAt(with: jint((indexPath as NSIndexPath).row)) else {
             preconditionFailure("Accessing a slot which doesn't exist")
         }
 
-            let cell = tableView.dequeueReusableCell(withIdentifier: "day", for: indexPath) as! CalendarSourceViewCell;
-            cell.bind(item, slot: slot);
-            return cell;
+        let cell = tableView.dequeueReusableCell(withIdentifier: "day", for: indexPath) as! CalendarSourceViewCell;
+        cell.bind(item, slot: slot);
+        return cell;
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -93,9 +92,8 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
             let addController = addEventController(item);
             self.navigationController?.present(addController, animated: true, completion: nil);
         } else {
-            let editController = editEventController(item as! SCEventCalendarItem);
-            if (editController != nil) {
-                self.navigationController?.pushViewController(editController!, animated: true);
+            if let editController = editEventController(item as! SCEventCalendarItem) {
+                self.navigationController?.pushViewController(editController, animated: true)
             }
         }
     }
@@ -134,8 +132,8 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard let indexPath = tableView.indexPathForRow(at: location),
-            cell = tableView.cellForRow(at: indexPath),
-            item = self.calendarSource?.itemAt(with: jint((indexPath as NSIndexPath).row)) else {
+            let cell = tableView.cellForRow(at: indexPath),
+            let item = self.calendarSource?.itemAt(with: jint((indexPath as NSIndexPath).row)) else {
                 return nil
         }
     
@@ -154,31 +152,13 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
         self.navigationController?.pushViewController(viewControllerToCommit, animated: true);
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    /*
-    
-*/
-
-}
-
-extension WhatsOnViewController: WhatsOnPresenterDelegate {
-
     func didUpdateSource(_ source: SCCalendarSource) {
         self.calendarSource = source;
         self.tableView.reloadData();
     }
-
-    func failedToAccessCalendar(_ error: NSError?) {
-        // TODO implement
-    }
     
+    func failedToAccessCalendar(_ error: NSError?) {
+        print(error)
+    }
+
 }
