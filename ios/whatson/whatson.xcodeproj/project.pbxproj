@@ -12,6 +12,7 @@
 		8626FCE01C63FBF800640079 /* CalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8626FCDF1C63FBF800640079 /* CalendarCell.xib */; };
 		864561C31C02709800ADDE44 /* NSDateCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864561C21C02709800ADDE44 /* NSDateCalculator.swift */; };
 		8693FD111D16F456003FA6D7 /* EventDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8693FD101D16F456003FA6D7 /* EventDetailsViewController.xib */; };
+		869DAC731D449EFB005AF315 /* WhatsOnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC721D449EFB005AF315 /* WhatsOnTests.swift */; };
 		86A9C2CB1C444468009281A0 /* WhatsOnAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */; };
 		86C19EBF1BBF28E600BBCDF6 /* WhatsOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */; };
 		86CAD49E1BACC9B1009C9CFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD49D1BACC9B1009C9CFD /* main.m */; };
@@ -44,12 +45,25 @@
 		86F8499B1D046AAE007C41B0 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		869DAC751D449EFB005AF315 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 86CAD4911BACC9B1009C9CFD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 86CAD4981BACC9B1009C9CFD;
+			remoteInfo = whatson;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		8614BABD1C825B7A00A3E570 /* NSDate+Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Time.swift"; sourceTree = "<group>"; };
 		8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSourceViewCell.swift; sourceTree = "<group>"; };
 		8626FCDF1C63FBF800640079 /* CalendarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarCell.xib; sourceTree = "<group>"; };
 		864561C21C02709800ADDE44 /* NSDateCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateCalculator.swift; sourceTree = "<group>"; };
 		8693FD101D16F456003FA6D7 /* EventDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventDetailsViewController.xib; sourceTree = "<group>"; };
+		869DAC701D449EFB005AF315 /* WhatsOnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatsOnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		869DAC721D449EFB005AF315 /* WhatsOnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsOnTests.swift; sourceTree = "<group>"; };
+		869DAC741D449EFB005AF315 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsOnAppDelegate.swift; sourceTree = "<group>"; };
 		86C19EB91BBF287500BBCDF6 /* whatson-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "whatson-Bridging-Header.h"; sourceTree = "<group>"; };
 		86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WhatsOnViewController.swift; path = whatson/WhatsOnViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +117,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		869DAC6D1D449EFB005AF315 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		86CAD4961BACC9B1009C9CFD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -116,6 +137,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		869DAC711D449EFB005AF315 /* WhatsOnTests */ = {
+			isa = PBXGroup;
+			children = (
+				869DAC721D449EFB005AF315 /* WhatsOnTests.swift */,
+				869DAC741D449EFB005AF315 /* Info.plist */,
+			);
+			path = WhatsOnTests;
+			sourceTree = "<group>";
+		};
 		86CAD4901BACC9B1009C9CFD = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +157,7 @@
 				86DE0FE81BB8863D004E20B5 /* Security.framework */,
 				86DE0FE61BB885E8004E20B5 /* libicucore.tbd */,
 				86CAD49B1BACC9B1009C9CFD /* whatson */,
+				869DAC711D449EFB005AF315 /* WhatsOnTests */,
 				86CAD49A1BACC9B1009C9CFD /* Products */,
 				86C19EB91BBF287500BBCDF6 /* whatson-Bridging-Header.h */,
 			);
@@ -136,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				86CAD4991BACC9B1009C9CFD /* What's On.app */,
+				869DAC701D449EFB005AF315 /* WhatsOnTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -212,6 +244,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		869DAC6F1D449EFB005AF315 /* WhatsOnTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 869DAC791D449EFB005AF315 /* Build configuration list for PBXNativeTarget "WhatsOnTests" */;
+			buildPhases = (
+				869DAC6C1D449EFB005AF315 /* Sources */,
+				869DAC6D1D449EFB005AF315 /* Frameworks */,
+				869DAC6E1D449EFB005AF315 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				869DAC761D449EFB005AF315 /* PBXTargetDependency */,
+			);
+			name = WhatsOnTests;
+			productName = WhatsOnTests;
+			productReference = 869DAC701D449EFB005AF315 /* WhatsOnTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		86CAD4981BACC9B1009C9CFD /* whatson */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 86CAD4B01BACC9B1009C9CFD /* Build configuration list for PBXNativeTarget "whatson" */;
@@ -235,10 +285,17 @@
 		86CAD4911BACC9B1009C9CFD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Alex Curran";
 				TargetAttributes = {
+					869DAC6F1D449EFB005AF315 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 3H3SBN3AYY;
+						DevelopmentTeamName = "Alexander Curran";
+						ProvisioningStyle = Automatic;
+						TestTargetID = 86CAD4981BACC9B1009C9CFD;
+					};
 					86CAD4981BACC9B1009C9CFD = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = 3H3SBN3AYY;
@@ -262,11 +319,19 @@
 			projectRoot = "";
 			targets = (
 				86CAD4981BACC9B1009C9CFD /* whatson */,
+				869DAC6F1D449EFB005AF315 /* WhatsOnTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		869DAC6E1D449EFB005AF315 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		86CAD4971BACC9B1009C9CFD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -282,6 +347,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		869DAC6C1D449EFB005AF315 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				869DAC731D449EFB005AF315 /* WhatsOnTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		86CAD4951BACC9B1009C9CFD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -318,6 +391,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		869DAC761D449EFB005AF315 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 86CAD4981BACC9B1009C9CFD /* whatson */;
+			targetProxy = 869DAC751D449EFB005AF315 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		86CAD4A51BACC9B1009C9CFD /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -338,6 +419,49 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		869DAC771D449EFB005AF315 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				HEADER_SEARCH_PATHS = (
+					"~/Projects/j2objc/include",
+					./uk/co/amlcurran/social,
+				);
+				INFOPLIST_FILE = WhatsOnTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.WhatsOnTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/What's On.app/What's On";
+			};
+			name = Debug;
+		};
+		869DAC781D449EFB005AF315 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				HEADER_SEARCH_PATHS = (
+					"~/Projects/j2objc/include",
+					./uk/co/amlcurran/social,
+				);
+				INFOPLIST_FILE = WhatsOnTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.WhatsOnTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/What's On.app/What's On";
+			};
+			name = Release;
+		};
 		86CAD4AE1BACC9B1009C9CFD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -491,6 +615,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		869DAC791D449EFB005AF315 /* Build configuration list for PBXNativeTarget "WhatsOnTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				869DAC771D449EFB005AF315 /* Debug */,
+				869DAC781D449EFB005AF315 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		86CAD4941BACC9B1009C9CFD /* Build configuration list for PBXProject "whatson" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
