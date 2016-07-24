@@ -45,6 +45,8 @@
 		86F849951D046277007C41B0 /* TimeRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F849871D046277007C41B0 /* TimeRepository.m */; };
 		86F849991D046A3E007C41B0 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */; };
 		86F8499B1D046AAE007C41B0 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */; };
+		86FCF43D1D45506F000938E3 /* OptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86FCF43C1D45506F000938E3 /* OptionsViewController.xib */; };
+		86FCF43F1D455080000938E3 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FCF43E1D455080000938E3 /* OptionsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +120,8 @@
 		86F849961D046418007C41B0 /* libjre_emul.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjre_emul.a; path = ../../../j2objc/lib/libjre_emul.a; sourceTree = "<group>"; };
 		86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
 		86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
+		86FCF43C1D45506F000938E3 /* OptionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionsViewController.xib; sourceTree = "<group>"; };
+		86FCF43E1D455080000938E3 /* OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +204,8 @@
 				86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */,
 				8693FD101D16F456003FA6D7 /* EventDetailsViewController.xib */,
 				869DAC7C1D44D15C005AF315 /* EventPredicates.swift */,
+				86FCF43C1D45506F000938E3 /* OptionsViewController.xib */,
+				86FCF43E1D455080000938E3 /* OptionsViewController.swift */,
 			);
 			path = whatson;
 			sourceTree = "<group>";
@@ -345,6 +351,7 @@
 				86CAD4AC1BACC9B1009C9CFD /* LaunchScreen.storyboard in Resources */,
 				86CAD4A91BACC9B1009C9CFD /* Assets.xcassets in Resources */,
 				86CAD4A71BACC9B1009C9CFD /* Main.storyboard in Resources */,
+				86FCF43D1D45506F000938E3 /* OptionsViewController.xib in Resources */,
 				8693FD111D16F456003FA6D7 /* EventDetailsViewController.xib in Resources */,
 				8626FCE01C63FBF800640079 /* CalendarCell.xib in Resources */,
 			);
@@ -381,6 +388,7 @@
 				86F8499B1D046AAE007C41B0 /* UIView+Constraints.swift in Sources */,
 				86F849911D046277007C41B0 /* SparseArray.m in Sources */,
 				869DAC7D1D44D15C005AF315 /* EventPredicates.swift in Sources */,
+				86FCF43F1D455080000938E3 /* OptionsViewController.swift in Sources */,
 				86F467F91C8AFFA500147F2E /* WhatsOnPresenter.swift in Sources */,
 				86D751151C71316D00C0A607 /* UIColor+WhatsOn.swift in Sources */,
 				86A9C2CB1C444468009281A0 /* WhatsOnAppDelegate.swift in Sources */,
@@ -577,6 +585,7 @@
 					"-l",
 					jre_emul,
 				);
+				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson;
 				PRODUCT_NAME = "What's On";
 				PROVISIONING_PROFILE = "";
@@ -611,6 +620,7 @@
 					"-l",
 					jre_emul,
 				);
+				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson;
 				PRODUCT_NAME = "What's On";
 				PROVISIONING_PROFILE = "";
@@ -630,6 +640,7 @@
 				869DAC781D449EFB005AF315 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		86CAD4941BACC9B1009C9CFD /* Build configuration list for PBXProject "whatson" */ = {
 			isa = XCConfigurationList;

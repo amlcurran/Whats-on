@@ -35,11 +35,14 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
         presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService)
         
         navigationController?.navigationBar.barTintColor = UIColor.appColor()
-        navigationController?.navigationBar.tintColor = UIColor.eightyWhite();
+        navigationController?.navigationBar.tintColor = UIColor.eightyWhite()
+        #if DEBUG
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editTapped))
+        #endif
         
         title = "What's On";
         
-        let newCellNib = UINib.init(nibName: "CalendarCell", bundle: Bundle.main);
+        let newCellNib = UINib(nibName: "CalendarCell", bundle: Bundle.main)
         self.tableView.register(newCellNib, forCellReuseIdentifier: "day");
         self.tableView.rowHeight = 60;
         self.tableView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
@@ -47,6 +50,12 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
     
     func eventsChanged() {
         presenter.refreshEvents()
+    }
+    
+    func editTapped() {
+        let options = OptionsViewController.create()
+        let navigationController = UINavigationController(rootViewController: options)
+        present(navigationController, animated: true, completion: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
