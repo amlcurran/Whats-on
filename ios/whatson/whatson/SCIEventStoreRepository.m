@@ -85,6 +85,7 @@
 
 @property (nonatomic, strong) NSCalendar *calendar;
 @property (nonatomic, strong) NSDateCalculator *calculator;
+@property (nonatomic, strong) NSPredicate *predicate;
 
 @end
 
@@ -96,6 +97,7 @@
     if (self) {
         _calendar = [NSCalendar currentCalendar];
         _calculator = [[NSDateCalculator alloc] init];
+        _predicate = [EventPredicates standardPredicates];
     }
     return self;
 }
@@ -110,17 +112,7 @@
     NSDate *endTime = [self.calculator date:searchEndTime];
     NSPredicate *search = [eventStore predicateForEventsWithStartDate:startTime endDate:endTime calendars:nil];
     NSArray *array = [eventStore eventsMatchingPredicate:search];
-    __block NSCalendar *calendar = self.calendar;
-    NSArray *filtered = [array filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        EKEvent *event = (EKEvent *) evaluatedObject;
-        NSDateComponents *endComponents = [calendar components:NSCalendarUnitHour|NSCalendarUnitDay fromDate:event.endDate];
-        endComponents.timeZone = [NSTimeZone defaultTimeZone];
-        NSDateComponents *startComponents = [calendar components:NSCalendarUnitHour|NSCalendarUnitDay fromDate:event.startDate];
-        startComponents.timeZone = [NSTimeZone defaultTimeZone];
-        bool endsBefore = endComponents.hour <= 18 && endComponents.day == startComponents.day;
-        bool startsAfter = startComponents.hour > 23;
-        return !(endsBefore || startsAfter) && event.allDay == false;
-    }]];
+    NSArray *filtered = [array filteredArrayUsingPredicate:self.predicate];
     return [[SCIEKEventAccessor alloc] initWithEventItems:filtered];
 }
 
