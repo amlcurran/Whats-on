@@ -60,7 +60,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8614BABD1C825B7A00A3E570 /* NSDate+Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Time.swift"; sourceTree = "<group>"; };
+		8614BABD1C825B7A00A3E570 /* NSDate+Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDate+Time.swift"; path = "../NSDate+Time.swift"; sourceTree = "<group>"; };
 		8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSourceViewCell.swift; sourceTree = "<group>"; };
 		8626FCDF1C63FBF800640079 /* CalendarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarCell.xib; sourceTree = "<group>"; };
 		864561C21C02709800ADDE44 /* NSDateCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateCalculator.swift; sourceTree = "<group>"; };
@@ -72,7 +72,7 @@
 		869DAC7E1D44D17E005AF315 /* EventPredicateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPredicateTests.swift; sourceTree = "<group>"; };
 		86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsOnAppDelegate.swift; sourceTree = "<group>"; };
 		86C19EB91BBF287500BBCDF6 /* whatson-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "whatson-Bridging-Header.h"; sourceTree = "<group>"; };
-		86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WhatsOnViewController.swift; path = whatson/WhatsOnViewController.swift; sourceTree = "<group>"; };
+		86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsOnViewController.swift; sourceTree = "<group>"; };
 		86CAD4991BACC9B1009C9CFD /* What's On.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "What's On.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86CAD49D1BACC9B1009C9CFD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		86CAD4A61BACC9B1009C9CFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 		86DE0FE61BB885E8004E20B5 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		86DE0FE81BB8863D004E20B5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		86DE0FEA1BB88646004E20B5 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		86F467F81C8AFFA500147F2E /* WhatsOnPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WhatsOnPresenter.swift; path = whatson/WhatsOnPresenter.swift; sourceTree = "<group>"; };
+		86F467F81C8AFFA500147F2E /* WhatsOnPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsOnPresenter.swift; sourceTree = "<group>"; };
 		86F8496C1D046277007C41B0 /* CalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarItem.h; path = ../../../build/ios/objc/CalendarItem.h; sourceTree = "<group>"; };
 		86F8496D1D046277007C41B0 /* CalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarItem.m; path = ../../../build/ios/objc/CalendarItem.m; sourceTree = "<group>"; };
 		86F8496E1D046277007C41B0 /* CalendarSlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarSlot.h; path = ../../../build/ios/objc/CalendarSlot.h; sourceTree = "<group>"; };
@@ -145,28 +145,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		869DAC711D449EFB005AF315 /* WhatsOnTests */ = {
+		869DAC711D449EFB005AF315 /* tests */ = {
 			isa = PBXGroup;
 			children = (
 				869DAC721D449EFB005AF315 /* WhatsOnTests.swift */,
 				869DAC741D449EFB005AF315 /* Info.plist */,
 				869DAC7E1D44D17E005AF315 /* EventPredicateTests.swift */,
 			);
+			name = tests;
 			path = WhatsOnTests;
 			sourceTree = "<group>";
 		};
 		86CAD4901BACC9B1009C9CFD = {
 			isa = PBXGroup;
 			children = (
-				86F849961D046418007C41B0 /* libjre_emul.a */,
-				8614BABD1C825B7A00A3E570 /* NSDate+Time.swift */,
-				86F467F81C8AFFA500147F2E /* WhatsOnPresenter.swift */,
-				86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */,
-				86DE0FEA1BB88646004E20B5 /* libz.tbd */,
-				86DE0FE81BB8863D004E20B5 /* Security.framework */,
-				86DE0FE61BB885E8004E20B5 /* libicucore.tbd */,
+				86FCF4411D455ADE000938E3 /* dependencies */,
 				86CAD49B1BACC9B1009C9CFD /* whatson */,
-				869DAC711D449EFB005AF315 /* WhatsOnTests */,
+				869DAC711D449EFB005AF315 /* tests */,
 				86CAD49A1BACC9B1009C9CFD /* Products */,
 				86C19EB91BBF287500BBCDF6 /* whatson-Bridging-Header.h */,
 			);
@@ -191,6 +186,8 @@
 				86CAD4AD1BACC9B1009C9CFD /* Info.plist */,
 				86CAD49C1BACC9B1009C9CFD /* Supporting Files */,
 				86CAD4ED1BADF68F009C9CFD /* SCITimeRepository.h */,
+				86F467F81C8AFFA500147F2E /* WhatsOnPresenter.swift */,
+				86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */,
 				86CAD4EE1BADF68F009C9CFD /* SCITimeRepository.m */,
 				86CAD4F31BAF3B43009C9CFD /* SCIEventStoreRepository.h */,
 				86CAD4F41BAF3B43009C9CFD /* SCIEventStoreRepository.m */,
@@ -199,9 +196,8 @@
 				86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */,
 				8626FCDF1C63FBF800640079 /* CalendarCell.xib */,
 				86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */,
-				86D751141C71316D00C0A607 /* UIColor+WhatsOn.swift */,
+				86FCF4401D455AC3000938E3 /* Extensions */,
 				86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */,
-				86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */,
 				8693FD101D16F456003FA6D7 /* EventDetailsViewController.xib */,
 				869DAC7C1D44D15C005AF315 /* EventPredicates.swift */,
 				86FCF43C1D45506F000938E3 /* OptionsViewController.xib */,
@@ -251,6 +247,27 @@
 				86F849871D046277007C41B0 /* TimeRepository.m */,
 			);
 			name = core;
+			sourceTree = "<group>";
+		};
+		86FCF4401D455AC3000938E3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8614BABD1C825B7A00A3E570 /* NSDate+Time.swift */,
+				86D751141C71316D00C0A607 /* UIColor+WhatsOn.swift */,
+				86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		86FCF4411D455ADE000938E3 /* dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				86F849961D046418007C41B0 /* libjre_emul.a */,
+				86DE0FEA1BB88646004E20B5 /* libz.tbd */,
+				86DE0FE81BB8863D004E20B5 /* Security.framework */,
+				86DE0FE61BB885E8004E20B5 /* libicucore.tbd */,
+			);
+			name = dependencies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

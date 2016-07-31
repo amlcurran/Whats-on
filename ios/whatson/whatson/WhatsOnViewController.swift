@@ -34,7 +34,8 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
         eventService = SCEventsService(scTimeRepository: timeRepo, with: eventRepo);
         presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService)
         
-        navigationController?.navigationBar.barTintColor = UIColor.appColor()
+        navigationController?.navigationBar.barTintColor = UIColor.appColor().withAlphaComponent(0.4)
+        navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.tintColor = UIColor.eightyWhite()
         #if DEBUG
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editTapped))
