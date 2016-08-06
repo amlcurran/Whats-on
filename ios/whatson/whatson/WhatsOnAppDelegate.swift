@@ -1,11 +1,3 @@
-//
-//  WhatsOnAppDelegate.swift
-//  whatson
-//
-//  Created by Alex on 11/01/2016.
-//  Copyright © 2016 Alex Curran. All rights reserved.
-//
-
 import Foundation
 import UIKit
 import EventKit
@@ -39,9 +31,7 @@ class WhatsOnAppDelegate : NSObject, UIApplicationDelegate, EKEventEditViewDeleg
     func updateTouchShortcuts(_ application: UIApplication) {
         var newIcons = [UIApplicationShortcutItem]()
         let newEventTommorrow = UIMutableApplicationShortcutItem(type: "new-tomorrow", localizedTitle: "Add event tomorrow", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: UIApplicationShortcutIconType.add), userInfo: nil)
-        let onToday = UIMutableApplicationShortcutItem(type: "on-today", localizedTitle: "On today", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: UIApplicationShortcutIconType.date), userInfo: nil);
         newIcons.append(newEventTommorrow)
-        newIcons.append(onToday)
         application.shortcutItems = newIcons;
     }
     
@@ -58,6 +48,7 @@ class WhatsOnAppDelegate : NSObject, UIApplicationDelegate, EKEventEditViewDeleg
             let editController = EKEventEditViewController()
             editController.eventStore = eventStore
             editController.event = event
+            editController.editViewDelegate = self
             let rootViewController = self.rootViewController()
             rootViewController?.present(editController, animated: false, completion: nil)
             return true
