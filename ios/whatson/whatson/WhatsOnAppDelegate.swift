@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 import EventKit
 import EventKitUI
+import FirebaseAnalytics
 
 class WhatsOnAppDelegate : NSObject, UIApplicationDelegate, EKEventEditViewDelegate {
     
@@ -9,6 +10,7 @@ class WhatsOnAppDelegate : NSObject, UIApplicationDelegate, EKEventEditViewDeleg
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         self.window?.tintColor = UIColor.appColor()
+        FIRApp.configure()
         if #available(iOS 9.1, *) {
             updateTouchShortcuts(application)
             guard let options = launchOptions, let launchShortcut = options[UIApplicationLaunchOptionsShortcutItemKey] as? UIApplicationShortcutItem else {
@@ -37,6 +39,7 @@ class WhatsOnAppDelegate : NSObject, UIApplicationDelegate, EKEventEditViewDeleg
     
     @available(iOS 9.0, *)
     func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
+        FIRAnalytics.logEvent(withName: "3dtouch", parameters: [ "type" : shortcutItem.type])
         if (shortcutItem.type == "new-tomorrow") {
             let eventStore = EKEventStore()
             let event = EKEvent(eventStore: eventStore)
