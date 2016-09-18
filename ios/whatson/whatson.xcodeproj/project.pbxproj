@@ -224,8 +224,7 @@
 				8626FCDF1C63FBF800640079 /* CalendarCell.xib */,
 				86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */,
 				86FCF4401D455AC3000938E3 /* Extensions */,
-				86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */,
-				8693FD101D16F456003FA6D7 /* EventDetailsViewController.xib */,
+				86FB1C321D8F37310074431B /* event details */,
 				869DAC7C1D44D15C005AF315 /* EventPredicates.swift */,
 				86FCF43C1D45506F000938E3 /* OptionsViewController.xib */,
 				86FCF43E1D455080000938E3 /* OptionsViewController.swift */,
@@ -274,6 +273,15 @@
 				86F849871D046277007C41B0 /* TimeRepository.m */,
 			);
 			name = core;
+			sourceTree = "<group>";
+		};
+		86FB1C321D8F37310074431B /* event details */ = {
+			isa = PBXGroup;
+			children = (
+				86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */,
+				8693FD101D16F456003FA6D7 /* EventDetailsViewController.xib */,
+			);
+			name = "event details";
 			sourceTree = "<group>";
 		};
 		86FCF4401D455AC3000938E3 /* Extensions */ = {
