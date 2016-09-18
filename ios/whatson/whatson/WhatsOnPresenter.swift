@@ -19,7 +19,7 @@ class WhatsOnPresenter {
             if (access) {
                 self?.refreshEvents()
             } else {
-                self?.delegate?.failedToAccessCalendar(error)
+                self?.delegate?.failedToAccessCalendar(error as NSError?)
             }
         }
     }
@@ -34,8 +34,8 @@ class WhatsOnPresenter {
         })
     }
 
-    private func fetchEvents(_ completion: ((SCCalendarSource) -> Void)) {
-        let queue = DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosDefault);
+    private func fetchEvents(_ completion: @escaping ((SCCalendarSource) -> Void)) {
+        let queue = DispatchQueue.global(qos: .default)
         queue.async {
             let now = NSDateCalculator().now();
             let source = self.eventService.getCalendarSource(with: 14, with: now)

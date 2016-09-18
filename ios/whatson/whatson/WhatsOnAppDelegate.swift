@@ -2,18 +2,19 @@ import Foundation
 import UIKit
 import EventKit
 import EventKitUI
-import FirebaseAnalytics
+import Firebase
+//import FirebaseAnalytics
 
 class WhatsOnAppDelegate : NSObject, UIApplicationDelegate, EKEventEditViewDelegate {
     
     var window = UIWindow() as UIWindow?
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         self.window?.tintColor = UIColor.appColor()
         FIRApp.configure()
         if #available(iOS 9.1, *) {
             updateTouchShortcuts(application)
-            guard let options = launchOptions, let launchShortcut = options[UIApplicationLaunchOptionsShortcutItemKey] as? UIApplicationShortcutItem else {
+            guard let options = launchOptions, let launchShortcut = options[.shortcutItem] as? UIApplicationShortcutItem else {
                 return true;
             }
             
@@ -39,12 +40,12 @@ class WhatsOnAppDelegate : NSObject, UIApplicationDelegate, EKEventEditViewDeleg
     
     @available(iOS 9.0, *)
     func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
-        FIRAnalytics.logEvent(withName: "3dtouch", parameters: [ "type" : shortcutItem.type])
+//        FIRAnalytics.logEvent(withName: "3dtouch", parameters: [ "type" : shortcutItem.type as NSString])
         if (shortcutItem.type == "new-tomorrow") {
             let eventStore = EKEventStore()
             let event = EKEvent(eventStore: eventStore)
-            let startDate = Calendar.current.date(bySettingHour: 17, minute: 0, second: 0, of: Date(), options: Calendar.Options.init(rawValue: 0))
-            let endDate = Calendar.current.date(bySettingHour: 23, minute: 0, second: 0, of: Date(), options: Calendar.Options.init(rawValue: 0))
+            let startDate = Calendar.current.date(bySettingHour: 17, minute: 0, second: 0, of: Date())
+            let endDate = Calendar.current.date(bySettingHour: 23, minute: 0, second: 0, of: Date())
             event.startDate = startDate!
             event.endDate = endDate!
             
@@ -65,8 +66,7 @@ class WhatsOnAppDelegate : NSObject, UIApplicationDelegate, EKEventEditViewDeleg
         return false
     }
     
-    @available(iOS 9.0, *)
-    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         _ = handleShortcutItem(shortcutItem)
     }
     

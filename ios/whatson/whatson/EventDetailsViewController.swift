@@ -24,7 +24,7 @@ class EventDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white()
+        self.view.backgroundColor = .white
         self.navigationItem.title = "Event details"
         
         titleLabel.text = event.title
@@ -65,9 +65,9 @@ class EventDetailsViewController: UIViewController {
 
 }
 
-private extension Date {
+fileprivate extension Date {
     
-    private func formatAsTime() -> String {
+    fileprivate func formatAsTime() -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .none
         formatter.timeStyle = .short

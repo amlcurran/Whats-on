@@ -28,7 +28,7 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
         }
         dateFormatter = DateFormatter();
         dateFormatter.dateFormat = "EEE";
-        dayColor = UIColor.black().withAlphaComponent(0.54);
+        dayColor = UIColor.black.withAlphaComponent(0.54);
         let timeRepo = SCITimeRepository();
         let eventRepo = SCIEventStoreRepository();
         eventService = SCEventsService(scTimeRepository: timeRepo, with: eventRepo);

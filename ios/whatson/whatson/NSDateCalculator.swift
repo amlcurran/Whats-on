@@ -11,7 +11,6 @@ import Foundation
 public class NSDateCalculator : NSObject, SCTimeCalculator {
     
     let calendar : Calendar;
-    private let noOptions = Calendar.Options(rawValue: 0);
     
     override init() {
         calendar = Calendar.current;
@@ -27,12 +26,12 @@ public class NSDateCalculator : NSObject, SCTimeCalculator {
         var components = DateComponents();
         components.day = Int(days);
         let timeAsDate = date(time);
-        let newDate = calendar.date(byAdding: components, to: timeAsDate, options: noOptions);
+        let newDate = calendar.date(byAdding: components, to: timeAsDate);
         return SCTime(long: jlong(newDate!.timeIntervalSince1970 * 1000), with: self);
     }
     
     @objc public func getDaysWith(_ time: SCTime!) -> jint {
-        let difference = self.calendar.components(.day, from: Date(timeIntervalSince1970: 0), to: date(time), options: noOptions);
+        let difference = self.calendar.dateComponents([.day], from: Date(timeIntervalSince1970: 0), to: date(time));
         return jint(difference.day!);
     }
     
@@ -40,7 +39,7 @@ public class NSDateCalculator : NSObject, SCTimeCalculator {
         var components = DateComponents();
         components.hour = Int(hours);
         let timeAsDate = date(time);
-        let newDate = calendar.date(byAdding: components, to: timeAsDate, options: noOptions);
+        let newDate = calendar.date(byAdding: components, to: timeAsDate);
         return SCTime(long: jlong(newDate!.timeIntervalSince1970 * 1000), with: self);
     }
     

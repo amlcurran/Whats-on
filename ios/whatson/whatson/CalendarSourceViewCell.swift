@@ -48,7 +48,8 @@ class CalendarSourceViewCell : UITableViewCell {
         mainLabel.textColor = UIColor.mainTextColor(slot)
         mainLabel.attributedText = colouredString;
         
-        if (slot?.count() > 1) {
+        let itemCount = slot?.count() ?? 0
+        if (itemCount > 1) {
             numberLabel.text = String(format: "+%lu more event", slot!.count() - 1);
             numberLabel.isHidden = false;
             numberLabel.textColor = UIColor.lowTextColor(slot)
@@ -93,39 +94,39 @@ private extension UIColor {
         if (!cell.empty) {
             return UIColor.appColor()
         } else {
-            return UIColor.white()
+            return UIColor.white
         }
     }
     
     static func mainTextColor(_ slot: SCCalendarSlot?) -> UIColor {
-        if (slot?.count() > 0) {
-            return UIColor.white();
+        if ((slot?.count() ?? 0) > 0) {
+            return UIColor.white
         } else {
-            return UIColor.black();
+            return UIColor.black
         }
     }
     
     static func selectedMainTextColor(_ cell: CalendarSourceViewCell) -> UIColor {
         if (!cell.empty) {
-            return UIColor.white();
+            return UIColor.white
         } else {
-            return UIColor.black();
+            return UIColor.black
         }
     }
     
     static func lowTextColor(_ slot: SCCalendarSlot?) -> UIColor {
-        if (slot?.count() > 0) {
-            return UIColor.white().withAlphaComponent(0.54);
+        if ((slot?.count() ?? 0) > 0) {
+            return UIColor.white.withAlphaComponent(0.54);
         } else {
-            return UIColor.black().withAlphaComponent(0.54);
+            return UIColor.black.withAlphaComponent(0.54);
         }
     }
     
     static func selectedLowTextColor(_ cell: CalendarSourceViewCell) -> UIColor {
         if (!cell.empty) {
-            return UIColor.white().withAlphaComponent(0.54);
+            return UIColor.white.withAlphaComponent(0.54);
         } else {
-            return UIColor.black().withAlphaComponent(0.54);
+            return UIColor.black.withAlphaComponent(0.54);
         }
     }
     
