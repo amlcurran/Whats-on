@@ -10,7 +10,7 @@
 #import <EventKit/EventKit.h>
 #import "EventRepositoryAccessor.h"
 #import "TimeCalculator.h"
-#import "What_s_On-Swift.h"
+#import "Whatson-Swift.h"
 
 @interface SCIEKEventAccessor : NSObject<SCEventRepositoryAccessor>
 

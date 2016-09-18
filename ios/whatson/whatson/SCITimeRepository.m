@@ -8,7 +8,7 @@
 
 #import "SCITimeRepository.h"
 #import "TimeOfDay.h"
-#import "What_s_On-Swift.h"
+#import "Whatson-Swift.h"
 
 @interface SCITimeRepository()
 

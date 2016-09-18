@@ -81,7 +81,7 @@
 		86B866091D55EDF700968099 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		86C19EB91BBF287500BBCDF6 /* whatson-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "whatson-Bridging-Header.h"; sourceTree = "<group>"; };
 		86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsOnViewController.swift; sourceTree = "<group>"; };
-		86CAD4991BACC9B1009C9CFD /* What's On.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "What's On.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		86CAD4991BACC9B1009C9CFD /* Whatson.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Whatson.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86CAD49D1BACC9B1009C9CFD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		86CAD4A61BACC9B1009C9CFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -197,7 +197,7 @@
 		86CAD49A1BACC9B1009C9CFD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				86CAD4991BACC9B1009C9CFD /* What's On.app */,
+				86CAD4991BACC9B1009C9CFD /* Whatson.app */,
 				869DAC701D449EFB005AF315 /* WhatsOnTests.xctest */,
 			);
 			name = Products;
@@ -347,7 +347,7 @@
 			);
 			name = whatson;
 			productName = whatson;
-			productReference = 86CAD4991BACC9B1009C9CFD /* What's On.app */;
+			productReference = 86CAD4991BACC9B1009C9CFD /* Whatson.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -754,13 +754,39 @@
 					/Users/amlcurran/Projects/j2objc/lib,
 				);
 				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AdSupport\"",
+					"-framework",
+					"\"AddressBook\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseInstanceID\"",
+					"-framework",
+					"\"GoogleInterchangeUtilities\"",
+					"-framework",
+					"\"GoogleSymbolUtilities\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
 					"-l",
 					jre_emul,
-					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson;
-				PRODUCT_NAME = "What's On";
+				PRODUCT_NAME = Whatson;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "whatson-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -802,13 +828,39 @@
 					/Users/amlcurran/Projects/j2objc/lib,
 				);
 				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AdSupport\"",
+					"-framework",
+					"\"AddressBook\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseInstanceID\"",
+					"-framework",
+					"\"GoogleInterchangeUtilities\"",
+					"-framework",
+					"\"GoogleSymbolUtilities\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
 					"-l",
 					jre_emul,
-					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson;
-				PRODUCT_NAME = "What's On";
+				PRODUCT_NAME = Whatson;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "whatson-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
