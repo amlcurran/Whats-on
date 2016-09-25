@@ -1,8 +1,10 @@
 import UIKit
 import EventKit
+import EventKitUI
 import MapKit
+import FirebaseAnalytics
 
-class EventDetailsViewController: UIViewController, UITextViewDelegate {
+class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventViewDelegate {
     
     lazy var titleLabel = UILabel()
     lazy var locationLabel = UILabel()
@@ -26,6 +28,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         edgesForExtendedLayout = []
+        FIRAnalytics.logEvent(withName: "event_details", parameters: nil)
         
         layoutViews()
         
@@ -37,9 +40,8 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate {
         timingLabel.text = "From \(event.startDate.formatAsTime()) to \(event.endDate.formatAsTime())"
         moreInfoLabel.text = "More info"
         
-        let recogniser = UITapGestureRecognizer(target: self, action: #selector(moreInfoTapped))
         moreInfoLabel.isUserInteractionEnabled = true
-        moreInfoLabel.addGestureRecognizer(recogniser)
+        moreInfoLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(moreInfoTapped)))
         
         locationMapView.isUserInteractionEnabled = false
         
@@ -99,7 +101,17 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate {
     }
     
     func moreInfoTapped() {
-        print("woop woop")
+        FIRAnalytics.logEvent(withName: "event_more_info", parameters: nil)
+        let eventViewController = EKEventViewController()
+        eventViewController.event = event
+        eventViewController.delegate = self
+        eventViewController.allowsEditing = false
+        let navigationController = UINavigationController(rootViewController: eventViewController)
+        present(navigationController, animated: true, completion: nil)
+    }
+    
+    public func eventViewController(_ controller: EKEventViewController, didCompleteWith action: EKEventViewAction) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
