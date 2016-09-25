@@ -40,7 +40,12 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         #endif
         
         titleLabel.text = event.title
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+        
         locationLabel.text = event.location
+        locationLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        locationLabel.textColor = UIColor.black.withAlphaComponent(0.7)
+        
         timingLabel.text = "From \(event.startDate.formatAsTime()) to \(event.endDate.formatAsTime())"
         moreInfoLabel.text = "More info"
         
