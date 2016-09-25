@@ -12,6 +12,7 @@
 		8618A51F1BDA92F900A4845E /* CalendarSourceViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */; };
 		8626FCE01C63FBF800640079 /* CalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8626FCDF1C63FBF800640079 /* CalendarCell.xib */; };
 		864561C31C02709800ADDE44 /* NSDateCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864561C21C02709800ADDE44 /* NSDateCalculator.swift */; };
+		8648F18F1D984F6500C7BD48 /* EventDetailsTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8648F18E1D984F6500C7BD48 /* EventDetailsTracking.swift */; };
 		869DAC731D449EFB005AF315 /* WhatsOnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC721D449EFB005AF315 /* WhatsOnTests.swift */; };
 		869DAC7D1D44D15C005AF315 /* EventPredicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC7C1D44D15C005AF315 /* EventPredicates.swift */; };
 		869DAC7F1D44D17E005AF315 /* EventPredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC7E1D44D17E005AF315 /* EventPredicateTests.swift */; };
@@ -70,6 +71,7 @@
 		8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSourceViewCell.swift; sourceTree = "<group>"; };
 		8626FCDF1C63FBF800640079 /* CalendarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarCell.xib; sourceTree = "<group>"; };
 		864561C21C02709800ADDE44 /* NSDateCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateCalculator.swift; sourceTree = "<group>"; };
+		8648F18E1D984F6500C7BD48 /* EventDetailsTracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsTracking.swift; sourceTree = "<group>"; };
 		869DAC701D449EFB005AF315 /* WhatsOnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatsOnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		869DAC721D449EFB005AF315 /* WhatsOnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsOnTests.swift; sourceTree = "<group>"; };
 		869DAC741D449EFB005AF315 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */,
+				8648F18E1D984F6500C7BD48 /* EventDetailsTracking.swift */,
 			);
 			name = "event details";
 			sourceTree = "<group>";
@@ -533,6 +536,7 @@
 			files = (
 				86CAD4F51BAF3B43009C9CFD /* SCIEventStoreRepository.m in Sources */,
 				86C19EBF1BBF28E600BBCDF6 /* WhatsOnViewController.swift in Sources */,
+				8648F18F1D984F6500C7BD48 /* EventDetailsTracking.swift in Sources */,
 				86F849991D046A3E007C41B0 /* EventDetailsViewController.swift in Sources */,
 				86F849931D046277007C41B0 /* TimeCalculator.m in Sources */,
 				8614BABE1C825B7A00A3E570 /* NSDate+Time.swift in Sources */,

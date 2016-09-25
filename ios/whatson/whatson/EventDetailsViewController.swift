@@ -11,6 +11,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     lazy var timingLabel = UILabel()
     lazy var locationMapView = MKMapView()
     lazy var moreInfoLabel = UILabel()
+    lazy var tracking = EventDetailsTracking()
     var mapHeightConstraint: NSLayoutConstraint!
     
     private let geocoder = CLGeocoder()
@@ -28,7 +29,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     override func viewDidLoad() {
         super.viewDidLoad()
         edgesForExtendedLayout = []
-        FIRAnalytics.logEvent(withName: "event_details", parameters: nil)
+        tracking.viewedEventDetails()
         
         layoutViews()
         
@@ -101,12 +102,9 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     }
     
     func moreInfoTapped() {
-        FIRAnalytics.logEvent(withName: "event_more_info", parameters: nil)
-        let eventViewController = EKEventViewController()
-        eventViewController.event = event
-        eventViewController.delegate = self
-        eventViewController.allowsEditing = false
-        let navigationController = UINavigationController(rootViewController: eventViewController)
+        tracking.wantedMoreInfo()
+        let eventController = EKEventViewController(showing: event, delegate: self)
+        let navigationController = UINavigationController(rootViewController: eventController)
         present(navigationController, animated: true, completion: nil)
     }
     
@@ -133,4 +131,14 @@ fileprivate extension Date {
     
 }
 
+fileprivate extension EKEventViewController {
+    
+    convenience init(showing event: EKEvent, delegate: EKEventViewDelegate) {
+        self.init()
+        self.event = event
+        self.delegate = delegate
+        self.allowsEditing = false
+    }
+    
+}
 
