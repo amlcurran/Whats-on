@@ -33,8 +33,11 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         
         layoutViews()
         
-        self.view.backgroundColor = .white
-        self.navigationItem.title = "Event details"
+        view.backgroundColor = .white
+        navigationItem.title = "Event details"
+        #if DEBUG
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteEventTapped))
+        #endif
         
         titleLabel.text = event.title
         locationLabel.text = event.location
@@ -109,6 +112,30 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         let eventController = EKEventViewController(showing: event, delegate: self)
         let navigationController = UINavigationController(rootViewController: eventController)
         present(navigationController, animated: true, completion: nil)
+    }
+    
+    func deleteEventTapped() {
+        if (!event.isDetached) {
+            deleteEvent(span: .thisEvent)
+        }
+        let actionSheet = UIAlertController(title: "Delete event", message: nil, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "This event", style: .default, handler: { _ in self.deleteEvent(span: .thisEvent) }))
+        actionSheet.addAction(UIAlertAction(title: "Future events", style: .default, handler: { _ in self.deleteEvent(span: .futureEvents) }))
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func deleteEvent(span: EKSpan) {
+        let eventStore = EKEventStore()
+        do {
+            try eventStore.remove(event, span: span)
+            _ = navigationController?.popViewController(animated: true)
+        } catch {
+            print(error)
+            let errorView = UIAlertController(title: "An error occurred", message: "The event couldn't be deleted", preferredStyle: .alert)
+            errorView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(errorView, animated: true, completion: nil)
+        }
     }
     
     public func eventViewController(_ controller: EKEventViewController, didCompleteWith action: EKEventViewAction) {
