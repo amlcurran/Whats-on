@@ -2,25 +2,55 @@ import UIKit
 
 extension UIView {
     
-    func constrainToSuperview(edge: NSLayoutAttribute, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
+    func constrainToSuperview(edges: [NSLayoutAttribute], withOffset offset: CGFloat = 0) {
+        for edge in edges {
+            constrainToSuperview(edge, withOffset: offset)
+        }
+    }
+    
+    @discardableResult func constrainToSuperview(_ edge: NSLayoutAttribute, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
         let superview = prepareForConstraints()
         let constraint = NSLayoutConstraint(item: self, attribute: edge, relatedBy: .equal, toItem: superview, attribute: edge, multiplier: 1, constant: offset)
-        superview.addConstraint(constraint)
+        constraint.isActive = true
         return constraint
     }
     
-    func constrain(height: CGFloat) -> NSLayoutConstraint {
+    @discardableResult func constrain(to view: UIView, _ edge: NSLayoutAttribute, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
+        let constraint = NSLayoutConstraint(item: self, attribute: edge, relatedBy: .equal, toItem: view, attribute: edge, multiplier: 1, constant: offset)
+        constraint.isActive = true
+        return constraint
+    }
+    
+    func constrain(to view: UIView, edges: [NSLayoutAttribute], withOffset offset: CGFloat = 0) {
+        for edge in edges {
+            constrain(to: view, edge, withOffset: offset)
+        }
+    }
+    
+    @discardableResult func constrain(height: CGFloat) -> NSLayoutConstraint {
         _ = prepareForConstraints()
         let constraint = NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height)
         constraint.isActive = true
         return constraint
     }
     
+    @discardableResult func constrain(_ edge: NSLayoutAttribute, to view: UIView, _ otherEdge: NSLayoutAttribute, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
+        _ = prepareForConstraints()
+        let constraint = NSLayoutConstraint(item: self, attribute: edge, relatedBy: .equal, toItem: view, attribute: otherEdge, multiplier: 1, constant: offset)
+        constraint.isActive = true
+        return constraint
+    }
+    
+    func add(_ view: UIView, constrainedTo edges: [NSLayoutAttribute]) {
+        addSubview(view)
+        view.constrainToSuperview(edges: edges)
+    }
+    
     private func prepareForConstraints() -> UIView {
         guard let superview = self.superview else {
             fatalError("view doesn't have a superview")
         }
-        self.translatesAutoresizingMaskIntoConstraints = false
+        translatesAutoresizingMaskIntoConstraints = false
         return superview
     }
 

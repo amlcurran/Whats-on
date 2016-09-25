@@ -12,7 +12,6 @@
 		8618A51F1BDA92F900A4845E /* CalendarSourceViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */; };
 		8626FCE01C63FBF800640079 /* CalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8626FCDF1C63FBF800640079 /* CalendarCell.xib */; };
 		864561C31C02709800ADDE44 /* NSDateCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864561C21C02709800ADDE44 /* NSDateCalculator.swift */; };
-		8693FD111D16F456003FA6D7 /* EventDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8693FD101D16F456003FA6D7 /* EventDetailsViewController.xib */; };
 		869DAC731D449EFB005AF315 /* WhatsOnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC721D449EFB005AF315 /* WhatsOnTests.swift */; };
 		869DAC7D1D44D15C005AF315 /* EventPredicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC7C1D44D15C005AF315 /* EventPredicates.swift */; };
 		869DAC7F1D44D17E005AF315 /* EventPredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC7E1D44D17E005AF315 /* EventPredicateTests.swift */; };
@@ -71,7 +70,6 @@
 		8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSourceViewCell.swift; sourceTree = "<group>"; };
 		8626FCDF1C63FBF800640079 /* CalendarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarCell.xib; sourceTree = "<group>"; };
 		864561C21C02709800ADDE44 /* NSDateCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateCalculator.swift; sourceTree = "<group>"; };
-		8693FD101D16F456003FA6D7 /* EventDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventDetailsViewController.xib; sourceTree = "<group>"; };
 		869DAC701D449EFB005AF315 /* WhatsOnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatsOnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		869DAC721D449EFB005AF315 /* WhatsOnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsOnTests.swift; sourceTree = "<group>"; };
 		869DAC741D449EFB005AF315 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -279,7 +277,6 @@
 			isa = PBXGroup;
 			children = (
 				86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */,
-				8693FD101D16F456003FA6D7 /* EventDetailsViewController.xib */,
 			);
 			name = "event details";
 			sourceTree = "<group>";
@@ -420,7 +417,6 @@
 				86CAD4A91BACC9B1009C9CFD /* Assets.xcassets in Resources */,
 				86CAD4A71BACC9B1009C9CFD /* Main.storyboard in Resources */,
 				86FCF43D1D45506F000938E3 /* OptionsViewController.xib in Resources */,
-				8693FD111D16F456003FA6D7 /* EventDetailsViewController.xib in Resources */,
 				8626FCE01C63FBF800640079 /* CalendarCell.xib in Resources */,
 				86B8660A1D55EDF700968099 /* GoogleService-Info.plist in Resources */,
 			);
@@ -750,7 +746,7 @@
 					"\"${PODS_ROOT}/Headers/Public/GoogleInterchangeUtilities\"",
 					"\"${PODS_ROOT}/Headers/Public/GoogleSymbolUtilities\"",
 					"\"${PODS_ROOT}/Headers/Public/GoogleUtilities\"",
-					"~/Projects/j2objc/include/**",
+					"~/Projects/j2objc/include",
 					./uk/co/amlcurran/social,
 				);
 				INFOPLIST_FILE = whatson/Info.plist;
@@ -824,7 +820,7 @@
 					"\"${PODS_ROOT}/Headers/Public/GoogleInterchangeUtilities\"",
 					"\"${PODS_ROOT}/Headers/Public/GoogleSymbolUtilities\"",
 					"\"${PODS_ROOT}/Headers/Public/GoogleUtilities\"",
-					"~/Projects/j2objc/include/**",
+					"~/Projects/j2objc/include",
 					./uk/co/amlcurran/social,
 				);
 				INFOPLIST_FILE = whatson/Info.plist;
