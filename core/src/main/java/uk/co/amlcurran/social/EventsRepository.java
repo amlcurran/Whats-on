@@ -1,6 +1,8 @@
 package uk.co.amlcurran.social;
 
+import java.util.List;
+
 public interface EventsRepository {
-    EventRepositoryAccessor queryEvents(TimeOfDay fivePm, TimeOfDay elevenPm,
-                                        Timestamp searchStartTime, Timestamp searchEndTime);
+
+    List<CalendarItem> getCalendarItems(Timestamp nowTime, Timestamp nextWeek, TimeOfDay fivePm, TimeOfDay elevenPm, EventsService eventsService);
 }

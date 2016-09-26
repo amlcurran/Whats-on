@@ -7,17 +7,17 @@ class TestCalendarItem implements CalendarItem {
 
     @Override
     public String title() {
-        return null;
+        return "foo";
     }
 
     @Override
     public Timestamp startTime() {
-        return null;
+        return new Timestamp(3000, new TestCalculator());
     }
 
     @Override
     public Timestamp endTime() {
-        return null;
+        return new Timestamp(4000, new TestCalculator());
     }
 
     @Override

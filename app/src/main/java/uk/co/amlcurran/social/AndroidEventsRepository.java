@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AndroidEventsRepository implements EventsRepository {
 
     private static String[] PROJECTION = new String[]{
@@ -22,9 +25,7 @@ public class AndroidEventsRepository implements EventsRepository {
         this.contentResolver = contentResolver;
     }
 
-    @Override
-    public EventRepositoryAccessor queryEvents(TimeOfDay fivePm, TimeOfDay elevenPm,
-                                               Timestamp searchStart, Timestamp searchEnd) {
+    private Cursor getCursor(TimeOfDay fivePm, TimeOfDay elevenPm, Timestamp searchStart, Timestamp searchEnd) {
         Uri.Builder builder = CalendarContract.Instances.CONTENT_URI.buildUpon();
         ContentUris.appendId(builder, searchStart.getMillis());
         ContentUris.appendId(builder, searchEnd.getMillis());
@@ -36,8 +37,23 @@ public class AndroidEventsRepository implements EventsRepository {
                 CalendarContract.Instances.SELF_ATTENDEE_STATUS, CalendarContract.Instances.STATUS_CANCELED,
                 CalendarContract.Instances.ALL_DAY, 0);
 
-        Cursor calendarCursor = contentResolver.query(builder.build(), PROJECTION, selection, null, null);
-        return new CursorEventRepositoryAccessor(calendarCursor, new JodaCalculator());
+        return contentResolver.query(builder.build(), PROJECTION, selection, null, null);
+    }
+
+    @Override
+    public List<CalendarItem> getCalendarItems(Timestamp nowTime, Timestamp nextWeek, TimeOfDay fivePm, TimeOfDay elevenPm, EventsService eventsService) {
+        Cursor calendarCursor = getCursor(fivePm, elevenPm, nowTime, nextWeek);
+        EventRepositoryAccessor accessor = new CursorEventRepositoryAccessor(calendarCursor, new JodaCalculator());
+        List<CalendarItem> calendarItems = new ArrayList<>();
+        while (accessor.nextItem()) {
+            String title = accessor.getTitle();
+            String eventId = accessor.getEventIdentifier();
+            Timestamp time = accessor.getStartTime();
+            Timestamp endTime = accessor.getEndTime();
+            calendarItems.add(new EventCalendarItem(eventId, title, time, endTime));
+        }
+        calendarCursor.close();
+        return calendarItems;
     }
 
     private static class CursorEventRepositoryAccessor implements EventRepositoryAccessor {

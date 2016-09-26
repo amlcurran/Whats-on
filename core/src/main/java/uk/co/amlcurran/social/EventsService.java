@@ -1,6 +1,5 @@
 package uk.co.amlcurran.social;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.amlcurran.social.core.SparseArray;
@@ -20,15 +19,7 @@ public class EventsService {
         TimeOfDay fivePm = timeRepository.borderTimeStart();
         TimeOfDay elevenPm = timeRepository.borderTimeEnd();
 
-        EventRepositoryAccessor accessor = eventsRepository.queryEvents(fivePm, elevenPm, nowTime, nextWeek);
-        List<CalendarItem> calendarItems = new ArrayList<>();
-        while (accessor.nextItem()) {
-            String title = accessor.getTitle();
-            String eventId = accessor.getEventIdentifier();
-            Timestamp time = accessor.getStartTime();
-            Timestamp endTime = accessor.getEndTime();
-            calendarItems.add(new EventCalendarItem(eventId, title, time, endTime));
-        }
+        List<CalendarItem> calendarItems = eventsRepository.getCalendarItems(nowTime, nextWeek, fivePm, elevenPm, this);
 
         SparseArray<CalendarSlot> itemArray = new SparseArray<>(numberOfDays);
         int epochToNow = now.daysSinceEpoch();
@@ -39,9 +30,7 @@ public class EventsService {
             itemArray.put(key, slot);
         }
 
-        CalendarSource calendarSource = new CalendarSource(timeRepository, itemArray, numberOfDays);
-        accessor.endAccess();
-        return calendarSource;
+        return new CalendarSource(timeRepository, itemArray, numberOfDays);
     }
 
 }
