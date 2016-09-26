@@ -47,7 +47,7 @@
     return [SCTimeOfDay fromHoursWithInt:17];
 }
 
-- (SCTime *)startOfToday
+- (SCTimestamp *)startOfToday
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:( NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitDay | NSCalendarUnitMinute | NSCalendarUnitSecond ) fromDate:[[NSDate alloc] init]];

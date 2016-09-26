@@ -10,7 +10,7 @@ import UIKit
 
 extension Date {
     
-    static func dateFromTime(_ time: SCTime) -> Date {
+    static func dateFromTime(_ time: SCTimestamp) -> Date {
         return Date(timeIntervalSince1970: TimeInterval(time.getMillis() / 1000))
     }
 

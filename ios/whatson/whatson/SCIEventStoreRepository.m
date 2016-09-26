@@ -62,13 +62,13 @@
     self.currentPosition = -1;
 }
 
-- (SCTime *)getStartTime
+- (SCTimestamp *)getStartTime
 {
     NSDate *date = [self currentEvent].startDate;
     return [self.timeCalculator time:date];
 }
 
-- (SCTime *)getEndTime
+- (SCTimestamp *)getEndTime
 {
     NSDate *date = [self currentEvent].endDate;
     return [self.timeCalculator time:date];
@@ -104,8 +104,8 @@
 
 - (id<SCEventRepositoryAccessor>)queryEventsWithSCTimeOfDay:(SCTimeOfDay *)fivePm
                                             withSCTimeOfDay:(SCTimeOfDay *)elevenPm
-                                                 withSCTime:(SCTime *)searchStartTime
-                                                 withSCTime:(SCTime *)searchEndTime
+                                                 withSCTime:(SCTimestamp *)searchStartTime
+                                                 withSCTime:(SCTimestamp *)searchEndTime
 {
     EKEventStore *eventStore = [[EKEventStore alloc] init];
     NSDate *startTime =  [self.calculator date:searchStartTime];

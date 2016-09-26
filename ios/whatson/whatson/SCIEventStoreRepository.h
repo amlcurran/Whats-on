@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "EventsRepository.h"
-#import "SCTime.h"
+#import "Timestamp.h"
 
 @interface SCIEventStoreRepository : NSObject<SCEventsRepository>
 
