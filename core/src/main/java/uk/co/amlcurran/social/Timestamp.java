@@ -1,16 +1,16 @@
 package uk.co.amlcurran.social;
 
-public class Time {
+public class Timestamp {
 
     private final TimeCalculator timeCalculator;
     private final long millis;
 
-    public Time(long millis, TimeCalculator timeCalculator) {
+    public Timestamp(long millis, TimeCalculator timeCalculator) {
         this.millis = millis;
         this.timeCalculator = timeCalculator;
     }
 
-    public Time plusDays(int days) {
+    public Timestamp plusDays(int days) {
         return timeCalculator.plusDays(days, this);
     }
 
@@ -22,7 +22,7 @@ public class Time {
         return millis;
     }
 
-    public Time plusHours(int hours) {
+    public Timestamp plusHours(int hours) {
         return timeCalculator.plusHours(this, hours);
     }
 

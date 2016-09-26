@@ -14,9 +14,9 @@ public class EventsService {
         this.timeRepository = dateCreator;
     }
 
-    public CalendarSource getCalendarSource(final int numberOfDays, final Time now) {
-        Time nowTime = timeRepository.startOfToday();
-        Time nextWeek = nowTime.plusDays(numberOfDays);
+    public CalendarSource getCalendarSource(final int numberOfDays, final Timestamp now) {
+        Timestamp nowTime = timeRepository.startOfToday();
+        Timestamp nextWeek = nowTime.plusDays(numberOfDays);
         TimeOfDay fivePm = timeRepository.borderTimeStart();
         TimeOfDay elevenPm = timeRepository.borderTimeEnd();
 
@@ -25,8 +25,8 @@ public class EventsService {
         while (accessor.nextItem()) {
             String title = accessor.getTitle();
             String eventId = accessor.getEventIdentifier();
-            Time time = accessor.getStartTime();
-            Time endTime = accessor.getEndTime();
+            Timestamp time = accessor.getStartTime();
+            Timestamp endTime = accessor.getEndTime();
             calendarItems.add(new EventCalendarItem(eventId, title, time, endTime));
         }
 

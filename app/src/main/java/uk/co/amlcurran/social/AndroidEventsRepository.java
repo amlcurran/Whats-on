@@ -24,7 +24,7 @@ public class AndroidEventsRepository implements EventsRepository {
 
     @Override
     public EventRepositoryAccessor queryEvents(TimeOfDay fivePm, TimeOfDay elevenPm,
-                                               Time searchStart, Time searchEnd) {
+                                               Timestamp searchStart, Timestamp searchEnd) {
         Uri.Builder builder = CalendarContract.Instances.CONTENT_URI.buildUpon();
         ContentUris.appendId(builder, searchStart.getMillis());
         ContentUris.appendId(builder, searchEnd.getMillis());
@@ -79,15 +79,15 @@ public class AndroidEventsRepository implements EventsRepository {
         }
 
         @Override
-        public Time getStartTime() {
+        public Timestamp getStartTime() {
             long startMillis = calendarCursor.getLong(dtStartColumnIndex);
-            return new Time(startMillis, timeCalculator);
+            return new Timestamp(startMillis, timeCalculator);
         }
 
         @Override
-        public Time getEndTime() {
+        public Timestamp getEndTime() {
             long endMillis = calendarCursor.getLong(dtEndColumnIndex);
-            return new Time(endMillis, timeCalculator);
+            return new Timestamp(endMillis, timeCalculator);
         }
     }
 

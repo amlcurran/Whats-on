@@ -4,9 +4,9 @@ public interface CalendarItem {
 
     String title();
 
-    Time startTime();
+    Timestamp startTime();
 
-    Time endTime();
+    Timestamp endTime();
 
     boolean isEmpty();
 }

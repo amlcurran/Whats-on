@@ -5,5 +5,5 @@ public interface TimeRepository {
 
     TimeOfDay borderTimeStart();
 
-    Time startOfToday();
+    Timestamp startOfToday();
 }

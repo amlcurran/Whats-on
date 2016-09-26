@@ -8,21 +8,21 @@ class JodaCalculator implements TimeCalculator {
     private static final DateTime EPOCH = new DateTime(0, DateTimeZone.getDefault());
 
     @Override
-    public Time plusHours(Time time, int hours) {
-        return new Time(getDateTime(time).plusHours(hours).getMillis(), this);
+    public Timestamp plusHours(Timestamp time, int hours) {
+        return new Timestamp(getDateTime(time).plusHours(hours).getMillis(), this);
     }
 
     @Override
-    public int getDays(Time time) {
+    public int getDays(Timestamp time) {
         return Days.daysBetween(EPOCH, getDateTime(time)).getDays();
     }
 
     @Override
-    public Time plusDays(int days, Time time) {
-        return new Time(getDateTime(time).plusDays(days).getMillis(), this);
+    public Timestamp plusDays(int days, Timestamp time) {
+        return new Timestamp(getDateTime(time).plusDays(days).getMillis(), this);
     }
 
-    private DateTime getDateTime(Time time) {
+    private DateTime getDateTime(Timestamp time) {
         return new DateTime(time.getMillis(), DateTimeZone.getDefault());
     }
 }

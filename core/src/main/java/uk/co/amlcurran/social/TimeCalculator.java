@@ -1,9 +1,9 @@
 package uk.co.amlcurran.social;
 
 public interface TimeCalculator {
-    Time plusDays(int days, Time time);
+    Timestamp plusDays(int days, Timestamp time);
 
-    int getDays(Time time);
+    int getDays(Timestamp time);
 
-    Time plusHours(Time time, int hours);
+    Timestamp plusHours(Timestamp time, int hours);
 }

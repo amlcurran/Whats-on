@@ -3,10 +3,10 @@ package uk.co.amlcurran.social;
 class EventCalendarItem implements CalendarItem {
     private final String eventId;
     private final String title;
-    private final Time start;
-    private final Time endTime;
+    private final Timestamp start;
+    private final Timestamp endTime;
 
-    public EventCalendarItem(String eventId, String title, Time time, Time endTime) {
+    public EventCalendarItem(String eventId, String title, Timestamp time, Timestamp endTime) {
         this.eventId = eventId;
         this.title = title;
         this.start = time;
@@ -23,12 +23,12 @@ class EventCalendarItem implements CalendarItem {
     }
 
     @Override
-    public Time startTime() {
+    public Timestamp startTime() {
         return start;
     }
 
     @Override
-    public Time endTime() {
+    public Timestamp endTime() {
         return endTime;
     }
 

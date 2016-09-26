@@ -33,12 +33,12 @@ class TestAccessor implements EventRepositoryAccessor {
     }
 
     @Override
-    public Time getStartTime() {
-        return new Time(17 * 60 * 60 * 1000, new TestCalculator());
+    public Timestamp getStartTime() {
+        return new Timestamp(17 * 60 * 60 * 1000, new TestCalculator());
     }
 
     @Override
-    public Time getEndTime() {
-        return new Time(19 * 60 * 60 * 1000, new TestCalculator());
+    public Timestamp getEndTime() {
+        return new Timestamp(19 * 60 * 60 * 1000, new TestCalculator());
     }
 }

@@ -9,7 +9,7 @@ public interface EventRepositoryAccessor {
 
     void endAccess();
 
-    Time getStartTime();
+    Timestamp getStartTime();
 
-    Time getEndTime();
+    Timestamp getEndTime();
 }

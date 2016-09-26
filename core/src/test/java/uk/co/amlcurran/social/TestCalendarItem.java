@@ -11,12 +11,12 @@ class TestCalendarItem implements CalendarItem {
     }
 
     @Override
-    public Time startTime() {
+    public Timestamp startTime() {
         return null;
     }
 
     @Override
-    public Time endTime() {
+    public Timestamp endTime() {
         return null;
     }
 

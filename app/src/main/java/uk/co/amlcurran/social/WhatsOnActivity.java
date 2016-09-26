@@ -51,7 +51,7 @@ public class WhatsOnActivity extends AppCompatActivity {
         permissions.requestPermission(REQUEST_CODE_REQUEST_CALENDAR, Manifest.permission.READ_CALENDAR, new Permissions.OnPermissionRequestListener() {
             @Override
             public void onPermissionGranted() {
-                events.load(new Time(now.getMillis(), new JodaCalculator()), adapter);
+                events.load(new Timestamp(now.getMillis(), new JodaCalculator()), adapter);
             }
 
             @Override

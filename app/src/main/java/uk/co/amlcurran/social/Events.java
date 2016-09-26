@@ -16,7 +16,7 @@ public class Events {
         this.eventsService = eventsService;
     }
 
-    public void load(final Time now, Observer<CalendarSource> calendarSourceObserver) {
+    public void load(final Timestamp now, Observer<CalendarSource> calendarSourceObserver) {
         Observable.create(new Observable.OnSubscribe<CalendarSource>() {
             @Override
             public void call(Subscriber<? super CalendarSource> subscriber) {

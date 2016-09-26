@@ -13,14 +13,14 @@ public class EventsServiceTest {
     public void givenASlotWithTwoEventsThenTheSlotHasACountOfTwo() {
         EventsService service = new EventsService(new MyTimeRepository(), new MyEventsRepository());
 
-        CalendarSource calendarSource = service.getCalendarSource(14, new Time(0, new TestCalculator()));
+        CalendarSource calendarSource = service.getCalendarSource(14, new Timestamp(0, new TestCalculator()));
 
         assertThat(calendarSource.slotAt(0).count(), is(2));
     }
 
     private static class MyEventsRepository implements EventsRepository {
         @Override
-        public EventRepositoryAccessor queryEvents(TimeOfDay fivePm, TimeOfDay elevenPm, Time searchStartTime, Time searchEndTime) {
+        public EventRepositoryAccessor queryEvents(TimeOfDay fivePm, TimeOfDay elevenPm, Timestamp searchStartTime, Timestamp searchEndTime) {
             return new TestAccessor(Arrays.asList("event1", "event2"));
         }
 
@@ -38,8 +38,8 @@ public class EventsServiceTest {
         }
 
         @Override
-        public Time startOfToday() {
-            return new Time(0, new TestCalculator());
+        public Timestamp startOfToday() {
+            return new Timestamp(0, new TestCalculator());
         }
     }
 

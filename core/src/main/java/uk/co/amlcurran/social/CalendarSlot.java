@@ -21,4 +21,8 @@ public class CalendarSlot {
     public boolean isEmpty() {
         return calendarItems.isEmpty();
     }
+
+    public List<CalendarItem> items() {
+        return calendarItems;
+    }
 }

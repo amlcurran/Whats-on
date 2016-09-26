@@ -21,18 +21,18 @@ class CalendarSource {
     public CalendarItem itemAt(int position) {
         CalendarSlot calendarSlot = calendarItems.get(position);
         if (calendarSlot == null || calendarSlot.isEmpty()) {
-            Time startTime = startOfTodayBlock(position);
-            Time endTime = endOfTodayBlock(position);
+            Timestamp startTime = startOfTodayBlock(position);
+            Timestamp endTime = endOfTodayBlock(position);
             return new EmptyCalendarItem(startTime, endTime);
         }
         return calendarSlot.firstItem();
     }
 
-    private Time startOfTodayBlock(int position) {
+    private Timestamp startOfTodayBlock(int position) {
         return timeRepository.startOfToday().plusDays(position).plusHours(17);
     }
 
-    private Time endOfTodayBlock(int position) {
+    private Timestamp endOfTodayBlock(int position) {
         return timeRepository.startOfToday().plusDays(position).plusHours(23);
     }
 

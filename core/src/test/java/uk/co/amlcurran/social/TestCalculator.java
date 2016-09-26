@@ -2,17 +2,17 @@ package uk.co.amlcurran.social;
 
 class TestCalculator implements TimeCalculator {
     @Override
-    public Time plusDays(int days, Time time) {
+    public Timestamp plusDays(int days, Timestamp time) {
         return null;
     }
 
     @Override
-    public int getDays(Time time) {
+    public int getDays(Timestamp time) {
         return 0;
     }
 
     @Override
-    public Time plusHours(Time time, int hours) {
+    public Timestamp plusHours(Timestamp time, int hours) {
         return null;
     }
 }
