@@ -104,9 +104,8 @@
 
 - (id<SCEventRepositoryAccessor>)queryEventsWithSCTimeOfDay:(SCTimeOfDay *)fivePm
                                             withSCTimeOfDay:(SCTimeOfDay *)elevenPm
-                                                 withSCTime:(SCTimestamp *)searchStartTime
-                                                 withSCTime:(SCTimestamp *)searchEndTime
-{
+                                            withSCTimestamp:(SCTimestamp *)searchStartTime
+                                            withSCTimestamp:(SCTimestamp *)searchEndTime {
     EKEventStore *eventStore = [[EKEventStore alloc] init];
     NSDate *startTime =  [self.calculator date:searchStartTime];
     NSDate *endTime = [self.calculator date:searchEndTime];
