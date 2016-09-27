@@ -3,11 +3,12 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/EventsRepository.java
 //
 
-#include "EventRepositoryAccessor.h"
 #include "EventsRepository.h"
+#include "EventsService.h"
 #include "J2ObjC_source.h"
 #include "TimeOfDay.h"
 #include "Timestamp.h"
+#include "java/util/List.h"
 
 @interface SCEventsRepository : NSObject
 
@@ -17,7 +18,7 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "queryEventsWithSCTimeOfDay:withSCTimeOfDay:withSCTimestamp:withSCTimestamp:", "queryEvents", "Luk.co.amlcurran.social.EventRepositoryAccessor;", 0x401, NULL, NULL },
+    { "getCalendarItemsWithSCTimestamp:withSCTimestamp:withSCTimeOfDay:withSCTimeOfDay:withSCEventsService:", "getCalendarItems", "Ljava.util.List;", 0x401, NULL, "(Luk/co/amlcurran/social/Timestamp;Luk/co/amlcurran/social/Timestamp;Luk/co/amlcurran/social/TimeOfDay;Luk/co/amlcurran/social/TimeOfDay;Luk/co/amlcurran/social/EventsService;)Ljava/util/List<Luk/co/amlcurran/social/CalendarItem;>;" },
   };
   static const J2ObjcClassInfo _SCEventsRepository = { 2, "EventsRepository", "uk.co.amlcurran.social", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_SCEventsRepository;

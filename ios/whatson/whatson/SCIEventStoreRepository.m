@@ -10,6 +10,8 @@
 #import <EventKit/EventKit.h>
 #import "EventRepositoryAccessor.h"
 #import "TimeCalculator.h"
+#import "ArrayList.h"
+#import "EventCalendarItem.h"
 #import "Whatson-Swift.h"
 
 @interface SCIEKEventAccessor : NSObject<SCEventRepositoryAccessor>
@@ -102,18 +104,25 @@
     return self;
 }
 
-- (id<SCEventRepositoryAccessor>)queryEventsWithSCTimeOfDay:(SCTimeOfDay *)fivePm
-                                            withSCTimeOfDay:(SCTimeOfDay *)elevenPm
-                                            withSCTimestamp:(SCTimestamp *)searchStartTime
-                                            withSCTimestamp:(SCTimestamp *)searchEndTime {
+- (id<JavaUtilList>)getCalendarItemsWithSCTimestamp:(SCTimestamp *)nowTime
+                                    withSCTimestamp:(SCTimestamp *)nextWeek
+                                    withSCTimeOfDay:(SCTimeOfDay *)fivePm
+                                    withSCTimeOfDay:(SCTimeOfDay *)elevenPm
+                                withSCEventsService:(SCEventsService *)eventsService {
     EKEventStore *eventStore = [[EKEventStore alloc] init];
-    NSDate *startTime =  [self.calculator date:searchStartTime];
-    NSDate *endTime = [self.calculator date:searchEndTime];
+    NSDate *startTime =  [self.calculator date:nowTime];
+    NSDate *endTime = [self.calculator date:nextWeek];
     NSPredicate *search = [eventStore predicateForEventsWithStartDate:startTime endDate:endTime calendars:nil];
     NSArray *array = [eventStore eventsMatchingPredicate:search];
     NSArray *filtered = [array filteredArrayUsingPredicate:self.predicate];
-    return [[SCIEKEventAccessor alloc] initWithEventItems:filtered];
+    id<JavaUtilList> items = [[JavaUtilArrayList alloc] init];
+    for (EKEvent* item in filtered) {
+        [items addWithId:[[SCEventCalendarItem alloc] initWithNSString:item.eventIdentifier
+                                                          withNSString:item.title
+                                                       withSCTimestamp:[self.calculator time:item.startDate]
+                                                       withSCTimestamp:[self.calculator time:item.endDate]]];
+    }
+    return items;
 }
-
 
 @end

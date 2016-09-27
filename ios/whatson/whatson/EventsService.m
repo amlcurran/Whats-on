@@ -6,8 +6,6 @@
 #include "CalendarItem.h"
 #include "CalendarSlot.h"
 #include "CalendarSource.h"
-#include "EventCalendarItem.h"
-#include "EventRepositoryAccessor.h"
 #include "EventsRepository.h"
 #include "EventsService.h"
 #include "J2ObjC_source.h"
@@ -15,7 +13,6 @@
 #include "TimeOfDay.h"
 #include "TimeRepository.h"
 #include "Timestamp.h"
-#include "java/util/ArrayList.h"
 #include "java/util/List.h"
 
 @interface SCEventsService () {
@@ -43,26 +40,16 @@ J2OBJC_FIELD_SETTER(SCEventsService, eventsRepository_, id<SCEventsRepository>)
   SCTimestamp *nextWeek = [((SCTimestamp *) nil_chk(nowTime)) plusDaysWithInt:numberOfDays];
   SCTimeOfDay *fivePm = [timeRepository_ borderTimeStart];
   SCTimeOfDay *elevenPm = [timeRepository_ borderTimeEnd];
-  id<SCEventRepositoryAccessor> accessor = [((id<SCEventsRepository>) nil_chk(eventsRepository_)) queryEventsWithSCTimeOfDay:fivePm withSCTimeOfDay:elevenPm withSCTimestamp:nowTime withSCTimestamp:nextWeek];
-  id<JavaUtilList> calendarItems = new_JavaUtilArrayList_init();
-  while ([((id<SCEventRepositoryAccessor>) nil_chk(accessor)) nextItem]) {
-    NSString *title = [accessor getTitle];
-    NSString *eventId = [accessor getEventIdentifier];
-    SCTimestamp *time = [accessor getStartTime];
-    SCTimestamp *endTime = [accessor getEndTime];
-    [calendarItems addWithId:new_SCEventCalendarItem_initWithNSString_withNSString_withSCTimestamp_withSCTimestamp_(eventId, title, time, endTime)];
-  }
+  id<JavaUtilList> calendarItems = [((id<SCEventsRepository>) nil_chk(eventsRepository_)) getCalendarItemsWithSCTimestamp:nowTime withSCTimestamp:nextWeek withSCTimeOfDay:fivePm withSCTimeOfDay:elevenPm withSCEventsService:self];
   UkCoAmlcurranSocialCoreSparseArray *itemArray = new_UkCoAmlcurranSocialCoreSparseArray_initWithInt_(numberOfDays);
   jint epochToNow = [((SCTimestamp *) nil_chk(now)) daysSinceEpoch];
-  for (id<SCCalendarItem> __strong item in calendarItems) {
+  for (id<SCCalendarItem> __strong item in nil_chk(calendarItems)) {
     jint key = [((SCTimestamp *) nil_chk([((id<SCCalendarItem>) nil_chk(item)) startTime])) daysSinceEpoch] - epochToNow;
     SCCalendarSlot *slot = [itemArray getWithInt:key withId:new_SCCalendarSlot_init()];
     [((SCCalendarSlot *) nil_chk(slot)) addItemWithSCCalendarItem:item];
     [itemArray putWithInt:key withId:slot];
   }
-  SCCalendarSource *calendarSource = new_SCCalendarSource_initWithSCTimeRepository_withUkCoAmlcurranSocialCoreSparseArray_withInt_(timeRepository_, itemArray, numberOfDays);
-  [accessor endAccess];
-  return calendarSource;
+  return new_SCCalendarSource_initWithSCTimeRepository_withUkCoAmlcurranSocialCoreSparseArray_withInt_(timeRepository_, itemArray, numberOfDays);
 }
 
 + (const J2ObjcClassInfo *)__metadata {

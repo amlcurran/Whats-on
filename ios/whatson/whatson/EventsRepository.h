@@ -16,16 +16,18 @@
 #if !defined (SCEventsRepository_) && (EventsRepository_INCLUDE_ALL || defined(SCEventsRepository_INCLUDE))
 #define SCEventsRepository_
 
+@class SCEventsService;
 @class SCTimeOfDay;
 @class SCTimestamp;
-@protocol SCEventRepositoryAccessor;
+@protocol JavaUtilList;
 
 @protocol SCEventsRepository < NSObject, JavaObject >
 
-- (id<SCEventRepositoryAccessor>)queryEventsWithSCTimeOfDay:(SCTimeOfDay *)fivePm
-                                            withSCTimeOfDay:(SCTimeOfDay *)elevenPm
-                                            withSCTimestamp:(SCTimestamp *)searchStartTime
-                                            withSCTimestamp:(SCTimestamp *)searchEndTime;
+- (id<JavaUtilList>)getCalendarItemsWithSCTimestamp:(SCTimestamp *)nowTime
+                                    withSCTimestamp:(SCTimestamp *)nextWeek
+                                    withSCTimeOfDay:(SCTimeOfDay *)fivePm
+                                    withSCTimeOfDay:(SCTimeOfDay *)elevenPm
+                                withSCEventsService:(SCEventsService *)eventsService;
 
 @end
 
