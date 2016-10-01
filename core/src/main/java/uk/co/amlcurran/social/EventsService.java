@@ -22,7 +22,7 @@ public class EventsService {
         TimeOfDay fivePm = timeRepository.borderTimeStart();
         TimeOfDay elevenPm = timeRepository.borderTimeEnd();
 
-        List<CalendarItem> calendarItems = eventsRepository.getCalendarItems(nowTime, nextWeek, fivePm, elevenPm, this);
+        List<CalendarItem> calendarItems = eventsRepository.getCalendarItems(nowTime, nextWeek, fivePm, elevenPm);
 
         SparseArray<CalendarSlot> itemArray = new SparseArray<>(numberOfDays);
         int epochToNow = now.daysSinceEpoch();

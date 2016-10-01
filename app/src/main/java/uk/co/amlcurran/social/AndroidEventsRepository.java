@@ -41,7 +41,7 @@ public class AndroidEventsRepository implements EventsRepository {
     }
 
     @Override
-    public List<CalendarItem> getCalendarItems(Timestamp nowTime, Timestamp nextWeek, TimeOfDay fivePm, TimeOfDay elevenPm, EventsService eventsService) {
+    public List<CalendarItem> getCalendarItems(Timestamp nowTime, Timestamp nextWeek, TimeOfDay fivePm, TimeOfDay elevenPm) {
         Cursor calendarCursor = getCursor(fivePm, elevenPm, nowTime, nextWeek);
         EventRepositoryAccessor accessor = new CursorEventRepositoryAccessor(calendarCursor, new JodaCalculator());
         List<CalendarItem> calendarItems = new ArrayList<>();

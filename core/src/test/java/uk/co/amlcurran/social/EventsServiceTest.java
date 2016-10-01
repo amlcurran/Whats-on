@@ -2,9 +2,7 @@ package uk.co.amlcurran.social;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -24,7 +22,7 @@ public class EventsServiceTest {
     private static class MyEventsRepository implements EventsRepository {
 
         @Override
-        public List<CalendarItem> getCalendarItems(Timestamp nowTime, Timestamp nextWeek, TimeOfDay fivePm, TimeOfDay elevenPm, EventsService eventsService) {
+        public List<CalendarItem> getCalendarItems(Timestamp nowTime, Timestamp nextWeek, TimeOfDay fivePm, TimeOfDay elevenPm) {
             return Arrays.asList(new TestCalendarItem(), new TestCalendarItem());
         }
     }

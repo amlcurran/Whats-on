@@ -30,7 +30,7 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
         dateFormatter.dateFormat = "EEE";
         dayColor = UIColor.black.withAlphaComponent(0.54);
         let timeRepo = SCITimeRepository();
-        let eventRepo = SCIEventStoreRepository();
+        let eventRepo = EventStoreRepository();
         eventService = SCEventsService(scTimeRepository: timeRepo, with: eventRepo);
         presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService)
         
