@@ -17,42 +17,49 @@ class CalendarSourceViewCell : UITableViewCell {
     @IBOutlet weak var topSpacingConstraint: NSLayoutConstraint!
     @IBOutlet weak var roundedView: UIView!
     
-    let dateFormatter = DateFormatter();
+    let dateFormatter = DateFormatter()
     
+    var type: SlotType = .empty {
+        didSet {
+            roundedView.backgroundColor = type.cellBackground
+            mainLabel.textColor = type.mainText
+            numberLabel.textColor = type.secondaryText
+        }
+    }
     var empty : Bool = true
 
-    @available(iOS 3.0, *) override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         dateFormatter.dateFormat = "EEE"
+        backgroundColor = .clear
         selectionStyle = .none
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         dateFormatter.dateFormat = "EEE"
+        backgroundColor = .clear
         selectionStyle = .none
     }
 
     func bind(_ item : SCCalendarItem, slot : SCCalendarSlot?) {
-        self.empty = slot?.isEmpty() ?? false
+        type = (slot?.isEmpty() ?? false) ? .empty : .full
         let startTime = Date.dateFromTime(item.startTime());
         let formatted = String(format: "%@ - %@", dateFormatter.string(from: startTime), item.title());
         let colouredString = NSMutableAttributedString(string: formatted);
         if (item.isEmpty()) {
             let lowRange = NSRange(location: 0, length: colouredString.length)
-            colouredString.addAttribute(NSForegroundColorAttributeName, value: UIColor.lowTextColor(slot), range: lowRange);
+            colouredString.addAttribute(NSForegroundColorAttributeName, value: type.secondaryText, range: lowRange);
         } else {
             let lowRange = NSRange(location: 0, length: 3)
-            colouredString.addAttribute(NSForegroundColorAttributeName, value: UIColor.lowTextColor(slot), range: lowRange);
+            colouredString.addAttribute(NSForegroundColorAttributeName, value: type.secondaryText, range: lowRange);
         }
-        mainLabel.textColor = UIColor.mainTextColor(slot)
         mainLabel.attributedText = colouredString;
         
         let itemCount = slot?.count() ?? 0
         if (itemCount > 1) {
             numberLabel.text = String(format: "+%lu more event", slot!.count() - 1);
             numberLabel.isHidden = false;
-            numberLabel.textColor = UIColor.lowTextColor(slot)
             centreInParentConstraint.isActive = false;
             topSpacingConstraint.isActive = true;
         } else {
@@ -62,48 +69,25 @@ class CalendarSourceViewCell : UITableViewCell {
         }
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        if (selected) {
-            roundedView.backgroundColor = UIColor.selectedCellColor(self)
-        } else {
-            roundedView.backgroundColor = UIColor.cellColor(self)
-        }
-    }
-    
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        if (highlighted) {
-            roundedView.backgroundColor = UIColor.selectedCellColor(self)
-        } else {
-            roundedView.backgroundColor = UIColor.cellColor(self)
-        }
-    }
-    
 }
 
-private extension UIColor {
+private let backgrounds: [SlotType: UIColor] = [ .empty: .clear, .full: .white ]
+private let mainTexts: [SlotType: UIColor] = [ .empty: .lightText, .full: .secondary ]
+private let secondaryTexts: [SlotType: UIColor] = [ .empty: .lightText, .full: .lightText ]
+
+enum SlotType {
+    case empty
+    case full
     
-    static func selectedCellColor(_ cell: CalendarSourceViewCell) -> UIColor {
-        return UIColor.blue
+    var cellBackground: UIColor {
+        return backgrounds[self].or(.white)
     }
     
-    static func cellColor(_ cell: CalendarSourceViewCell) -> UIColor {
-        return UIColor.yellow
+    var mainText: UIColor {
+        return mainTexts[self].or(.secondary)
     }
     
-    static func mainTextColor(_ slot: SCCalendarSlot?) -> UIColor {
-        return UIColor.black
+    var secondaryText: UIColor {
+        return secondaryTexts[self].or(.lightText)
     }
-    
-    static func selectedMainTextColor(_ cell: CalendarSourceViewCell) -> UIColor {
-        return UIColor.black
-    }
-    
-    static func lowTextColor(_ slot: SCCalendarSlot?) -> UIColor {
-       return UIColor.green
-    }
-    
-    static func selectedLowTextColor(_ cell: CalendarSourceViewCell) -> UIColor {
-        return UIColor.green
-    }
-    
 }

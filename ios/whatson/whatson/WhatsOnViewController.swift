@@ -24,6 +24,7 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .windowBackground
         eventStore = EKEventStore()
         if traitCollection.forceTouchCapability == .available {
             registerForPreviewing(with: self, sourceView: tableView);
@@ -49,11 +50,13 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
         title = "What's On";
         
         let newCellNib = UINib(nibName: "CalendarCell", bundle: Bundle.main)
-        tableView.register(newCellNib, forCellReuseIdentifier: "day");
+        tableView.register(newCellNib, forCellReuseIdentifier: "day")
+        tableView.backgroundColor = .clear
         tableView.rowHeight = 60;
         tableView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
     }
     
     func eventsChanged() {
