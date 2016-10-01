@@ -19,17 +19,20 @@ class HeaderView: UIView {
     func layout() {
         add(todayLabel, constrainedTo: [.top, .trailing, .leading])
         add(appLabel, constrainedTo: [.bottom, .trailing, .leading])
-        appLabel.constrain(.top, to: todayLabel, .bottom, withOffset: 3)
+        appLabel.constrain(.top, to: todayLabel, .bottom, withOffset: 4)
     }
 
     func styleTodayLabel() {
-        todayLabel.text = "Hello world"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .full
+        dateFormatter.timeStyle = .none
+        todayLabel.text = (dateFormatter.string(from: Date()) as NSString).uppercased
         todayLabel.textColor = .accent
         todayLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightSemibold)
     }
     
     func styleAppLabel() {
-        appLabel.text = "What's on"
+        appLabel.text = "What’s on"
         appLabel.textColor = .secondary
         appLabel.font = UIFont.systemFont(ofSize: 32, weight: UIFontWeightHeavy)
     }
