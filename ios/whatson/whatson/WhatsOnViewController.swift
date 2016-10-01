@@ -24,6 +24,7 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        edgesForExtendedLayout = [.left, .right, .bottom]
         view.backgroundColor = .windowBackground
         eventStore = EKEventStore()
         if traitCollection.forceTouchCapability == .available {
@@ -43,9 +44,19 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
         #if DEBUG
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editTapped))
         #endif
+        navigationController?.isNavigationBarHidden = true
         
-        view.addSubview(tableView)
-        tableView.constrainToSuperview(edges: [.top, .bottom, .leading, .trailing])
+        let blur = UIBlurEffect(style: .light)
+        let blurView = UIVisualEffectView(effect: blur)
+        let header = HeaderView()
+        blurView.add(header, constrainedTo: [.leading], withOffset: 16)
+        header.constrainToSuperview(edges: [.trailing, .bottom], withOffset: -16)
+        
+        view.add(tableView, constrainedTo: [.bottom, .leading, .trailing])
+        view.add(blurView, constrainedTo: [.leading, .trailing, .top])
+        header.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 16).isActive = true
+        tableView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        tableView.contentInset = UIEdgeInsets(top: header.intrinsicContentSize.height + 38, left: 0, bottom: 0, right: 0)
         
         title = "What's On";
         
@@ -53,7 +64,6 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
         tableView.register(newCellNib, forCellReuseIdentifier: "day")
         tableView.backgroundColor = .clear
         tableView.rowHeight = 60;
-        tableView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none

@@ -41,9 +41,9 @@ extension UIView {
         return constraint
     }
     
-    func add(_ view: UIView, constrainedTo edges: [NSLayoutAttribute]) {
+    func add(_ view: UIView, constrainedTo edges: [NSLayoutAttribute], withOffset offset: CGFloat = 0) {
         addSubview(view)
-        view.constrainToSuperview(edges: edges)
+        view.constrainToSuperview(edges: edges, withOffset: offset)
     }
     
     private func prepareForConstraints() -> UIView {
