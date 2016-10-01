@@ -11,7 +11,7 @@ import EventKit
         self.predicates = EventPredicates(timeRepository: timeRepository)
     }
     
-    public func getCalendarItems(with nowTime: SCTimestamp!, with nextWeek: SCTimestamp!, with fivePm: SCTimeOfDay!, with elevenPm: SCTimeOfDay!, with eventsService: SCEventsService!) -> JavaUtilList {
+    public func getCalendarItems(with nowTime: SCTimestamp!, with nextWeek: SCTimestamp!, with fivePm: SCTimeOfDay!, with elevenPm: SCTimeOfDay!) -> JavaUtilList {
         let eventStore = EKEventStore()
         let startTime = calculator.date(nowTime)
         let endTime = calculator.date(nextWeek)
@@ -37,21 +37,3 @@ fileprivate extension Array {
     }
     
 }
-
-/*
- 
- EKEventStore *eventStore = [[EKEventStore alloc] init];
- NSDate *startTime =  [self.calculator date:nowTime];
- NSDate *endTime = [self.calculator date:nextWeek];
- NSPredicate *search = [eventStore predicateForEventsWithStartDate:startTime endDate:endTime calendars:nil];
- NSArray *array = [eventStore eventsMatchingPredicate:search];
- NSArray *filtered = [array filteredArrayUsingPredicate:self.predicate];
- id<JavaUtilList> items = [[JavaUtilArrayList alloc] init];
- for (EKEvent* item in filtered) {
- [items addWithId:[[SCEventCalendarItem alloc] initWithNSString:item.eventIdentifier
- withNSString:item.title
- withSCTimestamp:[self.calculator time:item.startDate]
- withSCTimestamp:[self.calculator time:item.endDate]]];
- }
- return items;
- */

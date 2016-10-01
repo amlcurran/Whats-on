@@ -7,7 +7,6 @@
 #include "J2ObjC_source.h"
 #include "TimeOfDay.h"
 #include "TimeRepository.h"
-#include "Timestamp.h"
 #include "javax/annotation/Nonnull.h"
 #include "javax/annotation/meta/When.h"
 
@@ -34,17 +33,12 @@
   return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
-+ (IOSObjectArray *)__annotations_startOfToday {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "borderTimeEnd", NULL, "Luk.co.amlcurran.social.TimeOfDay;", 0x401, NULL, NULL },
     { "borderTimeStart", NULL, "Luk.co.amlcurran.social.TimeOfDay;", 0x401, NULL, NULL },
-    { "startOfToday", NULL, "Luk.co.amlcurran.social.Timestamp;", 0x401, NULL, NULL },
   };
-  static const J2ObjcClassInfo _SCTimeRepository = { 2, "TimeRepository", "uk.co.amlcurran.social", NULL, 0x609, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _SCTimeRepository = { 2, "TimeRepository", "uk.co.amlcurran.social", NULL, 0x609, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_SCTimeRepository;
 }
 

@@ -4,7 +4,6 @@
 //
 
 #include "EventsRepository.h"
-#include "EventsService.h"
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "TimeOfDay.h"
@@ -28,13 +27,13 @@
 
 @implementation SCEventsRepository
 
-+ (IOSObjectArray *)__annotations_getCalendarItemsWithSCTimestamp_withSCTimestamp_withSCTimeOfDay_withSCTimeOfDay_withSCEventsService_ {
++ (IOSObjectArray *)__annotations_getCalendarItemsWithSCTimestamp_withSCTimestamp_withSCTimeOfDay_withSCTimeOfDay_ {
   return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "getCalendarItemsWithSCTimestamp:withSCTimestamp:withSCTimeOfDay:withSCTimeOfDay:withSCEventsService:", "getCalendarItems", "Ljava.util.List;", 0x401, NULL, "(Luk/co/amlcurran/social/Timestamp;Luk/co/amlcurran/social/Timestamp;Luk/co/amlcurran/social/TimeOfDay;Luk/co/amlcurran/social/TimeOfDay;Luk/co/amlcurran/social/EventsService;)Ljava/util/List<Luk/co/amlcurran/social/CalendarItem;>;" },
+    { "getCalendarItemsWithSCTimestamp:withSCTimestamp:withSCTimeOfDay:withSCTimeOfDay:", "getCalendarItems", "Ljava.util.List;", 0x401, NULL, "(Luk/co/amlcurran/social/Timestamp;Luk/co/amlcurran/social/Timestamp;Luk/co/amlcurran/social/TimeOfDay;Luk/co/amlcurran/social/TimeOfDay;)Ljava/util/List<Luk/co/amlcurran/social/CalendarItem;>;" },
   };
   static const J2ObjcClassInfo _SCEventsRepository = { 2, "EventsRepository", "uk.co.amlcurran.social", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_SCEventsRepository;

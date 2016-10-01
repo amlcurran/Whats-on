@@ -19,6 +19,7 @@
 @class SCCalendarSource;
 @class SCTimestamp;
 @protocol SCEventsRepository;
+@protocol SCTimeCalculator;
 @protocol SCTimeRepository;
 
 #if __has_feature(nullability)
@@ -31,7 +32,8 @@
 #pragma mark Public
 
 - (instancetype)initWithSCTimeRepository:(id<SCTimeRepository>)dateCreator
-                  withSCEventsRepository:(id<SCEventsRepository>)eventsRepository;
+                  withSCEventsRepository:(id<SCEventsRepository>)eventsRepository
+                    withSCTimeCalculator:(id<SCTimeCalculator>)timeCalculator;
 
 - (SCCalendarSource * __nonnull)getCalendarSourceWithInt:(jint)numberOfDays
                                          withSCTimestamp:(SCTimestamp *)now;
@@ -40,11 +42,11 @@
 
 J2OBJC_EMPTY_STATIC_INIT(SCEventsService)
 
-FOUNDATION_EXPORT void SCEventsService_initWithSCTimeRepository_withSCEventsRepository_(SCEventsService *self, id<SCTimeRepository> dateCreator, id<SCEventsRepository> eventsRepository);
+FOUNDATION_EXPORT void SCEventsService_initWithSCTimeRepository_withSCEventsRepository_withSCTimeCalculator_(SCEventsService *self, id<SCTimeRepository> dateCreator, id<SCEventsRepository> eventsRepository, id<SCTimeCalculator> timeCalculator);
 
-FOUNDATION_EXPORT SCEventsService *new_SCEventsService_initWithSCTimeRepository_withSCEventsRepository_(id<SCTimeRepository> dateCreator, id<SCEventsRepository> eventsRepository) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT SCEventsService *new_SCEventsService_initWithSCTimeRepository_withSCEventsRepository_withSCTimeCalculator_(id<SCTimeRepository> dateCreator, id<SCEventsRepository> eventsRepository, id<SCTimeCalculator> timeCalculator) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT SCEventsService *create_SCEventsService_initWithSCTimeRepository_withSCEventsRepository_(id<SCTimeRepository> dateCreator, id<SCEventsRepository> eventsRepository);
+FOUNDATION_EXPORT SCEventsService *create_SCEventsService_initWithSCTimeRepository_withSCEventsRepository_withSCTimeCalculator_(id<SCTimeRepository> dateCreator, id<SCEventsRepository> eventsRepository, id<SCTimeCalculator> timeCalculator);
 
 J2OBJC_TYPE_LITERAL_HEADER(SCEventsService)
 

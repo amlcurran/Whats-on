@@ -11,6 +11,7 @@
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "SparseArray.h"
+#include "TimeCalculator.h"
 #include "TimeOfDay.h"
 #include "TimeRepository.h"
 #include "Timestamp.h"
@@ -27,12 +28,14 @@
  @public
   id<SCTimeRepository> timeRepository_;
   id<SCEventsRepository> eventsRepository_;
+  id<SCTimeCalculator> timeCalculator_;
 }
 
 @end
 
 J2OBJC_FIELD_SETTER(SCEventsService, timeRepository_, id<SCTimeRepository>)
 J2OBJC_FIELD_SETTER(SCEventsService, eventsRepository_, id<SCEventsRepository>)
+J2OBJC_FIELD_SETTER(SCEventsService, timeCalculator_, id<SCTimeCalculator>)
 
 #if __has_feature(nullability)
 #pragma clang diagnostic pop
@@ -41,18 +44,19 @@ J2OBJC_FIELD_SETTER(SCEventsService, eventsRepository_, id<SCEventsRepository>)
 @implementation SCEventsService
 
 - (instancetype)initWithSCTimeRepository:(id<SCTimeRepository>)dateCreator
-                  withSCEventsRepository:(id<SCEventsRepository>)eventsRepository {
-  SCEventsService_initWithSCTimeRepository_withSCEventsRepository_(self, dateCreator, eventsRepository);
+                  withSCEventsRepository:(id<SCEventsRepository>)eventsRepository
+                    withSCTimeCalculator:(id<SCTimeCalculator>)timeCalculator {
+  SCEventsService_initWithSCTimeRepository_withSCEventsRepository_withSCTimeCalculator_(self, dateCreator, eventsRepository, timeCalculator);
   return self;
 }
 
 - (SCCalendarSource * __nonnull)getCalendarSourceWithInt:(jint)numberOfDays
                                          withSCTimestamp:(SCTimestamp *)now {
-  SCTimestamp *nowTime = [((id<SCTimeRepository>) nil_chk(timeRepository_)) startOfToday];
+  SCTimestamp *nowTime = [((id<SCTimeCalculator>) nil_chk(timeCalculator_)) startOfToday];
   SCTimestamp *nextWeek = [((SCTimestamp *) nil_chk(nowTime)) plusDaysWithInt:numberOfDays];
-  SCTimeOfDay *fivePm = [timeRepository_ borderTimeStart];
+  SCTimeOfDay *fivePm = [((id<SCTimeRepository>) nil_chk(timeRepository_)) borderTimeStart];
   SCTimeOfDay *elevenPm = [timeRepository_ borderTimeEnd];
-  id<JavaUtilList> calendarItems = [((id<SCEventsRepository>) nil_chk(eventsRepository_)) getCalendarItemsWithSCTimestamp:nowTime withSCTimestamp:nextWeek withSCTimeOfDay:fivePm withSCTimeOfDay:elevenPm withSCEventsService:self];
+  id<JavaUtilList> calendarItems = [((id<SCEventsRepository>) nil_chk(eventsRepository_)) getCalendarItemsWithSCTimestamp:nowTime withSCTimestamp:nextWeek withSCTimeOfDay:fivePm withSCTimeOfDay:elevenPm];
   UkCoAmlcurranSocialCoreSparseArray *itemArray = new_UkCoAmlcurranSocialCoreSparseArray_initWithInt_(numberOfDays);
   jint epochToNow = [((SCTimestamp *) nil_chk(now)) daysSinceEpoch];
   for (id<SCCalendarItem> __strong item in nil_chk(calendarItems)) {
@@ -61,7 +65,7 @@ J2OBJC_FIELD_SETTER(SCEventsService, eventsRepository_, id<SCEventsRepository>)
     [((SCCalendarSlot *) nil_chk(slot)) addItemWithSCCalendarItem:item];
     [itemArray putWithInt:key withId:slot];
   }
-  return new_SCCalendarSource_initWithSCTimeRepository_withUkCoAmlcurranSocialCoreSparseArray_withInt_(timeRepository_, itemArray, numberOfDays);
+  return new_SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTimeCalculator_(itemArray, numberOfDays, timeCalculator_);
 }
 
 + (IOSObjectArray *)__annotations_getCalendarSourceWithInt_withSCTimestamp_ {
@@ -70,33 +74,35 @@ J2OBJC_FIELD_SETTER(SCEventsService, eventsRepository_, id<SCEventsRepository>)
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithSCTimeRepository:withSCEventsRepository:", "EventsService", NULL, 0x1, NULL, NULL },
+    { "initWithSCTimeRepository:withSCEventsRepository:withSCTimeCalculator:", "EventsService", NULL, 0x1, NULL, NULL },
     { "getCalendarSourceWithInt:withSCTimestamp:", "getCalendarSource", "Luk.co.amlcurran.social.CalendarSource;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "timeRepository_", NULL, 0x12, "Luk.co.amlcurran.social.TimeRepository;", NULL, NULL, .constantValue.asLong = 0 },
     { "eventsRepository_", NULL, 0x12, "Luk.co.amlcurran.social.EventsRepository;", NULL, NULL, .constantValue.asLong = 0 },
+    { "timeCalculator_", NULL, 0x12, "Luk.co.amlcurran.social.TimeCalculator;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _SCEventsService = { 2, "EventsService", "uk.co.amlcurran.social", NULL, 0x1, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _SCEventsService = { 2, "EventsService", "uk.co.amlcurran.social", NULL, 0x1, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_SCEventsService;
 }
 
 @end
 
-void SCEventsService_initWithSCTimeRepository_withSCEventsRepository_(SCEventsService *self, id<SCTimeRepository> dateCreator, id<SCEventsRepository> eventsRepository) {
+void SCEventsService_initWithSCTimeRepository_withSCEventsRepository_withSCTimeCalculator_(SCEventsService *self, id<SCTimeRepository> dateCreator, id<SCEventsRepository> eventsRepository, id<SCTimeCalculator> timeCalculator) {
   NSObject_init(self);
   self->eventsRepository_ = eventsRepository;
   self->timeRepository_ = dateCreator;
+  self->timeCalculator_ = timeCalculator;
 }
 
-SCEventsService *new_SCEventsService_initWithSCTimeRepository_withSCEventsRepository_(id<SCTimeRepository> dateCreator, id<SCEventsRepository> eventsRepository) {
+SCEventsService *new_SCEventsService_initWithSCTimeRepository_withSCEventsRepository_withSCTimeCalculator_(id<SCTimeRepository> dateCreator, id<SCEventsRepository> eventsRepository, id<SCTimeCalculator> timeCalculator) {
   SCEventsService *self = [SCEventsService alloc];
-  SCEventsService_initWithSCTimeRepository_withSCEventsRepository_(self, dateCreator, eventsRepository);
+  SCEventsService_initWithSCTimeRepository_withSCEventsRepository_withSCTimeCalculator_(self, dateCreator, eventsRepository, timeCalculator);
   return self;
 }
 
-SCEventsService *create_SCEventsService_initWithSCTimeRepository_withSCEventsRepository_(id<SCTimeRepository> dateCreator, id<SCEventsRepository> eventsRepository) {
-  return new_SCEventsService_initWithSCTimeRepository_withSCEventsRepository_(dateCreator, eventsRepository);
+SCEventsService *create_SCEventsService_initWithSCTimeRepository_withSCEventsRepository_withSCTimeCalculator_(id<SCTimeRepository> dateCreator, id<SCEventsRepository> eventsRepository, id<SCTimeCalculator> timeCalculator) {
+  return new_SCEventsService_initWithSCTimeRepository_withSCEventsRepository_withSCTimeCalculator_(dateCreator, eventsRepository, timeCalculator);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(SCEventsService)

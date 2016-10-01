@@ -33,6 +33,8 @@
 - (SCTimestamp * __nonnull)plusHoursWithSCTimestamp:(SCTimestamp *)time
                                             withInt:(jint)hours;
 
+- (SCTimestamp *)startOfToday;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(SCTimeCalculator)

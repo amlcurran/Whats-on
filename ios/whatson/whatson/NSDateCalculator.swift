@@ -43,6 +43,15 @@ public class NSDateCalculator : NSObject, SCTimeCalculator {
         return SCTimestamp(long: jlong(newDate!.timeIntervalSince1970 * 1000), with: self);
     }
     
+    @objc public func startOfToday() -> SCTimestamp {
+        var components = NSCalendar.current.dateComponents([.second, .minute, .hour, .day, .month, .year], from: Date())
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        let newDate = NSCalendar.current.date(from: components)!
+        return time(newDate as NSDate)
+    }
+    
     internal func date(_ time: SCTimestamp) -> Date {
         return Date(timeIntervalSince1970: (Double(time.getMillis()) / 1000.0));
     }

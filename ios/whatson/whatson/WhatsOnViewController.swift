@@ -31,7 +31,7 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
         dayColor = UIColor.black.withAlphaComponent(0.54);
         let timeRepo = TimeRepository()
         let eventRepo = EventStoreRepository(timeRepository: timeRepo)
-        eventService = SCEventsService(scTimeRepository: timeRepo, with: eventRepo)
+        eventService = SCEventsService(scTimeRepository: timeRepo, with: eventRepo, with: NSDateCalculator())
         presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService)
         
         navigationController?.navigationBar.barTintColor = UIColor.appColor().withAlphaComponent(0.4)

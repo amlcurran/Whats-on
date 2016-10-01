@@ -10,7 +10,7 @@
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "SparseArray.h"
-#include "TimeRepository.h"
+#include "TimeCalculator.h"
 #include "Timestamp.h"
 #include "javax/annotation/Nonnull.h"
 #include "javax/annotation/Nullable.h"
@@ -23,9 +23,9 @@
 
 @interface SCCalendarSource () {
  @public
-  id<SCTimeRepository> timeRepository_;
   UkCoAmlcurranSocialCoreSparseArray *calendarItems_;
   jint daysSize_;
+  id<SCTimeCalculator> timeCalculator_;
 }
 
 - (SCTimestamp * __nonnull)startOfTodayBlockWithInt:(jint)position;
@@ -34,8 +34,8 @@
 
 @end
 
-J2OBJC_FIELD_SETTER(SCCalendarSource, timeRepository_, id<SCTimeRepository>)
 J2OBJC_FIELD_SETTER(SCCalendarSource, calendarItems_, UkCoAmlcurranSocialCoreSparseArray *)
+J2OBJC_FIELD_SETTER(SCCalendarSource, timeCalculator_, id<SCTimeCalculator>)
 
 __attribute__((unused)) static SCTimestamp *SCCalendarSource_startOfTodayBlockWithInt_(SCCalendarSource *self, jint position);
 
@@ -47,10 +47,10 @@ __attribute__((unused)) static SCTimestamp *SCCalendarSource_endOfTodayBlockWith
 
 @implementation SCCalendarSource
 
-- (instancetype)initWithSCTimeRepository:(id<SCTimeRepository>)timeRepository
-  withUkCoAmlcurranSocialCoreSparseArray:(UkCoAmlcurranSocialCoreSparseArray *)calendarItems
-                                 withInt:(jint)daysSize {
-  SCCalendarSource_initWithSCTimeRepository_withUkCoAmlcurranSocialCoreSparseArray_withInt_(self, timeRepository, calendarItems, daysSize);
+- (instancetype)initWithUkCoAmlcurranSocialCoreSparseArray:(UkCoAmlcurranSocialCoreSparseArray *)calendarItems
+                                                   withInt:(jint)daysSize
+                                      withSCTimeCalculator:(id<SCTimeCalculator>)timeCalculator {
+  SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTimeCalculator_(self, calendarItems, daysSize, timeCalculator);
   return self;
 }
 
@@ -102,7 +102,7 @@ __attribute__((unused)) static SCTimestamp *SCCalendarSource_endOfTodayBlockWith
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithSCTimeRepository:withUkCoAmlcurranSocialCoreSparseArray:withInt:", "CalendarSource", NULL, 0x1, NULL, "(Luk/co/amlcurran/social/TimeRepository;Luk/co/amlcurran/social/core/SparseArray<Luk/co/amlcurran/social/CalendarSlot;>;I)V" },
+    { "initWithUkCoAmlcurranSocialCoreSparseArray:withInt:withSCTimeCalculator:", "CalendarSource", NULL, 0x1, NULL, "(Luk/co/amlcurran/social/core/SparseArray<Luk/co/amlcurran/social/CalendarSlot;>;ILuk/co/amlcurran/social/TimeCalculator;)V" },
     { "count", NULL, "I", 0x1, NULL, NULL },
     { "itemAtWithInt:", "itemAt", "Luk.co.amlcurran.social.CalendarItem;", 0x1, NULL, NULL },
     { "startOfTodayBlockWithInt:", "startOfTodayBlock", "Luk.co.amlcurran.social.Timestamp;", 0x2, NULL, NULL },
@@ -111,9 +111,9 @@ __attribute__((unused)) static SCTimestamp *SCCalendarSource_endOfTodayBlockWith
     { "isEmptySlotWithInt:", "isEmptySlot", "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "timeRepository_", NULL, 0x12, "Luk.co.amlcurran.social.TimeRepository;", NULL, NULL, .constantValue.asLong = 0 },
     { "calendarItems_", NULL, 0x12, "Luk.co.amlcurran.social.core.SparseArray;", NULL, "Luk/co/amlcurran/social/core/SparseArray<Luk/co/amlcurran/social/CalendarSlot;>;", .constantValue.asLong = 0 },
     { "daysSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "timeCalculator_", NULL, 0x12, "Luk.co.amlcurran.social.TimeCalculator;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _SCCalendarSource = { 2, "CalendarSource", "uk.co.amlcurran.social", NULL, 0x0, 7, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_SCCalendarSource;
@@ -121,29 +121,29 @@ __attribute__((unused)) static SCTimestamp *SCCalendarSource_endOfTodayBlockWith
 
 @end
 
-void SCCalendarSource_initWithSCTimeRepository_withUkCoAmlcurranSocialCoreSparseArray_withInt_(SCCalendarSource *self, id<SCTimeRepository> timeRepository, UkCoAmlcurranSocialCoreSparseArray *calendarItems, jint daysSize) {
+void SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTimeCalculator_(SCCalendarSource *self, UkCoAmlcurranSocialCoreSparseArray *calendarItems, jint daysSize, id<SCTimeCalculator> timeCalculator) {
   NSObject_init(self);
-  self->timeRepository_ = timeRepository;
   self->calendarItems_ = calendarItems;
   self->daysSize_ = daysSize;
+  self->timeCalculator_ = timeCalculator;
 }
 
-SCCalendarSource *new_SCCalendarSource_initWithSCTimeRepository_withUkCoAmlcurranSocialCoreSparseArray_withInt_(id<SCTimeRepository> timeRepository, UkCoAmlcurranSocialCoreSparseArray *calendarItems, jint daysSize) {
+SCCalendarSource *new_SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTimeCalculator_(UkCoAmlcurranSocialCoreSparseArray *calendarItems, jint daysSize, id<SCTimeCalculator> timeCalculator) {
   SCCalendarSource *self = [SCCalendarSource alloc];
-  SCCalendarSource_initWithSCTimeRepository_withUkCoAmlcurranSocialCoreSparseArray_withInt_(self, timeRepository, calendarItems, daysSize);
+  SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTimeCalculator_(self, calendarItems, daysSize, timeCalculator);
   return self;
 }
 
-SCCalendarSource *create_SCCalendarSource_initWithSCTimeRepository_withUkCoAmlcurranSocialCoreSparseArray_withInt_(id<SCTimeRepository> timeRepository, UkCoAmlcurranSocialCoreSparseArray *calendarItems, jint daysSize) {
-  return new_SCCalendarSource_initWithSCTimeRepository_withUkCoAmlcurranSocialCoreSparseArray_withInt_(timeRepository, calendarItems, daysSize);
+SCCalendarSource *create_SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTimeCalculator_(UkCoAmlcurranSocialCoreSparseArray *calendarItems, jint daysSize, id<SCTimeCalculator> timeCalculator) {
+  return new_SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTimeCalculator_(calendarItems, daysSize, timeCalculator);
 }
 
 SCTimestamp *SCCalendarSource_startOfTodayBlockWithInt_(SCCalendarSource *self, jint position) {
-  return [((SCTimestamp *) nil_chk([((SCTimestamp *) nil_chk([((id<SCTimeRepository>) nil_chk(self->timeRepository_)) startOfToday])) plusDaysWithInt:position])) plusHoursWithInt:17];
+  return [((SCTimestamp *) nil_chk([((SCTimestamp *) nil_chk([((id<SCTimeCalculator>) nil_chk(self->timeCalculator_)) startOfToday])) plusDaysWithInt:position])) plusHoursWithInt:17];
 }
 
 SCTimestamp *SCCalendarSource_endOfTodayBlockWithInt_(SCCalendarSource *self, jint position) {
-  return [((SCTimestamp *) nil_chk([((SCTimestamp *) nil_chk([((id<SCTimeRepository>) nil_chk(self->timeRepository_)) startOfToday])) plusDaysWithInt:position])) plusHoursWithInt:23];
+  return [((SCTimestamp *) nil_chk([((SCTimestamp *) nil_chk([((id<SCTimeCalculator>) nil_chk(self->timeCalculator_)) startOfToday])) plusDaysWithInt:position])) plusHoursWithInt:23];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(SCCalendarSource)

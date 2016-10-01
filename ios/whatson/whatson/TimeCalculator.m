@@ -38,8 +38,9 @@
     { "plusDaysWithInt:withSCTimestamp:", "plusDays", "Luk.co.amlcurran.social.Timestamp;", 0x401, NULL, NULL },
     { "getDaysWithSCTimestamp:", "getDays", "I", 0x401, NULL, NULL },
     { "plusHoursWithSCTimestamp:withInt:", "plusHours", "Luk.co.amlcurran.social.Timestamp;", 0x401, NULL, NULL },
+    { "startOfToday", NULL, "Luk.co.amlcurran.social.Timestamp;", 0x401, NULL, NULL },
   };
-  static const J2ObjcClassInfo _SCTimeCalculator = { 2, "TimeCalculator", "uk.co.amlcurran.social", NULL, 0x609, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _SCTimeCalculator = { 2, "TimeCalculator", "uk.co.amlcurran.social", NULL, 0x609, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_SCTimeCalculator;
 }
 

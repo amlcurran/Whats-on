@@ -16,7 +16,6 @@
 #if !defined (SCEventsRepository_) && (EventsRepository_INCLUDE_ALL || defined(SCEventsRepository_INCLUDE))
 #define SCEventsRepository_
 
-@class SCEventsService;
 @class SCTimeOfDay;
 @class SCTimestamp;
 @protocol JavaUtilList;
@@ -31,8 +30,7 @@
 - (id<JavaUtilList> __nonnull)getCalendarItemsWithSCTimestamp:(SCTimestamp *)nowTime
                                               withSCTimestamp:(SCTimestamp *)nextWeek
                                               withSCTimeOfDay:(SCTimeOfDay *)fivePm
-                                              withSCTimeOfDay:(SCTimeOfDay *)elevenPm
-                                          withSCEventsService:(SCEventsService *)eventsService;
+                                              withSCTimeOfDay:(SCTimeOfDay *)elevenPm;
 
 @end
 

@@ -17,7 +17,6 @@
 #define SCTimeRepository_
 
 @class SCTimeOfDay;
-@class SCTimestamp;
 
 #if __has_feature(nullability)
 #pragma clang diagnostic push
@@ -29,8 +28,6 @@
 - (SCTimeOfDay * __nonnull)borderTimeEnd;
 
 - (SCTimeOfDay * __nonnull)borderTimeStart;
-
-- (SCTimestamp * __nonnull)startOfToday;
 
 @end
 
