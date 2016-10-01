@@ -13,6 +13,11 @@ class JodaCalculator implements TimeCalculator {
     }
 
     @Override
+    public Timestamp startOfToday() {
+        return new Timestamp(DateTime.now().withTimeAtStartOfDay().getMillis(), this);
+    }
+
+    @Override
     public int getDays(Timestamp time) {
         return Days.daysBetween(EPOCH, getDateTime(time)).getDays();
     }

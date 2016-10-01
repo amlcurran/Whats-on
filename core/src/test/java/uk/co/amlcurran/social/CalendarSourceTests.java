@@ -30,7 +30,7 @@ public class CalendarSourceTests {
             calendarSlot.addItem(items.get(0));
             slots.put(position, calendarSlot);
         }
-        return new CalendarSource(null, slots, numberOfItems);
+        return new CalendarSource(slots, numberOfItems, null);
     }
 
     @Test

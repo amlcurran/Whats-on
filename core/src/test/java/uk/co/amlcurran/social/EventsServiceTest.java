@@ -12,7 +12,7 @@ public class EventsServiceTest {
 
     @Test
     public void givenASlotWithTwoEventsThenTheSlotHasACountOfTwo() {
-        EventsService service = new EventsService(new MyTimeRepository(), new MyEventsRepository());
+        EventsService service = new EventsService(new MyTimeRepository(), new MyEventsRepository(), null);
 
         CalendarSource calendarSource = service.getCalendarSource(14, new Timestamp(0, new TestCalculator()));
 
@@ -38,10 +38,6 @@ public class EventsServiceTest {
             return TimeOfDay.fromHours(17);
         }
 
-        @Override
-        public Timestamp startOfToday() {
-            return new Timestamp(0, new TestCalculator());
-        }
     }
 
 }

@@ -44,9 +44,9 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
         title = "What's On";
         
         let newCellNib = UINib(nibName: "CalendarCell", bundle: Bundle.main)
-        self.tableView.register(newCellNib, forCellReuseIdentifier: "day");
-        self.tableView.rowHeight = 60;
-        self.tableView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
+        tableView.register(newCellNib, forCellReuseIdentifier: "day");
+        tableView.rowHeight = 60;
+        tableView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
     }
     
     func eventsChanged() {

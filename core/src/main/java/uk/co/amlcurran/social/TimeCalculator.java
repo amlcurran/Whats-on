@@ -11,4 +11,7 @@ public interface TimeCalculator {
 
     @Nonnull
     Timestamp plusHours(Timestamp time, int hours);
+
+    Timestamp startOfToday();
+
 }

@@ -15,4 +15,9 @@ class TestCalculator implements TimeCalculator {
     public Timestamp plusHours(Timestamp time, int hours) {
         return null;
     }
+
+    @Override
+    public Timestamp startOfToday() {
+        return null;
+    }
 }

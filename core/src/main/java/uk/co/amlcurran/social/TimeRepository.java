@@ -10,6 +10,4 @@ public interface TimeRepository {
     @Nonnull
     TimeOfDay borderTimeStart();
 
-    @Nonnull
-    Timestamp startOfToday();
 }

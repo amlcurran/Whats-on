@@ -39,12 +39,13 @@ public class WhatsOnActivity extends AppCompatActivity {
         AndroidTimeRepository dateCreator = new AndroidTimeRepository();
         Scheduler mainThread = AndroidSchedulers.mainThread();
         Scheduler background = Schedulers.io();
-        events = new Events(mainThread, background, new EventsService(dateCreator, eventsRepository));
+        events = new Events(mainThread, background, new EventsService(dateCreator, eventsRepository, new JodaCalculator()));
 
         final DateTime now = DateTime.now(DateTimeZone.getDefault());
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list_whats_on);
-        adapter = new WhatsOnAdapter(LayoutInflater.from(this), eventSelectedListener, new CalendarSource(dateCreator, new SparseArray<CalendarSlot>(), 0));
+        CalendarSource calendarSource = new CalendarSource(new SparseArray<CalendarSlot>(), 0, new JodaCalculator());
+        adapter = new WhatsOnAdapter(LayoutInflater.from(this), eventSelectedListener, calendarSource);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
