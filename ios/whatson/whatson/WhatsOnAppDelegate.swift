@@ -10,7 +10,9 @@ class WhatsOnAppDelegate : NSObject, UIApplicationDelegate, EKEventEditViewDeleg
     var window = UIWindow() as UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
-        self.window?.tintColor = UIColor.appColor()
+        window?.tintColor = UIColor.appColor()
+        let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "whatsonviewcontroller")
+        window?.rootViewController = UINavigationController(rootViewController: mainVC)
         FIRApp.configure()
         if #available(iOS 9.1, *) {
             updateTouchShortcuts(application)
@@ -18,16 +20,15 @@ class WhatsOnAppDelegate : NSObject, UIApplicationDelegate, EKEventEditViewDeleg
                 return true;
             }
             
-            let rootViewController = self.rootViewController()
+            let rootViewController = self.rootViewController
             rootViewController?.dismiss(animated: true, completion: nil)
             return handleShortcutItem(launchShortcut)
-        } else {
-            return true;
         }
+        return true
     }
     
-    func rootViewController() -> UIViewController? {
-        return window?.rootViewController ?? nil
+    var rootViewController: UIViewController? {
+        return window?.rootViewController
     }
     
     @available(iOS 9.1, *)
@@ -53,14 +54,13 @@ class WhatsOnAppDelegate : NSObject, UIApplicationDelegate, EKEventEditViewDeleg
             editController.eventStore = eventStore
             editController.event = event
             editController.editViewDelegate = self
-            let rootViewController = self.rootViewController()
             rootViewController?.present(editController, animated: false, completion: nil)
             return true
         } else if (shortcutItem.type == "on-today") {
             let alertController = UIAlertController(title: "Uh oh!", message: "You've not implemented this yet", preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(action)
-            self.rootViewController()?.present(alertController, animated: true, completion: nil)
+            rootViewController?.present(alertController, animated: true, completion: nil)
             return false
         }
         return false
@@ -71,7 +71,7 @@ class WhatsOnAppDelegate : NSObject, UIApplicationDelegate, EKEventEditViewDeleg
     }
     
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
-        self.rootViewController()?.dismiss(animated: true, completion: nil)
+        rootViewController?.dismiss(animated: true, completion: nil)
     }
     
 }
