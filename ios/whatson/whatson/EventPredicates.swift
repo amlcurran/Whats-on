@@ -1,6 +1,6 @@
 import EventKit
 
-@objc class EventPredicates: NSObject {
+struct EventPredicates {
     
     static func compound(from predicates: [NSPredicate]) -> NSPredicate {
         return NSPredicate(block: { (element, bindings) -> Bool in
@@ -10,8 +10,9 @@ import EventKit
         })
     }
     
-    @objc static func standardPredicates() -> NSPredicate {
-        return compound(from: [ notAllDay(), isWithin(startHour: 18, endHour: 23, using: Calendar.autoupdatingCurrent) ])
+    static func standardPredicates() -> NSPredicate {
+        let timeRepository = TimeRepository()
+        return compound(from: [ notAllDay(), isWithinBorder(timeRepository: timeRepository, using: Calendar.autoupdatingCurrent) ])
     }
 
 }
@@ -25,15 +26,17 @@ private func notAllDay() -> NSPredicate {
     })
 }
 
-private func isWithin(startHour: Int, endHour: Int, using calendar: Calendar) -> NSPredicate {
+private func isWithinBorder(timeRepository: TimeRepository, using calendar: Calendar) -> NSPredicate {
     return NSPredicate(block: { (element, bindings) -> Bool in
         if let event = element as? EKEvent {
             var startComponents = calendar.dateComponents([ .hour, .day ], from: event.startDate)
             var endComponents = calendar.dateComponents([ .hour, .day ], from: event.endDate)
             startComponents.timeZone = TimeZone.current
             endComponents.timeZone = TimeZone.current
-            let endsBefore = endComponents.hour! <= startHour && endComponents.day! == startComponents.day!
-            let beginsAfter = startComponents.hour! > endHour
+            let endHour = endComponents.hour!
+            let startHour = startComponents.hour!
+            let endsBefore = endHour <= Int(timeRepository.borderTimeStart().toHours()) && endComponents.day! == startComponents.day!
+            let beginsAfter = startHour > Int(timeRepository.borderTimeEnd().toHours())
             return !(endsBefore || beginsAfter)
         }
         return false

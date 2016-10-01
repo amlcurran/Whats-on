@@ -45,6 +45,10 @@ __attribute__((unused)) static SCTimeOfDay *create_SCTimeOfDay_initWithLong_(jlo
   return self;
 }
 
+- (jlong)toHours {
+  return [((JavaUtilConcurrentTimeUnit *) nil_chk(JreLoadEnum(JavaUtilConcurrentTimeUnit, MILLISECONDS))) toHoursWithLong:millis_];
+}
+
 - (jlong)toMinutes {
   return [((JavaUtilConcurrentTimeUnit *) nil_chk(JreLoadEnum(JavaUtilConcurrentTimeUnit, MILLISECONDS))) toMinutesWithLong:millis_];
 }
@@ -57,12 +61,13 @@ __attribute__((unused)) static SCTimeOfDay *create_SCTimeOfDay_initWithLong_(jlo
   static const J2ObjcMethodInfo methods[] = {
     { "fromHoursWithInt:", "fromHours", "Luk.co.amlcurran.social.TimeOfDay;", 0x9, NULL, NULL },
     { "initWithLong:", "TimeOfDay", NULL, 0x2, NULL, NULL },
+    { "toHours", NULL, "J", 0x1, NULL, NULL },
     { "toMinutes", NULL, "J", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "millis_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _SCTimeOfDay = { 2, "TimeOfDay", "uk.co.amlcurran.social", NULL, 0x1, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _SCTimeOfDay = { 2, "TimeOfDay", "uk.co.amlcurran.social", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_SCTimeOfDay;
 }
 

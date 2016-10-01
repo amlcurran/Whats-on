@@ -27,6 +27,8 @@
 
 + (SCTimeOfDay * __nonnull)fromHoursWithInt:(jint)hours;
 
+- (jlong)toHours;
+
 - (jlong)toMinutes;
 
 @end

@@ -5,7 +5,7 @@
 #import "Timestamp.h"
 #import "CalendarSource.h"
 #import "EventsRepository.h"
-#import "SCITimeRepository.h"
+#import "TimeRepository.h"
 #import "EventsService.h"
 #import "CalendarItem.h"
 #import "TimeCalculator.h"

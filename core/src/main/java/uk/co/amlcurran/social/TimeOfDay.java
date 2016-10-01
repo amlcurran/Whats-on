@@ -17,6 +17,10 @@ public class TimeOfDay {
         this.millis = millis;
     }
 
+    public long toHours() {
+        return TimeUnit.MILLISECONDS.toHours(millis);
+    }
+
     public long toMinutes() {
         return TimeUnit.MILLISECONDS.toMinutes(millis);
     }
