@@ -10,7 +10,8 @@ import UIKit
 import EventKit
 import EventKitUI
 
-class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIViewControllerPreviewingDelegate, WhatsOnPresenterDelegate {
+class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewControllerPreviewingDelegate, WhatsOnPresenterDelegate,
+    UITableViewDelegate, UITableViewDataSource {
     
     var dateFormatter : DateFormatter!;
     var eventStore : EKEventStore!;
@@ -19,12 +20,13 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
     var calendarSource : SCCalendarSource?;
     var eventService : SCEventsService!;
     let timeCalculator = NSDateCalculator();
+    let tableView = UITableView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         eventStore = EKEventStore()
         if traitCollection.forceTouchCapability == .available {
-            registerForPreviewing(with: self, sourceView: self.tableView);
+            registerForPreviewing(with: self, sourceView: tableView);
         }
         dateFormatter = DateFormatter();
         dateFormatter.dateFormat = "EEE";
@@ -41,12 +43,17 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editTapped))
         #endif
         
+        view.addSubview(tableView)
+        tableView.constrainToSuperview(edges: [.top, .bottom, .leading, .trailing])
+        
         title = "What's On";
         
         let newCellNib = UINib(nibName: "CalendarCell", bundle: Bundle.main)
         tableView.register(newCellNib, forCellReuseIdentifier: "day");
         tableView.rowHeight = 60;
         tableView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     func eventsChanged() {
@@ -76,7 +83,7 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
         // Dispose of any resources that can be recreated.
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let slot = self.calendarSource?.slotAt(with: jint((indexPath as NSIndexPath).row)),
             let item = self.calendarSource?.itemAt(with: jint((indexPath as NSIndexPath).row)) else {
             preconditionFailure("Accessing a slot which doesn't exist")
@@ -87,14 +94,14 @@ class WhatsOnViewController: UITableViewController, EKEventEditViewDelegate, UIV
         return cell;
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let count = calendarSource?.count() {
             return Int(count);
         }
         return 0;
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let item = self.calendarSource?.itemAt(with: jint((indexPath as NSIndexPath).row)) else {
             preconditionFailure("Calendar didn't have item at expected index \((indexPath as NSIndexPath).row)")
         }

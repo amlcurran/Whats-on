@@ -11,8 +11,8 @@ class WhatsOnAppDelegate : NSObject, UIApplicationDelegate, EKEventEditViewDeleg
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         window?.tintColor = UIColor.appColor()
-        let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "whatsonviewcontroller")
-        window?.rootViewController = UINavigationController(rootViewController: mainVC)
+        window?.rootViewController = UINavigationController(rootViewController: WhatsOnViewController())
+        window?.makeKeyAndVisible()
         FIRApp.configure()
         if #available(iOS 9.1, *) {
             updateTouchShortcuts(application)
