@@ -1,5 +1,7 @@
 package uk.co.amlcurran.social;
 
+import javax.annotation.Nonnull;
+
 class EventCalendarItem implements CalendarItem {
     private final String eventId;
     private final String title;
@@ -17,16 +19,19 @@ class EventCalendarItem implements CalendarItem {
         return eventId;
     }
 
+    @Nonnull
     @Override
     public String title() {
         return title;
     }
 
+    @Nonnull
     @Override
     public Timestamp startTime() {
         return start;
     }
 
+    @Nonnull
     @Override
     public Timestamp endTime() {
         return endTime;

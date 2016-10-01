@@ -40,9 +40,7 @@ class WhatsOnPresenter {
             let now = NSDateCalculator().now();
             let source = self.eventService.getCalendarSource(with: 14, with: now)
             DispatchQueue.main.async {
-                if let source = source {
-                    completion(source);
-                }
+                completion(source)
             };
         };
     }

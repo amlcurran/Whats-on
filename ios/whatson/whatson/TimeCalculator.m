@@ -3,15 +3,35 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/TimeCalculator.java
 //
 
+#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "TimeCalculator.h"
 #include "Timestamp.h"
+#include "javax/annotation/Nonnull.h"
+#include "javax/annotation/meta/When.h"
+
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
 
 @interface SCTimeCalculator : NSObject
 
 @end
 
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
+
 @implementation SCTimeCalculator
+
++ (IOSObjectArray *)__annotations_plusDaysWithInt_withSCTimestamp_ {
+  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_plusHoursWithSCTimestamp_withInt_ {
+  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

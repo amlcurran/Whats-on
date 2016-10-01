@@ -4,8 +4,16 @@
 //
 
 #include "EmptyCalendarItem.h"
+#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "Timestamp.h"
+#include "javax/annotation/Nonnull.h"
+#include "javax/annotation/meta/When.h"
+
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
 
 @interface SCEmptyCalendarItem () {
  @public
@@ -18,6 +26,10 @@
 J2OBJC_FIELD_SETTER(SCEmptyCalendarItem, startTime_, SCTimestamp *)
 J2OBJC_FIELD_SETTER(SCEmptyCalendarItem, endTime_, SCTimestamp *)
 
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
+
 @implementation SCEmptyCalendarItem
 
 - (instancetype)initWithSCTimestamp:(SCTimestamp *)startTime
@@ -26,20 +38,32 @@ J2OBJC_FIELD_SETTER(SCEmptyCalendarItem, endTime_, SCTimestamp *)
   return self;
 }
 
-- (NSString *)title {
+- (NSString * __nonnull)title {
   return @"Empty";
 }
 
-- (SCTimestamp *)startTime {
+- (SCTimestamp * __nonnull)startTime {
   return startTime_;
 }
 
-- (SCTimestamp *)endTime {
+- (SCTimestamp * __nonnull)endTime {
   return endTime_;
 }
 
 - (jboolean)isEmpty {
   return true;
+}
+
++ (IOSObjectArray *)__annotations_title {
+  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_startTime {
+  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_endTime {
+  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {

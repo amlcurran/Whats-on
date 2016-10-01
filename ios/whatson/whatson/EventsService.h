@@ -21,6 +21,11 @@
 @protocol SCEventsRepository;
 @protocol SCTimeRepository;
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 @interface SCEventsService : NSObject
 
 #pragma mark Public
@@ -28,8 +33,8 @@
 - (instancetype)initWithSCTimeRepository:(id<SCTimeRepository>)dateCreator
                   withSCEventsRepository:(id<SCEventsRepository>)eventsRepository;
 
-- (SCCalendarSource *)getCalendarSourceWithInt:(jint)numberOfDays
-                               withSCTimestamp:(SCTimestamp *)now;
+- (SCCalendarSource * __nonnull)getCalendarSourceWithInt:(jint)numberOfDays
+                                         withSCTimestamp:(SCTimestamp *)now;
 
 @end
 
@@ -44,6 +49,10 @@ FOUNDATION_EXPORT SCEventsService *create_SCEventsService_initWithSCTimeReposito
 J2OBJC_TYPE_LITERAL_HEADER(SCEventsService)
 
 @compatibility_alias UkCoAmlcurranSocialEventsService SCEventsService;
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 
 #endif
 

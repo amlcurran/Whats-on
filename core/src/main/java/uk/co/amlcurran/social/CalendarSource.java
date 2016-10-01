@@ -1,5 +1,8 @@
 package uk.co.amlcurran.social;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import uk.co.amlcurran.social.core.SparseArray;
 
 class CalendarSource {
@@ -18,6 +21,7 @@ class CalendarSource {
         return daysSize;
     }
 
+    @Nullable
     public CalendarItem itemAt(int position) {
         CalendarSlot calendarSlot = calendarItems.get(position);
         if (calendarSlot == null || calendarSlot.isEmpty()) {
@@ -28,14 +32,17 @@ class CalendarSource {
         return calendarSlot.firstItem();
     }
 
+    @Nonnull
     private Timestamp startOfTodayBlock(int position) {
         return timeRepository.startOfToday().plusDays(position).plusHours(17);
     }
 
+    @Nonnull
     private Timestamp endOfTodayBlock(int position) {
         return timeRepository.startOfToday().plusDays(position).plusHours(23);
     }
 
+    @Nonnull
     public CalendarSlot slotAt(int position) {
         return calendarItems.get(position, new CalendarSlot());
     }

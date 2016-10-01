@@ -19,13 +19,18 @@
 @class SCTimeOfDay;
 @class SCTimestamp;
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 @protocol SCTimeRepository < NSObject, JavaObject >
 
-- (SCTimeOfDay *)borderTimeEnd;
+- (SCTimeOfDay * __nonnull)borderTimeEnd;
 
-- (SCTimeOfDay *)borderTimeStart;
+- (SCTimeOfDay * __nonnull)borderTimeStart;
 
-- (SCTimestamp *)startOfToday;
+- (SCTimestamp * __nonnull)startOfToday;
 
 @end
 
@@ -34,6 +39,10 @@ J2OBJC_EMPTY_STATIC_INIT(SCTimeRepository)
 J2OBJC_TYPE_LITERAL_HEADER(SCTimeRepository)
 
 #define UkCoAmlcurranSocialTimeRepository SCTimeRepository
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 
 #endif
 

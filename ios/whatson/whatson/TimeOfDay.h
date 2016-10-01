@@ -16,11 +16,16 @@
 #if !defined (SCTimeOfDay_) && (TimeOfDay_INCLUDE_ALL || defined(SCTimeOfDay_INCLUDE))
 #define SCTimeOfDay_
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 @interface SCTimeOfDay : NSObject
 
 #pragma mark Public
 
-+ (SCTimeOfDay *)fromHoursWithInt:(jint)hours;
++ (SCTimeOfDay * __nonnull)fromHoursWithInt:(jint)hours;
 
 - (jlong)toMinutes;
 
@@ -33,6 +38,10 @@ FOUNDATION_EXPORT SCTimeOfDay *SCTimeOfDay_fromHoursWithInt_(jint hours);
 J2OBJC_TYPE_LITERAL_HEADER(SCTimeOfDay)
 
 @compatibility_alias UkCoAmlcurranSocialTimeOfDay SCTimeOfDay;
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 
 #endif
 

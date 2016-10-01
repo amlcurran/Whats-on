@@ -18,6 +18,11 @@
 
 @protocol SCTimeCalculator;
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 @interface SCTimestamp : NSObject
 
 #pragma mark Public
@@ -29,9 +34,9 @@
 
 - (jlong)getMillis;
 
-- (SCTimestamp *)plusDaysWithInt:(jint)days;
+- (SCTimestamp * __nonnull)plusDaysWithInt:(jint)days;
 
-- (SCTimestamp *)plusHoursWithInt:(jint)hours;
+- (SCTimestamp * __nonnull)plusHoursWithInt:(jint)hours;
 
 @end
 
@@ -46,6 +51,10 @@ FOUNDATION_EXPORT SCTimestamp *create_SCTimestamp_initWithLong_withSCTimeCalcula
 J2OBJC_TYPE_LITERAL_HEADER(SCTimestamp)
 
 @compatibility_alias UkCoAmlcurranSocialTimestamp SCTimestamp;
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 
 #endif
 

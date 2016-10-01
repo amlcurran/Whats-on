@@ -3,5 +3,5 @@ apply plugin: 'java'
 dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.easytesting:fest-assert-core:2.0M10'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
 }

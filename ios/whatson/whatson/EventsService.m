@@ -8,12 +8,20 @@
 #include "CalendarSource.h"
 #include "EventsRepository.h"
 #include "EventsService.h"
+#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "SparseArray.h"
 #include "TimeOfDay.h"
 #include "TimeRepository.h"
 #include "Timestamp.h"
 #include "java/util/List.h"
+#include "javax/annotation/Nonnull.h"
+#include "javax/annotation/meta/When.h"
+
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
 
 @interface SCEventsService () {
  @public
@@ -26,6 +34,10 @@
 J2OBJC_FIELD_SETTER(SCEventsService, timeRepository_, id<SCTimeRepository>)
 J2OBJC_FIELD_SETTER(SCEventsService, eventsRepository_, id<SCEventsRepository>)
 
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
+
 @implementation SCEventsService
 
 - (instancetype)initWithSCTimeRepository:(id<SCTimeRepository>)dateCreator
@@ -34,8 +46,8 @@ J2OBJC_FIELD_SETTER(SCEventsService, eventsRepository_, id<SCEventsRepository>)
   return self;
 }
 
-- (SCCalendarSource *)getCalendarSourceWithInt:(jint)numberOfDays
-                               withSCTimestamp:(SCTimestamp *)now {
+- (SCCalendarSource * __nonnull)getCalendarSourceWithInt:(jint)numberOfDays
+                                         withSCTimestamp:(SCTimestamp *)now {
   SCTimestamp *nowTime = [((id<SCTimeRepository>) nil_chk(timeRepository_)) startOfToday];
   SCTimestamp *nextWeek = [((SCTimestamp *) nil_chk(nowTime)) plusDaysWithInt:numberOfDays];
   SCTimeOfDay *fivePm = [timeRepository_ borderTimeStart];
@@ -50,6 +62,10 @@ J2OBJC_FIELD_SETTER(SCEventsService, eventsRepository_, id<SCEventsRepository>)
     [itemArray putWithInt:key withId:slot];
   }
   return new_SCCalendarSource_initWithSCTimeRepository_withUkCoAmlcurranSocialCoreSparseArray_withInt_(timeRepository_, itemArray, numberOfDays);
+}
+
++ (IOSObjectArray *)__annotations_getCalendarSourceWithInt_withSCTimestamp_ {
+  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {

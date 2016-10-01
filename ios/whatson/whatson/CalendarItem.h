@@ -18,13 +18,18 @@
 
 @class SCTimestamp;
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 @protocol SCCalendarItem < NSObject, JavaObject >
 
-- (NSString *)title;
+- (NSString * __nonnull)title;
 
-- (SCTimestamp *)startTime;
+- (SCTimestamp * __nonnull)startTime;
 
-- (SCTimestamp *)endTime;
+- (SCTimestamp * __nonnull)endTime;
 
 - (jboolean)isEmpty;
 
@@ -35,6 +40,10 @@ J2OBJC_EMPTY_STATIC_INIT(SCCalendarItem)
 J2OBJC_TYPE_LITERAL_HEADER(SCCalendarItem)
 
 #define UkCoAmlcurranSocialCalendarItem SCCalendarItem
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 
 #endif
 

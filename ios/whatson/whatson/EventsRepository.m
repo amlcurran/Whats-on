@@ -5,16 +5,32 @@
 
 #include "EventsRepository.h"
 #include "EventsService.h"
+#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "TimeOfDay.h"
 #include "Timestamp.h"
 #include "java/util/List.h"
+#include "javax/annotation/Nonnull.h"
+#include "javax/annotation/meta/When.h"
+
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
 
 @interface SCEventsRepository : NSObject
 
 @end
 
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
+
 @implementation SCEventsRepository
+
++ (IOSObjectArray *)__annotations_getCalendarItemsWithSCTimestamp_withSCTimestamp_withSCTimeOfDay_withSCTimeOfDay_withSCEventsService_ {
+  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

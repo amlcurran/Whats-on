@@ -1,5 +1,7 @@
 package uk.co.amlcurran.social;
 
+import javax.annotation.Nonnull;
+
 public class EmptyCalendarItem implements CalendarItem {
 
     private final Timestamp startTime;
@@ -10,16 +12,19 @@ public class EmptyCalendarItem implements CalendarItem {
         this.endTime = endTime;
     }
 
+    @Nonnull
     @Override
     public String title() {
         return "Empty";
     }
 
+    @Nonnull
     @Override
     public Timestamp startTime() {
         return startTime;
     }
 
+    @Nonnull
     @Override
     public Timestamp endTime() {
         return endTime;

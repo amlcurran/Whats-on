@@ -7,10 +7,19 @@
 #include "CalendarSlot.h"
 #include "CalendarSource.h"
 #include "EmptyCalendarItem.h"
+#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "SparseArray.h"
 #include "TimeRepository.h"
 #include "Timestamp.h"
+#include "javax/annotation/Nonnull.h"
+#include "javax/annotation/Nullable.h"
+#include "javax/annotation/meta/When.h"
+
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
 
 @interface SCCalendarSource () {
  @public
@@ -19,9 +28,9 @@
   jint daysSize_;
 }
 
-- (SCTimestamp *)startOfTodayBlockWithInt:(jint)position;
+- (SCTimestamp * __nonnull)startOfTodayBlockWithInt:(jint)position;
 
-- (SCTimestamp *)endOfTodayBlockWithInt:(jint)position;
+- (SCTimestamp * __nonnull)endOfTodayBlockWithInt:(jint)position;
 
 @end
 
@@ -31,6 +40,10 @@ J2OBJC_FIELD_SETTER(SCCalendarSource, calendarItems_, UkCoAmlcurranSocialCoreSpa
 __attribute__((unused)) static SCTimestamp *SCCalendarSource_startOfTodayBlockWithInt_(SCCalendarSource *self, jint position);
 
 __attribute__((unused)) static SCTimestamp *SCCalendarSource_endOfTodayBlockWithInt_(SCCalendarSource *self, jint position);
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 
 @implementation SCCalendarSource
 
@@ -45,7 +58,7 @@ __attribute__((unused)) static SCTimestamp *SCCalendarSource_endOfTodayBlockWith
   return daysSize_;
 }
 
-- (id<SCCalendarItem>)itemAtWithInt:(jint)position {
+- (id<SCCalendarItem> __nullable)itemAtWithInt:(jint)position {
   SCCalendarSlot *calendarSlot = [((UkCoAmlcurranSocialCoreSparseArray *) nil_chk(calendarItems_)) getWithInt:position];
   if (calendarSlot == nil || [calendarSlot isEmpty]) {
     SCTimestamp *startTime = SCCalendarSource_startOfTodayBlockWithInt_(self, position);
@@ -55,20 +68,36 @@ __attribute__((unused)) static SCTimestamp *SCCalendarSource_endOfTodayBlockWith
   return [((SCCalendarSlot *) nil_chk(calendarSlot)) firstItem];
 }
 
-- (SCTimestamp *)startOfTodayBlockWithInt:(jint)position {
+- (SCTimestamp * __nonnull)startOfTodayBlockWithInt:(jint)position {
   return SCCalendarSource_startOfTodayBlockWithInt_(self, position);
 }
 
-- (SCTimestamp *)endOfTodayBlockWithInt:(jint)position {
+- (SCTimestamp * __nonnull)endOfTodayBlockWithInt:(jint)position {
   return SCCalendarSource_endOfTodayBlockWithInt_(self, position);
 }
 
-- (SCCalendarSlot *)slotAtWithInt:(jint)position {
+- (SCCalendarSlot * __nonnull)slotAtWithInt:(jint)position {
   return [((UkCoAmlcurranSocialCoreSparseArray *) nil_chk(calendarItems_)) getWithInt:position withId:new_SCCalendarSlot_init()];
 }
 
 - (jboolean)isEmptySlotWithInt:(jint)position {
   return [((SCCalendarSlot *) nil_chk([self slotAtWithInt:position])) isEmpty];
+}
+
++ (IOSObjectArray *)__annotations_itemAtWithInt_ {
+  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNullable alloc] init] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_startOfTodayBlockWithInt_ {
+  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_endOfTodayBlockWithInt_ {
+  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_slotAtWithInt_ {
+  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {

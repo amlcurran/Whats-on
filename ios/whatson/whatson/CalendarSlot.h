@@ -19,6 +19,11 @@
 @protocol JavaUtilList;
 @protocol SCCalendarItem;
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 @interface SCCalendarSlot : NSObject
 
 #pragma mark Public
@@ -29,11 +34,11 @@
 
 - (jint)count;
 
-- (id<SCCalendarItem>)firstItem;
+- (id<SCCalendarItem> __nullable)firstItem;
 
 - (jboolean)isEmpty;
 
-- (id<JavaUtilList>)items;
+- (id<JavaUtilList> __nonnull)items;
 
 @end
 
@@ -48,6 +53,10 @@ FOUNDATION_EXPORT SCCalendarSlot *create_SCCalendarSlot_init();
 J2OBJC_TYPE_LITERAL_HEADER(SCCalendarSlot)
 
 @compatibility_alias UkCoAmlcurranSocialCalendarSlot SCCalendarSlot;
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 
 #endif
 

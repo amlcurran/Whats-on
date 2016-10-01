@@ -2,6 +2,8 @@ package uk.co.amlcurran.social;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import uk.co.amlcurran.social.core.SparseArray;
 
 public class EventsService {
@@ -13,6 +15,7 @@ public class EventsService {
         this.timeRepository = dateCreator;
     }
 
+    @Nonnull
     public CalendarSource getCalendarSource(final int numberOfDays, final Timestamp now) {
         Timestamp nowTime = timeRepository.startOfToday();
         Timestamp nextWeek = nowTime.plusDays(numberOfDays);

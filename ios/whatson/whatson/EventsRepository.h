@@ -21,13 +21,18 @@
 @class SCTimestamp;
 @protocol JavaUtilList;
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 @protocol SCEventsRepository < NSObject, JavaObject >
 
-- (id<JavaUtilList>)getCalendarItemsWithSCTimestamp:(SCTimestamp *)nowTime
-                                    withSCTimestamp:(SCTimestamp *)nextWeek
-                                    withSCTimeOfDay:(SCTimeOfDay *)fivePm
-                                    withSCTimeOfDay:(SCTimeOfDay *)elevenPm
-                                withSCEventsService:(SCEventsService *)eventsService;
+- (id<JavaUtilList> __nonnull)getCalendarItemsWithSCTimestamp:(SCTimestamp *)nowTime
+                                              withSCTimestamp:(SCTimestamp *)nextWeek
+                                              withSCTimeOfDay:(SCTimeOfDay *)fivePm
+                                              withSCTimeOfDay:(SCTimeOfDay *)elevenPm
+                                          withSCEventsService:(SCEventsService *)eventsService;
 
 @end
 
@@ -36,6 +41,10 @@ J2OBJC_EMPTY_STATIC_INIT(SCEventsRepository)
 J2OBJC_TYPE_LITERAL_HEADER(SCEventsRepository)
 
 #define UkCoAmlcurranSocialEventsRepository SCEventsRepository
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 
 #endif
 

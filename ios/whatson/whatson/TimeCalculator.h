@@ -18,15 +18,20 @@
 
 @class SCTimestamp;
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 @protocol SCTimeCalculator < NSObject, JavaObject >
 
-- (SCTimestamp *)plusDaysWithInt:(jint)days
-                 withSCTimestamp:(SCTimestamp *)time;
+- (SCTimestamp * __nonnull)plusDaysWithInt:(jint)days
+                           withSCTimestamp:(SCTimestamp *)time;
 
 - (jint)getDaysWithSCTimestamp:(SCTimestamp *)time;
 
-- (SCTimestamp *)plusHoursWithSCTimestamp:(SCTimestamp *)time
-                                  withInt:(jint)hours;
+- (SCTimestamp * __nonnull)plusHoursWithSCTimestamp:(SCTimestamp *)time
+                                            withInt:(jint)hours;
 
 @end
 
@@ -35,6 +40,10 @@ J2OBJC_EMPTY_STATIC_INIT(SCTimeCalculator)
 J2OBJC_TYPE_LITERAL_HEADER(SCTimeCalculator)
 
 #define UkCoAmlcurranSocialTimeCalculator SCTimeCalculator
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 
 #endif
 

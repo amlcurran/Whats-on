@@ -2,10 +2,13 @@ package uk.co.amlcurran.social;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.Nonnull;
+
 public class TimeOfDay {
 
     private final long millis;
 
+    @Nonnull
     public static TimeOfDay fromHours(int hours) {
         return new TimeOfDay(TimeUnit.HOURS.toMillis(hours));
     }

@@ -3,9 +3,17 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/Timestamp.java
 //
 
+#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "TimeCalculator.h"
 #include "Timestamp.h"
+#include "javax/annotation/Nonnull.h"
+#include "javax/annotation/meta/When.h"
+
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
 
 @interface SCTimestamp () {
  @public
@@ -17,6 +25,10 @@
 
 J2OBJC_FIELD_SETTER(SCTimestamp, timeCalculator_, id<SCTimeCalculator>)
 
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
+
 @implementation SCTimestamp
 
 - (instancetype)initWithLong:(jlong)millis
@@ -25,7 +37,7 @@ J2OBJC_FIELD_SETTER(SCTimestamp, timeCalculator_, id<SCTimeCalculator>)
   return self;
 }
 
-- (SCTimestamp *)plusDaysWithInt:(jint)days {
+- (SCTimestamp * __nonnull)plusDaysWithInt:(jint)days {
   return [((id<SCTimeCalculator>) nil_chk(timeCalculator_)) plusDaysWithInt:days withSCTimestamp:self];
 }
 
@@ -37,8 +49,16 @@ J2OBJC_FIELD_SETTER(SCTimestamp, timeCalculator_, id<SCTimeCalculator>)
   return millis_;
 }
 
-- (SCTimestamp *)plusHoursWithInt:(jint)hours {
+- (SCTimestamp * __nonnull)plusHoursWithInt:(jint)hours {
   return [((id<SCTimeCalculator>) nil_chk(timeCalculator_)) plusHoursWithSCTimestamp:self withInt:hours];
+}
+
++ (IOSObjectArray *)__annotations_plusDaysWithInt_ {
+  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_plusHoursWithInt_ {
+  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {

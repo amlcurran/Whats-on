@@ -22,7 +22,7 @@ public class NSDateCalculator : NSObject, SCTimeCalculator {
         return SCTimestamp(long: millis, with: self);
     }
     
-    @objc public func plusDays(with days: jint, with time: SCTimestamp!) -> SCTimestamp! {
+    @objc public func plusDays(with days: jint, with time: SCTimestamp!) -> SCTimestamp {
         var components = DateComponents();
         components.day = Int(days);
         let timeAsDate = date(time);
@@ -35,7 +35,7 @@ public class NSDateCalculator : NSObject, SCTimeCalculator {
         return jint(difference.day!);
     }
     
-    @objc public func plusHours(with time: SCTimestamp!, with hours: jint) -> SCTimestamp! {
+    @objc public func plusHours(with time: SCTimestamp!, with hours: jint) -> SCTimestamp {
         var components = DateComponents();
         components.hour = Int(hours);
         let timeAsDate = date(time);

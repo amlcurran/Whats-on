@@ -21,6 +21,11 @@
 @protocol SCCalendarItem;
 @protocol SCTimeRepository;
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 @interface SCCalendarSource : NSObject
 
 #pragma mark Public
@@ -33,9 +38,9 @@
 
 - (jboolean)isEmptySlotWithInt:(jint)position;
 
-- (id<SCCalendarItem>)itemAtWithInt:(jint)position;
+- (id<SCCalendarItem> __nullable)itemAtWithInt:(jint)position;
 
-- (SCCalendarSlot *)slotAtWithInt:(jint)position;
+- (SCCalendarSlot * __nonnull)slotAtWithInt:(jint)position;
 
 @end
 
@@ -50,6 +55,10 @@ FOUNDATION_EXPORT SCCalendarSource *create_SCCalendarSource_initWithSCTimeReposi
 J2OBJC_TYPE_LITERAL_HEADER(SCCalendarSource)
 
 @compatibility_alias UkCoAmlcurranSocialCalendarSource SCCalendarSource;
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 
 #endif
 

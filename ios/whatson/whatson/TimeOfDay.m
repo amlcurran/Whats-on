@@ -3,9 +3,17 @@
 //  source: core/src/main/java//uk/co/amlcurran/social/TimeOfDay.java
 //
 
+#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "TimeOfDay.h"
 #include "java/util/concurrent/TimeUnit.h"
+#include "javax/annotation/Nonnull.h"
+#include "javax/annotation/meta/When.h"
+
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
 
 @interface SCTimeOfDay () {
  @public
@@ -22,9 +30,13 @@ __attribute__((unused)) static SCTimeOfDay *new_SCTimeOfDay_initWithLong_(jlong 
 
 __attribute__((unused)) static SCTimeOfDay *create_SCTimeOfDay_initWithLong_(jlong millis);
 
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
+
 @implementation SCTimeOfDay
 
-+ (SCTimeOfDay *)fromHoursWithInt:(jint)hours {
++ (SCTimeOfDay * __nonnull)fromHoursWithInt:(jint)hours {
   return SCTimeOfDay_fromHoursWithInt_(hours);
 }
 
@@ -35,6 +47,10 @@ __attribute__((unused)) static SCTimeOfDay *create_SCTimeOfDay_initWithLong_(jlo
 
 - (jlong)toMinutes {
   return [((JavaUtilConcurrentTimeUnit *) nil_chk(JreLoadEnum(JavaUtilConcurrentTimeUnit, MILLISECONDS))) toMinutesWithLong:millis_];
+}
+
++ (IOSObjectArray *)__annotations_fromHoursWithInt_ {
+  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
