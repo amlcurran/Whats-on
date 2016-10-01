@@ -1,72 +1,66 @@
-//
-//  CalendarSourceViewCell.swift
-//  whatson
-//
-//  Created by Alex on 23/10/2015.
-//  Copyright © 2015 Alex Curran. All rights reserved.
-//
-
 import Foundation
 import UIKit
 
 class CalendarSourceViewCell : UITableViewCell {
-
-    @IBOutlet weak var mainLabel: UILabel!
-    @IBOutlet weak var numberLabel: UILabel!
-    @IBOutlet weak var centreInParentConstraint: NSLayoutConstraint!
-    @IBOutlet weak var topSpacingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var roundedView: UIView!
     
+    let dayLabel = UILabel()
+    let eventLabel = UILabel()
+    let roundedView = RoundedRectBorderView()
     let dateFormatter = DateFormatter()
     
     var type: SlotType = .empty {
         didSet {
             roundedView.backgroundColor = type.cellBackground
-            mainLabel.textColor = type.mainText
-            numberLabel.textColor = type.secondaryText
+            dayLabel.textColor = type.secondaryText
+            eventLabel.textColor = type.mainText
+            roundedView.borderColor = type.borderColor
         }
     }
     var empty : Bool = true
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        dateFormatter.dateFormat = "EEE"
+        dateFormatter.dateStyle = .full
+        dateFormatter.timeStyle = .none
         backgroundColor = .clear
         selectionStyle = .none
+        layout()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        dateFormatter.dateFormat = "EEE"
+        dateFormatter.dateStyle = .full
+        dateFormatter.timeStyle = .none
         backgroundColor = .clear
         selectionStyle = .none
+        layout()
+    }
+    
+    func layout() {
+        roundedView.addSubview(eventLabel)
+        eventLabel.constrainToSuperview(edges: [.top, .leading], withOffset: 16)
+        eventLabel.constrainToSuperview(edges: [.trailing, .bottom], withOffset: -16)
+        eventLabel.setContentHuggingPriority(UILayoutPriorityRequired, for: .vertical)
+        
+        contentView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+        contentView.add(dayLabel, constrainedTo: [.topMargin, .leadingMargin, .trailingMargin], withOffset: 8)
+        contentView.add(roundedView, constrainedTo: [.leadingMargin, .trailingMargin, .bottomMargin])
+        roundedView.constrain(.top, to: dayLabel, .bottom, withOffset: 6)
+        roundedView.cornerRadius = 6
+        roundedView.layer.shadowOffset = CGSize(width: 0, height: 6)
+        roundedView.layer.shadowRadius = 4
+        roundedView.layer.shadowColor = UIColor.red.cgColor
+        
+        dayLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
+        eventLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightSemibold)
+        
+        roundedView.borderWidth = 2
     }
 
     func bind(_ item : SCCalendarItem, slot : SCCalendarSlot?) {
         type = (slot?.isEmpty() ?? false) ? .empty : .full
-        let startTime = Date.dateFromTime(item.startTime());
-        let formatted = String(format: "%@ - %@", dateFormatter.string(from: startTime), item.title());
-        let colouredString = NSMutableAttributedString(string: formatted);
-        if (item.isEmpty()) {
-            let lowRange = NSRange(location: 0, length: colouredString.length)
-            colouredString.addAttribute(NSForegroundColorAttributeName, value: type.secondaryText, range: lowRange);
-        } else {
-            let lowRange = NSRange(location: 0, length: 3)
-            colouredString.addAttribute(NSForegroundColorAttributeName, value: type.secondaryText, range: lowRange);
-        }
-        mainLabel.attributedText = colouredString;
-        
-        let itemCount = slot?.count() ?? 0
-        if (itemCount > 1) {
-            numberLabel.text = String(format: "+%lu more event", slot!.count() - 1);
-            numberLabel.isHidden = false;
-            centreInParentConstraint.isActive = false;
-            topSpacingConstraint.isActive = true;
-        } else {
-            numberLabel.isHidden = true;
-            centreInParentConstraint.isActive = true;
-            topSpacingConstraint.isActive = false;
-        }
+        eventLabel.text = item.title()
+        dayLabel.text = dateFormatter.string(from:  Date.dateFromTime(item.startTime()))
     }
     
 }
@@ -74,6 +68,7 @@ class CalendarSourceViewCell : UITableViewCell {
 private let backgrounds: [SlotType: UIColor] = [ .empty: .clear, .full: .white ]
 private let mainTexts: [SlotType: UIColor] = [ .empty: .lightText, .full: .secondary ]
 private let secondaryTexts: [SlotType: UIColor] = [ .empty: .lightText, .full: .lightText ]
+private let borderColors: [SlotType: UIColor] = [ .empty: .emptyOutline, .full: .clear ]
 
 enum SlotType {
     case empty
@@ -89,5 +84,9 @@ enum SlotType {
     
     var secondaryText: UIColor {
         return secondaryTexts[self].or(.lightText)
+    }
+    
+    var borderColor: UIColor {
+        return borderColors[self].or(.clear)
     }
 }

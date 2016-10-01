@@ -63,7 +63,8 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
         let newCellNib = UINib(nibName: "CalendarCell", bundle: Bundle.main)
         tableView.register(newCellNib, forCellReuseIdentifier: "day")
         tableView.backgroundColor = .clear
-        tableView.rowHeight = 60;
+        tableView.rowHeight = 90;
+//        tableView.estimatedRowHeight = 120
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
