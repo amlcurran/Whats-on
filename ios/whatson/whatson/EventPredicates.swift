@@ -2,19 +2,24 @@ import EventKit
 
 struct EventPredicates {
     
-    static func compound(from predicates: [NSPredicate]) -> NSPredicate {
-        return NSPredicate(block: { (element, bindings) -> Bool in
+    let timeRepository: SCTimeRepository
+    
+    func standard() -> NSPredicate {
+        return NSPredicate(compoundFrom: [ notAllDay(), isWithinBorder(timeRepository: timeRepository, using: Calendar.autoupdatingCurrent) ])
+    }
+
+}
+
+private extension NSPredicate {
+    
+    convenience init(compoundFrom predicates: [NSPredicate]) {
+        self.init(block: { (element, bindings) -> Bool in
             return predicates.reduce(true, { (current, predicate) -> Bool in
                 return current && predicate.evaluate(with: element)
             })
         })
     }
     
-    static func standardPredicates() -> NSPredicate {
-        let timeRepository = TimeRepository()
-        return compound(from: [ notAllDay(), isWithinBorder(timeRepository: timeRepository, using: Calendar.autoupdatingCurrent) ])
-    }
-
 }
 
 private func notAllDay() -> NSPredicate {
@@ -26,7 +31,7 @@ private func notAllDay() -> NSPredicate {
     })
 }
 
-private func isWithinBorder(timeRepository: TimeRepository, using calendar: Calendar) -> NSPredicate {
+private func isWithinBorder(timeRepository: SCTimeRepository, using calendar: Calendar) -> NSPredicate {
     return NSPredicate(block: { (element, bindings) -> Bool in
         if let event = element as? EKEvent {
             var startComponents = calendar.dateComponents([ .hour, .day ], from: event.startDate)
