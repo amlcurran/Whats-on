@@ -10,7 +10,7 @@ class WhatsOnAppDelegate : NSObject, UIApplicationDelegate, EKEventEditViewDeleg
     var window = UIWindow() as UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
-        window?.tintColor = UIColor.appColor()
+        window?.tintColor = UIColor.secondary
         window?.rootViewController = UINavigationController(rootViewController: WhatsOnViewController())
         window?.makeKeyAndVisible()
         FIRApp.configure()

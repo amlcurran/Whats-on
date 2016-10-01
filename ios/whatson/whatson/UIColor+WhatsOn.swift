@@ -1,21 +1,16 @@
-//
-//  UIColor.swift
-//  whatson
-//
-//  Created by Alex on 14/02/2016.
-//  Copyright © 2016 Alex Curran. All rights reserved.
-//
-
 import UIKit
 
 extension UIColor {
-    
-    static func appColor() -> UIColor {
-        return UIColor(red: 0.0, green: 0.561, blue: 0.486, alpha: 1)
+    class var windowBackground: UIColor {
+        return UIColor(red: 194.0 / 255.0, green: 207.0 / 255.0, blue: 214.0 / 255.0, alpha: 1.0)
     }
     
-    static func eightyWhite() -> UIColor {
-        return UIColor(white: 1, alpha: 0.8)
+    class var accent: UIColor {
+        return UIColor(red: 58.0 / 255.0, green: 217.0 / 255.0, blue: 112.0 / 255.0, alpha: 1.0)
     }
-
+    
+    class var secondary: UIColor {
+        return UIColor(red: 68.0 / 255.0, green: 82.0 / 255.0, blue: 108.0 / 255.0, alpha: 1.0)
+    }
+    
 }

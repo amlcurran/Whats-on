@@ -83,51 +83,27 @@ class CalendarSourceViewCell : UITableViewCell {
 private extension UIColor {
     
     static func selectedCellColor(_ cell: CalendarSourceViewCell) -> UIColor {
-        if (!cell.empty) {
-            return UIColor.appColor().withAlphaComponent(0.4);
-        } else {
-            return UIColor.appColor().withAlphaComponent(0.2);
-        }
+        return UIColor.blue
     }
     
     static func cellColor(_ cell: CalendarSourceViewCell) -> UIColor {
-        if (!cell.empty) {
-            return UIColor.appColor()
-        } else {
-            return UIColor.white
-        }
+        return UIColor.yellow
     }
     
     static func mainTextColor(_ slot: SCCalendarSlot?) -> UIColor {
-        if ((slot?.count() ?? 0) > 0) {
-            return UIColor.white
-        } else {
-            return UIColor.black
-        }
+        return UIColor.black
     }
     
     static func selectedMainTextColor(_ cell: CalendarSourceViewCell) -> UIColor {
-        if (!cell.empty) {
-            return UIColor.white
-        } else {
-            return UIColor.black
-        }
+        return UIColor.black
     }
     
     static func lowTextColor(_ slot: SCCalendarSlot?) -> UIColor {
-        if ((slot?.count() ?? 0) > 0) {
-            return UIColor.white.withAlphaComponent(0.54);
-        } else {
-            return UIColor.black.withAlphaComponent(0.54);
-        }
+       return UIColor.green
     }
     
     static func selectedLowTextColor(_ cell: CalendarSourceViewCell) -> UIColor {
-        if (!cell.empty) {
-            return UIColor.white.withAlphaComponent(0.54);
-        } else {
-            return UIColor.black.withAlphaComponent(0.54);
-        }
+        return UIColor.green
     }
     
 }
