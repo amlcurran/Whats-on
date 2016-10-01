@@ -23,6 +23,7 @@
 		861BD0DB1D9FBE540032FBAB /* TimeOfDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 861BD0CC1D9FBE540032FBAB /* TimeOfDay.m */; };
 		861BD0DC1D9FBE540032FBAB /* TimeRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 861BD0CE1D9FBE540032FBAB /* TimeRepository.m */; };
 		861BD0DD1D9FBE540032FBAB /* Timestamp.m in Sources */ = {isa = PBXBuildFile; fileRef = 861BD0D01D9FBE540032FBAB /* Timestamp.m */; };
+		861BD0E01D9FC4290032FBAB /* Optional+Fluency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */; };
 		8626FCE01C63FBF800640079 /* CalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8626FCDF1C63FBF800640079 /* CalendarCell.xib */; };
 		864561C31C02709800ADDE44 /* NSDateCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864561C21C02709800ADDE44 /* NSDateCalculator.swift */; };
 		8648F18F1D984F6500C7BD48 /* EventDetailsTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8648F18E1D984F6500C7BD48 /* EventDetailsTracking.swift */; };
@@ -94,6 +95,7 @@
 		861BD0CE1D9FBE540032FBAB /* TimeRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeRepository.m; sourceTree = "<group>"; };
 		861BD0CF1D9FBE540032FBAB /* Timestamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timestamp.h; sourceTree = "<group>"; };
 		861BD0D01D9FBE540032FBAB /* Timestamp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timestamp.m; sourceTree = "<group>"; };
+		861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Fluency.swift"; sourceTree = "<group>"; };
 		8626FCDF1C63FBF800640079 /* CalendarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarCell.xib; sourceTree = "<group>"; };
 		864561C21C02709800ADDE44 /* NSDateCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateCalculator.swift; sourceTree = "<group>"; };
 		8648F18E1D984F6500C7BD48 /* EventDetailsTracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsTracking.swift; sourceTree = "<group>"; };
@@ -164,6 +166,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		861BD0DE1D9FBFBB0032FBAB /* options */ = {
+			isa = PBXGroup;
+			children = (
+				86FCF43C1D45506F000938E3 /* OptionsViewController.xib */,
+				86FCF43E1D455080000938E3 /* OptionsViewController.swift */,
+			);
+			name = options;
+			sourceTree = "<group>";
+		};
 		869DAC711D449EFB005AF315 /* tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,9 +227,8 @@
 				86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */,
 				86FCF4401D455AC3000938E3 /* Extensions */,
 				86FB1C321D8F37310074431B /* event details */,
+				861BD0DE1D9FBFBB0032FBAB /* options */,
 				869DAC7C1D44D15C005AF315 /* EventPredicates.swift */,
-				86FCF43C1D45506F000938E3 /* OptionsViewController.xib */,
-				86FCF43E1D455080000938E3 /* OptionsViewController.swift */,
 				8650D7CF1D9FA8F5002D5930 /* EventStoreRepository.swift */,
 				8650D7D11D9FAE8E002D5930 /* TimeRepository.swift */,
 			);
@@ -281,6 +291,7 @@
 				8614BABD1C825B7A00A3E570 /* NSDate+Time.swift */,
 				86D751141C71316D00C0A607 /* UIColor+WhatsOn.swift */,
 				86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */,
+				861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -539,6 +550,7 @@
 				869DAC7D1D44D15C005AF315 /* EventPredicates.swift in Sources */,
 				86FCF43F1D455080000938E3 /* OptionsViewController.swift in Sources */,
 				861BD0D71D9FBE540032FBAB /* EventsRepository.m in Sources */,
+				861BD0E01D9FC4290032FBAB /* Optional+Fluency.swift in Sources */,
 				86F467F91C8AFFA500147F2E /* WhatsOnPresenter.swift in Sources */,
 				861BD0DC1D9FBE540032FBAB /* TimeRepository.m in Sources */,
 				8650D7D21D9FAE8E002D5930 /* TimeRepository.swift in Sources */,
