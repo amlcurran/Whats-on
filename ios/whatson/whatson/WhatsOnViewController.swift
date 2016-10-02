@@ -38,14 +38,6 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
         eventService = SCEventsService(scTimeRepository: timeRepo, with: eventRepo, with: NSDateCalculator())
         presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService)
         
-        navigationController?.navigationBar.barTintColor = UIColor.accent
-        navigationController?.navigationBar.isTranslucent = true
-        navigationController?.navigationBar.tintColor = UIColor.white
-        #if DEBUG
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editTapped))
-        #endif
-        navigationController?.isNavigationBarHidden = true
-        
         let blur = UIBlurEffect(style: .light)
         let blurView = UIVisualEffectView(effect: blur)
         let header = HeaderView()
@@ -83,6 +75,7 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated);
         NotificationCenter.default.addObserver(self, selector:#selector(eventsChanged), name: NSNotification.Name.EKEventStoreChanged, object: eventStore)
+        navigationController?.setNavigationBarHidden(true, animated: true)
         presenter.beginPresenting(self)
     }
     

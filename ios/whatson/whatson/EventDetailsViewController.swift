@@ -83,6 +83,11 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         moreInfoLabel.constrain(.top, to: timingLabel, .bottom, withOffset: 8)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     private func loadLocation() {
         if let location = event.structuredLocation?.geoLocation {
             updateMap(location: location)
