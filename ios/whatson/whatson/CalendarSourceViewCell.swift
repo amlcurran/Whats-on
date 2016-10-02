@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 
+@IBDesignable
 class CalendarSourceViewCell : UITableViewCell {
     
     let dayLabel = UILabel()
@@ -8,15 +9,16 @@ class CalendarSourceViewCell : UITableViewCell {
     let roundedView = RoundedRectBorderView()
     let dateFormatter = DateFormatter()
     
-    var type: SlotType = .empty {
+    var type: SlotCellStyle = .empty {
         didSet {
             roundedView.backgroundColor = type.cellBackground
             dayLabel.textColor = type.secondaryText
             eventLabel.textColor = type.mainText
             roundedView.borderColor = type.borderColor
+            roundedView.borderWidth = type.borderWidth
+            roundedView.borderDash = type.borderDash
         }
     }
-    var empty : Bool = true
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -53,8 +55,6 @@ class CalendarSourceViewCell : UITableViewCell {
         
         dayLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
         eventLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightSemibold)
-        
-        roundedView.borderWidth = 2
     }
 
     func bind(_ item : SCCalendarItem, slot : SCCalendarSlot?) {
@@ -63,30 +63,4 @@ class CalendarSourceViewCell : UITableViewCell {
         dayLabel.text = dateFormatter.string(from:  Date.dateFromTime(item.startTime()))
     }
     
-}
-
-private let backgrounds: [SlotType: UIColor] = [ .empty: .clear, .full: .white ]
-private let mainTexts: [SlotType: UIColor] = [ .empty: .lightText, .full: .secondary ]
-private let secondaryTexts: [SlotType: UIColor] = [ .empty: .lightText, .full: .lightText ]
-private let borderColors: [SlotType: UIColor] = [ .empty: .emptyOutline, .full: .clear ]
-
-enum SlotType {
-    case empty
-    case full
-    
-    var cellBackground: UIColor {
-        return backgrounds[self].or(.white)
-    }
-    
-    var mainText: UIColor {
-        return mainTexts[self].or(.secondary)
-    }
-    
-    var secondaryText: UIColor {
-        return secondaryTexts[self].or(.lightText)
-    }
-    
-    var borderColor: UIColor {
-        return borderColors[self].or(.clear)
-    }
 }

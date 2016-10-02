@@ -30,6 +30,7 @@
 		8650D7D01D9FA8F5002D5930 /* EventStoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8650D7CF1D9FA8F5002D5930 /* EventStoreRepository.swift */; };
 		8650D7D21D9FAE8E002D5930 /* TimeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8650D7D11D9FAE8E002D5930 /* TimeRepository.swift */; };
 		8695D0281DA023670034D52A /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0271DA023670034D52A /* HeaderView.swift */; };
+		8695D0301DA185DB0034D52A /* SlotCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */; };
 		869DAC731D449EFB005AF315 /* WhatsOnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC721D449EFB005AF315 /* WhatsOnTests.swift */; };
 		869DAC7D1D44D15C005AF315 /* EventPredicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC7C1D44D15C005AF315 /* EventPredicates.swift */; };
 		869DAC7F1D44D17E005AF315 /* EventPredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC7E1D44D17E005AF315 /* EventPredicateTests.swift */; };
@@ -102,6 +103,7 @@
 		8650D7CF1D9FA8F5002D5930 /* EventStoreRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventStoreRepository.swift; sourceTree = "<group>"; };
 		8650D7D11D9FAE8E002D5930 /* TimeRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeRepository.swift; sourceTree = "<group>"; };
 		8695D0271DA023670034D52A /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotCellStyle.swift; sourceTree = "<group>"; };
 		869DAC701D449EFB005AF315 /* WhatsOnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatsOnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		869DAC721D449EFB005AF315 /* WhatsOnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsOnTests.swift; sourceTree = "<group>"; };
 		869DAC741D449EFB005AF315 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				8650D7CF1D9FA8F5002D5930 /* EventStoreRepository.swift */,
 				8650D7D11D9FAE8E002D5930 /* TimeRepository.swift */,
 				8695D0271DA023670034D52A /* HeaderView.swift */,
+				8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */,
 			);
 			path = whatson;
 			sourceTree = "<group>";
@@ -557,6 +560,7 @@
 				8695D0281DA023670034D52A /* HeaderView.swift in Sources */,
 				86D751151C71316D00C0A607 /* UIColor+WhatsOn.swift in Sources */,
 				861BD0D21D9FBE540032FBAB /* CalendarSlot.m in Sources */,
+				8695D0301DA185DB0034D52A /* SlotCellStyle.swift in Sources */,
 				861BD0D81D9FBE540032FBAB /* EventsService.m in Sources */,
 				861BD0D51D9FBE540032FBAB /* EmptyCalendarItem.m in Sources */,
 				861BD0D41D9FBE540032FBAB /* ContainerHelpers.m in Sources */,

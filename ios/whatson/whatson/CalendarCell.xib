@@ -7,14 +7,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="89L-oX-vwT" customClass="CalendarSourceViewCell" customModule="Whatson" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="101" id="89L-oX-vwT" customClass="CalendarSourceViewCell" customModule="Whatson" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="101"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="89L-oX-vwT" id="zah-3A-sdb">
-                <frame key="frameInset" width="375" height="43"/>
+                <frame key="frameInset" width="375" height="100.5"/>
                 <autoresizingMask key="autoresizingMask"/>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="-168" y="-16"/>
+            <point key="canvasLocation" x="-187.5" y="71.5"/>
         </tableViewCell>
     </objects>
 </document>
