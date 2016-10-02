@@ -31,6 +31,7 @@
 		8650D7D21D9FAE8E002D5930 /* TimeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8650D7D11D9FAE8E002D5930 /* TimeRepository.swift */; };
 		8695D0281DA023670034D52A /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0271DA023670034D52A /* HeaderView.swift */; };
 		8695D0301DA185DB0034D52A /* SlotCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */; };
+		8695D0331DA1A2A20034D52A /* SlotDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0321DA1A2A20034D52A /* SlotDetail.swift */; };
 		869DAC731D449EFB005AF315 /* WhatsOnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC721D449EFB005AF315 /* WhatsOnTests.swift */; };
 		869DAC7D1D44D15C005AF315 /* EventPredicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC7C1D44D15C005AF315 /* EventPredicates.swift */; };
 		869DAC7F1D44D17E005AF315 /* EventPredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC7E1D44D17E005AF315 /* EventPredicateTests.swift */; };
@@ -104,6 +105,7 @@
 		8650D7D11D9FAE8E002D5930 /* TimeRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeRepository.swift; sourceTree = "<group>"; };
 		8695D0271DA023670034D52A /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotCellStyle.swift; sourceTree = "<group>"; };
+		8695D0321DA1A2A20034D52A /* SlotDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotDetail.swift; sourceTree = "<group>"; };
 		869DAC701D449EFB005AF315 /* WhatsOnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatsOnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		869DAC721D449EFB005AF315 /* WhatsOnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsOnTests.swift; sourceTree = "<group>"; };
 		869DAC741D449EFB005AF315 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -177,6 +179,20 @@
 			name = options;
 			sourceTree = "<group>";
 		};
+		8695D0311DA1A19B0034D52A /* day list */ = {
+			isa = PBXGroup;
+			children = (
+				86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */,
+				86F467F81C8AFFA500147F2E /* WhatsOnPresenter.swift */,
+				8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */,
+				8626FCDF1C63FBF800640079 /* CalendarCell.xib */,
+				8695D0271DA023670034D52A /* HeaderView.swift */,
+				8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */,
+				8695D0321DA1A2A20034D52A /* SlotDetail.swift */,
+			);
+			name = "day list";
+			sourceTree = "<group>";
+		};
 		869DAC711D449EFB005AF315 /* tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,25 +231,19 @@
 			isa = PBXGroup;
 			children = (
 				86E09AB31BB6A75700D5A809 /* core */,
+				86FCF4401D455AC3000938E3 /* extensions */,
 				86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */,
 				86CAD4AA1BACC9B1009C9CFD /* LaunchScreen.storyboard */,
-				86CAD4AD1BACC9B1009C9CFD /* Info.plist */,
-				86CAD49C1BACC9B1009C9CFD /* Supporting Files */,
-				86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */,
-				86F467F81C8AFFA500147F2E /* WhatsOnPresenter.swift */,
-				8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */,
-				864561C21C02709800ADDE44 /* NSDateCalculator.swift */,
 				86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */,
-				8626FCDF1C63FBF800640079 /* CalendarCell.xib */,
 				86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */,
-				86FCF4401D455AC3000938E3 /* Extensions */,
+				86CAD49C1BACC9B1009C9CFD /* Supporting Files */,
+				8695D0311DA1A19B0034D52A /* day list */,
 				86FB1C321D8F37310074431B /* event details */,
 				861BD0DE1D9FBFBB0032FBAB /* options */,
+				864561C21C02709800ADDE44 /* NSDateCalculator.swift */,
 				869DAC7C1D44D15C005AF315 /* EventPredicates.swift */,
 				8650D7CF1D9FA8F5002D5930 /* EventStoreRepository.swift */,
 				8650D7D11D9FAE8E002D5930 /* TimeRepository.swift */,
-				8695D0271DA023670034D52A /* HeaderView.swift */,
-				8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */,
 			);
 			path = whatson;
 			sourceTree = "<group>";
@@ -241,6 +251,7 @@
 		86CAD49C1BACC9B1009C9CFD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				86CAD4AD1BACC9B1009C9CFD /* Info.plist */,
 				86CAD49D1BACC9B1009C9CFD /* main.m */,
 			);
 			name = "Supporting Files";
@@ -288,7 +299,7 @@
 			name = "event details";
 			sourceTree = "<group>";
 		};
-		86FCF4401D455AC3000938E3 /* Extensions */ = {
+		86FCF4401D455AC3000938E3 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
 				8614BABD1C825B7A00A3E570 /* NSDate+Time.swift */,
@@ -296,7 +307,7 @@
 				86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */,
 				861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */,
 			);
-			name = Extensions;
+			name = extensions;
 			sourceTree = "<group>";
 		};
 		86FCF4411D455ADE000938E3 /* dependencies */ = {
@@ -547,6 +558,7 @@
 				8614BABE1C825B7A00A3E570 /* NSDate+Time.swift in Sources */,
 				861BD0DA1D9FBE540032FBAB /* TimeCalculator.m in Sources */,
 				861BD0D91D9FBE540032FBAB /* SparseArray.m in Sources */,
+				8695D0331DA1A2A20034D52A /* SlotDetail.swift in Sources */,
 				86D751131C7128EB00C0A607 /* RoundedRectBorderView.swift in Sources */,
 				86F8499B1D046AAE007C41B0 /* UIView+Constraints.swift in Sources */,
 				869DAC7D1D44D15C005AF315 /* EventPredicates.swift in Sources */,

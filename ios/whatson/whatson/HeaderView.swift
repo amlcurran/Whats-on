@@ -4,7 +4,8 @@ class HeaderView: UIView {
     
     let todayLabel = UILabel()
     let appLabel = UILabel()
-
+    let dateFormatter = DateFormatter()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         layout()
@@ -23,7 +24,6 @@ class HeaderView: UIView {
     }
 
     func styleTodayLabel() {
-        let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .full
         dateFormatter.timeStyle = .none
         todayLabel.text = (dateFormatter.string(from: Date()) as NSString).uppercased

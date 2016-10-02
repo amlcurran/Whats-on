@@ -32,4 +32,8 @@ enum SlotCellStyle {
     var borderDash: Border {
         return self == .empty ? .dashed(width: 12) : .full
     }
+    
+    var isSecondaryTextShown: Bool {
+        return self == .full
+    }
 }
