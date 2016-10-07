@@ -1,9 +1,14 @@
 import UIKit
 
-class CalendarDataSource: NSObject, UITableViewDataSource {
+class CalendarDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     private var items: [SCCalendarItem?] = []
     private var slots: [SCCalendarSlot] = []
+    private weak var delegate: CalendarDataSourceDelegate?
+    
+    init(delegate: CalendarDataSourceDelegate) {
+        self.delegate = delegate
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "day", for: indexPath) as! CalendarSourceViewCell
@@ -28,5 +33,22 @@ class CalendarDataSource: NSObject, UITableViewDataSource {
     func item(at index: IndexPath) -> SCCalendarItem? {
         return items[index.row]
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let item = item(at: indexPath) else {
+            preconditionFailure("Calendar didn't have item at expected index \((indexPath as NSIndexPath).row)")
+        }
+        if item.isEmpty() {
+            delegate?.addEvent(for: item)
+        } else {
+            delegate?.showDetails(for: item as! SCEventCalendarItem)
+        }
+    }
 
+}
+
+protocol CalendarDataSourceDelegate: class {
+    func addEvent(for item: SCCalendarItem)
+    
+    func showDetails(for item: SCEventCalendarItem)
 }

@@ -10,8 +10,7 @@ import UIKit
 import EventKit
 import EventKitUI
 
-class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewControllerPreviewingDelegate, WhatsOnPresenterDelegate,
-    UITableViewDelegate {
+class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewControllerPreviewingDelegate, WhatsOnPresenterDelegate, CalendarDataSourceDelegate {
     
     var dateFormatter : DateFormatter!;
     var eventStore : EKEventStore!;
@@ -20,7 +19,9 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
     var eventService : SCEventsService!;
     let timeCalculator = NSDateCalculator();
     let tableView = UITableView()
-    let dataSource = CalendarDataSource()
+    lazy var dataSource: CalendarDataSource = {
+        return CalendarDataSource(delegate: self)
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +58,7 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
         tableView.backgroundColor = .clear
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
-        tableView.delegate = self
+        tableView.delegate = dataSource
         tableView.dataSource = dataSource
         tableView.separatorStyle = .none
         
@@ -91,40 +92,20 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let item = dataSource.item(at: indexPath) else {
-            preconditionFailure("Calendar didn't have item at expected index \((indexPath as NSIndexPath).row)")
-        }
-        if item.isEmpty() {
-            let addController = addEventController(item);
-            self.navigationController?.present(addController, animated: true, completion: nil);
-        } else {
-            if let editController = editEventController(item as! SCEventCalendarItem) {
-                self.navigationController?.pushViewController(editController, animated: true)
-            }
-        }
+    func addEvent(for item: SCCalendarItem) {
+        let addController = EKEventEditViewController(calendarItem: item, delegate: self, calculator: timeCalculator)
+        navigationController?.present(addController, animated: true, completion: nil)
     }
     
-    func addEventController(_ calendarItem: SCCalendarItem) -> UIViewController {
-        let newEvent = EKEvent(eventStore: eventStore);
-        let startDate = timeCalculator.date(calendarItem.startTime());
-        let endDate = timeCalculator.date(calendarItem.endTime());
-        let editController = EKEventEditViewController();
-        newEvent.startDate = startDate;
-        newEvent.endDate = endDate;
-        editController.eventStore = eventStore;
-        editController.event = newEvent;
-        editController.editViewDelegate = self;
-        return editController;
+    func showDetails(for item: SCEventCalendarItem) {
+        navigationController?.pushViewController(editEventController(item), animated: true)
     }
     
-    func editEventController(_ calendarItem: SCEventCalendarItem) -> UIViewController? {
+    func editEventController(_ calendarItem: SCEventCalendarItem) -> UIViewController {
         let itemId = calendarItem.id__();
         guard let event = eventStore.event(withIdentifier: itemId!) else {
-            return nil
+            preconditionFailure("Trying to view an event which doesnt exist")
         }
-//        let showController = EKEventViewController();
-//        showController.event = event;
         let showController = EventDetailsViewController(event: event)
         return showController;
     }
@@ -132,7 +113,7 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
     // MARK: - edit view delegate
     
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
-        self.navigationController?.dismiss(animated: true, completion: nil);
+        navigationController?.dismiss(animated: true, completion: nil);
     }
     
     // MARK: - peek and pop
@@ -150,13 +131,13 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
             return nil;
         } else {
             let vc = editEventController(item as! SCEventCalendarItem)
-            vc?.preferredContentSize = self.view.frame.size
+            vc.preferredContentSize = self.view.frame.size
             return vc
         }
     }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        self.navigationController?.pushViewController(viewControllerToCommit, animated: true);
+        navigationController?.pushViewController(viewControllerToCommit, animated: true);
     }
     
     func didUpdateSource(_ source: SCCalendarSource) {
@@ -168,4 +149,25 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
         print(error)
     }
 
+}
+
+fileprivate extension EKEventEditViewController {
+    
+    convenience init(calendarItem: SCCalendarItem, delegate: EKEventEditViewDelegate, calculator: NSDateCalculator, eventStore: EKEventStore = EKEventStore.instance) {
+        self.init()
+        self.eventStore = eventStore
+        self.event = EKEvent(representing: calendarItem, calculator: calculator, eventStore: eventStore)
+        self.editViewDelegate = delegate
+    }
+    
+}
+
+fileprivate extension EKEvent {
+    
+    convenience init(representing calendarItem: SCCalendarItem, calculator: NSDateCalculator, eventStore: EKEventStore = EKEventStore.instance) {
+        self.init(eventStore: eventStore)
+        self.startDate = calculator.date(calendarItem.startTime())
+        self.endDate = calculator.date(calendarItem.endTime())
+    }
+    
 }
