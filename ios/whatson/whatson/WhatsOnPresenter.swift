@@ -37,7 +37,7 @@ class WhatsOnPresenter {
     private func fetchEvents(_ completion: @escaping ((SCCalendarSource) -> Void)) {
         let queue = DispatchQueue.global(qos: .default)
         queue.async {
-            let now = NSDateCalculator().now();
+            let now = NSDateCalculator.instance.now()
             let source = self.eventService.getCalendarSource(with: 14, with: now)
             DispatchQueue.main.async {
                 completion(source)

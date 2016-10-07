@@ -9,7 +9,7 @@ class CalendarSourceViewCell : UITableViewCell {
     let roundedView = RoundedRectBorderView()
     let dayFormatter = DateFormatter()
     let timeFormatter = DateFormatter()
-    let timeCalculator = NSDateCalculator()
+    let timeCalculator = NSDateCalculator.instance
     let secondaryLabel = UILabel()
     
     var secondaryLabelZeroHeightConstraint: NSLayoutConstraint?

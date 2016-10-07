@@ -1,20 +1,16 @@
-//
-//  NSDateCalculator.swift
-//  whatson
-//
-//  Created by Alex on 22/11/2015.
-//  Copyright © 2015 Alex Curran. All rights reserved.
-//
-
 import Foundation
 
 public class NSDateCalculator : NSObject, SCTimeCalculator {
     
-    let calendar : Calendar;
+    static var instance: NSDateCalculator = {
+       return NSDateCalculator()
+    }()
     
-    override init() {
-        calendar = Calendar.current;
-        super.init();
+    let calendar: Calendar
+    
+    private override init() {
+        calendar = Calendar.current
+        super.init()
     }
     
     func now() -> SCTimestamp {

@@ -7,7 +7,7 @@ import EventKit
     let predicates: EventPredicates
     
     init(timeRepository: SCTimeRepository) {
-        self.calculator = NSDateCalculator()
+        self.calculator = NSDateCalculator.instance
         self.predicates = EventPredicates(timeRepository: timeRepository)
     }
     

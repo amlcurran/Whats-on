@@ -2,7 +2,7 @@ import UIKit
 
 class TimeRepository: NSObject, SCTimeRepository {
     
-    let calculator = NSDateCalculator()
+    let calculator = NSDateCalculator.instance
 
     func borderTimeStart() -> SCTimeOfDay {
         let hours = UserDefaults.standard.string(forKey: "startHour").flatMap({ Int32($0) })

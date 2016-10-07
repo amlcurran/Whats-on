@@ -9,7 +9,6 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
     var dayColor : UIColor!;
     var presenter : WhatsOnPresenter!
     var eventService : SCEventsService!
-    let timeCalculator = NSDateCalculator()
     let tableView = UITableView()
     lazy var dataSource: CalendarDataSource = {
         return CalendarDataSource(delegate: self)
@@ -27,7 +26,7 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
         dayColor = UIColor.black.withAlphaComponent(0.54);
         let timeRepo = TimeRepository()
         let eventRepo = EventStoreRepository(timeRepository: timeRepo)
-        eventService = SCEventsService(scTimeRepository: timeRepo, with: eventRepo, with: NSDateCalculator())
+        eventService = SCEventsService(scTimeRepository: timeRepo, with: eventRepo, with: NSDateCalculator.instance)
         presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService)
         
         let blur = UIBlurEffect(style: .light)
@@ -82,7 +81,7 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
     }
     
     func addEvent(for item: SCCalendarItem) {
-        let addController = EKEventEditViewController(calendarItem: item, delegate: self, calculator: timeCalculator)
+        let addController = EKEventEditViewController(calendarItem: item, delegate: self)
         navigationController?.present(addController, animated: true, completion: nil)
     }
     
@@ -142,7 +141,7 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
 
 fileprivate extension EKEventEditViewController {
     
-    convenience init(calendarItem: SCCalendarItem, delegate: EKEventEditViewDelegate, calculator: NSDateCalculator, eventStore: EKEventStore = EKEventStore.instance) {
+    convenience init(calendarItem: SCCalendarItem, delegate: EKEventEditViewDelegate, calculator: NSDateCalculator = NSDateCalculator.instance, eventStore: EKEventStore = EKEventStore.instance) {
         self.init()
         self.eventStore = eventStore
         self.event = EKEvent(representing: calendarItem, calculator: calculator, eventStore: eventStore)
@@ -153,7 +152,7 @@ fileprivate extension EKEventEditViewController {
 
 fileprivate extension EKEvent {
     
-    convenience init(representing calendarItem: SCCalendarItem, calculator: NSDateCalculator, eventStore: EKEventStore = EKEventStore.instance) {
+    convenience init(representing calendarItem: SCCalendarItem, calculator: NSDateCalculator = NSDateCalculator.instance, eventStore: EKEventStore = EKEventStore.instance) {
         self.init(eventStore: eventStore)
         self.startDate = calculator.date(calendarItem.startTime())
         self.endDate = calculator.date(calendarItem.endTime())
