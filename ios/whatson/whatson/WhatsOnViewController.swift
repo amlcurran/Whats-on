@@ -11,7 +11,7 @@ import EventKit
 import EventKitUI
 
 class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewControllerPreviewingDelegate, WhatsOnPresenterDelegate,
-    UITableViewDelegate, UITableViewDataSource {
+    UITableViewDelegate {
     
     var dateFormatter : DateFormatter!;
     var eventStore : EKEventStore!;
@@ -21,6 +21,7 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
     var eventService : SCEventsService!;
     let timeCalculator = NSDateCalculator();
     let tableView = UITableView()
+    let dataSource = CalendarDataSource()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +59,7 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
         tableView.delegate = self
-        tableView.dataSource = self
+        tableView.dataSource = dataSource
         tableView.separatorStyle = .none
         
     }
@@ -89,24 +90,6 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let slot = self.calendarSource?.slotAt(with: jint((indexPath as NSIndexPath).row)),
-            let item = self.calendarSource?.itemAt(with: jint((indexPath as NSIndexPath).row)) else {
-            preconditionFailure("Accessing a slot which doesn't exist")
-        }
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: "day", for: indexPath) as! CalendarSourceViewCell;
-        cell.bind(item, slot: slot);
-        return cell;
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let count = calendarSource?.count() {
-            return Int(count);
-        }
-        return 0;
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -179,7 +162,8 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
     
     func didUpdateSource(_ source: SCCalendarSource) {
         self.calendarSource = source;
-        self.tableView.reloadData();
+        dataSource.update(source)
+        tableView.reloadData()
     }
     
     func failedToAccessCalendar(_ error: NSError?) {
