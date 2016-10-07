@@ -33,8 +33,7 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
         let header = HeaderView()
         anchor(header)
         
-        styleTable()
-        tableView.contentInset = UIEdgeInsets(top: header.intrinsicContentSize.height + 38, left: 0, bottom: 16, right: 0)
+        styleTable(offsetAgainst: header)
         tableView.delegate = dataSource
         tableView.dataSource = dataSource
     }
@@ -52,13 +51,14 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
         tableView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 0).isActive = true
     }
     
-    private func styleTable() {
+    private func styleTable(offsetAgainst header: HeaderView) {
         let newCellNib = UINib(nibName: "CalendarCell", bundle: Bundle.main)
         tableView.register(newCellNib, forCellReuseIdentifier: "day")
         tableView.backgroundColor = .clear
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
         tableView.separatorStyle = .none
+        tableView.contentInset = UIEdgeInsets(top: header.intrinsicContentSize.height + 38, left: 0, bottom: 16, right: 0)
     }
     
     func eventsChanged() {
@@ -116,7 +116,7 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
             return nil
         } else {
             let details = EventDetailsViewController(item: item)
-            details?.preferredContentSize = self.view.frame.size
+            details?.preferredContentSize = view.frame.size
             return details
         }
     }
@@ -130,7 +130,7 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
         tableView.reloadData()
     }
     
-    func failedToAccessCalendar(_ error: NSError?) {
+    func failedToAccessCalendar(_ error: NSError) {
         print(error)
     }
 

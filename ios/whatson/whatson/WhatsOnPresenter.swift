@@ -18,8 +18,8 @@ class WhatsOnPresenter {
         eventStore.requestAccess(to: .event) { [weak self] (access, error) in
             if (access) {
                 self?.refreshEvents()
-            } else {
-                self?.delegate?.failedToAccessCalendar(error as NSError?)
+            } else if let error = error {
+                self?.delegate?.failedToAccessCalendar(error as NSError)
             }
         }
     }
@@ -47,5 +47,5 @@ class WhatsOnPresenter {
 
 protocol WhatsOnPresenterDelegate: class {
     func didUpdateSource(_ source: SCCalendarSource)
-    func failedToAccessCalendar(_ error: NSError?)
+    func failedToAccessCalendar(_ error: NSError)
 }
