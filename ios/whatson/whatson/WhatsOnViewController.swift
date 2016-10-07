@@ -1,23 +1,15 @@
-//
-//  WhatsOnViewController.swift
-//  whatson
-//
-//  Created by Alex on 02/10/2015.
-//  Copyright © 2015 Alex Curran. All rights reserved.
-//
-
 import UIKit
 import EventKit
 import EventKitUI
 
 class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewControllerPreviewingDelegate, WhatsOnPresenterDelegate, CalendarDataSourceDelegate {
     
-    var dateFormatter : DateFormatter!;
-    var eventStore : EKEventStore!;
+    var dateFormatter : DateFormatter!
+    var eventStore = EKEventStore.instance
     var dayColor : UIColor!;
     var presenter : WhatsOnPresenter!
-    var eventService : SCEventsService!;
-    let timeCalculator = NSDateCalculator();
+    var eventService : SCEventsService!
+    let timeCalculator = NSDateCalculator()
     let tableView = UITableView()
     lazy var dataSource: CalendarDataSource = {
         return CalendarDataSource(delegate: self)
@@ -27,7 +19,6 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
         super.viewDidLoad()
         edgesForExtendedLayout = [.left, .right, .bottom]
         view.backgroundColor = .windowBackground
-        eventStore = EKEventStore()
         if traitCollection.forceTouchCapability == .available {
             registerForPreviewing(with: self, sourceView: tableView);
         }
@@ -69,9 +60,7 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
     }
     
     func editTapped() {
-        let options = OptionsViewController.create()
-        let navigationController = UINavigationController(rootViewController: options)
-        present(navigationController, animated: true, completion: nil)
+        present(OptionsViewController.create().inNavigationController(), animated: true, completion: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
