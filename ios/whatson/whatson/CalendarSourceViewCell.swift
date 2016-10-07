@@ -94,7 +94,7 @@ class CalendarSourceViewCell : UITableViewCell {
         type = (slot?.isEmpty() ?? false) ? .empty : .full
         eventLabel.text = item.title()
         secondaryLabel.text = String(format: "From %@", timeFormatter.string(from: timeCalculator.date(item.startTime())))
-        dayLabel.text = dayFormatter.string(from:  Date.dateFromTime(item.startTime()))
+        dayLabel.text = dayFormatter.string(from: Date.dateFromTime(item.startTime()))
     }
     
 }
