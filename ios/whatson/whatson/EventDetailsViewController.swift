@@ -33,19 +33,20 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         
         layoutViews()
         
-        view.backgroundColor = .white
-        navigationItem.title = "Event details"
+        view.backgroundColor = .windowBackground
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(UIImage.from(color: .windowBackground), for: .default)
         #if DEBUG
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteEventTapped))
         #endif
         
+        titleLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightSemibold)
+        locationLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
+        titleLabel.textColor = .secondary
+        locationLabel.textColor = .lightText
+        
         titleLabel.text = event.title
-        titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
-        
         locationLabel.text = event.location
-        locationLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        locationLabel.textColor = UIColor.black.withAlphaComponent(0.7)
-        
         timingLabel.text = "From \(event.startDate.formatAsTime()) to \(event.endDate.formatAsTime())"
         moreInfoLabel.text = "More info"
         
@@ -70,7 +71,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         titleLabel.constrainToSuperview(edges: [.leadingMargin, .trailingMargin, .topMargin])
         
         stackView.add(locationLabel, constrainedTo: [.leadingMargin, .trailingMargin])
-        locationLabel.constrain(.top, to: titleLabel, .bottom, withOffset: 8)
+        locationLabel.constrain(.top, to: titleLabel, .bottom, withOffset: 3)
         
         stackView.add(locationMapView, constrainedTo: [.leading, .trailing])
         mapHeightConstraint = locationMapView.constrain(height: 160)
@@ -182,5 +183,21 @@ fileprivate extension EKEventViewController {
         self.delegate = delegate
         self.allowsEditing = false
     }
+    
+}
+
+fileprivate extension UIImage {
+    
+    static func from(color: UIColor) -> UIImage? {
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        context?.setFillColor(color.cgColor)
+        context?.fill(rect)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return img
+    }
+    
     
 }
