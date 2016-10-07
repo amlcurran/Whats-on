@@ -24,5 +24,9 @@ class CalendarDataSource: NSObject, UITableViewDataSource {
             slots.append(source.slotAt(with: jint(i)))
         }
     }
+    
+    func item(at index: IndexPath) -> SCCalendarItem? {
+        return items[index.row]
+    }
 
 }

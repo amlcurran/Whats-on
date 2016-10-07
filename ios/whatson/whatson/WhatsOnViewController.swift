@@ -17,7 +17,6 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
     var eventStore : EKEventStore!;
     var dayColor : UIColor!;
     var presenter : WhatsOnPresenter!
-    var calendarSource : SCCalendarSource?;
     var eventService : SCEventsService!;
     let timeCalculator = NSDateCalculator();
     let tableView = UITableView()
@@ -93,7 +92,7 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let item = self.calendarSource?.itemAt(with: jint((indexPath as NSIndexPath).row)) else {
+        guard let item = dataSource.item(at: indexPath) else {
             preconditionFailure("Calendar didn't have item at expected index \((indexPath as NSIndexPath).row)")
         }
         if item.isEmpty() {
@@ -141,7 +140,7 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard let indexPath = tableView.indexPathForRow(at: location),
             let cell = tableView.cellForRow(at: indexPath),
-            let item = self.calendarSource?.itemAt(with: jint((indexPath as NSIndexPath).row)) else {
+            let item = dataSource.item(at: indexPath) else {
                 return nil
         }
     
@@ -161,7 +160,6 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
     }
     
     func didUpdateSource(_ source: SCCalendarSource) {
-        self.calendarSource = source;
         dataSource.update(source)
         tableView.reloadData()
     }
