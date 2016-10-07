@@ -50,7 +50,7 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
         tableView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 0).isActive = true
         tableView.contentInset = UIEdgeInsets(top: header.intrinsicContentSize.height + 38, left: 0, bottom: 16, right: 0)
         
-        title = "What's On";
+        title = " "
         
         let newCellNib = UINib(nibName: "CalendarCell", bundle: Bundle.main)
         tableView.register(newCellNib, forCellReuseIdentifier: "day")
