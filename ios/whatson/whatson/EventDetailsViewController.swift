@@ -17,6 +17,21 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     private let geocoder = CLGeocoder()
     private let event: EKEvent
     
+    convenience init?(item: SCCalendarItem) {
+        if let eventItem = item as? SCEventCalendarItem {
+            self.init(eventItem: eventItem)
+        }
+        return nil
+    }
+    
+    convenience init(eventItem: SCEventCalendarItem) {
+        guard let itemId = eventItem.id__(),
+            let event = EKEventStore.instance.event(withIdentifier: itemId) else {
+                preconditionFailure("Trying to view an event which doesnt exist")
+        }
+        self.init(event: event)
+    }
+    
     init(event: EKEvent) {
         self.event = event
         super.init(nibName: nil, bundle: nil)

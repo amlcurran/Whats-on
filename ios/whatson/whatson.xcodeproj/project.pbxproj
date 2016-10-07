@@ -40,6 +40,7 @@
 		86A9E4591DA8076400E8D019 /* EKEventStore+Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E4581DA8076400E8D019 /* EKEventStore+Singleton.swift */; };
 		86A9E45B1DA80A4900E8D019 /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E45A1DA80A4900E8D019 /* UIViewController+Navigation.swift */; };
 		86A9E45D1DA80DA500E8D019 /* SCTimestamp+Now.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E45C1DA80DA500E8D019 /* SCTimestamp+Now.swift */; };
+		86A9E45F1DA80E9700E8D019 /* DateFormatter+Initialisers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E45E1DA80E9700E8D019 /* DateFormatter+Initialisers.swift */; };
 		86B8660A1D55EDF700968099 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 86B866091D55EDF700968099 /* GoogleService-Info.plist */; };
 		86B8660B1D55EDF700968099 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 86B866091D55EDF700968099 /* GoogleService-Info.plist */; };
 		86C19EBF1BBF28E600BBCDF6 /* WhatsOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */; };
@@ -120,6 +121,7 @@
 		86A9E4581DA8076400E8D019 /* EKEventStore+Singleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EKEventStore+Singleton.swift"; sourceTree = "<group>"; };
 		86A9E45A1DA80A4900E8D019 /* UIViewController+Navigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Navigation.swift"; sourceTree = "<group>"; };
 		86A9E45C1DA80DA500E8D019 /* SCTimestamp+Now.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCTimestamp+Now.swift"; sourceTree = "<group>"; };
+		86A9E45E1DA80E9700E8D019 /* DateFormatter+Initialisers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Initialisers.swift"; sourceTree = "<group>"; };
 		86B866091D55EDF700968099 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		86C19EB91BBF287500BBCDF6 /* whatson-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "whatson-Bridging-Header.h"; sourceTree = "<group>"; };
 		86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsOnViewController.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 				86A9E4581DA8076400E8D019 /* EKEventStore+Singleton.swift */,
 				86A9E45A1DA80A4900E8D019 /* UIViewController+Navigation.swift */,
 				86A9E45C1DA80DA500E8D019 /* SCTimestamp+Now.swift */,
+				86A9E45E1DA80E9700E8D019 /* DateFormatter+Initialisers.swift */,
 			);
 			name = extensions;
 			sourceTree = "<group>";
@@ -581,6 +584,7 @@
 				86F467F91C8AFFA500147F2E /* WhatsOnPresenter.swift in Sources */,
 				861BD0DC1D9FBE540032FBAB /* TimeRepository.m in Sources */,
 				86A9E4591DA8076400E8D019 /* EKEventStore+Singleton.swift in Sources */,
+				86A9E45F1DA80E9700E8D019 /* DateFormatter+Initialisers.swift in Sources */,
 				8650D7D21D9FAE8E002D5930 /* TimeRepository.swift in Sources */,
 				861BD0D31D9FBE540032FBAB /* CalendarSource.m in Sources */,
 				8695D0281DA023670034D52A /* HeaderView.swift in Sources */,

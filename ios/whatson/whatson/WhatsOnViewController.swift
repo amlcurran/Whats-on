@@ -4,12 +4,14 @@ import EventKitUI
 
 class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewControllerPreviewingDelegate, WhatsOnPresenterDelegate, CalendarDataSourceDelegate {
     
-    var dateFormatter : DateFormatter!
-    var eventStore = EKEventStore.instance
-    var dayColor : UIColor!;
-    var presenter : WhatsOnPresenter!
-    var eventService : SCEventsService!
-    let tableView = UITableView()
+    private let dateFormatter = DateFormatter(dateFormat: "EEE")
+    private let eventStore = EKEventStore.instance
+    private let tableView = UITableView()
+    private let timeRepo = TimeRepository()
+    
+    private var presenter: WhatsOnPresenter!
+    private var eventService: SCEventsService!
+    
     lazy var dataSource: CalendarDataSource = {
         return CalendarDataSource(delegate: self)
     }()
@@ -18,40 +20,45 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
         super.viewDidLoad()
         edgesForExtendedLayout = [.left, .right, .bottom]
         view.backgroundColor = .windowBackground
+        title = " "
+        
         if traitCollection.forceTouchCapability == .available {
-            registerForPreviewing(with: self, sourceView: tableView);
+            registerForPreviewing(with: self, sourceView: tableView)
         }
-        dateFormatter = DateFormatter();
-        dateFormatter.dateFormat = "EEE";
-        dayColor = UIColor.black.withAlphaComponent(0.54);
-        let timeRepo = TimeRepository()
+        
         let eventRepo = EventStoreRepository(timeRepository: timeRepo)
         eventService = SCEventsService(scTimeRepository: timeRepo, with: eventRepo, with: NSDateCalculator.instance)
         presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService)
         
+        let header = HeaderView()
+        anchor(header)
+        
+        styleTable()
+        tableView.contentInset = UIEdgeInsets(top: header.intrinsicContentSize.height + 38, left: 0, bottom: 16, right: 0)
+        tableView.delegate = dataSource
+        tableView.dataSource = dataSource
+    }
+    
+    private func anchor(_ header: UIView) {
         let blur = UIBlurEffect(style: .light)
         let blurView = UIVisualEffectView(effect: blur)
-        let header = HeaderView()
-        blurView.add(header, constrainedTo: [.leading], withOffset: 16)
+        blurView.addSubview(header)
+        header.constrainToSuperview(edges: [.leading], withOffset: 16)
         header.constrainToSuperview(edges: [.trailing, .bottom], withOffset: -16)
         
         view.add(tableView, constrainedTo: [.bottom, .leading, .trailing])
         view.add(blurView, constrainedTo: [.leading, .trailing, .top])
         header.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 16).isActive = true
         tableView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 0).isActive = true
-        tableView.contentInset = UIEdgeInsets(top: header.intrinsicContentSize.height + 38, left: 0, bottom: 16, right: 0)
-        
-        title = " "
-        
+    }
+    
+    private func styleTable() {
         let newCellNib = UINib(nibName: "CalendarCell", bundle: Bundle.main)
         tableView.register(newCellNib, forCellReuseIdentifier: "day")
         tableView.backgroundColor = .clear
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
-        tableView.delegate = dataSource
-        tableView.dataSource = dataSource
         tableView.separatorStyle = .none
-        
     }
     
     func eventsChanged() {
@@ -63,15 +70,15 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated);
+        super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector:#selector(eventsChanged), name: NSNotification.Name.EKEventStoreChanged, object: eventStore)
         navigationController?.setNavigationBarHidden(true, animated: true)
         presenter.beginPresenting(self)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated);
-        NotificationCenter.default.removeObserver(self);
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
         presenter.stopPresenting()
     }
     
@@ -81,27 +88,17 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
     }
     
     func addEvent(for item: SCCalendarItem) {
-        let addController = EKEventEditViewController(calendarItem: item, delegate: self)
-        navigationController?.present(addController, animated: true, completion: nil)
+        navigationController?.present(EKEventEditViewController(calendarItem: item, delegate: self), animated: true, completion: nil)
     }
     
     func showDetails(for item: SCEventCalendarItem) {
-        navigationController?.pushViewController(editEventController(item), animated: true)
-    }
-    
-    func editEventController(_ calendarItem: SCEventCalendarItem) -> UIViewController {
-        let itemId = calendarItem.id__();
-        guard let event = eventStore.event(withIdentifier: itemId!) else {
-            preconditionFailure("Trying to view an event which doesnt exist")
-        }
-        let showController = EventDetailsViewController(event: event)
-        return showController;
+        navigationController?.pushViewController(EventDetailsViewController(eventItem: item), animated: true)
     }
     
     // MARK: - edit view delegate
     
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
-        navigationController?.dismiss(animated: true, completion: nil);
+        navigationController?.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - peek and pop
@@ -116,16 +113,16 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
         previewingContext.sourceRect = cell.frame
         
         if item.isEmpty() {
-            return nil;
+            return nil
         } else {
-            let vc = editEventController(item as! SCEventCalendarItem)
-            vc.preferredContentSize = self.view.frame.size
-            return vc
+            let details = EventDetailsViewController(item: item)
+            details?.preferredContentSize = self.view.frame.size
+            return details
         }
     }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        navigationController?.pushViewController(viewControllerToCommit, animated: true);
+        navigationController?.pushViewController(viewControllerToCommit, animated: true)
     }
     
     func didUpdateSource(_ source: SCCalendarSource) {
