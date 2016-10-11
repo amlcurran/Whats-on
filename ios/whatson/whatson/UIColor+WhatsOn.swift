@@ -21,4 +21,23 @@ extension UIColor {
         return UIColor(red: 237.0 / 255.0, green: 241.0 / 255.0, blue: 245.0 / 255.0, alpha: 1.0)
     }
     
+    class var divider: UIColor {
+        return UIColor(red: 226.0 / 255.0, green: 233.0 / 255.0, blue: 238.0 / 255.0, alpha: 1.0)
+    }
+    
+    class var cardDivider: UIColor {
+        return UIColor(red: 245.0 / 255.0, green: 246.0 / 255.0, blue: 247.0 / 255.0, alpha: 1.0)
+    }
+    
+    func darken(by factor: CGFloat) -> UIColor {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        if self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) {
+            return UIColor(colorLiteralRed: Float(red - factor), green: Float(green - factor), blue: Float(blue - factor), alpha: Float(alpha))
+        }
+        return self
+    }
+    
 }

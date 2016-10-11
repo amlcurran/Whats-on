@@ -26,3 +26,13 @@ extension UILabel {
     }
     
 }
+
+extension UIButton {
+    
+    func set(style: LabelStyle) {
+        setTitleColor(textColors[style], for: .normal)
+        setTitleColor(textColors[style]?.darken(by: 0.2), for: .highlighted)
+        titleLabel?.font = fonts[style]
+    }
+    
+}

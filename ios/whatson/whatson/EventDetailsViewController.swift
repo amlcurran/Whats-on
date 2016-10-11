@@ -10,7 +10,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     lazy var locationLabel = UILabel()
     lazy var timingLabel = UILabel()
     lazy var locationMapView = MKMapView()
-    lazy var moreInfoLabel = UILabel()
+    lazy var moreInfoButton = UIButton()
     lazy var tracking = EventDetailsTracking()
     var mapHeightConstraint: NSLayoutConstraint!
     
@@ -59,15 +59,14 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         titleLabel.set(style: .header)
         locationLabel.set(style: .lower)
         timingLabel.set(style: .lower)
-        moreInfoLabel.set(style: .cta)
+        moreInfoButton.set(style: .cta)
         
         titleLabel.text = event.title
         locationLabel.text = event.location
         timingLabel.text = "From \(event.startDate.formatAsTime()) to \(event.endDate.formatAsTime())"
-        moreInfoLabel.text = "More info"
+        moreInfoButton.setTitle("Show more info", for: .normal)
         
-        moreInfoLabel.isUserInteractionEnabled = true
-        moreInfoLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(moreInfoTapped)))
+        moreInfoButton.addTarget(self, action: #selector(moreInfoTapped), for: .touchUpInside)
         
         locationMapView.isUserInteractionEnabled = false
         loadLocation()
@@ -79,12 +78,28 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         scrollView.constrainToSuperview(edges: [.top, .bottom, .leading, .trailing])
         
         let detailsCard = UIView()
+        layout(detailsCard)
+        scrollView.add(detailsCard, constrainedTo: [.topMargin, .leadingMargin], withOffset: 16)
+        detailsCard.constrain(.width, to: view, .width, withOffset: -16)
+        
+        let line = UIView()
+        line.backgroundColor = .divider
+        scrollView.addSubview(line)
+        line.constrain(height: 1)
+        line.constrain(.width, to: view, .width)
+        line.constrain(.top, to: detailsCard, .bottom, withOffset: 16)
+        
+        scrollView.add(moreInfoButton, constrainedTo: [.bottomMargin])
+        moreInfoButton.constrain(.top, to: line, .bottom, withOffset: 0)
+        moreInfoButton.contentEdgeInsets = UIEdgeInsets(top: 21, left: 21, bottom: 21, right: 21)
+        moreInfoButton.constrain(.width, to: view, .width)
+    }
+    
+    private func layout(_ detailsCard: UIView) {
         detailsCard.layer.cornerRadius = 6
         detailsCard.layer.masksToBounds = true
         detailsCard.layoutMargins = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         detailsCard.backgroundColor = .white
-        scrollView.add(detailsCard, constrainedTo: [.topMargin, .leadingMargin], withOffset: 16)
-        detailsCard.constrain(.width, to: view, .width, withOffset: -16)
         
         detailsCard.addSubview(titleLabel)
         titleLabel.constrainToSuperview(edges: [.leading, .top], withOffset: 16)
@@ -95,17 +110,22 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         timingLabel.constrainToSuperview(edges: [.trailing], withOffset: -16)
         timingLabel.constrain(.top, to: titleLabel, .bottom, withOffset: 8)
         
+        let line = UIView()
+        line.backgroundColor = .cardDivider
+        detailsCard.addSubview(line)
+        line.constrain(height: 1)
+        line.constrain(.width, to: detailsCard, .width)
+        line.constrainToSuperview(edges: [.leading, .trailing])
+        line.constrain(.top, to: timingLabel, .bottom, withOffset: 16)
+        
         detailsCard.addSubview(locationLabel)
         locationLabel.constrainToSuperview(edges: [.leading], withOffset: 16)
         locationLabel.constrainToSuperview(edges: [.trailing], withOffset: -16)
-        locationLabel.constrain(.top, to: timingLabel, .bottom, withOffset: 32)
+        locationLabel.constrain(.top, to: line, .bottom, withOffset: 16)
         
         detailsCard.add(locationMapView, constrainedTo: [.leading, .trailing, .bottom])
         mapHeightConstraint = locationMapView.constrain(height: 136)
         locationMapView.constrain(.top, to: locationLabel, .bottom, withOffset: 16)
-        
-        scrollView.add(moreInfoLabel, constrainedTo: [.bottomMargin, .leadingMargin, .trailingMargin])
-        moreInfoLabel.constrain(.top, to: detailsCard, .bottom, withOffset: 8)
     }
     
     override func viewWillAppear(_ animated: Bool) {
