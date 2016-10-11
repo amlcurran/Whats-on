@@ -20,8 +20,9 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     convenience init?(item: SCCalendarItem) {
         if let eventItem = item as? SCEventCalendarItem {
             self.init(eventItem: eventItem)
+        } else {
+            return nil
         }
-        return nil
     }
     
     convenience init(eventItem: SCEventCalendarItem) {
