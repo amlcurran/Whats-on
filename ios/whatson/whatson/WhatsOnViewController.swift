@@ -138,10 +138,12 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
 
 fileprivate extension EKEventEditViewController {
     
-    convenience init(calendarItem: SCCalendarItem, delegate: EKEventEditViewDelegate, calculator: NSDateCalculator = NSDateCalculator.instance, eventStore: EKEventStore = EKEventStore.instance) {
+    convenience init(calendarItem: SCCalendarItem,
+                     delegate: EKEventEditViewDelegate,
+                     eventStore: EKEventStore = EKEventStore.instance) {
         self.init()
         self.eventStore = eventStore
-        self.event = EKEvent(representing: calendarItem, calculator: calculator, eventStore: eventStore)
+        self.event = EKEvent(representing: calendarItem)
         self.editViewDelegate = delegate
     }
     
@@ -149,7 +151,9 @@ fileprivate extension EKEventEditViewController {
 
 fileprivate extension EKEvent {
     
-    convenience init(representing calendarItem: SCCalendarItem, calculator: NSDateCalculator = NSDateCalculator.instance, eventStore: EKEventStore = EKEventStore.instance) {
+    convenience init(representing calendarItem: SCCalendarItem,
+                     calculator: NSDateCalculator = NSDateCalculator.instance,
+                     eventStore: EKEventStore = EKEventStore.instance) {
         self.init(eventStore: eventStore)
         self.startDate = calculator.date(calendarItem.startTime())
         self.endDate = calculator.date(calendarItem.endTime())
