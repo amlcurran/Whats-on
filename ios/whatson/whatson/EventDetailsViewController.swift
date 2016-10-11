@@ -55,10 +55,10 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteEventTapped))
         #endif
         
-        titleLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightSemibold)
-        locationLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
-        titleLabel.textColor = .secondary
-        locationLabel.textColor = .lightText
+        titleLabel.set(style: .header)
+        locationLabel.set(style: .lower)
+        timingLabel.set(style: .lower)
+        moreInfoLabel.set(style: .cta)
         
         titleLabel.text = event.title
         locationLabel.text = event.location
@@ -77,26 +77,34 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         view.addSubview(scrollView)
         scrollView.constrainToSuperview(edges: [.top, .bottom, .leading, .trailing])
         
-        let stackView = UIView()
-        stackView.layoutMargins = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        scrollView.add(stackView, constrainedTo: [.top, .bottom])
-        stackView.constrain(.width, to: view, .width)
+        let detailsCard = UIView()
+        detailsCard.layer.cornerRadius = 6
+        detailsCard.layer.masksToBounds = true
+        detailsCard.layoutMargins = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        detailsCard.backgroundColor = .white
+        scrollView.add(detailsCard, constrainedTo: [.topMargin, .leadingMargin], withOffset: 16)
+        detailsCard.constrain(.width, to: view, .width, withOffset: -16)
         
-        stackView.add(titleLabel, constrainedTo: [.leadingMargin, .trailingMargin, .topMargin])
-        titleLabel.constrainToSuperview(edges: [.leadingMargin, .trailingMargin, .topMargin])
+        detailsCard.addSubview(titleLabel)
+        titleLabel.constrainToSuperview(edges: [.leading, .top], withOffset: 16)
+        titleLabel.constrainToSuperview(edges: [.trailing], withOffset: -16)
         
-        stackView.add(locationLabel, constrainedTo: [.leadingMargin, .trailingMargin])
-        locationLabel.constrain(.top, to: titleLabel, .bottom, withOffset: 3)
+        detailsCard.addSubview(timingLabel)
+        timingLabel.constrainToSuperview(edges: [.leading], withOffset: 16)
+        timingLabel.constrainToSuperview(edges: [.trailing], withOffset: -16)
+        timingLabel.constrain(.top, to: titleLabel, .bottom, withOffset: 8)
         
-        stackView.add(locationMapView, constrainedTo: [.leading, .trailing])
-        mapHeightConstraint = locationMapView.constrain(height: 160)
-        locationMapView.constrain(.top, to: locationLabel, .bottom, withOffset: 8)
+        detailsCard.addSubview(locationLabel)
+        locationLabel.constrainToSuperview(edges: [.leading], withOffset: 16)
+        locationLabel.constrainToSuperview(edges: [.trailing], withOffset: -16)
+        locationLabel.constrain(.top, to: timingLabel, .bottom, withOffset: 32)
         
-        stackView.add(timingLabel, constrainedTo: [.leadingMargin, .trailingMargin])
-        timingLabel.constrain(.top, to: locationMapView, .bottom, withOffset: 8)
+        detailsCard.add(locationMapView, constrainedTo: [.leading, .trailing, .bottom])
+        mapHeightConstraint = locationMapView.constrain(height: 136)
+        locationMapView.constrain(.top, to: locationLabel, .bottom, withOffset: 16)
         
-        stackView.add(moreInfoLabel, constrainedTo: [.bottomMargin, .leadingMargin, .trailingMargin])
-        moreInfoLabel.constrain(.top, to: timingLabel, .bottom, withOffset: 8)
+        scrollView.add(moreInfoLabel, constrainedTo: [.bottomMargin, .leadingMargin, .trailingMargin])
+        moreInfoLabel.constrain(.top, to: detailsCard, .bottom, withOffset: 8)
     }
     
     override func viewWillAppear(_ animated: Bool) {
