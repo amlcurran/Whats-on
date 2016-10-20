@@ -4,13 +4,14 @@ import EventKitUI
 import MapKit
 import FirebaseAnalytics
 
-class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventViewDelegate {
+class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventViewDelegate, UINavigationBarDelegate {
     
     lazy var titleLabel = UILabel()
     lazy var locationLabel = UILabel()
     lazy var timingLabel = UILabel()
     lazy var locationMapView = MKMapView()
     lazy var moreInfoButton = UIButton()
+    lazy var navBar = UINavigationBar()
     lazy var tracking = EventDetailsTracking()
     var mapHeightConstraint: NSLayoutConstraint!
     
@@ -44,22 +45,28 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        edgesForExtendedLayout = []
         tracking.viewedEventDetails()
         
         layoutViews()
         
         view.backgroundColor = .windowBackground
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.setBackgroundImage(UIImage.from(color: .windowBackground), for: .default)
-        #if DEBUG
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteEventTapped))
-        #endif
         
         titleLabel.set(style: .header)
         locationLabel.set(style: .lower)
         timingLabel.set(style: .lower)
         moreInfoButton.set(style: .cta)
+        
+        navBar.shadowImage = UIImage()
+        navBar.setBackgroundImage(UIImage.from(color: .windowBackground), for: .default)
+        let previousItem = UINavigationItem()
+        let navigationItem = UINavigationItem()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        #if DEBUG
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteEventTapped))
+        #endif
+        navBar.pushItem(previousItem, animated: false)
+        navBar.pushItem(navigationItem, animated: false)
+        navBar.delegate = self
         
         titleLabel.text = event.title
         locationLabel.text = event.location
@@ -72,10 +79,23 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         loadLocation()
     }
     
+    @objc private func backTapped() {
+        _ = navigationController?.popViewController(animated: true)
+    }
+    
+    func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool {
+        _ = navigationController?.popViewController(animated: true)
+        return true
+    }
+    
     private func layoutViews() {
+        view.addSubview(navBar)
+        navBar.constrainToSuperview(edges: [.leading, .trailing])
+        navBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
         let scrollView = UIScrollView()
         view.addSubview(scrollView)
-        scrollView.constrainToSuperview(edges: [.top, .bottom, .leading, .trailing])
+        scrollView.constrainToSuperview(edges: [.bottom, .leading, .trailing])
+        scrollView.constrain(.top, to: navBar, .bottom)
         
         let detailsCard = UIView()
         layout(detailsCard)
@@ -130,7 +150,6 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     private func loadLocation() {

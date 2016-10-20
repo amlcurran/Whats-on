@@ -2,12 +2,13 @@ import UIKit
 import EventKit
 import EventKitUI
 
-class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewControllerPreviewingDelegate, WhatsOnPresenterDelegate, CalendarDataSourceDelegate {
+class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewControllerPreviewingDelegate, WhatsOnPresenterDelegate, CalendarDataSourceDelegate, UINavigationControllerDelegate {
     
     private let dateFormatter = DateFormatter(dateFormat: "EEE")
     private let eventStore = EKEventStore.instance
     private let tableView = UITableView()
     private let timeRepo = TimeRepository()
+    private let pushDelegate = EventDetailsPushTransition()
     
     private var presenter: WhatsOnPresenter!
     private var eventService: SCEventsService!
@@ -18,6 +19,7 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.delegate = self
         edgesForExtendedLayout = [.left, .right, .bottom]
         view.backgroundColor = .windowBackground
         title = " "
@@ -36,6 +38,8 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
         styleTable(offsetAgainst: header)
         tableView.delegate = dataSource
         tableView.dataSource = dataSource
+        
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     private func anchor(_ header: UIView) {
@@ -61,6 +65,13 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
         tableView.contentInset = UIEdgeInsets(top: header.intrinsicContentSize.height + 38, left: 0, bottom: 16, right: 0)
     }
     
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        if (operation == .push) {
+//            return pushDelegate
+//        }
+        return nil
+    }
+    
     func eventsChanged() {
         presenter.refreshEvents()
     }
@@ -72,7 +83,6 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector:#selector(eventsChanged), name: NSNotification.Name.EKEventStoreChanged, object: eventStore)
-        navigationController?.setNavigationBarHidden(true, animated: true)
         presenter.beginPresenting(self)
     }
     

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		19B26691193D2CF98E39543F /* Pods_WhatsOnTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE94BF63C5CC68AC641A95DE /* Pods_WhatsOnTests.framework */; };
 		8607847A1DAD7E6100AAE856 /* LabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860784791DAD7E6100AAE856 /* LabelStyle.swift */; };
+		8609C5A41DB01AF100B44D76 /* EventDetailsPushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609C5A31DB01AF100B44D76 /* EventDetailsPushTransition.swift */; };
 		8614BABE1C825B7A00A3E570 /* NSDate+Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8614BABD1C825B7A00A3E570 /* NSDate+Time.swift */; };
 		8618A51F1BDA92F900A4845E /* CalendarSourceViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */; };
 		861BD0D11D9FBE540032FBAB /* CalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 861BD0B81D9FBE530032FBAB /* CalendarItem.m */; };
@@ -76,6 +77,7 @@
 		4DB8059D3AAB19AFD5B4C782 /* Pods-whatson.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whatson.release.xcconfig"; path = "Pods/Target Support Files/Pods-whatson/Pods-whatson.release.xcconfig"; sourceTree = "<group>"; };
 		8334259A4DD3ECC2E846BCAF /* Pods_whatson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_whatson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		860784791DAD7E6100AAE856 /* LabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelStyle.swift; sourceTree = "<group>"; };
+		8609C5A31DB01AF100B44D76 /* EventDetailsPushTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsPushTransition.swift; sourceTree = "<group>"; };
 		8614BABD1C825B7A00A3E570 /* NSDate+Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDate+Time.swift"; path = "../NSDate+Time.swift"; sourceTree = "<group>"; };
 		8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSourceViewCell.swift; sourceTree = "<group>"; };
 		861BD0B71D9FBE530032FBAB /* CalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarItem.h; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 			children = (
 				86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */,
 				8648F18E1D984F6500C7BD48 /* EventDetailsTracking.swift */,
+				8609C5A31DB01AF100B44D76 /* EventDetailsPushTransition.swift */,
 			);
 			name = "event details";
 			sourceTree = "<group>";
@@ -595,6 +598,7 @@
 				86D751151C71316D00C0A607 /* UIColor+WhatsOn.swift in Sources */,
 				86A9E4571DA7A7DC00E8D019 /* CalendarDataSource.swift in Sources */,
 				861BD0D21D9FBE540032FBAB /* CalendarSlot.m in Sources */,
+				8609C5A41DB01AF100B44D76 /* EventDetailsPushTransition.swift in Sources */,
 				8695D0301DA185DB0034D52A /* SlotCellStyle.swift in Sources */,
 				861BD0D81D9FBE540032FBAB /* EventsService.m in Sources */,
 				861BD0D51D9FBE540032FBAB /* EmptyCalendarItem.m in Sources */,
