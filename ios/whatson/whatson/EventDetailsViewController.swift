@@ -166,9 +166,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if (geocoder.isGeocoding) {
-            geocoder.cancelGeocode()
-        }
+        geocoder.cancelGeocode()
     }
 
 }
