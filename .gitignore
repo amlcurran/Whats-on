@@ -6,6 +6,7 @@
 /captures
 *.iml
 ios/whatson/DerivedData
+ios/whatson/GoogleService-Info.plist
 ios/whatson/.idea
 ios/core/whatson-core/DerivedData/
 ios/whatson/whatson.xcodeproj/project.xcworkspace/xcuserdata/amlcurran.xcuserdatad/UserInterfaceState.xcuserstate

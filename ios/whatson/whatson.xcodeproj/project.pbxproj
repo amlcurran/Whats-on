@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		19B26691193D2CF98E39543F /* Pods_WhatsOnTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE94BF63C5CC68AC641A95DE /* Pods_WhatsOnTests.framework */; };
+		69853D85F37E68B39053DB9F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69853D2C9F2840A9862339C4 /* GoogleService-Info.plist */; };
 		8607847A1DAD7E6100AAE856 /* LabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860784791DAD7E6100AAE856 /* LabelStyle.swift */; };
 		8609C5A41DB01AF100B44D76 /* EventDetailsPushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609C5A31DB01AF100B44D76 /* EventDetailsPushTransition.swift */; };
 		8614BABE1C825B7A00A3E570 /* NSDate+Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8614BABD1C825B7A00A3E570 /* NSDate+Time.swift */; };
@@ -43,8 +44,6 @@
 		86A9E45B1DA80A4900E8D019 /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E45A1DA80A4900E8D019 /* UIViewController+Navigation.swift */; };
 		86A9E45D1DA80DA500E8D019 /* SCTimestamp+Now.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E45C1DA80DA500E8D019 /* SCTimestamp+Now.swift */; };
 		86A9E45F1DA80E9700E8D019 /* DateFormatter+Initialisers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E45E1DA80E9700E8D019 /* DateFormatter+Initialisers.swift */; };
-		86B8660A1D55EDF700968099 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 86B866091D55EDF700968099 /* GoogleService-Info.plist */; };
-		86B8660B1D55EDF700968099 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 86B866091D55EDF700968099 /* GoogleService-Info.plist */; };
 		86C19EBF1BBF28E600BBCDF6 /* WhatsOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */; };
 		86CAD49E1BACC9B1009C9CFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD49D1BACC9B1009C9CFD /* main.m */; };
 		86CAD4A91BACC9B1009C9CFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */; };
@@ -75,6 +74,7 @@
 /* Begin PBXFileReference section */
 		1175B80F0FD97DA802FE2AB1 /* Pods-whatson.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whatson.debug.xcconfig"; path = "Pods/Target Support Files/Pods-whatson/Pods-whatson.debug.xcconfig"; sourceTree = "<group>"; };
 		4DB8059D3AAB19AFD5B4C782 /* Pods-whatson.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whatson.release.xcconfig"; path = "Pods/Target Support Files/Pods-whatson/Pods-whatson.release.xcconfig"; sourceTree = "<group>"; };
+		69853D2C9F2840A9862339C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8334259A4DD3ECC2E846BCAF /* Pods_whatson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_whatson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		860784791DAD7E6100AAE856 /* LabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelStyle.swift; sourceTree = "<group>"; };
 		8609C5A31DB01AF100B44D76 /* EventDetailsPushTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsPushTransition.swift; sourceTree = "<group>"; };
@@ -126,7 +126,6 @@
 		86A9E45A1DA80A4900E8D019 /* UIViewController+Navigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Navigation.swift"; sourceTree = "<group>"; };
 		86A9E45C1DA80DA500E8D019 /* SCTimestamp+Now.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCTimestamp+Now.swift"; sourceTree = "<group>"; };
 		86A9E45E1DA80E9700E8D019 /* DateFormatter+Initialisers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Initialisers.swift"; sourceTree = "<group>"; };
-		86B866091D55EDF700968099 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		86C19EB91BBF287500BBCDF6 /* whatson-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "whatson-Bridging-Header.h"; sourceTree = "<group>"; };
 		86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsOnViewController.swift; sourceTree = "<group>"; };
 		86CAD4991BACC9B1009C9CFD /* Whatson.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Whatson.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,7 +221,6 @@
 		86CAD4901BACC9B1009C9CFD = {
 			isa = PBXGroup;
 			children = (
-				86B866091D55EDF700968099 /* GoogleService-Info.plist */,
 				86FCF4411D455ADE000938E3 /* dependencies */,
 				86CAD49B1BACC9B1009C9CFD /* whatson */,
 				869DAC711D449EFB005AF315 /* tests */,
@@ -230,6 +228,7 @@
 				86C19EB91BBF287500BBCDF6 /* whatson-Bridging-Header.h */,
 				3C1168F9D8934AD69843604B /* Pods */,
 				BC38BE0C51940461A7C28C6F /* Frameworks */,
+				69853D2C9F2840A9862339C4 /* GoogleService-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -445,7 +444,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86B8660B1D55EDF700968099 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,7 +455,7 @@
 				86CAD4A91BACC9B1009C9CFD /* Assets.xcassets in Resources */,
 				86FCF43D1D45506F000938E3 /* OptionsViewController.xib in Resources */,
 				8626FCE01C63FBF800640079 /* CalendarCell.xib in Resources */,
-				86B8660A1D55EDF700968099 /* GoogleService-Info.plist in Resources */,
+				69853D85F37E68B39053DB9F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
