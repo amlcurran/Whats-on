@@ -27,10 +27,8 @@ class DetailsCard: UIView {
         timingLabel.constrainToSuperview(edges: [.trailing], withOffset: -16)
         timingLabel.constrain(.top, to: titleLabel, .bottom, withOffset: 8)
 
-        let line = UIView()
-        line.backgroundColor = .cardDivider
+        let line = Line(height: 1, color: .cardDivider)
         addSubview(line)
-        line.constrain(height: 1)
         line.constrain(.width, to: self, .width)
         line.constrainToSuperview(edges: [.leading, .trailing])
         line.constrain(.top, to: timingLabel, .bottom, withOffset: 16)
