@@ -5,15 +5,11 @@ import MapKit
 import FirebaseAnalytics
 
 class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventViewDelegate, UINavigationBarDelegate {
-    
-    lazy var titleLabel = UILabel()
-    lazy var locationLabel = UILabel()
-    lazy var timingLabel = UILabel()
-    lazy var locationMapView = MKMapView()
+
+    lazy var detailsCard: DetailsCard = DetailsCard()
     lazy var moreInfoButton = UIButton()
     lazy var navBar = UINavigationBar()
     lazy var tracking = EventDetailsTracking()
-    var mapHeightConstraint: NSLayoutConstraint!
     
     private let geocoder = CLGeocoder()
     private let event: EKEvent
@@ -50,11 +46,9 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         layoutViews()
         
         view.backgroundColor = .windowBackground
-        
-        titleLabel.set(style: .header)
-        locationLabel.set(style: .lower)
-        timingLabel.set(style: .lower)
+
         moreInfoButton.set(style: .cta)
+        detailsCard.style()
         
         navBar.shadowImage = UIImage()
         navBar.setBackgroundImage(UIImage.from(color: .windowBackground), for: .default)
@@ -67,15 +61,12 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         navBar.pushItem(previousItem, animated: false)
         navBar.pushItem(navigationItem, animated: false)
         navBar.delegate = self
-        
-        titleLabel.text = event.title
-        locationLabel.text = event.location
-        timingLabel.text = "From \(event.startDate.formatAsTime()) to \(event.endDate.formatAsTime())"
+
+        detailsCard.set(event: event)
         moreInfoButton.setTitle("Show more info", for: .normal)
         
         moreInfoButton.addTarget(self, action: #selector(moreInfoTapped), for: .touchUpInside)
-        
-        locationMapView.isUserInteractionEnabled = false
+
         loadLocation()
     }
     
@@ -96,11 +87,10 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         view.addSubview(scrollView)
         scrollView.constrainToSuperview(edges: [.bottom, .leading, .trailing])
         scrollView.constrain(.top, to: navBar, .bottom)
-        
-        let detailsCard = UIView()
-        layout(detailsCard)
+
         scrollView.add(detailsCard, constrainedTo: [.topMargin, .leadingMargin], withOffset: 16)
         detailsCard.constrain(.width, to: view, .width, withOffset: -16)
+        detailsCard.layout()
         
         let line = UIView()
         line.backgroundColor = .divider
@@ -115,48 +105,15 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         moreInfoButton.constrain(.width, to: view, .width)
     }
     
-    private func layout(_ detailsCard: UIView) {
-        detailsCard.layer.cornerRadius = 6
-        detailsCard.layer.masksToBounds = true
-        detailsCard.layoutMargins = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        detailsCard.backgroundColor = .white
-        
-        detailsCard.addSubview(titleLabel)
-        titleLabel.constrainToSuperview(edges: [.leading, .top], withOffset: 16)
-        titleLabel.constrainToSuperview(edges: [.trailing], withOffset: -16)
-        
-        detailsCard.addSubview(timingLabel)
-        timingLabel.constrainToSuperview(edges: [.leading], withOffset: 16)
-        timingLabel.constrainToSuperview(edges: [.trailing], withOffset: -16)
-        timingLabel.constrain(.top, to: titleLabel, .bottom, withOffset: 8)
-        
-        let line = UIView()
-        line.backgroundColor = .cardDivider
-        detailsCard.addSubview(line)
-        line.constrain(height: 1)
-        line.constrain(.width, to: detailsCard, .width)
-        line.constrainToSuperview(edges: [.leading, .trailing])
-        line.constrain(.top, to: timingLabel, .bottom, withOffset: 16)
-        
-        detailsCard.addSubview(locationLabel)
-        locationLabel.constrainToSuperview(edges: [.leading], withOffset: 16)
-        locationLabel.constrainToSuperview(edges: [.trailing], withOffset: -16)
-        locationLabel.constrain(.top, to: line, .bottom, withOffset: 16)
-        
-        detailsCard.add(locationMapView, constrainedTo: [.leading, .trailing, .bottom])
-        mapHeightConstraint = locationMapView.constrain(height: 136)
-        locationMapView.constrain(.top, to: locationLabel, .bottom, withOffset: 16)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
     private func loadLocation() {
         if let location = event.structuredLocation?.geoLocation {
-            updateMap(location: location)
+            detailsCard.updateMap(location: location)
         } else if let location = event.location {
-            mapHeightConstraint.constant = 0
+            detailsCard.hideMap()
             geocoder.geocodeAddressString(location, completionHandler: { [weak self] (places, error) in
                 self?.handleGeocoding(places: places)
                 })
@@ -165,20 +122,9 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     
     private func handleGeocoding(places: [CLPlacemark]?) {
         if let places = places, let firstPlace = places.first, let location = firstPlace.location {
-            mapHeightConstraint.constant = 160
-            UIView.animate(withDuration: 0.2, animations: {
-                self.view.layoutIfNeeded()
-            })
-            updateMap(location: location)
+            detailsCard.showMap()
+            detailsCard.updateMap(location: location)
         }
-    }
-    
-    private func updateMap(location: CLLocation) {
-        let region = MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        locationMapView.setRegion(region, animated: false)
-        let point = MKPointAnnotation()
-        point.coordinate = location.coordinate
-        locationMapView.addAnnotation(point)
     }
     
     func moreInfoTapped() {
@@ -261,6 +207,81 @@ fileprivate extension UIImage {
         UIGraphicsEndImageContext()
         return img
     }
-    
-    
+
+}
+
+class DetailsCard: UIView {
+
+    lazy var titleLabel = UILabel()
+    lazy var locationLabel = UILabel()
+    lazy var timingLabel = UILabel()
+    lazy var locationMapView = MKMapView()
+
+    var mapHeightConstraint: NSLayoutConstraint!
+
+    func layout() {
+        layer.cornerRadius = 6
+        layer.masksToBounds = true
+        layoutMargins = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        backgroundColor = .white
+
+        addSubview(titleLabel)
+        titleLabel.constrainToSuperview(edges: [.leading, .top], withOffset: 16)
+        titleLabel.constrainToSuperview(edges: [.trailing], withOffset: -16)
+
+        addSubview(timingLabel)
+        timingLabel.constrainToSuperview(edges: [.leading], withOffset: 16)
+        timingLabel.constrainToSuperview(edges: [.trailing], withOffset: -16)
+        timingLabel.constrain(.top, to: titleLabel, .bottom, withOffset: 8)
+
+        let line = UIView()
+        line.backgroundColor = .cardDivider
+        addSubview(line)
+        line.constrain(height: 1)
+        line.constrain(.width, to: self, .width)
+        line.constrainToSuperview(edges: [.leading, .trailing])
+        line.constrain(.top, to: timingLabel, .bottom, withOffset: 16)
+
+        addSubview(locationLabel)
+        locationLabel.constrainToSuperview(edges: [.leading], withOffset: 16)
+        locationLabel.constrainToSuperview(edges: [.trailing], withOffset: -16)
+        locationLabel.constrain(.top, to: line, .bottom, withOffset: 16)
+
+        add(locationMapView, constrainedTo: [.leading, .trailing, .bottom])
+        mapHeightConstraint = locationMapView.constrain(height: 136)
+        locationMapView.constrain(.top, to: locationLabel, .bottom, withOffset: 16)
+    }
+
+    func style() {
+        titleLabel.set(style: .header)
+        locationLabel.set(style: .lower)
+        timingLabel.set(style: .lower)
+        locationMapView.isUserInteractionEnabled = false
+    }
+
+    func set(event: EKEvent) {
+        titleLabel.text = event.title
+        locationLabel.text = event.location
+        timingLabel.text = "From \(event.startDate.formatAsTime()) to \(event.endDate.formatAsTime())"
+    }
+
+    func hideMap() {
+        mapHeightConstraint.constant = 0
+    }
+
+    func showMap() {
+        mapHeightConstraint.constant = 160
+        UIView.animate(withDuration: 0.2, animations: { [weak self] in
+            self?.layoutIfNeeded()
+        })
+    }
+
+    func updateMap(location: CLLocation) {
+        let region = MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        locationMapView.setRegion(region, animated: false)
+        let point = MKPointAnnotation()
+        point.coordinate = location.coordinate
+        locationMapView.addAnnotation(point)
+    }
+
 }
