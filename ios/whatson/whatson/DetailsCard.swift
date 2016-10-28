@@ -9,6 +9,7 @@ class DetailsCard: UIView {
     lazy var locationLabel = UILabel()
     lazy var timingLabel = UILabel()
     lazy var locationMapView = MKMapView()
+    lazy var line = Line(height: 1, color: .cardDivider)
 
     var mapHeightConstraint: NSLayoutConstraint!
 
@@ -27,7 +28,6 @@ class DetailsCard: UIView {
         timingLabel.constrainToSuperview(edges: [.trailing], withOffset: -16)
         timingLabel.constrain(.top, to: titleLabel, .bottom, withOffset: 8)
 
-        let line = Line(height: 1, color: .cardDivider)
         addSubview(line)
         line.constrain(.width, to: self, .width)
         line.constrainToSuperview(edges: [.leading, .trailing])
@@ -58,6 +58,14 @@ class DetailsCard: UIView {
 
     func hideMap() {
         mapHeightConstraint.constant = 0
+    }
+
+    func collapseMap() {
+        mapHeightConstraint.constant = 0
+        line.removeFromSuperview()
+        locationLabel.removeFromSuperview()
+        locationMapView.removeFromSuperview()
+        timingLabel.constrainToSuperview(edges: [.bottom], withOffset: -16)
     }
 
     func showMap() {
