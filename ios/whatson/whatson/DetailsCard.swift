@@ -69,10 +69,12 @@ class DetailsCard: UIView {
     }
 
     func showMap() {
-        mapHeightConstraint.constant = 160
-        UIView.animate(withDuration: 0.2, animations: { [weak self] in
-            self?.layoutIfNeeded()
-        })
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + DispatchTimeInterval.seconds(1)) {
+            self.mapHeightConstraint.constant = 160
+            UIView.animate(withDuration: 0.2, animations: { [weak self] in
+                self?.superview?.layoutIfNeeded()
+            })
+        }
     }
 
     func updateMap(location: CLLocation) {
