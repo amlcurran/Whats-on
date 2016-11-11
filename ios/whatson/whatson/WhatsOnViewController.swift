@@ -2,7 +2,7 @@ import UIKit
 import EventKit
 import EventKitUI
 
-class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewControllerPreviewingDelegate, WhatsOnPresenterDelegate, CalendarDataSourceDelegate, UINavigationControllerDelegate {
+class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewControllerPreviewingDelegate, WhatsOnPresenterDelegate, CalendarDataSourceDelegate, UINavigationControllerDelegate, HeaderViewDelegate {
     
     private let dateFormatter = DateFormatter(dateFormat: "EEE")
     private let eventStore = EKEventStore.instance
@@ -32,7 +32,7 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
         eventService = SCEventsService(scTimeRepository: timeRepo, with: eventRepo, with: NSDateCalculator.instance)
         presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService)
         
-        let header = HeaderView()
+        let header = HeaderView(delegate: self)
         anchor(header)
         
         styleTable(offsetAgainst: header)
@@ -76,7 +76,7 @@ class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewCo
         presenter.refreshEvents()
     }
     
-    func editTapped() {
+    func didTapEdit() {
         present(OptionsViewController.create().inNavigationController(), animated: true, completion: nil)
     }
     

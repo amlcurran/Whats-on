@@ -5,12 +5,17 @@ class HeaderView: UIView {
     let todayLabel = UILabel()
     let appLabel = UILabel()
     let dateFormatter = DateFormatter()
+    let editButton = UIButton()
+
+    private weak var delegate: HeaderViewDelegate?
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(delegate: HeaderViewDelegate) {
+        super.init(frame: .zero)
         layout()
         styleTodayLabel()
         styleAppLabel()
+        styleEditButton()
+        self.delegate = delegate
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -18,9 +23,14 @@ class HeaderView: UIView {
     }
     
     func layout() {
-        add(todayLabel, constrainedTo: [.top, .trailing, .leading])
-        add(appLabel, constrainedTo: [.bottom, .trailing, .leading])
+        let view = UIView()
+        view.add(todayLabel, constrainedTo: [.top, .trailing, .leading])
+        view.add(appLabel, constrainedTo: [.bottom, .trailing, .leading])
         appLabel.constrain(.top, to: todayLabel, .bottom, withOffset: 4)
+        add(view, constrainedTo: [.top, .leading, .bottom])
+        add(editButton, constrainedTo: [.top, .trailing, .bottom])
+        view.constrain(.trailing, to: editButton, .leading)
+        editButton.setContentHuggingPriority(UILayoutPriorityRequired, for: .horizontal)
     }
 
     func styleTodayLabel() {
@@ -36,10 +46,24 @@ class HeaderView: UIView {
         appLabel.textColor = .secondary
         appLabel.font = UIFont.systemFont(ofSize: 32, weight: UIFontWeightHeavy)
     }
+
+    func styleEditButton() {
+        editButton.setTitle("Edit", for: .normal)
+        editButton.setTitleColor(.accent, for: .normal)
+        editButton.addTarget(self, action: #selector(editTapped), for: .touchUpInside)
+    }
+
+    func editTapped() {
+        delegate?.didTapEdit()
+    }
     
     override var intrinsicContentSize: CGSize {
         let height = todayLabel.font.pointSize + 3 + appLabel.font.pointSize
         return CGSize(width: 0, height: height)
     }
     
+}
+
+protocol HeaderViewDelegate: class {
+    func didTapEdit()
 }
