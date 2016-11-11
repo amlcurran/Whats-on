@@ -2,7 +2,13 @@ import UIKit
 import EventKit
 import EventKitUI
 
-class WhatsOnViewController: UIViewController, EKEventEditViewDelegate, UIViewControllerPreviewingDelegate, WhatsOnPresenterDelegate, CalendarDataSourceDelegate, UINavigationControllerDelegate, HeaderViewDelegate {
+class WhatsOnViewController: UIViewController,
+        EKEventEditViewDelegate,
+        UIViewControllerPreviewingDelegate,
+        WhatsOnPresenterDelegate,
+        CalendarDataSourceDelegate,
+        UINavigationControllerDelegate,
+        HeaderViewDelegate {
     
     private let dateFormatter = DateFormatter(dateFormat: "EEE")
     private let eventStore = EKEventStore.instance
