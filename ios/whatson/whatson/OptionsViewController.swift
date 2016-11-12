@@ -3,44 +3,83 @@ import UIKit
 
 class OptionsViewController: UIViewController {
     
-    @IBOutlet weak var startPicker: UIDatePicker!
-    @IBOutlet weak var endPicker: UIDatePicker!
-    @IBOutlet weak var label: UILabel!
+    let startPicker = UIDatePicker()
+    let label = UILabel()
+    private let timeStore = UserDefaultsTimeStore()
     
     let dateFormatter = DateFormatter()
     
     static func create() -> OptionsViewController {
-        let nib = UINib(nibName: "OptionsViewController", bundle: nil)
-        return nib.instantiate(withOwner: self, options: nil).first! as! OptionsViewController
+        return OptionsViewController(nibName: nil, bundle: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .windowBackground
+
+        layoutViews()
+
         dateFormatter.dateFormat = "HH:mm"
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneTapped))
         
-        startPicker.addTarget(self, action: #selector(spinnerUpdated), for: .valueChanged)
-        endPicker.addTarget(self, action: #selector(spinnerUpdated), for: .valueChanged)
         spinnerUpdated()
     }
     
     func cancelTapped() {
         dismiss(animated: true, completion: nil)
     }
-    
+
+    private func layoutViews() {
+        view.addSubview(label)
+        label.constrainToSuperview(edges: [.leading, .top, .trailing, .bottom])
+    }
+
     func doneTapped() {
-        let startComponents = Calendar.current.dateComponents([.hour], from: startPicker.date)
-        let endComponents = Calendar.current.dateComponents([.hour], from: endPicker.date)
-        UserDefaults.standard.set(startComponents.hour, forKey: "startHour")
-        UserDefaults.standard.set(endComponents.hour, forKey: "endHour")
+//        let startComponents = Calendar.current.dateComponents([.hour], from: startPicker.date)
+//        let endComponents = Calendar.current.dateComponents([.hour], from: 23)
+//        timeStore.startTime = startComponents.hour
+//        timeStore.endTime = endComponents.hour
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func spinnerUpdated() {
-        label.text = "From \(dateFormatter.string(from: startPicker.date)) to \(dateFormatter.string(from: endPicker.date))"
-        endPicker.minimumDate = startPicker.date
+        label.text = "From \(timeStore.startTime) to \(timeStore.endTime)"
     }
     
+}
+
+fileprivate struct UserDefaultsTimeStore {
+
+    private let userDefaults: UserDefaults
+
+    init(userDefaults: UserDefaults = .standard) {
+        self.userDefaults = userDefaults
+    }
+
+    var startTime: Int {
+        get {
+            if let startTime = userDefaults.value(forKey: "startHour") as? Int {
+                return startTime
+            }
+            return 17
+        }
+        set {
+            userDefaults.set(newValue, forKey: "startHour")
+        }
+    }
+
+    var endTime: Int {
+        get {
+            if let endTime = userDefaults.value(forKey: "endHour") as? Int {
+                return endTime
+            }
+            return 23
+        }
+        set {
+            userDefaults.set(newValue, forKey: "endHour")
+        }
+    }
+
 }
