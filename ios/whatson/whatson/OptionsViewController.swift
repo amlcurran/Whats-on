@@ -4,17 +4,17 @@ import UIKit
 class OptionsViewController: UIViewController {
     
     let startPicker = UIDatePicker()
-    let label = UILabel()
+    let beginningLabel = UILabel()
+    let startLabel = UILabel()
+    let intermediateLabel = UILabel()
+    let endLabel = UILabel()
     private let timeStore = UserDefaultsTimeStore()
     
     let dateFormatter = DateFormatter()
     
-    static func create() -> OptionsViewController {
-        return OptionsViewController(nibName: nil, bundle: nil)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        edgesForExtendedLayout = []
         view.backgroundColor = .windowBackground
 
         layoutViews()
@@ -32,8 +32,19 @@ class OptionsViewController: UIViewController {
     }
 
     private func layoutViews() {
-        view.addSubview(label)
-        label.constrainToSuperview(edges: [.leading, .top, .trailing, .bottom])
+        let holdingView = UIStackView()
+        holdingView.addArrangedSubview(beginningLabel)
+        holdingView.addArrangedSubview(startLabel)
+        holdingView.addArrangedSubview(intermediateLabel)
+        holdingView.addArrangedSubview(endLabel)
+        holdingView.alignment = .center
+        holdingView.axis = .vertical
+        holdingView.distribution = .equalSpacing
+        [beginningLabel, startLabel, intermediateLabel, endLabel].forEach({ $0.hugContent(.vertical) })
+        view.addSubview(holdingView)
+        holdingView.constrainToSuperview(edges: [.leading, .trailing])
+        holdingView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        holdingView.hugContent(.vertical)
     }
 
     func doneTapped() {
@@ -44,8 +55,11 @@ class OptionsViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func spinnerUpdated() {
-        label.text = "From \(timeStore.startTime) to \(timeStore.endTime)"
+    func spinnerUpdated() {
+        beginningLabel.text = "Show me events from"
+        startLabel.text = "\(timeStore.startTime)"
+        intermediateLabel.text = "to"
+        endLabel.text = "\(timeStore.endTime)"
     }
     
 }

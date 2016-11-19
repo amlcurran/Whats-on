@@ -54,4 +54,8 @@ extension UIView {
         return superview
     }
 
+    func hugContent(_ axis: UILayoutConstraintAxis) {
+        setContentHuggingPriority(UILayoutPriorityRequired, for: axis)
+    }
+
 }

@@ -83,7 +83,7 @@ class WhatsOnViewController: UIViewController,
     }
     
     func didTapEdit() {
-        present(OptionsViewController.create().inNavigationController(), animated: true, completion: nil)
+        present(OptionsViewController().inNavigationController(), animated: true, completion: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
