@@ -73,9 +73,9 @@ class OptionsViewController: UIViewController {
     
     func spinnerUpdated() {
         beginningLabel.text = "Show me events from"
-        startSelectableView.text = "\(timeStore.startTime)"
+        startSelectableView.text = dateFormatter.string(from: NSDateCalculator.instance.date(timeStore.startTimestamp))
         intermediateLabel.text = "to"
-        endSelectableView.text = "\(timeStore.endTime)"
+        endSelectableView.text = dateFormatter.string(from: NSDateCalculator.instance.date(timeStore.endTimestamp))
     }
     
 }
@@ -83,9 +83,22 @@ class OptionsViewController: UIViewController {
 fileprivate struct UserDefaultsTimeStore {
 
     private let userDefaults: UserDefaults
+    private let dateCalculator = NSDateCalculator.instance
 
     init(userDefaults: UserDefaults = .standard) {
         self.userDefaults = userDefaults
+    }
+
+    var startTimestamp: SCTimestamp {
+        get {
+            return dateCalculator.startOfToday().plusHours(with: Int32(startTime))
+        }
+    }
+
+    var endTimestamp: SCTimestamp {
+        get {
+            return dateCalculator.startOfToday().plusHours(with: Int32(endTime))
+        }
     }
 
     var startTime: Int {
