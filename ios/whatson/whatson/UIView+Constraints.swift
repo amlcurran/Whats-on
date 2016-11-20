@@ -58,4 +58,15 @@ extension UIView {
         setContentHuggingPriority(UILayoutPriorityRequired, for: axis)
     }
 
+    func surroundedByView(insetBy inset: CGFloat) -> UIView {
+        return surrounded(by: UIView(), inset: inset)
+    }
+
+    func surrounded<T: UIView>(by view: T, inset: CGFloat) -> T {
+        view.addSubview(self)
+        constrainToSuperview(edges: [.leading, .top], withOffset: inset)
+        constrainToSuperview(edges: [.trailing, .bottom], withOffset: -inset)
+        return view
+    }
+
 }

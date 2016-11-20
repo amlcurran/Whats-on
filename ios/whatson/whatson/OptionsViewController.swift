@@ -5,9 +5,9 @@ class OptionsViewController: UIViewController {
     
     let startPicker = UIDatePicker()
     let beginningLabel = UILabel()
-    let startLabel = UILabel()
     let intermediateLabel = UILabel()
-    let endLabel = UILabel()
+    var startSelectableView = TimeLabel()
+    var endSelectableView = TimeLabel()
     private let timeStore = UserDefaultsTimeStore()
     
     let dateFormatter = DateFormatter()
@@ -18,6 +18,7 @@ class OptionsViewController: UIViewController {
         view.backgroundColor = .windowBackground
 
         layoutViews()
+        styleViews()
 
         dateFormatter.dateFormat = "HH:mm"
         
@@ -31,16 +32,33 @@ class OptionsViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
+    private func styleViews() {
+        beginningLabel.set(style: .header)
+        intermediateLabel.set(style: .header)
+    }
+
     private func layoutViews() {
-        let holdingView = UIStackView()
-        holdingView.addArrangedSubview(beginningLabel)
-        holdingView.addArrangedSubview(startLabel)
-        holdingView.addArrangedSubview(intermediateLabel)
-        holdingView.addArrangedSubview(endLabel)
-        holdingView.alignment = .center
-        holdingView.axis = .vertical
-        holdingView.distribution = .equalSpacing
-        [beginningLabel, startLabel, intermediateLabel, endLabel].forEach({ $0.hugContent(.vertical) })
+        let holdingView = UIView()
+
+        holdingView.addSubview(beginningLabel)
+        beginningLabel.constrainToSuperview(edges: [.top, .leading, .trailing])
+
+        createSelectableView(startSelectableView, selector: #selector(startSelected))
+//        _ = startLabel.surrounded(by: startSelectableView, inset: 4)
+        holdingView.addSubview(startSelectableView)
+        startSelectableView.constrainToSuperview(edges: [.leading, .trailing])
+        startSelectableView.constrain(.top, to: beginningLabel, .bottom)
+
+        holdingView.addSubview(intermediateLabel)
+        intermediateLabel.constrainToSuperview(edges: [.leading, .trailing])
+        intermediateLabel.constrain(.top, to: startSelectableView, .bottom)
+
+        createSelectableView(endSelectableView, selector: #selector(endSelected))
+        holdingView.addSubview(endSelectableView)
+        endSelectableView.constrainToSuperview(edges: [.leading, .trailing, .bottom])
+        endSelectableView.constrain(.top, to: intermediateLabel, .bottom)
+
+        [beginningLabel, startSelectableView, intermediateLabel, endSelectableView].forEach({ $0.hugContent(.vertical) })
         view.addSubview(holdingView)
         holdingView.constrainToSuperview(edges: [.leading, .trailing])
         holdingView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -54,12 +72,27 @@ class OptionsViewController: UIViewController {
 //        timeStore.endTime = endComponents.hour
         dismiss(animated: true, completion: nil)
     }
+
+    private func createSelectableView(_ view: TimeLabel, selector: Selector) {
+        let gestureRecogniser = UITapGestureRecognizer(target: self, action: selector)
+        view.addGestureRecognizer(gestureRecogniser)
+    }
+
+    @objc func startSelected(recogniser: UITapGestureRecognizer) {
+        startSelectableView.selected = true
+        endSelectableView.selected = false
+    }
+
+    @objc func endSelected(recogniser: UITapGestureRecognizer) {
+        startSelectableView.selected = false
+        endSelectableView.selected = true
+    }
     
     func spinnerUpdated() {
         beginningLabel.text = "Show me events from"
-        startLabel.text = "\(timeStore.startTime)"
+        startSelectableView.text = "\(timeStore.startTime)"
         intermediateLabel.text = "to"
-        endLabel.text = "\(timeStore.endTime)"
+        endSelectableView.text = "\(timeStore.endTime)"
     }
     
 }
