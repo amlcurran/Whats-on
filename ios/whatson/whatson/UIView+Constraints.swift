@@ -28,7 +28,6 @@ extension UIView {
     }
     
     @discardableResult func constrain(height: CGFloat) -> NSLayoutConstraint {
-        _ = prepareForConstraints()
         let constraint = NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height)
         constraint.isActive = true
         return constraint

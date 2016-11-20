@@ -10,6 +10,8 @@ class OptionsViewController: UIViewController {
     private let endSelectableView = TimeLabel()
     private let timeStore = UserDefaultsTimeStore()
     private let dateFormatter = DateFormatter()
+    private let picker = UIDatePicker()
+    private var pickerHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,22 +47,30 @@ class OptionsViewController: UIViewController {
     }
 
     private func layoutViews() {
-        let holdingView = UIStackView()
-        holdingView.alignment = .center
-        holdingView.axis = .vertical
-        holdingView.distribution = .equalSpacing
-        holdingView.spacing = 4
+        let holdingView = UIView()
 
-        holdingView.addArrangedSubview(beginningLabel)
-        holdingView.addArrangedSubview(startSelectableView)
-        holdingView.addArrangedSubview(intermediateLabel)
-        holdingView.addArrangedSubview(endSelectableView)
+        let stackView = UIStackView()
+        stackView.alignment = .center
+        stackView.axis = .vertical
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 4
+
+        stackView.addArrangedSubview(beginningLabel)
+        stackView.addArrangedSubview(startSelectableView)
+        stackView.addArrangedSubview(intermediateLabel)
+        stackView.addArrangedSubview(endSelectableView)
 
         [beginningLabel, startSelectableView, intermediateLabel, endSelectableView].forEach({ $0.hugContent(.vertical) })
-        view.addSubview(holdingView)
-        holdingView.constrainToSuperview(edges: [.leading, .trailing])
-        holdingView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        holdingView.hugContent(.vertical)
+        holdingView.add(stackView, constrainedTo: [.leading, .trailing])
+        stackView.centerYAnchor.constraint(equalTo: holdingView.centerYAnchor).isActive = true
+        stackView.hugContent(.vertical)
+
+
+        view.add(holdingView, constrainedTo: [.top, .leading, .trailing])
+        pickerHeightConstraint = picker.constrain(height: 0)
+        pickerHeightConstraint.isActive = true
+        view.add(picker, constrainedTo: [.leading, .trailing, .bottom])
+        picker.constrain(.top, to: holdingView, .bottom)
     }
 
     func doneTapped() {
