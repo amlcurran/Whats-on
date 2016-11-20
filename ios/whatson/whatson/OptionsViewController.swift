@@ -23,10 +23,18 @@ class OptionsViewController: UIViewController {
         startSelectableView.tapClosure = { [weak self] in
             self?.startSelectableView.selected = true
             self?.endSelectableView.selected = false
+            UIView.animate(withDuration: 0.2, animations: { [weak self] in
+                self?.pickerHeightConstraint.isActive = false
+                self?.view.layoutIfNeeded()
+            })
         }
         endSelectableView.tapClosure = { [weak self] in
             self?.startSelectableView.selected = false
             self?.endSelectableView.selected = true
+            UIView.animate(withDuration: 0.2, animations: { [weak self] in
+                self?.pickerHeightConstraint.isActive = false
+                self?.view.layoutIfNeeded()
+            })
         }
 
         dateFormatter.dateFormat = "HH:mm"

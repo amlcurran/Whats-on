@@ -4,7 +4,7 @@
     <list default="true" id="94ce1a51-61c6-4408-a8c0-ca50f8ac639a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/OptionsViewController.swift" afterPath="$PROJECT_DIR$/whatson/OptionsViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/UIView+Constraints.swift" afterPath="$PROJECT_DIR$/whatson/UIView+Constraints.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/views/TimeLabel.swift" afterPath="$PROJECT_DIR$/whatson/views/TimeLabel.swift" />
     </list>
     <ignored path="whatson.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="OptionsViewController.swift" pinned="false" current-in-tab="false">
+      <file leaf-file-name="OptionsViewController.swift" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/whatson/OptionsViewController.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="69" column="42" lean-forward="true" selection-start-line="69" selection-start-column="42" selection-end-line="69" selection-end-column="42" />
+            <state relative-caret-position="135">
+              <caret line="9" column="40" lean-forward="true" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
               <folding>
                 <element signature="e#0#17#0" expanded="true" />
               </folding>
@@ -80,8 +80,8 @@
       <file leaf-file-name="TimeLabel.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/whatson/views/TimeLabel.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+            <state relative-caret-position="219">
+              <caret line="28" column="5" lean-forward="true" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
               <folding>
                 <element signature="e#0#17#0" expanded="true" />
               </folding>
@@ -99,7 +99,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UIView+Constraints.swift" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UIView+Constraints.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/whatson/UIView+Constraints.swift">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
@@ -147,9 +147,9 @@
         <option value="$PROJECT_DIR$/whatson/LabelStyle.swift" />
         <option value="$PROJECT_DIR$/whatson/views/Selectableview.swift" />
         <option value="$PROJECT_DIR$/whatson/views/SelectableView.swift" />
-        <option value="$PROJECT_DIR$/whatson/views/TimeLabel.swift" />
-        <option value="$PROJECT_DIR$/whatson/OptionsViewController.swift" />
         <option value="$PROJECT_DIR$/whatson/UIView+Constraints.swift" />
+        <option value="$PROJECT_DIR$/whatson/OptionsViewController.swift" />
+        <option value="$PROJECT_DIR$/whatson/views/TimeLabel.swift" />
       </list>
     </option>
   </component>
@@ -369,11 +369,18 @@
       <option name="project" value="LOCAL" />
       <updated>1479652023436</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Adds picker, hidden by default">
+      <created>1479653919886</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1479653919886</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16673000" />
+    <option name="totallyTimeSpent" value="17097000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="10" y="23" width="1260" height="709" extended-state="0" />
@@ -408,7 +415,8 @@
     <MESSAGE value="Basic layout for options" />
     <MESSAGE value="Hiding ma privates" />
     <MESSAGE value="Format the times correctly in the options" />
-    <option name="LAST_COMMIT_MESSAGE" value="Format the times correctly in the options" />
+    <MESSAGE value="Adds picker, hidden by default" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adds picker, hidden by default" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -702,16 +710,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/whatson/views/TimeLabel.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/whatson/SCTimestamp+Now.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -752,21 +750,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/whatson/OptionsViewController.swift">
+    <entry file="file://$PROJECT_DIR$/whatson/UIView+Constraints.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="69" column="42" lean-forward="true" selection-start-line="69" selection-start-column="42" selection-end-line="69" selection-end-column="42" />
+        <state relative-caret-position="285">
+          <caret line="30" column="24" lean-forward="false" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/whatson/views/TimeLabel.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="28" column="5" lean-forward="true" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
           <folding>
             <element signature="e#0#17#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/whatson/UIView+Constraints.swift">
+    <entry file="file://$PROJECT_DIR$/whatson/OptionsViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="30" column="24" lean-forward="false" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
-          <folding />
+        <state relative-caret-position="135">
+          <caret line="9" column="40" lean-forward="true" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
