@@ -23,18 +23,12 @@ class OptionsViewController: UIViewController {
         startSelectableView.tapClosure = { [weak self] in
             self?.startSelectableView.selected = true
             self?.endSelectableView.selected = false
-            UIView.animate(withDuration: 0.2, animations: { [weak self] in
-                self?.pickerHeightConstraint.isActive = false
-                self?.view.layoutIfNeeded()
-            })
+            self?.showPicker()
         }
         endSelectableView.tapClosure = { [weak self] in
             self?.startSelectableView.selected = false
             self?.endSelectableView.selected = true
-            UIView.animate(withDuration: 0.2, animations: { [weak self] in
-                self?.pickerHeightConstraint.isActive = false
-                self?.view.layoutIfNeeded()
-            })
+            self?.showPicker()
         }
 
         dateFormatter.dateFormat = "HH:mm"
@@ -52,6 +46,13 @@ class OptionsViewController: UIViewController {
     private func styleViews() {
         beginningLabel.set(style: .header)
         intermediateLabel.set(style: .header)
+    }
+
+    private func showPicker() {
+        UIView.animate(withDuration: 0.2, animations: { [weak self] in
+            self?.pickerHeightConstraint.isActive = false
+            self?.view.layoutIfNeeded()
+        })
     }
 
     private func layoutViews() {
