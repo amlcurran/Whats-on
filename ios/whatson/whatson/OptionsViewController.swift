@@ -3,14 +3,13 @@ import UIKit
 
 class OptionsViewController: UIViewController {
     
-    let startPicker = UIDatePicker()
-    let beginningLabel = UILabel()
-    let intermediateLabel = UILabel()
-    let startSelectableView = TimeLabel()
-    let endSelectableView = TimeLabel()
+    private let startPicker = UIDatePicker()
+    private let beginningLabel = UILabel()
+    private let intermediateLabel = UILabel()
+    private let startSelectableView = TimeLabel()
+    private let endSelectableView = TimeLabel()
     private let timeStore = UserDefaultsTimeStore()
-    
-    let dateFormatter = DateFormatter()
+    private let dateFormatter = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
