@@ -71,13 +71,6 @@ class WhatsOnViewController: UIViewController,
         tableView.contentInset = UIEdgeInsets(top: header.intrinsicContentSize.height + 38, left: 0, bottom: 16, right: 0)
     }
     
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        if (operation == .push) {
-//            return pushDelegate
-//        }
-        return nil
-    }
-    
     func eventsChanged() {
         presenter.refreshEvents()
     }

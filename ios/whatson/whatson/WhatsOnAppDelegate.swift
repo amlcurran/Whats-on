@@ -35,7 +35,11 @@ class WhatsOnAppDelegate : NSObject, UIApplicationDelegate, EKEventEditViewDeleg
     @available(iOS 9.1, *)
     func updateTouchShortcuts(_ application: UIApplication) {
         var newIcons = [UIApplicationShortcutItem]()
-        let newEventTommorrow = UIMutableApplicationShortcutItem(type: "new-tomorrow", localizedTitle: "Add event tomorrow", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: UIApplicationShortcutIconType.add), userInfo: nil)
+        let newEventTommorrow = UIMutableApplicationShortcutItem(type: "new-tomorrow",
+                localizedTitle: "Add event tomorrow",
+                localizedSubtitle: nil,
+                icon: UIApplicationShortcutIcon(type: UIApplicationShortcutIconType.add),
+                userInfo: nil)
         newIcons.append(newEventTommorrow)
         application.shortcutItems = newIcons;
     }

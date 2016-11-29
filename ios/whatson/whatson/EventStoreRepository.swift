@@ -19,7 +19,8 @@ import EventKit
         let allEvents = eventStore.events(matching: search)
         let filtered = allEvents.filter(predicates.standard().evaluate)
         let items = filtered.flatMap({ ekEvent in
-            return SCEventCalendarItem(nsString: ekEvent.eventIdentifier, with: ekEvent.title, with: self.calculator.time(ekEvent.startDate as NSDate), with: self.calculator.time(ekEvent.endDate as NSDate))
+            return SCEventCalendarItem(nsString: ekEvent.eventIdentifier, with: ekEvent.title,
+                    with: self.calculator.time(ekEvent.startDate as NSDate), with: self.calculator.time(ekEvent.endDate as NSDate))
         })
         return items.toJavaList()
     }
