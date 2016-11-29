@@ -28,7 +28,7 @@ class RoundedRectBorderView: UIView {
     }
     var borderDash: Border = .full {
         didSet {
-            switch (borderDash) {
+            switch borderDash {
             case .full:
                 borderLayer.lineDashPattern = nil
                 break

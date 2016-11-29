@@ -20,7 +20,7 @@ class Line: UIView {
 
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
-        if (superview != nil) {
+        if superview != nil {
             removeConstraints(constraints)
             constrain(height: height)
         }

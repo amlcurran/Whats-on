@@ -15,8 +15,8 @@ class WhatsOnPresenter {
 
     func beginPresenting(_ delegate: WhatsOnPresenterDelegate) {
         self.delegate = delegate
-        eventStore.requestAccess(to: .event) { [weak self] (access, error) in
-            if (access) {
+        eventStore.requestAccess(to: .event) { [weak self] (hasAccess, error) in
+            if hasAccess {
                 self?.refreshEvents()
             } else if let error = error {
                 self?.delegate?.failedToAccessCalendar(error as NSError)

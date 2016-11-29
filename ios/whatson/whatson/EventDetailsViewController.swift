@@ -137,7 +137,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     }
 
     func deleteEventTapped() {
-        if (!event.isDetached) {
+        if !event.isDetached {
             deleteEvent(span: .thisEvent)
         }
         let actionSheet = UIAlertController(title: "Delete event", message: nil, preferredStyle: .actionSheet)
@@ -162,7 +162,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
 
     public func eventViewController(_ controller: EKEventViewController, didCompleteWith action: EKEventViewAction) {
         controller.dismiss(animated: true, completion: nil)
-        if (action == .deleted) {
+        if action == .deleted {
             _ = navigationController?.popViewController(animated: true)
         }
     }

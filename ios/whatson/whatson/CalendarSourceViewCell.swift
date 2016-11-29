@@ -83,7 +83,7 @@ class CalendarSourceViewCell: UITableViewCell {
     }
 
     func updateSecondaryHeight() {
-        if (detail.isSecondaryTextShown && type.isSecondaryTextShown) {
+        if detail.isSecondaryTextShown && type.isSecondaryTextShown {
             secondaryLabelZeroHeightConstraint?.isActive = false
         } else {
             secondaryLabelZeroHeightConstraint?.isActive = true

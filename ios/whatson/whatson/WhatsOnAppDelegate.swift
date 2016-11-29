@@ -48,7 +48,7 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
     @available(iOS 9.0, *)
     func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
 //        FIRAnalytics.logEvent(withName: "3dtouch", parameters: [ "type" : shortcutItem.type as NSString])
-        if (shortcutItem.type == "new-tomorrow") {
+        if shortcutItem.type == "new-tomorrow" {
             let eventStore = EKEventStore()
             let event = EKEvent(eventStore: eventStore)
             let startDate = Calendar.current.date(bySettingHour: 17, minute: 0, second: 0, of: Date())
@@ -62,7 +62,7 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
             editController.editViewDelegate = self
             rootViewController?.present(editController, animated: false, completion: nil)
             return true
-        } else if (shortcutItem.type == "on-today") {
+        } else if shortcutItem.type == "on-today" {
             let alertController = UIAlertController(title: "Uh oh!", message: "You've not implemented this yet", preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(action)

@@ -19,7 +19,7 @@ class TimeLabel: UIView {
     var selected = false {
         didSet {
             UIView.animate(withDuration: 0.2, animations: {
-                if (self.selected) {
+                if self.selected {
                     self.backgroundColor = UIColor.accent.withAlphaComponent(0.6)
                 } else {
                     self.backgroundColor = .clear
