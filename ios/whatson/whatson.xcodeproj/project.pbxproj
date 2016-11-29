@@ -38,7 +38,6 @@
 		8695D0281DA023670034D52A /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0271DA023670034D52A /* HeaderView.swift */; };
 		8695D0301DA185DB0034D52A /* SlotCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */; };
 		8695D0331DA1A2A20034D52A /* SlotDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0321DA1A2A20034D52A /* SlotDetail.swift */; };
-		869DAC731D449EFB005AF315 /* WhatsOnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC721D449EFB005AF315 /* WhatsOnTests.swift */; };
 		869DAC7D1D44D15C005AF315 /* EventPredicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC7C1D44D15C005AF315 /* EventPredicates.swift */; };
 		869DAC7F1D44D17E005AF315 /* EventPredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC7E1D44D17E005AF315 /* EventPredicateTests.swift */; };
 		86A9C2CB1C444468009281A0 /* WhatsOnAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */; };
@@ -121,7 +120,6 @@
 		8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotCellStyle.swift; sourceTree = "<group>"; };
 		8695D0321DA1A2A20034D52A /* SlotDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotDetail.swift; sourceTree = "<group>"; };
 		869DAC701D449EFB005AF315 /* WhatsOnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatsOnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		869DAC721D449EFB005AF315 /* WhatsOnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsOnTests.swift; sourceTree = "<group>"; };
 		869DAC741D449EFB005AF315 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		869DAC7C1D44D15C005AF315 /* EventPredicates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPredicates.swift; sourceTree = "<group>"; };
 		869DAC7E1D44D17E005AF315 /* EventPredicateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPredicateTests.swift; sourceTree = "<group>"; };
@@ -222,7 +220,6 @@
 		869DAC711D449EFB005AF315 /* tests */ = {
 			isa = PBXGroup;
 			children = (
-				869DAC721D449EFB005AF315 /* WhatsOnTests.swift */,
 				869DAC741D449EFB005AF315 /* Info.plist */,
 				869DAC7E1D44D17E005AF315 /* EventPredicateTests.swift */,
 			);
@@ -587,7 +584,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				869DAC7F1D44D17E005AF315 /* EventPredicateTests.swift in Sources */,
-				869DAC731D449EFB005AF315 /* WhatsOnTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
