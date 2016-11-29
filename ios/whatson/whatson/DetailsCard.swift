@@ -78,7 +78,8 @@ class DetailsCard: UIView {
     }
 
     func updateMap(location: CLLocation) {
-        let region = MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        let region = MKCoordinateRegion(center: location.coordinate, span: span)
         locationMapView.setRegion(region, animated: false)
         let point = MKPointAnnotation()
         point.coordinate = location.coordinate
