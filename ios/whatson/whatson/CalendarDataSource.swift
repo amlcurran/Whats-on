@@ -11,7 +11,9 @@ class CalendarDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "day", for: indexPath) as! CalendarSourceViewCell
+        guard cell = tableView.dequeueReusableCell(withIdentifier: "day", for: indexPath) as? CalendarSourceViewCell else {
+            preconditionFailure("Tried to dequeue a cell which wasn't a Calendar cell")
+        }
         cell.bind(items[indexPath.row]!, slot: slots[indexPath.row])
         return cell;
     }
@@ -41,7 +43,10 @@ class CalendarDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
         if item.isEmpty() {
             delegate?.addEvent(for: item)
         } else {
-            delegate?.showDetails(for: item as! SCEventCalendarItem)
+            guard let item = item as? SCEventCalendarItem else {
+                preconditionFailure("Item isn't empty, but isn't event")
+            }
+            delegate?.showDetails(for: item)
         }
     }
 
