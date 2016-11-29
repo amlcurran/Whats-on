@@ -19,7 +19,7 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
         if #available(iOS 9.1, *) {
             updateTouchShortcuts(application)
             guard let options = launchOptions, let launchShortcut = options[.shortcutItem] as? UIApplicationShortcutItem else {
-                return true;
+                return true
             }
 
             let rootViewController = self.rootViewController
@@ -42,7 +42,7 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
                 icon: UIApplicationShortcutIcon(type: UIApplicationShortcutIconType.add),
                 userInfo: nil)
         newIcons.append(newEventTommorrow)
-        application.shortcutItems = newIcons;
+        application.shortcutItems = newIcons
     }
 
     @available(iOS 9.0, *)

@@ -40,7 +40,7 @@ class WhatsOnPresenter {
                     DispatchQueue.main.async {
                         completion(source)
                     }
-                };
+                }
     }
 
 }

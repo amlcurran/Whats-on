@@ -31,7 +31,7 @@ class RoundedRectBorderView: UIView {
             switch (borderDash) {
             case .full:
                 borderLayer.lineDashPattern = nil
-                break;
+                break
             case .dashed(let width):
                 borderLayer.lineDashPattern = [NSNumber(value: width), NSNumber(value: width)]
                 break

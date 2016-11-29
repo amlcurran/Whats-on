@@ -15,11 +15,11 @@ class CalendarDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
             preconditionFailure("Tried to dequeue a cell which wasn't a Calendar cell")
         }
         cell.bind(items[indexPath.row]!, slot: slots[indexPath.row])
-        return cell;
+        return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return slots.count;
+        return slots.count
     }
 
     func update(_ source: SCCalendarSource) {
