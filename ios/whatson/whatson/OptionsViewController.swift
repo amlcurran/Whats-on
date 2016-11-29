@@ -69,11 +69,12 @@ class OptionsViewController: UIViewController {
         stackView.addArrangedSubview(intermediateLabel)
         stackView.addArrangedSubview(endSelectableView)
 
-        [beginningLabel, startSelectableView, intermediateLabel, endSelectableView].forEach({ $0.hugContent(.vertical) })
+        [beginningLabel, startSelectableView, intermediateLabel, endSelectableView].forEach({ view in
+            view.hugContent(.vertical)
+        })
         holdingView.add(stackView, constrainedTo: [.leading, .trailing])
         stackView.centerYAnchor.constraint(equalTo: holdingView.centerYAnchor).isActive = true
         stackView.hugContent(.vertical)
-
 
         view.add(holdingView, constrainedTo: [.top, .leading, .trailing])
         pickerHeightConstraint = picker.constrain(height: 0)

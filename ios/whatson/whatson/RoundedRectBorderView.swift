@@ -11,7 +11,8 @@ class RoundedRectBorderView: UIView {
 
     @IBInspectable var cornerRadius: CGFloat = 0 {
         didSet {
-            borderLayer.path = UIBezierPath(roundedRect: bounds.insetBy(dx: cornerRadius, dy: cornerRadius), cornerRadius: cornerRadius).cgPath
+            let rect = bounds.insetBy(dx: cornerRadius, dy: cornerRadius)
+            borderLayer.path = UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius).cgPath
             layer.cornerRadius = cornerRadius
             layer.masksToBounds = cornerRadius > 0
         }
@@ -44,7 +45,6 @@ class RoundedRectBorderView: UIView {
         layer.addSublayer(borderLayer)
     }
 
-
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         layer.addSublayer(borderLayer)
@@ -52,7 +52,8 @@ class RoundedRectBorderView: UIView {
 
     override func layoutSubviews() {
         borderLayer.frame = bounds
-        borderLayer.path = UIBezierPath(roundedRect: bounds.insetBy(dx: borderWidth, dy: borderWidth), cornerRadius: cornerRadius).cgPath
+        let rect = bounds.insetBy(dx: borderWidth, dy: borderWidth)
+        borderLayer.path = UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius).cgPath
     }
 
 }
