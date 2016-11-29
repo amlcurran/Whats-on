@@ -2,15 +2,15 @@ import UIKit
 import EventKit
 
 @objc class EventStoreRepository: NSObject, SCEventsRepository {
-    
+
     let calculator: NSDateCalculator
     let predicates: EventPredicates
-    
+
     init(timeRepository: SCTimeRepository) {
         self.calculator = NSDateCalculator.instance
         self.predicates = EventPredicates(timeRepository: timeRepository)
     }
-    
+
     public func getCalendarItems(with nowTime: SCTimestamp!, with nextWeek: SCTimestamp!, with fivePm: SCTimeOfDay!, with elevenPm: SCTimeOfDay!) -> JavaUtilList {
         let eventStore = EKEventStore()
         let startTime = calculator.date(nowTime)
@@ -28,7 +28,7 @@ import EventKit
 }
 
 fileprivate extension Array {
-    
+
     func toJavaList() -> JavaUtilList {
         let list = JavaUtilArrayList()
         for item in self {
@@ -36,5 +36,5 @@ fileprivate extension Array {
         }
         return list!
     }
-    
+
 }

@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 class OptionsViewController: UIViewController {
-    
+
     private let startPicker = UIDatePicker()
     private let beginningLabel = UILabel()
     private let intermediateLabel = UILabel()
@@ -12,7 +12,7 @@ class OptionsViewController: UIViewController {
     private let dateFormatter = DateFormatter()
     private let picker = UIDatePicker()
     private var pickerHeightConstraint: NSLayoutConstraint!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         edgesForExtendedLayout = []
@@ -32,13 +32,13 @@ class OptionsViewController: UIViewController {
         }
 
         dateFormatter.dateFormat = "HH:mm"
-        
+
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneTapped))
-        
+
         spinnerUpdated()
     }
-    
+
     func cancelTapped() {
         dismiss(animated: true, completion: nil)
     }
@@ -89,14 +89,14 @@ class OptionsViewController: UIViewController {
 //        timeStore.endTime = endComponents.hour
         dismiss(animated: true, completion: nil)
     }
-    
+
     func spinnerUpdated() {
         beginningLabel.text = "Show me events from"
         startSelectableView.text = dateFormatter.string(from: NSDateCalculator.instance.date(timeStore.startTimestamp))
         intermediateLabel.text = "to"
         endSelectableView.text = dateFormatter.string(from: NSDateCalculator.instance.date(timeStore.endTimestamp))
     }
-    
+
 }
 
 fileprivate struct UserDefaultsTimeStore {

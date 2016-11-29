@@ -2,8 +2,8 @@ import Foundation
 import UIKit
 
 @IBDesignable
-class CalendarSourceViewCell : UITableViewCell {
-    
+class CalendarSourceViewCell: UITableViewCell {
+
     let dayLabel = UILabel()
     let eventLabel = UILabel()
     let roundedView = RoundedRectBorderView()
@@ -11,9 +11,9 @@ class CalendarSourceViewCell : UITableViewCell {
     let timeFormatter = DateFormatter()
     let timeCalculator = NSDateCalculator.instance
     let secondaryLabel = UILabel()
-    
+
     var secondaryLabelZeroHeightConstraint: NSLayoutConstraint?
-    
+
     var type: SlotCellStyle = .empty {
         didSet {
             roundedView.backgroundColor = type.cellBackground
@@ -26,7 +26,7 @@ class CalendarSourceViewCell : UITableViewCell {
             updateSecondaryHeight()
         }
     }
-    
+
     var detail: SlotDetail = .mid {
         didSet {
             updateSecondaryHeight()
@@ -44,7 +44,7 @@ class CalendarSourceViewCell : UITableViewCell {
         styleViews()
         layout()
     }
-    
+
     private func styleViews() {
         dayFormatter.dateStyle = .full
         dayFormatter.timeStyle = .none
@@ -53,12 +53,12 @@ class CalendarSourceViewCell : UITableViewCell {
         timeFormatter.timeStyle = .short
         backgroundColor = .clear
         selectionStyle = .none
-        
+
         dayLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
         eventLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightSemibold)
         secondaryLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
     }
-    
+
     private func layout() {
         roundedView.addSubview(eventLabel)
         eventLabel.constrainToSuperview(edges: [.top, .leading], withOffset: 16)
@@ -71,7 +71,7 @@ class CalendarSourceViewCell : UITableViewCell {
         secondaryLabel.constrain(.top, to: eventLabel, .bottom)
         secondaryLabelZeroHeightConstraint = secondaryLabel.constrain(height: 0)
         updateSecondaryHeight()
-        
+
         contentView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
         contentView.add(dayLabel, constrainedTo: [.topMargin, .leadingMargin, .trailingMargin], withOffset: 8)
         contentView.add(roundedView, constrainedTo: [.leadingMargin, .trailingMargin, .bottomMargin])
@@ -81,7 +81,7 @@ class CalendarSourceViewCell : UITableViewCell {
         roundedView.layer.shadowRadius = 4
         roundedView.layer.shadowColor = UIColor.red.cgColor
     }
-    
+
     func updateSecondaryHeight() {
         if (detail.isSecondaryTextShown && type.isSecondaryTextShown) {
             secondaryLabelZeroHeightConstraint?.isActive = false
@@ -90,11 +90,11 @@ class CalendarSourceViewCell : UITableViewCell {
         }
     }
 
-    func bind(_ item : SCCalendarItem, slot : SCCalendarSlot?) {
+    func bind(_ item: SCCalendarItem, slot: SCCalendarSlot?) {
         type = (slot?.isEmpty() ?? false) ? .empty : .full
         eventLabel.text = item.title()
         secondaryLabel.text = String(format: "From %@", timeFormatter.string(from: timeCalculator.date(item.startTime())))
         dayLabel.text = dayFormatter.string(from: Date.dateFromTime(item.startTime()))
     }
-    
+
 }

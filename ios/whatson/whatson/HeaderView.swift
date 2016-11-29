@@ -1,14 +1,14 @@
 import UIKit
 
 class HeaderView: UIView {
-    
+
     let todayLabel = UILabel()
     let appLabel = UILabel()
     let dateFormatter = DateFormatter()
     let editButton = UIButton()
 
     private weak var delegate: HeaderViewDelegate?
-    
+
     init(delegate: HeaderViewDelegate) {
         super.init(frame: .zero)
         layout()
@@ -17,11 +17,11 @@ class HeaderView: UIView {
         styleEditButton()
         self.delegate = delegate
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func layout() {
         let view = UIView()
         view.add(todayLabel, constrainedTo: [.top, .trailing, .leading])
@@ -40,7 +40,7 @@ class HeaderView: UIView {
         todayLabel.textColor = .accent
         todayLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightSemibold)
     }
-    
+
     func styleAppLabel() {
         appLabel.text = "What’s on"
         appLabel.textColor = .secondary
@@ -56,12 +56,12 @@ class HeaderView: UIView {
     func editTapped() {
         delegate?.didTapEdit()
     }
-    
+
     override var intrinsicContentSize: CGSize {
         let height = todayLabel.font.pointSize + 3 + appLabel.font.pointSize
         return CGSize(width: 0, height: height)
     }
-    
+
 }
 
 protocol HeaderViewDelegate: class {

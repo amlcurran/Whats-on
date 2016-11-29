@@ -1,17 +1,17 @@
 import EventKit
 
 struct EventPredicates {
-    
+
     let timeRepository: SCTimeRepository
-    
+
     func standard() -> NSPredicate {
-        return NSPredicate(compoundFrom: [ notAllDay(), isWithinBorder(timeRepository: timeRepository, using: Calendar.autoupdatingCurrent) ])
+        return NSPredicate(compoundFrom: [notAllDay(), isWithinBorder(timeRepository: timeRepository, using: Calendar.autoupdatingCurrent)])
     }
 
 }
 
 private extension NSPredicate {
-    
+
     convenience init(compoundFrom predicates: [NSPredicate]) {
         self.init(block: { (element, bindings) -> Bool in
             return predicates.reduce(true, { (current, predicate) -> Bool in
@@ -19,7 +19,7 @@ private extension NSPredicate {
             })
         })
     }
-    
+
 }
 
 private func notAllDay() -> NSPredicate {
@@ -34,8 +34,8 @@ private func notAllDay() -> NSPredicate {
 private func isWithinBorder(timeRepository: SCTimeRepository, using calendar: Calendar) -> NSPredicate {
     return NSPredicate(block: { (element, bindings) -> Bool in
         if let event = element as? EKEvent {
-            var startComponents = calendar.dateComponents([ .hour, .day ], from: event.startDate)
-            var endComponents = calendar.dateComponents([ .hour, .day ], from: event.endDate)
+            var startComponents = calendar.dateComponents([.hour, .day], from: event.startDate)
+            var endComponents = calendar.dateComponents([.hour, .day], from: event.endDate)
             startComponents.timeZone = TimeZone.current
             endComponents.timeZone = TimeZone.current
             let endHour = endComponents.hour!

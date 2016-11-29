@@ -23,11 +23,11 @@ class WhatsOnPresenter {
             }
         }
     }
-    
+
     func stopPresenting() {
         self.delegate = nil
     }
-    
+
     func refreshEvents() {
         fetchEvents({ [weak self] (source) in
             self?.delegate?.didUpdateSource(source)
@@ -36,16 +36,17 @@ class WhatsOnPresenter {
 
     private func fetchEvents(_ completion: @escaping ((SCCalendarSource) -> Void)) {
         DispatchQueue.global(qos: .default).async {
-            let source = self.eventService.getCalendarSource(with: 14, with: .now)
-            DispatchQueue.main.async {
-                completion(source)
-            }
-        };
+                    let source = self.eventService.getCalendarSource(with: 14, with: .now)
+                    DispatchQueue.main.async {
+                        completion(source)
+                    }
+                };
     }
 
 }
 
 protocol WhatsOnPresenterDelegate: class {
     func didUpdateSource(_ source: SCCalendarSource)
+
     func failedToAccessCalendar(_ error: NSError)
 }
