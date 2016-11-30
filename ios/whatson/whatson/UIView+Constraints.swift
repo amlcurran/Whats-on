@@ -61,7 +61,7 @@ extension UIView {
         return surrounded(by: UIView(), inset: inset)
     }
 
-    func surrounded<T:UIView>(by view: T, inset: CGFloat) -> T {
+    func surrounded<T: UIView>(by view: T, inset: CGFloat) -> T {
         view.addSubview(self)
         constrainToSuperview(edges: [.leading, .top], withOffset: inset)
         constrainToSuperview(edges: [.trailing, .bottom], withOffset: -inset)
