@@ -5,24 +5,24 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("CalendarSlot_INCLUDE_ALL")
-#ifdef CalendarSlot_RESTRICT
-#define CalendarSlot_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_CalendarSlot")
+#ifdef RESTRICT_CalendarSlot
+#define INCLUDE_ALL_CalendarSlot 0
 #else
-#define CalendarSlot_INCLUDE_ALL 1
+#define INCLUDE_ALL_CalendarSlot 1
 #endif
-#undef CalendarSlot_RESTRICT
-
-#if !defined (SCCalendarSlot_) && (CalendarSlot_INCLUDE_ALL || defined(SCCalendarSlot_INCLUDE))
-#define SCCalendarSlot_
-
-@protocol JavaUtilList;
-@protocol SCCalendarItem;
+#undef RESTRICT_CalendarSlot
 
 #if __has_feature(nullability)
 #pragma clang diagnostic push
 #pragma GCC diagnostic ignored "-Wnullability-completeness"
 #endif
+
+#if !defined (SCCalendarSlot_) && (INCLUDE_ALL_CalendarSlot || defined(INCLUDE_SCCalendarSlot))
+#define SCCalendarSlot_
+
+@protocol JavaUtilList;
+@protocol SCCalendarItem;
 
 @interface SCCalendarSlot : NSObject
 
@@ -54,10 +54,10 @@ J2OBJC_TYPE_LITERAL_HEADER(SCCalendarSlot)
 
 @compatibility_alias UkCoAmlcurranSocialCalendarSlot SCCalendarSlot;
 
+#endif
+
+
 #if __has_feature(nullability)
 #pragma clang diagnostic pop
 #endif
-
-#endif
-
-#pragma pop_macro("CalendarSlot_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_CalendarSlot")

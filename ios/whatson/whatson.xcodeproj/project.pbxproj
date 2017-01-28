@@ -485,7 +485,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		1E1E11974184238148778331 /* [CP] Embed Pods Frameworks */ = {
@@ -558,7 +558,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E06D633432F6E8A06756CA5A /* [CP] Embed Pods Frameworks */ = {
@@ -818,9 +818,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/whatson",
-					/Users/amlcurran/Projects/j2objc/lib,
+					"\"$(inherited)\"",
+					"\"$(PROJECT_DIR)/whatson\"",
+					"\"$(PROJECT_DIR)/j2objc/lib\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -861,7 +861,9 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "whatson-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
-				USER_HEADER_SEARCH_PATHS = "~/Projects/j2objc/include/**";
+				USER_HEADER_SEARCH_PATHS = (
+					"\"$(PROJECT_DIR)/j2objc/include\"/**",
+				);
 			};
 			name = Debug;
 		};
@@ -893,9 +895,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/whatson",
-					/Users/amlcurran/Projects/j2objc/lib,
+					"\"$(inherited)\"",
+					"\"$(PROJECT_DIR)/whatson\"",
+					"\"$(PROJECT_DIR)/j2objc/lib\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -936,7 +938,9 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "whatson-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
-				USER_HEADER_SEARCH_PATHS = "~/Projects/j2objc/include/**";
+				USER_HEADER_SEARCH_PATHS = (
+					"\"$(PROJECT_DIR)/j2objc/include\"/**",
+				);
 			};
 			name = Release;
 		};

@@ -5,15 +5,15 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("SparseArray_INCLUDE_ALL")
-#ifdef SparseArray_RESTRICT
-#define SparseArray_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_SparseArray")
+#ifdef RESTRICT_SparseArray
+#define INCLUDE_ALL_SparseArray 0
 #else
-#define SparseArray_INCLUDE_ALL 1
+#define INCLUDE_ALL_SparseArray 1
 #endif
-#undef SparseArray_RESTRICT
+#undef RESTRICT_SparseArray
 
-#if !defined (UkCoAmlcurranSocialCoreSparseArray_) && (SparseArray_INCLUDE_ALL || defined(UkCoAmlcurranSocialCoreSparseArray_INCLUDE))
+#if !defined (UkCoAmlcurranSocialCoreSparseArray_) && (INCLUDE_ALL_SparseArray || defined(INCLUDE_UkCoAmlcurranSocialCoreSparseArray))
 #define UkCoAmlcurranSocialCoreSparseArray_
 
 @interface UkCoAmlcurranSocialCoreSparseArray : NSObject
@@ -29,7 +29,7 @@
 
 - (void)clear;
 
-- (UkCoAmlcurranSocialCoreSparseArray *)clone;
+- (UkCoAmlcurranSocialCoreSparseArray *)java_clone;
 
 - (void)delete__WithInt:(jint)key;
 
@@ -83,4 +83,4 @@ J2OBJC_TYPE_LITERAL_HEADER(UkCoAmlcurranSocialCoreSparseArray)
 
 #endif
 
-#pragma pop_macro("SparseArray_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_SparseArray")

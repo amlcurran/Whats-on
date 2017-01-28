@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("Timestamp_INCLUDE_ALL")
-#ifdef Timestamp_RESTRICT
-#define Timestamp_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_Timestamp")
+#ifdef RESTRICT_Timestamp
+#define INCLUDE_ALL_Timestamp 0
 #else
-#define Timestamp_INCLUDE_ALL 1
+#define INCLUDE_ALL_Timestamp 1
 #endif
-#undef Timestamp_RESTRICT
-
-#if !defined (SCTimestamp_) && (Timestamp_INCLUDE_ALL || defined(SCTimestamp_INCLUDE))
-#define SCTimestamp_
-
-@protocol SCTimeCalculator;
+#undef RESTRICT_Timestamp
 
 #if __has_feature(nullability)
 #pragma clang diagnostic push
 #pragma GCC diagnostic ignored "-Wnullability-completeness"
 #endif
+
+#if !defined (SCTimestamp_) && (INCLUDE_ALL_Timestamp || defined(INCLUDE_SCTimestamp))
+#define SCTimestamp_
+
+@protocol SCTimeCalculator;
 
 @interface SCTimestamp : NSObject
 
@@ -52,10 +52,10 @@ J2OBJC_TYPE_LITERAL_HEADER(SCTimestamp)
 
 @compatibility_alias UkCoAmlcurranSocialTimestamp SCTimestamp;
 
+#endif
+
+
 #if __has_feature(nullability)
 #pragma clang diagnostic pop
 #endif
-
-#endif
-
-#pragma pop_macro("Timestamp_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_Timestamp")

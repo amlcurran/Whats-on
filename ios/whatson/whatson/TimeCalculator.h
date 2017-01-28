@@ -5,25 +5,25 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("TimeCalculator_INCLUDE_ALL")
-#ifdef TimeCalculator_RESTRICT
-#define TimeCalculator_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_TimeCalculator")
+#ifdef RESTRICT_TimeCalculator
+#define INCLUDE_ALL_TimeCalculator 0
 #else
-#define TimeCalculator_INCLUDE_ALL 1
+#define INCLUDE_ALL_TimeCalculator 1
 #endif
-#undef TimeCalculator_RESTRICT
-
-#if !defined (SCTimeCalculator_) && (TimeCalculator_INCLUDE_ALL || defined(SCTimeCalculator_INCLUDE))
-#define SCTimeCalculator_
-
-@class SCTimestamp;
+#undef RESTRICT_TimeCalculator
 
 #if __has_feature(nullability)
 #pragma clang diagnostic push
 #pragma GCC diagnostic ignored "-Wnullability-completeness"
 #endif
 
-@protocol SCTimeCalculator < NSObject, JavaObject >
+#if !defined (SCTimeCalculator_) && (INCLUDE_ALL_TimeCalculator || defined(INCLUDE_SCTimeCalculator))
+#define SCTimeCalculator_
+
+@class SCTimestamp;
+
+@protocol SCTimeCalculator < JavaObject >
 
 - (SCTimestamp * __nonnull)plusDaysWithInt:(jint)days
                            withSCTimestamp:(SCTimestamp *)time;
@@ -43,10 +43,10 @@ J2OBJC_TYPE_LITERAL_HEADER(SCTimeCalculator)
 
 #define UkCoAmlcurranSocialTimeCalculator SCTimeCalculator
 
+#endif
+
+
 #if __has_feature(nullability)
 #pragma clang diagnostic pop
 #endif
-
-#endif
-
-#pragma pop_macro("TimeCalculator_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_TimeCalculator")

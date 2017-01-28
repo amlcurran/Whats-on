@@ -4,16 +4,13 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "TimeOfDay.h"
+#include "java/lang/annotation/Annotation.h"
 #include "java/util/concurrent/TimeUnit.h"
 #include "javax/annotation/Nonnull.h"
 #include "javax/annotation/meta/When.h"
-
-#if __has_feature(nullability)
-#pragma clang diagnostic push
-#pragma GCC diagnostic ignored "-Wnullability-completeness"
-#endif
 
 @interface SCTimeOfDay () {
  @public
@@ -30,9 +27,7 @@ __attribute__((unused)) static SCTimeOfDay *new_SCTimeOfDay_initWithLong_(jlong 
 
 __attribute__((unused)) static SCTimeOfDay *create_SCTimeOfDay_initWithLong_(jlong millis);
 
-#if __has_feature(nullability)
-#pragma clang diagnostic pop
-#endif
+__attribute__((unused)) static IOSObjectArray *SCTimeOfDay__Annotations$0();
 
 @implementation SCTimeOfDay
 
@@ -53,21 +48,25 @@ __attribute__((unused)) static SCTimeOfDay *create_SCTimeOfDay_initWithLong_(jlo
   return [((JavaUtilConcurrentTimeUnit *) nil_chk(JreLoadEnum(JavaUtilConcurrentTimeUnit, MILLISECONDS))) toMinutesWithLong:millis_];
 }
 
-+ (IOSObjectArray *)__annotations_fromHoursWithInt_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "fromHoursWithInt:", "fromHours", "Luk.co.amlcurran.social.TimeOfDay;", 0x9, NULL, NULL },
-    { "initWithLong:", "TimeOfDay", NULL, 0x2, NULL, NULL },
-    { "toHours", NULL, "J", 0x1, NULL, NULL },
-    { "toMinutes", NULL, "J", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LSCTimeOfDay;", 0x9, 0, 1, -1, -1, 2, -1 },
+    { NULL, NULL, 0x2, -1, 3, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  methods[0].selector = @selector(fromHoursWithInt:);
+  methods[1].selector = @selector(initWithLong:);
+  methods[2].selector = @selector(toHours);
+  methods[3].selector = @selector(toMinutes);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "millis_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "millis_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _SCTimeOfDay = { 2, "TimeOfDay", "uk.co.amlcurran.social", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "fromHours", "I", (void *)&SCTimeOfDay__Annotations$0, "J" };
+  static const J2ObjcClassInfo _SCTimeOfDay = { "TimeOfDay", "uk.co.amlcurran.social", ptrTable, methods, fields, 7, 0x1, 4, 1, -1, -1, -1, -1, -1 };
   return &_SCTimeOfDay;
 }
 
@@ -84,13 +83,15 @@ void SCTimeOfDay_initWithLong_(SCTimeOfDay *self, jlong millis) {
 }
 
 SCTimeOfDay *new_SCTimeOfDay_initWithLong_(jlong millis) {
-  SCTimeOfDay *self = [SCTimeOfDay alloc];
-  SCTimeOfDay_initWithLong_(self, millis);
-  return self;
+  J2OBJC_NEW_IMPL(SCTimeOfDay, initWithLong_, millis)
 }
 
 SCTimeOfDay *create_SCTimeOfDay_initWithLong_(jlong millis) {
-  return new_SCTimeOfDay_initWithLong_(millis);
+  J2OBJC_CREATE_IMPL(SCTimeOfDay, initWithLong_, millis)
+}
+
+IOSObjectArray *SCTimeOfDay__Annotations$0() {
+  return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaxAnnotationNonnull(JreLoadEnum(JavaxAnnotationMetaWhen, ALWAYS)) } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(SCTimeOfDay)

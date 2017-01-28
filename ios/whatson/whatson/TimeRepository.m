@@ -4,44 +4,46 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "TimeOfDay.h"
 #include "TimeRepository.h"
+#include "java/lang/annotation/Annotation.h"
 #include "javax/annotation/Nonnull.h"
 #include "javax/annotation/meta/When.h"
-
-#if __has_feature(nullability)
-#pragma clang diagnostic push
-#pragma GCC diagnostic ignored "-Wnullability-completeness"
-#endif
 
 @interface SCTimeRepository : NSObject
 
 @end
 
-#if __has_feature(nullability)
-#pragma clang diagnostic pop
-#endif
+__attribute__((unused)) static IOSObjectArray *SCTimeRepository__Annotations$0();
+
+__attribute__((unused)) static IOSObjectArray *SCTimeRepository__Annotations$1();
 
 @implementation SCTimeRepository
 
-+ (IOSObjectArray *)__annotations_borderTimeEnd {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_borderTimeStart {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "borderTimeEnd", NULL, "Luk.co.amlcurran.social.TimeOfDay;", 0x401, NULL, NULL },
-    { "borderTimeStart", NULL, "Luk.co.amlcurran.social.TimeOfDay;", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LSCTimeOfDay;", 0x401, -1, -1, -1, -1, 0, -1 },
+    { NULL, "LSCTimeOfDay;", 0x401, -1, -1, -1, -1, 1, -1 },
   };
-  static const J2ObjcClassInfo _SCTimeRepository = { 2, "TimeRepository", "uk.co.amlcurran.social", NULL, 0x609, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  methods[0].selector = @selector(borderTimeEnd);
+  methods[1].selector = @selector(borderTimeStart);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { (void *)&SCTimeRepository__Annotations$0, (void *)&SCTimeRepository__Annotations$1 };
+  static const J2ObjcClassInfo _SCTimeRepository = { "TimeRepository", "uk.co.amlcurran.social", ptrTable, methods, NULL, 7, 0x609, 2, 0, -1, -1, -1, -1, -1 };
   return &_SCTimeRepository;
 }
 
 @end
+
+IOSObjectArray *SCTimeRepository__Annotations$0() {
+  return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaxAnnotationNonnull(JreLoadEnum(JavaxAnnotationMetaWhen, ALWAYS)) } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *SCTimeRepository__Annotations$1() {
+  return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaxAnnotationNonnull(JreLoadEnum(JavaxAnnotationMetaWhen, ALWAYS)) } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(SCTimeRepository)

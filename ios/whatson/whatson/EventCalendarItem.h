@@ -5,27 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("EventCalendarItem_INCLUDE_ALL")
-#ifdef EventCalendarItem_RESTRICT
-#define EventCalendarItem_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_EventCalendarItem")
+#ifdef RESTRICT_EventCalendarItem
+#define INCLUDE_ALL_EventCalendarItem 0
 #else
-#define EventCalendarItem_INCLUDE_ALL 1
+#define INCLUDE_ALL_EventCalendarItem 1
 #endif
-#undef EventCalendarItem_RESTRICT
-
-#if !defined (SCEventCalendarItem_) && (EventCalendarItem_INCLUDE_ALL || defined(SCEventCalendarItem_INCLUDE))
-#define SCEventCalendarItem_
-
-#define CalendarItem_RESTRICT 1
-#define SCCalendarItem_INCLUDE 1
-#include "CalendarItem.h"
-
-@class SCTimestamp;
+#undef RESTRICT_EventCalendarItem
 
 #if __has_feature(nullability)
 #pragma clang diagnostic push
 #pragma GCC diagnostic ignored "-Wnullability-completeness"
 #endif
+
+#if !defined (SCEventCalendarItem_) && (INCLUDE_ALL_EventCalendarItem || defined(INCLUDE_SCEventCalendarItem))
+#define SCEventCalendarItem_
+
+#define RESTRICT_CalendarItem 1
+#define INCLUDE_SCCalendarItem 1
+#include "CalendarItem.h"
+
+@class SCTimestamp;
 
 @interface SCEventCalendarItem : NSObject < SCCalendarItem >
 
@@ -60,10 +60,10 @@ J2OBJC_TYPE_LITERAL_HEADER(SCEventCalendarItem)
 
 @compatibility_alias UkCoAmlcurranSocialEventCalendarItem SCEventCalendarItem;
 
+#endif
+
+
 #if __has_feature(nullability)
 #pragma clang diagnostic pop
 #endif
-
-#endif
-
-#pragma pop_macro("EventCalendarItem_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_EventCalendarItem")

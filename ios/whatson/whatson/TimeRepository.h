@@ -5,25 +5,25 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("TimeRepository_INCLUDE_ALL")
-#ifdef TimeRepository_RESTRICT
-#define TimeRepository_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_TimeRepository")
+#ifdef RESTRICT_TimeRepository
+#define INCLUDE_ALL_TimeRepository 0
 #else
-#define TimeRepository_INCLUDE_ALL 1
+#define INCLUDE_ALL_TimeRepository 1
 #endif
-#undef TimeRepository_RESTRICT
-
-#if !defined (SCTimeRepository_) && (TimeRepository_INCLUDE_ALL || defined(SCTimeRepository_INCLUDE))
-#define SCTimeRepository_
-
-@class SCTimeOfDay;
+#undef RESTRICT_TimeRepository
 
 #if __has_feature(nullability)
 #pragma clang diagnostic push
 #pragma GCC diagnostic ignored "-Wnullability-completeness"
 #endif
 
-@protocol SCTimeRepository < NSObject, JavaObject >
+#if !defined (SCTimeRepository_) && (INCLUDE_ALL_TimeRepository || defined(INCLUDE_SCTimeRepository))
+#define SCTimeRepository_
+
+@class SCTimeOfDay;
+
+@protocol SCTimeRepository < JavaObject >
 
 - (SCTimeOfDay * __nonnull)borderTimeEnd;
 
@@ -37,10 +37,10 @@ J2OBJC_TYPE_LITERAL_HEADER(SCTimeRepository)
 
 #define UkCoAmlcurranSocialTimeRepository SCTimeRepository
 
+#endif
+
+
 #if __has_feature(nullability)
 #pragma clang diagnostic pop
 #endif
-
-#endif
-
-#pragma pop_macro("TimeRepository_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_TimeRepository")

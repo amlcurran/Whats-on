@@ -5,21 +5,21 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("TimeOfDay_INCLUDE_ALL")
-#ifdef TimeOfDay_RESTRICT
-#define TimeOfDay_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_TimeOfDay")
+#ifdef RESTRICT_TimeOfDay
+#define INCLUDE_ALL_TimeOfDay 0
 #else
-#define TimeOfDay_INCLUDE_ALL 1
+#define INCLUDE_ALL_TimeOfDay 1
 #endif
-#undef TimeOfDay_RESTRICT
-
-#if !defined (SCTimeOfDay_) && (TimeOfDay_INCLUDE_ALL || defined(SCTimeOfDay_INCLUDE))
-#define SCTimeOfDay_
+#undef RESTRICT_TimeOfDay
 
 #if __has_feature(nullability)
 #pragma clang diagnostic push
 #pragma GCC diagnostic ignored "-Wnullability-completeness"
 #endif
+
+#if !defined (SCTimeOfDay_) && (INCLUDE_ALL_TimeOfDay || defined(INCLUDE_SCTimeOfDay))
+#define SCTimeOfDay_
 
 @interface SCTimeOfDay : NSObject
 
@@ -41,10 +41,10 @@ J2OBJC_TYPE_LITERAL_HEADER(SCTimeOfDay)
 
 @compatibility_alias UkCoAmlcurranSocialTimeOfDay SCTimeOfDay;
 
+#endif
+
+
 #if __has_feature(nullability)
 #pragma clang diagnostic pop
 #endif
-
-#endif
-
-#pragma pop_macro("TimeOfDay_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_TimeOfDay")

@@ -5,49 +5,55 @@
 
 #include "CalendarItem.h"
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "Timestamp.h"
+#include "java/lang/annotation/Annotation.h"
 #include "javax/annotation/Nonnull.h"
 #include "javax/annotation/meta/When.h"
-
-#if __has_feature(nullability)
-#pragma clang diagnostic push
-#pragma GCC diagnostic ignored "-Wnullability-completeness"
-#endif
 
 @interface SCCalendarItem : NSObject
 
 @end
 
-#if __has_feature(nullability)
-#pragma clang diagnostic pop
-#endif
+__attribute__((unused)) static IOSObjectArray *SCCalendarItem__Annotations$0();
+
+__attribute__((unused)) static IOSObjectArray *SCCalendarItem__Annotations$1();
+
+__attribute__((unused)) static IOSObjectArray *SCCalendarItem__Annotations$2();
 
 @implementation SCCalendarItem
 
-+ (IOSObjectArray *)__annotations_title {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_startTime {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_endTime {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "title", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "startTime", NULL, "Luk.co.amlcurran.social.Timestamp;", 0x401, NULL, NULL },
-    { "endTime", NULL, "Luk.co.amlcurran.social.Timestamp;", 0x401, NULL, NULL },
-    { "isEmpty", NULL, "Z", 0x401, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "LNSString;", 0x401, -1, -1, -1, -1, 0, -1 },
+    { NULL, "LSCTimestamp;", 0x401, -1, -1, -1, -1, 1, -1 },
+    { NULL, "LSCTimestamp;", 0x401, -1, -1, -1, -1, 2, -1 },
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _SCCalendarItem = { 2, "CalendarItem", "uk.co.amlcurran.social", NULL, 0x609, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  methods[0].selector = @selector(title);
+  methods[1].selector = @selector(startTime);
+  methods[2].selector = @selector(endTime);
+  methods[3].selector = @selector(isEmpty);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { (void *)&SCCalendarItem__Annotations$0, (void *)&SCCalendarItem__Annotations$1, (void *)&SCCalendarItem__Annotations$2 };
+  static const J2ObjcClassInfo _SCCalendarItem = { "CalendarItem", "uk.co.amlcurran.social", ptrTable, methods, NULL, 7, 0x609, 4, 0, -1, -1, -1, -1, -1 };
   return &_SCCalendarItem;
 }
 
 @end
+
+IOSObjectArray *SCCalendarItem__Annotations$0() {
+  return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaxAnnotationNonnull(JreLoadEnum(JavaxAnnotationMetaWhen, ALWAYS)) } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *SCCalendarItem__Annotations$1() {
+  return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaxAnnotationNonnull(JreLoadEnum(JavaxAnnotationMetaWhen, ALWAYS)) } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *SCCalendarItem__Annotations$2() {
+  return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaxAnnotationNonnull(JreLoadEnum(JavaxAnnotationMetaWhen, ALWAYS)) } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(SCCalendarItem)

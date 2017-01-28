@@ -4,16 +4,13 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "TimeCalculator.h"
 #include "Timestamp.h"
+#include "java/lang/annotation/Annotation.h"
 #include "javax/annotation/Nonnull.h"
 #include "javax/annotation/meta/When.h"
-
-#if __has_feature(nullability)
-#pragma clang diagnostic push
-#pragma GCC diagnostic ignored "-Wnullability-completeness"
-#endif
 
 @interface SCTimestamp () {
  @public
@@ -25,9 +22,9 @@
 
 J2OBJC_FIELD_SETTER(SCTimestamp, timeCalculator_, id<SCTimeCalculator>)
 
-#if __has_feature(nullability)
-#pragma clang diagnostic pop
-#endif
+__attribute__((unused)) static IOSObjectArray *SCTimestamp__Annotations$0();
+
+__attribute__((unused)) static IOSObjectArray *SCTimestamp__Annotations$1();
 
 @implementation SCTimestamp
 
@@ -53,27 +50,28 @@ J2OBJC_FIELD_SETTER(SCTimestamp, timeCalculator_, id<SCTimeCalculator>)
   return [((id<SCTimeCalculator>) nil_chk(timeCalculator_)) plusHoursWithSCTimestamp:self withInt:hours];
 }
 
-+ (IOSObjectArray *)__annotations_plusDaysWithInt_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_plusHoursWithInt_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithLong:withSCTimeCalculator:", "Timestamp", NULL, 0x1, NULL, NULL },
-    { "plusDaysWithInt:", "plusDays", "Luk.co.amlcurran.social.Timestamp;", 0x1, NULL, NULL },
-    { "daysSinceEpoch", NULL, "I", 0x1, NULL, NULL },
-    { "getMillis", NULL, "J", 0x1, NULL, NULL },
-    { "plusHoursWithInt:", "plusHours", "Luk.co.amlcurran.social.Timestamp;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LSCTimestamp;", 0x1, 1, 2, -1, -1, 3, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LSCTimestamp;", 0x1, 4, 2, -1, -1, 5, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  methods[0].selector = @selector(initWithLong:withSCTimeCalculator:);
+  methods[1].selector = @selector(plusDaysWithInt:);
+  methods[2].selector = @selector(daysSinceEpoch);
+  methods[3].selector = @selector(getMillis);
+  methods[4].selector = @selector(plusHoursWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "timeCalculator_", NULL, 0x12, "Luk.co.amlcurran.social.TimeCalculator;", NULL, NULL, .constantValue.asLong = 0 },
-    { "millis_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
+    { "timeCalculator_", "LSCTimeCalculator;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "millis_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _SCTimestamp = { 2, "Timestamp", "uk.co.amlcurran.social", NULL, 0x1, 5, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "JLSCTimeCalculator;", "plusDays", "I", (void *)&SCTimestamp__Annotations$0, "plusHours", (void *)&SCTimestamp__Annotations$1 };
+  static const J2ObjcClassInfo _SCTimestamp = { "Timestamp", "uk.co.amlcurran.social", ptrTable, methods, fields, 7, 0x1, 5, 2, -1, -1, -1, -1, -1 };
   return &_SCTimestamp;
 }
 
@@ -86,13 +84,19 @@ void SCTimestamp_initWithLong_withSCTimeCalculator_(SCTimestamp *self, jlong mil
 }
 
 SCTimestamp *new_SCTimestamp_initWithLong_withSCTimeCalculator_(jlong millis, id<SCTimeCalculator> timeCalculator) {
-  SCTimestamp *self = [SCTimestamp alloc];
-  SCTimestamp_initWithLong_withSCTimeCalculator_(self, millis, timeCalculator);
-  return self;
+  J2OBJC_NEW_IMPL(SCTimestamp, initWithLong_withSCTimeCalculator_, millis, timeCalculator)
 }
 
 SCTimestamp *create_SCTimestamp_initWithLong_withSCTimeCalculator_(jlong millis, id<SCTimeCalculator> timeCalculator) {
-  return new_SCTimestamp_initWithLong_withSCTimeCalculator_(millis, timeCalculator);
+  J2OBJC_CREATE_IMPL(SCTimestamp, initWithLong_withSCTimeCalculator_, millis, timeCalculator)
+}
+
+IOSObjectArray *SCTimestamp__Annotations$0() {
+  return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaxAnnotationNonnull(JreLoadEnum(JavaxAnnotationMetaWhen, ALWAYS)) } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *SCTimestamp__Annotations$1() {
+  return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaxAnnotationNonnull(JreLoadEnum(JavaxAnnotationMetaWhen, ALWAYS)) } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(SCTimestamp)

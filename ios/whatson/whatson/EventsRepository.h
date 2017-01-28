@@ -5,27 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("EventsRepository_INCLUDE_ALL")
-#ifdef EventsRepository_RESTRICT
-#define EventsRepository_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_EventsRepository")
+#ifdef RESTRICT_EventsRepository
+#define INCLUDE_ALL_EventsRepository 0
 #else
-#define EventsRepository_INCLUDE_ALL 1
+#define INCLUDE_ALL_EventsRepository 1
 #endif
-#undef EventsRepository_RESTRICT
-
-#if !defined (SCEventsRepository_) && (EventsRepository_INCLUDE_ALL || defined(SCEventsRepository_INCLUDE))
-#define SCEventsRepository_
-
-@class SCTimeOfDay;
-@class SCTimestamp;
-@protocol JavaUtilList;
+#undef RESTRICT_EventsRepository
 
 #if __has_feature(nullability)
 #pragma clang diagnostic push
 #pragma GCC diagnostic ignored "-Wnullability-completeness"
 #endif
 
-@protocol SCEventsRepository < NSObject, JavaObject >
+#if !defined (SCEventsRepository_) && (INCLUDE_ALL_EventsRepository || defined(INCLUDE_SCEventsRepository))
+#define SCEventsRepository_
+
+@class SCTimeOfDay;
+@class SCTimestamp;
+@protocol JavaUtilList;
+
+@protocol SCEventsRepository < JavaObject >
 
 - (id<JavaUtilList> __nonnull)getCalendarItemsWithSCTimestamp:(SCTimestamp *)nowTime
                                               withSCTimestamp:(SCTimestamp *)nextWeek
@@ -40,10 +40,10 @@ J2OBJC_TYPE_LITERAL_HEADER(SCEventsRepository)
 
 #define UkCoAmlcurranSocialEventsRepository SCEventsRepository
 
+#endif
+
+
 #if __has_feature(nullability)
 #pragma clang diagnostic pop
 #endif
-
-#endif
-
-#pragma pop_macro("EventsRepository_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_EventsRepository")

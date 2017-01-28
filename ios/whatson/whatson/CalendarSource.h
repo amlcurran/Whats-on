@@ -5,26 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("CalendarSource_INCLUDE_ALL")
-#ifdef CalendarSource_RESTRICT
-#define CalendarSource_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_CalendarSource")
+#ifdef RESTRICT_CalendarSource
+#define INCLUDE_ALL_CalendarSource 0
 #else
-#define CalendarSource_INCLUDE_ALL 1
+#define INCLUDE_ALL_CalendarSource 1
 #endif
-#undef CalendarSource_RESTRICT
+#undef RESTRICT_CalendarSource
 
-#if !defined (SCCalendarSource_) && (CalendarSource_INCLUDE_ALL || defined(SCCalendarSource_INCLUDE))
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
+#if !defined (SCCalendarSource_) && (INCLUDE_ALL_CalendarSource || defined(INCLUDE_SCCalendarSource))
 #define SCCalendarSource_
 
 @class SCCalendarSlot;
 @class UkCoAmlcurranSocialCoreSparseArray;
 @protocol SCCalendarItem;
 @protocol SCTimeCalculator;
-
-#if __has_feature(nullability)
-#pragma clang diagnostic push
-#pragma GCC diagnostic ignored "-Wnullability-completeness"
-#endif
 
 @interface SCCalendarSource : NSObject
 
@@ -56,10 +56,10 @@ J2OBJC_TYPE_LITERAL_HEADER(SCCalendarSource)
 
 @compatibility_alias UkCoAmlcurranSocialCalendarSource SCCalendarSource;
 
+#endif
+
+
 #if __has_feature(nullability)
 #pragma clang diagnostic pop
 #endif
-
-#endif
-
-#pragma pop_macro("CalendarSource_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_CalendarSource")

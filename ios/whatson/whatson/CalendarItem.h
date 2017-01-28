@@ -5,25 +5,25 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("CalendarItem_INCLUDE_ALL")
-#ifdef CalendarItem_RESTRICT
-#define CalendarItem_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_CalendarItem")
+#ifdef RESTRICT_CalendarItem
+#define INCLUDE_ALL_CalendarItem 0
 #else
-#define CalendarItem_INCLUDE_ALL 1
+#define INCLUDE_ALL_CalendarItem 1
 #endif
-#undef CalendarItem_RESTRICT
-
-#if !defined (SCCalendarItem_) && (CalendarItem_INCLUDE_ALL || defined(SCCalendarItem_INCLUDE))
-#define SCCalendarItem_
-
-@class SCTimestamp;
+#undef RESTRICT_CalendarItem
 
 #if __has_feature(nullability)
 #pragma clang diagnostic push
 #pragma GCC diagnostic ignored "-Wnullability-completeness"
 #endif
 
-@protocol SCCalendarItem < NSObject, JavaObject >
+#if !defined (SCCalendarItem_) && (INCLUDE_ALL_CalendarItem || defined(INCLUDE_SCCalendarItem))
+#define SCCalendarItem_
+
+@class SCTimestamp;
+
+@protocol SCCalendarItem < JavaObject >
 
 - (NSString * __nonnull)title;
 
@@ -41,10 +41,10 @@ J2OBJC_TYPE_LITERAL_HEADER(SCCalendarItem)
 
 #define UkCoAmlcurranSocialCalendarItem SCCalendarItem
 
+#endif
+
+
 #if __has_feature(nullability)
 #pragma clang diagnostic pop
 #endif
-
-#endif
-
-#pragma pop_macro("CalendarItem_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_CalendarItem")

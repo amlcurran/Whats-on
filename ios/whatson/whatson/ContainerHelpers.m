@@ -4,6 +4,7 @@
 //
 
 #include "ContainerHelpers.h"
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
@@ -15,6 +16,13 @@ IOSLongArray *UkCoAmlcurranSocialCoreContainerHelpers_EMPTY_LONGS;
 IOSObjectArray *UkCoAmlcurranSocialCoreContainerHelpers_EMPTY_OBJECTS;
 
 @implementation UkCoAmlcurranSocialCoreContainerHelpers
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  UkCoAmlcurranSocialCoreContainerHelpers_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (jint)idealIntArraySizeWithInt:(jint)need {
   return UkCoAmlcurranSocialCoreContainerHelpers_idealIntArraySizeWithInt_(need);
@@ -45,12 +53,35 @@ IOSObjectArray *UkCoAmlcurranSocialCoreContainerHelpers_EMPTY_OBJECTS;
   return UkCoAmlcurranSocialCoreContainerHelpers_binarySearchWithLongArray_withInt_withLong_(array, size, value);
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  UkCoAmlcurranSocialCoreContainerHelpers_init(self);
-  return self;
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 2, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 3, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 4, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x8, 6, 7, -1, -1, -1, -1 },
+    { NULL, "I", 0x8, 6, 8, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(idealIntArraySizeWithInt:);
+  methods[2].selector = @selector(idealLongArraySizeWithInt:);
+  methods[3].selector = @selector(idealByteArraySizeWithInt:);
+  methods[4].selector = @selector(equalWithId:withId:);
+  methods[5].selector = @selector(binarySearchWithIntArray:withInt:withInt:);
+  methods[6].selector = @selector(binarySearchWithLongArray:withInt:withLong:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "EMPTY_INTS", "[I", .constantValue.asLong = 0, 0x18, -1, 9, -1, -1 },
+    { "EMPTY_LONGS", "[J", .constantValue.asLong = 0, 0x18, -1, 10, -1, -1 },
+    { "EMPTY_OBJECTS", "[LNSObject;", .constantValue.asLong = 0, 0x18, -1, 11, -1, -1 },
+  };
+  static const void *ptrTable[] = { "idealIntArraySize", "I", "idealLongArraySize", "idealByteArraySize", "equal", "LNSObject;LNSObject;", "binarySearch", "[III", "[JIJ", &UkCoAmlcurranSocialCoreContainerHelpers_EMPTY_INTS, &UkCoAmlcurranSocialCoreContainerHelpers_EMPTY_LONGS, &UkCoAmlcurranSocialCoreContainerHelpers_EMPTY_OBJECTS };
+  static const J2ObjcClassInfo _UkCoAmlcurranSocialCoreContainerHelpers = { "ContainerHelpers", "uk.co.amlcurran.social.core", ptrTable, methods, fields, 7, 0x1, 7, 3, -1, -1, -1, -1, -1 };
+  return &_UkCoAmlcurranSocialCoreContainerHelpers;
 }
-J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [UkCoAmlcurranSocialCoreContainerHelpers class]) {
@@ -61,26 +92,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "idealIntArraySizeWithInt:", "idealIntArraySize", "I", 0x9, NULL, NULL },
-    { "idealLongArraySizeWithInt:", "idealLongArraySize", "I", 0x9, NULL, NULL },
-    { "idealByteArraySizeWithInt:", "idealByteArraySize", "I", 0x9, NULL, NULL },
-    { "equalWithId:withId:", "equal", "Z", 0x9, NULL, NULL },
-    { "binarySearchWithIntArray:withInt:withInt:", "binarySearch", "I", 0x8, NULL, NULL },
-    { "binarySearchWithLongArray:withInt:withLong:", "binarySearch", "I", 0x8, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_INTS", "EMPTY_INTS", 0x18, "[I", &UkCoAmlcurranSocialCoreContainerHelpers_EMPTY_INTS, NULL, .constantValue.asLong = 0 },
-    { "EMPTY_LONGS", "EMPTY_LONGS", 0x18, "[J", &UkCoAmlcurranSocialCoreContainerHelpers_EMPTY_LONGS, NULL, .constantValue.asLong = 0 },
-    { "EMPTY_OBJECTS", "EMPTY_OBJECTS", 0x18, "[Ljava.lang.Object;", &UkCoAmlcurranSocialCoreContainerHelpers_EMPTY_OBJECTS, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _UkCoAmlcurranSocialCoreContainerHelpers = { 2, "ContainerHelpers", "uk.co.amlcurran.social.core", NULL, 0x1, 7, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_UkCoAmlcurranSocialCoreContainerHelpers;
+@end
+
+void UkCoAmlcurranSocialCoreContainerHelpers_init(UkCoAmlcurranSocialCoreContainerHelpers *self) {
+  NSObject_init(self);
 }
 
-@end
+UkCoAmlcurranSocialCoreContainerHelpers *new_UkCoAmlcurranSocialCoreContainerHelpers_init() {
+  J2OBJC_NEW_IMPL(UkCoAmlcurranSocialCoreContainerHelpers, init)
+}
+
+UkCoAmlcurranSocialCoreContainerHelpers *create_UkCoAmlcurranSocialCoreContainerHelpers_init() {
+  J2OBJC_CREATE_IMPL(UkCoAmlcurranSocialCoreContainerHelpers, init)
+}
 
 jint UkCoAmlcurranSocialCoreContainerHelpers_idealIntArraySizeWithInt_(jint need) {
   UkCoAmlcurranSocialCoreContainerHelpers_initialize();
@@ -141,20 +165,6 @@ jint UkCoAmlcurranSocialCoreContainerHelpers_binarySearchWithLongArray_withInt_w
     }
   }
   return ~lo;
-}
-
-void UkCoAmlcurranSocialCoreContainerHelpers_init(UkCoAmlcurranSocialCoreContainerHelpers *self) {
-  NSObject_init(self);
-}
-
-UkCoAmlcurranSocialCoreContainerHelpers *new_UkCoAmlcurranSocialCoreContainerHelpers_init() {
-  UkCoAmlcurranSocialCoreContainerHelpers *self = [UkCoAmlcurranSocialCoreContainerHelpers alloc];
-  UkCoAmlcurranSocialCoreContainerHelpers_init(self);
-  return self;
-}
-
-UkCoAmlcurranSocialCoreContainerHelpers *create_UkCoAmlcurranSocialCoreContainerHelpers_init() {
-  return new_UkCoAmlcurranSocialCoreContainerHelpers_init();
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(UkCoAmlcurranSocialCoreContainerHelpers)

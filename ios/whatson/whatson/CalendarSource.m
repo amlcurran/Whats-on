@@ -8,18 +8,15 @@
 #include "CalendarSource.h"
 #include "EmptyCalendarItem.h"
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "SparseArray.h"
 #include "TimeCalculator.h"
 #include "Timestamp.h"
+#include "java/lang/annotation/Annotation.h"
 #include "javax/annotation/Nonnull.h"
 #include "javax/annotation/Nullable.h"
 #include "javax/annotation/meta/When.h"
-
-#if __has_feature(nullability)
-#pragma clang diagnostic push
-#pragma GCC diagnostic ignored "-Wnullability-completeness"
-#endif
 
 @interface SCCalendarSource () {
  @public
@@ -41,9 +38,13 @@ __attribute__((unused)) static SCTimestamp *SCCalendarSource_startOfTodayBlockWi
 
 __attribute__((unused)) static SCTimestamp *SCCalendarSource_endOfTodayBlockWithInt_(SCCalendarSource *self, jint position);
 
-#if __has_feature(nullability)
-#pragma clang diagnostic pop
-#endif
+__attribute__((unused)) static IOSObjectArray *SCCalendarSource__Annotations$0();
+
+__attribute__((unused)) static IOSObjectArray *SCCalendarSource__Annotations$1();
+
+__attribute__((unused)) static IOSObjectArray *SCCalendarSource__Annotations$2();
+
+__attribute__((unused)) static IOSObjectArray *SCCalendarSource__Annotations$3();
 
 @implementation SCCalendarSource
 
@@ -65,7 +66,7 @@ __attribute__((unused)) static SCTimestamp *SCCalendarSource_endOfTodayBlockWith
     SCTimestamp *endTime = SCCalendarSource_endOfTodayBlockWithInt_(self, position);
     return new_SCEmptyCalendarItem_initWithSCTimestamp_withSCTimestamp_(startTime, endTime);
   }
-  return [((SCCalendarSlot *) nil_chk(calendarSlot)) firstItem];
+  return [calendarSlot firstItem];
 }
 
 - (SCTimestamp * __nonnull)startOfTodayBlockWithInt:(jint)position {
@@ -84,38 +85,33 @@ __attribute__((unused)) static SCTimestamp *SCCalendarSource_endOfTodayBlockWith
   return [((SCCalendarSlot *) nil_chk([self slotAtWithInt:position])) isEmpty];
 }
 
-+ (IOSObjectArray *)__annotations_itemAtWithInt_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNullable alloc] init] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_startOfTodayBlockWithInt_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_endOfTodayBlockWithInt_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_slotAtWithInt_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithUkCoAmlcurranSocialCoreSparseArray:withInt:withSCTimeCalculator:", "CalendarSource", NULL, 0x1, NULL, "(Luk/co/amlcurran/social/core/SparseArray<Luk/co/amlcurran/social/CalendarSlot;>;ILuk/co/amlcurran/social/TimeCalculator;)V" },
-    { "count", NULL, "I", 0x1, NULL, NULL },
-    { "itemAtWithInt:", "itemAt", "Luk.co.amlcurran.social.CalendarItem;", 0x1, NULL, NULL },
-    { "startOfTodayBlockWithInt:", "startOfTodayBlock", "Luk.co.amlcurran.social.Timestamp;", 0x2, NULL, NULL },
-    { "endOfTodayBlockWithInt:", "endOfTodayBlock", "Luk.co.amlcurran.social.Timestamp;", 0x2, NULL, NULL },
-    { "slotAtWithInt:", "slotAt", "Luk.co.amlcurran.social.CalendarSlot;", 0x1, NULL, NULL },
-    { "isEmptySlotWithInt:", "isEmptySlot", "Z", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LSCCalendarItem;", 0x1, 2, 3, -1, -1, 4, -1 },
+    { NULL, "LSCTimestamp;", 0x2, 5, 3, -1, -1, 6, -1 },
+    { NULL, "LSCTimestamp;", 0x2, 7, 3, -1, -1, 8, -1 },
+    { NULL, "LSCCalendarSlot;", 0x1, 9, 3, -1, -1, 10, -1 },
+    { NULL, "Z", 0x1, 11, 3, -1, -1, -1, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  methods[0].selector = @selector(initWithUkCoAmlcurranSocialCoreSparseArray:withInt:withSCTimeCalculator:);
+  methods[1].selector = @selector(count);
+  methods[2].selector = @selector(itemAtWithInt:);
+  methods[3].selector = @selector(startOfTodayBlockWithInt:);
+  methods[4].selector = @selector(endOfTodayBlockWithInt:);
+  methods[5].selector = @selector(slotAtWithInt:);
+  methods[6].selector = @selector(isEmptySlotWithInt:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "calendarItems_", NULL, 0x12, "Luk.co.amlcurran.social.core.SparseArray;", NULL, "Luk/co/amlcurran/social/core/SparseArray<Luk/co/amlcurran/social/CalendarSlot;>;", .constantValue.asLong = 0 },
-    { "daysSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "timeCalculator_", NULL, 0x12, "Luk.co.amlcurran.social.TimeCalculator;", NULL, NULL, .constantValue.asLong = 0 },
+    { "calendarItems_", "LUkCoAmlcurranSocialCoreSparseArray;", .constantValue.asLong = 0, 0x12, -1, -1, 12, -1 },
+    { "daysSize_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "timeCalculator_", "LSCTimeCalculator;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _SCCalendarSource = { 2, "CalendarSource", "uk.co.amlcurran.social", NULL, 0x0, 7, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LUkCoAmlcurranSocialCoreSparseArray;ILSCTimeCalculator;", "(Luk/co/amlcurran/social/core/SparseArray<Luk/co/amlcurran/social/CalendarSlot;>;ILuk/co/amlcurran/social/TimeCalculator;)V", "itemAt", "I", (void *)&SCCalendarSource__Annotations$0, "startOfTodayBlock", (void *)&SCCalendarSource__Annotations$1, "endOfTodayBlock", (void *)&SCCalendarSource__Annotations$2, "slotAt", (void *)&SCCalendarSource__Annotations$3, "isEmptySlot", "Luk/co/amlcurran/social/core/SparseArray<Luk/co/amlcurran/social/CalendarSlot;>;" };
+  static const J2ObjcClassInfo _SCCalendarSource = { "CalendarSource", "uk.co.amlcurran.social", ptrTable, methods, fields, 7, 0x0, 7, 3, -1, -1, -1, -1, -1 };
   return &_SCCalendarSource;
 }
 
@@ -129,13 +125,11 @@ void SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCT
 }
 
 SCCalendarSource *new_SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTimeCalculator_(UkCoAmlcurranSocialCoreSparseArray *calendarItems, jint daysSize, id<SCTimeCalculator> timeCalculator) {
-  SCCalendarSource *self = [SCCalendarSource alloc];
-  SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTimeCalculator_(self, calendarItems, daysSize, timeCalculator);
-  return self;
+  J2OBJC_NEW_IMPL(SCCalendarSource, initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTimeCalculator_, calendarItems, daysSize, timeCalculator)
 }
 
 SCCalendarSource *create_SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTimeCalculator_(UkCoAmlcurranSocialCoreSparseArray *calendarItems, jint daysSize, id<SCTimeCalculator> timeCalculator) {
-  return new_SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTimeCalculator_(calendarItems, daysSize, timeCalculator);
+  J2OBJC_CREATE_IMPL(SCCalendarSource, initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTimeCalculator_, calendarItems, daysSize, timeCalculator)
 }
 
 SCTimestamp *SCCalendarSource_startOfTodayBlockWithInt_(SCCalendarSource *self, jint position) {
@@ -144,6 +138,22 @@ SCTimestamp *SCCalendarSource_startOfTodayBlockWithInt_(SCCalendarSource *self, 
 
 SCTimestamp *SCCalendarSource_endOfTodayBlockWithInt_(SCCalendarSource *self, jint position) {
   return [((SCTimestamp *) nil_chk([((SCTimestamp *) nil_chk([((id<SCTimeCalculator>) nil_chk(self->timeCalculator_)) startOfToday])) plusDaysWithInt:position])) plusHoursWithInt:23];
+}
+
+IOSObjectArray *SCCalendarSource__Annotations$0() {
+  return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaxAnnotationNullable() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *SCCalendarSource__Annotations$1() {
+  return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaxAnnotationNonnull(JreLoadEnum(JavaxAnnotationMetaWhen, ALWAYS)) } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *SCCalendarSource__Annotations$2() {
+  return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaxAnnotationNonnull(JreLoadEnum(JavaxAnnotationMetaWhen, ALWAYS)) } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *SCCalendarSource__Annotations$3() {
+  return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaxAnnotationNonnull(JreLoadEnum(JavaxAnnotationMetaWhen, ALWAYS)) } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(SCCalendarSource)

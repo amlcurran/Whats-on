@@ -5,15 +5,15 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("ContainerHelpers_INCLUDE_ALL")
-#ifdef ContainerHelpers_RESTRICT
-#define ContainerHelpers_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_ContainerHelpers")
+#ifdef RESTRICT_ContainerHelpers
+#define INCLUDE_ALL_ContainerHelpers 0
 #else
-#define ContainerHelpers_INCLUDE_ALL 1
+#define INCLUDE_ALL_ContainerHelpers 1
 #endif
-#undef ContainerHelpers_RESTRICT
+#undef RESTRICT_ContainerHelpers
 
-#if !defined (UkCoAmlcurranSocialCoreContainerHelpers_) && (ContainerHelpers_INCLUDE_ALL || defined(UkCoAmlcurranSocialCoreContainerHelpers_INCLUDE))
+#if !defined (UkCoAmlcurranSocialCoreContainerHelpers_) && (INCLUDE_ALL_ContainerHelpers || defined(INCLUDE_UkCoAmlcurranSocialCoreContainerHelpers))
 #define UkCoAmlcurranSocialCoreContainerHelpers_
 
 @class IOSIntArray;
@@ -64,6 +64,12 @@ inline IOSObjectArray *UkCoAmlcurranSocialCoreContainerHelpers_get_EMPTY_OBJECTS
 FOUNDATION_EXPORT IOSObjectArray *UkCoAmlcurranSocialCoreContainerHelpers_EMPTY_OBJECTS;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(UkCoAmlcurranSocialCoreContainerHelpers, EMPTY_OBJECTS, IOSObjectArray *)
 
+FOUNDATION_EXPORT void UkCoAmlcurranSocialCoreContainerHelpers_init(UkCoAmlcurranSocialCoreContainerHelpers *self);
+
+FOUNDATION_EXPORT UkCoAmlcurranSocialCoreContainerHelpers *new_UkCoAmlcurranSocialCoreContainerHelpers_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT UkCoAmlcurranSocialCoreContainerHelpers *create_UkCoAmlcurranSocialCoreContainerHelpers_init();
+
 FOUNDATION_EXPORT jint UkCoAmlcurranSocialCoreContainerHelpers_idealIntArraySizeWithInt_(jint need);
 
 FOUNDATION_EXPORT jint UkCoAmlcurranSocialCoreContainerHelpers_idealLongArraySizeWithInt_(jint need);
@@ -76,14 +82,8 @@ FOUNDATION_EXPORT jint UkCoAmlcurranSocialCoreContainerHelpers_binarySearchWithI
 
 FOUNDATION_EXPORT jint UkCoAmlcurranSocialCoreContainerHelpers_binarySearchWithLongArray_withInt_withLong_(IOSLongArray *array, jint size, jlong value);
 
-FOUNDATION_EXPORT void UkCoAmlcurranSocialCoreContainerHelpers_init(UkCoAmlcurranSocialCoreContainerHelpers *self);
-
-FOUNDATION_EXPORT UkCoAmlcurranSocialCoreContainerHelpers *new_UkCoAmlcurranSocialCoreContainerHelpers_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT UkCoAmlcurranSocialCoreContainerHelpers *create_UkCoAmlcurranSocialCoreContainerHelpers_init();
-
 J2OBJC_TYPE_LITERAL_HEADER(UkCoAmlcurranSocialCoreContainerHelpers)
 
 #endif
 
-#pragma pop_macro("ContainerHelpers_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_ContainerHelpers")

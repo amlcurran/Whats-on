@@ -9,20 +9,17 @@
 #include "EventsRepository.h"
 #include "EventsService.h"
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "SparseArray.h"
 #include "TimeCalculator.h"
 #include "TimeOfDay.h"
 #include "TimeRepository.h"
 #include "Timestamp.h"
+#include "java/lang/annotation/Annotation.h"
 #include "java/util/List.h"
 #include "javax/annotation/Nonnull.h"
 #include "javax/annotation/meta/When.h"
-
-#if __has_feature(nullability)
-#pragma clang diagnostic push
-#pragma GCC diagnostic ignored "-Wnullability-completeness"
-#endif
 
 @interface SCEventsService () {
  @public
@@ -37,9 +34,7 @@ J2OBJC_FIELD_SETTER(SCEventsService, timeRepository_, id<SCTimeRepository>)
 J2OBJC_FIELD_SETTER(SCEventsService, eventsRepository_, id<SCEventsRepository>)
 J2OBJC_FIELD_SETTER(SCEventsService, timeCalculator_, id<SCTimeCalculator>)
 
-#if __has_feature(nullability)
-#pragma clang diagnostic pop
-#endif
+__attribute__((unused)) static IOSObjectArray *SCEventsService__Annotations$0();
 
 @implementation SCEventsService
 
@@ -68,21 +63,23 @@ J2OBJC_FIELD_SETTER(SCEventsService, timeCalculator_, id<SCTimeCalculator>)
   return new_SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTimeCalculator_(itemArray, numberOfDays, timeCalculator_);
 }
 
-+ (IOSObjectArray *)__annotations_getCalendarSourceWithInt_withSCTimestamp_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithSCTimeRepository:withSCEventsRepository:withSCTimeCalculator:", "EventsService", NULL, 0x1, NULL, NULL },
-    { "getCalendarSourceWithInt:withSCTimestamp:", "getCalendarSource", "Luk.co.amlcurran.social.CalendarSource;", 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LSCCalendarSource;", 0x1, 1, 2, -1, -1, 3, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  methods[0].selector = @selector(initWithSCTimeRepository:withSCEventsRepository:withSCTimeCalculator:);
+  methods[1].selector = @selector(getCalendarSourceWithInt:withSCTimestamp:);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "timeRepository_", NULL, 0x12, "Luk.co.amlcurran.social.TimeRepository;", NULL, NULL, .constantValue.asLong = 0 },
-    { "eventsRepository_", NULL, 0x12, "Luk.co.amlcurran.social.EventsRepository;", NULL, NULL, .constantValue.asLong = 0 },
-    { "timeCalculator_", NULL, 0x12, "Luk.co.amlcurran.social.TimeCalculator;", NULL, NULL, .constantValue.asLong = 0 },
+    { "timeRepository_", "LSCTimeRepository;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "eventsRepository_", "LSCEventsRepository;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "timeCalculator_", "LSCTimeCalculator;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _SCEventsService = { 2, "EventsService", "uk.co.amlcurran.social", NULL, 0x1, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { "LSCTimeRepository;LSCEventsRepository;LSCTimeCalculator;", "getCalendarSource", "ILSCTimestamp;", (void *)&SCEventsService__Annotations$0 };
+  static const J2ObjcClassInfo _SCEventsService = { "EventsService", "uk.co.amlcurran.social", ptrTable, methods, fields, 7, 0x1, 2, 3, -1, -1, -1, -1, -1 };
   return &_SCEventsService;
 }
 
@@ -96,13 +93,15 @@ void SCEventsService_initWithSCTimeRepository_withSCEventsRepository_withSCTimeC
 }
 
 SCEventsService *new_SCEventsService_initWithSCTimeRepository_withSCEventsRepository_withSCTimeCalculator_(id<SCTimeRepository> dateCreator, id<SCEventsRepository> eventsRepository, id<SCTimeCalculator> timeCalculator) {
-  SCEventsService *self = [SCEventsService alloc];
-  SCEventsService_initWithSCTimeRepository_withSCEventsRepository_withSCTimeCalculator_(self, dateCreator, eventsRepository, timeCalculator);
-  return self;
+  J2OBJC_NEW_IMPL(SCEventsService, initWithSCTimeRepository_withSCEventsRepository_withSCTimeCalculator_, dateCreator, eventsRepository, timeCalculator)
 }
 
 SCEventsService *create_SCEventsService_initWithSCTimeRepository_withSCEventsRepository_withSCTimeCalculator_(id<SCTimeRepository> dateCreator, id<SCEventsRepository> eventsRepository, id<SCTimeCalculator> timeCalculator) {
-  return new_SCEventsService_initWithSCTimeRepository_withSCEventsRepository_withSCTimeCalculator_(dateCreator, eventsRepository, timeCalculator);
+  J2OBJC_CREATE_IMPL(SCEventsService, initWithSCTimeRepository_withSCEventsRepository_withSCTimeCalculator_, dateCreator, eventsRepository, timeCalculator)
+}
+
+IOSObjectArray *SCEventsService__Annotations$0() {
+  return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaxAnnotationNonnull(JreLoadEnum(JavaxAnnotationMetaWhen, ALWAYS)) } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(SCEventsService)

@@ -6,17 +6,14 @@
 #include "CalendarItem.h"
 #include "CalendarSlot.h"
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
+#include "java/lang/annotation/Annotation.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
 #include "javax/annotation/Nonnull.h"
 #include "javax/annotation/Nullable.h"
 #include "javax/annotation/meta/When.h"
-
-#if __has_feature(nullability)
-#pragma clang diagnostic push
-#pragma GCC diagnostic ignored "-Wnullability-completeness"
-#endif
 
 @interface SCCalendarSlot () {
  @public
@@ -27,11 +24,18 @@
 
 J2OBJC_FIELD_SETTER(SCCalendarSlot, calendarItems_, id<JavaUtilList>)
 
-#if __has_feature(nullability)
-#pragma clang diagnostic pop
-#endif
+__attribute__((unused)) static IOSObjectArray *SCCalendarSlot__Annotations$0();
+
+__attribute__((unused)) static IOSObjectArray *SCCalendarSlot__Annotations$1();
 
 @implementation SCCalendarSlot
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  SCCalendarSlot_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<SCCalendarItem> __nullable)firstItem {
   return [((id<JavaUtilList>) nil_chk(calendarItems_)) getWithInt:0];
@@ -53,34 +57,29 @@ J2OBJC_FIELD_SETTER(SCCalendarSlot, calendarItems_, id<JavaUtilList>)
   return calendarItems_;
 }
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  SCCalendarSlot_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
-+ (IOSObjectArray *)__annotations_firstItem {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNullable alloc] init] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_items {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[JavaxAnnotationNonnull alloc] initWithWhen:JavaxAnnotationMetaWhen_get_ALWAYS()] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "firstItem", NULL, "Luk.co.amlcurran.social.CalendarItem;", 0x1, NULL, NULL },
-    { "addItemWithSCCalendarItem:", "addItem", "V", 0x1, NULL, NULL },
-    { "count", NULL, "I", 0x1, NULL, NULL },
-    { "isEmpty", NULL, "Z", 0x1, NULL, NULL },
-    { "items", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Luk/co/amlcurran/social/CalendarItem;>;" },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LSCCalendarItem;", 0x1, -1, -1, -1, -1, 0, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 3, 4, -1 },
   };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(firstItem);
+  methods[2].selector = @selector(addItemWithSCCalendarItem:);
+  methods[3].selector = @selector(count);
+  methods[4].selector = @selector(isEmpty);
+  methods[5].selector = @selector(items);
+  #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "calendarItems_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Luk/co/amlcurran/social/CalendarItem;>;", .constantValue.asLong = 0 },
+    { "calendarItems_", "LJavaUtilList;", .constantValue.asLong = 0, 0x12, -1, -1, 5, -1 },
   };
-  static const J2ObjcClassInfo _SCCalendarSlot = { 2, "CalendarSlot", "uk.co.amlcurran.social", NULL, 0x1, 6, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const void *ptrTable[] = { (void *)&SCCalendarSlot__Annotations$0, "addItem", "LSCCalendarItem;", "()Ljava/util/List<Luk/co/amlcurran/social/CalendarItem;>;", (void *)&SCCalendarSlot__Annotations$1, "Ljava/util/List<Luk/co/amlcurran/social/CalendarItem;>;" };
+  static const J2ObjcClassInfo _SCCalendarSlot = { "CalendarSlot", "uk.co.amlcurran.social", ptrTable, methods, fields, 7, 0x1, 6, 1, -1, -1, -1, -1, -1 };
   return &_SCCalendarSlot;
 }
 
@@ -92,13 +91,19 @@ void SCCalendarSlot_init(SCCalendarSlot *self) {
 }
 
 SCCalendarSlot *new_SCCalendarSlot_init() {
-  SCCalendarSlot *self = [SCCalendarSlot alloc];
-  SCCalendarSlot_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(SCCalendarSlot, init)
 }
 
 SCCalendarSlot *create_SCCalendarSlot_init() {
-  return new_SCCalendarSlot_init();
+  J2OBJC_CREATE_IMPL(SCCalendarSlot, init)
+}
+
+IOSObjectArray *SCCalendarSlot__Annotations$0() {
+  return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaxAnnotationNullable() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *SCCalendarSlot__Annotations$1() {
+  return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaxAnnotationNonnull(JreLoadEnum(JavaxAnnotationMetaWhen, ALWAYS)) } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(SCCalendarSlot)
