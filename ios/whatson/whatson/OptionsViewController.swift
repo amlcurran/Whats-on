@@ -106,10 +106,10 @@ class OptionsViewController: UIViewController {
 
     func spinnerUpdated() {
         if (editState == .start) {
-            timeStore.startTime = Calendar.current.dateComponents([.hour], from: picker.date).hour.or(17)
+            timeStore.startTime = picker.hour.or(17)
         }
         if (editState == .end) {
-            timeStore.endTime = Calendar.current.dateComponents([.hour], from: picker.date).hour.or(23)
+            timeStore.endTime = picker.hour.or(23)
         }
         beginningLabel.text = "Show me events from"
         startSelectableView.text = dateFormatter.string(from: NSDateCalculator.instance.date(timeStore.startTimestamp))
