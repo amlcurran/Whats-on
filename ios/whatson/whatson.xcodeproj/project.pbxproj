@@ -13,7 +13,9 @@
 		69853B3AC06B29C271651CF0 /* UIDatePicker+Hours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985397DE155D32104662FA2 /* UIDatePicker+Hours.swift */; };
 		69853BB8C3723DD6A606DFFE /* DetailsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853ADAFB0D8A57C40FC7BA /* DetailsCard.swift */; };
 		69853D85F37E68B39053DB9F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69853D2C9F2840A9862339C4 /* GoogleService-Info.plist */; };
+		69853DBE93212578467A9402 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698532BD8B0E148238449902 /* String+Localization.swift */; };
 		69853EB6AEFC9EE982D28388 /* TimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853F60E5391F881F006F7B /* TimeLabel.swift */; };
+		86075C331E3E228C005AF423 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86075C321E3E228C005AF423 /* Localizable.strings */; };
 		8607847A1DAD7E6100AAE856 /* LabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860784791DAD7E6100AAE856 /* LabelStyle.swift */; };
 		8609C5A41DB01AF100B44D76 /* EventDetailsPushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609C5A31DB01AF100B44D76 /* EventDetailsPushTransition.swift */; };
 		8614BABE1C825B7A00A3E570 /* NSDate+Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8614BABD1C825B7A00A3E570 /* NSDate+Time.swift */; };
@@ -78,12 +80,14 @@
 		1175B80F0FD97DA802FE2AB1 /* Pods-whatson.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whatson.debug.xcconfig"; path = "Pods/Target Support Files/Pods-whatson/Pods-whatson.debug.xcconfig"; sourceTree = "<group>"; };
 		4DB8059D3AAB19AFD5B4C782 /* Pods-whatson.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whatson.release.xcconfig"; path = "Pods/Target Support Files/Pods-whatson/Pods-whatson.release.xcconfig"; sourceTree = "<group>"; };
 		6985328C217A9C753C09CFDE /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		698532BD8B0E148238449902 /* String+Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsTimeStore.swift; sourceTree = "<group>"; };
 		6985397DE155D32104662FA2 /* UIDatePicker+Hours.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDatePicker+Hours.swift"; sourceTree = "<group>"; };
 		69853ADAFB0D8A57C40FC7BA /* DetailsCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsCard.swift; sourceTree = "<group>"; };
 		69853D2C9F2840A9862339C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		69853F60E5391F881F006F7B /* TimeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeLabel.swift; path = views/TimeLabel.swift; sourceTree = "<group>"; };
 		8334259A4DD3ECC2E846BCAF /* Pods_whatson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_whatson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		86075C321E3E228C005AF423 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		860784791DAD7E6100AAE856 /* LabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelStyle.swift; sourceTree = "<group>"; };
 		8609C5A31DB01AF100B44D76 /* EventDetailsPushTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsPushTransition.swift; sourceTree = "<group>"; };
 		8614BABD1C825B7A00A3E570 /* NSDate+Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDate+Time.swift"; path = "../NSDate+Time.swift"; sourceTree = "<group>"; };
@@ -235,6 +239,7 @@
 		86CAD4901BACC9B1009C9CFD = {
 			isa = PBXGroup;
 			children = (
+				86075C321E3E228C005AF423 /* Localizable.strings */,
 				86FCF4411D455ADE000938E3 /* dependencies */,
 				86CAD49B1BACC9B1009C9CFD /* whatson */,
 				869DAC711D449EFB005AF315 /* tests */,
@@ -343,6 +348,7 @@
 				86A9E45A1DA80A4900E8D019 /* UIViewController+Navigation.swift */,
 				86A9E45C1DA80DA500E8D019 /* SCTimestamp+Now.swift */,
 				86A9E45E1DA80E9700E8D019 /* DateFormatter+Initialisers.swift */,
+				698532BD8B0E148238449902 /* String+Localization.swift */,
 			);
 			name = extensions;
 			sourceTree = "<group>";
@@ -469,6 +475,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86075C331E3E228C005AF423 /* Localizable.strings in Resources */,
 				86CAD4AC1BACC9B1009C9CFD /* LaunchScreen.storyboard in Resources */,
 				86CAD4A91BACC9B1009C9CFD /* Assets.xcassets in Resources */,
 				8626FCE01C63FBF800640079 /* CalendarCell.xib in Resources */,
@@ -642,6 +649,7 @@
 				69853EB6AEFC9EE982D28388 /* TimeLabel.swift in Sources */,
 				698538E5F918BCBD1F75C446 /* UserDefaultsTimeStore.swift in Sources */,
 				69853B3AC06B29C271651CF0 /* UIDatePicker+Hours.swift in Sources */,
+				69853DBE93212578467A9402 /* String+Localization.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -869,9 +877,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "whatson-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
-				USER_HEADER_SEARCH_PATHS = (
-					"\"$(PROJECT_DIR)/j2objc/include\"/**",
-				);
+				USER_HEADER_SEARCH_PATHS = "\"$(PROJECT_DIR)/j2objc/include\"/**";
 			};
 			name = Debug;
 		};
@@ -946,9 +952,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "whatson-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
-				USER_HEADER_SEARCH_PATHS = (
-					"\"$(PROJECT_DIR)/j2objc/include\"/**",
-				);
+				USER_HEADER_SEARCH_PATHS = "\"$(PROJECT_DIR)/j2objc/include\"/**";
 			};
 			name = Release;
 		};

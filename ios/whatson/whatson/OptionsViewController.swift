@@ -41,8 +41,8 @@ class OptionsViewController: UIViewController {
 
         dateFormatter.dateFormat = "HH:mm"
 
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel".localized(), style: .plain, target: self, action: #selector(cancelTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done".localized(), style: .plain, target: self, action: #selector(doneTapped))
 
         spinnerUpdated()
     }
@@ -111,9 +111,9 @@ class OptionsViewController: UIViewController {
         if (editState == .end) {
             timeStore.endTime = picker.hour.or(23)
         }
-        beginningLabel.text = "Show me events from"
+        beginningLabel.text = "Options.Beginning".localized()
         startSelectableView.text = dateFormatter.string(from: NSDateCalculator.instance.date(timeStore.startTimestamp))
-        intermediateLabel.text = "to"
+        intermediateLabel.text = "Options.Intermediate".localized()
         endSelectableView.text = dateFormatter.string(from: NSDateCalculator.instance.date(timeStore.endTimestamp))
 
     }
