@@ -10,6 +10,7 @@
 		19B26691193D2CF98E39543F /* Pods_WhatsOnTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE94BF63C5CC68AC641A95DE /* Pods_WhatsOnTests.framework */; };
 		698533DEAF59954635D7E3CD /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985328C217A9C753C09CFDE /* Line.swift */; };
 		698538E5F918BCBD1F75C446 /* UserDefaultsTimeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */; };
+		69853B3AC06B29C271651CF0 /* UIDatePicker+Hours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985397DE155D32104662FA2 /* UIDatePicker+Hours.swift */; };
 		69853BB8C3723DD6A606DFFE /* DetailsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853ADAFB0D8A57C40FC7BA /* DetailsCard.swift */; };
 		69853D85F37E68B39053DB9F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69853D2C9F2840A9862339C4 /* GoogleService-Info.plist */; };
 		69853EB6AEFC9EE982D28388 /* TimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853F60E5391F881F006F7B /* TimeLabel.swift */; };
@@ -78,6 +79,7 @@
 		4DB8059D3AAB19AFD5B4C782 /* Pods-whatson.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whatson.release.xcconfig"; path = "Pods/Target Support Files/Pods-whatson/Pods-whatson.release.xcconfig"; sourceTree = "<group>"; };
 		6985328C217A9C753C09CFDE /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsTimeStore.swift; sourceTree = "<group>"; };
+		6985397DE155D32104662FA2 /* UIDatePicker+Hours.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDatePicker+Hours.swift"; sourceTree = "<group>"; };
 		69853ADAFB0D8A57C40FC7BA /* DetailsCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsCard.swift; sourceTree = "<group>"; };
 		69853D2C9F2840A9862339C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		69853F60E5391F881F006F7B /* TimeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeLabel.swift; path = views/TimeLabel.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			children = (
 				86FCF43E1D455080000938E3 /* OptionsViewController.swift */,
 				69853F60E5391F881F006F7B /* TimeLabel.swift */,
+				6985397DE155D32104662FA2 /* UIDatePicker+Hours.swift */,
 			);
 			name = options;
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				698533DEAF59954635D7E3CD /* Line.swift in Sources */,
 				69853EB6AEFC9EE982D28388 /* TimeLabel.swift in Sources */,
 				698538E5F918BCBD1F75C446 /* UserDefaultsTimeStore.swift in Sources */,
+				69853B3AC06B29C271651CF0 /* UIDatePicker+Hours.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
