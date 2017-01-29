@@ -10,8 +10,10 @@ class OptionsViewController: UIViewController {
     private let endSelectableView = TimeLabel()
     private let timeStore = UserDefaultsTimeStore()
     private let dateFormatter = DateFormatter()
-    private let picker = UIDatePicker()
+    private let picker: UIDatePicker = UIDatePicker()
     private var pickerHeightConstraint: NSLayoutConstraint!
+
+    private var editState: EditState = .none
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,12 +26,18 @@ class OptionsViewController: UIViewController {
             self?.startSelectableView.selected = true
             self?.endSelectableView.selected = false
             self?.showPicker()
+            self?.editState = .start
+            self?.beginEditing()
         }
         endSelectableView.tapClosure = { [weak self] in
             self?.startSelectableView.selected = false
             self?.endSelectableView.selected = true
             self?.showPicker()
+            self?.editState = .end
+            self?.beginEditing()
         }
+        picker.addTarget(self, action: #selector(spinnerUpdated), for: .valueChanged)
+        picker.datePickerMode = .time
 
         dateFormatter.dateFormat = "HH:mm"
 
@@ -91,16 +99,37 @@ class OptionsViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
+    func beginEditing() {
+        if (editState == .start) {
+            picker.hour = timeStore.startTime
+        }
+        if (editState == .end) {
+            picker.hour = timeStore.endTime
+        }
+    }
+
     func spinnerUpdated() {
+        if (editState == .start) {
+            timeStore.startTime = Calendar.current.dateComponents([.hour], from: picker.date).hour.or(17)
+        }
+        if (editState == .end) {
+            timeStore.endTime = Calendar.current.dateComponents([.hour], from: picker.date).hour.or(23)
+        }
         beginningLabel.text = "Show me events from"
         startSelectableView.text = dateFormatter.string(from: NSDateCalculator.instance.date(timeStore.startTimestamp))
         intermediateLabel.text = "to"
         endSelectableView.text = dateFormatter.string(from: NSDateCalculator.instance.date(timeStore.endTimestamp))
     }
 
+    enum EditState {
+        case none
+        case start
+        case end
+    }
+
 }
 
-fileprivate struct UserDefaultsTimeStore {
+class UserDefaultsTimeStore {
 
     private let userDefaults: UserDefaults
     private let dateCalculator = NSDateCalculator.instance
@@ -142,6 +171,22 @@ fileprivate struct UserDefaultsTimeStore {
         }
         set {
             userDefaults.set(newValue, forKey: "endHour")
+        }
+    }
+
+}
+
+extension UIDatePicker {
+
+    var hour: Int? {
+        get {
+            return Calendar.current.dateComponents([.hour], from: date).hour
+        }
+        set {
+            var components = Calendar.current.dateComponents([.day, .hour, .minute], from: Date())
+            components.hour = newValue
+            components.minute = 0
+            date = Calendar.current.date(from: components)!
         }
     }
 
