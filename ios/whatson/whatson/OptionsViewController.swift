@@ -136,6 +136,7 @@ class OptionsViewController: UIViewController {
 
     func showMinuteLimitation() {
         if (picker.hasMinutes) {
+            analytics.requestedMinutes(repeatedTry: minuteLimitationLabel.alpha == 1)
             UIView.animate(withDuration: 0.2, animations: { [weak self] in
                 self?.minuteLimitationLabel.alpha = 1
             })
@@ -157,6 +158,12 @@ extension Analytics {
         sendEvent(named: "timeChange", withParameters: [
                 "startTime": "\(starting)",
                 "endTime": "\(finishing)"
+        ])
+    }
+
+    func requestMinutes(repeatedTry: Bool) {
+        sendEvent(named: "minuteRequest", withParameters: [
+                "repeated": "\(repeatedTry)"
         ])
     }
 
