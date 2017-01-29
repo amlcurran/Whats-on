@@ -3,6 +3,7 @@ import UIKit
 
 class OptionsViewController: UIViewController {
 
+    private let analytics = Analytics()
     private let startPicker = UIDatePicker()
     private let beginningLabel = UILabel()
     private let intermediateLabel = UILabel()
@@ -92,6 +93,7 @@ class OptionsViewController: UIViewController {
     }
 
     func doneTapped() {
+        analytics.changedTimes(starting: timeStore.startTime, finishing: timeStore.endTime)
         dismiss(animated: true, completion: nil)
     }
 
@@ -122,6 +124,17 @@ class OptionsViewController: UIViewController {
         case none
         case start
         case end
+    }
+
+}
+
+extension Analytics {
+
+    func changedTimes(starting: Int, finishing: Int) {
+        sendEvent(named: "timeChange", withParameters: [
+                "startTime": "\(starting)",
+                "endTime": "\(finishing)"
+        ])
     }
 
 }
