@@ -35,4 +35,15 @@ extension UIDatePicker {
         maximumDate = Calendar.current.date(from: components)
     }
 
+    var hasMinutes: Bool {
+        let components = Calendar.current.dateComponents([.minute], from: date)
+        return components.minute.or(0) != 0
+    }
+
+    func removeMinutes() {
+        var components = Calendar.current.dateComponents([.day, .hour, .minute], from: date)
+        components.minute = 0
+        date = Calendar.current.date(from: components)!
+    }
+
 }
