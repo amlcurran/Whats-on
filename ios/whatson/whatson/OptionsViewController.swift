@@ -92,10 +92,6 @@ class OptionsViewController: UIViewController {
     }
 
     func doneTapped() {
-//        let startComponents = Calendar.current.dateComponents([.hour], from: startPicker.date)
-//        let endComponents = Calendar.current.dateComponents([.hour], from: 23)
-//        timeStore.startTime = startComponents.hour
-//        timeStore.endTime = endComponents.hour
         dismiss(animated: true, completion: nil)
     }
 
