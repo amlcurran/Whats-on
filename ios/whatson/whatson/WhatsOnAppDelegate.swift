@@ -3,12 +3,12 @@ import UIKit
 import EventKit
 import EventKitUI
 import Firebase
-
-//import FirebaseAnalytics
+import FirebaseAnalytics
 
 class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelegate {
 
     var window = UIWindow() as UIWindow?
+    let analytics = Analytics()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]? = nil) -> Bool {
         window?.tintColor = UIColor.secondary
@@ -37,7 +37,7 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
     func updateTouchShortcuts(_ application: UIApplication) {
         var newIcons = [UIApplicationShortcutItem]()
         let newEventTommorrow = UIMutableApplicationShortcutItem(type: "new-tomorrow",
-                localizedTitle: "Add event tomorrow",
+                localizedTitle: "AddEventTomorrow".localized(),
                 localizedSubtitle: nil,
                 icon: UIApplicationShortcutIcon(type: UIApplicationShortcutIconType.add),
                 userInfo: nil)
@@ -47,7 +47,7 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
 
     @available(iOS 9.0, *)
     func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
-//        FIRAnalytics.logEvent(withName: "3dtouch", parameters: [ "type" : shortcutItem.type as NSString])
+        analytics.tapped3DTouchShortcut(type: shortcutItem.type)
         if shortcutItem.type == "new-tomorrow" {
             let eventStore = EKEventStore()
             let event = EKEvent(eventStore: eventStore)
@@ -62,12 +62,6 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
             editController.editViewDelegate = self
             rootViewController?.present(editController, animated: false, completion: nil)
             return true
-        } else if shortcutItem.type == "on-today" {
-            let alertController = UIAlertController(title: "Uh oh!", message: "You've not implemented this yet", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(action)
-            rootViewController?.present(alertController, animated: true, completion: nil)
-            return false
         }
         return false
     }
@@ -78,6 +72,14 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
 
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         rootViewController?.dismiss(animated: true, completion: nil)
+    }
+
+}
+
+fileprivate extension Analytics {
+
+    func tapped3DTouchShortcut(type: String) {
+        sendEvent(named: "3dtouch", withParameters: ["type" : type])
     }
 
 }

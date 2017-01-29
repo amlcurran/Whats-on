@@ -2,3 +2,5 @@
 "Done" = "Done";
 "Options.Beginning" = "Show me events from";
 "Options.Intermediate" = "to";
+
+"AddEventTomorrow" = "Add event tomorrow";
