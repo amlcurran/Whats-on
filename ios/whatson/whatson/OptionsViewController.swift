@@ -101,10 +101,10 @@ class OptionsViewController: UIViewController {
 
     func beginEditing() {
         if (editState == .start) {
-            picker.hour = timeStore.startTime
+            picker.set(hour: timeStore.startTime, limitedBefore: timeStore.endTime)
         }
         if (editState == .end) {
-            picker.hour = timeStore.endTime
+            picker.set(hour: timeStore.endTime, limitedAfter: timeStore.startTime)
         }
     }
 
@@ -182,12 +182,30 @@ extension UIDatePicker {
         get {
             return Calendar.current.dateComponents([.hour], from: date).hour
         }
-        set {
-            var components = Calendar.current.dateComponents([.day, .hour, .minute], from: Date())
-            components.hour = newValue
-            components.minute = 0
-            date = Calendar.current.date(from: components)!
-        }
+    }
+
+    func set(hour: Int, limitedAfter lowerLimit: Int) {
+        var components = Calendar.current.dateComponents([.day, .hour, .minute], from: Date())
+        components.hour = hour
+        components.minute = 0
+        date = Calendar.current.date(from: components)!
+
+        components = Calendar.current.dateComponents([.day, .hour, .minute], from: Date())
+        components.hour = lowerLimit
+        components.minute = 0
+        minimumDate = Calendar.current.date(from: components)
+    }
+
+    func set(hour: Int, limitedBefore upperLimit: Int) {
+        var components = Calendar.current.dateComponents([.day, .hour, .minute], from: Date())
+        components.hour = hour
+        components.minute = 0
+        date = Calendar.current.date(from: components)!
+
+        components = Calendar.current.dateComponents([.day, .hour, .minute], from: Date())
+        components.hour = upperLimit
+        components.minute = 0
+        maximumDate = Calendar.current.date(from: components)
     }
 
 }
