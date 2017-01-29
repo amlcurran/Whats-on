@@ -119,6 +119,7 @@ class OptionsViewController: UIViewController {
         startSelectableView.text = dateFormatter.string(from: NSDateCalculator.instance.date(timeStore.startTimestamp))
         intermediateLabel.text = "to"
         endSelectableView.text = dateFormatter.string(from: NSDateCalculator.instance.date(timeStore.endTimestamp))
+
     }
 
     enum EditState {
@@ -194,6 +195,7 @@ extension UIDatePicker {
         components.hour = lowerLimit
         components.minute = 0
         minimumDate = Calendar.current.date(from: components)
+        maximumDate = nil
     }
 
     func set(hour: Int, limitedBefore upperLimit: Int) {
@@ -205,6 +207,7 @@ extension UIDatePicker {
         components = Calendar.current.dateComponents([.day, .hour, .minute], from: Date())
         components.hour = upperLimit
         components.minute = 0
+        minimumDate = nil
         maximumDate = Calendar.current.date(from: components)
     }
 
