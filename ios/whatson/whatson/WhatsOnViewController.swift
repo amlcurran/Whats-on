@@ -18,6 +18,7 @@ class WhatsOnViewController: UIViewController,
 
     private var presenter: WhatsOnPresenter!
     private var eventService: SCEventsService!
+    private var failedAccessView: UIView?
 
     lazy var dataSource: CalendarDataSource = {
         return CalendarDataSource(delegate: self)
@@ -55,10 +56,29 @@ class WhatsOnViewController: UIViewController,
         header.constrainToSuperview(edges: [.leading], withOffset: 16)
         header.constrainToSuperview(edges: [.trailing, .bottom], withOffset: -16)
 
-        view.add(tableView, constrainedTo: [.bottom, .leading, .trailing])
+        let mainView = UIView()
+        view.add(mainView, constrainedTo: [.bottom, .leading, .trailing])
         view.add(blurView, constrainedTo: [.leading, .trailing, .top])
         header.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 16).isActive = true
-        tableView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        mainView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        
+        failedAccessView = failedToAccessView()
+        mainView.add(tableView, constrainedTo: [.leading, .top, .trailing, .bottom])
+        mainView.add(failedAccessView!, constrainedTo: [.leading, .top, .trailing, .bottom])
+    }
+    
+    private func failedToAccessView() -> UIView {
+        let view = UIView()
+        let label = UILabel()
+        label.set(style: .lower)
+        label.numberOfLines = 0
+        view.addSubview(label)
+        label.constrainToSuperview(edges: [.leading, .top], withOffset: 32)
+        label.constrainToSuperview(edges: [.trailing, .bottom], withOffset: -32)
+        label.textAlignment = .center
+        label.hugContent(.vertical)
+        label.text = "CalendarAccessError".localized()
+        return view
     }
 
     private func styleTable(offsetAgainst header: HeaderView) {
@@ -137,10 +157,17 @@ class WhatsOnViewController: UIViewController,
     func didUpdateSource(_ source: SCCalendarSource) {
         dataSource.update(source)
         tableView.reloadData()
+        failedAccessView?.alpha = 0
+        failedAccessView?.isUserInteractionEnabled = true
+        tableView.alpha = 1
+        tableView.isUserInteractionEnabled = false
     }
 
     func failedToAccessCalendar(_ error: NSError) {
-        print(error)
+        failedAccessView?.alpha = 1
+        failedAccessView?.isUserInteractionEnabled = false
+        tableView.alpha = 0
+        tableView.isUserInteractionEnabled = true
     }
 
 }

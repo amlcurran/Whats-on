@@ -3,5 +3,6 @@
 "Options.Beginning" = "Show me events from";
 "Options.Intermediate" = "to";
 "Options.MinuteLimitation" = "Limits can be set to only whole hours.";
+"CalendarAccessError" = "What's on needs access to your calendar to show events. You can enable this in Settings.";
 
 "AddEventTomorrow" = "Add event tomorrow";
