@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Whatson-Swift.h"
+#import "What_s_on-Swift.h"
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {
