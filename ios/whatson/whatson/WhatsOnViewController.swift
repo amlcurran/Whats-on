@@ -158,16 +158,16 @@ class WhatsOnViewController: UIViewController,
         dataSource.update(source)
         tableView.reloadData()
         failedAccessView?.alpha = 0
-        failedAccessView?.isUserInteractionEnabled = true
+        failedAccessView?.isUserInteractionEnabled = false
         tableView.alpha = 1
-        tableView.isUserInteractionEnabled = false
+        tableView.isUserInteractionEnabled = true
     }
 
     func failedToAccessCalendar(_ error: NSError) {
         failedAccessView?.alpha = 1
-        failedAccessView?.isUserInteractionEnabled = false
+        failedAccessView?.isUserInteractionEnabled = true
         tableView.alpha = 0
-        tableView.isUserInteractionEnabled = true
+        tableView.isUserInteractionEnabled = false
     }
 
 }
