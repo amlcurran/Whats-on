@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What’s on" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="inI-RF-Yo3">
-                                <rect key="frame" x="16" y="58" width="343" height="38.5"/>
+                                <rect key="frame" x="16" y="56" width="343" height="38.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="32"/>
                                 <color key="textColor" red="0.26666666666666666" green="0.32156862745098036" blue="0.42352941176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -32,7 +32,7 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="inI-RF-Yo3" secondAttribute="trailing" id="Hj2-Ax-KkQ"/>
                             <constraint firstItem="inI-RF-Yo3" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="ZRG-DB-0Vc"/>
-                            <constraint firstItem="inI-RF-Yo3" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="38" id="cvS-kZ-XeM"/>
+                            <constraint firstItem="inI-RF-Yo3" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="36" id="cvS-kZ-XeM"/>
                         </constraints>
                     </view>
                 </viewController>
