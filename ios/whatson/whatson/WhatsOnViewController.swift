@@ -61,12 +61,12 @@ class WhatsOnViewController: UIViewController,
         view.add(blurView, constrainedTo: [.leading, .trailing, .top])
         header.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 16).isActive = true
         mainView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 0).isActive = true
-        
+
         failedAccessView = failedToAccessView()
         mainView.add(tableView, constrainedTo: [.leading, .top, .trailing, .bottom])
         mainView.add(failedAccessView!, constrainedTo: [.leading, .top, .trailing, .bottom])
     }
-    
+
     private func failedToAccessView() -> UIView {
         let view = UIView()
         let label = UILabel()
