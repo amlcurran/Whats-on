@@ -949,7 +949,7 @@
 					jre_emul,
 					"-ljsr305",
 				);
-				OTHER_SWIFT_FLAGS = "-D DEBUG";
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson;
 				PRODUCT_NAME = "What’s on";
 				PROVISIONING_PROFILE = "";
