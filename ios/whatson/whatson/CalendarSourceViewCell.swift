@@ -73,7 +73,8 @@ class CalendarSourceViewCell: UITableViewCell {
         updateSecondaryHeight()
 
         contentView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
-        contentView.add(dayLabel, constrainedTo: [.topMargin, .leadingMargin, .trailingMargin], withOffset: 8)
+        contentView.add(dayLabel, constrainedTo: [.leadingMargin, .trailingMargin], withOffset: 8)
+        dayLabel.constrain(.top, to: contentView, .topMargin, withOffset: 8)
         contentView.add(roundedView, constrainedTo: [.leadingMargin, .trailingMargin, .bottomMargin])
         roundedView.constrain(.top, to: dayLabel, .bottom, withOffset: 6)
         roundedView.cornerRadius = 6
