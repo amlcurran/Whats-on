@@ -53,14 +53,13 @@ class WhatsOnViewController: UIViewController,
         let blur = UIBlurEffect(style: .light)
         let blurView = UIVisualEffectView(effect: blur)
         blurView.addSubview(header)
-        header.constrainToSuperview(edges: [.leading], withOffset: 16)
-        header.constrainToSuperview(edges: [.trailing, .bottom], withOffset: -16)
+        header.constrainToSuperview(edges: [.leading, .trailing, .bottom], withInset: 16)
 
         let mainView = UIView()
         view.add(mainView, constrainedTo: [.bottom, .leading, .trailing])
         view.add(blurView, constrainedTo: [.leading, .trailing, .top])
-        header.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 16).isActive = true
-        mainView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        header.constrainToTopLayoutGuide(of: self, insetBy: 16)
+        header.constrainToBottomLayoutGuide(of: self)
 
         failedAccessView = failedToAccessView()
         mainView.add(tableView, constrainedTo: [.leading, .top, .trailing, .bottom])
@@ -73,8 +72,7 @@ class WhatsOnViewController: UIViewController,
         label.set(style: .lower)
         label.numberOfLines = 0
         view.addSubview(label)
-        label.constrainToSuperview(edges: [.leading, .top], withOffset: 32)
-        label.constrainToSuperview(edges: [.trailing, .bottom], withOffset: -32)
+        label.constrainToSuperview(edges: [.leading, .top, .trailing, .bottom], withInset: 32)
         label.textAlignment = .center
         label.hugContent(.vertical)
         label.text = "CalendarAccessError".localized()

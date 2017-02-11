@@ -61,19 +61,17 @@ class CalendarSourceViewCell: UITableViewCell {
 
     private func layout() {
         roundedView.addSubview(eventLabel)
-        eventLabel.constrainToSuperview(edges: [.top, .leading], withOffset: 16)
-        eventLabel.constrainToSuperview(edges: [.trailing], withOffset: -16)
+        eventLabel.constrainToSuperview(edges: [.top, .leading, .trailing], withInset: 16)
         eventLabel.setContentHuggingPriority(UILayoutPriorityRequired, for: .vertical)
         roundedView.addSubview(secondaryLabel)
-        secondaryLabel.constrainToSuperview(edges: [.leading], withOffset: 16)
-        secondaryLabel.constrainToSuperview(edges: [.trailing, .bottom], withOffset: -16)
+        secondaryLabel.constrainToSuperview(edges: [.leading, .trailing, .bottom], withInset: 16)
         secondaryLabel.setContentHuggingPriority(UILayoutPriorityRequired, for: .vertical)
         secondaryLabel.constrain(.top, to: eventLabel, .bottom)
         secondaryLabelZeroHeightConstraint = secondaryLabel.constrain(height: 0)
         updateSecondaryHeight()
 
         contentView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
-        contentView.add(dayLabel, constrainedTo: [.leadingMargin, .trailingMargin], withOffset: 8)
+        contentView.add(dayLabel, constrainedTo: [.leadingMargin, .trailingMargin], withInset: 8)
         dayLabel.constrain(.top, to: contentView, .topMargin, withOffset: 8)
         contentView.add(roundedView, constrainedTo: [.leadingMargin, .trailingMargin, .bottomMargin])
         roundedView.constrain(.top, to: dayLabel, .bottom, withOffset: 6)

@@ -88,7 +88,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         scrollView.constrainToSuperview(edges: [.bottom, .leading, .trailing])
         scrollView.constrain(.top, to: navBar, .bottom)
 
-        scrollView.add(detailsCard, constrainedTo: [.topMargin, .leadingMargin], withOffset: 16)
+        scrollView.add(detailsCard, constrainedTo: [.topMargin, .leadingMargin], withInset: 16)
         detailsCard.constrain(.width, to: view, .width, withOffset: -16)
         detailsCard.layout()
 

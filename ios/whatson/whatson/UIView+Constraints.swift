@@ -2,10 +2,30 @@ import UIKit
 
 extension UIView {
 
-    func constrainToSuperview(edges: [NSLayoutAttribute], withOffset offset: CGFloat = 0) {
+    func constrainToSuperview(edges: [NSLayoutAttribute], withInset inset: CGFloat = 0) {
         for edge in edges {
-            constrainToSuperview(edge, withOffset: offset)
+            constrainToSuperview(edge, withOffset: offset(for: edge, ofInset: inset))
         }
+    }
+
+    func constrainToTopLayoutGuide(of viewController: UIViewController, insetBy inset: CGFloat = 0) {
+        topAnchor.constraint(equalTo: viewController.topLayoutGuide.bottomAnchor, constant: inset).isActive = true
+    }
+
+    private func offset(for edge: NSLayoutAttribute, ofInset inset: CGFloat) -> CGFloat {
+        switch edge {
+        case .top, .topMargin, .leading, .leadingMargin:
+            return inset
+        case .bottom, .bottomMargin, .trailing, .trailingMargin:
+            return -inset
+        default:
+            print("Warning, offset not handled for edge \(edge)")
+            return inset
+        }
+    }
+
+    func constrainToBottomLayoutGuide(of viewController: UIViewController, insetBy inset: CGFloat = 0) {
+        topAnchor.constraint(equalTo: viewController.bottomLayoutGuide.topAnchor, constant: -inset).isActive = true
     }
 
     @discardableResult func constrainToSuperview(_ edge: NSLayoutAttribute, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
@@ -40,9 +60,9 @@ extension UIView {
         return constraint
     }
 
-    func add(_ view: UIView, constrainedTo edges: [NSLayoutAttribute], withOffset offset: CGFloat = 0) {
+    func add(_ view: UIView, constrainedTo edges: [NSLayoutAttribute], withInset inset: CGFloat = 0) {
         addSubview(view)
-        view.constrainToSuperview(edges: edges, withOffset: offset)
+        view.constrainToSuperview(edges: edges, withInset: inset)
     }
 
     private func prepareForConstraints() -> UIView {
@@ -61,10 +81,9 @@ extension UIView {
         return surrounded(by: UIView(), inset: inset)
     }
 
-    func surrounded<T: UIView>(by view: T, inset: CGFloat) -> T {
+    func surrounded<T:UIView>(by view: T, inset: CGFloat) -> T {
         view.addSubview(self)
-        constrainToSuperview(edges: [.leading, .top], withOffset: inset)
-        constrainToSuperview(edges: [.trailing, .bottom], withOffset: -inset)
+        constrainToSuperview(edges: [.leading, .top, .trailing, .bottom], withInset: inset)
         return view
     }
 
