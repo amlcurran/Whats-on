@@ -4,7 +4,8 @@ import UIKit
 class TimeLabel: UIView {
 
     private let label = UILabel()
-    private var gestureRecogniser: UITapGestureRecognizer? = nil
+    private var gestureRecogniser: UITapGestureRecognizer?
+
     var tapClosure: (() -> Void)? = nil {
         didSet {
             if let previousRecognizer = gestureRecogniser {

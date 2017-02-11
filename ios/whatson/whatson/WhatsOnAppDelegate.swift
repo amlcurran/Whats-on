@@ -77,7 +77,7 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
 fileprivate extension Analytics {
 
     func tapped3DTouchShortcut(type: String) {
-        sendEvent(named: "3dtouch", withParameters: ["type" : type])
+        sendEvent(named: "3dtouch", withParameters: ["type": type])
     }
 
 }

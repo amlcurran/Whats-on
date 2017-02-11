@@ -6,7 +6,7 @@ class WhatsOnPresenter {
 
     let eventStore: EKEventStore
     let eventService: SCEventsService
-    private weak var delegate: WhatsOnPresenterDelegate? = nil
+    private weak var delegate: WhatsOnPresenterDelegate?
 
     init(eventStore: EKEventStore, eventService: SCEventsService) {
         self.eventStore = eventStore
