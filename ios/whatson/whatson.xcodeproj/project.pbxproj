@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		19B26691193D2CF98E39543F /* Pods_WhatsOnTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE94BF63C5CC68AC641A95DE /* Pods_WhatsOnTests.framework */; };
+		698531761CD39981ABD5B75B /* Completion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853BE8F4A525FC03DF7E20 /* Completion.swift */; };
 		698533DEAF59954635D7E3CD /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985328C217A9C753C09CFDE /* Line.swift */; };
 		698538E5F918BCBD1F75C446 /* UserDefaultsTimeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */; };
 		69853B3AC06B29C271651CF0 /* UIDatePicker+Hours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985397DE155D32104662FA2 /* UIDatePicker+Hours.swift */; };
@@ -86,6 +87,7 @@
 		698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsTimeStore.swift; sourceTree = "<group>"; };
 		6985397DE155D32104662FA2 /* UIDatePicker+Hours.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDatePicker+Hours.swift"; sourceTree = "<group>"; };
 		69853ADAFB0D8A57C40FC7BA /* DetailsCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsCard.swift; sourceTree = "<group>"; };
+		69853BE8F4A525FC03DF7E20 /* Completion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Completion.swift; sourceTree = "<group>"; };
 		69853D2C9F2840A9862339C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		69853F60E5391F881F006F7B /* TimeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeLabel.swift; path = views/TimeLabel.swift; sourceTree = "<group>"; };
 		8334259A4DD3ECC2E846BCAF /* Pods_whatson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_whatson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -352,6 +354,7 @@
 				86A9E45C1DA80DA500E8D019 /* SCTimestamp+Now.swift */,
 				86A9E45E1DA80E9700E8D019 /* DateFormatter+Initialisers.swift */,
 				698532BD8B0E148238449902 /* String+Localization.swift */,
+				69853BE8F4A525FC03DF7E20 /* Completion.swift */,
 			);
 			name = extensions;
 			sourceTree = "<group>";
@@ -654,6 +657,7 @@
 				69853B3AC06B29C271651CF0 /* UIDatePicker+Hours.swift in Sources */,
 				69853DBE93212578467A9402 /* String+Localization.swift in Sources */,
 				69853EDF767415596862180F /* Analytics.swift in Sources */,
+				698531761CD39981ABD5B75B /* Completion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

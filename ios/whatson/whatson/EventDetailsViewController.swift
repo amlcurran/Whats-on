@@ -114,16 +114,17 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
             detailsCard.updateMap(location: location)
         } else if let location = event.location, !location.isEmpty {
             detailsCard.hideMap()
-            geocoder.geocodeAddressString(location, completionHandler: { [weak self] (places, error) in
-                self?.handleGeocoding(places: places)
-            })
+            geocoder.geocodeAddressString(location,
+                    when(successful: { [weak self] places in
+                        self?.showLocationOnMap(places: places)
+                    }, whenFailed: doNothing))
         } else {
             detailsCard.collapseMap()
         }
     }
 
-    private func handleGeocoding(places: [CLPlacemark]?) {
-        if let places = places, let firstPlace = places.first, let location = firstPlace.location {
+    private func showLocationOnMap(places: [CLPlacemark]) {
+        if let firstPlace = places.first, let location = firstPlace.location {
             detailsCard.showMap()
             detailsCard.updateMap(location: location)
         }
