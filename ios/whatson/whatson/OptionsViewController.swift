@@ -108,19 +108,19 @@ class OptionsViewController: UIViewController {
     }
 
     func beginEditing() {
-        if (editState == .start) {
+        if editState == .start {
             picker.set(hour: timeStore.startTime, limitedBefore: timeStore.endTime)
         }
-        if (editState == .end) {
+        if editState == .end {
             picker.set(hour: timeStore.endTime, limitedAfter: timeStore.startTime)
         }
     }
 
     func updateText() {
-        if (editState == .start) {
+        if editState == .start {
             timeStore.startTime = picker.hour.or(17)
         }
-        if (editState == .end) {
+        if editState == .end {
             timeStore.endTime = picker.hour.or(23)
         }
         beginningLabel.text = "Options.Beginning".localized()
@@ -135,7 +135,7 @@ class OptionsViewController: UIViewController {
     }
 
     func showMinuteLimitation() {
-        if (picker.hasMinutes) {
+        if picker.hasMinutes
             analytics.requestMinutes(repeatedTry: minuteLimitationLabel.alpha == 1)
             UIView.animate(withDuration: 0.2, animations: { [weak self] in
                 self?.minuteLimitationLabel.alpha = 1
