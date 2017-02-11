@@ -51,14 +51,8 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
             let timeStore = UserDefaultsTimeStore()
             let eventStore = EKEventStore()
             let event = EKEvent(eventStore: eventStore)
-            var components = Calendar.current.dateComponents([.day, .minute, .hour, .second], from: Date())
-            components.hour = timeStore.startTime
-            components.minute = 0
-            components.day = components.day.or(0) + 1
-            let startDate = Calendar.current.date(bySettingHour: timeStore.startTime, minute: 0, second: 0, of: Date())
-            let endDate = Calendar.current.date(bySettingHour: timeStore.startTime, minute: 0, second: 0, of: Date())
-            event.startDate = startDate!
-            event.endDate = endDate!
+            event.startDate = Date.startTimeIn(days: 1, startTimeFrom: timeStore)!
+            event.endDate = Date.endTimeIn(days: 1, endTimeFrom: timeStore)!
 
             let editController = EKEventEditViewController()
             editController.eventStore = eventStore
@@ -84,6 +78,26 @@ fileprivate extension Analytics {
 
     func tapped3DTouchShortcut(type: String) {
         sendEvent(named: "3dtouch", withParameters: ["type" : type])
+    }
+
+}
+
+extension Date {
+
+    static func startTimeIn(days: Int, startTimeFrom timeStore: UserDefaultsTimeStore) -> Date? {
+        var components = Calendar.current.dateComponents([.day, .minute, .hour, .second, .month, .year], from: Date())
+        components.hour = timeStore.startTime
+        components.minute = 0
+        components.day = components.day.or(0) + days
+        return Calendar.current.date(from: components)
+    }
+
+    static func endTimeIn(days: Int, endTimeFrom timeStore: UserDefaultsTimeStore) -> Date? {
+        var components = Calendar.current.dateComponents([.day, .minute, .hour, .second, .month, .year], from: Date())
+        components.hour = timeStore.endTime
+        components.minute = 0
+        components.day = components.day.or(0) + days
+        return Calendar.current.date(from: components)
     }
 
 }
