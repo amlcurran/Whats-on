@@ -13,7 +13,7 @@ struct EventPredicates {
 private extension NSPredicate {
 
     convenience init(compoundFrom predicates: [NSPredicate]) {
-        self.init(block: { (element, bindings) -> Bool in
+        self.init(block: { (element, _) -> Bool in
             return predicates.reduce(true, { (current, predicate) -> Bool in
                 return current && predicate.evaluate(with: element)
             })
@@ -23,7 +23,7 @@ private extension NSPredicate {
 }
 
 private func notAllDay() -> NSPredicate {
-    return NSPredicate(block: { (element, bindings) -> Bool in
+    return NSPredicate(block: { (element, _) -> Bool in
         if let event = element as? EKEvent {
             return !event.isAllDay
         }
@@ -32,7 +32,7 @@ private func notAllDay() -> NSPredicate {
 }
 
 private func isWithinBorder(timeRepository: SCTimeRepository, using calendar: Calendar) -> NSPredicate {
-    return NSPredicate(block: { (element, bindings) -> Bool in
+    return NSPredicate(block: { (element, _) -> Bool in
         if let event = element as? EKEvent {
             var startComponents = calendar.dateComponents([.hour, .day], from: event.startDate)
             var endComponents = calendar.dateComponents([.hour, .day], from: event.endDate)
