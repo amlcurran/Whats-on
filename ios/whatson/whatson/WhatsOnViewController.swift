@@ -53,7 +53,7 @@ class WhatsOnViewController: UIViewController,
         let blur = UIBlurEffect(style: .light)
         let blurView = UIVisualEffectView(effect: blur)
         blurView.addSubview(header)
-        header.constrainToSuperview(edges: [.leading, .trailing, .bottom], withInset: 16)
+        header.constrainToSuperview([.leading, .trailing, .bottom], insetBy: 16)
 
         let mainView = UIView()
         view.add(mainView, constrainedTo: [.bottom, .leading, .trailing])
@@ -72,7 +72,7 @@ class WhatsOnViewController: UIViewController,
         label.set(style: .lower)
         label.numberOfLines = 0
         view.addSubview(label)
-        label.constrainToSuperview(edges: [.leading, .top, .trailing, .bottom], withInset: 32)
+        label.constrainToSuperview([.leading, .top, .trailing, .bottom], insetBy: 32)
         label.textAlignment = .center
         label.hugContent(.vertical)
         label.text = "CalendarAccessError".localized()

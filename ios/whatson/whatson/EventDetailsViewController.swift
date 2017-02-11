@@ -81,11 +81,11 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
 
     private func layoutViews() {
         view.addSubview(navBar)
-        navBar.constrainToSuperview(edges: [.leading, .trailing])
+        navBar.constrainToSuperview([.leading, .trailing])
         navBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
         let scrollView = UIScrollView()
         view.addSubview(scrollView)
-        scrollView.constrainToSuperview(edges: [.bottom, .leading, .trailing])
+        scrollView.constrainToSuperview([.bottom, .leading, .trailing])
         scrollView.constrain(.top, to: navBar, .bottom)
 
         scrollView.add(detailsCard, constrainedTo: [.topMargin, .leadingMargin], withInset: 16)

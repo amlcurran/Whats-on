@@ -20,19 +20,19 @@ class DetailsCard: UIView {
         backgroundColor = .white
 
         addSubview(titleLabel)
-        titleLabel.constrainToSuperview(edges: [.leading, .top, .trailing], withInset: 16)
+        titleLabel.constrainToSuperview([.leading, .top, .trailing], insetBy: 16)
 
         addSubview(timingLabel)
-        timingLabel.constrainToSuperview(edges: [.leading, .trailing], withInset: 16)
+        timingLabel.constrainToSuperview([.leading, .trailing], insetBy: 16)
         timingLabel.constrain(.top, to: titleLabel, .bottom, withOffset: 8)
 
         addSubview(line)
         line.constrain(.width, to: self, .width)
-        line.constrainToSuperview(edges: [.leading, .trailing])
+        line.constrainToSuperview([.leading, .trailing])
         line.constrain(.top, to: timingLabel, .bottom, withOffset: 16)
 
         addSubview(locationLabel)
-        locationLabel.constrainToSuperview(edges: [.leading, .trailing], withInset: 16)
+        locationLabel.constrainToSuperview([.leading, .trailing], insetBy: 16)
         locationLabel.constrain(.top, to: line, .bottom, withOffset: 16)
 
         add(locationMapView, constrainedTo: [.leading, .trailing, .bottom])
@@ -62,7 +62,7 @@ class DetailsCard: UIView {
         line.removeFromSuperview()
         locationLabel.removeFromSuperview()
         locationMapView.removeFromSuperview()
-        timingLabel.constrainToSuperview(edges: [.bottom], withInset: 16)
+        timingLabel.constrainToSuperview([.bottom], insetBy: 16)
     }
 
     func showMap() {

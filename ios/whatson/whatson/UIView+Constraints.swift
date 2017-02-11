@@ -2,7 +2,7 @@ import UIKit
 
 extension UIView {
 
-    func constrainToSuperview(edges: [NSLayoutAttribute], withInset inset: CGFloat = 0) {
+    func constrainToSuperview(_ edges: [NSLayoutAttribute], insetBy inset: CGFloat = 0) {
         for edge in edges {
             constrainToSuperview(edge, withOffset: offset(for: edge, ofInset: inset))
         }
@@ -62,7 +62,7 @@ extension UIView {
 
     func add(_ view: UIView, constrainedTo edges: [NSLayoutAttribute], withInset inset: CGFloat = 0) {
         addSubview(view)
-        view.constrainToSuperview(edges: edges, withInset: inset)
+        view.constrainToSuperview(edges, insetBy: inset)
     }
 
     private func prepareForConstraints() -> UIView {
@@ -83,7 +83,7 @@ extension UIView {
 
     func surrounded<T:UIView>(by view: T, inset: CGFloat) -> T {
         view.addSubview(self)
-        constrainToSuperview(edges: [.leading, .top, .trailing, .bottom], withInset: inset)
+        constrainToSuperview([.leading, .top, .trailing, .bottom], insetBy: inset)
         return view
     }
 

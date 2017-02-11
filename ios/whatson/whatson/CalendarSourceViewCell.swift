@@ -61,10 +61,10 @@ class CalendarSourceViewCell: UITableViewCell {
 
     private func layout() {
         roundedView.addSubview(eventLabel)
-        eventLabel.constrainToSuperview(edges: [.top, .leading, .trailing], withInset: 16)
+        eventLabel.constrainToSuperview([.top, .leading, .trailing], insetBy: 16)
         eventLabel.setContentHuggingPriority(UILayoutPriorityRequired, for: .vertical)
         roundedView.addSubview(secondaryLabel)
-        secondaryLabel.constrainToSuperview(edges: [.leading, .trailing, .bottom], withInset: 16)
+        secondaryLabel.constrainToSuperview([.leading, .trailing, .bottom], insetBy: 16)
         secondaryLabel.setContentHuggingPriority(UILayoutPriorityRequired, for: .vertical)
         secondaryLabel.constrain(.top, to: eventLabel, .bottom)
         secondaryLabelZeroHeightConstraint = secondaryLabel.constrain(height: 0)
