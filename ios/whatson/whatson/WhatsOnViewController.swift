@@ -7,7 +7,6 @@ class WhatsOnViewController: UIViewController,
         UIViewControllerPreviewingDelegate,
         WhatsOnPresenterDelegate,
         CalendarDataSourceDelegate,
-        UINavigationControllerDelegate,
         HeaderViewDelegate {
 
     private let dateFormatter = DateFormatter(dateFormat: "EEE")
@@ -26,7 +25,6 @@ class WhatsOnViewController: UIViewController,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.delegate = self
         edgesForExtendedLayout = [.left, .right, .bottom]
         view.backgroundColor = .windowBackground
         title = " "
