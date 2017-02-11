@@ -48,10 +48,15 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
     func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
         analytics.tapped3DTouchShortcut(type: shortcutItem.type)
         if shortcutItem.type == "new-tomorrow" {
+            let timeStore = UserDefaultsTimeStore()
             let eventStore = EKEventStore()
             let event = EKEvent(eventStore: eventStore)
-            let startDate = Calendar.current.date(bySettingHour: 17, minute: 0, second: 0, of: Date())
-            let endDate = Calendar.current.date(bySettingHour: 23, minute: 0, second: 0, of: Date())
+            var components = Calendar.current.dateComponents([.day, .minute, .hour, .second], from: Date())
+            components.hour = timeStore.startTime
+            components.minute = 0
+            components.day = components.day.or(0) + 1
+            let startDate = Calendar.current.date(bySettingHour: timeStore.startTime, minute: 0, second: 0, of: Date())
+            let endDate = Calendar.current.date(bySettingHour: timeStore.startTime, minute: 0, second: 0, of: Date())
             event.startDate = startDate!
             event.endDate = endDate!
 
