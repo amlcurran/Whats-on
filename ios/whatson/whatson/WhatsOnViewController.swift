@@ -7,7 +7,8 @@ class WhatsOnViewController: UIViewController,
         UIViewControllerPreviewingDelegate,
         WhatsOnPresenterDelegate,
         CalendarDataSourceDelegate,
-        HeaderViewDelegate {
+        HeaderViewDelegate,
+        UIGestureRecognizerDelegate {
 
     private let dateFormatter = DateFormatter(dateFormat: "EEE")
     private let eventStore = EKEventStore.instance
@@ -45,6 +46,7 @@ class WhatsOnViewController: UIViewController,
         tableView.dataSource = dataSource
 
         navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
 
     private func anchor(_ header: UIView) {
@@ -164,6 +166,10 @@ class WhatsOnViewController: UIViewController,
         failedAccessView?.isUserInteractionEnabled = true
         tableView.alpha = 0
         tableView.isUserInteractionEnabled = false
+    }
+
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 
 }
