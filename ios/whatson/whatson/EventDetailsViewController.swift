@@ -55,9 +55,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         let previousItem = UINavigationItem()
         let navigationItem = UINavigationItem()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
-#if DEBUG
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteEventTapped))
-#endif
         navBar.pushItem(previousItem, animated: false)
         navBar.pushItem(navigationItem, animated: false)
         navBar.delegate = self
