@@ -140,16 +140,17 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     func deleteEventTapped() {
         if !event.isDetached {
             deleteEvent(span: .thisEvent)
+        } else {
+            let actionSheet = UIAlertController(title: "Delete event", message: nil, preferredStyle: .actionSheet)
+            actionSheet.addAction(UIAlertAction(title: "This event", style: .default, handler: { _ in self.deleteEvent(span: .thisEvent) }))
+            actionSheet.addAction(UIAlertAction(title: "Future events", style: .default, handler: { _ in self.deleteEvent(span: .futureEvents) }))
+            actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            present(actionSheet, animated: true, completion: nil)
         }
-        let actionSheet = UIAlertController(title: "Delete event", message: nil, preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "This event", style: .default, handler: { _ in self.deleteEvent(span: .thisEvent) }))
-        actionSheet.addAction(UIAlertAction(title: "Future events", style: .default, handler: { _ in self.deleteEvent(span: .futureEvents) }))
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        present(actionSheet, animated: true, completion: nil)
     }
 
     func deleteEvent(span: EKSpan) {
-        let eventStore = EKEventStore()
+        let eventStore = EKEventStore.instance
         do {
             try eventStore.remove(event, span: span)
             _ = navigationController?.popViewController(animated: true)
