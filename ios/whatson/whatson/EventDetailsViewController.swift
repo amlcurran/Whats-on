@@ -88,6 +88,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
 
         view.addSubview(responseView)
         responseView.constrainToSuperview([.leading, .trailing, .bottom])
+        responseView.constrain(height: 0).isActive = !event.supportsResponses
 
         let scrollView = UIScrollView()
         view.addSubview(scrollView)
@@ -315,6 +316,10 @@ extension EKEvent {
         case .none:
             return .none
         }
+    }
+
+    var supportsResponses: Bool {
+        return isDetached && organizer != nil && !organizer!.isCurrentUser
     }
 
 }
