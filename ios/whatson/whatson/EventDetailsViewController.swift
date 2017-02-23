@@ -4,12 +4,15 @@ import EventKitUI
 import MapKit
 import FirebaseAnalytics
 
-class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventViewDelegate, UINavigationBarDelegate {
+class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventViewDelegate, UINavigationBarDelegate, EventResponseViewDelegate {
 
     lazy var detailsCard: DetailsCard = DetailsCard()
     lazy var moreInfoButton = UIButton()
     lazy var navBar = UINavigationBar()
     lazy var tracking = EventDetailsTracking()
+    lazy var responseView: EventResponseView = {
+        return EventResponseView(delegate: self)
+    }()
 
     private let geocoder = CLGeocoder()
     private let event: EKEvent
@@ -61,6 +64,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         navBar.delegate = self
 
         detailsCard.set(event: event)
+        responseView.set(event.response)
         moreInfoButton.setTitle("Show more info", for: .normal)
 
         moreInfoButton.addTarget(self, action: #selector(moreInfoTapped), for: .touchUpInside)
@@ -81,10 +85,15 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         view.addSubview(navBar)
         navBar.constrainToSuperview([.leading, .trailing])
         navBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
+
+        view.addSubview(responseView)
+        responseView.constrainToSuperview([.leading, .trailing, .bottom])
+
         let scrollView = UIScrollView()
         view.addSubview(scrollView)
-        scrollView.constrainToSuperview([.bottom, .leading, .trailing])
+        scrollView.constrainToSuperview([.leading, .trailing])
         scrollView.constrain(.top, to: navBar, .bottom)
+        scrollView.constrain(.bottom, to: responseView, .top)
 
         scrollView.add(detailsCard, constrainedTo: [.topMargin, .leadingMargin], withInset: 16)
         detailsCard.constrain(.width, to: view, .width, withOffset: -16)
@@ -113,9 +122,9 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         } else if let location = event.location, !location.isEmpty {
             detailsCard.hideMap()
             geocoder.geocodeAddressString(location, completionHandler:
-                    when(successful: { [weak self] places in
-                        self?.showLocationOnMap(places: places)
-                    }, whenFailed: doNothing))
+            when(successful: { [weak self] places in
+                self?.showLocationOnMap(places: places)
+            }, whenFailed: doNothing))
         } else {
             detailsCard.collapseMap()
         }
@@ -171,6 +180,10 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         geocoder.cancelGeocode()
     }
 
+    func changeResponse(to state: EventResponse) {
+        print(state.asStatus)
+    }
+
 }
 
 fileprivate extension EKEventViewController {
@@ -195,6 +208,113 @@ fileprivate extension UIImage {
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return img
+    }
+
+}
+
+class EventResponseView: UIStackView {
+
+    let acceptButton = UIButton()
+    let maybeButton = UIButton()
+    let declineButton = UIButton()
+    let selectedColor = UIColor.accent
+
+    private weak var delegate: EventResponseViewDelegate?
+
+    init(delegate: EventResponseViewDelegate) {
+        super.init(frame: .zero)
+        self.delegate = delegate
+        self.axis = .horizontal
+        self.distribution = .fillEqually
+        self.alignment = .center
+        acceptButton.setTitle("Accept", for: .normal)
+        self.addArrangedSubview(acceptButton)
+        acceptButton.addTarget(self, action: #selector(statusTapped), for: .touchUpInside)
+        maybeButton.setTitle("Maybe", for: .normal)
+        self.addArrangedSubview(maybeButton)
+        maybeButton.addTarget(self, action: #selector(statusTapped), for: .touchUpInside)
+        declineButton.setTitle("Decline", for: .normal)
+        self.addArrangedSubview(declineButton)
+        declineButton.addTarget(self, action: #selector(statusTapped), for: .touchUpInside)
+    }
+
+    required init(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
+    func statusTapped(button: UIButton) {
+        if button == acceptButton {
+            set(.accepted)
+            delegate?.changeResponse(to: .accepted)
+        } else if button == maybeButton {
+            set(.maybe)
+            delegate?.changeResponse(to: .maybe)
+        } else {
+            set(.declined)
+            delegate?.changeResponse(to: .declined)
+        }
+    }
+
+    func set(_ response: EventResponse) {
+        switch response {
+        case .accepted:
+            acceptButton.backgroundColor = selectedColor
+            declineButton.backgroundColor = .clear
+            maybeButton.backgroundColor = .clear
+        case .declined:
+            acceptButton.backgroundColor = .clear
+            declineButton.backgroundColor = selectedColor
+            maybeButton.backgroundColor = .clear
+        case .maybe:
+            acceptButton.backgroundColor = .clear
+            declineButton.backgroundColor = .clear
+            maybeButton.backgroundColor = selectedColor
+        case .none:
+            acceptButton.backgroundColor = .clear
+            declineButton.backgroundColor = .clear
+            maybeButton.backgroundColor = .clear
+        }
+    }
+
+}
+
+enum EventResponse {
+    case accepted
+    case declined
+    case maybe
+    case none
+
+    var asStatus: EKEventStatus {
+        switch self {
+        case .accepted:
+            return .confirmed
+        case .maybe:
+            return .tentative
+        case .declined:
+            return .canceled
+        case .none:
+            return .none
+        }
+    }
+}
+
+protocol EventResponseViewDelegate: class {
+    func changeResponse(to state: EventResponse)
+}
+
+extension EKEvent {
+
+    var response: EventResponse {
+        switch status {
+        case .confirmed:
+            return .accepted
+        case .canceled:
+            return .declined
+        case .tentative:
+            return .maybe
+        case .none:
+            return .none
+        }
     }
 
 }
