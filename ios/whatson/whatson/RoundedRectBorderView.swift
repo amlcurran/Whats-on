@@ -11,8 +11,10 @@ class RoundedRectBorderView: UIView {
 
     @IBInspectable var cornerRadius: CGFloat = 0 {
         didSet {
-            let rect = bounds.insetBy(dx: cornerRadius, dy: cornerRadius)
-            borderLayer.path = UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius).cgPath
+            if bounds.size != CGSize(width: 0, height: 0) {
+                let rect = bounds.insetBy(dx: cornerRadius, dy: cornerRadius)
+                borderLayer.path = UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius).cgPath
+            }
             layer.cornerRadius = cornerRadius
             layer.masksToBounds = cornerRadius > 0
         }
