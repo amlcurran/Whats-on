@@ -172,6 +172,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     func eventUpdated() {
         if event.refresh() {
             updateUI()
+            // cleverly reload location
             tracking.edited()
         } else {
             _ = navigationController?.popViewController(animated: true)
