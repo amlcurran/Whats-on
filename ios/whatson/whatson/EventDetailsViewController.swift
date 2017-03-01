@@ -4,7 +4,7 @@ import EventKitUI
 import MapKit
 import FirebaseAnalytics
 
-class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventViewDelegate, UINavigationBarDelegate, EventResponseViewDelegate {
+class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventViewDelegate, UINavigationBarDelegate, EventResponseViewDelegate, EKEventEditViewDelegate {
 
     lazy var detailsCard: DetailsCard = DetailsCard()
     lazy var moreInfoButton = UIButton()
@@ -68,6 +68,9 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         moreInfoButton.setTitle("Show more info", for: .normal)
 
         moreInfoButton.addTarget(self, action: #selector(moreInfoTapped), for: .touchUpInside)
+
+        updateUI()
+        loadLocation()
     }
 
     func updateUI() {
@@ -118,22 +121,6 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateUI()
-        loadLocation()
-        listenToChanges()
-    }
-
-    private func listenToChanges() {
-        NotificationCenter.default.addObserver(self, selector: #selector(eventStoreUpdated), name: NSNotification.Name.EKEventStoreChanged, object: nil)
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        stopListeningToChanges()
-    }
-
-    private func stopListeningToChanges() {
-        NotificationCenter.default.removeObserver(self)
     }
 
     private func loadLocation() {
@@ -178,12 +165,11 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
 
     func editEventTapped() {
         tracking.wantedEdit()
-        let eventController = EKEventViewController(editing: event, delegate: self)
-        let navigationController = UINavigationController(rootViewController: eventController)
-        present(navigationController, animated: true, completion: nil)
+        let eventController = EKEventEditViewController(editing: event, delegate: self)
+        showDetailViewController(eventController, sender: self)
     }
 
-    func eventStoreUpdated() {
+    func eventUpdated() {
         if event.refresh() {
             updateUI()
             tracking.edited()
@@ -195,15 +181,22 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         }
     }
 
+    func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
+        controller.dismiss(animated: true, completion: nil)
+        if action == .deleted {
+            _ = navigationController?.popViewController(animated: true)
+        } else if action == .saved {
+            eventUpdated()
+        }
+    }
+
     func deleteEvent(span: EKSpan) {
-        stopListeningToChanges()
         let eventStore = EKEventStore.instance
         do {
             try eventStore.remove(event, span: span)
             _ = navigationController?.popViewController(animated: true)
         } catch {
             print(error)
-            listenToChanges()
             let errorView = UIAlertController(title: "An error occurred", message: "The event couldn't be deleted", preferredStyle: .alert)
             errorView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             present(errorView, animated: true, completion: nil)
@@ -236,11 +229,15 @@ fileprivate extension EKEventViewController {
         self.allowsEditing = false
     }
 
-    convenience init(editing event: EKEvent, delegate: EKEventViewDelegate) {
+}
+
+fileprivate extension EKEventEditViewController {
+
+    convenience init(editing event: EKEvent, delegate: EKEventEditViewDelegate) {
         self.init()
         self.event = event
-        self.delegate = delegate
-        self.allowsEditing = true
+        self.editViewDelegate = delegate
+        self.eventStore = .instance
     }
 
 }
