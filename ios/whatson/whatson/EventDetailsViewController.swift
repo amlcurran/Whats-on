@@ -58,18 +58,21 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         let previousItem = UINavigationItem()
         let navigationItem = UINavigationItem()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteEventTapped))
+        navigationItem.rightBarButtonItems = [
+                UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteEventTapped)),
+                UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editEventTapped))
+        ]
         navBar.pushItem(previousItem, animated: false)
         navBar.pushItem(navigationItem, animated: false)
         navBar.delegate = self
-
-        detailsCard.set(event: event)
-        responseView.set(event.response)
         moreInfoButton.setTitle("Show more info", for: .normal)
 
         moreInfoButton.addTarget(self, action: #selector(moreInfoTapped), for: .touchUpInside)
+    }
 
-        loadLocation()
+    func updateUI() {
+        detailsCard.set(event: event)
+        responseView.set(event.response)
     }
 
     @objc private func backTapped() {
@@ -115,6 +118,22 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateUI()
+        loadLocation()
+        listenToChanges()
+    }
+
+    private func listenToChanges() {
+        NotificationCenter.default.addObserver(self, selector: #selector(eventStoreUpdated), name: NSNotification.Name.EKEventStoreChanged, object: nil)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        stopListeningToChanges()
+    }
+
+    private func stopListeningToChanges() {
+        NotificationCenter.default.removeObserver(self)
     }
 
     private func loadLocation() {
@@ -157,13 +176,34 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         }
     }
 
+    func editEventTapped() {
+        tracking.wantedEdit()
+        let eventController = EKEventViewController(editing: event, delegate: self)
+        let navigationController = UINavigationController(rootViewController: eventController)
+        present(navigationController, animated: true, completion: nil)
+    }
+
+    func eventStoreUpdated() {
+        if event.refresh() {
+            updateUI()
+            tracking.edited()
+        } else {
+            _ = navigationController?.popViewController(animated: true)
+            let errorView = UIAlertController(title: "An error occurred", message: "This event must be refreshed", preferredStyle: .alert)
+            errorView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(errorView, animated: true, completion: nil)
+        }
+    }
+
     func deleteEvent(span: EKSpan) {
+        stopListeningToChanges()
         let eventStore = EKEventStore.instance
         do {
             try eventStore.remove(event, span: span)
             _ = navigationController?.popViewController(animated: true)
         } catch {
             print(error)
+            listenToChanges()
             let errorView = UIAlertController(title: "An error occurred", message: "The event couldn't be deleted", preferredStyle: .alert)
             errorView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             present(errorView, animated: true, completion: nil)
@@ -194,6 +234,13 @@ fileprivate extension EKEventViewController {
         self.event = event
         self.delegate = delegate
         self.allowsEditing = false
+    }
+
+    convenience init(editing event: EKEvent, delegate: EKEventViewDelegate) {
+        self.init()
+        self.event = event
+        self.delegate = delegate
+        self.allowsEditing = true
     }
 
 }
