@@ -825,10 +825,18 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 3H3SBN3AYY;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleUtilities/Frameworks\"",
+					"${J2OBJC_HOME}/frameworks",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"${PODS_ROOT}/Firebase/Analytics/Sources",
-					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
 					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
@@ -836,15 +844,15 @@
 					"\"${PODS_ROOT}/Headers/Public/GoogleInterchangeUtilities\"",
 					"\"${PODS_ROOT}/Headers/Public/GoogleSymbolUtilities\"",
 					"\"${PODS_ROOT}/Headers/Public/GoogleUtilities\"",
-					./uk/co/amlcurran/social,
 				);
 				INFOPLIST_FILE = whatson/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				J2OBJC_HOME = ./j2objc;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(inherited)\"",
 					"\"$(PROJECT_DIR)/whatson\"",
-					"\"$(PROJECT_DIR)/j2objc/lib\"",
+					"${J2OBJC_HOME}/lib",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -874,8 +882,7 @@
 					"\"StoreKit\"",
 					"-framework",
 					"\"SystemConfiguration\"",
-					"-l",
-					jre_emul,
+					"-ljre_emul",
 					"-ljsr305",
 				);
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
@@ -885,7 +892,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "whatson-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
-				USER_HEADER_SEARCH_PATHS = "\"$(PROJECT_DIR)/j2objc/include\"/**";
+				USER_HEADER_SEARCH_PATHS = "\"${J2OBJC_HOME}/include\"/**";
 			};
 			name = Debug;
 		};
@@ -900,10 +907,18 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 3H3SBN3AYY;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleUtilities/Frameworks\"",
+					"${J2OBJC_HOME}/frameworks",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"${PODS_ROOT}/Firebase/Analytics/Sources",
-					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
 					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
@@ -911,15 +926,15 @@
 					"\"${PODS_ROOT}/Headers/Public/GoogleInterchangeUtilities\"",
 					"\"${PODS_ROOT}/Headers/Public/GoogleSymbolUtilities\"",
 					"\"${PODS_ROOT}/Headers/Public/GoogleUtilities\"",
-					./uk/co/amlcurran/social,
 				);
 				INFOPLIST_FILE = whatson/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				J2OBJC_HOME = ./j2objc;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(inherited)\"",
 					"\"$(PROJECT_DIR)/whatson\"",
-					"\"$(PROJECT_DIR)/j2objc/lib\"",
+					"${J2OBJC_HOME}/lib",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -949,8 +964,7 @@
 					"\"StoreKit\"",
 					"-framework",
 					"\"SystemConfiguration\"",
-					"-l",
-					jre_emul,
+					"-ljre_emul",
 					"-ljsr305",
 				);
 				OTHER_SWIFT_FLAGS = "";
@@ -960,7 +974,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "whatson-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
-				USER_HEADER_SEARCH_PATHS = "\"$(PROJECT_DIR)/j2objc/include\"/**";
+				USER_HEADER_SEARCH_PATHS = "\"${J2OBJC_HOME}/include\"/**";
 			};
 			name = Release;
 		};

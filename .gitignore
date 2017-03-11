@@ -7,13 +7,8 @@
 *.iml
 ios/whatson/DerivedData
 ios/whatson/GoogleService-Info.plist
-ios/whatson/.idea
-ios/core/whatson-core/DerivedData/
-ios/whatson/whatson.xcodeproj/project.xcworkspace/xcuserdata/amlcurran.xcuserdatad/UserInterfaceState.xcuserstate
-ios/whatson/.idea/workspace.xml
-ios/whatson/whatson.xcodeproj/xcuserdata/amlcurran.xcuserdatad/xcschemes/whatson.xcscheme
-
-ios/whatson/whatson.xcodeproj/xcuserdata/amlcurran.xcuserdatad/xcschemes/xcschememanagement.plist
-ios/whatson/whatson.xcodeproj/xcuserdata/amlcurran.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
 ios/whatson/.idea/
+ios/core/whatson-core/DerivedData/
 Ios/whatson/j2objc/
+ios/whatson/whatson.xcodeproj/xcuserdata/
+ios/whatson/whatson.xcodeproj/project.xcworkspace/xcuserdata/

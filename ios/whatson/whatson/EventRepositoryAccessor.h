@@ -16,7 +16,7 @@
 #if !defined (SCEventRepositoryAccessor_) && (EventRepositoryAccessor_INCLUDE_ALL || defined(SCEventRepositoryAccessor_INCLUDE))
 #define SCEventRepositoryAccessor_
 
-@class SCTimestamp;
+@protocol SCTime;
 
 @protocol SCEventRepositoryAccessor < NSObject, JavaObject >
 
@@ -28,9 +28,7 @@
 
 - (void)endAccess;
 
-- (SCTimestamp *)getStartTime;
-
-- (SCTimestamp *)getEndTime;
+- (id<SCTime>)getStartTime;
 
 @end
 
