@@ -3,45 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="94ce1a51-61c6-4408-a8c0-ca50f8ac639a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Podfile" afterPath="$PROJECT_DIR$/Podfile" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Podfile.lock" afterPath="$PROJECT_DIR$/Podfile.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Manifest.lock" afterPath="$PROJECT_DIR$/Pods/Manifest.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-WhatsOnTests/Pods-WhatsOnTests-frameworks.sh" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-WhatsOnTests/Pods-WhatsOnTests-frameworks.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-WhatsOnTests/Pods-WhatsOnTests-resources.sh" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-WhatsOnTests/Pods-WhatsOnTests-resources.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-WhatsOnTests/Pods-WhatsOnTests-umbrella.h" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-WhatsOnTests/Pods-WhatsOnTests-umbrella.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-WhatsOnTests/Pods-WhatsOnTests.debug.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-WhatsOnTests/Pods-WhatsOnTests.debug.xcconfig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-WhatsOnTests/Pods-WhatsOnTests.release.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-WhatsOnTests/Pods-WhatsOnTests.release.xcconfig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-whatson/Pods-whatson-acknowledgements.markdown" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-whatson/Pods-whatson-acknowledgements.markdown" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-whatson/Pods-whatson-acknowledgements.plist" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-whatson/Pods-whatson-acknowledgements.plist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-whatson/Pods-whatson-frameworks.sh" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-whatson/Pods-whatson-frameworks.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-whatson/Pods-whatson-resources.sh" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-whatson/Pods-whatson-resources.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-whatson/Pods-whatson-umbrella.h" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-whatson/Pods-whatson-umbrella.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/whatson.xcodeproj/project.pbxproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/CalendarItem.h" afterPath="$PROJECT_DIR$/whatson/CalendarItem.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/CalendarItem.m" afterPath="$PROJECT_DIR$/whatson/CalendarItem.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/CalendarSlot.h" afterPath="$PROJECT_DIR$/whatson/CalendarSlot.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/CalendarSlot.m" afterPath="$PROJECT_DIR$/whatson/CalendarSlot.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/CalendarSource.h" afterPath="$PROJECT_DIR$/whatson/CalendarSource.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/CalendarSource.m" afterPath="$PROJECT_DIR$/whatson/CalendarSource.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/ContainerHelpers.h" afterPath="$PROJECT_DIR$/whatson/ContainerHelpers.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/ContainerHelpers.m" afterPath="$PROJECT_DIR$/whatson/ContainerHelpers.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/EmptyCalendarItem.h" afterPath="$PROJECT_DIR$/whatson/EmptyCalendarItem.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/EmptyCalendarItem.m" afterPath="$PROJECT_DIR$/whatson/EmptyCalendarItem.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/EventCalendarItem.h" afterPath="$PROJECT_DIR$/whatson/EventCalendarItem.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/EventCalendarItem.m" afterPath="$PROJECT_DIR$/whatson/EventCalendarItem.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/EventsRepository.h" afterPath="$PROJECT_DIR$/whatson/EventsRepository.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/EventsRepository.m" afterPath="$PROJECT_DIR$/whatson/EventsRepository.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/EventsService.h" afterPath="$PROJECT_DIR$/whatson/EventsService.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/EventsService.m" afterPath="$PROJECT_DIR$/whatson/EventsService.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/SparseArray.h" afterPath="$PROJECT_DIR$/whatson/SparseArray.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/SparseArray.m" afterPath="$PROJECT_DIR$/whatson/SparseArray.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/TimeCalculator.h" afterPath="$PROJECT_DIR$/whatson/TimeCalculator.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/TimeCalculator.m" afterPath="$PROJECT_DIR$/whatson/TimeCalculator.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/TimeOfDay.h" afterPath="$PROJECT_DIR$/whatson/TimeOfDay.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/TimeOfDay.m" afterPath="$PROJECT_DIR$/whatson/TimeOfDay.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/TimeRepository.h" afterPath="$PROJECT_DIR$/whatson/TimeRepository.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/TimeRepository.m" afterPath="$PROJECT_DIR$/whatson/TimeRepository.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/Timestamp.h" afterPath="$PROJECT_DIR$/whatson/Timestamp.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/whatson/Timestamp.m" afterPath="$PROJECT_DIR$/whatson/Timestamp.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-whatson/Pods-whatson.debug.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-whatson/Pods-whatson.debug.xcconfig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-whatson/Pods-whatson.release.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-whatson/Pods-whatson.release.xcconfig" />
     </list>
     <ignored path="whatson.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -92,26 +63,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LabelStyle.swift" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/whatson/LabelStyle.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="27" lean-forward="false" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UIView+Constraints.swift" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/whatson/UIView+Constraints.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="24" lean-forward="false" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="TimeOfDay.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/whatson/TimeOfDay.h">
           <provider selected="true" editor-type-id="text-editor">
@@ -126,24 +77,24 @@
         <entry file="file://$PROJECT_DIR$/whatson/WhatsOnViewController.swift">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1500">
-              <caret line="102" column="53" lean-forward="false" selection-start-line="102" selection-start-column="53" selection-end-line="102" selection-end-column="53" />
+              <caret line="102" column="39" lean-forward="false" selection-start-line="102" selection-start-column="39" selection-end-line="102" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Project Settings" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Project Settings" pinned="false" current-in-tab="true">
         <entry file="appcode.project-settings://ec27cb79">
           <provider selected="true" editor-type-id="AppCode.ProjectSettings">
             <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SparseArray.m" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SparseArray.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/whatson/SparseArray.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2940">
-              <caret line="53" column="21" lean-forward="false" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
+            <state relative-caret-position="480">
+              <caret line="84" column="16" lean-forward="false" selection-start-line="84" selection-start-column="16" selection-end-line="84" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -154,6 +105,26 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
               <caret line="8" column="22" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EventDetailsViewController.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/whatson/EventDetailsViewController.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="290">
+              <caret line="82" column="5" lean-forward="false" selection-start-line="82" selection-start-column="5" selection-end-line="82" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Podfile" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Podfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" column="5" lean-forward="false" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -183,13 +154,15 @@
         <option value="$PROJECT_DIR$/whatson/WhatsOnAppDelegate.swift" />
         <option value="$PROJECT_DIR$/whatson/WhatsOnViewController.swift" />
         <option value="$PROJECT_DIR$/whatson/SparseArray.m" />
+        <option value="$PROJECT_DIR$/Podfile" />
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" />
-  <component name="JsBuildToolPackageJson" detection-done="true" />
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="10" />
@@ -353,6 +326,18 @@
     <property name="OBJC.PRESERVED_TARGET_SELECTION" value="whatson" />
     <property name="settings.editor.selected.configurable" value="CocoaPods" />
   </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager" selected="Application.whatson">
     <configuration default="true" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="whatson" TARGET_NAME="whatson" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="whatson" RUN_TARGET_NAME="whatson" MAKE_ACTIVE="TRUE">
       <envs />
@@ -369,24 +354,8 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="Pods-whatson" type="AppleRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="Pods-whatson" CONFIG_NAME="Debug" SCHEME_NAME="Pods-whatson" MAKE_ACTIVE="TRUE">
-      <envs />
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method />
-    </configuration>
-    <configuration default="false" name="Pods-WhatsOnTests" type="AppleRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="Pods-WhatsOnTests" CONFIG_NAME="Debug" SCHEME_NAME="Pods-WhatsOnTests" MAKE_ACTIVE="TRUE">
-      <envs />
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method />
-    </configuration>
-    <list size="3">
+    <list size="1">
       <item index="0" class="java.lang.String" itemvalue="Application.whatson" />
-      <item index="1" class="java.lang.String" itemvalue="Application.Pods-whatson" />
-      <item index="2" class="java.lang.String" itemvalue="Application.Pods-WhatsOnTests" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
@@ -475,38 +444,49 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17663000" />
+    <option name="totallyTimeSpent" value="17833000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="10" y="23" width="1260" height="709" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24939467" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3265625" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3241491" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3273906" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3265625" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3273906" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3265625" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3273906" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3265625" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <MESSAGE value="Make ranges in a swifty way" />
     <MESSAGE value="Basic layout for options" />
     <MESSAGE value="Hiding ma privates" />
@@ -525,13 +505,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/whatson/SlotDetail.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/whatson/SlotCellStyle.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
@@ -557,7 +530,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -692,8 +664,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/whatson/EventDetailsViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1755">
-          <caret line="121" column="9" lean-forward="false" selection-start-line="121" selection-start-column="9" selection-end-line="121" selection-end-column="9" />
+        <state relative-caret-position="290">
+          <caret line="82" column="5" lean-forward="false" selection-start-line="82" selection-start-column="5" selection-end-line="82" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -778,7 +751,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="21" lean-forward="false" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -786,9 +758,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
           <caret line="28" column="5" lean-forward="false" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#17#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -796,7 +765,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="26" column="27" lean-forward="false" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -804,7 +772,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="30" column="24" lean-forward="false" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -843,7 +810,7 @@
     <entry file="file://$PROJECT_DIR$/whatson/WhatsOnViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1500">
-          <caret line="102" column="53" lean-forward="false" selection-start-line="102" selection-start-column="53" selection-end-line="102" selection-end-column="53" />
+          <caret line="102" column="39" lean-forward="false" selection-start-line="102" selection-start-column="39" selection-end-line="102" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -857,17 +824,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/whatson/SparseArray.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="84" column="16" lean-forward="false" selection-start-line="84" selection-start-column="16" selection-end-line="84" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Podfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="5" lean-forward="false" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="appcode.project-settings://ec27cb79">
       <provider selected="true" editor-type-id="AppCode.ProjectSettings">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/whatson/SparseArray.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2940">
-          <caret line="53" column="21" lean-forward="false" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
-          <folding />
-        </state>
       </provider>
     </entry>
   </component>
