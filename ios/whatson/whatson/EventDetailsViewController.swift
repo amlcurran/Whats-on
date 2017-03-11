@@ -58,10 +58,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         let previousItem = UINavigationItem()
         let navigationItem = UINavigationItem()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
-        navigationItem.rightBarButtonItems = [
-                UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteEventTapped)),
-                UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editEventTapped))
-        ]
+        navigationItem.rightBarButtonItems = actionItems()
         navBar.pushItem(previousItem, animated: false)
         navBar.pushItem(navigationItem, animated: false)
         navBar.delegate = self
@@ -76,6 +73,17 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     func updateUI() {
         detailsCard.set(event: event)
         responseView.set(event.response)
+    }
+
+    func actionItems() -> [UIBarButtonItem] {
+        if BuildConfig.isDebug() {
+            return [
+                UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteEventTapped)),
+                UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editEventTapped))
+            ]
+        } else {
+            return [UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteEventTapped))]
+        }
     }
 
     @objc private func backTapped() {

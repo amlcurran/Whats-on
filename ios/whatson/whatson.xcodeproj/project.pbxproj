@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		19B26691193D2CF98E39543F /* Pods_WhatsOnTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE94BF63C5CC68AC641A95DE /* Pods_WhatsOnTests.framework */; };
+		2DBA1A1D4FF1A6199AD9D4FA /* BuildConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1EBA1E19FC38477D7218 /* BuildConfig.swift */; };
 		698531761CD39981ABD5B75B /* Completion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853BE8F4A525FC03DF7E20 /* Completion.swift */; };
 		698533DEAF59954635D7E3CD /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985328C217A9C753C09CFDE /* Line.swift */; };
 		698538E5F918BCBD1F75C446 /* UserDefaultsTimeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */; };
@@ -80,6 +81,7 @@
 
 /* Begin PBXFileReference section */
 		1175B80F0FD97DA802FE2AB1 /* Pods-whatson.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whatson.debug.xcconfig"; path = "Pods/Target Support Files/Pods-whatson/Pods-whatson.debug.xcconfig"; sourceTree = "<group>"; };
+		2DBA1EBA1E19FC38477D7218 /* BuildConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildConfig.swift; sourceTree = "<group>"; };
 		4DB8059D3AAB19AFD5B4C782 /* Pods-whatson.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whatson.release.xcconfig"; path = "Pods/Target Support Files/Pods-whatson/Pods-whatson.release.xcconfig"; sourceTree = "<group>"; };
 		6985328C217A9C753C09CFDE /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		698532BD8B0E148238449902 /* String+Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 				69853E6065D4384CD18D05CB /* views */,
 				698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */,
 				6985358E9835009A7EA756E9 /* Analytics.swift */,
+				2DBA1EBA1E19FC38477D7218 /* BuildConfig.swift */,
 			);
 			path = whatson;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 				69853DBE93212578467A9402 /* String+Localization.swift in Sources */,
 				69853EDF767415596862180F /* Analytics.swift in Sources */,
 				698531761CD39981ABD5B75B /* Completion.swift in Sources */,
+				2DBA1A1D4FF1A6199AD9D4FA /* BuildConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
