@@ -4,7 +4,7 @@ import EventKitUI
 import MapKit
 import FirebaseAnalytics
 
-class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventViewDelegate, UINavigationBarDelegate, EventResponseViewDelegate, EKEventEditViewDelegate {
+class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventViewDelegate, UINavigationBarDelegate, EventResponseViewDelegate, EKEventEditViewDelegate, EventView {
 
     lazy var detailsCard: DetailsCard = DetailsCard()
     lazy var moreInfoButton = UIButton()
@@ -13,6 +13,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     lazy var responseView: EventResponseView = {
         return EventResponseView(delegate: self)
     }()
+    lazy var presenter: EventPresenter = EventPresenter(view: self)
 
     private let geocoder = CLGeocoder()
     private let event: EKEvent
@@ -199,16 +200,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     }
 
     func deleteEvent(span: EKSpan) {
-        let eventStore = EKEventStore.instance
-        do {
-            try eventStore.remove(event, span: span)
-            _ = navigationController?.popViewController(animated: true)
-        } catch {
-            print(error)
-            let errorView = UIAlertController(title: "An error occurred", message: "The event couldn't be deleted", preferredStyle: .alert)
-            errorView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(errorView, animated: true, completion: nil)
-        }
+        presenter.delete(event, spanning: span)
     }
 
     public func eventViewController(_ controller: EKEventViewController, didCompleteWith action: EKEventViewAction) {
@@ -225,6 +217,44 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     func changeResponse(to state: EventResponse) {
         print(state.asStatus)
     }
+
+    func eventDeleted() {
+        _ = navigationController?.popViewController(animated: true)
+    }
+
+    func showDeleteError() {
+        let errorView = UIAlertController(title: "An error occurred", message: "The event couldn't be deleted", preferredStyle: .alert)
+        errorView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(errorView, animated: true, completion: nil)
+    }
+
+}
+
+class EventPresenter {
+
+    private weak var view: EventView?
+
+    init(view: EventView) {
+        self.view = view
+    }
+
+    func delete(_ event: EKEvent, spanning span: EKSpan) {
+        let eventStore = EKEventStore.instance
+        do {
+            try eventStore.remove(event, span: span)
+            view?.eventDeleted()
+        } catch {
+            view?.showDeleteError()
+        }
+    }
+
+}
+
+protocol EventView: class {
+
+    func eventDeleted()
+
+    func showDeleteError()
 
 }
 
