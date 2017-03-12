@@ -178,24 +178,12 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         showDetailViewController(eventController, sender: self)
     }
 
-    func eventUpdated() {
-        if event.refresh() {
-            updateUI()
-            tracking.edited()
-        } else {
-            _ = navigationController?.popViewController(animated: true)
-            let errorView = UIAlertController(title: "An error occurred", message: "This event must be refreshed", preferredStyle: .alert)
-            errorView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(errorView, animated: true, completion: nil)
-        }
-    }
-
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         controller.dismiss(animated: true, completion: nil)
         if action == .deleted {
             _ = navigationController?.popViewController(animated: true)
         } else if action == .saved {
-            eventUpdated()
+            presenter.handleUpdates(from: event)
         }
     }
 
@@ -228,6 +216,18 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         present(errorView, animated: true, completion: nil)
     }
 
+    func eventUpdated() {
+        updateUI()
+        tracking.edited()
+    }
+
+    func failedToUpdate() {
+        _ = navigationController?.popViewController(animated: true)
+        let errorView = UIAlertController(title: "An error occurred", message: "This event must be refreshed", preferredStyle: .alert)
+        errorView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(errorView, animated: true, completion: nil)
+    }
+
 }
 
 class EventPresenter {
@@ -248,6 +248,14 @@ class EventPresenter {
         }
     }
 
+    func handleUpdates(from event: EKEvent) {
+        if event.refresh() {
+            view?.eventUpdated()
+        } else {
+            view?.failedToUpdate()
+        }
+    }
+
 }
 
 protocol EventView: class {
@@ -255,6 +263,10 @@ protocol EventView: class {
     func eventDeleted()
 
     func showDeleteError()
+
+    func eventUpdated()
+
+    func failedToUpdate()
 
 }
 
