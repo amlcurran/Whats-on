@@ -4,7 +4,7 @@ import EventKitUI
 import MapKit
 import FirebaseAnalytics
 
-class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventViewDelegate, UINavigationBarDelegate, EventResponseViewDelegate, EKEventEditViewDelegate {
+class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventViewDelegate, UINavigationBarDelegate, EventResponseViewDelegate, EKEventEditViewDelegate, EventView {
 
     lazy var detailsCard: DetailsCard = DetailsCard()
     lazy var moreInfoButton = UIButton()
@@ -13,6 +13,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     lazy var responseView: EventResponseView = {
         return EventResponseView(delegate: self)
     }()
+    lazy var presenter: EventPresenter = EventPresenter(view: self)
 
     private let geocoder = CLGeocoder()
     private let event: EKEvent
@@ -58,10 +59,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         let previousItem = UINavigationItem()
         let navigationItem = UINavigationItem()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
-        navigationItem.rightBarButtonItems = [
-                UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteEventTapped)),
-                UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editEventTapped))
-        ]
+        navigationItem.rightBarButtonItems = actionItems()
         navBar.pushItem(previousItem, animated: false)
         navBar.pushItem(navigationItem, animated: false)
         navBar.delegate = self
@@ -76,6 +74,17 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     func updateUI() {
         detailsCard.set(event: event)
         responseView.set(event.response)
+    }
+
+    func actionItems() -> [UIBarButtonItem] {
+        if BuildConfig.isDebug() {
+            return [
+                UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteEventTapped)),
+                UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editEventTapped))
+            ]
+        } else {
+            return [UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteEventTapped))]
+        }
     }
 
     @objc private func backTapped() {
@@ -169,39 +178,17 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         showDetailViewController(eventController, sender: self)
     }
 
-    func eventUpdated() {
-        if event.refresh() {
-            updateUI()
-            // cleverly reload location
-            tracking.edited()
-        } else {
-            _ = navigationController?.popViewController(animated: true)
-            let errorView = UIAlertController(title: "An error occurred", message: "This event must be refreshed", preferredStyle: .alert)
-            errorView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(errorView, animated: true, completion: nil)
-        }
-    }
-
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         controller.dismiss(animated: true, completion: nil)
         if action == .deleted {
             _ = navigationController?.popViewController(animated: true)
         } else if action == .saved {
-            eventUpdated()
+            presenter.handleUpdates(from: event)
         }
     }
 
     func deleteEvent(span: EKSpan) {
-        let eventStore = EKEventStore.instance
-        do {
-            try eventStore.remove(event, span: span)
-            _ = navigationController?.popViewController(animated: true)
-        } catch {
-            print(error)
-            let errorView = UIAlertController(title: "An error occurred", message: "The event couldn't be deleted", preferredStyle: .alert)
-            errorView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(errorView, animated: true, completion: nil)
-        }
+        presenter.delete(event, spanning: span)
     }
 
     public func eventViewController(_ controller: EKEventViewController, didCompleteWith action: EKEventViewAction) {
@@ -218,6 +205,68 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     func changeResponse(to state: EventResponse) {
         print(state.asStatus)
     }
+
+    func eventDeleted() {
+        _ = navigationController?.popViewController(animated: true)
+    }
+
+    func showDeleteError() {
+        let errorView = UIAlertController(title: "An error occurred", message: "The event couldn't be deleted", preferredStyle: .alert)
+        errorView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(errorView, animated: true, completion: nil)
+    }
+
+    func eventUpdated() {
+        updateUI()
+        tracking.edited()
+    }
+
+    func failedToUpdate() {
+        _ = navigationController?.popViewController(animated: true)
+        let errorView = UIAlertController(title: "An error occurred", message: "This event must be refreshed", preferredStyle: .alert)
+        errorView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(errorView, animated: true, completion: nil)
+    }
+
+}
+
+class EventPresenter {
+
+    private weak var view: EventView?
+
+    init(view: EventView) {
+        self.view = view
+    }
+
+    func delete(_ event: EKEvent, spanning span: EKSpan) {
+        let eventStore = EKEventStore.instance
+        do {
+            try eventStore.remove(event, span: span)
+            view?.eventDeleted()
+        } catch {
+            view?.showDeleteError()
+        }
+    }
+
+    func handleUpdates(from event: EKEvent) {
+        if event.refresh() {
+            view?.eventUpdated()
+        } else {
+            view?.failedToUpdate()
+        }
+    }
+
+}
+
+protocol EventView: class {
+
+    func eventDeleted()
+
+    func showDeleteError()
+
+    func eventUpdated()
+
+    func failedToUpdate()
 
 }
 
@@ -254,117 +303,6 @@ fileprivate extension UIImage {
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return img
-    }
-
-}
-
-class EventResponseView: UIStackView {
-
-    let acceptButton = UIButton()
-    let maybeButton = UIButton()
-    let declineButton = UIButton()
-    let selectedColor = UIColor.accent
-
-    private weak var delegate: EventResponseViewDelegate?
-
-    init(delegate: EventResponseViewDelegate) {
-        super.init(frame: .zero)
-        self.delegate = delegate
-        self.axis = .horizontal
-        self.distribution = .fillEqually
-        self.alignment = .center
-        acceptButton.setTitle("Accept", for: .normal)
-        self.addArrangedSubview(acceptButton)
-        acceptButton.addTarget(self, action: #selector(statusTapped), for: .touchUpInside)
-        maybeButton.setTitle("Maybe", for: .normal)
-        self.addArrangedSubview(maybeButton)
-        maybeButton.addTarget(self, action: #selector(statusTapped), for: .touchUpInside)
-        declineButton.setTitle("Decline", for: .normal)
-        self.addArrangedSubview(declineButton)
-        declineButton.addTarget(self, action: #selector(statusTapped), for: .touchUpInside)
-    }
-
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-
-    func statusTapped(button: UIButton) {
-        if button == acceptButton {
-            set(.accepted)
-            delegate?.changeResponse(to: .accepted)
-        } else if button == maybeButton {
-            set(.maybe)
-            delegate?.changeResponse(to: .maybe)
-        } else {
-            set(.declined)
-            delegate?.changeResponse(to: .declined)
-        }
-    }
-
-    func set(_ response: EventResponse) {
-        switch response {
-        case .accepted:
-            acceptButton.backgroundColor = selectedColor
-            declineButton.backgroundColor = .clear
-            maybeButton.backgroundColor = .clear
-        case .declined:
-            acceptButton.backgroundColor = .clear
-            declineButton.backgroundColor = selectedColor
-            maybeButton.backgroundColor = .clear
-        case .maybe:
-            acceptButton.backgroundColor = .clear
-            declineButton.backgroundColor = .clear
-            maybeButton.backgroundColor = selectedColor
-        case .none:
-            acceptButton.backgroundColor = .clear
-            declineButton.backgroundColor = .clear
-            maybeButton.backgroundColor = .clear
-        }
-    }
-
-}
-
-enum EventResponse {
-    case accepted
-    case declined
-    case maybe
-    case none
-
-    var asStatus: EKEventStatus {
-        switch self {
-        case .accepted:
-            return .confirmed
-        case .maybe:
-            return .tentative
-        case .declined:
-            return .canceled
-        case .none:
-            return .none
-        }
-    }
-}
-
-protocol EventResponseViewDelegate: class {
-    func changeResponse(to state: EventResponse)
-}
-
-extension EKEvent {
-
-    var response: EventResponse {
-        switch status {
-        case .confirmed:
-            return .accepted
-        case .canceled:
-            return .declined
-        case .tentative:
-            return .maybe
-        case .none:
-            return .none
-        }
-    }
-
-    var supportsResponses: Bool {
-        return isDetached && organizer != nil && !organizer!.isCurrentUser
     }
 
 }

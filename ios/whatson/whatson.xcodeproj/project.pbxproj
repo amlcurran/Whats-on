@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		19B26691193D2CF98E39543F /* Pods_WhatsOnTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE94BF63C5CC68AC641A95DE /* Pods_WhatsOnTests.framework */; };
+		2DBA13D585CE5E035AE263D4 /* EventResponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA11FDB477210F9D964D34 /* EventResponseView.swift */; };
+		2DBA1A1D4FF1A6199AD9D4FA /* BuildConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1EBA1E19FC38477D7218 /* BuildConfig.swift */; };
+		2DBA1FC7FB7A35811ADEDB84 /* EventResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA151F9881A527C9CC0A71 /* EventResponse.swift */; };
 		698531761CD39981ABD5B75B /* Completion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853BE8F4A525FC03DF7E20 /* Completion.swift */; };
 		698533DEAF59954635D7E3CD /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985328C217A9C753C09CFDE /* Line.swift */; };
 		698538E5F918BCBD1F75C446 /* UserDefaultsTimeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */; };
@@ -80,6 +83,9 @@
 
 /* Begin PBXFileReference section */
 		1175B80F0FD97DA802FE2AB1 /* Pods-whatson.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whatson.debug.xcconfig"; path = "Pods/Target Support Files/Pods-whatson/Pods-whatson.debug.xcconfig"; sourceTree = "<group>"; };
+		2DBA11FDB477210F9D964D34 /* EventResponseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventResponseView.swift; sourceTree = "<group>"; };
+		2DBA151F9881A527C9CC0A71 /* EventResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventResponse.swift; sourceTree = "<group>"; };
+		2DBA1EBA1E19FC38477D7218 /* BuildConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildConfig.swift; sourceTree = "<group>"; };
 		4DB8059D3AAB19AFD5B4C782 /* Pods-whatson.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whatson.release.xcconfig"; path = "Pods/Target Support Files/Pods-whatson/Pods-whatson.release.xcconfig"; sourceTree = "<group>"; };
 		6985328C217A9C753C09CFDE /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		698532BD8B0E148238449902 /* String+Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
@@ -285,6 +291,7 @@
 				69853E6065D4384CD18D05CB /* views */,
 				698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */,
 				6985358E9835009A7EA756E9 /* Analytics.swift */,
+				2DBA1EBA1E19FC38477D7218 /* BuildConfig.swift */,
 			);
 			path = whatson;
 			sourceTree = "<group>";
@@ -338,6 +345,8 @@
 				8648F18E1D984F6500C7BD48 /* EventDetailsTracking.swift */,
 				8609C5A31DB01AF100B44D76 /* EventDetailsPushTransition.swift */,
 				69853ADAFB0D8A57C40FC7BA /* DetailsCard.swift */,
+				2DBA11FDB477210F9D964D34 /* EventResponseView.swift */,
+				2DBA151F9881A527C9CC0A71 /* EventResponse.swift */,
 			);
 			name = "event details";
 			sourceTree = "<group>";
@@ -548,7 +557,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
 		};
 		8E906CF0277A271B756898B3 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -658,6 +667,9 @@
 				69853DBE93212578467A9402 /* String+Localization.swift in Sources */,
 				69853EDF767415596862180F /* Analytics.swift in Sources */,
 				698531761CD39981ABD5B75B /* Completion.swift in Sources */,
+				2DBA1A1D4FF1A6199AD9D4FA /* BuildConfig.swift in Sources */,
+				2DBA13D585CE5E035AE263D4 /* EventResponseView.swift in Sources */,
+				2DBA1FC7FB7A35811ADEDB84 /* EventResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -825,10 +837,18 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 3H3SBN3AYY;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleUtilities/Frameworks\"",
+					"${J2OBJC_HOME}/frameworks",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"${PODS_ROOT}/Firebase/Analytics/Sources",
-					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
 					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
@@ -836,15 +856,15 @@
 					"\"${PODS_ROOT}/Headers/Public/GoogleInterchangeUtilities\"",
 					"\"${PODS_ROOT}/Headers/Public/GoogleSymbolUtilities\"",
 					"\"${PODS_ROOT}/Headers/Public/GoogleUtilities\"",
-					./uk/co/amlcurran/social,
 				);
 				INFOPLIST_FILE = whatson/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				J2OBJC_HOME = ./j2objc;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(inherited)\"",
 					"\"$(PROJECT_DIR)/whatson\"",
-					"\"$(PROJECT_DIR)/j2objc/lib\"",
+					"${J2OBJC_HOME}/lib",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -874,8 +894,7 @@
 					"\"StoreKit\"",
 					"-framework",
 					"\"SystemConfiguration\"",
-					"-l",
-					jre_emul,
+					"-ljre_emul",
 					"-ljsr305",
 				);
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
@@ -885,7 +904,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "whatson-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
-				USER_HEADER_SEARCH_PATHS = "\"$(PROJECT_DIR)/j2objc/include\"/**";
+				USER_HEADER_SEARCH_PATHS = "\"${J2OBJC_HOME}/include\"/**";
 			};
 			name = Debug;
 		};
@@ -900,10 +919,18 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 3H3SBN3AYY;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleUtilities/Frameworks\"",
+					"${J2OBJC_HOME}/frameworks",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"${PODS_ROOT}/Firebase/Analytics/Sources",
-					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
 					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
@@ -911,15 +938,15 @@
 					"\"${PODS_ROOT}/Headers/Public/GoogleInterchangeUtilities\"",
 					"\"${PODS_ROOT}/Headers/Public/GoogleSymbolUtilities\"",
 					"\"${PODS_ROOT}/Headers/Public/GoogleUtilities\"",
-					./uk/co/amlcurran/social,
 				);
 				INFOPLIST_FILE = whatson/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				J2OBJC_HOME = ./j2objc;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(inherited)\"",
 					"\"$(PROJECT_DIR)/whatson\"",
-					"\"$(PROJECT_DIR)/j2objc/lib\"",
+					"${J2OBJC_HOME}/lib",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -949,8 +976,7 @@
 					"\"StoreKit\"",
 					"-framework",
 					"\"SystemConfiguration\"",
-					"-l",
-					jre_emul,
+					"-ljre_emul",
 					"-ljsr305",
 				);
 				OTHER_SWIFT_FLAGS = "";
@@ -960,7 +986,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "whatson-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
-				USER_HEADER_SEARCH_PATHS = "\"$(PROJECT_DIR)/j2objc/include\"/**";
+				USER_HEADER_SEARCH_PATHS = "\"${J2OBJC_HOME}/include\"/**";
 			};
 			name = Release;
 		};

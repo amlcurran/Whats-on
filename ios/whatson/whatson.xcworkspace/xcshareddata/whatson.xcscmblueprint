@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B81A7F0D60EA0B6BD062ABC653A3B082B572224A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "44D221F7591175A4A445187FEA95357B21A925E5" : 9223372036854775807,
+    "B81A7F0D60EA0B6BD062ABC653A3B082B572224A" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "24F426C7-C913-4506-8244-C0A26628F46E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "44D221F7591175A4A445187FEA95357B21A925E5" : "j2objc\/",
+    "B81A7F0D60EA0B6BD062ABC653A3B082B572224A" : "Social\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "whatson",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ios\/whatson\/whatson.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/google\/j2objc.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "44D221F7591175A4A445187FEA95357B21A925E5"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/amlcurran\/Social.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B81A7F0D60EA0B6BD062ABC653A3B082B572224A"
+    }
+  ]
+}
