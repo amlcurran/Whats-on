@@ -65,7 +65,7 @@ class DetailsCard: UIView {
         timingLabel.constrainToSuperview([.bottom], insetBy: 16)
     }
 
-    func showMap() {
+    func expandMap() {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + DispatchTimeInterval.seconds(1)) {
             self.mapHeightConstraint.constant = 160
             UIView.animate(withDuration: 0.2, animations: { [weak self] in
@@ -74,7 +74,7 @@ class DetailsCard: UIView {
         }
     }
 
-    func updateMap(location: CLLocation) {
+    func show(_ location: CLLocation) {
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let region = MKCoordinateRegion(center: location.coordinate, span: span)
         locationMapView.setRegion(region, animated: false)

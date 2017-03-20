@@ -3,6 +3,7 @@ import EventKit
 import EventKitUI
 import MapKit
 import FirebaseAnalytics
+import CoreLocation
 
 class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventViewDelegate, UINavigationBarDelegate, EventResponseViewDelegate, EKEventEditViewDelegate, EventView {
 
@@ -13,9 +14,8 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     lazy var responseView: EventResponseView = {
         return EventResponseView(delegate: self)
     }()
-    lazy var presenter: EventPresenter = EventPresenter(view: self)
+    lazy var presenter: EventPresenter = EventPresenter(view: self, geocoder: CLGeocoder())
 
-    private let geocoder = CLGeocoder()
     private let event: EKEvent
 
     convenience init?(item: SCCalendarItem) {
@@ -128,29 +128,8 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         moreInfoButton.constrain(.width, to: view, .width)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-
     private func loadLocation() {
-        if let location = event.structuredLocation?.geoLocation {
-            detailsCard.updateMap(location: location)
-        } else if let location = event.location, !location.isEmpty {
-            detailsCard.hideMap()
-            geocoder.geocodeAddressString(location, completionHandler:
-            when(successful: { [weak self] places in
-                self?.showLocationOnMap(places: places)
-            }, whenFailed: doNothing))
-        } else {
-            detailsCard.collapseMap()
-        }
-    }
-
-    private func showLocationOnMap(places: [CLPlacemark]) {
-        if let firstPlace = places.first, let location = firstPlace.location {
-            detailsCard.showMap()
-            detailsCard.updateMap(location: location)
-        }
+        presenter.loadLocation(from: event)
     }
 
     func moreInfoTapped() {
@@ -199,7 +178,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        geocoder.cancelGeocode()
+        presenter.stopPresenting()
     }
 
     func changeResponse(to state: EventResponse) {
@@ -228,14 +207,29 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         present(errorView, animated: true, completion: nil)
     }
 
+    func expandMap() {
+        detailsCard.expandMap()
+    }
+
+    func collapseMap() {
+        detailsCard.collapseMap()
+    }
+
+    func display(_ location: CLLocation) {
+        detailsCard.show(location)
+    }
+
 }
 
 class EventPresenter {
 
     private weak var view: EventView?
 
-    init(view: EventView) {
+    private let geocoder: CLGeocoder
+
+    init(view: EventView, geocoder: CLGeocoder) {
         self.view = view
+        self.geocoder = geocoder
     }
 
     func delete(_ event: EKEvent, spanning span: EKSpan) {
@@ -256,6 +250,27 @@ class EventPresenter {
         }
     }
 
+    func loadLocation(from event: EKEvent) {
+        if let location = event.structuredLocation?.geoLocation {
+            view?.display(location)
+        } else if let location = event.location, !location.isEmpty {
+            view?.collapseMap()
+            geocoder.geocodeAddressString(location, completionHandler:
+            when(successful: { [weak self] places in
+                if let firstPlace = places.first, let location = firstPlace.location {
+                    self?.view?.expandMap()
+                    self?.view?.display(location)
+                }
+            }, whenFailed: doNothing))
+        } else {
+            view?.collapseMap()
+        }
+    }
+
+    func stopPresenting() {
+        geocoder.cancelGeocode()
+    }
+
 }
 
 protocol EventView: class {
@@ -267,6 +282,12 @@ protocol EventView: class {
     func eventUpdated()
 
     func failedToUpdate()
+
+    func expandMap()
+
+    func collapseMap()
+
+    func display(_ location: CLLocation)
 
 }
 
