@@ -12,6 +12,7 @@ class DetailsCard: UIView {
     lazy var line = Line(height: 1, color: .cardDivider)
 
     var mapHeightConstraint: NSLayoutConstraint!
+    var timingTitleContraint: NSLayoutConstraint?
 
     func layout() {
         layer.cornerRadius = 6
@@ -24,7 +25,7 @@ class DetailsCard: UIView {
 
         addSubview(timingLabel)
         timingLabel.constrainToSuperview([.leading, .trailing], insetBy: 16)
-        timingLabel.constrain(.top, to: titleLabel, .bottom, withOffset: 8)
+        timingTitleContraint = timingLabel.constrain(.top, to: titleLabel, .bottom)
 
         addSubview(line)
         line.constrain(.width, to: self, .width)
@@ -81,6 +82,13 @@ class DetailsCard: UIView {
         let point = MKPointAnnotation()
         point.coordinate = location.coordinate
         locationMapView.addAnnotation(point)
+    }
+
+    func expandTitleAndTimeGap() {
+        timingTitleContraint?.constant = 8
+        UIView.animate(withDuration: 0.1, animations: { [weak self] in
+            self?.superview?.layoutIfNeeded()
+        })
     }
 
 }

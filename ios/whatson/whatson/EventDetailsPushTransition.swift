@@ -5,7 +5,7 @@ class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitionin
     var selectedIndexPath: IndexPath?
 
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.4
+        return 0.5
     }
 
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -13,7 +13,7 @@ class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitionin
                 let listVC = transitionContext.viewController(forKey: .from) as? WhatsOnViewController,
                 let detailVC = transitionContext.viewController(forKey: .to) as? EventDetailsViewController,
                 let indexPath = selectedIndexPath,
-                let row = listVC.tableView.cellForRow(at: indexPath)?.contentView.snapshotView(afterScreenUpdates: false),
+                let row = listVC.tableView.cellForRow(at: indexPath) as? CalendarSourceViewCell,
                 let fromView = transitionContext.view(forKey: .from),
                 let toView = transitionContext.view(forKey: .to) else {
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
@@ -21,26 +21,35 @@ class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitionin
             return
         }
 
-//        listVC.beginAppearanceTransition(false, animated: true)
-//        detailVC.beginAppearanceTransition(true, animated: true)
         detailVC.view.layoutIfNeeded()
+        row.layoutIfNeeded()
+        guard let rowCardSnapshot = row.roundedView.snapshotView(afterScreenUpdates: false) else {
+            print("grr")
+            return
+        }
 
         let container = transitionContext.containerView
+        let background = UIView(frame: container.frame)
+        background.backgroundColor = .windowBackground
         container.addSubview(fromView)
-        container.addSubview(row)
+        container.addSubview(background)
+        container.addSubview(rowCardSnapshot)
         container.addSubview(toView)
 
         toView.alpha = 0
-        row.frame = listVC.tableView.convert(listVC.tableView.rectForRow(at: indexPath), to: nil)
+        background.alpha = 0
+        rowCardSnapshot.frame = row.convert(row.roundedView.frame, to: nil)
 
-        UIView.animate(withDuration: 0.2, animations: {
-            row.frame.origin.y = detailVC.detailsCard.convert(detailVC.detailsCard.frame.origin, to: nil).y
+        UIView.animate(withDuration: 0.3, delay: 0, options: [UIViewAnimationOptions.curveEaseInOut], animations: {
+            background.alpha = 1
+            rowCardSnapshot.frame.origin.y = detailVC.detailsCard.convert(detailVC.detailsCard.frame.origin, to: nil).y + 12
         }) { _ in
             UIView.animate(withDuration: 0.2, animations: {
                 toView.alpha = 1
             }, completion: { _ in
-//                listVC.endAppearanceTransition()
-//                detailVC.endAppearanceTransition()
+                rowCardSnapshot.removeFromSuperview()
+                fromView.removeFromSuperview()
+                detailVC.detailsCard.expandTitleAndTimeGap()
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
             })
         }
