@@ -8,7 +8,8 @@ class WhatsOnViewController: UIViewController,
         WhatsOnPresenterDelegate,
         CalendarDataSourceDelegate,
         HeaderViewDelegate,
-        UIGestureRecognizerDelegate {
+        UIGestureRecognizerDelegate,
+        UINavigationControllerDelegate {
 
     private let dateFormatter = DateFormatter(dateFormat: "EEE")
     private let eventStore = EKEventStore.instance
@@ -119,7 +120,9 @@ class WhatsOnViewController: UIViewController,
     }
 
     func showDetails(for item: SCEventCalendarItem) {
-        navigationController?.pushViewController(EventDetailsViewController(eventItem: item), animated: true)
+        let controller = EventDetailsViewController(eventItem: item)
+        navigationController?.delegate = self
+        navigationController?.pushViewController(controller, animated: true)
     }
 
     // MARK: - edit view delegate
@@ -127,6 +130,14 @@ class WhatsOnViewController: UIViewController,
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         navigationController?.dismiss(animated: true, completion: nil)
     }
+
+    public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if operation == .push && toVC is EventDetailsViewController && BuildConfig.isDebug() {
+            return pushDelegate
+        }
+        return nil
+    }
+
 
     // MARK: - peek and pop
 
