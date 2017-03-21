@@ -17,20 +17,18 @@ class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitionin
                 let fromView = transitionContext.view(forKey: .from),
                 let toView = transitionContext.view(forKey: .to) else {
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-            print("ruh roh")
             return
         }
 
         detailVC.view.layoutIfNeeded()
         row.layoutIfNeeded()
+
         guard let rowCardSnapshot = row.roundedView.snapshotView(afterScreenUpdates: false) else {
-            print("grr")
             return
         }
 
         let container = transitionContext.containerView
-        let background = UIView(frame: container.frame)
-        background.backgroundColor = .windowBackground
+        let background = UIView(frame: container.frame, color: .windowBackground)
         container.addSubview(fromView)
         container.addSubview(background)
         container.addSubview(rowCardSnapshot)
@@ -49,6 +47,7 @@ class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitionin
             }, completion: { _ in
                 rowCardSnapshot.removeFromSuperview()
                 fromView.removeFromSuperview()
+                background.removeFromSuperview()
                 detailVC.detailsCard.expandTitleAndTimeGap()
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
             })
@@ -66,6 +65,11 @@ extension UIView {
         set {
             transform = CGAffineTransform(scaleX: 1, y: newValue)
         }
+    }
+
+    convenience init(frame: CGRect, color: UIColor) {
+        self.init(frame: frame)
+        self.backgroundColor = color
     }
 
 }
