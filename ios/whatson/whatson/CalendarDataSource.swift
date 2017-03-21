@@ -46,7 +46,7 @@ class CalendarDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
             guard let item = item as? SCEventCalendarItem else {
                 preconditionFailure("Item isn't empty, but isn't event")
             }
-            delegate?.showDetails(for: item)
+            delegate?.showDetails(for: item, at: indexPath)
         }
     }
 
@@ -55,5 +55,5 @@ class CalendarDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
 protocol CalendarDataSourceDelegate: class {
     func addEvent(for item: SCCalendarItem)
 
-    func showDetails(for item: SCEventCalendarItem)
+    func showDetails(for item: SCEventCalendarItem, at indexPath: IndexPath)
 }

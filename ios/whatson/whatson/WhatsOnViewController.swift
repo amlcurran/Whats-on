@@ -13,7 +13,7 @@ class WhatsOnViewController: UIViewController,
 
     private let dateFormatter = DateFormatter(dateFormat: "EEE")
     private let eventStore = EKEventStore.instance
-    private let tableView = UITableView()
+     let tableView = UITableView()
     private let timeRepo = TimeRepository()
     private let pushDelegate = EventDetailsPushTransition()
 
@@ -119,8 +119,9 @@ class WhatsOnViewController: UIViewController,
         navigationController?.present(EKEventEditViewController(calendarItem: item, delegate: self), animated: true, completion: nil)
     }
 
-    func showDetails(for item: SCEventCalendarItem) {
+    func showDetails(for item: SCEventCalendarItem, at indexPath: IndexPath) {
         let controller = EventDetailsViewController(eventItem: item)
+        pushDelegate.selectedIndexPath = indexPath
         navigationController?.delegate = self
         navigationController?.pushViewController(controller, animated: true)
     }
