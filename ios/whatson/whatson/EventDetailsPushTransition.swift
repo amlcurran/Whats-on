@@ -28,30 +28,28 @@ class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitionin
         }
 
         let container = transitionContext.containerView
-        let background = UIView(frame: container.frame, color: .windowBackground)
+        let backgroundView = UIView(frame: container.frame, color: .windowBackground)
         container.addSubview(fromView)
-        container.addSubview(background)
+        container.addSubview(backgroundView)
         container.addSubview(rowCardSnapshot)
         container.addSubview(toView)
 
         toView.alpha = 0
-        background.alpha = 0
+        backgroundView.alpha = 0
         rowCardSnapshot.frame = row.convert(row.roundedView.frame, to: nil)
 
-        UIView.animate(withDuration: 0.3, delay: 0, options: [UIViewAnimationOptions.curveEaseInOut], animations: {
-            background.alpha = 1
+        UIView.animate(withDuration: 0.3, {
+            backgroundView.alpha = 1
             rowCardSnapshot.frame.origin.y = detailVC.detailsCard.convert(detailVC.detailsCard.frame.origin, to: nil).y + 12
-        }) { _ in
-            UIView.animate(withDuration: 0.2, animations: {
-                toView.alpha = 1
-            }, completion: { _ in
-                rowCardSnapshot.removeFromSuperview()
-                fromView.removeFromSuperview()
-                background.removeFromSuperview()
-                detailVC.detailsCard.expandTitleAndTimeGap()
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-            })
-        }
+        }).then({
+            toView.alpha = 1
+        }).then({
+            rowCardSnapshot.removeFromSuperview()
+            fromView.removeFromSuperview()
+            backgroundView.removeFromSuperview()
+            detailVC.detailsCard.expandTitleAndTimeGap()
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+        })
     }
 
 }
@@ -70,6 +68,37 @@ extension UIView {
     convenience init(frame: CGRect, color: UIColor) {
         self.init(frame: frame)
         self.backgroundColor = color
+    }
+
+}
+
+extension UIView {
+
+    static func animate(withDuration duration: TimeInterval, _ animations: @escaping (() -> Void)) -> Completable {
+        let completable = Completable()
+        UIView.animate(withDuration: duration, animations: animations, completion: { success in
+            completable.completion?()
+        })
+        return completable
+    }
+
+    func fadeIn() {
+        alpha = 1
+    }
+
+}
+
+class Completable {
+
+    var completion: (() -> Void)? = nil
+
+    @discardableResult func then(_ completion: @escaping (() -> Void)) -> Completable {
+        let completable = Completable()
+        self.completion = {
+            completion()
+            completable.completion?()
+        }
+        return completable
     }
 
 }
