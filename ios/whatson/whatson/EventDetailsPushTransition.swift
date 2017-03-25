@@ -1,11 +1,14 @@
 import UIKit
 
+private let slideDuration: TimeInterval = 0.2
+private let alphaDuration: TimeInterval = 0.2
+
 class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitioning {
 
     var selectedIndexPath: IndexPath?
 
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.5
+        return slideDuration + alphaDuration
     }
 
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -36,34 +39,27 @@ class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitionin
 
         toView.alpha = 0
         backgroundView.alpha = 0
-        rowCardSnapshot.frame = row.convert(row.roundedView.frame, to: nil)
+        rowCardSnapshot.frame = row.absoluteFrame(of: row.roundedView)
 
-        UIView.animate(withDuration: 0.3, {
+        UIView.animate(withDuration: slideDuration, animations: {
             backgroundView.alpha = 1
-            rowCardSnapshot.frame.origin.y = detailVC.detailsCard.convert(detailVC.detailsCard.frame.origin, to: nil).y + 12
-        }).then({
-            toView.alpha = 1
-        }).then({
-            rowCardSnapshot.removeFromSuperview()
-            fromView.removeFromSuperview()
-            backgroundView.removeFromSuperview()
-            detailVC.detailsCard.expandTitleAndTimeGap()
-            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+            rowCardSnapshot.frame.origin.y = detailVC.detailsCard.absoluteFrame().origin.y + 12
+        }, completion: { _ in
+            UIView.animate(withDuration: alphaDuration, animations: {
+                toView.alpha = 1
+            }, completion: { _ in
+                rowCardSnapshot.removeFromSuperview()
+                fromView.removeFromSuperview()
+                backgroundView.removeFromSuperview()
+                detailVC.detailsCard.expandTitleAndTimeGap()
+                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+            })
         })
     }
 
 }
 
 extension UIView {
-
-    var scaleY: CGFloat {
-        get {
-            return transform.d
-        }
-        set {
-            transform = CGAffineTransform(scaleX: 1, y: newValue)
-        }
-    }
 
     convenience init(frame: CGRect, color: UIColor) {
         self.init(frame: frame)
@@ -74,31 +70,12 @@ extension UIView {
 
 extension UIView {
 
-    static func animate(withDuration duration: TimeInterval, _ animations: @escaping (() -> Void)) -> Completable {
-        let completable = Completable()
-        UIView.animate(withDuration: duration, animations: animations, completion: { success in
-            completable.completion?()
-        })
-        return completable
+    func absoluteFrame(of view: UIView) -> CGRect {
+        return convert(view.frame, to: nil)
     }
 
-    func fadeIn() {
-        alpha = 1
-    }
-
-}
-
-class Completable {
-
-    var completion: (() -> Void)? = nil
-
-    @discardableResult func then(_ completion: @escaping (() -> Void)) -> Completable {
-        let completable = Completable()
-        self.completion = {
-            completion()
-            completable.completion?()
-        }
-        return completable
+    func absoluteFrame() -> CGRect {
+        return absoluteFrame(of: self)
     }
 
 }
