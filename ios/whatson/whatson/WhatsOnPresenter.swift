@@ -4,49 +4,51 @@ import EventKitUI
 
 class WhatsOnPresenter {
 
-    let eventStore: EKEventStore
-    let eventService: SCEventsService
-    private weak var delegate: WhatsOnPresenterDelegate?
+    private let eventStore: EKEventStore
+    private let eventService: SCEventsService
+    private let dataProvider: DataProvider
+    private weak var view: WhatsOnPresenterView?
 
-    init(eventStore: EKEventStore, eventService: SCEventsService) {
+    init(eventStore: EKEventStore, eventService: SCEventsService, dataProvider: DataProvider) {
         self.eventStore = eventStore
         self.eventService = eventService
+        self.dataProvider = dataProvider
     }
 
-    func beginPresenting(_ delegate: WhatsOnPresenterDelegate) {
-        self.delegate = delegate
+    func beginPresenting(on view: WhatsOnPresenterView) {
+        self.view = view
         eventStore.requestAccess(to: .event) { [weak self] (hasAccess, error) in
             if hasAccess {
                 self?.refreshEvents()
-            } else if let error = error {
-                self?.delegate?.failedToAccessCalendar(error as NSError)
+            } else if let _ = error {
+                self?.view?.showAccessFailure()
             }
         }
     }
 
     func stopPresenting() {
-        self.delegate = nil
+        self.view = nil
     }
 
     func refreshEvents() {
         fetchEvents({ [weak self] (source) in
-            self?.delegate?.didUpdateSource(source)
+            self?.view?.showCalendar(source)
         })
     }
 
     private func fetchEvents(_ completion: @escaping ((SCCalendarSource) -> Void)) {
         DispatchQueue.global(qos: .default).async {
-                    let source = self.eventService.getCalendarSource(with: 14, with: .now)
-                    DispatchQueue.main.async {
-                        completion(source)
-                    }
-                }
+            let source = self.eventService.getCalendarSource(with: 14, with: .now)
+            DispatchQueue.main.async {
+                completion(source)
+            }
+        }
     }
 
 }
 
-protocol WhatsOnPresenterDelegate: class {
-    func didUpdateSource(_ source: SCCalendarSource)
+protocol WhatsOnPresenterView: class {
+    func showCalendar(_ source: SCCalendarSource)
 
-    func failedToAccessCalendar(_ error: NSError)
+    func showAccessFailure()
 }

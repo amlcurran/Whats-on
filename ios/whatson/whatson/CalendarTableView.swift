@@ -1,13 +1,18 @@
 import UIKit
 
-class CalendarDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
+class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
 
     private let dataProvider: DataProvider
-    private weak var delegate: CalendarDataSourceDelegate?
+    private weak var tableView: UITableView?
+    private weak var delegate: CalendarTableViewDelegate?
 
-    init(delegate: CalendarDataSourceDelegate, dataProvider: DataProvider) {
+    init(delegate: CalendarTableViewDelegate, dataProvider: DataProvider, tableView: UITableView) {
         self.delegate = delegate
+        self.tableView = tableView
         self.dataProvider = dataProvider
+        super.init()
+        tableView.dataSource = self
+        tableView.delegate = self
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -16,8 +21,7 @@ class CalendarDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
                 let slot = dataProvider.slot(at: indexPath) else {
             preconditionFailure("Tried to dequeue a cell which wasn't a Calendar cell")
         }
-        cell.bind(item, slot: slot)
-        return cell
+        return cell.bound(to: item, slot: slot)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -26,6 +30,7 @@ class CalendarDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
 
     func update(_ source: SCCalendarSource) {
         dataProvider.update(from: source)
+        tableView?.reloadData()
     }
 
     func item(at index: IndexPath) -> SCCalendarItem? {
@@ -48,39 +53,8 @@ class CalendarDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
 
 }
 
-protocol CalendarDataSourceDelegate: class {
+protocol CalendarTableViewDelegate: class {
     func addEvent(for item: SCCalendarItem)
 
     func showDetails(for item: SCEventCalendarItem, at indexPath: IndexPath)
-}
-
-class DataProvider: NSObject {
-
-    private var items: [SCCalendarItem?] = []
-    private var slots: [SCCalendarSlot] = []
-
-    var count: Int {
-        get {
-            return slots.count
-        }
-    }
-
-    func update(from source: SCCalendarSource) {
-        items.removeAll()
-        slots.removeAll()
-        let sourceCount = Int(source.count())
-        for i in 0 ..< sourceCount {
-            items.append(source.itemAt(with: jint(i)))
-            slots.append(source.slotAt(with: jint(i)))
-        }
-    }
-
-    func item(at indexPath: IndexPath) -> SCCalendarItem? {
-        return items[indexPath.row]
-    }
-
-    func slot(at indexPath: IndexPath) -> SCCalendarSlot? {
-        return slots[indexPath.row]
-    }
-
 }

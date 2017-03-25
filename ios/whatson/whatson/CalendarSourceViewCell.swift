@@ -89,7 +89,7 @@ class CalendarSourceViewCell: UITableViewCell {
         }
     }
 
-    func bind(_ item: SCCalendarItem, slot: SCCalendarSlot?) {
+    func bound(to item: SCCalendarItem, slot: SCCalendarSlot?) -> Self {
         if slot?.isEmpty() ?? true {
             type = .empty
             eventLabel.text = "Add event"
@@ -100,6 +100,7 @@ class CalendarSourceViewCell: UITableViewCell {
         let startTime = timeFormatter.string(from: timeCalculator.date(item.startTime()))
         secondaryLabel.text = String(format: "From %@", startTime)
         dayLabel.text = dayFormatter.string(from: Date.dateFromTime(item.startTime()))
+        return self
     }
 
 }

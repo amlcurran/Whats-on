@@ -5,8 +5,8 @@ import EventKitUI
 class WhatsOnViewController: UIViewController,
         EKEventEditViewDelegate,
         UIViewControllerPreviewingDelegate,
-        WhatsOnPresenterDelegate,
-        CalendarDataSourceDelegate,
+        WhatsOnPresenterView,
+        CalendarTableViewDelegate,
         HeaderViewDelegate,
         UIGestureRecognizerDelegate,
         UINavigationControllerDelegate {
@@ -22,8 +22,8 @@ class WhatsOnViewController: UIViewController,
     private var eventService: SCEventsService!
     private var failedAccessView: UIView?
 
-    lazy var dataSource: CalendarDataSource = {
-        return CalendarDataSource(delegate: self, dataProvider: self.dataProvider)
+    lazy var table: CalendarTableView = {
+        return CalendarTableView(delegate: self, dataProvider: self.dataProvider, tableView: self.tableView)
     }()
 
     override func viewDidLoad() {
@@ -38,14 +38,12 @@ class WhatsOnViewController: UIViewController,
 
         let eventRepo = EventStoreRepository(timeRepository: timeRepo)
         eventService = SCEventsService(scTimeRepository: timeRepo, with: eventRepo, with: NSDateCalculator.instance)
-        presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService)
+        presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService, dataProvider: dataProvider)
 
         let header = HeaderView(delegate: self)
         anchor(header)
 
         styleTable(offsetAgainst: header)
-        tableView.delegate = dataSource
-        tableView.dataSource = dataSource
 
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController?.interactivePopGestureRecognizer?.delegate = self
@@ -102,7 +100,7 @@ class WhatsOnViewController: UIViewController,
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(eventsChanged), name: NSNotification.Name.EKEventStoreChanged, object: eventStore)
-        presenter.beginPresenting(self)
+        presenter.beginPresenting(on: self)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -145,7 +143,7 @@ class WhatsOnViewController: UIViewController,
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard let indexPath = tableView.indexPathForRow(at: location),
               let cell = tableView.cellForRow(at: indexPath),
-              let item = dataSource.item(at: indexPath) else {
+              let item = table.item(at: indexPath) else {
             return nil
         }
 
@@ -162,16 +160,15 @@ class WhatsOnViewController: UIViewController,
         navigationController?.pushViewController(viewControllerToCommit, animated: true)
     }
 
-    func didUpdateSource(_ source: SCCalendarSource) {
-        dataSource.update(source)
-        tableView.reloadData()
+    func showCalendar(_ source: SCCalendarSource) {
+        table.update(source)
         failedAccessView?.alpha = 0
         failedAccessView?.isUserInteractionEnabled = false
         tableView.alpha = 1
         tableView.isUserInteractionEnabled = true
     }
 
-    func failedToAccessCalendar(_ error: NSError) {
+    func showAccessFailure() {
         failedAccessView?.alpha = 1
         failedAccessView?.isUserInteractionEnabled = true
         tableView.alpha = 0
