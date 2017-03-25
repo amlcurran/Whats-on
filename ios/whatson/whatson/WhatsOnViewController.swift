@@ -15,7 +15,7 @@ class WhatsOnViewController: UIViewController,
     private let eventStore = EKEventStore.instance
      let tableView = UITableView()
     private let timeRepo = TimeRepository()
-    private let pushDelegate = EventDetailsPushTransition()
+    private let pushTransition = EventDetailsPushTransition()
 
     private var presenter: WhatsOnPresenter!
     private var eventService: SCEventsService!
@@ -121,7 +121,7 @@ class WhatsOnViewController: UIViewController,
 
     func showDetails(for item: SCEventCalendarItem, at indexPath: IndexPath) {
         let controller = EventDetailsViewController(eventItem: item)
-        pushDelegate.selectedIndexPath = indexPath
+        pushTransition.selectedIndexPath = indexPath
         navigationController?.delegate = self
         navigationController?.pushViewController(controller, animated: true)
     }
@@ -134,11 +134,10 @@ class WhatsOnViewController: UIViewController,
 
     public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         if operation == .push && toVC is EventDetailsViewController && BuildConfig.isDebug() {
-            return pushDelegate
+            return pushTransition
         }
         return nil
     }
-
 
     // MARK: - peek and pop
 
