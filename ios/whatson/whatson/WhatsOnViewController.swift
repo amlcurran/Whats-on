@@ -13,7 +13,8 @@ class WhatsOnViewController: UIViewController,
 
     private let dateFormatter = DateFormatter(dateFormat: "EEE")
     private let eventStore = EKEventStore.instance
-     let tableView = UITableView()
+    let tableView = UITableView()
+    private let dataProvider = DataProvider()
     private let timeRepo = TimeRepository()
     private let pushTransition = EventDetailsPushTransition()
 
@@ -22,7 +23,7 @@ class WhatsOnViewController: UIViewController,
     private var failedAccessView: UIView?
 
     lazy var dataSource: CalendarDataSource = {
-        return CalendarDataSource(delegate: self)
+        return CalendarDataSource(delegate: self, dataProvider: self.dataProvider)
     }()
 
     override func viewDidLoad() {
@@ -153,9 +154,7 @@ class WhatsOnViewController: UIViewController,
         if item.isEmpty() {
             return nil
         } else {
-            let details = EventDetailsViewController(item: item)
-            details?.preferredContentSize = view.frame.size
-            return details
+            return EventDetailsViewController(item: item)
         }
     }
 
