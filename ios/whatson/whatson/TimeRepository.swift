@@ -3,15 +3,14 @@ import UIKit
 class TimeRepository: NSObject, SCTimeRepository {
 
     let calculator = NSDateCalculator.instance
+    let timeStore = UserDefaultsTimeStore()
 
     func borderTimeStart() -> SCTimeOfDay {
-        let hours = UserDefaults.standard.string(forKey: "startHour").flatMap({ Int32($0) })
-        return SCTimeOfDay.fromHours(with: hours.or(18))
+        return SCTimeOfDay.fromHours(with: Int32(timeStore.startTime))
     }
 
     func borderTimeEnd() -> SCTimeOfDay {
-        let hours = UserDefaults.standard.string(forKey: "endHour").flatMap({ Int32($0) })
-        return SCTimeOfDay.fromHours(with: hours.or(23))
+        return SCTimeOfDay.fromHours(with: Int32(timeStore.endTime))
     }
 
 }
