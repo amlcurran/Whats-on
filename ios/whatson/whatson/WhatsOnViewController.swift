@@ -8,7 +8,6 @@ class WhatsOnViewController: UIViewController,
         WhatsOnPresenterView,
         CalendarTableViewDelegate,
         HeaderViewDelegate,
-        UIGestureRecognizerDelegate,
         UINavigationControllerDelegate {
 
     private let dateFormatter = DateFormatter(dateFormat: "EEE")
@@ -18,6 +17,7 @@ class WhatsOnViewController: UIViewController,
     private let timeRepo = TimeRepository()
     private let pushTransition = EventDetailsPushTransition()
     private let failedAccessView = FailedAccessView()
+    private let gestureHandler = AllowsGestureRecognizer()
 
     private var presenter: WhatsOnPresenter!
     private var eventService: SCEventsService!
@@ -46,7 +46,7 @@ class WhatsOnViewController: UIViewController,
         styleTable(offsetAgainst: header)
 
         navigationController?.setNavigationBarHidden(true, animated: false)
-        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        navigationController?.interactivePopGestureRecognizer?.delegate = gestureHandler
     }
 
     private func anchor(_ header: UIView) {
@@ -62,7 +62,7 @@ class WhatsOnViewController: UIViewController,
         mainView.constrainToTopLayoutGuide(of: self)
 
         mainView.add(tableView, constrainedTo: [.leading, .top, .trailing, .bottom])
-        mainView.add(failedAccessView!, constrainedTo: [.leading, .top, .trailing, .bottom])
+        mainView.add(failedAccessView, constrainedTo: [.leading, .top, .trailing, .bottom])
     }
 
     private func styleTable(offsetAgainst header: HeaderView) {
@@ -152,25 +152,21 @@ class WhatsOnViewController: UIViewController,
 
     func showCalendar(_ source: SCCalendarSource) {
         table.update(source)
-        failedAccessView?.alpha = 0
-        failedAccessView?.isUserInteractionEnabled = false
+        failedAccessView.alpha = 0
+        failedAccessView.isUserInteractionEnabled = false
         tableView.alpha = 1
         tableView.isUserInteractionEnabled = true
     }
 
     func showAccessFailure() {
-        failedAccessView?.alpha = 1
-        failedAccessView?.isUserInteractionEnabled = true
+        failedAccessView.alpha = 1
+        failedAccessView.isUserInteractionEnabled = true
         tableView.alpha = 0
         tableView.isUserInteractionEnabled = false
     }
 
     func failedToDelete(_ event: SCCalendarItem, withError error: Error) {
 
-    }
-
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
     }
 
 }
