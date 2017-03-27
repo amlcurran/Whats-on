@@ -29,8 +29,12 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
     }
 
     func update(_ source: SCCalendarSource) {
-        dataProvider.update(from: source)
-        tableView?.reloadData()
+        let indexes = dataProvider.update(from: source)
+        if indexes.count > 0 {
+            tableView?.reloadRows(at: indexes, with: .automatic)
+        } else {
+            tableView?.reloadData()
+        }
     }
 
     func item(at index: IndexPath) -> SCCalendarItem? {
