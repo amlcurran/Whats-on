@@ -125,6 +125,16 @@ class WhatsOnViewController: UIViewController,
         navigationController?.pushViewController(controller, animated: true)
     }
 
+    func remove(_ event: SCEventCalendarItem) {
+        do {
+            if let ekEvent = EKEventStore.instance.event(withIdentifier: event.id__()) {
+                try EKEventStore.instance.remove(ekEvent, span: .thisEvent)
+            }
+        } catch {
+            print("ruh roh")
+        }
+    }
+
     // MARK: - edit view delegate
 
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {

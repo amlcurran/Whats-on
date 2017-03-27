@@ -28,6 +28,18 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
         return dataProvider.count
     }
 
+    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        if let slot = dataProvider.slot(at: indexPath),
+           slot.count() != 0,
+           let slotItem = dataProvider.item(at: indexPath) as? SCEventCalendarItem {
+            return [UITableViewRowAction(style: .destructive, title: "Delete", handler: { [weak self] action, path in
+                self?.delegate?.remove(slotItem)
+             })]
+        }
+        return nil
+    }
+
+
     func update(_ source: SCCalendarSource) {
         let indexes = dataProvider.update(from: source)
         if indexes.count > 0 {
@@ -61,4 +73,6 @@ protocol CalendarTableViewDelegate: class {
     func addEvent(for item: SCCalendarItem)
 
     func showDetails(for item: SCEventCalendarItem, at indexPath: IndexPath)
+
+    func remove(_ event: SCEventCalendarItem)
 }
