@@ -126,13 +126,7 @@ class WhatsOnViewController: UIViewController,
     }
 
     func remove(_ event: SCEventCalendarItem) {
-        do {
-            if let ekEvent = EKEventStore.instance.event(withIdentifier: event.id__()) {
-                try EKEventStore.instance.remove(ekEvent, span: .thisEvent)
-            }
-        } catch {
-            print("ruh roh")
-        }
+        presenter.remove(event)
     }
 
     // MARK: - edit view delegate
@@ -183,6 +177,10 @@ class WhatsOnViewController: UIViewController,
         failedAccessView?.isUserInteractionEnabled = true
         tableView.alpha = 0
         tableView.isUserInteractionEnabled = false
+    }
+
+    func failedToDelete(_ event: SCCalendarItem, withError error: Error) {
+
     }
 
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {

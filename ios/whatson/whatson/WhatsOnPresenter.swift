@@ -45,10 +45,22 @@ class WhatsOnPresenter {
         }
     }
 
+    func remove(_ event: SCEventCalendarItem) {
+        do {
+            if let ekEvent = eventStore.event(withIdentifier: event.id__()) {
+                try eventStore.remove(ekEvent, span: .thisEvent)
+            }
+        } catch {
+            view?.failedToDelete(event, withError: error)
+        }
+    }
+
 }
 
 protocol WhatsOnPresenterView: class {
     func showCalendar(_ source: SCCalendarSource)
 
     func showAccessFailure()
+
+    func failedToDelete(_ event: SCCalendarItem, withError error: Error)
 }
