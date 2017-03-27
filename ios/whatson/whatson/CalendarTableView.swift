@@ -17,10 +17,11 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "day", for: indexPath) as? CalendarSourceViewCell,
-                let item = dataProvider.item(at: indexPath) else {
+                let item = dataProvider.item(at: indexPath),
+                let slot = dataProvider.slot(at: indexPath) else {
             preconditionFailure("Tried to dequeue a cell which wasn't a Calendar cell")
         }
-        return cell.bound(to: item, slot: dataProvider.slot(at: indexPath))
+        return cell.bound(to: item, slot: slot)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
