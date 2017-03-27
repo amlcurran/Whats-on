@@ -12,6 +12,7 @@
 		2DBA1A1D4FF1A6199AD9D4FA /* BuildConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1EBA1E19FC38477D7218 /* BuildConfig.swift */; };
 		2DBA1FC7FB7A35811ADEDB84 /* EventResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA151F9881A527C9CC0A71 /* EventResponse.swift */; };
 		698531761CD39981ABD5B75B /* Completion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853BE8F4A525FC03DF7E20 /* Completion.swift */; };
+		6985330727D25CE189AC7193 /* FailedAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985333EBC410C0E8F45C969 /* FailedAccessView.swift */; };
 		698533DEAF59954635D7E3CD /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985328C217A9C753C09CFDE /* Line.swift */; };
 		6985372A302EA91FAB612301 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698536C18C7A4E830F167DAE /* DataProvider.swift */; };
 		698538E5F918BCBD1F75C446 /* UserDefaultsTimeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */; };
@@ -90,6 +91,7 @@
 		4DB8059D3AAB19AFD5B4C782 /* Pods-whatson.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whatson.release.xcconfig"; path = "Pods/Target Support Files/Pods-whatson/Pods-whatson.release.xcconfig"; sourceTree = "<group>"; };
 		6985328C217A9C753C09CFDE /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		698532BD8B0E148238449902 /* String+Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
+		6985333EBC410C0E8F45C969 /* FailedAccessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailedAccessView.swift; sourceTree = "<group>"; };
 		6985358E9835009A7EA756E9 /* Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		698536C18C7A4E830F167DAE /* DataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsTimeStore.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				8695D0321DA1A2A20034D52A /* SlotDetail.swift */,
 				86A9E4561DA7A7DC00E8D019 /* CalendarTableView.swift */,
 				698536C18C7A4E830F167DAE /* DataProvider.swift */,
+				6985333EBC410C0E8F45C969 /* FailedAccessView.swift */,
 			);
 			name = "day list";
 			sourceTree = "<group>";
@@ -674,6 +677,7 @@
 				2DBA13D585CE5E035AE263D4 /* EventResponseView.swift in Sources */,
 				2DBA1FC7FB7A35811ADEDB84 /* EventResponse.swift in Sources */,
 				6985372A302EA91FAB612301 /* DataProvider.swift in Sources */,
+				6985330727D25CE189AC7193 /* FailedAccessView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,10 +17,10 @@ class WhatsOnViewController: UIViewController,
     private let dataProvider = DataProvider()
     private let timeRepo = TimeRepository()
     private let pushTransition = EventDetailsPushTransition()
+    private let failedAccessView = FailedAccessView()
 
     private var presenter: WhatsOnPresenter!
     private var eventService: SCEventsService!
-    private var failedAccessView: UIView?
 
     lazy var table: CalendarTableView = {
         return CalendarTableView(delegate: self, dataProvider: self.dataProvider, tableView: self.tableView)
@@ -61,22 +61,8 @@ class WhatsOnViewController: UIViewController,
         header.constrainToTopLayoutGuide(of: self, insetBy: 16)
         mainView.constrainToTopLayoutGuide(of: self)
 
-        failedAccessView = failedToAccessView()
         mainView.add(tableView, constrainedTo: [.leading, .top, .trailing, .bottom])
         mainView.add(failedAccessView!, constrainedTo: [.leading, .top, .trailing, .bottom])
-    }
-
-    private func failedToAccessView() -> UIView {
-        let view = UIView()
-        let label = UILabel()
-        label.set(style: .lower)
-        label.numberOfLines = 0
-        view.addSubview(label)
-        label.constrainToSuperview([.leading, .top, .trailing, .bottom], insetBy: 32)
-        label.textAlignment = .center
-        label.hugContent(.vertical)
-        label.text = "CalendarAccessError".localized()
-        return view
     }
 
     private func styleTable(offsetAgainst header: HeaderView) {
