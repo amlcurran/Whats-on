@@ -77,7 +77,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     }
 
     func actionItems() -> [UIBarButtonItem] {
-        if BuildConfig.isDebug() {
+        if BuildConfig.Supports.eventEditing {
             return [
                 UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteEventTapped)),
                 UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editEventTapped))
@@ -103,7 +103,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
 
         view.addSubview(responseView)
         responseView.constrainToSuperview([.leading, .trailing, .bottom])
-        responseView.constrain(height: 0).isActive = !event.supportsResponses
+        responseView.constrain(height: 0).isActive = !event.supportsResponses && BuildConfig.Supports.eventResponses
 
         let scrollView = UIScrollView()
         view.addSubview(scrollView)
