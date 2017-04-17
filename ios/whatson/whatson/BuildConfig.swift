@@ -21,7 +21,7 @@ struct BuildConfig {
         }
 
         static var eventTransitions: Bool {
-            return BuildConfig.isDebug()
+            return true
         }
 
     }
