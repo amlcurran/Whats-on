@@ -17,21 +17,21 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.2.0</string>
+	<string>0.3.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>00200</string>
+	<string>00300</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Access to your location is used to suggest nearby locations for events</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>We need access calendar to show your upcoming events</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Apple uses this when showing you more information about your event</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Access to your location is used to suggest nearby locations for events</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
