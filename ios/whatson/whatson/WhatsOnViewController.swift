@@ -12,7 +12,7 @@ class WhatsOnViewController: UIViewController,
 
     private let dateFormatter = DateFormatter(dateFormat: "EEE")
     private let eventStore = EKEventStore.instance
-    let tableView = UITableView()
+    private let tableView = UITableView()
     private let dataProvider = DataProvider()
     private let timeRepo = TimeRepository()
     private let pushTransition = EventDetailsPushTransition()
@@ -75,23 +75,17 @@ class WhatsOnViewController: UIViewController,
         tableView.contentInset = UIEdgeInsets(top: header.intrinsicContentSize.height + 38, left: 0, bottom: 16, right: 0)
     }
 
-    func eventsChanged() {
-        presenter.refreshEvents()
-    }
-
     func didTapEdit() {
         present(OptionsViewController().inNavigationController(), animated: true, completion: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(eventsChanged), name: NSNotification.Name.EKEventStoreChanged, object: eventStore)
         presenter.beginPresenting(on: self)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
         presenter.stopPresenting()
     }
 
@@ -167,6 +161,10 @@ class WhatsOnViewController: UIViewController,
 
     func failedToDelete(_ event: SCCalendarItem, withError error: Error) {
 
+    }
+
+    func calendarCellForRow(at indexPath: IndexPath) -> CalendarSourceViewCell? {
+        return tableView.cellForRow(at: indexPath) as? CalendarSourceViewCell
     }
 
 }

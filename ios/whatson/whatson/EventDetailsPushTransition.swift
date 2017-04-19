@@ -16,7 +16,7 @@ class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitionin
                 let listVC = transitionContext.viewController(forKey: .from) as? WhatsOnViewController,
                 let detailVC = transitionContext.viewController(forKey: .to) as? EventDetailsViewController,
                 let indexPath = selectedIndexPath,
-                let row = listVC.tableView.cellForRow(at: indexPath) as? CalendarSourceViewCell,
+                let row = listVC.calendarCellForRow(at: indexPath),
                 let fromView = transitionContext.view(forKey: .from),
                 let toView = transitionContext.view(forKey: .to) else {
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)

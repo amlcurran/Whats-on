@@ -8,6 +8,7 @@ class WhatsOnPresenter {
     private let eventService: SCEventsService
     private let dataProvider: DataProvider
     private weak var view: WhatsOnPresenterView?
+    private var notificationHandle: Any?
 
     init(eventStore: EKEventStore, eventService: SCEventsService, dataProvider: DataProvider) {
         self.eventStore = eventStore
@@ -17,6 +18,9 @@ class WhatsOnPresenter {
 
     func beginPresenting(on view: WhatsOnPresenterView) {
         self.view = view
+        notificationHandle = NotificationCenter.default.addObserver(forName: .EKEventStoreChanged, do: { [weak self] in
+            self?.refreshEvents()
+        })
         eventStore.requestAccess(to: .event) { [weak self] (hasAccess, error) in
             if hasAccess {
                 self?.refreshEvents()
@@ -28,9 +32,10 @@ class WhatsOnPresenter {
 
     func stopPresenting() {
         self.view = nil
+        NotificationCenter.default.removeOptionalObserver(notificationHandle)
     }
 
-    func refreshEvents() {
+    @objc func refreshEvents() {
         fetchEvents({ [weak self] (source) in
             self?.view?.showCalendar(source)
         })
@@ -63,4 +68,20 @@ protocol WhatsOnPresenterView: class {
     func showAccessFailure()
 
     func failedToDelete(_ event: SCCalendarItem, withError error: Error)
+}
+
+extension NotificationCenter {
+
+    func addObserver(forName name: NSNotification.Name, do change: @escaping (() -> Void)) -> NSObjectProtocol {
+        return addObserver(forName: name, object: nil, queue: .main, using: { _ in
+            change()
+        })
+    }
+
+    func removeOptionalObserver(_ observer: Any?) {
+        if let observer = observer {
+            removeObserver(observer)
+        }
+    }
+
 }
