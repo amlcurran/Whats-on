@@ -103,7 +103,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
 
         view.addSubview(responseView)
         responseView.constrainToSuperview([.leading, .trailing, .bottom])
-        responseView.constrain(height: 0).isActive = !event.supportsResponses && BuildConfig.Supports.eventResponses
+        responseView.hideConstraint().isActive = !(event.supportsResponses && BuildConfig.Supports.eventResponses)
 
         let scrollView = UIScrollView()
         view.addSubview(scrollView)

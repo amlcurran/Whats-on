@@ -52,6 +52,10 @@ extension UIView {
         constraint.isActive = true
         return constraint
     }
+    
+    func hideConstraint() -> NSLayoutConstraint {
+        return constrain(height: 0)
+    }
 
     @discardableResult func constrain(_ edge: NSLayoutAttribute, to view: UIView, _ otherEdge: NSLayoutAttribute, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
         _ = prepareForConstraints()
