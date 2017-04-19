@@ -155,6 +155,7 @@
 		86A9E45E1DA80E9700E8D019 /* DateFormatter+Initialisers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Initialisers.swift"; sourceTree = "<group>"; };
 		86C19EB91BBF287500BBCDF6 /* whatson-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "whatson-Bridging-Header.h"; sourceTree = "<group>"; };
 		86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsOnViewController.swift; sourceTree = "<group>"; };
+		86C85A121EA80B080085C9C6 /* What’s on.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "What’s on.entitlements"; sourceTree = "<group>"; };
 		86CAD4991BACC9B1009C9CFD /* What’s on.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "What’s on.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86CAD49D1BACC9B1009C9CFD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -289,6 +290,7 @@
 		86CAD49B1BACC9B1009C9CFD /* whatson */ = {
 			isa = PBXGroup;
 			children = (
+				86C85A121EA80B080085C9C6 /* What’s on.entitlements */,
 				86E09AB31BB6A75700D5A809 /* core */,
 				86FCF4401D455AC3000938E3 /* extensions */,
 				86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */,
@@ -473,6 +475,11 @@
 						DevelopmentTeamName = "Alexander Curran";
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -852,6 +859,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "whatson/What’s on.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
@@ -934,6 +942,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "whatson/What’s on.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
