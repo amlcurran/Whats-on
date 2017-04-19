@@ -18,7 +18,6 @@ platform :ios do
   desc "This will also make sure the profile is up to date"
   lane :beta do
     # match(type: "appstore")
-    badge
     gym(scheme: "whatson")
     pilot(skip_waiting_for_build_processing: true)
   end
