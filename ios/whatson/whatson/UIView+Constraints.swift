@@ -52,7 +52,7 @@ extension UIView {
         constraint.isActive = true
         return constraint
     }
-    
+
     func hideConstraint() -> NSLayoutConstraint {
         return constrain(height: 0)
     }

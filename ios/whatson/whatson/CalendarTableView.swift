@@ -32,13 +32,12 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
         if let slot = dataProvider.slot(at: indexPath),
            slot.count() != 0,
            let slotItem = dataProvider.item(at: indexPath) as? SCEventCalendarItem {
-            return [UITableViewRowAction(style: .destructive, title: "Delete", handler: { [weak self] action, path in
+            return [UITableViewRowAction(style: .destructive, title: "Delete", handler: { [weak self] _, _ in
                 self?.delegate?.remove(slotItem)
              })]
         }
         return nil
     }
-
 
     func update(_ source: SCCalendarSource) {
         let indexes = dataProvider.update(from: source)

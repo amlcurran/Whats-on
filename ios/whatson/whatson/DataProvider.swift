@@ -47,7 +47,7 @@ class DataProvider: NSObject {
 
 extension Int {
 
-    func isWithinBounds<T>(of array: Array<T>) -> Bool {
+    func isWithinBounds<T>(of array: [T]) -> Bool {
         return self < array.count
     }
 
