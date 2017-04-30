@@ -11,6 +11,7 @@ class CalendarSourceViewCell: UITableViewCell {
     let timeFormatter = DateFormatter()
     let timeCalculator = NSDateCalculator.instance
     let secondaryLabel = UILabel()
+    let otherEventsLabel = UILabel()
 
     var secondaryLabelZeroHeightConstraint: NSLayoutConstraint?
 
@@ -20,6 +21,7 @@ class CalendarSourceViewCell: UITableViewCell {
             dayLabel.textColor = type.secondaryText
             eventLabel.textColor = type.mainText
             secondaryLabel.textColor = type.secondaryText
+            otherEventsLabel.textColor = type.secondaryText
             roundedView.borderColor = type.borderColor
             roundedView.borderWidth = type.borderWidth
             roundedView.borderDash = type.borderDash
@@ -57,11 +59,16 @@ class CalendarSourceViewCell: UITableViewCell {
         dayLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
         eventLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightSemibold)
         secondaryLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
+        otherEventsLabel.font = .systemFont(ofSize: 18, weight: UIFontWeightMedium)
+        otherEventsLabel.textAlignment = .right
     }
 
     private func layout() {
+        roundedView.addSubview(otherEventsLabel)
+        otherEventsLabel.constrainToSuperview([.trailing, .top, .bottom], insetBy: 16)
         roundedView.addSubview(eventLabel)
-        eventLabel.constrainToSuperview([.top, .leading, .trailing], insetBy: 16)
+        eventLabel.constrainToSuperview([.top, .leading], insetBy: 16)
+        eventLabel.constrain(.trailing, to: otherEventsLabel, .leading)
         eventLabel.setContentHuggingPriority(UILayoutPriorityRequired, for: .vertical)
         roundedView.addSubview(secondaryLabel)
         secondaryLabel.constrainToSuperview([.leading, .trailing, .bottom], insetBy: 16)
@@ -100,6 +107,11 @@ class CalendarSourceViewCell: UITableViewCell {
         let startTime = timeFormatter.string(from: timeCalculator.date(item.startTime()))
         secondaryLabel.text = String(format: "From %@", startTime)
         dayLabel.text = dayFormatter.string(from: Date.dateFromTime(item.startTime()))
+        if let slot = slot, slot.count() > 1 {
+            otherEventsLabel.text = "+\(slot.count() - 1)"
+        } else {
+            otherEventsLabel.text = nil
+        }
         return self
     }
 
