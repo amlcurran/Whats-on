@@ -10,6 +10,11 @@ import UIKit
 
 extension Date {
 
+    init(from time: SCTimestamp) {
+        self.init(timeIntervalSince1970: TimeInterval(time.getMillis() / 1000))
+    }
+
+    @available(*, deprecated, renamed: "init(from:)")
     static func dateFromTime(_ time: SCTimestamp) -> Date {
         return Date(timeIntervalSince1970: TimeInterval(time.getMillis() / 1000))
     }
