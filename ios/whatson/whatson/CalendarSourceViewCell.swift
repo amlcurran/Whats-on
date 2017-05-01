@@ -96,23 +96,31 @@ class CalendarSourceViewCell: UITableViewCell {
         }
     }
 
-    func bound(to item: SCCalendarItem, slot: SCCalendarSlot?) -> Self {
-        if slot?.isEmpty() ?? true {
+    func bound(to item: SCCalendarItem, slot: SCCalendarSlot) -> Self {
+        let startTime = timeFormatter.string(from: timeCalculator.date(item.startTime()))
+        secondaryLabel.text = String(format: "From %@", startTime)
+        dayLabel.text = dayFormatter.string(from: Date(from: item.startTime()))
+        if slot.isEmpty() {
             type = .empty
             eventLabel.text = "Add event"
         } else {
             type = .full
             eventLabel.text = item.title()
         }
-        let startTime = timeFormatter.string(from: timeCalculator.date(item.startTime()))
-        secondaryLabel.text = String(format: "From %@", startTime)
-        dayLabel.text = dayFormatter.string(from: Date.dateFromTime(item.startTime()))
-        if let slot = slot, slot.count() > 1 {
-            otherEventsLabel.text = "+\(slot.count() - 1)"
+        if slot.count() > 1 {
+            otherEventsLabel.text = "+\(slot.extraItemsCount)"
         } else {
             otherEventsLabel.text = nil
         }
         return self
     }
 
+}
+
+extension SCCalendarSlot {
+    
+    var extraItemsCount: Int {
+        return Int(count()) - 1
+    }
+    
 }
