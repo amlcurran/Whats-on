@@ -118,9 +118,9 @@ class CalendarSourceViewCell: UITableViewCell {
 }
 
 extension SCCalendarSlot {
-    
+
     var extraItemsCount: Int {
         return Int(count()) - 1
     }
-    
+
 }

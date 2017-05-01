@@ -29,7 +29,7 @@ extension UIColor {
         return UIColor(red: 245.0 / 255.0, green: 246.0 / 255.0, blue: 247.0 / 255.0, alpha: 1.0)
     }
 
-    func darken(by factor: CGFloat) -> UIColor {
+    func darkened(by factor: CGFloat) -> UIColor {
         var red: CGFloat = 0
         var green: CGFloat = 0
         var blue: CGFloat = 0

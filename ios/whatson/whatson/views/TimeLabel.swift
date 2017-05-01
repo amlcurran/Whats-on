@@ -34,7 +34,7 @@ class TimeLabel: UIView {
         _ = label.surrounded(by: self, inset: 4)
         layer.cornerRadius = 3
         layer.borderWidth = 2
-        layer.borderColor = UIColor.accent.darken(by: 0.2).cgColor
+        layer.borderColor = UIColor.accent.darkened(by: 0.2).cgColor
     }
 
     required init(coder aDecoder: NSCoder) {
