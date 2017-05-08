@@ -11,7 +11,6 @@ class WhatsOnViewController: UIViewController,
 
     private let dateFormatter = DateFormatter(dateFormat: "EEE")
     private let eventStore = EKEventStore.instance
-    private let tableView = UITableView()
     private let dataProvider = DataProvider()
     private let timeRepo = TimeRepository()
     private let pushTransition = EventDetailsPushTransition()
@@ -23,7 +22,7 @@ class WhatsOnViewController: UIViewController,
     private var eventService: SCEventsService!
 
     lazy var table: CalendarTableView = {
-        return CalendarTableView(delegate: self, dataProvider: self.dataProvider, tableView: self.tableView)
+        return CalendarTableView(delegate: self, dataProvider: self.dataProvider, tableView: UITableView())
     }()
 
     override func viewDidLoad() {
@@ -32,9 +31,7 @@ class WhatsOnViewController: UIViewController,
         view.backgroundColor = .windowBackground
         title = " "
 
-        if traitCollection.forceTouchCapability == .available {
-            registerForPreviewing(with: self, sourceView: tableView)
-        }
+        table.enablePreviewing(with: self, in: self)
 
         let eventRepo = EventStoreRepository(timeRepository: timeRepo)
         eventService = SCEventsService(scTimeRepository: timeRepo, with: eventRepo, with: NSDateCalculator.instance)
@@ -62,18 +59,12 @@ class WhatsOnViewController: UIViewController,
         header.constrainToTopLayoutGuide(of: self, insetBy: 16)
         mainView.constrainToTopLayoutGuide(of: self)
 
-        mainView.add(tableView, constrainedTo: [.leading, .top, .trailing, .bottom])
+        mainView.add(table.view, constrainedTo: [.leading, .top, .trailing, .bottom])
         mainView.add(failedAccessView, constrainedTo: [.leading, .top, .trailing, .bottom])
     }
 
     private func styleTable(offsetAgainst header: HeaderView) {
-        let newCellNib = UINib(nibName: "CalendarCell", bundle: Bundle.main)
-        tableView.register(newCellNib, forCellReuseIdentifier: "day")
-        tableView.backgroundColor = .clear
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 120
-        tableView.separatorStyle = .none
-        tableView.contentInset = UIEdgeInsets(top: header.intrinsicContentSize.height + 38, left: 0, bottom: 16, right: 0)
+        table.style(offsetAgainst: header)
     }
 
     func didTapEdit() {
@@ -117,8 +108,8 @@ class WhatsOnViewController: UIViewController,
     // MARK: - peek and pop
 
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        guard let indexPath = tableView.indexPathForRow(at: location),
-              let cell = tableView.cellForRow(at: indexPath),
+        guard let indexPath = table.indexPath(under: location),
+            let cell = table.cell(at: indexPath),
               let item = table.item(at: indexPath) else {
             return nil
         }
@@ -140,15 +131,13 @@ class WhatsOnViewController: UIViewController,
         table.update(source)
         failedAccessView.alpha = 0
         failedAccessView.isUserInteractionEnabled = false
-        tableView.alpha = 1
-        tableView.isUserInteractionEnabled = true
+        table.show()
     }
 
     func showAccessFailure() {
         failedAccessView.alpha = 1
         failedAccessView.isUserInteractionEnabled = true
-        tableView.alpha = 0
-        tableView.isUserInteractionEnabled = false
+        table.hide()
     }
 
     func failedToDelete(_ event: SCCalendarItem, withError error: Error) {
