@@ -71,6 +71,7 @@
 		86F849991D046A3E007C41B0 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */; };
 		86F8499B1D046AAE007C41B0 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */; };
 		86FCF43F1D455080000938E3 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FCF43E1D455080000938E3 /* OptionsViewController.swift */; };
+		86FFFE491EC10E01009D772E /* Optional+Requirements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FFFE481EC10E01009D772E /* Optional+Requirements.swift */; };
 		E127D37CA6A573D91A32B802 /* Pods_whatson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8334259A4DD3ECC2E846BCAF /* Pods_whatson.framework */; };
 /* End PBXBuildFile section */
 
@@ -171,6 +172,7 @@
 		86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
 		86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		86FCF43E1D455080000938E3 /* OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
+		86FFFE481EC10E01009D772E /* Optional+Requirements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Requirements.swift"; sourceTree = "<group>"; };
 		A4CB48EDFB7E394EAA7145B4 /* Pods-WhatsOnTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsOnTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsOnTests/Pods-WhatsOnTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AADD5837B38D8A67EFF8AF80 /* Pods-WhatsOnTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsOnTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsOnTests/Pods-WhatsOnTests.release.xcconfig"; sourceTree = "<group>"; };
 		FE94BF63C5CC68AC641A95DE /* Pods_WhatsOnTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatsOnTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				69853BC8BAF5893B6913918C /* AllowsGestureRecognizer.swift */,
+				86FFFE481EC10E01009D772E /* Optional+Requirements.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -671,6 +674,7 @@
 				86D751151C71316D00C0A607 /* UIColor+WhatsOn.swift in Sources */,
 				86A9E4571DA7A7DC00E8D019 /* CalendarTableView.swift in Sources */,
 				861BD0D21D9FBE540032FBAB /* CalendarSlot.m in Sources */,
+				86FFFE491EC10E01009D772E /* Optional+Requirements.swift in Sources */,
 				8609C5A41DB01AF100B44D76 /* EventDetailsPushTransition.swift in Sources */,
 				8695D0301DA185DB0034D52A /* SlotCellStyle.swift in Sources */,
 				861BD0D81D9FBE540032FBAB /* EventsService.m in Sources */,

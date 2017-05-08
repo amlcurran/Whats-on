@@ -53,16 +53,15 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let item = dataProvider.item(at: indexPath) else {
-            preconditionFailure("Calendar didn't have item at expected index \((indexPath as NSIndexPath).row)")
-        }
+        let item = dataProvider.item(at: indexPath).required(message: "Calendar didn't have item at expected index \((indexPath as NSIndexPath).row)")
         if item.isEmpty() {
             delegate?.addEvent(for: item)
         } else {
             guard let item = item as? SCEventCalendarItem else {
                 preconditionFailure("Item isn't empty, but isn't event")
             }
-            delegate?.showDetails(for: item, at: indexPath)
+            let cell = tableView.cellForRow(at: indexPath).required()
+            delegate?.showDetails(for: item, at: indexPath, in: cell)
         }
     }
 
@@ -71,7 +70,7 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
 protocol CalendarTableViewDelegate: class {
     func addEvent(for item: SCCalendarItem)
 
-    func showDetails(for item: SCEventCalendarItem, at indexPath: IndexPath)
+    func showDetails(for item: SCEventCalendarItem, at indexPath: IndexPath, in cell: UITableViewCell)
 
     func remove(_ event: SCEventCalendarItem)
 }

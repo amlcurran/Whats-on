@@ -6,6 +6,7 @@ private let alphaDuration: TimeInterval = 0.2
 class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitioning {
 
     var selectedIndexPath: IndexPath?
+    var selectedCell: UITableViewCell?
 
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return slideDuration + alphaDuration
@@ -13,10 +14,9 @@ class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitionin
 
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard
-                let listVC = transitionContext.viewController(forKey: .from) as? WhatsOnViewController,
                 let detailVC = transitionContext.viewController(forKey: .to) as? EventDetailsViewController,
-                let indexPath = selectedIndexPath,
-                let row = listVC.calendarCellForRow(at: indexPath),
+                let row = selectedCell,
+                let calendarRow = row as? CalendarSourceViewCell,
                 let fromView = transitionContext.view(forKey: .from),
                 let toView = transitionContext.view(forKey: .to) else {
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
@@ -24,9 +24,9 @@ class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitionin
         }
 
         detailVC.view.layoutIfNeeded()
-        row.layoutIfNeeded()
+        calendarRow.layoutIfNeeded()
 
-        guard let rowCardSnapshot = row.roundedView.snapshotView(afterScreenUpdates: false) else {
+        guard let rowCardSnapshot = calendarRow.roundedView.snapshotView(afterScreenUpdates: false) else {
             return
         }
 
@@ -39,7 +39,7 @@ class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitionin
 
         toView.alpha = 0
         backgroundView.alpha = 0
-        rowCardSnapshot.frame = row.absoluteFrame(of: row.roundedView)
+        rowCardSnapshot.frame = row.absoluteFrame(of: calendarRow.roundedView)
 
         UIView.animate(withDuration: slideDuration, animations: {
             backgroundView.alpha = 1

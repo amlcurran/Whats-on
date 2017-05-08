@@ -7,8 +7,7 @@ class WhatsOnViewController: UIViewController,
         UIViewControllerPreviewingDelegate,
         WhatsOnPresenterView,
         CalendarTableViewDelegate,
-        HeaderViewDelegate,
-        UINavigationControllerDelegate {
+        HeaderViewDelegate {
 
     private let dateFormatter = DateFormatter(dateFormat: "EEE")
     private let eventStore = EKEventStore.instance
@@ -16,6 +15,7 @@ class WhatsOnViewController: UIViewController,
     private let dataProvider = DataProvider()
     private let timeRepo = TimeRepository()
     private let pushTransition = EventDetailsPushTransition()
+    private let navigationDelegate = EventTransitionNavigationDelegate()
     private let failedAccessView = FailedAccessView()
     private let gestureHandler = AllowsGestureRecognizer()
 
@@ -45,6 +45,7 @@ class WhatsOnViewController: UIViewController,
 
         styleTable(offsetAgainst: header)
 
+        navigationController?.delegate = navigationDelegate
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController?.interactivePopGestureRecognizer?.delegate = gestureHandler
     }
@@ -98,11 +99,9 @@ class WhatsOnViewController: UIViewController,
         navigationController?.present(EKEventEditViewController(calendarItem: item, delegate: self), animated: true, completion: nil)
     }
 
-    func showDetails(for item: SCEventCalendarItem, at indexPath: IndexPath) {
-        let controller = EventDetailsViewController(eventItem: item)
-        pushTransition.selectedIndexPath = indexPath
-        navigationController?.delegate = self
-        navigationController?.pushViewController(controller, animated: true)
+    func showDetails(for item: SCEventCalendarItem, at indexPath: IndexPath, in cell: UITableViewCell) {
+        navigationDelegate.prepareTransition(from: indexPath, using: cell)
+        navigationController?.pushViewController(EventDetailsViewController(eventItem: item), animated: true)
     }
 
     func remove(_ event: SCEventCalendarItem) {
@@ -113,13 +112,6 @@ class WhatsOnViewController: UIViewController,
 
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         navigationController?.dismiss(animated: true, completion: nil)
-    }
-
-    public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        if operation == .push && toVC is EventDetailsViewController && BuildConfig.Supports.eventTransitions {
-            return pushTransition
-        }
-        return nil
     }
 
     // MARK: - peek and pop
@@ -163,8 +155,22 @@ class WhatsOnViewController: UIViewController,
 
     }
 
-    func calendarCellForRow(at indexPath: IndexPath) -> CalendarSourceViewCell? {
-        return tableView.cellForRow(at: indexPath) as? CalendarSourceViewCell
+}
+
+class EventTransitionNavigationDelegate: NSObject, UINavigationControllerDelegate {
+
+    private let pushTransition = EventDetailsPushTransition()
+
+    func prepareTransition(from indexPath: IndexPath, using cell: UITableViewCell) {
+        pushTransition.selectedIndexPath = indexPath
+        pushTransition.selectedCell = cell
+    }
+
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if operation == .push && toVC is EventDetailsViewController && BuildConfig.Supports.eventTransitions {
+            return pushTransition
+        }
+        return nil
     }
 
 }
