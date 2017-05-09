@@ -40,19 +40,13 @@ private func notAllDay() -> NSPredicate {
 
 private func isWithinBorder(timeRepository: SCTimeRepository, using calendar: Calendar) -> NSPredicate {
     return NSPredicate(eventBlock: { event in
-        var startComponents = calendar.dateComponents([.hour, .day], from: event.startDate)
-        var endComponents = calendar.dateComponents([.hour, .day], from: event.endDate)
-        startComponents.timeZone = TimeZone.current
-        endComponents.timeZone = TimeZone.current
-        let endHour = endComponents.hour!
-        let startHour = startComponents.hour!
-        let endsBefore = endHour <= Int(timeRepository.borderTimeStart().toHours()) && endComponents.day! == startComponents.day!
-        let beginsAfter = startHour > Int(timeRepository.borderTimeEnd().toHours())
+        let endsBefore = timeRepository.borderTimeStart().isBefore(event.startDate, inSameDayAs: event.endDate, in: calendar)
+        let beginsAfter = timeRepository.borderTimeEnd().isAfter(event.endDate, in: calendar)
         return !(endsBefore || beginsAfter)
     })
 }
 
-extension NSPredicate {
+private extension NSPredicate {
 
     convenience init(eventBlock: @escaping ((EKEvent) -> Bool)) {
         self.init(block: { element, _ in
@@ -63,4 +57,29 @@ extension NSPredicate {
         })
     }
 
+}
+
+private extension SCTimeOfDay {
+
+    func isBefore(_ date: Date, inSameDayAs otherDate: Date, in calendar: Calendar) -> Bool {
+        var startComponents = calendar.dateComponents([.hour, .day], from: date)
+        var endComponents = calendar.dateComponents([.hour, .day], from: otherDate)
+        startComponents.timeZone = TimeZone.current
+        endComponents.timeZone = TimeZone.current
+        return isBefore(endComponents, inSameDayAs: startComponents)
+    }
+
+    func isAfter(_ date: Date, in calendar: Calendar) -> Bool {
+        var startComponents = calendar.dateComponents([.hour, .day], from: date)
+        startComponents.timeZone = TimeZone.current
+        return isAfter(startComponents)
+    }
+
+    func isBefore(_ components: DateComponents, inSameDayAs otherComponents: DateComponents) -> Bool {
+        return components.hour! <= Int(toHours()) && components.day! == otherComponents.day!
+    }
+
+    func isAfter(_ components: DateComponents) -> Bool {
+        return components.hour! > Int(toHours())
+    }
 }
