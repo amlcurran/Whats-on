@@ -10,11 +10,13 @@ class CalendarSource {
     private final SparseArray<CalendarSlot> calendarItems;
     private final int daysSize;
     private final TimeCalculator timeCalculator;
+    private final TimeRepository timeRepository;
 
-    public CalendarSource(SparseArray<CalendarSlot> calendarItems, int daysSize, TimeCalculator timeCalculator) {
+    public CalendarSource(SparseArray<CalendarSlot> calendarItems, int daysSize, TimeCalculator timeCalculator, TimeRepository timeRepository) {
         this.calendarItems = calendarItems;
         this.daysSize = daysSize;
         this.timeCalculator = timeCalculator;
+        this.timeRepository = timeRepository;
     }
 
     public int count() {
@@ -34,12 +36,12 @@ class CalendarSource {
 
     @Nonnull
     private Timestamp startOfTodayBlock(int position) {
-        return timeCalculator.startOfToday().plusDays(position).plusHours(17);
+        return timeCalculator.startOfToday().plusDays(position).plusHours((int) timeRepository.borderTimeStart().toHours());
     }
 
     @Nonnull
     private Timestamp endOfTodayBlock(int position) {
-        return timeCalculator.startOfToday().plusDays(position).plusHours(23);
+        return timeCalculator.startOfToday().plusDays(position).plusHours((int) timeRepository.borderTimeEnd().toHours());
     }
 
     @Nonnull

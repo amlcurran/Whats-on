@@ -60,7 +60,7 @@ __attribute__((unused)) static IOSObjectArray *SCEventsService__Annotations$0();
     [((SCCalendarSlot *) nil_chk(slot)) addItemWithSCCalendarItem:item];
     [itemArray putWithInt:key withId:slot];
   }
-  return new_SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTimeCalculator_(itemArray, numberOfDays, timeCalculator_);
+  return new_SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTimeCalculator_withSCTimeRepository_(itemArray, numberOfDays, timeCalculator_, timeRepository_);
 }
 
 + (const J2ObjcClassInfo *)__metadata {

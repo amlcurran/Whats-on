@@ -35,7 +35,7 @@ public class EventsService {
             itemArray.put(key, slot);
         }
 
-        return new CalendarSource(itemArray, numberOfDays, timeCalculator);
+        return new CalendarSource(itemArray, numberOfDays, timeCalculator, timeRepository);
     }
 
 }
