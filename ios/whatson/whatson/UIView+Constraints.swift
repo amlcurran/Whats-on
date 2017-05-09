@@ -85,6 +85,7 @@ extension UIView {
         return surrounded(by: UIView(), inset: inset)
     }
 
+    //swiftlint:disable:next colon this is the formatting for constrained generics
     func surrounded<T:UIView>(by view: T, inset: CGFloat) -> T {
         view.addSubview(self)
         constrainToSuperview([.leading, .top, .trailing, .bottom], insetBy: inset)

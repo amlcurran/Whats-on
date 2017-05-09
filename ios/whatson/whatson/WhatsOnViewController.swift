@@ -14,6 +14,7 @@ class WhatsOnViewController: UIViewController,
     private let dataProvider = DataProvider()
     private let timeRepo = TimeRepository()
     private let pushTransition = EventDetailsPushTransition()
+    //swiftlint:disable:next weak_delegate this is a delegate for something else 
     private let navigationDelegate = EventTransitionNavigationDelegate()
     private let failedAccessView = FailedAccessView()
     private let gestureHandler = AllowsGestureRecognizer()
