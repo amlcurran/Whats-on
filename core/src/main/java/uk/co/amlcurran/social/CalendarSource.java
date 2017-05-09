@@ -36,12 +36,12 @@ class CalendarSource {
 
     @Nonnull
     private Timestamp startOfTodayBlock(int position) {
-        return timeCalculator.startOfToday().plusDays(position).plusHours((int) timeRepository.borderTimeStart().toHours());
+        return timeCalculator.startOfToday().plusDays(position).plusHoursOf(timeRepository.borderTimeStart());
     }
 
     @Nonnull
     private Timestamp endOfTodayBlock(int position) {
-        return timeCalculator.startOfToday().plusDays(position).plusHours((int) timeRepository.borderTimeEnd().toHours());
+        return timeCalculator.startOfToday().plusDays(position).plusHoursOf(timeRepository.borderTimeEnd());
     }
 
     @Nonnull

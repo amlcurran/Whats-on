@@ -30,4 +30,9 @@ public class Timestamp {
         return timeCalculator.plusHours(this, hours);
     }
 
+    @Nonnull
+    public Timestamp plusHoursOf(TimeOfDay timeOfDay) {
+        return timeCalculator.plusHours(this, (int) timeOfDay.toHours());
+    }
+
 }
