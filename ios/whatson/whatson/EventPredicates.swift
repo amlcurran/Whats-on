@@ -14,7 +14,7 @@ struct EventPredicates {
 
 }
 
-private extension NSPredicate {
+extension NSPredicate {
 
     convenience init(compoundFrom predicates: [NSPredicate]) {
         self.init(block: { (element, _) -> Bool in

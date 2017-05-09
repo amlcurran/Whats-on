@@ -1,38 +1,38 @@
 import XCTest
-@testable import What_s_On
+@testable import What_s_on
 
 class EventPredicateTests: XCTestCase {
 
     func testSingleTruePredicateReturnsTrue() {
-        let test = EventPredicates.compound(from: [truePredicate()])
+        let test = NSPredicate(compoundFrom: [truePredicate()])
 
         XCTAssertTrue(test.evaluate(with: ""))
     }
 
     func testSingleFalsePredicateReturnsFalse() {
-        let test = EventPredicates.compound(from: [falsePredicate()])
+        let test = NSPredicate(compoundFrom: [falsePredicate()])
 
         XCTAssertFalse(test.evaluate(with: ""))
     }
 
     func testMixedPredicatesReturnFalse() {
-        let test = EventPredicates.compound(from: [truePredicate(), falsePredicate()])
+        let test = NSPredicate(compoundFrom: [truePredicate(), falsePredicate()])
 
         XCTAssertFalse(test.evaluate(with: ""))
     }
 
     func testFullyTruePredicatesReturnTrue() {
-        let test = EventPredicates.compound(from: [truePredicate(), truePredicate()])
+        let test = NSPredicate(compoundFrom: [truePredicate(), truePredicate()])
 
         XCTAssertTrue(test.evaluate(with: ""))
     }
 
 }
 
-private func truePredicate() -> Predicate {
-    return Predicate(value: true)
+private func truePredicate() -> NSPredicate {
+    return NSPredicate(value: true)
 }
 
-private func falsePredicate() -> Predicate {
-    return Predicate(value: false)
+private func falsePredicate() -> NSPredicate {
+    return NSPredicate(value: false)
 }
