@@ -32,7 +32,7 @@ public class Timestamp {
 
     @Nonnull
     public Timestamp plusHoursOf(TimeOfDay timeOfDay) {
-        return timeCalculator.plusHours(this, (int) timeOfDay.toHours());
+        return timeCalculator.plusHours(this, (int) timeOfDay.hoursInDay());
     }
 
 }

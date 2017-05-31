@@ -27,15 +27,20 @@
 
 + (SCTimeOfDay * __nonnull)fromHoursWithInt:(jint)hours;
 
-- (jlong)toHours;
++ (SCTimeOfDay * __nonnull)fromHoursAndMinuteWithInt:(jint)hours
+                                             withInt:(jint)minutes;
 
-- (jlong)toMinutes;
+- (jlong)hoursInDay;
+
+- (jlong)minutesInDay;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(SCTimeOfDay)
 
 FOUNDATION_EXPORT SCTimeOfDay *SCTimeOfDay_fromHoursWithInt_(jint hours);
+
+FOUNDATION_EXPORT SCTimeOfDay *SCTimeOfDay_fromHoursAndMinuteWithInt_withInt_(jint hours, jint minutes);
 
 J2OBJC_TYPE_LITERAL_HEADER(SCTimeOfDay)
 

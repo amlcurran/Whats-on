@@ -21,6 +21,7 @@
 #if !defined (SCTimestamp_) && (INCLUDE_ALL_Timestamp || defined(INCLUDE_SCTimestamp))
 #define SCTimestamp_
 
+@class SCTimeOfDay;
 @protocol SCTimeCalculator;
 
 @interface SCTimestamp : NSObject
@@ -37,6 +38,8 @@
 - (SCTimestamp * __nonnull)plusDaysWithInt:(jint)days;
 
 - (SCTimestamp * __nonnull)plusHoursWithInt:(jint)hours;
+
+- (SCTimestamp * __nonnull)plusHoursOfWithSCTimeOfDay:(SCTimeOfDay *)timeOfDay;
 
 @end
 

@@ -7,6 +7,7 @@
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "TimeCalculator.h"
+#include "TimeOfDay.h"
 #include "Timestamp.h"
 #include "java/lang/annotation/Annotation.h"
 #include "javax/annotation/Nonnull.h"
@@ -25,6 +26,8 @@ J2OBJC_FIELD_SETTER(SCTimestamp, timeCalculator_, id<SCTimeCalculator>)
 __attribute__((unused)) static IOSObjectArray *SCTimestamp__Annotations$0();
 
 __attribute__((unused)) static IOSObjectArray *SCTimestamp__Annotations$1();
+
+__attribute__((unused)) static IOSObjectArray *SCTimestamp__Annotations$2();
 
 @implementation SCTimestamp
 
@@ -50,6 +53,10 @@ __attribute__((unused)) static IOSObjectArray *SCTimestamp__Annotations$1();
   return [((id<SCTimeCalculator>) nil_chk(timeCalculator_)) plusHoursWithSCTimestamp:self withInt:hours];
 }
 
+- (SCTimestamp * __nonnull)plusHoursOfWithSCTimeOfDay:(SCTimeOfDay *)timeOfDay {
+  return [((id<SCTimeCalculator>) nil_chk(timeCalculator_)) plusHoursWithSCTimestamp:self withInt:(jint) [((SCTimeOfDay *) nil_chk(timeOfDay)) hoursInDay]];
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
@@ -57,6 +64,7 @@ __attribute__((unused)) static IOSObjectArray *SCTimestamp__Annotations$1();
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LSCTimestamp;", 0x1, 4, 2, -1, -1, 5, -1 },
+    { NULL, "LSCTimestamp;", 0x1, 6, 7, -1, -1, 8, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -65,13 +73,14 @@ __attribute__((unused)) static IOSObjectArray *SCTimestamp__Annotations$1();
   methods[2].selector = @selector(daysSinceEpoch);
   methods[3].selector = @selector(getMillis);
   methods[4].selector = @selector(plusHoursWithInt:);
+  methods[5].selector = @selector(plusHoursOfWithSCTimeOfDay:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "timeCalculator_", "LSCTimeCalculator;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
     { "millis_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "JLSCTimeCalculator;", "plusDays", "I", (void *)&SCTimestamp__Annotations$0, "plusHours", (void *)&SCTimestamp__Annotations$1 };
-  static const J2ObjcClassInfo _SCTimestamp = { "Timestamp", "uk.co.amlcurran.social", ptrTable, methods, fields, 7, 0x1, 5, 2, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "JLSCTimeCalculator;", "plusDays", "I", (void *)&SCTimestamp__Annotations$0, "plusHours", (void *)&SCTimestamp__Annotations$1, "plusHoursOf", "LSCTimeOfDay;", (void *)&SCTimestamp__Annotations$2 };
+  static const J2ObjcClassInfo _SCTimestamp = { "Timestamp", "uk.co.amlcurran.social", ptrTable, methods, fields, 7, 0x1, 6, 2, -1, -1, -1, -1, -1 };
   return &_SCTimestamp;
 }
 
@@ -96,6 +105,10 @@ IOSObjectArray *SCTimestamp__Annotations$0() {
 }
 
 IOSObjectArray *SCTimestamp__Annotations$1() {
+  return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaxAnnotationNonnull(JreLoadEnum(JavaxAnnotationMetaWhen, ALWAYS)) } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *SCTimestamp__Annotations$2() {
   return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaxAnnotationNonnull(JreLoadEnum(JavaxAnnotationMetaWhen, ALWAYS)) } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 

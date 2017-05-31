@@ -140,11 +140,11 @@ SCCalendarSource *create_SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseA
 }
 
 SCTimestamp *SCCalendarSource_startOfTodayBlockWithInt_(SCCalendarSource *self, jint position) {
-  return [((SCTimestamp *) nil_chk([((SCTimestamp *) nil_chk([((id<SCTimeCalculator>) nil_chk(self->timeCalculator_)) startOfToday])) plusDaysWithInt:position])) plusHoursWithInt:(jint) [((SCTimeOfDay *) nil_chk([((id<SCTimeRepository>) nil_chk(self->timeRepository_)) borderTimeStart])) toHours]];
+  return [((SCTimestamp *) nil_chk([((SCTimestamp *) nil_chk([((id<SCTimeCalculator>) nil_chk(self->timeCalculator_)) startOfToday])) plusDaysWithInt:position])) plusHoursOfWithSCTimeOfDay:[((id<SCTimeRepository>) nil_chk(self->timeRepository_)) borderTimeStart]];
 }
 
 SCTimestamp *SCCalendarSource_endOfTodayBlockWithInt_(SCCalendarSource *self, jint position) {
-  return [((SCTimestamp *) nil_chk([((SCTimestamp *) nil_chk([((id<SCTimeCalculator>) nil_chk(self->timeCalculator_)) startOfToday])) plusDaysWithInt:position])) plusHoursWithInt:(jint) [((SCTimeOfDay *) nil_chk([((id<SCTimeRepository>) nil_chk(self->timeRepository_)) borderTimeEnd])) toHours]];
+  return [((SCTimestamp *) nil_chk([((SCTimestamp *) nil_chk([((id<SCTimeCalculator>) nil_chk(self->timeCalculator_)) startOfToday])) plusDaysWithInt:position])) plusHoursOfWithSCTimeOfDay:[((id<SCTimeRepository>) nil_chk(self->timeRepository_)) borderTimeEnd]];
 }
 
 IOSObjectArray *SCCalendarSource__Annotations$0() {

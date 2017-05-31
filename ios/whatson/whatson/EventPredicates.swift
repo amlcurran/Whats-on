@@ -40,9 +40,11 @@ private func notAllDay() -> NSPredicate {
 
 private func isWithinBorder(timeRepository: SCTimeRepository, using calendar: Calendar) -> NSPredicate {
     return NSPredicate(eventBlock: { event in
-        let endsBefore = timeRepository.borderTimeStart().isBefore(event.startDate, inSameDayAs: event.endDate, in: calendar)
-        let beginsAfter = timeRepository.borderTimeEnd().isAfter(event.endDate, in: calendar)
-        return !(endsBefore || beginsAfter)
+        let start = timeRepository.borderTimeStart()
+        let end = timeRepository.borderTimeEnd()
+        return event.startDate.timeOfDay(isBetween: start, and: end, onSameDayAs: event.endDate, in: calendar) ||
+            event.endDate.timeOfDay(isBetween: start, and: end, in: calendar) ||
+            (event.startDate.isBefore(start, in: calendar) && event.endDate.isAfter(end, in: calendar))
     })
 }
 
@@ -59,27 +61,53 @@ private extension NSPredicate {
 
 }
 
-private extension SCTimeOfDay {
+private extension Date {
 
-    func isBefore(_ date: Date, inSameDayAs otherDate: Date, in calendar: Calendar) -> Bool {
-        var startComponents = calendar.dateComponents([.hour, .day], from: date)
-        var endComponents = calendar.dateComponents([.hour, .day], from: otherDate)
-        startComponents.timeZone = TimeZone.current
-        endComponents.timeZone = TimeZone.current
-        return isBefore(endComponents, inSameDayAs: startComponents)
+    func timeOfDay(isBetween borderStart: SCTimeOfDay, and borderEnd: SCTimeOfDay, in calendar: Calendar) -> Bool {
+        let components = calendar.dateComponents([.hour, .day], from: self)
+        if let hour = components.hour {
+            return borderStart.hours <= hour && borderEnd.hours > hour
+        }
+        return false
     }
 
-    func isAfter(_ date: Date, in calendar: Calendar) -> Bool {
-        var startComponents = calendar.dateComponents([.hour, .day], from: date)
-        startComponents.timeZone = TimeZone.current
-        return isAfter(startComponents)
+    func timeOfDay(isBetween borderStart: SCTimeOfDay, and borderEnd: SCTimeOfDay, onSameDayAs otherDate: Date, in calendar: Calendar) -> Bool {
+        let components = calendar.dateComponents([.hour, .day], from: self)
+        if let hour = components.hour {
+            return borderStart.hours <= hour && borderEnd.hours > hour ||
+                borderEnd.hours > hour && otherDate.startOfDay(in: calendar)! > self.startOfDay(in: calendar)!
+        }
+        return false
     }
 
-    func isBefore(_ components: DateComponents, inSameDayAs otherComponents: DateComponents) -> Bool {
-        return components.hour! <= Int(toHours()) && components.day! == otherComponents.day!
+    func isBefore(_ timeOfDay: SCTimeOfDay, in calendar: Calendar) -> Bool {
+        let components = calendar.dateComponents([.hour, .day], from: self)
+        if let hour = components.hour {
+            return hour <= timeOfDay.hours
+        }
+        return false
     }
 
-    func isAfter(_ components: DateComponents) -> Bool {
-        return components.hour! > Int(toHours())
+    func isAfter(_ timeOfDay: SCTimeOfDay, in calendar: Calendar) -> Bool {
+        let components = calendar.dateComponents([.hour, .day], from: self)
+        if let hour = components.hour {
+            return hour > timeOfDay.hours
+        }
+        return false
     }
+
+    func startOfDay(in calendar: Calendar) -> Date? {
+        return calendar.date(bySettingHour: 0, minute: 0, second: 0, of: self)
+    }
+
+}
+
+extension SCTimeOfDay {
+
+    var hours: Int {
+        get {
+            return Int(hoursInDay())
+        }
+    }
+
 }

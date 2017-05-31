@@ -13,15 +13,20 @@ public class TimeOfDay {
         return new TimeOfDay(TimeUnit.HOURS.toMillis(hours));
     }
 
+    @Nonnull
+    public static TimeOfDay fromHoursAndMinute(int hours, int minutes) {
+        return new TimeOfDay(TimeUnit.HOURS.toMillis(hours) + TimeUnit.MINUTES.toMillis(minutes));
+    }
+
     private TimeOfDay(long millis) {
         this.millis = millis;
     }
 
-    public long toHours() {
+    public long hoursInDay() {
         return TimeUnit.MILLISECONDS.toHours(millis);
     }
 
-    public long toMinutes() {
+    public long minutesInDay() {
         return TimeUnit.MILLISECONDS.toMinutes(millis);
     }
 }

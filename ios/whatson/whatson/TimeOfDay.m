@@ -29,10 +29,17 @@ __attribute__((unused)) static SCTimeOfDay *create_SCTimeOfDay_initWithLong_(jlo
 
 __attribute__((unused)) static IOSObjectArray *SCTimeOfDay__Annotations$0();
 
+__attribute__((unused)) static IOSObjectArray *SCTimeOfDay__Annotations$1();
+
 @implementation SCTimeOfDay
 
 + (SCTimeOfDay * __nonnull)fromHoursWithInt:(jint)hours {
   return SCTimeOfDay_fromHoursWithInt_(hours);
+}
+
++ (SCTimeOfDay * __nonnull)fromHoursAndMinuteWithInt:(jint)hours
+                                             withInt:(jint)minutes {
+  return SCTimeOfDay_fromHoursAndMinuteWithInt_withInt_(hours, minutes);
 }
 
 - (instancetype)initWithLong:(jlong)millis {
@@ -40,33 +47,35 @@ __attribute__((unused)) static IOSObjectArray *SCTimeOfDay__Annotations$0();
   return self;
 }
 
-- (jlong)toHours {
+- (jlong)hoursInDay {
   return [((JavaUtilConcurrentTimeUnit *) nil_chk(JreLoadEnum(JavaUtilConcurrentTimeUnit, MILLISECONDS))) toHoursWithLong:millis_];
 }
 
-- (jlong)toMinutes {
+- (jlong)minutesInDay {
   return [((JavaUtilConcurrentTimeUnit *) nil_chk(JreLoadEnum(JavaUtilConcurrentTimeUnit, MILLISECONDS))) toMinutesWithLong:millis_];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, "LSCTimeOfDay;", 0x9, 0, 1, -1, -1, 2, -1 },
-    { NULL, NULL, 0x2, -1, 3, -1, -1, -1, -1 },
+    { NULL, "LSCTimeOfDay;", 0x9, 3, 4, -1, -1, 5, -1 },
+    { NULL, NULL, 0x2, -1, 6, -1, -1, -1, -1 },
     { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   methods[0].selector = @selector(fromHoursWithInt:);
-  methods[1].selector = @selector(initWithLong:);
-  methods[2].selector = @selector(toHours);
-  methods[3].selector = @selector(toMinutes);
+  methods[1].selector = @selector(fromHoursAndMinuteWithInt:withInt:);
+  methods[2].selector = @selector(initWithLong:);
+  methods[3].selector = @selector(hoursInDay);
+  methods[4].selector = @selector(minutesInDay);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "millis_", "J", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "fromHours", "I", (void *)&SCTimeOfDay__Annotations$0, "J" };
-  static const J2ObjcClassInfo _SCTimeOfDay = { "TimeOfDay", "uk.co.amlcurran.social", ptrTable, methods, fields, 7, 0x1, 4, 1, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "fromHours", "I", (void *)&SCTimeOfDay__Annotations$0, "fromHoursAndMinute", "II", (void *)&SCTimeOfDay__Annotations$1, "J" };
+  static const J2ObjcClassInfo _SCTimeOfDay = { "TimeOfDay", "uk.co.amlcurran.social", ptrTable, methods, fields, 7, 0x1, 5, 1, -1, -1, -1, -1, -1 };
   return &_SCTimeOfDay;
 }
 
@@ -75,6 +84,11 @@ __attribute__((unused)) static IOSObjectArray *SCTimeOfDay__Annotations$0();
 SCTimeOfDay *SCTimeOfDay_fromHoursWithInt_(jint hours) {
   SCTimeOfDay_initialize();
   return new_SCTimeOfDay_initWithLong_([((JavaUtilConcurrentTimeUnit *) nil_chk(JreLoadEnum(JavaUtilConcurrentTimeUnit, HOURS))) toMillisWithLong:hours]);
+}
+
+SCTimeOfDay *SCTimeOfDay_fromHoursAndMinuteWithInt_withInt_(jint hours, jint minutes) {
+  SCTimeOfDay_initialize();
+  return new_SCTimeOfDay_initWithLong_([((JavaUtilConcurrentTimeUnit *) nil_chk(JreLoadEnum(JavaUtilConcurrentTimeUnit, HOURS))) toMillisWithLong:hours] + [((JavaUtilConcurrentTimeUnit *) nil_chk(JreLoadEnum(JavaUtilConcurrentTimeUnit, MINUTES))) toMillisWithLong:minutes]);
 }
 
 void SCTimeOfDay_initWithLong_(SCTimeOfDay *self, jlong millis) {
@@ -91,6 +105,10 @@ SCTimeOfDay *create_SCTimeOfDay_initWithLong_(jlong millis) {
 }
 
 IOSObjectArray *SCTimeOfDay__Annotations$0() {
+  return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaxAnnotationNonnull(JreLoadEnum(JavaxAnnotationMetaWhen, ALWAYS)) } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+IOSObjectArray *SCTimeOfDay__Annotations$1() {
   return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaxAnnotationNonnull(JreLoadEnum(JavaxAnnotationMetaWhen, ALWAYS)) } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
