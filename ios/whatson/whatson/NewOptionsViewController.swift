@@ -8,30 +8,31 @@
 
 import UIKit
 
-class NewOptionsViewController: UIViewController {
+class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate {
     
     private let analytics = Analytics()
     private let timeStore = UserDefaultsTimeStore()
     private let picker: UIDatePicker = UIDatePicker()
+    private let boundaryView = BoundaryPickerView()
     private var pickerHeightConstraint: NSLayoutConstraint!
-    
+
     private var editState: BoundaryPickerView.EditState = .none
 
     private let tableView = UITableView(frame: .zero, style: .grouped)
-    private let sections = [
-        TableSection(title: "Foo",
-                     footer: "Options.MinuteLimitation".localized(),
-                     items: [
-                        CustomViewTableItem(customViewFactory: {
-                            let view = BoundaryPickerView()
-                            view.updateText(from: UserDefaultsTimeStore())
-                            return view
-                        })
-            ])
-    ]
 
     private lazy var source: BuildableTableSource = {
-        return BuildableTableSource(sections: self.sections, tableView: self.tableView)
+        let sections = [
+            TableSection(title: "Foo",
+                         footer: "Options.MinuteLimitation".localized(),
+                         items: [
+                            CustomViewTableItem(customViewFactory: {
+                                self.boundaryView.updateText(from: UserDefaultsTimeStore())
+                                self.boundaryView.delegate = self
+                                return self.boundaryView
+                            })
+                ])
+        ]
+        return BuildableTableSource(sections: sections, tableView: self.tableView)
     }()
 
     init() {
@@ -92,7 +93,7 @@ class NewOptionsViewController: UIViewController {
         if editState == .end {
             timeStore.endTime = picker.hour.or(23)
         }
-        //boundaryPicker.updateText(from: timeStore)
+        boundaryView.updateText(from: timeStore)
     }
     
     func spinnerUpdated() {
