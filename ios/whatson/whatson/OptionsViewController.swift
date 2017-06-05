@@ -1,22 +1,18 @@
 import Foundation
 import UIKit
 
-class OptionsViewController: UIViewController {
+class OptionsViewController: UIViewController, BoundaryPickerViewDelegate {
 
     private let analytics = Analytics()
     private let startPicker = UIDatePicker()
-    private let beginningLabel = UILabel()
-    private let intermediateLabel = UILabel()
-    private let minuteLimitationLabel = UILabel()
-    private let startSelectableView = TimeLabel()
-    private let endSelectableView = TimeLabel()
+    private let boundaryPicker = BoundaryPickerView()
     private let timeStore = UserDefaultsTimeStore()
-    private let dateFormatter = DateFormatter()
+    private let minuteLimitationLabel = UILabel()
     private let picker: UIDatePicker = UIDatePicker()
     private var pickerHeightConstraint: NSLayoutConstraint!
     private var minuteLimitationHeightConstraint: NSLayoutConstraint?
 
-    private var editState: EditState = .none
+    private var editState: BoundaryPickerView.EditState = .none
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,24 +21,9 @@ class OptionsViewController: UIViewController {
 
         layoutViews()
         styleViews()
-        startSelectableView.tapClosure = { [weak self] in
-            self?.startSelectableView.selected = true
-            self?.endSelectableView.selected = false
-            self?.showPicker()
-            self?.editState = .start
-            self?.beginEditing()
-        }
-        endSelectableView.tapClosure = { [weak self] in
-            self?.startSelectableView.selected = false
-            self?.endSelectableView.selected = true
-            self?.showPicker()
-            self?.editState = .end
-            self?.beginEditing()
-        }
+        boundaryPicker.delegate = self
         picker.addTarget(self, action: #selector(spinnerUpdated), for: .valueChanged)
         picker.datePickerMode = .time
-
-        dateFormatter.dateFormat = "HH:mm"
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel".localized(), style: .plain, target: self, action: #selector(cancelTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done".localized(), style: .plain, target: self, action: #selector(doneTapped))
@@ -55,8 +36,7 @@ class OptionsViewController: UIViewController {
     }
 
     private func styleViews() {
-        beginningLabel.set(style: .header)
-        intermediateLabel.set(style: .header)
+        boundaryPicker.style()
         minuteLimitationLabel.set(style: .lower)
         minuteLimitationLabel.text = "Options.MinuteLimitation".localized()
         minuteLimitationLabel.alpha = 0
@@ -73,23 +53,9 @@ class OptionsViewController: UIViewController {
     private func layoutViews() {
         let holdingView = UIView()
 
-        let stackView = UIStackView()
-        stackView.alignment = .center
-        stackView.axis = .vertical
-        stackView.distribution = .equalSpacing
-        stackView.spacing = 4
-
-        stackView.addArrangedSubview(beginningLabel)
-        stackView.addArrangedSubview(startSelectableView)
-        stackView.addArrangedSubview(intermediateLabel)
-        stackView.addArrangedSubview(endSelectableView)
-
-        [beginningLabel, startSelectableView, intermediateLabel, endSelectableView].forEach({ view in
-            view.hugContent(.vertical)
-        })
-        holdingView.add(stackView, constrainedTo: [.leading, .trailing])
-        stackView.centerYAnchor.constraint(equalTo: holdingView.centerYAnchor).isActive = true
-        stackView.hugContent(.vertical)
+        boundaryPicker.layout()
+        holdingView.add(boundaryPicker, constrainedTo: [.leading, .trailing])
+        boundaryPicker.centerYAnchor.constraint(equalTo: holdingView.centerYAnchor).isActive = true
 
         view.add(holdingView, constrainedTo: [.top, .leading, .trailing])
         view.addSubview(minuteLimitationLabel)
@@ -107,15 +73,6 @@ class OptionsViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
-    func beginEditing() {
-        if editState == .start {
-            picker.set(hour: timeStore.startTime, limitedBefore: timeStore.endTime)
-        }
-        if editState == .end {
-            picker.set(hour: timeStore.endTime, limitedAfter: timeStore.startTime)
-        }
-    }
-
     func updateText() {
         if editState == .start {
             timeStore.startTime = picker.hour.or(17)
@@ -123,10 +80,7 @@ class OptionsViewController: UIViewController {
         if editState == .end {
             timeStore.endTime = picker.hour.or(23)
         }
-        beginningLabel.text = "Options.Beginning".localized()
-        startSelectableView.text = dateFormatter.string(from: NSDateCalculator.instance.date(timeStore.startTimestamp))
-        intermediateLabel.text = "Options.Intermediate".localized()
-        endSelectableView.text = dateFormatter.string(from: NSDateCalculator.instance.date(timeStore.endTimestamp))
+        boundaryPicker.updateText(from: timeStore)
     }
 
     func spinnerUpdated() {
@@ -144,10 +98,15 @@ class OptionsViewController: UIViewController {
         }
     }
 
-    enum EditState {
-        case none
-        case start
-        case end
+    func boundaryPickerDidBeginEditing(in state: BoundaryPickerView.EditState) {
+        showPicker()
+        editState = state
+        if editState == .start {
+            picker.set(hour: timeStore.startTime, limitedBefore: timeStore.endTime)
+        }
+        if editState == .end {
+            picker.set(hour: timeStore.endTime, limitedAfter: timeStore.startTime)
+        }
     }
 
 }
