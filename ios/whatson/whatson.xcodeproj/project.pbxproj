@@ -50,6 +50,8 @@
 		8650D7D01D9FA8F5002D5930 /* EventStoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8650D7CF1D9FA8F5002D5930 /* EventStoreRepository.swift */; };
 		8650D7D21D9FAE8E002D5930 /* TimeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8650D7D11D9FAE8E002D5930 /* TimeRepository.swift */; };
 		865C7B011EE4B00D0047D8E0 /* BoundaryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C7B001EE4B00D0047D8E0 /* BoundaryPickerView.swift */; };
+		865C7B031EE56AE80047D8E0 /* BuildableTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C7B021EE56AE80047D8E0 /* BuildableTable.swift */; };
+		865C7B051EE574100047D8E0 /* NewOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C7B041EE574100047D8E0 /* NewOptionsViewController.swift */; };
 		8695D0281DA023670034D52A /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0271DA023670034D52A /* HeaderView.swift */; };
 		8695D0301DA185DB0034D52A /* SlotCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */; };
 		8695D0331DA1A2A20034D52A /* SlotDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0321DA1A2A20034D52A /* SlotDetail.swift */; };
@@ -147,6 +149,8 @@
 		8650D7CF1D9FA8F5002D5930 /* EventStoreRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventStoreRepository.swift; sourceTree = "<group>"; };
 		8650D7D11D9FAE8E002D5930 /* TimeRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeRepository.swift; sourceTree = "<group>"; };
 		865C7B001EE4B00D0047D8E0 /* BoundaryPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundaryPickerView.swift; sourceTree = "<group>"; };
+		865C7B021EE56AE80047D8E0 /* BuildableTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildableTable.swift; sourceTree = "<group>"; };
+		865C7B041EE574100047D8E0 /* NewOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOptionsViewController.swift; sourceTree = "<group>"; };
 		8695D0271DA023670034D52A /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotCellStyle.swift; sourceTree = "<group>"; };
 		8695D0321DA1A2A20034D52A /* SlotDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotDetail.swift; sourceTree = "<group>"; };
@@ -250,6 +254,8 @@
 				69853F60E5391F881F006F7B /* TimeLabel.swift */,
 				6985397DE155D32104662FA2 /* UIDatePicker+Hours.swift */,
 				865C7B001EE4B00D0047D8E0 /* BoundaryPickerView.swift */,
+				865C7B021EE56AE80047D8E0 /* BuildableTable.swift */,
+				865C7B041EE574100047D8E0 /* NewOptionsViewController.swift */,
 			);
 			name = options;
 			sourceTree = "<group>";
@@ -671,6 +677,7 @@
 				8648F18F1D984F6500C7BD48 /* EventDetailsTracking.swift in Sources */,
 				86317A251EC260F20009EE8A /* CalendarSlot.m in Sources */,
 				86317A281EC260F20009EE8A /* EmptyCalendarItem.m in Sources */,
+				865C7B031EE56AE80047D8E0 /* BuildableTable.swift in Sources */,
 				86F849991D046A3E007C41B0 /* EventDetailsViewController.swift in Sources */,
 				8614BABE1C825B7A00A3E570 /* NSDate+Time.swift in Sources */,
 				8695D0331DA1A2A20034D52A /* SlotDetail.swift in Sources */,
@@ -687,6 +694,7 @@
 				861BD0E01D9FC4290032FBAB /* Optional+Fluency.swift in Sources */,
 				86F467F91C8AFFA500147F2E /* WhatsOnPresenter.swift in Sources */,
 				86A9E4591DA8076400E8D019 /* EKEventStore+Singleton.swift in Sources */,
+				865C7B051EE574100047D8E0 /* NewOptionsViewController.swift in Sources */,
 				86317A2E1EC260F20009EE8A /* TimeOfDay.m in Sources */,
 				86317A2C1EC260F20009EE8A /* SparseArray.m in Sources */,
 				86317A2F1EC260F20009EE8A /* TimeRepository.m in Sources */,

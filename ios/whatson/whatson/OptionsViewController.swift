@@ -36,7 +36,6 @@ class OptionsViewController: UIViewController, BoundaryPickerViewDelegate {
     }
 
     private func styleViews() {
-        boundaryPicker.style()
         minuteLimitationLabel.set(style: .lower)
         minuteLimitationLabel.text = "Options.MinuteLimitation".localized()
         minuteLimitationLabel.alpha = 0
@@ -53,7 +52,6 @@ class OptionsViewController: UIViewController, BoundaryPickerViewDelegate {
     private func layoutViews() {
         let holdingView = UIView()
 
-        boundaryPicker.layout()
         holdingView.add(boundaryPicker, constrainedTo: [.leading, .trailing])
         boundaryPicker.centerYAnchor.constraint(equalTo: holdingView.centerYAnchor).isActive = true
 

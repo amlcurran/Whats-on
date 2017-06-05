@@ -69,7 +69,8 @@ class WhatsOnViewController: UIViewController,
     }
 
     func didTapEdit() {
-        present(OptionsViewController().inNavigationController(), animated: true, completion: nil)
+        let foo = NewOptionsViewController(style: .grouped)
+        present(foo.inNavigationController(), animated: true, completion: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {

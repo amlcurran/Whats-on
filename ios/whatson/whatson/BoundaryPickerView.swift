@@ -36,13 +36,15 @@ class BoundaryPickerView: UIView {
             self?.endSelectableView.selected = true
             self?.delegate?.boundaryPickerDidBeginEditing(in: .end)
         }
+        layout()
+        style()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func layout() {
+    private func layout() {
         let stackView = UIStackView()
         stackView.alignment = .center
         stackView.axis = .vertical
@@ -59,7 +61,7 @@ class BoundaryPickerView: UIView {
         stackView.hugContent(.vertical)
     }
 
-    func style() {
+    private func style() {
         beginningLabel.set(style: .header)
         intermediateLabel.set(style: .header)
     }
