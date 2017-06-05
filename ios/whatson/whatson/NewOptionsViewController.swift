@@ -9,15 +9,22 @@
 import UIKit
 
 class NewOptionsViewController: UIViewController {
+    
+    private let analytics = Analytics()
+    private let timeStore = UserDefaultsTimeStore()
+    private let picker: UIDatePicker = UIDatePicker()
+    private var pickerHeightConstraint: NSLayoutConstraint!
+    
+    private var editState: BoundaryPickerView.EditState = .none
 
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private let sections = [
         TableSection(title: "Foo",
+                     footer: "Options.MinuteLimitation".localized(),
                      items: [
                         CustomViewTableItem(customViewFactory: {
                             let view = BoundaryPickerView()
                             view.updateText(from: UserDefaultsTimeStore())
-                            //view.backgroundColor = .red
                             return view
                         })
             ])
@@ -33,12 +40,91 @@ class NewOptionsViewController: UIViewController {
         self.tableView.delegate = source
         self.tableView.estimatedRowHeight = 44
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        view.addSubview(tableView)
-        tableView.constrainToSuperview([.leading, .trailing, .topMargin, .bottomMargin])
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        layoutViews()
+        picker.addTarget(self, action: #selector(spinnerUpdated), for: .valueChanged)
+        picker.datePickerMode = .time
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel".localized(), style: .plain, target: self, action: #selector(cancelTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done".localized(), style: .plain, target: self, action: #selector(doneTapped))
+        
+        updateText()
+    }
+    
+    func cancelTapped() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    private func showPicker() {
+        UIView.animate(withDuration: 0.2, animations: { [weak self] in
+            self?.pickerHeightConstraint.isActive = false
+            self?.view.layoutIfNeeded()
+        })
+    }
+    
+    private func layoutViews() {
+        view.addSubview(tableView)
+        tableView.constrainToSuperview([.leading, .trailing, .topMargin])
+        
+        pickerHeightConstraint = picker.constrain(height: 0)
+        pickerHeightConstraint.isActive = true
+        view.add(picker, constrainedTo: [.leading, .trailing, .bottom])
+        picker.constrain(.top, to: tableView, .bottom)
+    }
+    
+    func doneTapped() {
+        analytics.changedTimes(starting: timeStore.startTime, finishing: timeStore.endTime)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func updateText() {
+        if editState == .start {
+            timeStore.startTime = picker.hour.or(17)
+        }
+        if editState == .end {
+            timeStore.endTime = picker.hour.or(23)
+        }
+        //boundaryPicker.updateText(from: timeStore)
+    }
+    
+    func spinnerUpdated() {
+        updateText()
+    }
+    
+    func boundaryPickerDidBeginEditing(in state: BoundaryPickerView.EditState) {
+        showPicker()
+        editState = state
+        if editState == .start {
+            picker.set(hour: timeStore.startTime, limitedBefore: timeStore.endTime)
+        }
+        if editState == .end {
+            picker.set(hour: timeStore.endTime, limitedAfter: timeStore.startTime)
+        }
+    }
+    
+}
+
+extension Analytics {
+    
+    func changedTimes(starting: Int, finishing: Int) {
+        sendEvent(named: "timeChange", withParameters: [
+            "startTime": "\(starting)",
+            "endTime": "\(finishing)"
+            ])
+    }
+    
+    func requestMinutes(repeatedTry: Bool) {
+        sendEvent(named: "minuteRequest", withParameters: [
+            "repeated": "\(repeatedTry)"
+            ])
     }
 
 }

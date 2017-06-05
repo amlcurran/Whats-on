@@ -108,20 +108,3 @@ class OptionsViewController: UIViewController, BoundaryPickerViewDelegate {
     }
 
 }
-
-extension Analytics {
-
-    func changedTimes(starting: Int, finishing: Int) {
-        sendEvent(named: "timeChange", withParameters: [
-                "startTime": "\(starting)",
-                "endTime": "\(finishing)"
-        ])
-    }
-
-    func requestMinutes(repeatedTry: Bool) {
-        sendEvent(named: "minuteRequest", withParameters: [
-                "repeated": "\(repeatedTry)"
-        ])
-    }
-
-}
