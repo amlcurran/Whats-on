@@ -69,7 +69,7 @@ class WhatsOnViewController: UIViewController,
     }
 
     func didTapEdit() {
-        let foo = NewOptionsViewController(style: .grouped)
+        let foo = NewOptionsViewController()
         present(foo.inNavigationController(), animated: true, completion: nil)
     }
 

@@ -8,9 +8,10 @@
 
 import UIKit
 
-class NewOptionsViewController: UITableViewController {
-    
-    let sections = [
+class NewOptionsViewController: UIViewController {
+
+    private let tableView = UITableView(frame: .zero, style: .grouped)
+    private let sections = [
         TableSection(title: "Foo",
                      items: [
                         CustomViewTableItem(customViewFactory: {
@@ -21,21 +22,23 @@ class NewOptionsViewController: UITableViewController {
                         })
             ])
     ]
-    
-    lazy var source: BuildableTableSource = {
+
+    private lazy var source: BuildableTableSource = {
         return BuildableTableSource(sections: self.sections, tableView: self.tableView)
     }()
-    
-    override init(style: UITableViewStyle) {
-        super.init(style: style)
+
+    init() {
+        super.init(nibName: nil, bundle: nil)
         self.tableView.dataSource = source
         self.tableView.delegate = source
         self.tableView.estimatedRowHeight = 44
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        view.addSubview(tableView)
+        tableView.constrainToSuperview([.leading, .trailing, .topMargin, .bottomMargin])
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
 }
