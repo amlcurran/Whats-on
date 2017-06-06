@@ -11,7 +11,7 @@ class FailedAccessView: UIView {
         label.constrainToSuperview([.leading, .top, .trailing, .bottom], insetBy: 32)
         label.textAlignment = .center
         label.hugContent(.vertical)
-        label.text = "CalendarAccessError".localized()
+        label.text = NSLocalizedString("CalendarAccessError", comment: "When the app can't access the calendar")
     }
 
     public required init?(coder aDecoder: NSCoder) {

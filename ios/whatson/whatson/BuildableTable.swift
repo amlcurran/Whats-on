@@ -49,7 +49,7 @@ class SwitchTableItem: NSObject, TableItem {
     let isSelectable = false
     let getter: () -> Bool
     let setter: (Bool) -> Void
-    
+
     init(title: String, getter: @escaping () -> Bool, setter: @escaping (Bool) -> Void) {
         self.title = title
         self.getter = getter
@@ -67,7 +67,7 @@ class SwitchTableItem: NSObject, TableItem {
     static func register(in tableView: UITableView) {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: SwitchTableItem.cellIdentifier)
     }
-    
+
     @objc func changed(newValue: Bool) {
         setter(newValue)
     }

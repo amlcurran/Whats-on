@@ -25,8 +25,8 @@ class OptionsViewController: UIViewController, BoundaryPickerViewDelegate {
         picker.addTarget(self, action: #selector(spinnerUpdated), for: .valueChanged)
         picker.datePickerMode = .time
 
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel".localized(), style: .plain, target: self, action: #selector(cancelTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done".localized(), style: .plain, target: self, action: #selector(doneTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: "Navigation Item"), style: .plain, target: self, action: #selector(cancelTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Navigation Item"), style: .plain, target: self, action: #selector(doneTapped))
 
         updateText()
     }
@@ -37,7 +37,7 @@ class OptionsViewController: UIViewController, BoundaryPickerViewDelegate {
 
     private func styleViews() {
         minuteLimitationLabel.set(style: .lower)
-        minuteLimitationLabel.text = "Options.MinuteLimitation".localized()
+        minuteLimitationLabel.text = NSLocalizedString("Options.MinuteLimitation", comment: "Showing that users can only pick hours")
         minuteLimitationLabel.alpha = 0
         minuteLimitationLabel.textAlignment = .center
     }

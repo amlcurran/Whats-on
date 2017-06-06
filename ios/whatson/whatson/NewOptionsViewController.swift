@@ -22,8 +22,8 @@ class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate {
 
     private lazy var source: BuildableTableSource = {
         let sections = [
-            TableSection(title: "Options.DisplayOptions".localized(),
-                         footer: "Options.MinuteLimitation".localized(),
+            TableSection(title: NSLocalizedString("Options.DisplayOptions", comment: "Options"),
+                         footer: NSLocalizedString("Options.MinuteLimitation", comment: "Minute limitations in the options"),
                          items: [
                             CustomViewTableItem(customViewFactory: {
                                 self.boundaryView.updateText(from: UserDefaultsTimeStore())
@@ -54,8 +54,8 @@ class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate {
         picker.addTarget(self, action: #selector(spinnerUpdated), for: .valueChanged)
         picker.datePickerMode = .time
 
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel".localized(), style: .plain, target: self, action: #selector(cancelTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done".localized(), style: .plain, target: self, action: #selector(doneTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: "Navigation Item"), style: .plain, target: self, action: #selector(cancelTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Navigation Item"), style: .plain, target: self, action: #selector(doneTapped))
 
         updateText()
     }
