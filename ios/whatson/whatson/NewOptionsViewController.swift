@@ -22,7 +22,7 @@ class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate {
 
     private lazy var source: BuildableTableSource = {
         let sections = [
-            TableSection(title: "Foo",
+            TableSection(title: "Options.DisplayOptions".localized(),
                          footer: "Options.MinuteLimitation".localized(),
                          items: [
                             CustomViewTableItem(customViewFactory: {

@@ -42,6 +42,38 @@ struct TitleTableItem: TableItem {
 
 }
 
+class SwitchTableItem: NSObject, TableItem {
+
+    static var cellIdentifier = "switch"
+    let title: String
+    let isSelectable = false
+    let getter: () -> Bool
+    let setter: (Bool) -> Void
+    
+    init(title: String, getter: @escaping () -> Bool, setter: @escaping (Bool) -> Void) {
+        self.title = title
+        self.getter = getter
+        self.setter = setter
+    }
+
+    func bind(to cell: UITableViewCell) {
+        let tableSwitch = UISwitch(frame: .zero)
+        tableSwitch.isOn = getter()
+        tableSwitch.addTarget(self, action: #selector(changed), for: .valueChanged)
+        cell.accessoryView = tableSwitch
+        cell.textLabel?.text = title
+    }
+
+    static func register(in tableView: UITableView) {
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: SwitchTableItem.cellIdentifier)
+    }
+    
+    @objc func changed(newValue: Bool) {
+        setter(newValue)
+    }
+
+}
+
 struct CustomViewTableItem: TableItem {
 
     static var cellIdentifier = "singleCell"
@@ -68,6 +100,7 @@ class BuildableTableSource: NSObject, UITableViewDataSource, UITableViewDelegate
     init(sections: [TableSection], tableView: UITableView) {
         self.sections = sections
         TitleTableItem.register(in: tableView)
+        SwitchTableItem.register(in: tableView)
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
