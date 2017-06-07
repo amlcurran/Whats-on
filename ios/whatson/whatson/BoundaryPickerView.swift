@@ -57,7 +57,9 @@ class BoundaryPickerView: UIView {
         stackView.addArrangedSubview(endSelectableView)
 
         addSubview(stackView)
-        stackView.constrainToSuperview([.top, .leading, .trailing, .bottom])
+        stackView.constrainToSuperview([.leading, .trailing])
+        stackView.constrainToSuperview(.top, withOffset: 8)
+        stackView.constrainToSuperview(.bottom, withOffset: -8)
         stackView.hugContent(.vertical)
     }
 
