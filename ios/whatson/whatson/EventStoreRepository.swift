@@ -20,7 +20,7 @@ import EventKit
         let endTime = calculator.date(from: nextWeek)
         let search = eventStore.predicateForEvents(withStart: startTime, end: endTime, calendars: nil)
         let allEvents = eventStore.events(matching: search)
-        let filtered = allEvents.filter(predicates.standard().evaluate)
+        let filtered = allEvents.filter(predicates.defaults)
         let items = filtered.flatMap({ ekEvent in
             return SCEventCalendarItem(nsString: ekEvent.eventIdentifier,
                     with: ekEvent.title,
