@@ -28,8 +28,19 @@ extension NSPredicate {
 
 private func notDeclinedOrCancelled() -> NSPredicate {
     return NSPredicate(eventBlock: { event in
-        return event.status != EKEventStatus.canceled
+        if let mainUser = event.attendees.or([]).mainUser {
+            return mainUser.participantStatus == .accepted
+        }
+        return false
     })
+}
+
+extension Array where Element == EKParticipant {
+
+    var mainUser: EKParticipant? {
+        return filter({ $0.isCurrentUser }).first
+    }
+
 }
 
 private func notAllDay() -> NSPredicate {
