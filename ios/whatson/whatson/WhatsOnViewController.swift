@@ -185,8 +185,8 @@ fileprivate extension EKEvent {
                      calculator: NSDateCalculator = NSDateCalculator.instance,
                      eventStore: EKEventStore = EKEventStore.instance) {
         self.init(eventStore: eventStore)
-        self.startDate = calculator.date(calendarItem.startTime())
-        self.endDate = calculator.date(calendarItem.endTime())
+        self.startDate = calculator.date(from: calendarItem.startTime())
+        self.endDate = calculator.date(from: calendarItem.endTime())
     }
 
 }

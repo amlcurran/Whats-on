@@ -16,16 +16,16 @@ import EventKit
                                  with fivePm: SCTimeOfDay!,
                                  with elevenPm: SCTimeOfDay!) -> JavaUtilList {
         let eventStore = EKEventStore()
-        let startTime = calculator.date(nowTime)
-        let endTime = calculator.date(nextWeek)
+        let startTime = calculator.date(from: nowTime)
+        let endTime = calculator.date(from: nextWeek)
         let search = eventStore.predicateForEvents(withStart: startTime, end: endTime, calendars: nil)
         let allEvents = eventStore.events(matching: search)
         let filtered = allEvents.filter(predicates.standard().evaluate)
         let items = filtered.flatMap({ ekEvent in
             return SCEventCalendarItem(nsString: ekEvent.eventIdentifier,
                     with: ekEvent.title,
-                    with: self.calculator.time(ekEvent.startDate as NSDate),
-                    with: self.calculator.time(ekEvent.endDate as NSDate))
+                    with: self.calculator.time(from: ekEvent.startDate),
+                    with: self.calculator.time(from: ekEvent.endDate))
         })
         return items.toJavaList()
     }
