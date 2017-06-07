@@ -20,7 +20,7 @@ class BoundaryPickerView: UIView {
     private let intermediateLabel = UILabel()
     private let startSelectableView = TimeLabel()
     private let endSelectableView = TimeLabel()
-    private let dateFormatter = DateFormatter(dateFormat: "HH:mm")
+    private let dateFormatter = DateFormatter.shortTime
 
     weak var delegate: BoundaryPickerViewDelegate?
 

@@ -8,7 +8,7 @@ class CalendarSourceViewCell: UITableViewCell {
     let eventLabel = UILabel()
     let roundedView = RoundedRectBorderView()
     let dayFormatter = DateFormatter()
-    let timeFormatter = DateFormatter()
+    let timeFormatter = DateFormatter.shortTime
     let timeCalculator = NSDateCalculator.instance
     let secondaryLabel = UILabel()
     let otherEventsLabel = UILabel()
