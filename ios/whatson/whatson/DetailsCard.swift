@@ -13,7 +13,7 @@ class DetailsCard: UIView {
 
     var mapHeightConstraint: NSLayoutConstraint!
     var timingTitleContraint: NSLayoutConstraint?
-    
+
     private let timeFormatter = DateFormatter.shortTime
 
     func layout() {
