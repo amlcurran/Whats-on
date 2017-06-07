@@ -13,6 +13,8 @@ class DetailsCard: UIView {
 
     var mapHeightConstraint: NSLayoutConstraint!
     var timingTitleContraint: NSLayoutConstraint?
+    
+    private let timeFormatter = DateFormatter.shortTime
 
     func layout() {
         layer.cornerRadius = 6
@@ -51,7 +53,7 @@ class DetailsCard: UIView {
     func set(event: EKEvent) {
         titleLabel.text = event.title
         locationLabel.text = event.location
-        timingLabel.text = "From \(event.startDate.formatAsTime()) to \(event.endDate.formatAsTime())"
+        timingLabel.text = "From \(timeFormatter.string(from: event.startDate)) to \(timeFormatter.string(from: event.endDate))"
     }
 
     func hideMap() {
@@ -89,17 +91,6 @@ class DetailsCard: UIView {
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
             self?.superview?.layoutIfNeeded()
         })
-    }
-
-}
-
-fileprivate extension Date {
-
-    fileprivate func formatAsTime() -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .none
-        formatter.timeStyle = .short
-        return formatter.string(from: self)
     }
 
 }
