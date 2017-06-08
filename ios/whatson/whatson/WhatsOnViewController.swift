@@ -49,8 +49,9 @@ class WhatsOnViewController: UIViewController,
     }
 
     private func anchor(_ header: UIView) {
-        let blur = UIBlurEffect(style: .light)
-        let blurView = UIVisualEffectView(effect: blur)
+        let blurView = GradientView()
+        blurView.colors = [.windowBackground, .windowBackground, UIColor.windowBackground.withAlphaComponent(0)]
+        blurView.locations = [0.0, 0.85, 1.0]
         blurView.addSubview(header)
         header.constrainToSuperview([.leading, .trailing, .bottom], insetBy: 16)
 
