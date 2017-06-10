@@ -23,7 +23,9 @@ platform :ios do
     version = prompt(text: "version number: ")
     update_build(version)
     clean_build_artifacts
-    commit_version_bump
+    commit_version_bump(
+      xcodeproj: "whatson.xcodeproj"
+    )
     gym(scheme: "whatson")
     pilot(skip_waiting_for_build_processing: true)
     add_git_tag(
