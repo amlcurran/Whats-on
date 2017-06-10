@@ -894,6 +894,7 @@
 				CODE_SIGN_ENTITLEMENTS = "whatson/What’s on.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 3H3SBN3AYY;
 				ENABLE_BITCODE = NO;
@@ -977,6 +978,7 @@
 				CODE_SIGN_ENTITLEMENTS = "whatson/What’s on.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 3H3SBN3AYY;
 				ENABLE_BITCODE = NO;
