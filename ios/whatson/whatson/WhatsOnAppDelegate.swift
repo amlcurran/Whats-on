@@ -16,7 +16,7 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
         window?.makeKeyAndVisible()
         FIRApp.configure()
         if #available(iOS 9.1, *) {
-            updateTouchShortcuts(application)
+            UIApplication.shared.shortcutItems = [.addEventTommorow]
             guard let options = launchOptions, let launchShortcut = options[.shortcutItem] as? UIApplicationShortcutItem else {
                 return true
             }
@@ -32,36 +32,26 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
         return window?.rootViewController
     }
 
-    @available(iOS 9.1, *)
-    func updateTouchShortcuts(_ application: UIApplication) {
-        var newIcons = [UIApplicationShortcutItem]()
-        let newEventTommorrow = UIMutableApplicationShortcutItem(type: "new-tomorrow",
-                localizedTitle: NSLocalizedString("AddEventTomorrow", comment: "Application shortcut for adding event"),
-                localizedSubtitle: nil,
-                icon: UIApplicationShortcutIcon(type: UIApplicationShortcutIconType.add),
-                userInfo: nil)
-        newIcons.append(newEventTommorrow)
-        application.shortcutItems = newIcons
-    }
-
     @available(iOS 9.0, *)
     func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
         analytics.tapped3DTouchShortcut(type: shortcutItem.type)
-        if shortcutItem.type == "new-tomorrow" {
-            let timeStore = UserDefaultsTimeStore()
-            let eventStore = EKEventStore()
-            let event = EKEvent(eventStore: eventStore)
-            event.startDate = Date.startTimeIn(days: 1, startTimeFrom: timeStore)!
-            event.endDate = Date.endTimeIn(days: 1, endTimeFrom: timeStore)!
-
-            let editController = EKEventEditViewController()
-            editController.eventStore = eventStore
-            editController.event = event
-            editController.editViewDelegate = self
-            rootViewController?.present(editController, animated: false, completion: nil)
+        if shortcutItem.matches(.addEventTommorow) {
+            addEventTomorrow()
             return true
         }
         return false
+    }
+    
+    func addEventTomorrow() {
+        guard let event = EKEvent.tomorrow(using: UserDefaultsTimeStore()) else {
+            preconditionFailure("Couldn't create an event for tomorrow from shortcut")
+        }
+        
+        let editController = EKEventEditViewController()
+        editController.eventStore = .instance
+        editController.event = event
+        editController.editViewDelegate = self
+        rootViewController?.present(editController, animated: false, completion: nil)
     }
 
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
@@ -82,22 +72,18 @@ fileprivate extension Analytics {
 
 }
 
-extension Date {
-
-    static func startTimeIn(days: Int, startTimeFrom timeStore: UserDefaultsTimeStore) -> Date? {
-        var components = Calendar.current.dateComponents([.day, .minute, .hour, .second, .month, .year], from: Date())
-        components.hour = timeStore.startTime
-        components.minute = 0
-        components.day = components.day.or(0) + days
-        return Calendar.current.date(from: components)
+extension EKEvent {
+    
+    static func tomorrow(using: UserDefaultsTimeStore) -> EKEvent? {
+        let timeStore = UserDefaultsTimeStore()
+        let event = EKEvent(eventStore: .instance)
+        guard let start = Date.startTime(from: timeStore, addingDays: 1),
+            let end = Date.endTime(from: timeStore, addingDays: 1) else {
+                return nil
+        }
+        event.startDate = start
+        event.endDate = end
+        return event
     }
-
-    static func endTimeIn(days: Int, endTimeFrom timeStore: UserDefaultsTimeStore) -> Date? {
-        var components = Calendar.current.dateComponents([.day, .minute, .hour, .second, .month, .year], from: Date())
-        components.hour = timeStore.endTime
-        components.minute = 0
-        components.day = components.day.or(0) + days
-        return Calendar.current.date(from: components)
-    }
-
+    
 }

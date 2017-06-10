@@ -183,8 +183,8 @@ fileprivate extension EKEventEditViewController {
 fileprivate extension EKEvent {
 
     convenience init(representing calendarItem: SCCalendarItem,
-                     calculator: NSDateCalculator = NSDateCalculator.instance,
-                     eventStore: EKEventStore = EKEventStore.instance) {
+                     calculator: NSDateCalculator = .instance,
+                     eventStore: EKEventStore = .instance) {
         self.init(eventStore: eventStore)
         self.startDate = calculator.date(from: calendarItem.startTime())
         self.endDate = calculator.date(from: calendarItem.endTime())
