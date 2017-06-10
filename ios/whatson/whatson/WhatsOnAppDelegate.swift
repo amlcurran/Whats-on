@@ -16,7 +16,7 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
         window?.makeKeyAndVisible()
         FIRApp.configure()
         if #available(iOS 9.0, *) {
-            UIApplication.shared.shortcutItems = [.addEventTommorow]
+            UIApplication.shared.shortcutItems = [.addEventTomorrow]
             guard let options = launchOptions,
                 let launchShortcut = options[.shortcutItem] as? UIApplicationShortcutItem else {
                 return true
@@ -35,7 +35,7 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
     @available(iOS 9.0, *)
     func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
         analytics.tapped3DTouchShortcut(type: shortcutItem.type)
-        if shortcutItem.matches(.addEventTommorow) {
+        if shortcutItem.matches(.addEventTomorrow) {
             addEventTomorrow()
             return true
         }

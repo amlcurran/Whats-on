@@ -14,11 +14,6 @@ extension Date {
         self.init(timeIntervalSince1970: TimeInterval(time.getMillis() / 1000))
     }
 
-    @available(*, deprecated, renamed: "init(from:)")
-    static func dateFromTime(_ time: SCTimestamp) -> Date {
-        return Date(timeIntervalSince1970: TimeInterval(time.getMillis() / 1000))
-    }
-    
     static func startTime(from timeStore: UserDefaultsTimeStore, addingDays days: Int) -> Date? {
         var components = Calendar.current.dateComponents([.day, .minute, .hour, .second, .month, .year], from: Date())
         components.hour = timeStore.startTime
@@ -26,7 +21,7 @@ extension Date {
         components.day = components.day.or(0) + days
         return Calendar.current.date(from: components)
     }
-    
+
     static func endTime(from timeStore: UserDefaultsTimeStore, addingDays days: Int) -> Date? {
         var components = Calendar.current.dateComponents([.day, .minute, .hour, .second, .month, .year], from: Date())
         components.hour = timeStore.endTime

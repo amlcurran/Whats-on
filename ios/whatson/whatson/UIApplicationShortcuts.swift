@@ -10,12 +10,12 @@ import UIKit
 
 extension UIApplicationShortcutItem {
 
-    static let addEventTommorow = UIMutableApplicationShortcutItem(type: "new-tomorrow",
-                                                                   localizedTitle: NSLocalizedString("AddEventTomorrow", comment: "Application shortcut for adding event"),
-                                                                   localizedSubtitle: nil,
-                                                                   icon: UIApplicationShortcutIcon(type: .add),
-                                                                   userInfo: nil)
-    
+    static let addEventTomorrow = UIMutableApplicationShortcutItem(type: "new-tomorrow",
+        localizedTitle: NSLocalizedString("AddEventTomorrow", comment: "Application shortcut for adding event"),
+        localizedSubtitle: nil,
+        icon: UIApplicationShortcutIcon(type: .add),
+        userInfo: nil)
+
     func matches(_ otherShortcut: UIApplicationShortcutItem) -> Bool {
         return type == otherShortcut.type
     }

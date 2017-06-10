@@ -3,7 +3,7 @@ import EventKit
 @testable import What_s_on
 
 class EventPredicateTests: XCTestCase {
-    
+
     let predicates = EventPredicates(timeRepository: TestTimeRepository()).testDefaults
 
     func testExcludesAllDayEvents() {

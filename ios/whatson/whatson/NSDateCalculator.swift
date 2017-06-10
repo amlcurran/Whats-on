@@ -2,11 +2,9 @@ import Foundation
 
 public class NSDateCalculator: NSObject, SCTimeCalculator {
 
-    static var instance: NSDateCalculator = {
-        return NSDateCalculator()
-    }()
+    static let instance = NSDateCalculator()
 
-    let calendar: Calendar
+    private let calendar: Calendar
 
     private override init() {
         calendar = Calendar.current
