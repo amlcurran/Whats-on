@@ -15,13 +15,13 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
         window?.rootViewController = UINavigationController(rootViewController: WhatsOnViewController())
         window?.makeKeyAndVisible()
         FIRApp.configure()
-        if #available(iOS 9.1, *) {
+        if #available(iOS 9.0, *) {
             UIApplication.shared.shortcutItems = [.addEventTommorow]
-            guard let options = launchOptions, let launchShortcut = options[.shortcutItem] as? UIApplicationShortcutItem else {
+            guard let options = launchOptions,
+                let launchShortcut = options[.shortcutItem] as? UIApplicationShortcutItem else {
                 return true
             }
 
-            let rootViewController = self.rootViewController
             rootViewController?.dismiss(animated: true, completion: nil)
             return handleShortcutItem(launchShortcut)
         }
@@ -41,12 +41,12 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
         }
         return false
     }
-    
+
     func addEventTomorrow() {
         guard let event = EKEvent.tomorrow(using: UserDefaultsTimeStore()) else {
             preconditionFailure("Couldn't create an event for tomorrow from shortcut")
         }
-        
+
         let editController = EKEventEditViewController()
         editController.eventStore = .instance
         editController.event = event
@@ -73,7 +73,7 @@ fileprivate extension Analytics {
 }
 
 extension EKEvent {
-    
+
     static func tomorrow(using: UserDefaultsTimeStore) -> EKEvent? {
         let timeStore = UserDefaultsTimeStore()
         let event = EKEvent(eventStore: .instance)
@@ -85,5 +85,5 @@ extension EKEvent {
         event.endDate = end
         return event
     }
-    
+
 }
