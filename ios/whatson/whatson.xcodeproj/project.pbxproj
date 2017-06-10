@@ -57,7 +57,6 @@
 		8695D0301DA185DB0034D52A /* SlotCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */; };
 		8695D0331DA1A2A20034D52A /* SlotDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0321DA1A2A20034D52A /* SlotDetail.swift */; };
 		869DAC7D1D44D15C005AF315 /* EventPredicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC7C1D44D15C005AF315 /* EventPredicates.swift */; };
-		869DAC7F1D44D17E005AF315 /* CompoundPredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC7E1D44D17E005AF315 /* CompoundPredicateTests.swift */; };
 		86A9C2CB1C444468009281A0 /* WhatsOnAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */; };
 		86A9E4571DA7A7DC00E8D019 /* CalendarTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E4561DA7A7DC00E8D019 /* CalendarTableView.swift */; };
 		86A9E4591DA8076400E8D019 /* EKEventStore+Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E4581DA8076400E8D019 /* EKEventStore+Singleton.swift */; };
@@ -158,7 +157,6 @@
 		869DAC701D449EFB005AF315 /* WhatsOnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatsOnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		869DAC741D449EFB005AF315 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		869DAC7C1D44D15C005AF315 /* EventPredicates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPredicates.swift; sourceTree = "<group>"; };
-		869DAC7E1D44D17E005AF315 /* CompoundPredicateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompoundPredicateTests.swift; sourceTree = "<group>"; };
 		86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsOnAppDelegate.swift; sourceTree = "<group>"; };
 		86A9E4561DA7A7DC00E8D019 /* CalendarTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTableView.swift; sourceTree = "<group>"; };
 		86A9E4581DA8076400E8D019 /* EKEventStore+Singleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EKEventStore+Singleton.swift"; sourceTree = "<group>"; };
@@ -281,7 +279,6 @@
 			isa = PBXGroup;
 			children = (
 				869DAC741D449EFB005AF315 /* Info.plist */,
-				869DAC7E1D44D17E005AF315 /* CompoundPredicateTests.swift */,
 				86317A081EC258ED0009EE8A /* EventPredicateTests.swift */,
 			);
 			name = tests;
@@ -662,7 +659,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				86317A091EC258ED0009EE8A /* EventPredicateTests.swift in Sources */,
-				869DAC7F1D44D17E005AF315 /* CompoundPredicateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

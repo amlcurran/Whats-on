@@ -3,10 +3,10 @@ import EventKit
 @testable import What_s_on
 
 class EventPredicateTests: XCTestCase {
+    
+    let predicates = EventPredicates(timeRepository: TestTimeRepository()).testDefaults
 
     func testExcludesAllDayEvents() {
-        let predicates = EventPredicates(timeRepository: TestTimeRepository()).defaults
-
         let event = EKEvent(eventStore: EKEventStore())
         event.isAllDay = true
         event.startDate = today(atHour: 9)
@@ -15,8 +15,6 @@ class EventPredicateTests: XCTestCase {
     }
 
     func testIncludesEventsWhereTheyBeginAfterTheBorderTimeAndEndAfterTheBorderTime() {
-        let predicates = EventPredicates(timeRepository: TestTimeRepository()).defaults
-
         let event = EKEvent(eventStore: EKEventStore())
         event.timeZone = TimeZone.current
         event.startDate = today(atHour: 9)
@@ -25,8 +23,6 @@ class EventPredicateTests: XCTestCase {
     }
 
     func testIncludesEventsFullyWithinTheBorder() {
-        let predicates = EventPredicates(timeRepository: TestTimeRepository()).defaults
-
         let event = EKEvent(eventStore: EKEventStore())
         event.timeZone = TimeZone.current
         event.startDate = today(atHour: 9)
@@ -35,8 +31,6 @@ class EventPredicateTests: XCTestCase {
     }
 
     func testIncludesEventsWhereTheyBeginBeforeTheBorderTimeAndEndBeforeTheBorderTime() {
-        let predicates = EventPredicates(timeRepository: TestTimeRepository()).defaults
-
         let event = EKEvent(eventStore: EKEventStore())
         event.timeZone = TimeZone.current
         event.startDate = today(atHour: 6)
@@ -45,8 +39,6 @@ class EventPredicateTests: XCTestCase {
     }
 
     func testIncludesEventsWhereTheyBeginBeforeTheBorderTimeAndEndAfterTheBorderTime() {
-        let predicates = EventPredicates(timeRepository: TestTimeRepository()).defaults
-
         let event = EKEvent(eventStore: EKEventStore())
         event.timeZone = TimeZone.current
         event.startDate = today(atHour: 7)
@@ -55,8 +47,6 @@ class EventPredicateTests: XCTestCase {
     }
 
     func testExcludesEventsWhereTheyBeginAfterTheBorderEnds() {
-        let predicates = EventPredicates(timeRepository: TestTimeRepository()).defaults
-
         let event = EKEvent(eventStore: EKEventStore())
         event.timeZone = TimeZone.current
         event.startDate = today(atHour: 13)
@@ -65,8 +55,6 @@ class EventPredicateTests: XCTestCase {
     }
 
     func testExcludesEventsWhereTheyEndBeforeTheBorderStarts() {
-        let predicates = EventPredicates(timeRepository: TestTimeRepository()).defaults
-
         let event = EKEvent(eventStore: EKEventStore())
         event.timeZone = TimeZone.current
         event.startDate = today(atHour: 3)
@@ -75,8 +63,6 @@ class EventPredicateTests: XCTestCase {
     }
 
     func testIncludesEventsWhereTheyFinishTheDayAfterButEarly() {
-        let predicates = EventPredicates(timeRepository: TestTimeRepository()).defaults
-
         let event = EKEvent(eventStore: EKEventStore())
         event.timeZone = TimeZone.current
         event.startDate = today(atHour: 3)

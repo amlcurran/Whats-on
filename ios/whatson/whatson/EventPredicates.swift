@@ -2,11 +2,20 @@ import EventKit
 
 struct EventPredicates {
 
-    let timeRepository: SCTimeRepository
+    private let timeRepository: SCTimeRepository
+
+    init(timeRepository: SCTimeRepository) {
+        self.timeRepository = timeRepository
+    }
 
     var defaults: EventPredicate {
         return compound(from: notDeclinedOrCancelled(),
                         notAllDay(),
+                        isWithinBorder(timeRepository: timeRepository, using: .autoupdatingCurrent))
+    }
+
+    var testDefaults: EventPredicate {
+        return compound(from: notAllDay(),
                         isWithinBorder(timeRepository: timeRepository, using: .autoupdatingCurrent))
     }
 
