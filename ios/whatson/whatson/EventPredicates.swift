@@ -14,11 +14,6 @@ struct EventPredicates {
                         isWithinBorder(timeRepository: timeRepository, using: .autoupdatingCurrent))
     }
 
-    var testDefaults: EventPredicate {
-        return compound(from: notAllDay(),
-                        isWithinBorder(timeRepository: timeRepository, using: .autoupdatingCurrent))
-    }
-
 }
 
 typealias EventPredicate = (EKEvent) -> Bool
@@ -33,7 +28,10 @@ func compound(from predicates: EventPredicate...) -> EventPredicate {
 
 private func notDeclinedOrCancelled() -> EventPredicate {
     return { event in
-        if let mainUser = event.attendees.or([]).mainUser {
+        guard let attendees = event.attendees else {
+            return true
+        }
+        if let mainUser = attendees.mainUser {
             return mainUser.participantStatus == .accepted
         }
         return false

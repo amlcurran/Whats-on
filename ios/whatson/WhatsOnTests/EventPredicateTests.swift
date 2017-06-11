@@ -4,7 +4,7 @@ import EventKit
 
 class EventPredicateTests: XCTestCase {
 
-    let predicates = EventPredicates(timeRepository: TestTimeRepository()).testDefaults
+    let predicates = EventPredicates(timeRepository: TestTimeRepository()).defaults
 
     func testExcludesAllDayEvents() {
         let event = EKEvent(eventStore: EKEventStore())
@@ -27,6 +27,14 @@ class EventPredicateTests: XCTestCase {
         event.timeZone = TimeZone.current
         event.startDate = today(atHour: 9)
         event.endDate = today(atHour: 11)
+        XCTAssertTrue(predicates(event))
+    }
+
+    func testIncludesEventsExactlyOnTheBorder() {
+        let event = EKEvent(eventStore: EKEventStore())
+        event.timeZone = TimeZone.current
+        event.startDate = today(atHour: 8)
+        event.endDate = today(atHour: 12)
         XCTAssertTrue(predicates(event))
     }
 
@@ -70,6 +78,36 @@ class EventPredicateTests: XCTestCase {
         XCTAssertTrue(predicates(event))
     }
 
+    func testIncludesEventsWithABorderWithMinutes() {
+        let predicates = EventPredicates(timeRepository: TestTimeRepositoryWithMinutes()).defaults
+
+        let event = EKEvent(eventStore: EKEventStore())
+        event.timeZone = TimeZone.current
+        event.startDate = today(atHour: 23, minutes: 45)
+        event.endDate = today(atHour: 8, minutes: 50, addingDays: 1)
+        XCTAssertTrue(predicates(event))
+    }
+
+    func testExcludesEventsWithABorderWithMinutesJustAfterTheBoundary() {
+        let predicates = EventPredicates(timeRepository: TestTimeRepositoryWithMinutes()).defaults
+
+        let event = EKEvent(eventStore: EKEventStore())
+        event.timeZone = TimeZone.current
+        event.startDate = today(atHour: 23, minutes: 59)
+        event.endDate = today(atHour: 8, minutes: 50, addingDays: 1)
+        XCTAssertFalse(predicates(event))
+    }
+
+    func testExcludesEventsWithABorderWithMinutesJustBeforeTheBoundary() {
+        let predicates = EventPredicates(timeRepository: TestTimeRepositoryWithMinutes2()).defaults
+
+        let event = EKEvent(eventStore: EKEventStore())
+        event.timeZone = TimeZone.current
+        event.startDate = today(atHour: 21, minutes: 10)
+        event.endDate = today(atHour: 22, minutes: 25)
+        XCTAssertFalse(predicates(event))
+    }
+
 }
 
 private func today(atHour hour: Int, minutes: Int = 0, addingDays days: Int = 0) -> Date {
@@ -89,6 +127,30 @@ private class TestTimeRepository: NSObject, SCTimeRepository {
 
     func borderTimeEnd() -> SCTimeOfDay {
         return SCTimeOfDay.fromHours(with: 12)
+    }
+
+}
+
+private class TestTimeRepositoryWithMinutes: NSObject, SCTimeRepository {
+
+    func borderTimeStart() -> SCTimeOfDay {
+        return SCTimeOfDay.fromHoursAndMinute(with: 22, with: 0)
+    }
+
+    func borderTimeEnd() -> SCTimeOfDay {
+        return SCTimeOfDay.fromHoursAndMinute(with: 23, with: 58)
+    }
+
+}
+
+private class TestTimeRepositoryWithMinutes2: NSObject, SCTimeRepository {
+
+    func borderTimeStart() -> SCTimeOfDay {
+        return SCTimeOfDay.fromHoursAndMinute(with: 22, with: 30)
+    }
+
+    func borderTimeEnd() -> SCTimeOfDay {
+        return SCTimeOfDay.fromHoursAndMinute(with: 23, with: 59)
     }
 
 }
