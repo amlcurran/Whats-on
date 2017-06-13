@@ -6,8 +6,11 @@ import Firebase
 
 class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelegate {
 
-    var window = UIWindow() as UIWindow?
     let analytics = Analytics()
+    var window = UIWindow() as UIWindow?
+    var rootViewController: UIViewController? {
+        return window?.rootViewController
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]? = nil) -> Bool {
         window?.tintColor = UIColor.secondary
@@ -15,31 +18,14 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
         window?.rootViewController = UINavigationController(rootViewController: WhatsOnViewController())
         window?.makeKeyAndVisible()
         FIRApp.configure()
-        if #available(iOS 9.0, *) {
-            UIApplication.shared.shortcutItems = [.addEventTomorrow]
-            guard let options = launchOptions,
-                let launchShortcut = options[.shortcutItem] as? UIApplicationShortcutItem else {
-                return true
-            }
-
-            rootViewController?.dismiss(animated: true, completion: nil)
-            return handleShortcutItem(launchShortcut)
-        }
         return true
     }
 
-    var rootViewController: UIViewController? {
-        return window?.rootViewController
-    }
-
-    @available(iOS 9.0, *)
-    func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         analytics.tapped3DTouchShortcut(type: shortcutItem.type)
         if shortcutItem.matches(.addEventTomorrow) {
             addEventTomorrow()
-            return true
         }
-        return false
     }
 
     func addEventTomorrow() {
@@ -52,10 +38,6 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
         editController.event = event
         editController.editViewDelegate = self
         rootViewController?.present(editController, animated: false, completion: nil)
-    }
-
-    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        _ = handleShortcutItem(shortcutItem)
     }
 
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
