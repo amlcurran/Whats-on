@@ -2,11 +2,11 @@ import Foundation
 
 extension Optional {
 
-    func required(message: String? = nil, file: StaticString = #file, line: UInt = #line) -> Wrapped {
+    func required(message: @autoclosure () -> String = "Requirement was nil", file: StaticString = #file, line: UInt = #line) -> Wrapped {
         if let unwrapped = self {
             return unwrapped
         } else {
-            preconditionFailure(message.or("Requirement was nil"), file: file, line: line)
+            preconditionFailure(message(), file: file, line: line)
         }
     }
 

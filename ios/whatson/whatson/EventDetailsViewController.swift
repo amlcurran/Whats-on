@@ -302,7 +302,7 @@ fileprivate extension EKEventViewController {
 
 }
 
-fileprivate extension EKEventEditViewController {
+extension EKEventEditViewController {
 
     convenience init(editing event: EKEvent, delegate: EKEventEditViewDelegate) {
         self.init()

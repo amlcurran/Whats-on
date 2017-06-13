@@ -33,10 +33,7 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
             preconditionFailure("Couldn't create an event for tomorrow from shortcut")
         }
 
-        let editController = EKEventEditViewController()
-        editController.eventStore = .instance
-        editController.event = event
-        editController.editViewDelegate = self
+        let editController = EKEventEditViewController(editing: event, delegate: self)
         rootViewController?.present(editController, animated: false, completion: nil)
     }
 
