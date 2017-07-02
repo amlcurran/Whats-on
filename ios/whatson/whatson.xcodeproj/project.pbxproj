@@ -23,6 +23,7 @@
 		69853D85F37E68B39053DB9F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69853D2C9F2840A9862339C4 /* GoogleService-Info.plist */; };
 		69853EB6AEFC9EE982D28388 /* TimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853F60E5391F881F006F7B /* TimeLabel.swift */; };
 		69853EDF767415596862180F /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985358E9835009A7EA756E9 /* Analytics.swift */; };
+		8600B99D1F09383D008578E5 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8600B99C1F09383D008578E5 /* LoadingView.swift */; };
 		86075C331E3E228C005AF423 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86075C321E3E228C005AF423 /* Localizable.strings */; };
 		8607847A1DAD7E6100AAE856 /* LabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860784791DAD7E6100AAE856 /* LabelStyle.swift */; };
 		8609C5A41DB01AF100B44D76 /* EventDetailsPushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609C5A31DB01AF100B44D76 /* EventDetailsPushTransition.swift */; };
@@ -109,6 +110,7 @@
 		69853D2C9F2840A9862339C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		69853F60E5391F881F006F7B /* TimeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeLabel.swift; path = views/TimeLabel.swift; sourceTree = "<group>"; };
 		8334259A4DD3ECC2E846BCAF /* Pods_whatson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_whatson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8600B99C1F09383D008578E5 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		86075C321E3E228C005AF423 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		860784791DAD7E6100AAE856 /* LabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelStyle.swift; sourceTree = "<group>"; };
 		8609C5A31DB01AF100B44D76 /* EventDetailsPushTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsPushTransition.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 		86CAD49B1BACC9B1009C9CFD /* whatson */ = {
 			isa = PBXGroup;
 			children = (
+				8600B99C1F09383D008578E5 /* LoadingView.swift */,
 				86C85A121EA80B080085C9C6 /* What’s on.entitlements */,
 				86E09AB31BB6A75700D5A809 /* core */,
 				86FCF4401D455AC3000938E3 /* extensions */,
@@ -723,6 +726,7 @@
 				862468CC1F091ACE00FE5A49 /* SparseArray.m in Sources */,
 				2DBA13D585CE5E035AE263D4 /* EventResponseView.swift in Sources */,
 				2DBA1FC7FB7A35811ADEDB84 /* EventResponse.swift in Sources */,
+				8600B99D1F09383D008578E5 /* LoadingView.swift in Sources */,
 				862468C41F091ACE00FE5A49 /* CalendarItem.m in Sources */,
 				862468C71F091ACE00FE5A49 /* ContainerHelpers.m in Sources */,
 				6985372A302EA91FAB612301 /* DataProvider.swift in Sources */,

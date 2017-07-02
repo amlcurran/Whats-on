@@ -18,6 +18,7 @@ class WhatsOnPresenter {
 
     func beginPresenting(on view: WhatsOnPresenterView) {
         self.view = view
+        view.showLoading()
         notificationHandle = NotificationCenter.default.addObserver(forName: .EKEventStoreChanged, do: { [weak self] in
             self?.refreshEvents()
         })
@@ -68,6 +69,8 @@ protocol WhatsOnPresenterView: class {
     func showAccessFailure()
 
     func failedToDelete(_ event: SCCalendarItem, withError error: Error)
+
+    func showLoading()
 }
 
 extension NotificationCenter {

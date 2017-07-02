@@ -17,6 +17,7 @@ class WhatsOnViewController: UIViewController,
     //swiftlint:disable:next weak_delegate this is a delegate for something else 
     private let navigationDelegate = EventTransitionNavigationDelegate()
     private let failedAccessView = FailedAccessView()
+    private let loadingView = LoadingView(pathColor: .accent)
     private let gestureHandler = AllowsGestureRecognizer()
 
     private var presenter: WhatsOnPresenter!
@@ -63,6 +64,12 @@ class WhatsOnViewController: UIViewController,
 
         mainView.add(table.view, constrainedTo: [.leading, .top, .trailing, .bottom])
         mainView.add(failedAccessView, constrainedTo: [.leading, .top, .trailing, .bottom])
+
+        view.addSubview(loadingView)
+        loadingView.constrain(.centerX, to: view, .centerX)
+        loadingView.constrain(.centerY, to: view, .centerY)
+        loadingView.constrain(height: 96)
+        loadingView.constrain(width: 96)
     }
 
     private func styleTable(offsetAgainst header: HeaderView) {
@@ -132,19 +139,27 @@ class WhatsOnViewController: UIViewController,
 
     func showCalendar(_ source: SCCalendarSource) {
         table.update(source)
-        failedAccessView.alpha = 0
+        loadingView.isHidden = true
+        failedAccessView.isHidden = true
         failedAccessView.isUserInteractionEnabled = false
         table.show()
     }
 
     func showAccessFailure() {
-        failedAccessView.alpha = 1
+        loadingView.isHidden = true
+        failedAccessView.isHidden = false
         failedAccessView.isUserInteractionEnabled = true
         table.hide()
     }
 
     func failedToDelete(_ event: SCCalendarItem, withError error: Error) {
 
+    }
+
+    func showLoading() {
+        loadingView.isHidden = false
+        failedAccessView.isHidden = true
+        table.hide()
     }
 
 }
