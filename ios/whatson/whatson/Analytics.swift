@@ -4,7 +4,7 @@ import FirebaseAnalytics
 struct Analytics {
 
     func sendEvent(named name: String, withParameters parameters: [String: String] = [:]) {
-        FIRAnalytics.logEvent(withName: name, parameters: parameters.convertValuesToNSString())
+        FirebaseAnalytics.Analytics.logEvent(name, parameters: parameters.convertValuesToNSString())
     }
 
 }

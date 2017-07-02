@@ -17,7 +17,7 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
         window?.backgroundColor = UIColor.windowBackground
         window?.rootViewController = UINavigationController(rootViewController: WhatsOnViewController())
         window?.makeKeyAndVisible()
-        FIRApp.configure()
+        FirebaseApp.configure()
         return true
     }
 
