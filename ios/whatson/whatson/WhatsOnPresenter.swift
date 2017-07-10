@@ -7,6 +7,7 @@ class WhatsOnPresenter {
     private let eventStore: EKEventStore
     private let eventService: SCEventsService
     private let dataProvider: DataProvider
+    private let delayer: Delayer
     private weak var view: WhatsOnPresenterView?
     private var notificationHandle: Any?
 
@@ -14,11 +15,12 @@ class WhatsOnPresenter {
         self.eventStore = eventStore
         self.eventService = eventService
         self.dataProvider = dataProvider
+        self.delayer = Delayer(queue: .main)
     }
 
-    func beginPresenting(on view: WhatsOnPresenterView) {
+    func beginPresenting(on view: WhatsOnPresenterView, delayingBy delay: DispatchTimeInterval = .seconds(0)) {
         self.view = view
-        view.showLoading()
+        delayer.delayUpcomingEvents(by: delay)
         notificationHandle = NotificationCenter.default.addObserver(forName: .EKEventStoreChanged, do: { [weak self] in
             self?.refreshEvents()
         })
@@ -38,7 +40,9 @@ class WhatsOnPresenter {
 
     @objc func refreshEvents() {
         fetchEvents({ [weak self] (source) in
-            self?.view?.showCalendar(source)
+            self?.delayer.runAfterExpiryTime({ [weak self] in
+                self?.view?.showCalendar(source)
+            })
         })
     }
 

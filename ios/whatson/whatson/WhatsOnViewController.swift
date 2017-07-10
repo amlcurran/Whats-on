@@ -22,6 +22,7 @@ class WhatsOnViewController: UIViewController,
 
     private var presenter: WhatsOnPresenter!
     private var eventService: SCEventsService!
+    private var loadingDelay = DispatchTimeInterval.milliseconds(1500)
 
     lazy var table: CalendarTableView = {
         return CalendarTableView(delegate: self, dataProvider: self.dataProvider, tableView: UITableView())
@@ -47,6 +48,9 @@ class WhatsOnViewController: UIViewController,
         navigationController?.delegate = navigationDelegate
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController?.interactivePopGestureRecognizer?.delegate = gestureHandler
+
+        loadingDelay = DispatchTimeInterval.milliseconds(1500)
+        showLoading()
     }
 
     private func anchor(_ header: UIView) {
@@ -83,7 +87,8 @@ class WhatsOnViewController: UIViewController,
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        presenter.beginPresenting(on: self)
+        presenter.beginPresenting(on: self, delayingBy: loadingDelay)
+        loadingDelay = DispatchTimeInterval.milliseconds(0)
     }
 
     override func viewDidDisappear(_ animated: Bool) {

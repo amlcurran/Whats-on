@@ -24,6 +24,8 @@
 		69853EB6AEFC9EE982D28388 /* TimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853F60E5391F881F006F7B /* TimeLabel.swift */; };
 		69853EDF767415596862180F /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985358E9835009A7EA756E9 /* Analytics.swift */; };
 		8600B99D1F09383D008578E5 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8600B99C1F09383D008578E5 /* LoadingView.swift */; };
+		8600B99F1F09429D008578E5 /* Delayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8600B99E1F09429D008578E5 /* Delayer.swift */; };
+		8600B9A11F0946F9008578E5 /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8600B9A01F0946F9008578E5 /* UIView+Animations.swift */; };
 		86075C331E3E228C005AF423 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86075C321E3E228C005AF423 /* Localizable.strings */; };
 		8607847A1DAD7E6100AAE856 /* LabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860784791DAD7E6100AAE856 /* LabelStyle.swift */; };
 		8609C5A41DB01AF100B44D76 /* EventDetailsPushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609C5A31DB01AF100B44D76 /* EventDetailsPushTransition.swift */; };
@@ -111,6 +113,8 @@
 		69853F60E5391F881F006F7B /* TimeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeLabel.swift; path = views/TimeLabel.swift; sourceTree = "<group>"; };
 		8334259A4DD3ECC2E846BCAF /* Pods_whatson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_whatson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8600B99C1F09383D008578E5 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		8600B99E1F09429D008578E5 /* Delayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delayer.swift; sourceTree = "<group>"; };
+		8600B9A01F0946F9008578E5 /* UIView+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Animations.swift"; sourceTree = "<group>"; };
 		86075C321E3E228C005AF423 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		860784791DAD7E6100AAE856 /* LabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelStyle.swift; sourceTree = "<group>"; };
 		8609C5A31DB01AF100B44D76 /* EventDetailsPushTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsPushTransition.swift; sourceTree = "<group>"; };
@@ -230,6 +234,8 @@
 			children = (
 				69853BC8BAF5893B6913918C /* AllowsGestureRecognizer.swift */,
 				86FFFE481EC10E01009D772E /* Optional+Requirements.swift */,
+				8600B99E1F09429D008578E5 /* Delayer.swift */,
+				8600B9A01F0946F9008578E5 /* UIView+Animations.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -694,6 +700,7 @@
 				86A9E4591DA8076400E8D019 /* EKEventStore+Singleton.swift in Sources */,
 				865C7B051EE574100047D8E0 /* NewOptionsViewController.swift in Sources */,
 				866D2E771EEA045E008D76D5 /* GradientView.swift in Sources */,
+				8600B99F1F09429D008578E5 /* Delayer.swift in Sources */,
 				862468C61F091ACE00FE5A49 /* CalendarSource.m in Sources */,
 				86A9E45F1DA80E9700E8D019 /* DateFormatter+Initialisers.swift in Sources */,
 				8650D7D21D9FAE8E002D5930 /* TimeRepository.swift in Sources */,
@@ -709,6 +716,7 @@
 				862468C81F091ACE00FE5A49 /* EmptyCalendarItem.m in Sources */,
 				86A9C2CB1C444468009281A0 /* WhatsOnAppDelegate.swift in Sources */,
 				86A9E45D1DA80DA500E8D019 /* SCTimestamp+Now.swift in Sources */,
+				8600B9A11F0946F9008578E5 /* UIView+Animations.swift in Sources */,
 				8618A51F1BDA92F900A4845E /* CalendarSourceViewCell.swift in Sources */,
 				864561C31C02709800ADDE44 /* NSDateCalculator.swift in Sources */,
 				86CAD49E1BACC9B1009C9CFD /* main.m in Sources */,
@@ -961,6 +969,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "whatson-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
 				USER_HEADER_SEARCH_PATHS = "\"${J2OBJC_HOME}/include\"/**";
 			};
 			name = Debug;
@@ -1033,6 +1042,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "whatson-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
+				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
 				USER_HEADER_SEARCH_PATHS = "\"${J2OBJC_HOME}/include\"/**";
 			};
 			name = Release;
