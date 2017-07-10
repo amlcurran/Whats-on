@@ -71,6 +71,7 @@
 		86CAD49E1BACC9B1009C9CFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD49D1BACC9B1009C9CFD /* main.m */; };
 		86CAD4A91BACC9B1009C9CFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */; };
 		86CAD4AC1BACC9B1009C9CFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4AA1BACC9B1009C9CFD /* LaunchScreen.storyboard */; };
+		86CFE11C1F1376A400D9AA8D /* EventForceTouchDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CFE11B1F1376A400D9AA8D /* EventForceTouchDisplayer.swift */; };
 		86D751131C7128EB00C0A607 /* RoundedRectBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */; };
 		86D751151C71316D00C0A607 /* UIColor+WhatsOn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D751141C71316D00C0A607 /* UIColor+WhatsOn.swift */; };
 		86DE0FE71BB885E8004E20B5 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DE0FE61BB885E8004E20B5 /* libicucore.tbd */; };
@@ -179,6 +180,7 @@
 		86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		86CAD4AB1BACC9B1009C9CFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86CAD4AD1BACC9B1009C9CFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		86CFE11B1F1376A400D9AA8D /* EventForceTouchDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventForceTouchDisplayer.swift; sourceTree = "<group>"; };
 		86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedRectBorderView.swift; sourceTree = "<group>"; };
 		86D751141C71316D00C0A607 /* UIColor+WhatsOn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+WhatsOn.swift"; sourceTree = "<group>"; };
 		86DE0FE61BB885E8004E20B5 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
@@ -282,6 +284,7 @@
 				86A9E4561DA7A7DC00E8D019 /* CalendarTableView.swift */,
 				698536C18C7A4E830F167DAE /* DataProvider.swift */,
 				6985333EBC410C0E8F45C969 /* FailedAccessView.swift */,
+				86CFE11B1F1376A400D9AA8D /* EventForceTouchDisplayer.swift */,
 			);
 			name = "day list";
 			sourceTree = "<group>";
@@ -714,6 +717,7 @@
 				8609C5A41DB01AF100B44D76 /* EventDetailsPushTransition.swift in Sources */,
 				8695D0301DA185DB0034D52A /* SlotCellStyle.swift in Sources */,
 				862468C81F091ACE00FE5A49 /* EmptyCalendarItem.m in Sources */,
+				86CFE11C1F1376A400D9AA8D /* EventForceTouchDisplayer.swift in Sources */,
 				86A9C2CB1C444468009281A0 /* WhatsOnAppDelegate.swift in Sources */,
 				86A9E45D1DA80DA500E8D019 /* SCTimestamp+Now.swift in Sources */,
 				8600B9A11F0946F9008578E5 /* UIView+Animations.swift in Sources */,

@@ -4,7 +4,6 @@ import EventKitUI
 
 class WhatsOnViewController: UIViewController,
         EKEventEditViewDelegate,
-        UIViewControllerPreviewingDelegate,
         WhatsOnPresenterView,
         CalendarTableViewDelegate,
         HeaderViewDelegate {
@@ -20,6 +19,7 @@ class WhatsOnViewController: UIViewController,
     private let loadingView = LoadingView(pathColor: .accent)
     private let gestureHandler = AllowsGestureRecognizer()
 
+    private var forceTouchDisplayer: Any?
     private var presenter: WhatsOnPresenter!
     private var eventService: SCEventsService!
     private var loadingDelay = DispatchTimeInterval.milliseconds(1500)
@@ -34,7 +34,9 @@ class WhatsOnViewController: UIViewController,
         view.backgroundColor = .windowBackground
         title = " "
 
-        table.enablePreviewing(with: self, in: self)
+        let displayer = EventForceTouchDisplayer(table: table, navigationController: navigationController)
+        table.enablePreviewing(with: displayer, in: self)
+        forceTouchDisplayer = displayer
 
         let eventRepo = EventStoreRepository(timeRepository: timeRepo)
         eventService = SCEventsService(scTimeRepository: timeRepo, with: eventRepo, with: NSDateCalculator.instance)
@@ -81,8 +83,8 @@ class WhatsOnViewController: UIViewController,
     }
 
     func didTapEdit() {
-        let foo = NewOptionsViewController()
-        present(foo.inNavigationController(), animated: true, completion: nil)
+        let settings = NewOptionsViewController().inNavigationController()
+        present(settings, animated: true)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -121,26 +123,6 @@ class WhatsOnViewController: UIViewController,
     }
 
     // MARK: - peek and pop
-
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        guard let indexPath = table.indexPath(under: location),
-            let cell = table.cell(at: indexPath),
-              let item = table.item(at: indexPath) else {
-            return nil
-        }
-
-        previewingContext.sourceRect = cell.frame
-
-        if item.isEmpty() {
-            return nil
-        } else {
-            return EventDetailsViewController(item: item)
-        }
-    }
-
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        navigationController?.pushViewController(viewControllerToCommit, animated: true)
-    }
 
     func showCalendar(_ source: SCCalendarSource) {
         table.update(source)
