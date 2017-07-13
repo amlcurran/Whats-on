@@ -20,12 +20,23 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "day", for: indexPath) as? CalendarSourceViewCell,
-            let item = dataProvider.item(at: indexPath.dataIndexPath),
-            let slot = dataProvider.slot(at: indexPath.dataIndexPath) else {
+        if indexPath.row % 2 == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "day", for: indexPath) as? CalendarSourceViewCell,
+                  let item = dataProvider.item(at: indexPath.dataIndexPath),
+                  let slot = dataProvider.slot(at: indexPath.dataIndexPath) else {
                 preconditionFailure("Tried to dequeue a cell which wasn't a Calendar cell")
+            }
+            cell.backgroundColor = .red
+            return cell.bound(to: item, slot: slot)
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "event", for: indexPath) as? CalendarSourceViewCell,
+                  let item = dataProvider.item(at: indexPath.dataIndexPath),
+                  let slot = dataProvider.slot(at: indexPath.dataIndexPath) else {
+                preconditionFailure("Tried to dequeue a cell which wasn't a Calendar cell")
+            }
+            return cell.bound(to: item, slot: slot)
         }
-        return cell.bound(to: item, slot: slot)
+
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -34,8 +45,8 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if let slot = dataProvider.slot(at: indexPath.dataIndexPath),
-            slot.count() != 0,
-            let slotItem = dataProvider.item(at: indexPath.dataIndexPath) as? SCEventCalendarItem {
+           slot.count() != 0,
+           let slotItem = dataProvider.item(at: indexPath.dataIndexPath) as? SCEventCalendarItem {
             return [UITableViewRowAction(style: .destructive, title: "Delete", handler: { [weak self] _, _ in
                 self?.delegate?.remove(slotItem)
             })]
@@ -45,11 +56,8 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
 
     func update(_ source: SCCalendarSource) {
         let indexes = dataProvider.update(from: source)
-//        if indexes.count > 0 {
-//            tableView.reloadRows(at: indexes, with: .automatic)
-//        } else {
-            tableView.reloadData()
-//        }
+        print("Fix the indexes!")
+        tableView.reloadData()
     }
 
     func show() {
@@ -94,6 +102,7 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
     func style(offsetAgainst header: HeaderView) {
         let newCellNib = UINib(nibName: "CalendarCell", bundle: Bundle.main)
         tableView.register(newCellNib, forCellReuseIdentifier: "day")
+        tableView.register(newCellNib, forCellReuseIdentifier: "event")
         tableView.backgroundColor = .clear
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
