@@ -20,7 +20,7 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row % 2 == 0 {
+        if indexPath.isDay {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "day", for: indexPath) as? CalendarSourceViewCell,
                   let item = dataProvider.item(at: indexPath.dataIndexPath),
                   let slot = dataProvider.slot(at: indexPath.dataIndexPath) else {
@@ -82,6 +82,13 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
         return tableView.cellForRow(at: index)
     }
 
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if indexPath.isDay {
+            return nil
+        }
+        return indexPath
+    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = dataProvider.item(at: indexPath.dataIndexPath).required(message: "Calendar didn't have item at expected index \((indexPath as NSIndexPath).row)")
         if item.isEmpty() {
@@ -120,6 +127,10 @@ fileprivate extension IndexPath {
         } else {
             return IndexPath(row: row / 2, section: section)
         }
+    }
+
+    var isDay: Bool {
+        return row % 2 == 0
     }
 
 }
