@@ -21,21 +21,21 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "day", for: indexPath) as? CalendarSourceViewCell,
-            let item = dataProvider.item(at: indexPath),
-            let slot = dataProvider.slot(at: indexPath) else {
+            let item = dataProvider.item(at: indexPath.dataIndexPath),
+            let slot = dataProvider.slot(at: indexPath.dataIndexPath) else {
                 preconditionFailure("Tried to dequeue a cell which wasn't a Calendar cell")
         }
         return cell.bound(to: item, slot: slot)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataProvider.count
+        return dataProvider.count * 2
     }
 
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        if let slot = dataProvider.slot(at: indexPath),
+        if let slot = dataProvider.slot(at: indexPath.dataIndexPath),
             slot.count() != 0,
-            let slotItem = dataProvider.item(at: indexPath) as? SCEventCalendarItem {
+            let slotItem = dataProvider.item(at: indexPath.dataIndexPath) as? SCEventCalendarItem {
             return [UITableViewRowAction(style: .destructive, title: "Delete", handler: { [weak self] _, _ in
                 self?.delegate?.remove(slotItem)
             })]
@@ -45,11 +45,11 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
 
     func update(_ source: SCCalendarSource) {
         let indexes = dataProvider.update(from: source)
-        if indexes.count > 0 {
-            tableView.reloadRows(at: indexes, with: .automatic)
-        } else {
+//        if indexes.count > 0 {
+//            tableView.reloadRows(at: indexes, with: .automatic)
+//        } else {
             tableView.reloadData()
-        }
+//        }
     }
 
     func show() {
@@ -63,7 +63,7 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
     }
 
     func item(at index: IndexPath) -> SCCalendarItem? {
-        return dataProvider.item(at: index)
+        return dataProvider.item(at: index.dataIndexPath)
     }
 
     func indexPath(under location: CGPoint) -> IndexPath? {
@@ -75,7 +75,7 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = dataProvider.item(at: indexPath).required(message: "Calendar didn't have item at expected index \((indexPath as NSIndexPath).row)")
+        let item = dataProvider.item(at: indexPath.dataIndexPath).required(message: "Calendar didn't have item at expected index \((indexPath as NSIndexPath).row)")
         if item.isEmpty() {
             delegate?.addEvent(for: item)
         } else {
@@ -99,6 +99,18 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
         tableView.estimatedRowHeight = 120
         tableView.separatorStyle = .none
         tableView.contentInset = UIEdgeInsets(top: header.intrinsicContentSize.height + 38, left: 0, bottom: 16, right: 0)
+    }
+
+}
+
+fileprivate extension IndexPath {
+
+    var dataIndexPath: IndexPath {
+        if row % 2 == 1 {
+            return IndexPath(row: (row - 1) / 2, section: section)
+        } else {
+            return IndexPath(row: row / 2, section: section)
+        }
     }
 
 }
