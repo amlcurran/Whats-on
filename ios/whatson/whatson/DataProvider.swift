@@ -11,8 +11,8 @@ class DataProvider: NSObject {
         }
     }
 
-    func update(from source: SCCalendarSource) -> [IndexPath] {
-        var changedIndexes = [IndexPath]()
+    func update(from source: SCCalendarSource) -> [Int] {
+        var changedIndexes = [Int]()
         let oldItems = items
         let oldSlots = slots
         items.removeAll()
@@ -25,7 +25,7 @@ class DataProvider: NSObject {
             slots.append(newSlot)
             if i.isWithinBounds(of: oldSlots) && i.isWithinBounds(of: oldItems) {
                 if !newSlot.view(matches: oldSlots[i]) || !matchViews(newItem, oldItems[i]) {
-                    changedIndexes.append(IndexPath(row: i, section: 0))
+                    changedIndexes.append(i)
                 }
             }
         }

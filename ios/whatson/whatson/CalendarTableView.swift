@@ -55,8 +55,11 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
 
     func update(_ source: SCCalendarSource) {
         let indexes = dataProvider.update(from: source)
-        print("Fix the indexes!")
-        tableView.reloadData()
+        if indexes.count > 0 {
+            tableView.reloadRows(at: indexes.map { IndexPath.tableIndex(fromData: $0) }, with: .automatic)
+        } else {
+            tableView.reloadData()
+        }
     }
 
     func show() {
@@ -126,6 +129,10 @@ fileprivate extension IndexPath {
         } else {
             return IndexPath(row: row / 2, section: section)
         }
+    }
+
+    static func tableIndex(fromData index: Int) -> IndexPath {
+        return IndexPath(row: index * 2 + 1, section: 0)
     }
 
     var isDay: Bool {
