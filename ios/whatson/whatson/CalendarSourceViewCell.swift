@@ -4,7 +4,6 @@ import UIKit
 @IBDesignable
 class CalendarSourceViewCell: UITableViewCell {
 
-    let dayLabel = UILabel()
     let eventLabel = UILabel()
     let roundedView = RoundedRectBorderView()
     let dayFormatter = DateFormatter()
@@ -18,7 +17,6 @@ class CalendarSourceViewCell: UITableViewCell {
     var type: SlotCellStyle = .empty {
         didSet {
             roundedView.backgroundColor = type.cellBackground
-            dayLabel.textColor = type.secondaryText
             eventLabel.textColor = type.mainText
             secondaryLabel.textColor = type.secondaryText
             otherEventsLabel.textColor = type.secondaryText
@@ -56,7 +54,6 @@ class CalendarSourceViewCell: UITableViewCell {
         backgroundColor = .clear
         selectionStyle = .none
 
-        dayLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
         eventLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightSemibold)
         secondaryLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
         otherEventsLabel.font = .systemFont(ofSize: 18, weight: UIFontWeightMedium)
@@ -78,10 +75,7 @@ class CalendarSourceViewCell: UITableViewCell {
         updateSecondaryHeight()
 
         contentView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
-        contentView.add(dayLabel, constrainedTo: [.leadingMargin, .trailingMargin], withInset: 8)
-        dayLabel.constrain(.top, to: contentView, .topMargin, withOffset: 8)
-        contentView.add(roundedView, constrainedTo: [.leadingMargin, .trailingMargin, .bottomMargin])
-        roundedView.constrain(.top, to: dayLabel, .bottom, withOffset: 6)
+        contentView.add(roundedView, constrainedTo: [.topMargin, .leadingMargin, .trailingMargin, .bottomMargin])
         roundedView.cornerRadius = 6
         roundedView.layer.shadowOffset = CGSize(width: 0, height: 6)
         roundedView.layer.shadowRadius = 4
@@ -99,7 +93,6 @@ class CalendarSourceViewCell: UITableViewCell {
     func bound(to item: SCCalendarItem, slot: SCCalendarSlot) -> Self {
         let startTime = timeFormatter.string(from: timeCalculator.date(from: item.startTime()))
         secondaryLabel.text = String(format: "From %@", startTime)
-        dayLabel.text = dayFormatter.string(from: Date(from: item.startTime()))
         if slot.isEmpty() {
             type = .empty
             eventLabel.text = "Add event"

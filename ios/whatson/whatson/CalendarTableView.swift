@@ -21,12 +21,11 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.isDay {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "day", for: indexPath) as? CalendarSourceViewCell,
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "day", for: indexPath) as? DayCell,
                   let item = dataProvider.item(at: indexPath.dataIndexPath),
                   let slot = dataProvider.slot(at: indexPath.dataIndexPath) else {
                 preconditionFailure("Tried to dequeue a cell which wasn't a Calendar cell")
             }
-            cell.backgroundColor = .red
             return cell.bound(to: item, slot: slot)
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "event", for: indexPath) as? CalendarSourceViewCell,
@@ -108,7 +107,7 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
 
     func style(offsetAgainst header: HeaderView) {
         let newCellNib = UINib(nibName: "CalendarCell", bundle: Bundle.main)
-        tableView.register(newCellNib, forCellReuseIdentifier: "day")
+        tableView.register(DayCell.self, forCellReuseIdentifier: "day")
         tableView.register(newCellNib, forCellReuseIdentifier: "event")
         tableView.backgroundColor = .clear
         tableView.rowHeight = UITableViewAutomaticDimension
