@@ -28,7 +28,7 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
             }
             return cell.bound(to: item, slot: slot)
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "event", for: indexPath) as? CalendarSourceViewCell,
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "event", for: indexPath) as? EventCell,
                   let item = dataProvider.item(at: indexPath.dataIndexPath),
                   let slot = dataProvider.slot(at: indexPath.dataIndexPath) else {
                 preconditionFailure("Tried to dequeue a cell which wasn't a Calendar cell")
@@ -109,9 +109,8 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
     }
 
     func style(offsetAgainst header: HeaderView) {
-        let newCellNib = UINib(nibName: "CalendarCell", bundle: Bundle.main)
         tableView.register(DayCell.self, forCellReuseIdentifier: "day")
-        tableView.register(newCellNib, forCellReuseIdentifier: "event")
+        tableView.register(EventCell.self, forCellReuseIdentifier: "event")
         tableView.backgroundColor = .clear
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120

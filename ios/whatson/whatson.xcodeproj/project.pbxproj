@@ -48,7 +48,6 @@
 		862468D01F091ACE00FE5A49 /* Timestamp.m in Sources */ = {isa = PBXBuildFile; fileRef = 862468C31F091ACE00FE5A49 /* Timestamp.m */; };
 		862468D21F091B8C00FE5A49 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 862468D11F091B8C00FE5A49 /* libiconv.tbd */; };
 		8626886E1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8626886D1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift */; };
-		8626FCE01C63FBF800640079 /* CalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8626FCDF1C63FBF800640079 /* CalendarCell.xib */; };
 		86317A091EC258ED0009EE8A /* EventPredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86317A081EC258ED0009EE8A /* EventPredicateTests.swift */; };
 		864561C31C02709800ADDE44 /* NSDateCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864561C21C02709800ADDE44 /* NSDateCalculator.swift */; };
 		8648F18F1D984F6500C7BD48 /* EventDetailsTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8648F18E1D984F6500C7BD48 /* EventDetailsTracking.swift */; };
@@ -152,7 +151,6 @@
 		862468C31F091ACE00FE5A49 /* Timestamp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timestamp.m; sourceTree = "<group>"; };
 		862468D11F091B8C00FE5A49 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		8626886D1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplicationShortcuts.swift; sourceTree = "<group>"; };
-		8626FCDF1C63FBF800640079 /* CalendarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarCell.xib; sourceTree = "<group>"; };
 		86317A081EC258ED0009EE8A /* EventPredicateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPredicateTests.swift; sourceTree = "<group>"; };
 		864561C21C02709800ADDE44 /* NSDateCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateCalculator.swift; sourceTree = "<group>"; };
 		8648F18E1D984F6500C7BD48 /* EventDetailsTracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsTracking.swift; sourceTree = "<group>"; };
@@ -279,7 +277,6 @@
 				86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */,
 				86F467F81C8AFFA500147F2E /* WhatsOnPresenter.swift */,
 				8618A51E1BDA92F900A4845E /* CalendarSourceViewCell.swift */,
-				8626FCDF1C63FBF800640079 /* CalendarCell.xib */,
 				8695D0271DA023670034D52A /* HeaderView.swift */,
 				8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */,
 				8695D0321DA1A2A20034D52A /* SlotDetail.swift */,
@@ -559,7 +556,6 @@
 				86075C331E3E228C005AF423 /* Localizable.strings in Resources */,
 				86CAD4AC1BACC9B1009C9CFD /* LaunchScreen.storyboard in Resources */,
 				86CAD4A91BACC9B1009C9CFD /* Assets.xcassets in Resources */,
-				8626FCE01C63FBF800640079 /* CalendarCell.xib in Resources */,
 				69853D85F37E68B39053DB9F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 @IBDesignable
-class CalendarSourceViewCell: UITableViewCell {
+class EventCell: UITableViewCell {
 
     let eventLabel = UILabel()
     let roundedView = RoundedRectBorderView()
