@@ -6,7 +6,6 @@ class CalendarSourceViewCell: UITableViewCell {
 
     let eventLabel = UILabel()
     let roundedView = RoundedRectBorderView()
-    let dayFormatter = DateFormatter()
     let timeFormatter = DateFormatter.shortTime
     let timeCalculator = NSDateCalculator.instance
     let secondaryLabel = UILabel()
@@ -46,9 +45,6 @@ class CalendarSourceViewCell: UITableViewCell {
     }
 
     private func styleViews() {
-        dayFormatter.dateStyle = .full
-        dayFormatter.timeStyle = .none
-        dayFormatter.doesRelativeDateFormatting = true
         timeFormatter.dateStyle = .none
         timeFormatter.timeStyle = .short
         backgroundColor = .clear
