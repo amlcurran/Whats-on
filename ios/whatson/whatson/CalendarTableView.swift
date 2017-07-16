@@ -104,10 +104,6 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
         }
     }
 
-    func enablePreviewing(with delegate: UIViewControllerPreviewingDelegate, in viewController: UIViewController) {
-        viewController.registerForPreviewing(with: delegate, sourceView: tableView)
-    }
-
     func style(offsetAgainst header: HeaderView) {
         tableView.register(DayCell.self, forCellReuseIdentifier: "day")
         tableView.register(EventCell.self, forCellReuseIdentifier: "event")

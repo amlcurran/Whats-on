@@ -35,7 +35,7 @@ class WhatsOnViewController: UIViewController,
         title = " "
 
         let displayer = EventForceTouchDisplayer(table: table, navigationController: navigationController)
-        table.enablePreviewing(with: displayer, in: self)
+        registerForPreviewing(with: displayer, sourceView: table.view)
         forceTouchDisplayer = displayer
 
         let eventRepo = EventStoreRepository(timeRepository: timeRepo)
