@@ -22,11 +22,10 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.isDay {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "day", for: indexPath) as? DayCell,
-                  let item = dataProvider.item(at: indexPath.dataIndexPath),
-                  let slot = dataProvider.slot(at: indexPath.dataIndexPath) else {
+                  let item = dataProvider.item(at: indexPath.dataIndexPath) else {
                 preconditionFailure("Tried to dequeue a cell which wasn't a Calendar cell")
             }
-            return cell.bound(to: item, slot: slot)
+            return cell.bound(to: item)
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "event", for: indexPath) as? EventCell,
                   let item = dataProvider.item(at: indexPath.dataIndexPath),

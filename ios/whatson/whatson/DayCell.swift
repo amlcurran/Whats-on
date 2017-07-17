@@ -34,7 +34,7 @@ class DayCell: UITableViewCell {
         dayLabel.constrain(.bottom, to: contentView, .bottom, withOffset: -4)
     }
 
-    func bound(to item: SCCalendarItem, slot: SCCalendarSlot) -> Self {
+    func bound(to item: SCCalendarItem) -> Self {
         dayLabel.text = dayFormatter.string(from: Date(from: item.startTime()))
         return self
     }
