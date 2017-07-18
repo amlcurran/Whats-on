@@ -7,6 +7,7 @@ class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitionin
 
     var selectedIndexPath: IndexPath?
     var selectedCell: UITableViewCell?
+    let animator: Animator = AnimatorHolder.animator
 
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return slideDuration + alphaDuration
@@ -41,20 +42,22 @@ class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitionin
         backgroundView.alpha = 0
         rowCardSnapshot.frame = row.absoluteFrame(of: calendarRow.roundedView)
 
-        UIView.animate(withDuration: slideDuration, animations: {
+        let secondAnimation = animator.animate(withDuration: alphaDuration, {
+            toView.alpha = 1
+        }, completion: {
+            rowCardSnapshot.removeFromSuperview()
+            fromView.removeFromSuperview()
+            backgroundView.removeFromSuperview()
+            detailVC.detailsCard.expandTitleAndTimeGap()
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+        })
+        let firstAnimation = animator.animate(withDuration: slideDuration, {
             backgroundView.alpha = 1
             rowCardSnapshot.frame.origin.y = detailVC.detailsCard.absoluteFrame().origin.y + 12
-        }, completion: { _ in
-            UIView.animate(withDuration: alphaDuration, animations: {
-                toView.alpha = 1
-            }, completion: { _ in
-                rowCardSnapshot.removeFromSuperview()
-                fromView.removeFromSuperview()
-                backgroundView.removeFromSuperview()
-                detailVC.detailsCard.expandTitleAndTimeGap()
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-            })
+        }, completion: {
+            secondAnimation?.start()
         })
+        firstAnimation?.start()
     }
 
 }

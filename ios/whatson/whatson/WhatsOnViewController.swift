@@ -126,6 +126,7 @@ class WhatsOnViewController: UIViewController,
 
     func showCalendar(_ source: SCCalendarSource) {
         table.update(source)
+        loadingView.animateAlpha(to: 0)
         loadingView.isHidden = true
         failedAccessView.isHidden = true
         failedAccessView.isUserInteractionEnabled = false
