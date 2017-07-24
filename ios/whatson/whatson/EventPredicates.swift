@@ -34,6 +34,9 @@ private func notDeclinedOrCancelled() -> EventPredicate {
         if let mainUser = attendees.mainUser {
             return mainUser.participantStatus == .accepted
         }
+        if let organiser = event.organizer {
+            return organiser.isCurrentUser
+        }
         return false
     }
 }
