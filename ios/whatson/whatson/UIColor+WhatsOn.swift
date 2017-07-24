@@ -35,10 +35,10 @@ extension UIColor {
         var blue: CGFloat = 0
         var alpha: CGFloat = 0
         if self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) {
-            let darkRed = Float(red - factor)
-            let darkGreen = Float(green - factor)
-            let darkBlue = Float(blue - factor)
-            return UIColor(colorLiteralRed: darkRed, green: darkGreen, blue: darkBlue, alpha: Float(alpha))
+            let darkRed = CGFloat(red - factor)
+            let darkGreen = CGFloat(green - factor)
+            let darkBlue = CGFloat(blue - factor)
+            return UIColor(red: darkRed, green: darkGreen, blue: darkBlue, alpha: CGFloat(alpha))
         }
         return self
     }
