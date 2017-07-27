@@ -253,6 +253,9 @@
 		69853E6065D4384CD18D05CB /* views */ = {
 			isa = PBXGroup;
 			children = (
+				8600B99C1F09383D008578E5 /* LoadingView.swift */,
+				860784791DAD7E6100AAE856 /* LabelStyle.swift */,
+				86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */,
 				6985328C217A9C753C09CFDE /* Line.swift */,
 				866D2E761EEA045E008D76D5 /* GradientView.swift */,
 			);
@@ -335,14 +338,12 @@
 		86CAD49B1BACC9B1009C9CFD /* whatson */ = {
 			isa = PBXGroup;
 			children = (
-				8600B99C1F09383D008578E5 /* LoadingView.swift */,
 				86C85A121EA80B080085C9C6 /* What’s on.entitlements */,
 				86E09AB31BB6A75700D5A809 /* core */,
 				86FCF4401D455AC3000938E3 /* extensions */,
 				86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */,
 				86CAD4AA1BACC9B1009C9CFD /* LaunchScreen.storyboard */,
 				86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */,
-				86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */,
 				86CAD49C1BACC9B1009C9CFD /* Supporting Files */,
 				8695D0311DA1A19B0034D52A /* day list */,
 				86FB1C321D8F37310074431B /* event details */,
@@ -351,7 +352,6 @@
 				869DAC7C1D44D15C005AF315 /* EventPredicates.swift */,
 				8650D7CF1D9FA8F5002D5930 /* EventStoreRepository.swift */,
 				8650D7D11D9FAE8E002D5930 /* TimeRepository.swift */,
-				860784791DAD7E6100AAE856 /* LabelStyle.swift */,
 				69853E6065D4384CD18D05CB /* views */,
 				698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */,
 				6985358E9835009A7EA756E9 /* Analytics.swift */,
