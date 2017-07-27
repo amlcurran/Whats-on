@@ -120,7 +120,7 @@
 		69853BC8BAF5893B6913918C /* AllowsGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllowsGestureRecognizer.swift; sourceTree = "<group>"; };
 		69853BE8F4A525FC03DF7E20 /* Completion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Completion.swift; sourceTree = "<group>"; };
 		69853D2C9F2840A9862339C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		69853F60E5391F881F006F7B /* TimeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeLabel.swift; path = views/TimeLabel.swift; sourceTree = "<group>"; };
+		69853F60E5391F881F006F7B /* TimeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLabel.swift; sourceTree = "<group>"; };
 		8334259A4DD3ECC2E846BCAF /* Pods_whatson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_whatson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8600B99C1F09383D008578E5 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		8600B99E1F09429D008578E5 /* Delayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delayer.swift; sourceTree = "<group>"; };
@@ -276,7 +276,7 @@
 				865C7B021EE56AE80047D8E0 /* BuildableTable.swift */,
 				865C7B041EE574100047D8E0 /* NewOptionsViewController.swift */,
 			);
-			name = options;
+			path = options;
 			sourceTree = "<group>";
 		};
 		8695D0311DA1A19B0034D52A /* day list */ = {
