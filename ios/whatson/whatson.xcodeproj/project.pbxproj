@@ -418,7 +418,7 @@
 				2DBA11FDB477210F9D964D34 /* EventResponseView.swift */,
 				2DBA151F9881A527C9CC0A71 /* EventResponse.swift */,
 			);
-			name = "event details";
+			path = "event details";
 			sourceTree = "<group>";
 		};
 		86FCF4401D455AC3000938E3 /* extensions */ = {
