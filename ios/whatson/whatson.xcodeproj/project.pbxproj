@@ -294,7 +294,7 @@
 				86CFE11B1F1376A400D9AA8D /* EventForceTouchDisplayer.swift */,
 				698530C0F754D12F1E38397C /* DayCell.swift */,
 			);
-			name = "day list";
+			path = "day list";
 			sourceTree = "<group>";
 		};
 		869DAC711D449EFB005AF315 /* tests */ = {
