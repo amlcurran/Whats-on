@@ -1,6 +1,6 @@
 import XCTest
 import EventKit
-@testable import What_s_on
+@testable import Whatson
 
 class EventPredicateTests: XCTestCase {
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0800"
+   LastUpgradeVersion = "0830"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "86CAD4981BACC9B1009C9CFD"
-               BuildableName = "What&#8217;s on.app"
+               BuildableName = "What&#x2019;s on.app"
                BlueprintName = "whatson"
                ReferencedContainer = "container:whatson.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "86CAD4981BACC9B1009C9CFD"
-            BuildableName = "What&#8217;s on.app"
+            BuildableName = "What&#x2019;s on.app"
             BlueprintName = "whatson"
             ReferencedContainer = "container:whatson.xcodeproj">
          </BuildableReference>
@@ -66,7 +66,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "86CAD4981BACC9B1009C9CFD"
-            BuildableName = "What&#8217;s on.app"
+            BuildableName = "What&#x2019;s on.app"
             BlueprintName = "whatson"
             ReferencedContainer = "container:whatson.xcodeproj">
          </BuildableReference>
@@ -91,7 +91,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "86CAD4981BACC9B1009C9CFD"
-            BuildableName = "What&#8217;s on.app"
+            BuildableName = "What&#x2019;s on.app"
             BlueprintName = "whatson"
             ReferencedContainer = "container:whatson.xcodeproj">
          </BuildableReference>

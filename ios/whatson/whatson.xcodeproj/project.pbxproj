@@ -510,7 +510,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Alex Curran";
 				TargetAttributes = {
 					869DAC6F1D449EFB005AF315 = {
@@ -993,12 +993,12 @@
 				);
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson;
+				PRODUCT_MODULE_NAME = Whatson;
 				PRODUCT_NAME = "What’s on";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "whatson-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
-				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
 				USER_HEADER_SEARCH_PATHS = "\"${J2OBJC_HOME}/include\"/**";
 			};
 			name = Debug;
@@ -1066,12 +1066,12 @@
 				);
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson;
+				PRODUCT_MODULE_NAME = Whatson;
 				PRODUCT_NAME = "What’s on";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "whatson-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
-				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
 				USER_HEADER_SEARCH_PATHS = "\"${J2OBJC_HOME}/include\"/**";
 			};
 			name = Release;

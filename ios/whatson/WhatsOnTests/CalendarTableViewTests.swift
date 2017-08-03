@@ -1,6 +1,6 @@
 import XCTest
 import UIKit
-@testable import What_s_on
+@testable import Whatson
 
 class CalendarTableViewTests: XCTestCase, CalendarTableViewDelegate {
 
