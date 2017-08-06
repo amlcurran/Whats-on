@@ -31,4 +31,8 @@ class CheckableTableItem: TableItem {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: TitleTableItem.cellIdentifier)
     }
 
+    var withFlippedCheck: CheckableTableItem {
+        return CheckableTableItem(title: title, isChecked: !isChecked)
+    }
+
 }

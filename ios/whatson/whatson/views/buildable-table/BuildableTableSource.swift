@@ -42,6 +42,10 @@ class BuildableTableSource: NSObject, UITableViewDataSource, UITableViewDelegate
         }
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        sections[indexPath.section].onSelect?(sections[indexPath.section].item(at: indexPath.row), indexPath.row)
+    }
+
     private func item(at indexPath: IndexPath) -> TableItem {
         return sections[indexPath.section].item(at: indexPath.row)
     }

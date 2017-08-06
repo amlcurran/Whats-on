@@ -12,6 +12,7 @@ protocol TableSection {
     var title: String { get }
     var footer: String? { get }
     var itemCount: Int { get }
+    var onSelect: ((TableItem, Int) -> Void)? { get }
     func item(at index: Int) -> TableItem
 }
 
@@ -19,11 +20,13 @@ class StaticTableSection: TableSection {
     let title: String
     let footer: String?
     var items: [TableItem]
+    let onSelect: ((TableItem, Int) -> Void)?
 
-    init(title: String, footer: String? = nil, items: [TableItem]) {
+    init(title: String, footer: String? = nil, items: [TableItem], onSelect: ((TableItem, Int) -> Void)? = nil) {
         self.title = title
         self.footer = footer
         self.items = items
+        self.onSelect = onSelect
     }
 
     var itemCount: Int {

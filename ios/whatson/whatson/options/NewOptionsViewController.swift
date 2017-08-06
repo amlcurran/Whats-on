@@ -11,14 +11,16 @@ import UIKit
 class NewOptionsViewController: UIViewController, CalendarsView, DateView {
 
     private let analytics = Analytics()
-    private let calendarPresenter = CalendarPresenter(loader: CalendarLoader(preferenceStore: CalendarPreferenceStore()))
+    private let calendarPresenter = CalendarPresenter(loader: CalendarLoader(preferenceStore: CalendarPreferenceStore()), preferenceStore: CalendarPreferenceStore())
     private let pickerPresenter = DatePickerPresenter(timeStore: UserDefaultsTimeStore())
     private let picker = UIDatePicker()
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private let pickerSection = StaticTableSection(title: NSLocalizedString("Options.DisplayOptions", comment: "Options"),
                                                    footer: NSLocalizedString("Options.MinuteLimitation", comment: "Minute limitations in the options"),
                                                    items: [])
-    private lazy var calendarsSection = StaticTableSection(title: "Calendars", items: [])
+    private lazy var calendarsSection = StaticTableSection(title: "Calendars", items: [], onSelect: { (item: TableItem, index: Int) in
+        self.calendarPresenter.toggle(item, at: index)
+    })
     private var pickerHeightConstraint: NSLayoutConstraint!
     private lazy var sections = [self.pickerSection, self.calendarsSection]
     private lazy var source = BuildableTableSource(sections: self.sections, tableView: self.tableView)
@@ -77,6 +79,11 @@ class NewOptionsViewController: UIViewController, CalendarsView, DateView {
     func updateCalendar(_ items: [TableItem]) {
         calendarsSection.items = items
         tableView.reloadSections([1], with: .automatic)
+    }
+
+    func updateSingleCalendar(_ item: TableItem, at index: Int) {
+        calendarsSection.items.replaceSubrange(index..<index+1, with: [item])
+        tableView.reloadRows(at: [IndexPath(row: index, section: 1)], with: .automatic)
     }
 
     func updateDate(_ items: [TableItem]) {
