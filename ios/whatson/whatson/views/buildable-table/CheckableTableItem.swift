@@ -1,5 +1,5 @@
 //
-//  TitleTableItem.swift
+//  CheckableTableItem.swift
 //  whatson
 //
 //  Created by Alex Curran on 06/08/2017.
@@ -8,23 +8,23 @@
 
 import UIKit
 
-struct TitleTableItem: TableItem {
+class CheckableTableItem: TableItem {
 
     static var cellIdentifier = "singleCell"
 
     let title: String
-    let isSelectable: Bool
-    let isEnabled: Bool
+    let isChecked: Bool
+    let isSelectable = true
+    let isEnabled = true
 
-    init(title: String, isSelectable: Bool = false, isEnabled: Bool = true) {
+    init(title: String, isChecked: Bool) {
         self.title = title
-        self.isSelectable = isSelectable
-        self.isEnabled = isEnabled
+        self.isChecked = isChecked
     }
 
     func bind(to cell: UITableViewCell) {
         cell.textLabel?.text = title
-        cell.textLabel?.isEnabled = isEnabled
+        cell.accessoryType = isChecked ? .checkmark : .none
     }
 
     static func register(in tableView: UITableView) {

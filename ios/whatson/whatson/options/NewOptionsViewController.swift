@@ -67,11 +67,11 @@ class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate {
         updateText()
         calendarLoader.load(onSuccess: { calendars in
             calendarsSection.items = calendars.map({ calendar in
-                return TitleTableItem(title: calendar.name)
+                return CheckableTableItem(title: calendar.name, isChecked: true)
             })
             tableView.reloadData()
         }, onError: { _ in
-
+            calendarsSection.items = [TitleTableItem(title: "No calendars available", isEnabled: false)]
         })
     }
 
