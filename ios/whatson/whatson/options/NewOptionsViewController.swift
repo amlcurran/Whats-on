@@ -8,11 +8,11 @@
 
 import UIKit
 
-class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate {
+class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate, CalendarsView {
 
     private let analytics = Analytics()
     private let timeStore = UserDefaultsTimeStore()
-    private let calendarLoader = CalendarLoader()
+    private let calendarLoader = CalendarPresenter(loader: CalendarLoader(preferenceStore: CalendarPreferenceStore()))
     private let picker = UIDatePicker()
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private let boundaryView = BoundaryPickerView()
@@ -65,14 +65,7 @@ class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Navigation Item"), style: .plain, target: self, action: #selector(doneTapped))
 
         updateText()
-        calendarLoader.load(onSuccess: { calendars in
-            calendarsSection.items = calendars.map({ calendar in
-                return CheckableTableItem(title: calendar.name, isChecked: true)
-            })
-            tableView.reloadData()
-        }, onError: { _ in
-            calendarsSection.items = [TitleTableItem(title: "No calendars available", isEnabled: false)]
-        })
+        calendarLoader.beginPresenting(on: self)
     }
 
     func cancelTapped() {
@@ -124,6 +117,11 @@ class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate {
         if editState == .end {
             picker.set(hour: timeStore.endTime, limitedAfter: timeStore.startTime)
         }
+    }
+
+    func updateCalendar(_ items: [TableItem]) {
+        calendarsSection.items = items
+        tableView.reloadSections([1], with: .automatic)
     }
 
 }

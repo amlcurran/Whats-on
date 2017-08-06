@@ -10,7 +10,7 @@ import UIKit
 
 struct CustomViewTableItem: TableItem {
 
-    static var cellIdentifier = "singleCell"
+    static var cellIdentifier = "customCell"
 
     let isSelectable = false
     let isEnabled = false

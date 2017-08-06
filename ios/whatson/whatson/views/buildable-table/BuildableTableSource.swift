@@ -8,6 +8,7 @@ class BuildableTableSource: NSObject, UITableViewDataSource, UITableViewDelegate
         self.sections = sections
         TitleTableItem.register(in: tableView)
         SwitchTableItem.register(in: tableView)
+        CustomViewTableItem.register(in: tableView)
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
