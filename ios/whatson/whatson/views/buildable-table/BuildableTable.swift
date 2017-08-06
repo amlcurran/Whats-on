@@ -1,9 +1,58 @@
 import UIKit
 
-struct TableSection {
+protocol TableSection {
+    var title: String { get }
+    var footer: String? { get }
+    var itemCount: Int { get }
+    func item(at index: Int) -> TableItem
+}
+
+class StaticTableSection: TableSection {
     let title: String
     let footer: String?
-    let items: [TableItem]
+    private let items: [TableItem]
+
+    init(title: String, footer: String? = nil, items: [TableItem]) {
+        self.title = title
+        self.footer = footer
+        self.items = items
+    }
+
+    var itemCount: Int {
+        return items.count
+    }
+
+    func item(at index: Int) -> TableItem {
+        return items[index]
+    }
+}
+
+protocol DynamicTableSectionSource: class {
+    var itemCount: Int { get }
+    func item(at index: Int) -> TableItem
+}
+
+class DynamicTableSection: TableSection {
+
+    let title: String
+    let footer: String?
+    weak var source: DynamicTableSectionSource?
+
+    init(title: String, footer: String? = nil, source: DynamicTableSectionSource) {
+        self.title = title
+        self.footer = footer
+        self.source = source
+    }
+
+    var itemCount: Int {
+        return (source?.itemCount).or(0)
+    }
+
+    func item(at index: Int) -> TableItem {
+        let concreteSource = source.required(message: "Source deallocated before item could be retrieved")
+        return concreteSource.item(at: index)
+    }
+
 }
 
 protocol TableItem {
@@ -108,7 +157,7 @@ class BuildableTableSource: NSObject, UITableViewDataSource, UITableViewDelegate
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections[section].items.count
+        return sections[section].itemCount
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -120,7 +169,7 @@ class BuildableTableSource: NSObject, UITableViewDataSource, UITableViewDelegate
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = sections[indexPath.section].items[indexPath.row]
+        let item = sections[indexPath.section].item(at: indexPath.row)
         let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
         item.bind(to: cell)
         return cell
@@ -135,7 +184,7 @@ class BuildableTableSource: NSObject, UITableViewDataSource, UITableViewDelegate
     }
 
     private func item(at indexPath: IndexPath) -> TableItem {
-        return sections[indexPath.section].items[indexPath.row]
+        return sections[indexPath.section].item(at: indexPath.row)
     }
 
 }

@@ -253,6 +253,7 @@
 		69853E6065D4384CD18D05CB /* views */ = {
 			isa = PBXGroup;
 			children = (
+				8658A22E1F375C8800BF219C /* buildable-table */,
 				8600B99C1F09383D008578E5 /* LoadingView.swift */,
 				860784791DAD7E6100AAE856 /* LabelStyle.swift */,
 				86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */,
@@ -279,10 +280,17 @@
 				69853F60E5391F881F006F7B /* TimeLabel.swift */,
 				6985397DE155D32104662FA2 /* UIDatePicker+Hours.swift */,
 				865C7B001EE4B00D0047D8E0 /* BoundaryPickerView.swift */,
-				865C7B021EE56AE80047D8E0 /* BuildableTable.swift */,
 				865C7B041EE574100047D8E0 /* NewOptionsViewController.swift */,
 			);
 			path = options;
+			sourceTree = "<group>";
+		};
+		8658A22E1F375C8800BF219C /* buildable-table */ = {
+			isa = PBXGroup;
+			children = (
+				865C7B021EE56AE80047D8E0 /* BuildableTable.swift */,
+			);
+			path = "buildable-table";
 			sourceTree = "<group>";
 		};
 		8695D0311DA1A19B0034D52A /* day list */ = {

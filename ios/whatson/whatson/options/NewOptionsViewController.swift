@@ -8,32 +8,18 @@
 
 import UIKit
 
-class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate {
+class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate, DynamicTableSectionSource {
 
     private let analytics = Analytics()
     private let timeStore = UserDefaultsTimeStore()
-    private let picker: UIDatePicker = UIDatePicker()
+    private let picker = UIDatePicker()
+    private let tableView = UITableView(frame: .zero, style: .grouped)
     private let boundaryView = BoundaryPickerView()
     private var pickerHeightConstraint: NSLayoutConstraint!
+    private lazy var sections: [TableSection] = self.createSections()
+    private lazy var source: BuildableTableSource = self.createSource()
 
     private var editState: BoundaryPickerView.EditState = .none
-
-    private let tableView = UITableView(frame: .zero, style: .grouped)
-
-    private lazy var source: BuildableTableSource = {
-        let sections = [
-            TableSection(title: NSLocalizedString("Options.DisplayOptions", comment: "Options"),
-                         footer: NSLocalizedString("Options.MinuteLimitation", comment: "Minute limitations in the options"),
-                         items: [
-                            CustomViewTableItem(customViewFactory: {
-                                self.boundaryView.updateText(from: UserDefaultsTimeStore())
-                                self.boundaryView.delegate = self
-                                return self.boundaryView
-                            })
-                ])
-        ]
-        return BuildableTableSource(sections: sections, tableView: self.tableView)
-    }()
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -45,6 +31,25 @@ class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private func createSections() -> [TableSection] {
+        return [
+            StaticTableSection(title: NSLocalizedString("Options.DisplayOptions", comment: "Options"),
+                               footer: NSLocalizedString("Options.MinuteLimitation", comment: "Minute limitations in the options"),
+                               items: [
+                                CustomViewTableItem(customViewFactory: {
+                                    self.boundaryView.updateText(from: UserDefaultsTimeStore())
+                                    self.boundaryView.delegate = self
+                                    return self.boundaryView
+                                })
+                ]),
+            DynamicTableSection(title: "Dynamic", source: self)
+        ]
+    }
+
+    private func createSource() -> BuildableTableSource {
+        return BuildableTableSource(sections: self.sections, tableView: self.tableView)
     }
 
     override func viewDidLoad() {
@@ -109,6 +114,15 @@ class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate {
         if editState == .end {
             picker.set(hour: timeStore.endTime, limitedAfter: timeStore.startTime)
         }
+    }
+
+    var itemCount: Int {
+
+        return 1
+    }
+
+    func item(at index: Int) -> TableItem {
+        return TitleTableItem(title: "Hello world!")
     }
 
 }
