@@ -8,13 +8,15 @@
 
 import UIKit
 
-class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate, DynamicTableSectionSource {
+class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate {
 
     private let analytics = Analytics()
     private let timeStore = UserDefaultsTimeStore()
+    private let calendarLoader = CalendarLoader()
     private let picker = UIDatePicker()
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private let boundaryView = BoundaryPickerView()
+    private let calendarsSection = StaticTableSection(title: "Calendars", items: [])
     private var pickerHeightConstraint: NSLayoutConstraint!
     private lazy var sections: [TableSection] = self.createSections()
     private lazy var source: BuildableTableSource = self.createSource()
@@ -44,7 +46,7 @@ class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate, Dy
                                     return self.boundaryView
                                 })
                 ]),
-            DynamicTableSection(title: "Dynamic", source: self)
+            calendarsSection
         ]
     }
 
@@ -63,6 +65,14 @@ class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate, Dy
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Navigation Item"), style: .plain, target: self, action: #selector(doneTapped))
 
         updateText()
+        calendarLoader.load(onSuccess: { calendars in
+            calendarsSection.items = calendars.map({ calendar in
+                return TitleTableItem(title: calendar.name)
+            })
+            tableView.reloadData()
+        }, onError: { _ in
+
+        })
     }
 
     func cancelTapped() {
@@ -114,15 +124,6 @@ class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate, Dy
         if editState == .end {
             picker.set(hour: timeStore.endTime, limitedAfter: timeStore.startTime)
         }
-    }
-
-    var itemCount: Int {
-
-        return 1
-    }
-
-    func item(at index: Int) -> TableItem {
-        return TitleTableItem(title: "Hello world!")
     }
 
 }

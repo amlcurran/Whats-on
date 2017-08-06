@@ -12,6 +12,7 @@ protocol TableItem {
 
     static var cellIdentifier: String { get }
     var isSelectable: Bool { get }
+    var isEnabled: Bool { get }
 
     func bind(to cell: UITableViewCell)
 

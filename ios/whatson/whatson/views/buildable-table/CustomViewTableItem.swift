@@ -13,6 +13,7 @@ struct CustomViewTableItem: TableItem {
     static var cellIdentifier = "singleCell"
 
     let isSelectable = false
+    let isEnabled = false
     let customViewFactory: () -> UIView
 
     func bind(to cell: UITableViewCell) {

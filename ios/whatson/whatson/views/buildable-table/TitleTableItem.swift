@@ -14,6 +14,7 @@ struct TitleTableItem: TableItem {
 
     let title: String
     let isSelectable = false
+    let isEnabled = false
 
     func bind(to cell: UITableViewCell) {
         cell.textLabel?.text = title

@@ -13,6 +13,7 @@ class SwitchTableItem: NSObject, TableItem {
     static var cellIdentifier = "switch"
     let title: String
     let isSelectable = false
+    let isEnabled = false
     let getter: () -> Bool
     let setter: (Bool) -> Void
 
