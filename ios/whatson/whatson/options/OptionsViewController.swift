@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewOptionsViewController: UIViewController, CalendarsView, DateView {
+class OptionsViewController: UIViewController, CalendarsView, DateView {
 
     private let analytics = Analytics()
     private let calendarPresenter = CalendarPresenter(loader: CalendarLoader(preferenceStore: CalendarPreferenceStore()), preferenceStore: CalendarPreferenceStore())

@@ -83,7 +83,7 @@ class WhatsOnViewController: UIViewController,
     }
 
     func didTapEdit() {
-        let settings = NewOptionsViewController().inNavigationController()
+        let settings = OptionsViewController().inNavigationController()
         present(settings, animated: true)
     }
 
