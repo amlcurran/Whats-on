@@ -18,10 +18,10 @@ class NewOptionsViewController: UIViewController, CalendarsView, DateView {
     private let pickerSection = StaticTableSection(title: NSLocalizedString("Options.DisplayOptions", comment: "Options"),
                                                    footer: NSLocalizedString("Options.MinuteLimitation", comment: "Minute limitations in the options"),
                                                    items: [])
-    private let calendarsSection = StaticTableSection(title: "Calendars", items: [])
+    private lazy var calendarsSection = StaticTableSection(title: "Calendars", items: [])
     private var pickerHeightConstraint: NSLayoutConstraint!
-    private lazy var sections: [TableSection] = self.createSections()
-    private lazy var source: BuildableTableSource = self.createSource()
+    private lazy var sections = [self.pickerSection, self.calendarsSection]
+    private lazy var source = BuildableTableSource(sections: self.sections, tableView: self.tableView)
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -33,17 +33,6 @@ class NewOptionsViewController: UIViewController, CalendarsView, DateView {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    private func createSections() -> [TableSection] {
-        return [
-            pickerSection,
-            calendarsSection
-        ]
-    }
-
-    private func createSource() -> BuildableTableSource {
-        return BuildableTableSource(sections: self.sections, tableView: self.tableView)
     }
 
     override func viewDidLoad() {
