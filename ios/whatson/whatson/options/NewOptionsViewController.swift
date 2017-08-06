@@ -18,17 +18,17 @@ class NewOptionsViewController: UIViewController, CalendarsView, DateView {
     private let pickerSection = StaticTableSection(title: NSLocalizedString("Options.DisplayOptions", comment: "Options"),
                                                    footer: NSLocalizedString("Options.MinuteLimitation", comment: "Minute limitations in the options"),
                                                    items: [])
-    private lazy var calendarsSection = StaticTableSection(title: "Calendars", items: [], onSelect: { (item: TableItem, index: Int) in
-        self.calendarPresenter.toggle(item, at: index)
-    })
+    private var calendarsSection: StaticTableSection!
     private var pickerHeightConstraint: NSLayoutConstraint!
-    private lazy var sections = [self.pickerSection, self.calendarsSection]
-    private lazy var source = BuildableTableSource(sections: self.sections, tableView: self.tableView)
+    private var source: BuildableTableSource! {
+        didSet {
+            tableView.dataSource = source
+            tableView.delegate = source
+        }
+    }
 
     init() {
         super.init(nibName: nil, bundle: nil)
-        self.tableView.dataSource = source
-        self.tableView.delegate = source
         self.tableView.estimatedRowHeight = 44
         self.tableView.rowHeight = UITableViewAutomaticDimension
     }
@@ -39,6 +39,11 @@ class NewOptionsViewController: UIViewController, CalendarsView, DateView {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        calendarsSection = StaticTableSection(title: "Calendars", items: [], onSelect: { (item: TableItem, index: Int) in
+                self.calendarPresenter.toggle(item, at: index)
+            })
+
+        source = BuildableTableSource(sections: [pickerSection, calendarsSection], tableView: tableView)
 
         layoutViews()
 
