@@ -8,20 +8,20 @@
 
 import UIKit
 
-class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate, CalendarsView {
+class NewOptionsViewController: UIViewController, CalendarsView, DateView {
 
     private let analytics = Analytics()
-    private let timeStore = UserDefaultsTimeStore()
-    private let calendarLoader = CalendarPresenter(loader: CalendarLoader(preferenceStore: CalendarPreferenceStore()))
+    private let calendarPresenter = CalendarPresenter(loader: CalendarLoader(preferenceStore: CalendarPreferenceStore()))
+    private let pickerPresenter = DatePickerPresenter(timeStore: UserDefaultsTimeStore())
     private let picker = UIDatePicker()
     private let tableView = UITableView(frame: .zero, style: .grouped)
-    private let boundaryView = BoundaryPickerView()
+    private let pickerSection = StaticTableSection(title: NSLocalizedString("Options.DisplayOptions", comment: "Options"),
+                                                   footer: NSLocalizedString("Options.MinuteLimitation", comment: "Minute limitations in the options"),
+                                                   items: [])
     private let calendarsSection = StaticTableSection(title: "Calendars", items: [])
     private var pickerHeightConstraint: NSLayoutConstraint!
     private lazy var sections: [TableSection] = self.createSections()
     private lazy var source: BuildableTableSource = self.createSource()
-
-    private var editState: BoundaryPickerView.EditState = .none
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -37,15 +37,7 @@ class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate, Ca
 
     private func createSections() -> [TableSection] {
         return [
-            StaticTableSection(title: NSLocalizedString("Options.DisplayOptions", comment: "Options"),
-                               footer: NSLocalizedString("Options.MinuteLimitation", comment: "Minute limitations in the options"),
-                               items: [
-                                CustomViewTableItem(customViewFactory: {
-                                    self.boundaryView.updateText(from: UserDefaultsTimeStore())
-                                    self.boundaryView.delegate = self
-                                    return self.boundaryView
-                                })
-                ]),
+            pickerSection,
             calendarsSection
         ]
     }
@@ -58,21 +50,19 @@ class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate, Ca
         super.viewDidLoad()
 
         layoutViews()
-        picker.addTarget(self, action: #selector(spinnerUpdated), for: .valueChanged)
-        picker.datePickerMode = .time
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: "Navigation Item"), style: .plain, target: self, action: #selector(cancelTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Navigation Item"), style: .plain, target: self, action: #selector(doneTapped))
 
-        updateText()
-        calendarLoader.beginPresenting(on: self)
+        pickerPresenter.beginPresenting(using: picker, on: self)
+        calendarPresenter.beginPresenting(on: self)
     }
 
     func cancelTapped() {
         dismiss(animated: true, completion: nil)
     }
 
-    private func showPicker() {
+    func showPicker() {
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
             self?.pickerHeightConstraint.isActive = false
             self?.view.layoutIfNeeded()
@@ -90,38 +80,19 @@ class NewOptionsViewController: UIViewController, BoundaryPickerViewDelegate, Ca
     }
 
     func doneTapped() {
+        let timeStore = UserDefaultsTimeStore()
         analytics.changedTimes(starting: timeStore.startTime, finishing: timeStore.endTime)
         dismiss(animated: true, completion: nil)
-    }
-
-    func updateText() {
-        if editState == .start {
-            timeStore.startTime = picker.hour.or(17)
-        }
-        if editState == .end {
-            timeStore.endTime = picker.hour.or(23)
-        }
-        boundaryView.updateText(from: timeStore)
-    }
-
-    func spinnerUpdated() {
-        updateText()
-    }
-
-    func boundaryPickerDidBeginEditing(in state: BoundaryPickerView.EditState) {
-        showPicker()
-        editState = state
-        if editState == .start {
-            picker.set(hour: timeStore.startTime, limitedBefore: timeStore.endTime)
-        }
-        if editState == .end {
-            picker.set(hour: timeStore.endTime, limitedAfter: timeStore.startTime)
-        }
     }
 
     func updateCalendar(_ items: [TableItem]) {
         calendarsSection.items = items
         tableView.reloadSections([1], with: .automatic)
+    }
+
+    func updateDate(_ items: [TableItem]) {
+        pickerSection.items = items
+        tableView.reloadSections([0], with: .automatic)
     }
 
 }

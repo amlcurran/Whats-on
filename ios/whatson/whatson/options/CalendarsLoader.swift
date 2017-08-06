@@ -47,7 +47,7 @@ struct EventCalendar {
             return rawValue.hashValue
         }
 
-        static func ==(lhs: Id, rhs: Id) -> Bool {
+        static func == (lhs: Id, rhs: Id) -> Bool {
             return lhs.rawValue == rhs.rawValue
         }
     }
