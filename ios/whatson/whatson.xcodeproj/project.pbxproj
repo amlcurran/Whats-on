@@ -57,6 +57,11 @@
 		8648F18F1D984F6500C7BD48 /* EventDetailsTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8648F18E1D984F6500C7BD48 /* EventDetailsTracking.swift */; };
 		8650D7D01D9FA8F5002D5930 /* EventStoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8650D7CF1D9FA8F5002D5930 /* EventStoreRepository.swift */; };
 		8650D7D21D9FAE8E002D5930 /* TimeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8650D7D11D9FAE8E002D5930 /* TimeRepository.swift */; };
+		8658A2301F375DF800BF219C /* TableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658A22F1F375DF800BF219C /* TableSection.swift */; };
+		8658A2321F375E3A00BF219C /* TableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658A2311F375E3A00BF219C /* TableItem.swift */; };
+		8658A2341F375E6100BF219C /* TitleTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658A2331F375E6100BF219C /* TitleTableItem.swift */; };
+		8658A2361F375EA500BF219C /* SwitchTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658A2351F375EA500BF219C /* SwitchTableItem.swift */; };
+		8658A2381F375ED500BF219C /* CustomViewTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658A2371F375ED500BF219C /* CustomViewTableItem.swift */; };
 		865C7B011EE4B00D0047D8E0 /* BoundaryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C7B001EE4B00D0047D8E0 /* BoundaryPickerView.swift */; };
 		865C7B031EE56AE80047D8E0 /* BuildableTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C7B021EE56AE80047D8E0 /* BuildableTable.swift */; };
 		865C7B051EE574100047D8E0 /* NewOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C7B041EE574100047D8E0 /* NewOptionsViewController.swift */; };
@@ -164,6 +169,11 @@
 		8648F18E1D984F6500C7BD48 /* EventDetailsTracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsTracking.swift; sourceTree = "<group>"; };
 		8650D7CF1D9FA8F5002D5930 /* EventStoreRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventStoreRepository.swift; sourceTree = "<group>"; };
 		8650D7D11D9FAE8E002D5930 /* TimeRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeRepository.swift; sourceTree = "<group>"; };
+		8658A22F1F375DF800BF219C /* TableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSection.swift; sourceTree = "<group>"; };
+		8658A2311F375E3A00BF219C /* TableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableItem.swift; sourceTree = "<group>"; };
+		8658A2331F375E6100BF219C /* TitleTableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableItem.swift; sourceTree = "<group>"; };
+		8658A2351F375EA500BF219C /* SwitchTableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableItem.swift; sourceTree = "<group>"; };
+		8658A2371F375ED500BF219C /* CustomViewTableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewTableItem.swift; sourceTree = "<group>"; };
 		865C7B001EE4B00D0047D8E0 /* BoundaryPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundaryPickerView.swift; sourceTree = "<group>"; };
 		865C7B021EE56AE80047D8E0 /* BuildableTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildableTable.swift; sourceTree = "<group>"; };
 		865C7B041EE574100047D8E0 /* NewOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOptionsViewController.swift; sourceTree = "<group>"; };
@@ -289,6 +299,11 @@
 			isa = PBXGroup;
 			children = (
 				865C7B021EE56AE80047D8E0 /* BuildableTable.swift */,
+				8658A22F1F375DF800BF219C /* TableSection.swift */,
+				8658A2311F375E3A00BF219C /* TableItem.swift */,
+				8658A2331F375E6100BF219C /* TitleTableItem.swift */,
+				8658A2351F375EA500BF219C /* SwitchTableItem.swift */,
+				8658A2371F375ED500BF219C /* CustomViewTableItem.swift */,
 			);
 			path = "buildable-table";
 			sourceTree = "<group>";
@@ -720,11 +735,13 @@
 				865C7B031EE56AE80047D8E0 /* BuildableTable.swift in Sources */,
 				86F849991D046A3E007C41B0 /* EventDetailsViewController.swift in Sources */,
 				8614BABE1C825B7A00A3E570 /* NSDate+Time.swift in Sources */,
+				8658A2381F375ED500BF219C /* CustomViewTableItem.swift in Sources */,
 				8695D0331DA1A2A20034D52A /* SlotDetail.swift in Sources */,
 				86D751131C7128EB00C0A607 /* RoundedRectBorderView.swift in Sources */,
 				862468CB1F091ACE00FE5A49 /* EventsService.m in Sources */,
 				86F8499B1D046AAE007C41B0 /* UIView+Constraints.swift in Sources */,
 				86A9E45B1DA80A4900E8D019 /* UIViewController+Navigation.swift in Sources */,
+				8658A2341F375E6100BF219C /* TitleTableItem.swift in Sources */,
 				862468CE1F091ACE00FE5A49 /* TimeOfDay.m in Sources */,
 				869DAC7D1D44D15C005AF315 /* EventPredicates.swift in Sources */,
 				861BD0E01D9FC4290032FBAB /* Optional+Fluency.swift in Sources */,
@@ -733,6 +750,7 @@
 				865C7B051EE574100047D8E0 /* NewOptionsViewController.swift in Sources */,
 				866D2E771EEA045E008D76D5 /* GradientView.swift in Sources */,
 				8600B99F1F09429D008578E5 /* Delayer.swift in Sources */,
+				8658A2301F375DF800BF219C /* TableSection.swift in Sources */,
 				862468C61F091ACE00FE5A49 /* CalendarSource.m in Sources */,
 				86A9E45F1DA80E9700E8D019 /* DateFormatter+Initialisers.swift in Sources */,
 				8650D7D21D9FAE8E002D5930 /* TimeRepository.swift in Sources */,
@@ -753,6 +771,7 @@
 				8618A51F1BDA92F900A4845E /* EventCell.swift in Sources */,
 				864561C31C02709800ADDE44 /* NSDateCalculator.swift in Sources */,
 				86CAD49E1BACC9B1009C9CFD /* main.m in Sources */,
+				8658A2321F375E3A00BF219C /* TableItem.swift in Sources */,
 				69853BB8C3723DD6A606DFFE /* DetailsCard.swift in Sources */,
 				865C7B011EE4B00D0047D8E0 /* BoundaryPickerView.swift in Sources */,
 				698533DEAF59954635D7E3CD /* Line.swift in Sources */,
@@ -766,6 +785,7 @@
 				2DBA1A1D4FF1A6199AD9D4FA /* BuildConfig.swift in Sources */,
 				862468CC1F091ACE00FE5A49 /* SparseArray.m in Sources */,
 				2DBA13D585CE5E035AE263D4 /* EventResponseView.swift in Sources */,
+				8658A2361F375EA500BF219C /* SwitchTableItem.swift in Sources */,
 				2DBA1FC7FB7A35811ADEDB84 /* EventResponse.swift in Sources */,
 				8600B99D1F09383D008578E5 /* LoadingView.swift in Sources */,
 				862468C41F091ACE00FE5A49 /* CalendarItem.m in Sources */,
