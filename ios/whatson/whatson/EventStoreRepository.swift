@@ -5,20 +5,23 @@ import EventKit
 
     let calculator: NSDateCalculator
     let predicates: EventPredicates
+    let calendarPreferenceStore: CalendarPreferenceStore
 
-    init(timeRepository: SCTimeRepository) {
+    init(timeRepository: SCTimeRepository, calendarPreferenceStore: CalendarPreferenceStore) {
         self.calculator = NSDateCalculator.instance
         self.predicates = EventPredicates(timeRepository: timeRepository)
+        self.calendarPreferenceStore = calendarPreferenceStore
     }
 
     public func getCalendarItems(with nowTime: SCTimestamp!,
                                  with nextWeek: SCTimestamp!,
                                  with fivePm: SCTimeOfDay!,
                                  with elevenPm: SCTimeOfDay!) -> JavaUtilList {
-        let eventStore = EKEventStore()
+        let eventStore = EKEventStore.instance
         let startTime = calculator.date(from: nowTime)
         let endTime = calculator.date(from: nextWeek)
-        let search = eventStore.predicateForEvents(withStart: startTime, end: endTime, calendars: nil)
+        let calendars = eventStore.supportedCalendars(from: calendarPreferenceStore)
+        let search = eventStore.predicateForEvents(withStart: startTime, end: endTime, calendars: calendars)
         let allEvents = eventStore.events(matching: search)
         let filtered = allEvents.filter(predicates.defaults)
         let items = filtered.flatMap({ ekEvent in
@@ -40,6 +43,19 @@ fileprivate extension Array {
             list!.add(withId: item)
         }
         return list!
+    }
+
+}
+
+private extension EKEventStore {
+
+    func supportedCalendars(from preferences: CalendarPreferenceStore) -> [EKCalendar] {
+        let excludedCalendars = preferences.excludedCalendars
+        return calendars(for: .event).filter({ (calendar) -> Bool in
+            return excludedCalendars.contains(where: { excludedId in
+                return excludedId.rawValue == calendar.calendarIdentifier
+            }) == false
+        })
     }
 
 }
