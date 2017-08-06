@@ -30,7 +30,7 @@ class CalendarPresenter {
         loader.load(onSuccess: { calendars in
             self.calendars = calendars
             let items = calendars.map({ calendar in
-                return CheckableTableItem(title: calendar.name, isChecked: calendar.included)
+                return CheckableTableItem(title: calendar.name, subtitle: calendar.account, isChecked: calendar.included)
             })
             view.updateCalendar(items)
         }, onError: { _ in
@@ -50,14 +50,6 @@ class CalendarPresenter {
             let flippedItem = checkableItem.withFlippedCheck
             view?.updateSingleCalendar(flippedItem, at: index)
         }
-    }
-
-}
-
-private extension Array {
-
-    mutating func remove(where predicate: (Element) -> Bool) {
-
     }
 
 }

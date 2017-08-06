@@ -60,9 +60,9 @@ private extension EKEventStore {
 
 private extension Array where Element == EventCalendar.Id {
 
-    func doesNotContainCalendar(withId id: String) -> Bool {
+    func doesNotContainCalendar(withId identifier: String) -> Bool {
         return contains(where: { excludedId in
-            return excludedId.rawValue == id
+            return excludedId.rawValue == identifier
         }) == false
     }
 

@@ -25,6 +25,7 @@ class CalendarLoader {
         let calendars = ekCalendars.map({ ekCalendar -> EventCalendar in
             let calendarId = EventCalendar.Id(rawValue: ekCalendar.calendarIdentifier)
             return EventCalendar(name: ekCalendar.title,
+                                 account: ekCalendar.source.title,
                                  id: calendarId,
                                  included: excludedCalendars.contains(calendarId) == false)
         })
@@ -35,6 +36,7 @@ class CalendarLoader {
 
 struct EventCalendar {
     let name: String
+    let account: String
     //swiftlint:disable:next variable_name
     let id: Id
     let included: Bool

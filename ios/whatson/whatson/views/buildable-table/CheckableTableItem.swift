@@ -10,29 +10,44 @@ import UIKit
 
 class CheckableTableItem: TableItem {
 
-    static var cellIdentifier = "singleCell"
+    static var cellIdentifier = "checkable"
 
     let title: String
+    let subtitle: String
     let isChecked: Bool
     let isSelectable = true
     let isEnabled = true
 
-    init(title: String, isChecked: Bool) {
+    init(title: String, subtitle: String, isChecked: Bool) {
         self.title = title
+        self.subtitle = subtitle
         self.isChecked = isChecked
     }
 
     func bind(to cell: UITableViewCell) {
         cell.textLabel?.text = title
+        cell.detailTextLabel?.text = subtitle
         cell.accessoryType = isChecked ? .checkmark : .none
     }
 
     static func register(in tableView: UITableView) {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: TitleTableItem.cellIdentifier)
+        tableView.register(SubtitleCell.self, forCellReuseIdentifier: CheckableTableItem.cellIdentifier)
     }
 
     var withFlippedCheck: CheckableTableItem {
-        return CheckableTableItem(title: title, isChecked: !isChecked)
+        return CheckableTableItem(title: title, subtitle: subtitle, isChecked: !isChecked)
+    }
+
+}
+
+private class SubtitleCell: UITableViewCell {
+
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
 }
