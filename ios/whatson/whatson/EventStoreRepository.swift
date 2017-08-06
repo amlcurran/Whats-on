@@ -52,10 +52,18 @@ private extension EKEventStore {
     func supportedCalendars(from preferences: CalendarPreferenceStore) -> [EKCalendar] {
         let excludedCalendars = preferences.excludedCalendars
         return calendars(for: .event).filter({ (calendar) -> Bool in
-            return excludedCalendars.contains(where: { excludedId in
-                return excludedId.rawValue == calendar.calendarIdentifier
-            }) == false
+            return excludedCalendars.doesNotContainCalendar(withId: calendar.calendarIdentifier)
         })
+    }
+
+}
+
+private extension Array where Element == EventCalendar.Id {
+
+    func doesNotContainCalendar(withId id: String) -> Bool {
+        return contains(where: { excludedId in
+            return excludedId.rawValue == id
+        }) == false
     }
 
 }
