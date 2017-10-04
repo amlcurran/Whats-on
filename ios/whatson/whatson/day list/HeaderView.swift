@@ -30,7 +30,7 @@ class HeaderView: UIView {
         add(view, constrainedTo: [.top, .leading, .bottom])
         add(editButton, constrainedTo: [.top, .trailing, .bottom])
         view.constrain(.trailing, to: editButton, .leading)
-        editButton.setContentHuggingPriority(UILayoutPriorityRequired, for: .horizontal)
+        editButton.setContentHuggingPriority(UILayoutPriority.required, for: .horizontal)
     }
 
     func styleTodayLabel() {
@@ -38,13 +38,13 @@ class HeaderView: UIView {
         dateFormatter.timeStyle = .none
         todayLabel.text = (dateFormatter.string(from: Date()) as NSString).uppercased
         todayLabel.textColor = .accent
-        todayLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightSemibold)
+        todayLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.semibold)
     }
 
     func styleAppLabel() {
         appLabel.text = "What’s on"
         appLabel.textColor = .secondary
-        appLabel.font = UIFont.systemFont(ofSize: 32, weight: UIFontWeightHeavy)
+        appLabel.font = UIFont.systemFont(ofSize: 32, weight: UIFont.Weight.heavy)
     }
 
     func styleEditButton() {
@@ -53,7 +53,7 @@ class HeaderView: UIView {
         editButton.addTarget(self, action: #selector(editTapped), for: .touchUpInside)
     }
 
-    func editTapped() {
+    @objc func editTapped() {
         delegate?.didTapEdit()
     }
 

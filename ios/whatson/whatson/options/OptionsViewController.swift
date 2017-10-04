@@ -54,7 +54,7 @@ class OptionsViewController: UIViewController, CalendarsView, DateView {
         calendarPresenter.beginPresenting(on: self)
     }
 
-    func cancelTapped() {
+    @objc func cancelTapped() {
         dismiss(animated: true, completion: nil)
     }
 
@@ -75,7 +75,7 @@ class OptionsViewController: UIViewController, CalendarsView, DateView {
         picker.constrain(.top, to: tableView, .bottom)
     }
 
-    func doneTapped() {
+    @objc func doneTapped() {
         let timeStore = UserDefaultsTimeStore()
         analytics.changedTimes(starting: timeStore.startTime, finishing: timeStore.endTime)
         dismiss(animated: true, completion: nil)

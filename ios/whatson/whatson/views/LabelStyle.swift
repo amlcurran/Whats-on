@@ -7,10 +7,10 @@ private let textColors: [LabelStyle: UIColor] = [
         .selectableTime: .secondary
 ]
 private let fonts: [LabelStyle: UIFont] = [
-        .cta: .systemFont(ofSize: 14, weight: UIFontWeightMedium),
-        .lower: .systemFont(ofSize: 14, weight: UIFontWeightMedium),
-        .header: .systemFont(ofSize: 16, weight: UIFontWeightSemibold),
-        .selectableTime: .systemFont(ofSize: 16, weight: UIFontWeightMedium)
+        .cta: .systemFont(ofSize: 14, weight: UIFont.Weight.medium),
+        .lower: .systemFont(ofSize: 14, weight: UIFont.Weight.medium),
+        .header: .systemFont(ofSize: 16, weight: UIFont.Weight.semibold),
+        .selectableTime: .systemFont(ofSize: 16, weight: UIFont.Weight.medium)
 ]
 
 enum LabelStyle {

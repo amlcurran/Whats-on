@@ -8,10 +8,6 @@ extension UIView {
         }
     }
 
-    func constrainToTopLayoutGuide(of viewController: UIViewController, insetBy inset: CGFloat = 0) {
-        topAnchor.constraint(equalTo: viewController.topLayoutGuide.bottomAnchor, constant: inset).isActive = true
-    }
-
     private func offset(for edge: NSLayoutAttribute, ofInset inset: CGFloat) -> CGFloat {
         switch edge {
         case .top, .topMargin, .leading, .leadingMargin:
@@ -22,10 +18,6 @@ extension UIView {
             print("Warning, offset not handled for edge \(edge)")
             return inset
         }
-    }
-
-    func constrainToBottomLayoutGuide(of viewController: UIViewController, insetBy inset: CGFloat = 0) {
-        topAnchor.constraint(equalTo: viewController.bottomLayoutGuide.topAnchor, constant: -inset).isActive = true
     }
 
     @discardableResult func constrainToSuperview(_ edge: NSLayoutAttribute, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
@@ -84,7 +76,7 @@ extension UIView {
     }
 
     func hugContent(_ axis: UILayoutConstraintAxis) {
-        setContentHuggingPriority(UILayoutPriorityRequired, for: axis)
+        setContentHuggingPriority(UILayoutPriority.required, for: axis)
     }
 
     func surroundedByView(insetBy inset: CGFloat) -> UIView {

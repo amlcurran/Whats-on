@@ -132,14 +132,14 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         presenter.loadLocation(from: event)
     }
 
-    func moreInfoTapped() {
+    @objc func moreInfoTapped() {
         tracking.wantedMoreInfo()
         let eventController = EKEventViewController(showing: event, delegate: self)
         let navigationController = UINavigationController(rootViewController: eventController)
         present(navigationController, animated: true, completion: nil)
     }
 
-    func deleteEventTapped() {
+    @objc func deleteEventTapped() {
         if !event.isDetached {
             deleteEvent(span: .thisEvent)
         } else {
@@ -151,7 +151,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         }
     }
 
-    func editEventTapped() {
+    @objc func editEventTapped() {
         tracking.wantedEdit()
         let eventController = EKEventEditViewController(editing: event, delegate: self)
         showDetailViewController(eventController, sender: self)

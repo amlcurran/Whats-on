@@ -24,7 +24,7 @@ class DayCell: UITableViewCell {
         backgroundColor = .clear
 
         dayLabel.textColor = .lightText
-        dayLabel.font = .systemFont(ofSize: 14, weight: UIFontWeightMedium)
+        dayLabel.font = .systemFont(ofSize: 14, weight: UIFont.Weight.medium)
     }
 
     private func layout() {

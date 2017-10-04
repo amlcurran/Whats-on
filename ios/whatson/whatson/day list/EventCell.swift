@@ -50,9 +50,9 @@ class EventCell: UITableViewCell {
         backgroundColor = .clear
         selectionStyle = .none
 
-        eventLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightSemibold)
-        secondaryLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
-        otherEventsLabel.font = .systemFont(ofSize: 18, weight: UIFontWeightMedium)
+        eventLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.semibold)
+        secondaryLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
+        otherEventsLabel.font = .systemFont(ofSize: 18, weight: UIFont.Weight.medium)
         otherEventsLabel.textAlignment = .right
     }
 
@@ -62,10 +62,10 @@ class EventCell: UITableViewCell {
         roundedView.addSubview(eventLabel)
         eventLabel.constrainToSuperview([.top, .leading], insetBy: 16)
         eventLabel.constrain(.trailing, to: otherEventsLabel, .leading)
-        eventLabel.setContentHuggingPriority(UILayoutPriorityRequired, for: .vertical)
+        eventLabel.setContentHuggingPriority(UILayoutPriority.required, for: .vertical)
         roundedView.addSubview(secondaryLabel)
         secondaryLabel.constrainToSuperview([.leading, .trailing, .bottom], insetBy: 16)
-        secondaryLabel.setContentHuggingPriority(UILayoutPriorityRequired, for: .vertical)
+        secondaryLabel.setContentHuggingPriority(UILayoutPriority.required, for: .vertical)
         secondaryLabel.constrain(.top, to: eventLabel, .bottom)
         secondaryLabelZeroHeightConstraint = secondaryLabel.constrain(height: 0)
         updateSecondaryHeight()

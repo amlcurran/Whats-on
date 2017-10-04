@@ -31,7 +31,7 @@ class EventResponseView: UIStackView {
         super.init(coder: coder)
     }
 
-    func statusTapped(button: UIButton) {
+    @objc func statusTapped(button: UIButton) {
         if button == acceptButton {
             set(.accepted)
             delegate?.changeResponse(to: .accepted)
