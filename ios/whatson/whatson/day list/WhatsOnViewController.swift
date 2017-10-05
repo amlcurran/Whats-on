@@ -45,7 +45,7 @@ class WhatsOnViewController: UIViewController,
         let header = HeaderView(delegate: self)
         anchor(header)
 
-        styleTable(offsetAgainst: header)
+        table.style()
 
         navigationController?.delegate = navigationDelegate
         navigationController?.setNavigationBarHidden(true, animated: false)
@@ -60,14 +60,19 @@ class WhatsOnViewController: UIViewController,
         blurView.colors = [.windowBackground, .windowBackground, UIColor.windowBackground.withAlphaComponent(0)]
         blurView.locations = [0.0, 0.85, 1.0]
         blurView.addSubview(header)
-        header.constrainToSuperview([.leading, .trailing, .bottom], insetBy: 16)
+        header.constrainToSuperview([.top, .leading, .trailing, .bottom], insetBy: 16)
+        header.hugContent(.vertical)
 
         let mainView = UIView()
         view.add(mainView, constrainedTo: [.bottom, .leading, .trailing])
-        view.add(blurView, constrainedTo: [.leading, .trailing, .top])
-        header.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
-        mainView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
-
+        view.add(blurView, constrainedTo: [.top, .leading, .trailing])
+        if #available(iOS 11.0, *) {
+            header.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
+            mainView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: -16).isActive = true
+        } else {
+            header.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
+            mainView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: -16).isActive = true
+        }
         mainView.add(table.view, constrainedTo: [.leading, .top, .trailing, .bottom])
         mainView.add(failedAccessView, constrainedTo: [.leading, .top, .trailing, .bottom])
 
@@ -76,10 +81,6 @@ class WhatsOnViewController: UIViewController,
         loadingView.constrain(.centerY, to: view, .centerY)
         loadingView.constrain(height: 96)
         loadingView.constrain(width: 96)
-    }
-
-    private func styleTable(offsetAgainst header: HeaderView) {
-        table.style(offsetAgainst: header)
     }
 
     func didTapEdit() {

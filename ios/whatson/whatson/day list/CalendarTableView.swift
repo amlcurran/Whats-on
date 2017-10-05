@@ -103,14 +103,14 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
         }
     }
 
-    func style(offsetAgainst header: HeaderView) {
+    func style() {
         tableView.register(DayCell.self, forCellReuseIdentifier: "day")
         tableView.register(EventCell.self, forCellReuseIdentifier: "event")
         tableView.backgroundColor = .clear
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
         tableView.separatorStyle = .none
-        tableView.contentInset = UIEdgeInsets(top: header.intrinsicContentSize.height + 38, left: 0, bottom: 16, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
     }
 
 }
