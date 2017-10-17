@@ -66,13 +66,8 @@ class WhatsOnViewController: UIViewController,
         let mainView = UIView()
         view.add(mainView, constrainedTo: [.bottom, .leading, .trailing])
         view.add(blurView, constrainedTo: [.top, .leading, .trailing])
-        if #available(iOS 11.0, *) {
-            header.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
-            mainView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: -16).isActive = true
-        } else {
-            header.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
-            mainView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: -16).isActive = true
-        }
+        header.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 16).isActive = true
+        mainView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: -16).isActive = true
         mainView.add(table.view, constrainedTo: [.leading, .top, .trailing, .bottom])
         mainView.add(failedAccessView, constrainedTo: [.leading, .top, .trailing, .bottom])
 
