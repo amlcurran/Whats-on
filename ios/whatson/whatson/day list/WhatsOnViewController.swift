@@ -60,7 +60,7 @@ class WhatsOnViewController: UIViewController,
         blurView.colors = [.windowBackground, .windowBackground, UIColor.windowBackground.withAlphaComponent(0)]
         blurView.locations = [0.0, 0.85, 1.0]
         blurView.addSubview(header)
-        header.constrainToSuperview([.top, .leading, .trailing, .bottom], insetBy: 16)
+        header.constrainToSuperview([.top, .trailing, .bottom], insetBy: 16)
         header.hugContent(.vertical)
 
         let mainView = UIView()
@@ -70,6 +70,13 @@ class WhatsOnViewController: UIViewController,
         mainView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: -16).isActive = true
         mainView.add(table.view, constrainedTo: [.leading, .top, .trailing, .bottom])
         mainView.add(failedAccessView, constrainedTo: [.leading, .top, .trailing, .bottom])
+
+        if #available(iOS 11.0, *) {
+            header.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
+            header.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+        } else {
+            header.constrainToSuperview([.leading, .trailing], insetBy: 16)
+        }
 
         view.addSubview(loadingView)
         loadingView.constrain(.centerX, to: view, .centerX)
