@@ -10,6 +10,7 @@ class BuildableTableSource: NSObject, UITableViewDataSource, UITableViewDelegate
         SwitchTableItem.register(in: tableView)
         CustomViewTableItem.register(in: tableView)
         CheckableTableItem.register(in: tableView)
+        NextStepTableItem.register(in: tableView)
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

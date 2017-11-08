@@ -18,6 +18,7 @@ class OptionsViewController: UIViewController, CalendarsView, DateView {
     private let pickerSection = StaticTableSection(title: NSLocalizedString("Options.DisplayOptions", comment: "Options"),
                                                    footer: NSLocalizedString("Options.MinuteLimitation", comment: "Minute limitations in the options"),
                                                    items: [])
+    private var defaultCalendarSection: StaticTableSection!
     private var calendarsSection: StaticTableSection!
     private var pickerHeightConstraint: NSLayoutConstraint!
     private var source: BuildableTableSource! {
@@ -40,10 +41,14 @@ class OptionsViewController: UIViewController, CalendarsView, DateView {
     override func viewDidLoad() {
         super.viewDidLoad()
         calendarsSection = StaticTableSection(title: "Calendars", items: [], onSelect: { (item: TableItem, index: Int) in
-                self.calendarPresenter.toggle(item, at: index)
-            })
+            self.calendarPresenter.toggle(item, at: index)
+        })
+        defaultCalendarSection = StaticTableSection(title: "Default calendar", footer: nil, items: [], onSelect: { (_, _) in
+            let foo = UITableViewController()
+            self.show(foo, sender: nil)
+        })
 
-        source = BuildableTableSource(sections: [pickerSection, calendarsSection], tableView: tableView)
+        source = BuildableTableSource(sections: [pickerSection, defaultCalendarSection, calendarsSection], tableView: tableView)
 
         layoutViews()
 
@@ -94,6 +99,12 @@ class OptionsViewController: UIViewController, CalendarsView, DateView {
     func updateDate(_ items: [TableItem]) {
         pickerSection.items = items
         tableView.reloadSections([0], with: .automatic)
+    }
+
+    func updateDefaultCalendar(_ calendar: EventCalendar?) {
+        defaultCalendarSection.items = [
+            NextStepTableItem(label: "Default calendar", currentValue: calendar?.name)
+        ]
     }
 
 }

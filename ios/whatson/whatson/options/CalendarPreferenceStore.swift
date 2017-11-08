@@ -12,6 +12,7 @@ class CalendarPreferenceStore {
 
     private let userDefaults: UserDefaults
     private let calendarsKey = "excludedCalendars"
+    private let defaultCalendarKey = "defaultCalendar"
 
     init(userDefaults: UserDefaults = .standard) {
         self.userDefaults = userDefaults
@@ -26,6 +27,23 @@ class CalendarPreferenceStore {
         }
         set {
             userDefaults.set(newValue.map({ $0.rawValue }), forKey: calendarsKey)
+        }
+    }
+
+    var defaultCalendar: EventCalendar.Id? {
+        get {
+            if let rawId = userDefaults.string(forKey: defaultCalendarKey) {
+                return EventCalendar.Id(rawValue: rawId)
+            } else {
+                return nil
+            }
+        }
+        set {
+            if let rawId = newValue?.rawValue {
+                userDefaults.set(rawId, forKey: defaultCalendarKey)
+            } else {
+                userDefaults.set(nil, forKey: defaultCalendarKey)
+            }
         }
     }
 

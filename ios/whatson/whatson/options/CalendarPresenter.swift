@@ -11,6 +11,7 @@ import Foundation
 protocol CalendarsView: class {
     func updateCalendar(_ items: [TableItem])
     func updateSingleCalendar(_ item: TableItem, at index: Int)
+    func updateDefaultCalendar(_ calendar: EventCalendar?)
 }
 
 class CalendarPresenter {
@@ -33,6 +34,7 @@ class CalendarPresenter {
                 return CheckableTableItem(title: calendar.name, subtitle: calendar.account, isChecked: calendar.included)
             })
             view.updateCalendar(items)
+            view.updateDefaultCalendar(calendars.first(where: isDefault))
         }, onError: { _ in
             let items = [TitleTableItem(title: "No calendars available", isEnabled: false)]
             view.updateCalendar(items)
@@ -52,4 +54,7 @@ class CalendarPresenter {
         }
     }
 
+    private func isDefault(calendar: EventCalendar) -> Bool {
+        return calendar.id == preferenceStore.defaultCalendar
+    }
 }
