@@ -18,6 +18,7 @@ class WhatsOnViewController: UIViewController,
     private let failedAccessView = FailedAccessView()
     private let loadingView = LoadingView(pathColor: .accent)
     private let gestureHandler = AllowsGestureRecognizer()
+    private let addNewEventViewControllerFactory = AddNewEventViewControllerFactory()
 
     private var forceTouchDisplayer: Any?
     private var presenter: WhatsOnPresenter!
@@ -107,7 +108,7 @@ class WhatsOnViewController: UIViewController,
     }
 
     func addEvent(for item: SCCalendarItem) {
-        navigationController?.present(EKEventEditViewController(calendarItem: item, delegate: self), animated: true, completion: nil)
+        navigationController?.present(addNewEventViewControllerFactory.newEventController(for: item, delegate: self), animated: true, completion: nil)
     }
 
     func showDetails(for item: SCEventCalendarItem, at indexPath: IndexPath, in cell: UITableViewCell) {
@@ -169,31 +170,6 @@ class EventTransitionNavigationDelegate: NSObject, UINavigationControllerDelegat
             return pushTransition
         }
         return nil
-    }
-
-}
-
-fileprivate extension EKEventEditViewController {
-
-    convenience init(calendarItem: SCCalendarItem,
-                     delegate: EKEventEditViewDelegate,
-                     eventStore: EKEventStore = EKEventStore.instance) {
-        self.init()
-        self.eventStore = eventStore
-        self.event = EKEvent(representing: calendarItem)
-        self.editViewDelegate = delegate
-    }
-
-}
-
-fileprivate extension EKEvent {
-
-    convenience init(representing calendarItem: SCCalendarItem,
-                     calculator: NSDateCalculator = .instance,
-                     eventStore: EKEventStore = .instance) {
-        self.init(eventStore: eventStore)
-        self.startDate = calculator.date(from: calendarItem.startTime())
-        self.endDate = calculator.date(from: calendarItem.endTime())
     }
 
 }
