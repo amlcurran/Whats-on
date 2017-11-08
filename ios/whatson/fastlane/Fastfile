@@ -21,8 +21,10 @@ platform :ios do
     sigh
     version = prompt(text: "version number: ")
     update_build(version)
-    clean_build_artifacts
-    gym(scheme: "whatson", export_xcargs: "-allowProvisioningUpdates")
+    gym(
+	scheme: "whatson",
+	export_method: "app-store"
+    )
     pilot(skip_waiting_for_build_processing: true)
     commit_version_bump(
       xcodeproj: "whatson.xcodeproj"
