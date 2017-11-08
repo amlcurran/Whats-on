@@ -567,7 +567,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -997,10 +997,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "whatson/What’s on.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 00600;
+				CURRENT_PROJECT_VERSION = 00601;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 3H3SBN3AYY;
 				ENABLE_BITCODE = NO;
@@ -1071,10 +1070,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "whatson/What’s on.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 00600;
+				CURRENT_PROJECT_VERSION = 00601;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 3H3SBN3AYY;
 				ENABLE_BITCODE = NO;
