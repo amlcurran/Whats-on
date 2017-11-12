@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OptionsViewController: UIViewController, CalendarsView, DateView {
+class OptionsViewController: UIViewController, CalendarsView, DateView, CalendarPickerViewControllerDelegate {
 
     private let analytics = Analytics()
     private let calendarPresenter = CalendarPresenter(loader: CalendarLoader(preferenceStore: CalendarPreferenceStore()), preferenceStore: CalendarPreferenceStore())
@@ -43,9 +43,13 @@ class OptionsViewController: UIViewController, CalendarsView, DateView {
         calendarsSection = StaticTableSection(title: "Calendars", items: [], onSelect: { (item: TableItem, index: Int) in
             self.calendarPresenter.toggle(item, at: index)
         })
-        defaultCalendarSection = StaticTableSection(title: "Default calendar", footer: nil, items: [], onSelect: { (_, _) in
-            let foo = UITableViewController()
-            self.show(foo, sender: nil)
+        defaultCalendarSection = StaticTableSection(title: "Other options", footer: nil, items: [], onSelect: { (_, index) in
+            let picker = CalendarPickerViewController(calendars: self.calendarPresenter.calendars, selectedCalendar: self.calendarPresenter.defaultCalendar, delegate: self)
+            if self.navigationController == nil {
+                preconditionFailure("View wasn't in a navigation controller, even though it was expected to be.")
+            }
+            self.navigationController?.pushViewController(picker, animated: true)
+            self.tableView.deselectRow(at: IndexPath(row: index, section: 1), animated: true)
         })
 
         source = BuildableTableSource(sections: [pickerSection, defaultCalendarSection, calendarsSection], tableView: tableView)
@@ -88,23 +92,47 @@ class OptionsViewController: UIViewController, CalendarsView, DateView {
 
     func updateCalendar(_ items: [TableItem]) {
         calendarsSection.items = items
-        tableView.reloadSections([1], with: .automatic)
+        tableView.reload(calendarsSection, from: source)
     }
 
     func updateSingleCalendar(_ item: TableItem, at index: Int) {
         calendarsSection.items.replaceSubrange(index..<index+1, with: [item])
-        tableView.reloadRows(at: [IndexPath(row: index, section: 1)], with: .automatic)
+        tableView.reload(index, in: calendarsSection, from: source)
     }
 
     func updateDate(_ items: [TableItem]) {
         pickerSection.items = items
-        tableView.reloadSections([0], with: .automatic)
+        tableView.reload(pickerSection, from: source)
     }
 
     func updateDefaultCalendar(_ calendar: EventCalendar?) {
         defaultCalendarSection.items = [
             NextStepTableItem(label: "Default calendar", currentValue: calendar?.name)
         ]
+        tableView.reload(defaultCalendarSection, from: source)
+    }
+
+    func didSelect(_ calendar: EventCalendar) {
+        calendarPresenter.defaultCalendar = calendar
+        self.navigationController?.popViewController(animated: true)
+    }
+
+}
+
+private extension UITableView {
+
+    func reload(_ section: TableSection, from source: BuildableTableSource) {
+        guard let sectionIndex = source.sectionIndex(of: section) else {
+            preconditionFailure("Attempting to reload a section \(section) which doesn't exist in the table")
+        }
+        reloadSections([sectionIndex], with: .automatic)
+    }
+
+    func reload(_ index: Int, in section: TableSection, from source: BuildableTableSource) {
+        guard let sectionIndex = source.sectionIndex(of: section) else {
+            preconditionFailure("Attempting to find a section \(section) which doesn't exist in the table")
+        }
+        reloadRows(at: [IndexPath(row: index, section: sectionIndex)], with: .automatic)
     }
 
 }

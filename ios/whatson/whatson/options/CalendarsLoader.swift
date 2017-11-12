@@ -34,7 +34,8 @@ class CalendarLoader {
 
 }
 
-struct EventCalendar {
+struct EventCalendar: Equatable {
+
     let name: String
     let account: String
     //swiftlint:disable:next variable_name
@@ -53,4 +54,9 @@ struct EventCalendar {
             return lhs.rawValue == rhs.rawValue
         }
     }
+
+    static func ==(lhs: EventCalendar, rhs: EventCalendar) -> Bool {
+        return lhs.id == rhs.id
+    }
+
 }

@@ -52,4 +52,8 @@ class BuildableTableSource: NSObject, UITableViewDataSource, UITableViewDelegate
         return sections[indexPath.section].item(at: indexPath.row)
     }
 
+    func sectionIndex(of section: TableSection) -> Int? {
+        return sections.index(where: { $0.title == section.title })
+    }
+
 }

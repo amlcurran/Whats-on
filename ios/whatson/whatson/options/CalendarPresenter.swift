@@ -19,7 +19,13 @@ class CalendarPresenter {
     private let loader: CalendarLoader
     private let preferenceStore: CalendarPreferenceStore
     private weak var view: CalendarsView?
-    private var calendars = [EventCalendar]()
+    private(set) var calendars = [EventCalendar]()
+    var defaultCalendar: EventCalendar? {
+        didSet {
+            preferenceStore.defaultCalendar = defaultCalendar?.id
+            view?.updateDefaultCalendar(defaultCalendar)
+        }
+    }
 
     init(loader: CalendarLoader, preferenceStore: CalendarPreferenceStore) {
         self.loader = loader
@@ -34,7 +40,8 @@ class CalendarPresenter {
                 return CheckableTableItem(title: calendar.name, subtitle: calendar.account, isChecked: calendar.included)
             })
             view.updateCalendar(items)
-            view.updateDefaultCalendar(calendars.first(where: isDefault))
+            self.defaultCalendar = calendars.first(where: isDefault)
+            view.updateDefaultCalendar(self.defaultCalendar)
         }, onError: { _ in
             let items = [TitleTableItem(title: "No calendars available", isEnabled: false)]
             view.updateCalendar(items)
