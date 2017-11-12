@@ -21,10 +21,11 @@ fileprivate extension EKEventEditViewController {
 
     convenience init(calendarItem: SCCalendarItem,
                      delegate: EKEventEditViewDelegate,
-                     eventStore: EKEventStore = EKEventStore.instance) {
+                     eventStore: EKEventStore = EKEventStore.instance,
+                     calendarPreferenceStore: CalendarPreferenceStore = CalendarPreferenceStore()) {
         self.init()
         self.eventStore = eventStore
-        self.event = EKEvent(representing: calendarItem)
+        self.event = EKEvent(representing: calendarItem, preferenceStore: calendarPreferenceStore)
         self.editViewDelegate = delegate
     }
 
@@ -34,8 +35,12 @@ fileprivate extension EKEvent {
 
     convenience init(representing calendarItem: SCCalendarItem,
                      calculator: NSDateCalculator = .instance,
-                     eventStore: EKEventStore = .instance) {
+                     eventStore: EKEventStore = .instance,
+                     preferenceStore: CalendarPreferenceStore) {
         self.init(eventStore: eventStore)
+        if let defaultCalendarId = preferenceStore.defaultCalendar?.rawValue {
+            self.calendar = eventStore.calendar(withIdentifier: defaultCalendarId)
+        }
         self.startDate = calculator.date(from: calendarItem.startTime())
         self.endDate = calculator.date(from: calendarItem.endTime())
     }
