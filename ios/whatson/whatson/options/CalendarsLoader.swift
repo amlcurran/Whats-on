@@ -27,7 +27,8 @@ class CalendarLoader {
             return EventCalendar(name: ekCalendar.title,
                                  account: ekCalendar.source.title,
                                  id: calendarId,
-                                 included: excludedCalendars.contains(calendarId) == false)
+                                 included: excludedCalendars.contains(calendarId) == false,
+                                 editable: ekCalendar.allowsContentModifications)
         })
         onSuccess(calendars)
     }
@@ -41,6 +42,7 @@ struct EventCalendar: Equatable {
     //swiftlint:disable:next variable_name
     let id: Id
     let included: Bool
+    let editable: Bool
 
     //swiftlint:disable:next type_name
     struct Id: Hashable {
@@ -57,6 +59,16 @@ struct EventCalendar: Equatable {
 
     static func ==(lhs: EventCalendar, rhs: EventCalendar) -> Bool {
         return lhs.id == rhs.id
+    }
+
+}
+
+extension Array where Element == EventCalendar {
+
+    var onlyEditable: [EventCalendar] {
+        return filter { calendar in
+            calendar.editable
+        }
     }
 
 }

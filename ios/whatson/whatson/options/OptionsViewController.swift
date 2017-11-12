@@ -44,7 +44,7 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
             self.calendarPresenter.toggle(item, at: index)
         })
         defaultCalendarSection = StaticTableSection(title: "Other options", footer: nil, items: [], onSelect: { (_, index) in
-            let picker = CalendarPickerViewController(calendars: self.calendarPresenter.calendars, selectedCalendar: self.calendarPresenter.defaultCalendar, delegate: self)
+            let picker = CalendarPickerViewController(calendars: self.calendarPresenter.calendars.onlyEditable, selectedCalendar: self.calendarPresenter.defaultCalendar, delegate: self)
             if self.navigationController == nil {
                 preconditionFailure("View wasn't in a navigation controller, even though it was expected to be.")
             }
