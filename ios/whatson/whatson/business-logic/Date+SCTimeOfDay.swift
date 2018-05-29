@@ -4,7 +4,7 @@ extension Date {
 
     func timeOfDay(isBetween borderStart: SCTimeOfDay, and borderEnd: SCTimeOfDay, in calendar: Calendar) -> Bool {
         let components = calendar.dateComponents([.hour, .day], from: self)
-        if let _ = components.hour {
+        if components.hour != nil {
             return isAfter(borderStart, in: calendar) && isBefore(borderEnd, in: calendar)
         }
         return false
@@ -12,7 +12,7 @@ extension Date {
 
     func timeOfDay(isBetween borderStart: SCTimeOfDay, and borderEnd: SCTimeOfDay, onSameDayAs otherDate: Date, in calendar: Calendar) -> Bool {
         let components = calendar.dateComponents([.hour, .minute, .day], from: self)
-        if let _ = components.hour {
+        if components.hour != nil {
             return isAfter(borderStart, in: calendar) && isBefore(borderEnd, in: calendar) ||
                 isBefore(borderEnd, in: calendar) && otherDate.startOfDay(in: calendar)! > self.startOfDay(in: calendar)!
         }

@@ -24,12 +24,12 @@ import EventKit
         let search = eventStore.predicateForEvents(withStart: startTime, end: endTime, calendars: calendars)
         let allEvents = eventStore.events(matching: search)
         let filtered = allEvents.filter(predicates.defaults)
-        let items = filtered.flatMap({ ekEvent in
+        let items = filtered.compactMap { ekEvent in
             return SCEventCalendarItem(nsString: ekEvent.eventIdentifier,
                     with: ekEvent.title,
                     with: self.calculator.time(from: ekEvent.startDate),
                     with: self.calculator.time(from: ekEvent.endDate))
-        })
+        }
         return items.toJavaList()
     }
 

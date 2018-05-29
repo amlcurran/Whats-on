@@ -47,18 +47,6 @@ struct EventCalendar: Equatable {
     //swiftlint:disable:next type_name
     struct Id: Hashable {
         let rawValue: String
-
-        var hashValue: Int {
-            return rawValue.hashValue
-        }
-
-        static func == (lhs: Id, rhs: Id) -> Bool {
-            return lhs.rawValue == rhs.rawValue
-        }
-    }
-
-    static func ==(lhs: EventCalendar, rhs: EventCalendar) -> Bool {
-        return lhs.id == rhs.id
     }
 
 }

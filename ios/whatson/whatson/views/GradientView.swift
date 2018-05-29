@@ -24,7 +24,7 @@ class GradientView: UIView {
     var colors: [UIColor] {
         get {
             //swiftlint:disable force_cast
-            return gradient.colors.or([]).flatMap { UIColor(cgColor: ($0 as! CGColor)) }
+            return gradient.colors.or([]).compactMap { UIColor(cgColor: ($0 as! CGColor)) }
         }
         set {
             gradient.colors = newValue.map { $0.cgColor }

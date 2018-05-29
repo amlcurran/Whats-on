@@ -27,7 +27,7 @@ class WhatsOnPresenter {
         eventStore.requestAccess(to: .event) { [weak self] (hasAccess, error) in
             if hasAccess {
                 self?.refreshEvents()
-            } else if let _ = error {
+            } else if error != nil {
                 self?.view?.showAccessFailure()
             }
         }
