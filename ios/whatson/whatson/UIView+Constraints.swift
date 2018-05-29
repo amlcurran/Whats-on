@@ -2,10 +2,44 @@ import UIKit
 
 extension UIView {
 
-    func constrainToSuperview(_ edges: [NSLayoutAttribute], insetBy inset: CGFloat = 0) {
+    func constrain(toSuperview edges: NSLayoutAttribute..., insetBy inset: CGFloat = 0) {
         for edge in edges {
             constrainToSuperview(edge, withOffset: offset(for: edge, ofInset: inset))
         }
+    }
+
+    @available(iOS 11.0, *)
+    func constrain(toSuperviewSafeArea edges: NSLayoutAttribute..., insetBy inset: CGFloat = 0) {
+        _ = prepareForConstraints()
+        var edges = edges
+        if edges.contains(.leading) {
+            leadingAnchor.constraint(equalTo: superview!.safeAreaLayoutGuide.leadingAnchor,
+                constant: offset(for: .leading, ofInset: inset)).isActive = true
+            _ = edges.remove(.leading)
+        }
+        if edges.contains(.trailing) {
+            trailingAnchor.constraint(equalTo: superview!.safeAreaLayoutGuide.trailingAnchor,
+                constant: offset(for: .trailing, ofInset: inset)).isActive = true
+            _ = edges.remove(.trailing)
+        }
+        if edges.contains(.top) {
+            topAnchor.constraint(equalTo: superview!.safeAreaLayoutGuide.topAnchor,
+                constant: offset(for: .top, ofInset: inset)).isActive = true
+            _ = edges.remove(.top)
+        }
+        if edges.contains(.bottom) {
+            bottomAnchor.constraint(equalTo: superview!.safeAreaLayoutGuide.bottomAnchor,
+                constant: offset(for: .bottom, ofInset: inset)).isActive = true
+            _ = edges.remove(.bottom)
+        }
+        if edges.isEmpty == false {
+            debugPrint("Constraining to superview safe area was left with the following unconstrained attributes: \(edges)")
+        }
+    }
+
+    @available(iOS 11.0, *)
+    func constrainToSafeAreaTop(of viewController: UIViewController, insetBy inset: CGFloat = 0) {
+        topAnchor.constraint(equalTo: viewController.view.safeAreaLayoutGuide.topAnchor, constant: inset).isActive = true
     }
 
     private func offset(for edge: NSLayoutAttribute, ofInset inset: CGFloat) -> CGFloat {
@@ -18,6 +52,11 @@ extension UIView {
             print("Warning, offset not handled for edge \(edge)")
             return inset
         }
+    }
+
+    @available(iOS 11.0, *)
+    func constrainToSafeAreaBottom(of viewController: UIViewController, insetBy inset: CGFloat = 0) {
+        bottomAnchor.constraint(equalTo: viewController.view.safeAreaLayoutGuide.bottomAnchor, constant: -inset).isActive = true
     }
 
     @discardableResult func constrainToSuperview(_ edge: NSLayoutAttribute, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
@@ -33,7 +72,7 @@ extension UIView {
         return constraint
     }
 
-    func constrain(to view: UIView, edges: [NSLayoutAttribute], withOffset offset: CGFloat = 0) {
+    func constrain(to view: UIView, edges: NSLayoutAttribute..., withOffset offset: CGFloat = 0) {
         for edge in edges {
             constrain(to: view, edge, withOffset: offset)
         }
@@ -64,7 +103,9 @@ extension UIView {
 
     func add(_ view: UIView, constrainedTo edges: [NSLayoutAttribute], withInset inset: CGFloat = 0) {
         addSubview(view)
-        view.constrainToSuperview(edges, insetBy: inset)
+        for edge in edges {
+            view.constrain(toSuperview: edge, insetBy: inset)
+        }
     }
 
     private func prepareForConstraints() -> UIView {
@@ -76,18 +117,17 @@ extension UIView {
     }
 
     func hugContent(_ axis: UILayoutConstraintAxis) {
-        setContentHuggingPriority(UILayoutPriority.required, for: axis)
+        setContentHuggingPriority(.required, for: axis)
     }
 
-    func surroundedByView(insetBy inset: CGFloat) -> UIView {
-        return surrounded(by: UIView(), inset: inset)
-    }
+}
 
-    //swiftlint:disable:next colon this is the formatting for constrained generics
-    func surrounded<T:UIView>(by view: T, inset: CGFloat) -> T {
-        view.addSubview(self)
-        constrainToSuperview([.leading, .top, .trailing, .bottom], insetBy: inset)
-        return view
+private extension Array where Element == NSLayoutAttribute {
+
+    mutating func remove(_ attribute: NSLayoutAttribute) {
+        if let foundIndex = index(of: attribute) {
+            remove(at: foundIndex)
+        }
     }
 
 }

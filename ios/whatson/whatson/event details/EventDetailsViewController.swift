@@ -98,16 +98,16 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
 
     private func layoutViews() {
         view.addSubview(navBar)
-        navBar.constrainToSuperview([.leading, .trailing])
+        navBar.constrain(toSuperview: .leading, .trailing)
         navBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
 
         view.addSubview(responseView)
-        responseView.constrainToSuperview([.leading, .trailing, .bottom])
+        responseView.constrain(toSuperview: .leading, .trailing, .bottom)
         responseView.hideConstraint().isActive = !(event.supportsResponses && BuildConfig.Supports.eventResponses)
 
         let scrollView = UIScrollView()
         view.addSubview(scrollView)
-        scrollView.constrainToSuperview([.leading, .trailing])
+        scrollView.constrain(toSuperview: .leading, .trailing)
         scrollView.constrain(.top, to: navBar, .bottom)
         scrollView.constrain(.bottom, to: responseView, .top)
 

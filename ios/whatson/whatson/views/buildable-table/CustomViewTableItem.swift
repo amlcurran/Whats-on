@@ -19,7 +19,7 @@ struct CustomViewTableItem: TableItem {
     func bind(to cell: UITableViewCell) {
         let customView = customViewFactory()
         cell.contentView.addSubview(customView)
-        customView.constrainToSuperview([.leadingMargin, .topMargin, .trailingMargin, .bottomMargin])
+        customView.constrain(toSuperview: .leadingMargin, .topMargin, .trailingMargin, .bottomMargin)
     }
 
     static func register(in tableView: UITableView) {

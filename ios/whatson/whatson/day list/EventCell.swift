@@ -58,13 +58,13 @@ class EventCell: UITableViewCell {
 
     private func layout() {
         roundedView.addSubview(otherEventsLabel)
-        otherEventsLabel.constrainToSuperview([.trailing, .top, .bottom], insetBy: 16)
+        otherEventsLabel.constrain(toSuperview: .trailing, .top, .bottom, insetBy: 16)
         roundedView.addSubview(eventLabel)
-        eventLabel.constrainToSuperview([.top, .leading], insetBy: 16)
+        eventLabel.constrain(toSuperview: .top, .leading, insetBy: 16)
         eventLabel.constrain(.trailing, to: otherEventsLabel, .leading)
         eventLabel.setContentHuggingPriority(UILayoutPriority.required, for: .vertical)
         roundedView.addSubview(secondaryLabel)
-        secondaryLabel.constrainToSuperview([.leading, .trailing, .bottom], insetBy: 16)
+        secondaryLabel.constrain(toSuperview: .leading, .trailing, .bottom, insetBy: 16)
         secondaryLabel.setContentHuggingPriority(UILayoutPriority.required, for: .vertical)
         secondaryLabel.constrain(.top, to: eventLabel, .bottom)
         secondaryLabelZeroHeightConstraint = secondaryLabel.constrain(height: 0)

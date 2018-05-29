@@ -76,7 +76,7 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
 
     private func layoutViews() {
         view.addSubview(tableView)
-        tableView.constrainToSuperview([.leading, .trailing, .topMargin])
+        tableView.constrain(toSuperview: .leading, .trailing, .topMargin)
 
         pickerHeightConstraint = picker.constrain(height: 0)
         pickerHeightConstraint.isActive = true

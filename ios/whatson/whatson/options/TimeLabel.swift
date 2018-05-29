@@ -31,7 +31,8 @@ class TimeLabel: UIView {
 
     init() {
         super.init(frame: .zero)
-        _ = label.surrounded(by: self, inset: 4)
+        addSubview(label)
+        label.constrain(toSuperview: .leading, .trailing, .bottom, .top, insetBy: 4)
         layer.cornerRadius = 3
         layer.borderWidth = 2
         layer.borderColor = UIColor.accent.darkened(by: 0.2).cgColor
