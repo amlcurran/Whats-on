@@ -18,14 +18,14 @@ class DataProvider: NSObject {
         items.removeAll()
         slots.removeAll()
         let sourceCount = Int(source.count())
-        for i in 0 ..< sourceCount {
-            let newItem = source.itemAt(with: jint(i))
-            let newSlot = source.slotAt(with: jint(i))
+        for index in 0..<sourceCount {
+            let newItem = source.itemAt(with: jint(index))
+            let newSlot = source.slotAt(with: jint(index))
             items.append(newItem)
             slots.append(newSlot)
-            if i.isWithinBounds(of: oldSlots) && i.isWithinBounds(of: oldItems) {
-                if !newSlot.view(matches: oldSlots[i]) || !matchViews(newItem, oldItems[i]) {
-                    changedIndexes.append(i)
+            if index.isWithinBounds(of: oldSlots) && index.isWithinBounds(of: oldItems) {
+                if !newSlot.view(matches: oldSlots[index]) || !matchViews(newItem, oldItems[index]) {
+                    changedIndexes.append(index)
                 }
             }
         }
