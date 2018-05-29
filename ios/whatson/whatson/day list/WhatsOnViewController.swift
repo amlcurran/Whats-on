@@ -72,11 +72,7 @@ class WhatsOnViewController: UIViewController,
         mainView.add(table.view, constrainedTo: [.leading, .top, .trailing, .bottom])
         mainView.add(failedAccessView, constrainedTo: [.leading, .top, .trailing, .bottom])
 
-        if #available(iOS 11.0, *) {
-            header.constrain(toSuperviewSafeArea: .leading, .trailing, insetBy: 16)
-        } else {
-            header.constrain(toSuperview: .leading, .trailing, insetBy: 16)
-        }
+        header.constrain(toSuperviewSafeArea: .leading, .trailing, insetBy: 16)
 
         view.addSubview(loadingView)
         loadingView.constrain(.centerX, to: view, .centerX)

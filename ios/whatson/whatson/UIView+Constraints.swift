@@ -8,32 +8,63 @@ extension UIView {
         }
     }
 
-    @available(iOS 11.0, *)
     func constrain(toSuperviewSafeArea edges: NSLayoutAttribute..., insetBy inset: CGFloat = 0) {
         _ = prepareForConstraints()
         var edges = edges
         if edges.contains(.leading) {
-            leadingAnchor.constraint(equalTo: superview!.safeAreaLayoutGuide.leadingAnchor,
+            leadingAnchor.constraint(equalTo: superview!.leadingSafeAnchor,
                 constant: offset(for: .leading, ofInset: inset)).isActive = true
             edges.remove(.leading)
         }
         if edges.contains(.trailing) {
-            trailingAnchor.constraint(equalTo: superview!.safeAreaLayoutGuide.trailingAnchor,
+            trailingAnchor.constraint(equalTo: superview!.trailingSafeAnchor,
                 constant: offset(for: .trailing, ofInset: inset)).isActive = true
             edges.remove(.trailing)
         }
         if edges.contains(.top) {
-            topAnchor.constraint(equalTo: superview!.safeAreaLayoutGuide.topAnchor,
+            topAnchor.constraint(equalTo: superview!.topSafeAnchor,
                 constant: offset(for: .top, ofInset: inset)).isActive = true
             edges.remove(.top)
         }
         if edges.contains(.bottom) {
-            bottomAnchor.constraint(equalTo: superview!.safeAreaLayoutGuide.bottomAnchor,
+            bottomAnchor.constraint(equalTo: superview!.bottomSafeAnchor,
                 constant: offset(for: .bottom, ofInset: inset)).isActive = true
             edges.remove(.bottom)
         }
         if edges.isEmpty == false {
             debugPrint("Constraining to superview safe area was left with the following unconstrained attributes: \(edges)")
+        }
+    }
+
+    private var leadingSafeAnchor: NSLayoutXAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return safeAreaLayoutGuide.leadingAnchor
+        } else {
+            return leadingAnchor
+        }
+    }
+
+    private var trailingSafeAnchor: NSLayoutXAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return safeAreaLayoutGuide.trailingAnchor
+        } else {
+            return trailingAnchor
+        }
+    }
+
+    private var topSafeAnchor: NSLayoutYAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return safeAreaLayoutGuide.topAnchor
+        } else {
+            return topAnchor
+        }
+    }
+
+    private var bottomSafeAnchor: NSLayoutYAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return safeAreaLayoutGuide.bottomAnchor
+        } else {
+            return bottomAnchor
         }
     }
 
