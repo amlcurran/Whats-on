@@ -13,8 +13,7 @@ class WhatsOnViewController: UIViewController,
     private let dataProvider = DataProvider()
     private let timeRepo = TimeRepository()
     private let pushTransition = EventDetailsPushTransition()
-    //swiftlint:disable:next weak_delegate this is a delegate for something else 
-    private let navigationDelegate = EventTransitionNavigationDelegate()
+    private let navigationAnimations = EventTransitionNavigationDelegate()
     private let failedAccessView = FailedAccessView()
     private let loadingView = LoadingView(pathColor: .accent)
     private let gestureHandler = AllowsGestureRecognizer()
@@ -48,7 +47,7 @@ class WhatsOnViewController: UIViewController,
 
         table.style()
 
-        navigationController?.delegate = navigationDelegate
+        navigationController?.delegate = navigationAnimations
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController?.interactivePopGestureRecognizer?.delegate = gestureHandler
 
@@ -107,7 +106,7 @@ class WhatsOnViewController: UIViewController,
     }
 
     func showDetails(for item: SCEventCalendarItem, at indexPath: IndexPath, in cell: UITableViewCell) {
-        navigationDelegate.prepareTransition(from: indexPath, using: cell)
+        navigationAnimations.prepareTransition(from: indexPath, using: cell)
         navigationController?.show(EventDetailsViewController(eventItem: item), sender: nil)
     }
 
