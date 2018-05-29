@@ -4,7 +4,7 @@ extension UIView {
 
     func constrain(toSuperview edges: NSLayoutAttribute..., insetBy inset: CGFloat = 0) {
         for edge in edges {
-            constrainToSuperview(edge, withOffset: offset(for: edge, ofInset: inset))
+            constrain(toSuperview: edge, withOffset: offset(for: edge, ofInset: inset))
         }
     }
 
@@ -15,22 +15,22 @@ extension UIView {
         if edges.contains(.leading) {
             leadingAnchor.constraint(equalTo: superview!.safeAreaLayoutGuide.leadingAnchor,
                 constant: offset(for: .leading, ofInset: inset)).isActive = true
-            _ = edges.remove(.leading)
+            edges.remove(.leading)
         }
         if edges.contains(.trailing) {
             trailingAnchor.constraint(equalTo: superview!.safeAreaLayoutGuide.trailingAnchor,
                 constant: offset(for: .trailing, ofInset: inset)).isActive = true
-            _ = edges.remove(.trailing)
+            edges.remove(.trailing)
         }
         if edges.contains(.top) {
             topAnchor.constraint(equalTo: superview!.safeAreaLayoutGuide.topAnchor,
                 constant: offset(for: .top, ofInset: inset)).isActive = true
-            _ = edges.remove(.top)
+            edges.remove(.top)
         }
         if edges.contains(.bottom) {
             bottomAnchor.constraint(equalTo: superview!.safeAreaLayoutGuide.bottomAnchor,
                 constant: offset(for: .bottom, ofInset: inset)).isActive = true
-            _ = edges.remove(.bottom)
+            edges.remove(.bottom)
         }
         if edges.isEmpty == false {
             debugPrint("Constraining to superview safe area was left with the following unconstrained attributes: \(edges)")
@@ -59,7 +59,7 @@ extension UIView {
         bottomAnchor.constraint(equalTo: viewController.view.safeAreaLayoutGuide.bottomAnchor, constant: -inset).isActive = true
     }
 
-    @discardableResult func constrainToSuperview(_ edge: NSLayoutAttribute, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
+    @discardableResult func constrain(toSuperview edge: NSLayoutAttribute, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
         let superview = prepareForConstraints()
         let constraint = NSLayoutConstraint(item: self, attribute: edge, relatedBy: .equal, toItem: superview, attribute: edge, multiplier: 1, constant: offset)
         constraint.isActive = true
