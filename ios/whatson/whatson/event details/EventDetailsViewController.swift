@@ -107,7 +107,11 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
 
         let scrollView = UIScrollView()
         view.addSubview(scrollView)
-        scrollView.constrain(toSuperview: .leading, .trailing)
+        if #available(iOS 11.0, *) {
+            scrollView.constrain(toSuperviewSafeArea: .leading, .trailing)
+        } else {
+            scrollView.constrain(toSuperview: .leading, .trailing)
+        }
         scrollView.constrain(.top, to: navBar, .bottom)
         scrollView.constrain(.bottom, to: responseView, .top)
 
