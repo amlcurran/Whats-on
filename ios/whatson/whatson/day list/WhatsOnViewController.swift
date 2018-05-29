@@ -73,8 +73,7 @@ class WhatsOnViewController: UIViewController,
         mainView.add(failedAccessView, constrainedTo: [.leading, .top, .trailing, .bottom])
 
         if #available(iOS 11.0, *) {
-            header.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
-            header.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+            header.constrain(toSuperviewSafeArea: .leading, .trailing, insetBy: 16)
         } else {
             header.constrain(toSuperview: .leading, .trailing, insetBy: 16)
         }
