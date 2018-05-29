@@ -82,8 +82,8 @@ class WhatsOnViewController: UIViewController,
     }
 
     func didTapEdit() {
-        let settings = OptionsViewController().inNavigationController()
-        present(settings, animated: true)
+        let settings = OptionsViewController()
+        present(settings.inNavigationController(), animated: true)
     }
 
     override func viewDidAppear(_ animated: Bool) {
