@@ -68,9 +68,12 @@ extension UIView {
         }
     }
 
-    @available(iOS 11.0, *)
-    func constrainToSafeAreaTop(of viewController: UIViewController, insetBy inset: CGFloat = 0) {
-        topAnchor.constraint(equalTo: viewController.view.safeAreaLayoutGuide.topAnchor, constant: inset).isActive = true
+    func constrain(toSafeAreaTopOf viewController: UIViewController, insetBy inset: CGFloat = 0) {
+        if #available(iOS 11.0, *) {
+            topAnchor.constraint(equalTo: viewController.view.safeAreaLayoutGuide.topAnchor, constant: inset).isActive = true
+        } else {
+            topAnchor.constraint(equalTo: viewController.topLayoutGuide.bottomAnchor, constant: inset).isActive = true
+        }
     }
 
     private func offset(for edge: NSLayoutAttribute, ofInset inset: CGFloat) -> CGFloat {

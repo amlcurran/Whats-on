@@ -67,8 +67,8 @@ class WhatsOnViewController: UIViewController,
         let mainView = UIView()
         view.add(mainView, constrainedTo: [.bottom, .leading, .trailing])
         view.add(blurView, constrainedTo: [.top, .leading, .trailing])
-        header.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 16).isActive = true
-        mainView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: -16).isActive = true
+        header.constrain(toSafeAreaTopOf: self, insetBy: 16)
+        mainView.constrain(.top, to: header, .bottom, withOffset: -16)
         mainView.add(table.view, constrainedTo: [.leading, .top, .trailing, .bottom])
         mainView.add(failedAccessView, constrainedTo: [.leading, .top, .trailing, .bottom])
 
