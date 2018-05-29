@@ -50,7 +50,6 @@ class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitionin
             rowCardSnapshot.removeFromSuperview()
             fromView.removeFromSuperview()
             backgroundView.removeFromSuperview()
-            detailVC.detailsCard.expandTitleAndTimeGap()
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
         let firstAnimation = animator.animate(withDuration: slideDuration, {

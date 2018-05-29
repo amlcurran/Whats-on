@@ -12,6 +12,7 @@ class EventCell: UITableViewCell {
     let otherEventsLabel = UILabel()
 
     var secondaryLabelZeroHeightConstraint: NSLayoutConstraint?
+    var secondaryLabelBelowConstraint: NSLayoutConstraint?
 
     var type: SlotCellStyle = .empty {
         didSet {
@@ -66,7 +67,7 @@ class EventCell: UITableViewCell {
         roundedView.addSubview(secondaryLabel)
         secondaryLabel.constrain(toSuperview: .leading, .trailing, .bottom, insetBy: 16)
         secondaryLabel.setContentHuggingPriority(UILayoutPriority.required, for: .vertical)
-        secondaryLabel.constrain(.top, to: eventLabel, .bottom)
+        secondaryLabelBelowConstraint = secondaryLabel.constrain(.top, to: eventLabel, .bottom, withOffset: 4)
         secondaryLabelZeroHeightConstraint = secondaryLabel.constrain(height: 0)
         updateSecondaryHeight()
 
@@ -81,8 +82,10 @@ class EventCell: UITableViewCell {
     func updateSecondaryHeight() {
         if detail.isSecondaryTextShown && type.isSecondaryTextShown {
             secondaryLabelZeroHeightConstraint?.isActive = false
+            secondaryLabelBelowConstraint?.constant = 4
         } else {
             secondaryLabelZeroHeightConstraint?.isActive = true
+            secondaryLabelBelowConstraint?.constant = 0
         }
     }
 

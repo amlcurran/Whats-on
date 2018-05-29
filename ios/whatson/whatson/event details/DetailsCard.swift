@@ -27,7 +27,7 @@ class DetailsCard: UIView {
 
         addSubview(timingLabel)
         timingLabel.constrain(toSuperview: .leading, .trailing, insetBy: 16)
-        timingTitleContraint = timingLabel.constrain(.top, to: titleLabel, .bottom)
+        timingTitleContraint = timingLabel.constrain(.top, to: titleLabel, .bottom, withOffset: 4)
 
         addSubview(line)
         line.constrain(.width, to: self, .width)
@@ -84,13 +84,6 @@ class DetailsCard: UIView {
         let point = MKPointAnnotation()
         point.coordinate = location.coordinate
         locationMapView.addAnnotation(point)
-    }
-
-    func expandTitleAndTimeGap() {
-        timingTitleContraint?.constant = 8
-        UIView.animate(withDuration: 0.2, animations: { [weak self] in
-            self?.superview?.layoutIfNeeded()
-        })
     }
 
 }
