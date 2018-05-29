@@ -1020,8 +1020,8 @@
 				PRODUCT_NAME = "What’s on";
 				SWIFT_OBJC_BRIDGING_HEADER = "whatson-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "\"${J2OBJC_HOME}/include\"/**";
 			};
 			name = Debug;
@@ -1092,8 +1092,8 @@
 				PRODUCT_NAME = "What’s on";
 				SWIFT_OBJC_BRIDGING_HEADER = "whatson-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "\"${J2OBJC_HOME}/include\"/**";
 			};
 			name = Release;
