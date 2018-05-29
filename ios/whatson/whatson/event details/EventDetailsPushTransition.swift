@@ -24,7 +24,6 @@ class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitionin
             return
         }
 
-        detailVC.view.layoutIfNeeded()
         calendarRow.layoutIfNeeded()
 
         guard let rowCardSnapshot = calendarRow.roundedView.snapshotView(afterScreenUpdates: false) else {
@@ -37,6 +36,8 @@ class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitionin
         container.addSubview(backgroundView)
         container.addSubview(rowCardSnapshot)
         container.addSubview(toView)
+        toView.setNeedsLayout()
+        toView.layoutIfNeeded()
 
         toView.alpha = 0
         backgroundView.alpha = 0
@@ -53,7 +54,7 @@ class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitionin
         })
         let firstAnimation = animator.animate(withDuration: slideDuration, {
             backgroundView.alpha = 1
-            rowCardSnapshot.frame.origin.y = detailVC.detailsCard.absoluteFrame().origin.y + 12
+            rowCardSnapshot.frame.origin.y = detailVC.detailsCard.absoluteFrame().origin.y - 8
         }, completion: {
             secondAnimation?.start()
         })
