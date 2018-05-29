@@ -41,7 +41,8 @@ class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitionin
 
         toView.alpha = 0
         backgroundView.alpha = 0
-        rowCardSnapshot.frame = row.absoluteFrame(of: calendarRow.roundedView)
+        rowCardSnapshot.frame = calendarRow.roundedView.absoluteFrame()
+        rowCardSnapshot.frame = rowCardSnapshot.frame.offsetBy(dx: -8, dy: 0)
 
         let secondAnimation = animator.animate(withDuration: alphaDuration, {
             toView.alpha = 1
@@ -55,6 +56,7 @@ class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitionin
         let firstAnimation = animator.animate(withDuration: slideDuration, {
             backgroundView.alpha = 1
             rowCardSnapshot.frame.origin.y = detailVC.detailsCard.absoluteFrame().origin.y - 8
+            rowCardSnapshot.frame.origin.x = detailVC.detailsCard.absoluteFrame().origin.x - 8
         }, completion: {
             secondAnimation?.start()
         })
