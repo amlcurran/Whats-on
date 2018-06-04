@@ -16,6 +16,7 @@
 		6985330727D25CE189AC7193 /* FailedAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985333EBC410C0E8F45C969 /* FailedAccessView.swift */; };
 		698533858A420599E0C749F0 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698530C0F754D12F1E38397C /* DayCell.swift */; };
 		698533DEAF59954635D7E3CD /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985328C217A9C753C09CFDE /* Line.swift */; };
+		69853441A16C05863E33DAD3 /* LargeEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853BA182ED22ECC8DCC6F3 /* LargeEventCell.swift */; };
 		698534B8D95E1BCE5206D939 /* BasicAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853B71158DE94568DDC9FB /* BasicAnimator.swift */; };
 		6985372A302EA91FAB612301 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698536C18C7A4E830F167DAE /* DataProvider.swift */; };
 		698538E5F918BCBD1F75C446 /* UserDefaultsTimeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */; };
@@ -130,6 +131,7 @@
 		698539EC9C2B0360E301F15F /* Date+SCTimeOfDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+SCTimeOfDay.swift"; sourceTree = "<group>"; };
 		69853ADAFB0D8A57C40FC7BA /* DetailsCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsCard.swift; sourceTree = "<group>"; };
 		69853B71158DE94568DDC9FB /* BasicAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicAnimator.swift; sourceTree = "<group>"; };
+		69853BA182ED22ECC8DCC6F3 /* LargeEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargeEventCell.swift; sourceTree = "<group>"; };
 		69853BC8BAF5893B6913918C /* AllowsGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllowsGestureRecognizer.swift; sourceTree = "<group>"; };
 		69853BE8F4A525FC03DF7E20 /* Completion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Completion.swift; sourceTree = "<group>"; };
 		69853D2C9F2840A9862339C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 				86CFE11B1F1376A400D9AA8D /* EventForceTouchDisplayer.swift */,
 				698530C0F754D12F1E38397C /* DayCell.swift */,
 				86DEC9551FB3A069000FF4CD /* AddNewEventViewControllerFactory.swift */,
+				69853BA182ED22ECC8DCC6F3 /* LargeEventCell.swift */,
 			);
 			path = "day list";
 			sourceTree = "<group>";
@@ -785,6 +788,7 @@
 				698534B8D95E1BCE5206D939 /* BasicAnimator.swift in Sources */,
 				69853044F5C74357E1751736 /* Animator.swift in Sources */,
 				698539E35BDB526A55FA73A4 /* PropertyAnimator.swift in Sources */,
+				69853441A16C05863E33DAD3 /* LargeEventCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

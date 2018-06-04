@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class EventCell: UITableViewCell {
+class LargeEventCell: UITableViewCell {
 
     let eventLabel = UILabel()
     let roundedView = RoundedRectBorderView()
@@ -22,12 +22,6 @@ class EventCell: UITableViewCell {
             roundedView.borderColor = type.borderColor
             roundedView.borderWidth = type.borderWidth
             roundedView.borderDash = type.borderDash
-            updateSecondaryHeight()
-        }
-    }
-
-    var detail: SlotDetail = .mid {
-        didSet {
             updateSecondaryHeight()
         }
     }
@@ -73,18 +67,12 @@ class EventCell: UITableViewCell {
         contentView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
         contentView.add(roundedView, constrainedTo: [.topMargin, .leadingMargin, .trailingMargin, .bottomMargin])
         roundedView.cornerRadius = 6
-        roundedView.layer.shadowOffset = CGSize(width: 0, height: 6)
-        roundedView.layer.shadowRadius = 4
-        roundedView.layer.shadowColor = UIColor.red.cgColor
     }
 
     func updateSecondaryHeight() {
-        if detail.isSecondaryTextShown && type.isSecondaryTextShown {
+        if type.isSecondaryTextShown {
             secondaryLabelZeroHeightConstraint?.isActive = false
             secondaryLabelBelowConstraint?.constant = 4
-        } else {
-            secondaryLabelZeroHeightConstraint?.isActive = true
-            secondaryLabelBelowConstraint?.constant = 0
         }
     }
 
@@ -104,14 +92,6 @@ class EventCell: UITableViewCell {
             otherEventsLabel.text = nil
         }
         return self
-    }
-
-}
-
-extension SCCalendarSlot {
-
-    var extraItemsCount: Int {
-        return Int(count()) - 1
     }
 
 }
