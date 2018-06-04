@@ -16,6 +16,7 @@
 		6985330727D25CE189AC7193 /* FailedAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985333EBC410C0E8F45C969 /* FailedAccessView.swift */; };
 		698533858A420599E0C749F0 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698530C0F754D12F1E38397C /* DayCell.swift */; };
 		698533DEAF59954635D7E3CD /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985328C217A9C753C09CFDE /* Line.swift */; };
+		69853448A07DBD304BB17FCA /* EventKit+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698532CE016FB882B2800B62 /* EventKit+Convenience.swift */; };
 		698534B8D95E1BCE5206D939 /* BasicAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853B71158DE94568DDC9FB /* BasicAnimator.swift */; };
 		6985372A302EA91FAB612301 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698536C18C7A4E830F167DAE /* DataProvider.swift */; };
 		698538E5F918BCBD1F75C446 /* UserDefaultsTimeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */; };
@@ -24,6 +25,8 @@
 		69853A438F323A331EE8B46E /* CalendarTableViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698534DCE645AF4CAB841A5F /* CalendarTableViewTests.swift */; };
 		69853B3AC06B29C271651CF0 /* UIDatePicker+Hours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985397DE155D32104662FA2 /* UIDatePicker+Hours.swift */; };
 		69853BB8C3723DD6A606DFFE /* DetailsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853ADAFB0D8A57C40FC7BA /* DetailsCard.swift */; };
+		69853C206C9404ACE2BD00BC /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853943917F0CF738ACB915 /* EventView.swift */; };
+		69853C93D4E8453CAAF42338 /* EventDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985351AE5837369246C93AD /* EventDetailsPresenter.swift */; };
 		69853D14E1379414F9593F8C /* Date+SCTimeOfDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698539EC9C2B0360E301F15F /* Date+SCTimeOfDay.swift */; };
 		69853D85F37E68B39053DB9F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69853D2C9F2840A9862339C4 /* GoogleService-Info.plist */; };
 		69853EB6AEFC9EE982D28388 /* TimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853F60E5391F881F006F7B /* TimeLabel.swift */; };
@@ -120,12 +123,15 @@
 		6985300D9DA8F970ED4D589E /* Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		698530C0F754D12F1E38397C /* DayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		6985328C217A9C753C09CFDE /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		698532CE016FB882B2800B62 /* EventKit+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EventKit+Convenience.swift"; sourceTree = "<group>"; };
 		6985333EBC410C0E8F45C969 /* FailedAccessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailedAccessView.swift; sourceTree = "<group>"; };
 		698534DCE645AF4CAB841A5F /* CalendarTableViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTableViewTests.swift; sourceTree = "<group>"; };
+		6985351AE5837369246C93AD /* EventDetailsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsPresenter.swift; sourceTree = "<group>"; };
 		6985358E9835009A7EA756E9 /* Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		698536C18C7A4E830F167DAE /* DataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsTimeStore.swift; sourceTree = "<group>"; };
 		69853939FC3A0F98F4792C0F /* PropertyAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyAnimator.swift; sourceTree = "<group>"; };
+		69853943917F0CF738ACB915 /* EventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		6985397DE155D32104662FA2 /* UIDatePicker+Hours.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDatePicker+Hours.swift"; sourceTree = "<group>"; };
 		698539EC9C2B0360E301F15F /* Date+SCTimeOfDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+SCTimeOfDay.swift"; sourceTree = "<group>"; };
 		69853ADAFB0D8A57C40FC7BA /* DetailsCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsCard.swift; sourceTree = "<group>"; };
@@ -272,6 +278,7 @@
 				86FFFE481EC10E01009D772E /* Optional+Requirements.swift */,
 				8600B99E1F09429D008578E5 /* Delayer.swift */,
 				8600B9A01F0946F9008578E5 /* UIView+Animations.swift */,
+				698532CE016FB882B2800B62 /* EventKit+Convenience.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -464,6 +471,8 @@
 				69853ADAFB0D8A57C40FC7BA /* DetailsCard.swift */,
 				2DBA11FDB477210F9D964D34 /* EventResponseView.swift */,
 				2DBA151F9881A527C9CC0A71 /* EventResponse.swift */,
+				6985351AE5837369246C93AD /* EventDetailsPresenter.swift */,
+				69853943917F0CF738ACB915 /* EventView.swift */,
 			);
 			path = "event details";
 			sourceTree = "<group>";
@@ -785,6 +794,9 @@
 				698534B8D95E1BCE5206D939 /* BasicAnimator.swift in Sources */,
 				69853044F5C74357E1751736 /* Animator.swift in Sources */,
 				698539E35BDB526A55FA73A4 /* PropertyAnimator.swift in Sources */,
+				69853448A07DBD304BB17FCA /* EventKit+Convenience.swift in Sources */,
+				69853C93D4E8453CAAF42338 /* EventDetailsPresenter.swift in Sources */,
+				69853C206C9404ACE2BD00BC /* EventView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
