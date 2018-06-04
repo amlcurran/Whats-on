@@ -11,7 +11,6 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     lazy var moreInfoButton = UIButton()
     lazy var navBar = UINavigationBar()
     lazy var tracking = EventDetailsTracking()
-    lazy var responseView = EventResponseView(delegate: self)
     lazy var presenter = EventPresenter(view: self, geocoder: CLGeocoder())
 
     private let event: EKEvent
@@ -31,8 +30,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     }
 
     convenience init(eventItem: SCEventCalendarItem, showingNavBar: Bool) {
-        guard let itemId = eventItem.id__(),
-              let event = EKEventStore.instance.event(withIdentifier: itemId) else {
+        guard let event = EKEventStore.instance.event(matching: eventItem) else {
             preconditionFailure("Trying to view an event which doesnt exist")
         }
         self.init(event: event, showingNavBar: showingNavBar)
@@ -79,7 +77,6 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
 
     func updateUI() {
         detailsCard.set(event: event, delegate: self)
-        responseView.set(event.response)
     }
 
     func actionItems() -> [UIBarButtonItem] {
@@ -107,15 +104,10 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         navBar.constrain(toSuperview: .leading, .trailing)
         navBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
 
-        view.addSubview(responseView)
-        responseView.constrain(toSuperview: .leading, .trailing, .bottom)
-        responseView.hideConstraint().isActive = !(event.supportsResponses && BuildConfig.Supports.eventResponses)
-
         let scrollView = UIScrollView()
         view.addSubview(scrollView)
-        scrollView.constrain(toSuperviewSafeArea: .leading, .trailing)
+        scrollView.constrain(toSuperviewSafeArea: .leading, .trailing, .bottom)
         scrollView.constrain(.top, to: navBar, .bottom)
-        scrollView.constrain(.bottom, to: responseView, .top)
 
         scrollView.addSubview(detailsCard)
         detailsCard.constrain(toSuperview: .leading, .top, insetBy: 8)
