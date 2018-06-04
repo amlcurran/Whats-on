@@ -7,16 +7,15 @@ import CoreLocation
 
 class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventViewDelegate, UINavigationBarDelegate, EventResponseViewDelegate, EKEventEditViewDelegate, EventView, DetailsCardDelegate {
 
-    lazy var detailsCard: DetailsCard = DetailsCard()
+    lazy var detailsCard = DetailsCard()
     lazy var moreInfoButton = UIButton()
     lazy var navBar = UINavigationBar()
     lazy var tracking = EventDetailsTracking()
-    lazy var responseView: EventResponseView = {
-        return EventResponseView(delegate: self)
-    }()
-    lazy var presenter: EventPresenter = EventPresenter(view: self, geocoder: CLGeocoder())
+    lazy var responseView = EventResponseView(delegate: self)
+    lazy var presenter = EventPresenter(view: self, geocoder: CLGeocoder())
 
     private let event: EKEvent
+
     var showingNavBar: Bool {
         didSet {
             navBar.isHidden = !showingNavBar
