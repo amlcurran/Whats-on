@@ -17,25 +17,31 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     lazy var presenter: EventPresenter = EventPresenter(view: self, geocoder: CLGeocoder())
 
     private let event: EKEvent
+    var showingNavBar: Bool {
+        didSet {
+            navBar.isHidden = !showingNavBar
+        }
+    }
 
-    convenience init?(item: SCCalendarItem) {
+    convenience init?(item: SCCalendarItem, showingNavBar: Bool = true) {
         if let eventItem = item as? SCEventCalendarItem {
-            self.init(eventItem: eventItem)
+            self.init(eventItem: eventItem, showingNavBar: showingNavBar)
         } else {
             return nil
         }
     }
 
-    convenience init(eventItem: SCEventCalendarItem) {
+    convenience init(eventItem: SCEventCalendarItem, showingNavBar: Bool) {
         guard let itemId = eventItem.id__(),
               let event = EKEventStore.instance.event(withIdentifier: itemId) else {
             preconditionFailure("Trying to view an event which doesnt exist")
         }
-        self.init(event: event)
+        self.init(event: event, showingNavBar: showingNavBar)
     }
 
-    init(event: EKEvent) {
+    init(event: EKEvent, showingNavBar: Bool) {
         self.event = event
+        self.showingNavBar = showingNavBar
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -63,6 +69,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         navBar.pushItem(previousItem, animated: false)
         navBar.pushItem(navigationItem, animated: false)
         navBar.delegate = self
+        navBar.isHidden = !showingNavBar
         moreInfoButton.setTitle("Show more info", for: .normal)
 
         moreInfoButton.addTarget(self, action: #selector(moreInfoTapped), for: .touchUpInside)

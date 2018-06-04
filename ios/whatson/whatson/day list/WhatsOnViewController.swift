@@ -107,7 +107,7 @@ class WhatsOnViewController: UIViewController,
 
     func showDetails(for item: SCEventCalendarItem, at indexPath: IndexPath, in cell: UITableViewCell) {
         navigationAnimations.prepareTransition(from: indexPath, using: cell)
-        navigationController?.show(EventDetailsViewController(eventItem: item), sender: nil)
+        navigationController?.show(EventDetailsViewController(eventItem: item, showingNavBar: true), sender: nil)
     }
 
     func remove(_ event: SCEventCalendarItem) {

@@ -30,11 +30,12 @@ class EventForceTouchDisplayer: NSObject, UIViewControllerPreviewingDelegate {
         if item.isEmpty() {
             return nil
         } else {
-            return EventDetailsViewController(item: item)
+            return EventDetailsViewController(item: item, showingNavBar: false)
         }
     }
 
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        (viewControllerToCommit as? EventDetailsViewController)?.showingNavBar = true
         navigationController?.pushViewController(viewControllerToCommit, animated: true)
     }
 
