@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 
+@IBDesignable
 class EventCell: UITableViewCell {
 
     let eventLabel = UILabel()
