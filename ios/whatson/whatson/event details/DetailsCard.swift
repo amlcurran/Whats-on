@@ -3,6 +3,10 @@ import EventKit
 import CoreLocation
 import MapKit
 
+protocol DetailsCardDelegate: class {
+    func didTapMap(on detailsCard: DetailsCard, onRegion region: MKCoordinateRegion)
+}
+
 class DetailsCard: UIView {
 
     lazy var titleLabel = UILabel()
@@ -10,11 +14,14 @@ class DetailsCard: UIView {
     lazy var timingLabel = UILabel()
     lazy var locationMapView = MKMapView()
     lazy var line = Line(height: 1, color: .cardDivider)
+    lazy var mapTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(mapTapped))
 
     var mapHeightConstraint: NSLayoutConstraint!
     var timingTitleContraint: NSLayoutConstraint?
 
     private let timeFormatter = DateFormatter.shortTime
+
+    private weak var delegate: DetailsCardDelegate?
 
     func layout() {
         layer.cornerRadius = 6
@@ -38,9 +45,16 @@ class DetailsCard: UIView {
         locationLabel.constrain(toSuperview: .leading, .trailing, insetBy: 16)
         locationLabel.constrain(.top, to: line, .bottom, withOffset: 16)
 
-        add(locationMapView, constrainedTo: [.leading, .trailing, .bottom])
-        mapHeightConstraint = locationMapView.constrain(height: 136)
-        locationMapView.constrain(.top, to: locationLabel, .bottom, withOffset: 16)
+        let locationHostView = UIView()
+        add(locationHostView, constrainedTo: [.leading, .trailing, .bottom])
+        mapHeightConstraint = locationHostView.constrain(height: 136)
+        locationHostView.constrain(.top, to: locationLabel, .bottom, withOffset: 16)
+        locationHostView.addGestureRecognizer(mapTapRecognizer)
+        locationHostView.add(locationMapView, constrainedTo: [.leading, .top, .trailing, .bottom])
+    }
+
+    @objc func mapTapped() {
+        delegate?.didTapMap(on: self, onRegion: locationMapView.region)
     }
 
     func style() {
@@ -50,7 +64,8 @@ class DetailsCard: UIView {
         locationMapView.isUserInteractionEnabled = false
     }
 
-    func set(event: EKEvent) {
+    func set(event: EKEvent, delegate: DetailsCardDelegate) {
+        self.delegate = delegate
         titleLabel.text = event.title
         locationLabel.text = event.location
         timingLabel.text = "From \(timeFormatter.string(from: event.startDate)) to \(timeFormatter.string(from: event.endDate))"

@@ -1,6 +1,6 @@
 import UIKit
 
-private let slideDuration: TimeInterval = 0.4
+private let slideDuration: TimeInterval = 0.3
 private let alphaDuration: TimeInterval = 0.3
 
 class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitioning {

@@ -5,7 +5,7 @@ import MapKit
 import FirebaseAnalytics
 import CoreLocation
 
-class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventViewDelegate, UINavigationBarDelegate, EventResponseViewDelegate, EKEventEditViewDelegate, EventView {
+class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventViewDelegate, UINavigationBarDelegate, EventResponseViewDelegate, EKEventEditViewDelegate, EventView, DetailsCardDelegate {
 
     lazy var detailsCard: DetailsCard = DetailsCard()
     lazy var moreInfoButton = UIButton()
@@ -72,7 +72,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     }
 
     func updateUI() {
-        detailsCard.set(event: event)
+        detailsCard.set(event: event, delegate: self)
         responseView.set(event.response)
     }
 
@@ -218,6 +218,13 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
 
     func display(_ location: CLLocation) {
         detailsCard.show(location)
+    }
+
+    func didTapMap(on detailsCard: DetailsCard, onRegion region: MKCoordinateRegion) {
+        let placemark = MKPlacemark(coordinate: region.center, addressDictionary: nil)
+        MKMapItem(placemark: placemark).openInMaps(launchOptions: [
+            MKLaunchOptionsMapSpanKey: region.span
+        ])
     }
 
 }
