@@ -12,7 +12,9 @@ import EventKitUI
 class AddNewEventViewControllerFactory {
 
     func newEventController(for calendarItem: SCCalendarItem, delegate: EKEventEditViewDelegate) -> UIViewController {
-        return EKEventEditViewController(calendarItem: calendarItem, delegate: delegate)
+        let eventController = EKEventEditViewController(calendarItem: calendarItem, delegate: delegate)
+        eventController.modalPresentationStyle = .formSheet
+        return eventController
     }
 
 }
