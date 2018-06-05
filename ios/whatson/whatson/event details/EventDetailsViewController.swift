@@ -106,8 +106,10 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
 
         let scrollView = UIScrollView()
         view.addSubview(scrollView)
-        scrollView.constrain(toSuperviewSafeArea: .leading, .trailing, .bottom)
+        scrollView.constrain(toSuperviewSafeArea: .bottom)
         scrollView.constrain(.top, to: navBar, .bottom)
+        scrollView.leadingAnchor.constraint(equalTo: view.readableContentGuide.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.readableContentGuide.trailingAnchor).isActive = true
 
         scrollView.addSubview(detailsCard)
         detailsCard.constrain(toSuperview: .leading, .top, insetBy: 8)
