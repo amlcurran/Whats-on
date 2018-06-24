@@ -112,21 +112,22 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         scrollView.trailingAnchor.constraint(equalTo: view.readableContentGuide.trailingAnchor).isActive = true
 
         scrollView.addSubview(detailsCard)
-        detailsCard.constrain(toSuperview: .leading, .top, insetBy: 8)
-        detailsCard.constrain(.width, to: view, .width, withOffset: -16)
+        detailsCard.constrain(toSuperview: .top, insetBy: 8)
+        detailsCard.constrain(toSuperview: .leading)
+        detailsCard.widthAnchor.constraint(equalTo: view.readableContentGuide.widthAnchor).isActive = true
         detailsCard.layout()
 
         let line = UIView()
         line.backgroundColor = .divider
         scrollView.addSubview(line)
         line.constrain(height: 1)
-        line.constrain(.width, to: view, .width)
+        line.widthAnchor.constraint(equalTo: view.readableContentGuide.widthAnchor).isActive = true
         line.constrain(.top, to: detailsCard, .bottom, withOffset: 16)
 
         scrollView.add(moreInfoButton, constrainedTo: [.bottomMargin])
         moreInfoButton.constrain(.top, to: line, .bottom, withOffset: 0)
         moreInfoButton.contentEdgeInsets = UIEdgeInsets(top: 21, left: 21, bottom: 21, right: 21)
-        moreInfoButton.constrain(.width, to: view, .width)
+        moreInfoButton.widthAnchor.constraint(equalTo: view.readableContentGuide.widthAnchor).isActive = true
     }
 
     private func loadLocation() {

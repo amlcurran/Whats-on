@@ -55,7 +55,7 @@ class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitionin
         let firstAnimation = animator.animate(withDuration: slideDuration, {
             backgroundView.alpha = 1
             rowCardSnapshot.frame.origin.y = detailVC.detailsCard.absoluteFrame().origin.y - 8
-            rowCardSnapshot.frame.origin.x = detailVC.detailsCard.absoluteFrame().origin.x - 8
+            rowCardSnapshot.frame.origin.x = detailVC.detailsCard.absoluteFrame().origin.x
         }, completion: {
             secondAnimation?.start()
         })
