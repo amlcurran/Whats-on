@@ -14,7 +14,7 @@ class CalendarPreferenceStore {
     private let calendarsKey = "excludedCalendars"
     private let defaultCalendarKey = "defaultCalendar"
 
-    init(userDefaults: UserDefaults = .standard) {
+    init(userDefaults: UserDefaults = UserDefaults(suiteName: "group.uk.co.amlcurran.social")!) {
         self.userDefaults = userDefaults
     }
 

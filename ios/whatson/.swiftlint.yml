@@ -4,3 +4,4 @@ opt_in_rules:
 disabled_rules:
  - line_length
  - implicit_getter
+ - identifier_name

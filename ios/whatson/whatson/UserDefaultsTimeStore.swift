@@ -5,7 +5,7 @@ class UserDefaultsTimeStore {
     private let userDefaults: UserDefaults
     private let dateCalculator = NSDateCalculator.instance
 
-    init(userDefaults: UserDefaults = .standard) {
+    init(userDefaults: UserDefaults = UserDefaults(suiteName: "group.uk.co.amlcurran.social")!) {
         self.userDefaults = userDefaults
     }
 
