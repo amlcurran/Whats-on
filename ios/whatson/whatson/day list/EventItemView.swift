@@ -94,7 +94,7 @@ class EventItemView: UIView {
         }
     }
 
-    func bound(to item: SCCalendarItem, slot: SCCalendarSlot) -> Self {
+    func bound(to item: SCCalendarItem, slot: SCCalendarSlot) {
         let startTime = timeFormatter.string(from: timeCalculator.date(from: item.startTime()))
         secondaryLabel.text = String(format: "From %@", startTime)
         if slot.isEmpty() {
@@ -109,7 +109,6 @@ class EventItemView: UIView {
         } else {
             otherEventsLabel.text = nil
         }
-        return self
     }
 
 }

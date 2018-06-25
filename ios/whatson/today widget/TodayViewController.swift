@@ -11,7 +11,7 @@ import NotificationCenter
 
 class TodayViewController: UIViewController, NCWidgetProviding {
 
-    @IBOutlet weak var mainLabel: UILabel!
+    @IBOutlet weak var itemView: EventItemView!
     private var eventService: SCEventsService!
     private let timeRepo = TimeRepository()
 
@@ -24,13 +24,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
         let source = eventService.getCalendarSource(with: 2, with: .now)
-        if let item = source.itemAt(with: 0) {
-            mainLabel.text = item.title()
+        if source.count() > 0, let item = source.itemAt(with: 0) {
+            itemView.bound(to: item, slot: source.slotAt(with: 0))
+            completionHandler(.newData)
         } else {
-            mainLabel.text = "Nothing on"
+            completionHandler(.failed)
         }
-
-        completionHandler(NCUpdateResult.newData)
     }
 
 }
