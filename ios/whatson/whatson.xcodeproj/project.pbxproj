@@ -78,6 +78,15 @@
 		8695D0281DA023670034D52A /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0271DA023670034D52A /* HeaderView.swift */; };
 		8695D0301DA185DB0034D52A /* SlotCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */; };
 		8695D0331DA1A2A20034D52A /* SlotDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0321DA1A2A20034D52A /* SlotDetail.swift */; };
+		869B1EF520E180A40012A72D /* EventItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869B1EF420E180A40012A72D /* EventItemView.swift */; };
+		869B1EF620E180A40012A72D /* EventItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869B1EF420E180A40012A72D /* EventItemView.swift */; };
+		869B1EF720E180FA0012A72D /* DateFormatter+Initialisers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E45E1DA80E9700E8D019 /* DateFormatter+Initialisers.swift */; };
+		869B1EF820E181380012A72D /* RoundedRectBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */; };
+		869B1EF920E181460012A72D /* SlotCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */; };
+		869B1EFA20E1814D0012A72D /* SlotDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0321DA1A2A20034D52A /* SlotDetail.swift */; };
+		869B1EFB20E181600012A72D /* UIColor+WhatsOn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D751141C71316D00C0A607 /* UIColor+WhatsOn.swift */; };
+		869B1EFC20E1819F0012A72D /* Optional+Fluency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */; };
+		869B1EFD20E181EE0012A72D /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */; };
 		869DAC7D1D44D15C005AF315 /* EventPredicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC7C1D44D15C005AF315 /* EventPredicates.swift */; };
 		86A9C2CB1C444468009281A0 /* WhatsOnAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */; };
 		86A9E4571DA7A7DC00E8D019 /* CalendarTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E4561DA7A7DC00E8D019 /* CalendarTableView.swift */; };
@@ -252,6 +261,7 @@
 		8695D0271DA023670034D52A /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotCellStyle.swift; sourceTree = "<group>"; };
 		8695D0321DA1A2A20034D52A /* SlotDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotDetail.swift; sourceTree = "<group>"; };
+		869B1EF420E180A40012A72D /* EventItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventItemView.swift; sourceTree = "<group>"; };
 		869DAC701D449EFB005AF315 /* WhatsOnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatsOnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		869DAC741D449EFB005AF315 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		869DAC7C1D44D15C005AF315 /* EventPredicates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPredicates.swift; sourceTree = "<group>"; };
@@ -421,6 +431,7 @@
 				86CFE11B1F1376A400D9AA8D /* EventForceTouchDisplayer.swift */,
 				698530C0F754D12F1E38397C /* DayCell.swift */,
 				86DEC9551FB3A069000FF4CD /* AddNewEventViewControllerFactory.swift */,
+				869B1EF420E180A40012A72D /* EventItemView.swift */,
 			);
 			path = "day list";
 			sourceTree = "<group>";
@@ -839,19 +850,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				869B1EFA20E1814D0012A72D /* SlotDetail.swift in Sources */,
 				86B7D30C20E12703001B0DF6 /* EmptyCalendarItem.m in Sources */,
 				86B7D31120E12703001B0DF6 /* TimeCalculator.m in Sources */,
 				86B7D31D20E12ACF001B0DF6 /* Date+SCTimeOfDay.swift in Sources */,
+				869B1EFB20E181600012A72D /* UIColor+WhatsOn.swift in Sources */,
 				86B7D31520E12795001B0DF6 /* CalendarPreferenceStore.swift in Sources */,
 				86B7D31320E12703001B0DF6 /* TimeRepository.m in Sources */,
 				86B7D31920E12A89001B0DF6 /* TimeRepository.swift in Sources */,
 				86B7D31620E127A4001B0DF6 /* CalendarsLoader.swift in Sources */,
 				86B7D31720E127BA001B0DF6 /* EKEventStore+Singleton.swift in Sources */,
 				86B7D31C20E12AA0001B0DF6 /* EventPredicates.swift in Sources */,
+				869B1EF620E180A40012A72D /* EventItemView.swift in Sources */,
 				86B7D31F20E12C54001B0DF6 /* SCTimestamp+Now.swift in Sources */,
 				86B7D31020E12703001B0DF6 /* SparseArray.m in Sources */,
 				86B7D30F20E12703001B0DF6 /* EventsService.m in Sources */,
+				869B1EFD20E181EE0012A72D /* UIView+Constraints.swift in Sources */,
 				86B7D31220E12703001B0DF6 /* TimeOfDay.m in Sources */,
+				869B1EF720E180FA0012A72D /* DateFormatter+Initialisers.swift in Sources */,
 				86B7D30B20E12703001B0DF6 /* ContainerHelpers.m in Sources */,
 				86B7D31A20E12A8C001B0DF6 /* EventStoreRepository.swift in Sources */,
 				86B7D30E20E12703001B0DF6 /* EventsRepository.m in Sources */,
@@ -861,8 +877,11 @@
 				86B7D30920E12703001B0DF6 /* CalendarSlot.m in Sources */,
 				86B7D31420E12703001B0DF6 /* Timestamp.m in Sources */,
 				86B7D30D20E12703001B0DF6 /* EventCalendarItem.m in Sources */,
+				869B1EFC20E1819F0012A72D /* Optional+Fluency.swift in Sources */,
 				86B7D30A20E12703001B0DF6 /* CalendarSource.m in Sources */,
+				869B1EF920E181460012A72D /* SlotCellStyle.swift in Sources */,
 				86B7D2EB20E123EC001B0DF6 /* TodayViewController.swift in Sources */,
+				869B1EF820E181380012A72D /* RoundedRectBorderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -885,6 +904,7 @@
 				8695D0331DA1A2A20034D52A /* SlotDetail.swift in Sources */,
 				86D751131C7128EB00C0A607 /* RoundedRectBorderView.swift in Sources */,
 				862468CB1F091ACE00FE5A49 /* EventsService.m in Sources */,
+				869B1EF520E180A40012A72D /* EventItemView.swift in Sources */,
 				86F8499B1D046AAE007C41B0 /* UIView+Constraints.swift in Sources */,
 				86A9E45B1DA80A4900E8D019 /* UIViewController+Navigation.swift in Sources */,
 				8658A2341F375E6100BF219C /* TitleTableItem.swift in Sources */,
