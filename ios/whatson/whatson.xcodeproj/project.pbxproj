@@ -79,14 +79,6 @@
 		8695D0301DA185DB0034D52A /* SlotCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */; };
 		8695D0331DA1A2A20034D52A /* SlotDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0321DA1A2A20034D52A /* SlotDetail.swift */; };
 		869B1EF520E180A40012A72D /* EventItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869B1EF420E180A40012A72D /* EventItemView.swift */; };
-		869B1EF620E180A40012A72D /* EventItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869B1EF420E180A40012A72D /* EventItemView.swift */; };
-		869B1EF720E180FA0012A72D /* DateFormatter+Initialisers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E45E1DA80E9700E8D019 /* DateFormatter+Initialisers.swift */; };
-		869B1EF820E181380012A72D /* RoundedRectBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */; };
-		869B1EF920E181460012A72D /* SlotCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */; };
-		869B1EFA20E1814D0012A72D /* SlotDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0321DA1A2A20034D52A /* SlotDetail.swift */; };
-		869B1EFB20E181600012A72D /* UIColor+WhatsOn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D751141C71316D00C0A607 /* UIColor+WhatsOn.swift */; };
-		869B1EFC20E1819F0012A72D /* Optional+Fluency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */; };
-		869B1EFD20E181EE0012A72D /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */; };
 		869DAC7D1D44D15C005AF315 /* EventPredicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC7C1D44D15C005AF315 /* EventPredicates.swift */; };
 		86A9C2CB1C444468009281A0 /* WhatsOnAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */; };
 		86A9E4571DA7A7DC00E8D019 /* CalendarTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E4561DA7A7DC00E8D019 /* CalendarTableView.swift */; };
@@ -94,36 +86,6 @@
 		86A9E45B1DA80A4900E8D019 /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E45A1DA80A4900E8D019 /* UIViewController+Navigation.swift */; };
 		86A9E45D1DA80DA500E8D019 /* SCTimestamp+Now.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E45C1DA80DA500E8D019 /* SCTimestamp+Now.swift */; };
 		86A9E45F1DA80E9700E8D019 /* DateFormatter+Initialisers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E45E1DA80E9700E8D019 /* DateFormatter+Initialisers.swift */; };
-		86B7D2E820E123EC001B0DF6 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86B7D2E720E123EC001B0DF6 /* NotificationCenter.framework */; };
-		86B7D2EB20E123EC001B0DF6 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B7D2EA20E123EC001B0DF6 /* TodayViewController.swift */; };
-		86B7D2EE20E123EC001B0DF6 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86B7D2EC20E123EC001B0DF6 /* MainInterface.storyboard */; };
-		86B7D2F220E123EC001B0DF6 /* Today.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 86B7D2E620E123EC001B0DF6 /* Today.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		86B7D2FB20E126BA001B0DF6 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DE0FEA1BB88646004E20B5 /* libz.tbd */; };
-		86B7D2FC20E126CB001B0DF6 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DE0FE61BB885E8004E20B5 /* libicucore.tbd */; };
-		86B7D2FD20E126D1001B0DF6 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 862468D11F091B8C00FE5A49 /* libiconv.tbd */; };
-		86B7D30820E12703001B0DF6 /* CalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 862468AB1F091ACE00FE5A49 /* CalendarItem.m */; };
-		86B7D30920E12703001B0DF6 /* CalendarSlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 862468AD1F091ACE00FE5A49 /* CalendarSlot.m */; };
-		86B7D30A20E12703001B0DF6 /* CalendarSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 862468AF1F091ACE00FE5A49 /* CalendarSource.m */; };
-		86B7D30B20E12703001B0DF6 /* ContainerHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 862468B11F091ACE00FE5A49 /* ContainerHelpers.m */; };
-		86B7D30C20E12703001B0DF6 /* EmptyCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 862468B31F091ACE00FE5A49 /* EmptyCalendarItem.m */; };
-		86B7D30D20E12703001B0DF6 /* EventCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 862468B51F091ACE00FE5A49 /* EventCalendarItem.m */; };
-		86B7D30E20E12703001B0DF6 /* EventsRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 862468B71F091ACE00FE5A49 /* EventsRepository.m */; };
-		86B7D30F20E12703001B0DF6 /* EventsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 862468B91F091ACE00FE5A49 /* EventsService.m */; };
-		86B7D31020E12703001B0DF6 /* SparseArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 862468BB1F091ACE00FE5A49 /* SparseArray.m */; };
-		86B7D31120E12703001B0DF6 /* TimeCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 862468BD1F091ACE00FE5A49 /* TimeCalculator.m */; };
-		86B7D31220E12703001B0DF6 /* TimeOfDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 862468BF1F091ACE00FE5A49 /* TimeOfDay.m */; };
-		86B7D31320E12703001B0DF6 /* TimeRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 862468C11F091ACE00FE5A49 /* TimeRepository.m */; };
-		86B7D31420E12703001B0DF6 /* Timestamp.m in Sources */ = {isa = PBXBuildFile; fileRef = 862468C31F091ACE00FE5A49 /* Timestamp.m */; };
-		86B7D31520E12795001B0DF6 /* CalendarPreferenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869475691F376DE900925C2A /* CalendarPreferenceStore.swift */; };
-		86B7D31620E127A4001B0DF6 /* CalendarsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658A2391F37605000BF219C /* CalendarsLoader.swift */; };
-		86B7D31720E127BA001B0DF6 /* EKEventStore+Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E4581DA8076400E8D019 /* EKEventStore+Singleton.swift */; };
-		86B7D31920E12A89001B0DF6 /* TimeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8650D7D11D9FAE8E002D5930 /* TimeRepository.swift */; };
-		86B7D31A20E12A8C001B0DF6 /* EventStoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8650D7CF1D9FA8F5002D5930 /* EventStoreRepository.swift */; };
-		86B7D31B20E12A9C001B0DF6 /* NSDateCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864561C21C02709800ADDE44 /* NSDateCalculator.swift */; };
-		86B7D31C20E12AA0001B0DF6 /* EventPredicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC7C1D44D15C005AF315 /* EventPredicates.swift */; };
-		86B7D31D20E12ACF001B0DF6 /* Date+SCTimeOfDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698539EC9C2B0360E301F15F /* Date+SCTimeOfDay.swift */; };
-		86B7D31E20E12AE6001B0DF6 /* UserDefaultsTimeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */; };
-		86B7D31F20E12C54001B0DF6 /* SCTimestamp+Now.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E45C1DA80DA500E8D019 /* SCTimestamp+Now.swift */; };
 		86C19EBF1BBF28E600BBCDF6 /* WhatsOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */; };
 		86CAD49E1BACC9B1009C9CFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CAD49D1BACC9B1009C9CFD /* main.m */; };
 		86CAD4A91BACC9B1009C9CFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */; };
@@ -151,13 +113,6 @@
 			remoteGlobalIDString = 86CAD4981BACC9B1009C9CFD;
 			remoteInfo = whatson;
 		};
-		86B7D2F020E123EC001B0DF6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 86CAD4911BACC9B1009C9CFD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 86B7D2E520E123EC001B0DF6;
-			remoteInfo = Today;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -167,7 +122,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				86B7D2F220E123EC001B0DF6 /* Today.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,12 +225,7 @@
 		86A9E45A1DA80A4900E8D019 /* UIViewController+Navigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Navigation.swift"; sourceTree = "<group>"; };
 		86A9E45C1DA80DA500E8D019 /* SCTimestamp+Now.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCTimestamp+Now.swift"; sourceTree = "<group>"; };
 		86A9E45E1DA80E9700E8D019 /* DateFormatter+Initialisers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Initialisers.swift"; sourceTree = "<group>"; };
-		86B7D2E620E123EC001B0DF6 /* Today.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Today.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		86B7D2E720E123EC001B0DF6 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
-		86B7D2EA20E123EC001B0DF6 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
-		86B7D2ED20E123EC001B0DF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		86B7D2EF20E123EC001B0DF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		86B7D31820E1288A001B0DF6 /* Today-BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Today-BridgingHeader.h"; path = "../Today-BridgingHeader.h"; sourceTree = "<group>"; };
 		86B7D32020E12DA4001B0DF6 /* Today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Today.entitlements; sourceTree = "<group>"; };
 		86C19EB91BBF287500BBCDF6 /* whatson-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "whatson-Bridging-Header.h"; sourceTree = "<group>"; };
 		86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsOnViewController.swift; sourceTree = "<group>"; };
@@ -310,17 +259,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				19B26691193D2CF98E39543F /* Pods_WhatsOnTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		86B7D2E320E123EC001B0DF6 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				86B7D2FD20E126D1001B0DF6 /* libiconv.tbd in Frameworks */,
-				86B7D2FC20E126CB001B0DF6 /* libicucore.tbd in Frameworks */,
-				86B7D2FB20E126BA001B0DF6 /* libz.tbd in Frameworks */,
-				86B7D2E820E123EC001B0DF6 /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,17 +385,6 @@
 			path = WhatsOnTests;
 			sourceTree = "<group>";
 		};
-		86B7D2E920E123EC001B0DF6 /* today widget */ = {
-			isa = PBXGroup;
-			children = (
-				86B7D2EA20E123EC001B0DF6 /* TodayViewController.swift */,
-				86B7D2EC20E123EC001B0DF6 /* MainInterface.storyboard */,
-				86B7D2EF20E123EC001B0DF6 /* Info.plist */,
-				86B7D31820E1288A001B0DF6 /* Today-BridgingHeader.h */,
-			);
-			path = "today widget";
-			sourceTree = "<group>";
-		};
 		86CAD4901BACC9B1009C9CFD = {
 			isa = PBXGroup;
 			children = (
@@ -466,7 +393,6 @@
 				86FCF4411D455ADE000938E3 /* dependencies */,
 				86CAD49B1BACC9B1009C9CFD /* whatson */,
 				869DAC711D449EFB005AF315 /* tests */,
-				86B7D2E920E123EC001B0DF6 /* today widget */,
 				86CAD49A1BACC9B1009C9CFD /* Products */,
 				86C19EB91BBF287500BBCDF6 /* whatson-Bridging-Header.h */,
 				3C1168F9D8934AD69843604B /* Pods */,
@@ -480,7 +406,6 @@
 			children = (
 				86CAD4991BACC9B1009C9CFD /* What’s on.app */,
 				869DAC701D449EFB005AF315 /* WhatsOnTests.xctest */,
-				86B7D2E620E123EC001B0DF6 /* Today.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -631,23 +556,6 @@
 			productReference = 869DAC701D449EFB005AF315 /* WhatsOnTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		86B7D2E520E123EC001B0DF6 /* Today */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 86B7D2F520E123EC001B0DF6 /* Build configuration list for PBXNativeTarget "Today" */;
-			buildPhases = (
-				86B7D2E220E123EC001B0DF6 /* Sources */,
-				86B7D2E320E123EC001B0DF6 /* Frameworks */,
-				86B7D2E420E123EC001B0DF6 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Today;
-			productName = Today;
-			productReference = 86B7D2E620E123EC001B0DF6 /* Today.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		86CAD4981BACC9B1009C9CFD /* whatson */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 86CAD4B01BACC9B1009C9CFD /* Build configuration list for PBXNativeTarget "whatson" */;
@@ -663,7 +571,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				86B7D2F120E123EC001B0DF6 /* PBXTargetDependency */,
 			);
 			name = whatson;
 			productName = whatson;
@@ -687,16 +594,6 @@
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 86CAD4981BACC9B1009C9CFD;
-					};
-					86B7D2E520E123EC001B0DF6 = {
-						CreatedOnToolsVersion = 10.0;
-						DevelopmentTeam = 3H3SBN3AYY;
-						ProvisioningStyle = Automatic;
-						SystemCapabilities = {
-							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
-							};
-						};
 					};
 					86CAD4981BACC9B1009C9CFD = {
 						CreatedOnToolsVersion = 7.0;
@@ -730,7 +627,6 @@
 			targets = (
 				86CAD4981BACC9B1009C9CFD /* whatson */,
 				869DAC6F1D449EFB005AF315 /* WhatsOnTests */,
-				86B7D2E520E123EC001B0DF6 /* Today */,
 			);
 		};
 /* End PBXProject section */
@@ -740,14 +636,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		86B7D2E420E123EC001B0DF6 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				86B7D2EE20E123EC001B0DF6 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -843,45 +731,6 @@
 			files = (
 				86317A091EC258ED0009EE8A /* EventPredicateTests.swift in Sources */,
 				69853A438F323A331EE8B46E /* CalendarTableViewTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		86B7D2E220E123EC001B0DF6 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				869B1EFA20E1814D0012A72D /* SlotDetail.swift in Sources */,
-				86B7D30C20E12703001B0DF6 /* EmptyCalendarItem.m in Sources */,
-				86B7D31120E12703001B0DF6 /* TimeCalculator.m in Sources */,
-				86B7D31D20E12ACF001B0DF6 /* Date+SCTimeOfDay.swift in Sources */,
-				869B1EFB20E181600012A72D /* UIColor+WhatsOn.swift in Sources */,
-				86B7D31520E12795001B0DF6 /* CalendarPreferenceStore.swift in Sources */,
-				86B7D31320E12703001B0DF6 /* TimeRepository.m in Sources */,
-				86B7D31920E12A89001B0DF6 /* TimeRepository.swift in Sources */,
-				86B7D31620E127A4001B0DF6 /* CalendarsLoader.swift in Sources */,
-				86B7D31720E127BA001B0DF6 /* EKEventStore+Singleton.swift in Sources */,
-				86B7D31C20E12AA0001B0DF6 /* EventPredicates.swift in Sources */,
-				869B1EF620E180A40012A72D /* EventItemView.swift in Sources */,
-				86B7D31F20E12C54001B0DF6 /* SCTimestamp+Now.swift in Sources */,
-				86B7D31020E12703001B0DF6 /* SparseArray.m in Sources */,
-				86B7D30F20E12703001B0DF6 /* EventsService.m in Sources */,
-				869B1EFD20E181EE0012A72D /* UIView+Constraints.swift in Sources */,
-				86B7D31220E12703001B0DF6 /* TimeOfDay.m in Sources */,
-				869B1EF720E180FA0012A72D /* DateFormatter+Initialisers.swift in Sources */,
-				86B7D30B20E12703001B0DF6 /* ContainerHelpers.m in Sources */,
-				86B7D31A20E12A8C001B0DF6 /* EventStoreRepository.swift in Sources */,
-				86B7D30E20E12703001B0DF6 /* EventsRepository.m in Sources */,
-				86B7D30820E12703001B0DF6 /* CalendarItem.m in Sources */,
-				86B7D31E20E12AE6001B0DF6 /* UserDefaultsTimeStore.swift in Sources */,
-				86B7D31B20E12A9C001B0DF6 /* NSDateCalculator.swift in Sources */,
-				86B7D30920E12703001B0DF6 /* CalendarSlot.m in Sources */,
-				86B7D31420E12703001B0DF6 /* Timestamp.m in Sources */,
-				86B7D30D20E12703001B0DF6 /* EventCalendarItem.m in Sources */,
-				869B1EFC20E1819F0012A72D /* Optional+Fluency.swift in Sources */,
-				86B7D30A20E12703001B0DF6 /* CalendarSource.m in Sources */,
-				869B1EF920E181460012A72D /* SlotCellStyle.swift in Sources */,
-				86B7D2EB20E123EC001B0DF6 /* TodayViewController.swift in Sources */,
-				869B1EF820E181380012A72D /* RoundedRectBorderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -984,22 +833,9 @@
 			target = 86CAD4981BACC9B1009C9CFD /* whatson */;
 			targetProxy = 869DAC751D449EFB005AF315 /* PBXContainerItemProxy */;
 		};
-		86B7D2F120E123EC001B0DF6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 86B7D2E520E123EC001B0DF6 /* Today */;
-			targetProxy = 86B7D2F020E123EC001B0DF6 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		86B7D2EC20E123EC001B0DF6 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				86B7D2ED20E123EC001B0DF6 /* Base */,
-			);
-			name = MainInterface.storyboard;
-			sourceTree = "<group>";
-		};
 		86CAD4AA1BACC9B1009C9CFD /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1057,89 +893,6 @@
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/What’s on.app/What’s on";
 				USER_HEADER_SEARCH_PATHS = "\"$(J2OBJC_HOME)/include\"/**";
-			};
-			name = Release;
-		};
-		86B7D2F320E123EC001B0DF6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = Today.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3H3SBN3AYY;
-				FRAMEWORK_SEARCH_PATHS = "${J2OBJC_HOME}/frameworks";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				INFOPLIST_FILE = "$(SRCROOT)/today widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				LIBRARY_SEARCH_PATHS = "${J2OBJC_HOME}/lib";
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-ljre_emul",
-					"-ljsr305",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson.Today;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OBJC_BRIDGING_HEADER = "Today-BridgingHeader.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "\"${J2OBJC_HOME}/include\"/**";
-			};
-			name = Debug;
-		};
-		86B7D2F420E123EC001B0DF6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = Today.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3H3SBN3AYY;
-				FRAMEWORK_SEARCH_PATHS = "${J2OBJC_HOME}/frameworks";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "$(SRCROOT)/today widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				LIBRARY_SEARCH_PATHS = "${J2OBJC_HOME}/lib";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-ljre_emul",
-					"-ljsr305",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson.Today;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Today-BridgingHeader.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "\"${J2OBJC_HOME}/include\"/**";
 			};
 			name = Release;
 		};
@@ -1394,15 +1147,6 @@
 			buildConfigurations = (
 				869DAC771D449EFB005AF315 /* Debug */,
 				869DAC781D449EFB005AF315 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		86B7D2F520E123EC001B0DF6 /* Build configuration list for PBXNativeTarget "Today" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				86B7D2F320E123EC001B0DF6 /* Debug */,
-				86B7D2F420E123EC001B0DF6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
