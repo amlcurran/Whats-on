@@ -142,14 +142,17 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     }
 
     @objc func deleteEventTapped() {
-        if !event.isDetached {
-            deleteEvent(span: .thisEvent)
-        } else {
-            let actionSheet = UIAlertController(title: "Delete event", message: nil, preferredStyle: .actionSheet)
+        if event.hasRecurrenceRules {
+            let actionSheet = UIAlertController(title: nil, message: "This event is a recurring one. How many occurrences do you want to delete?", preferredStyle: .actionSheet)
             actionSheet.addAction(UIAlertAction(title: "This event", style: .default, handler: { _ in self.deleteEvent(span: .thisEvent) }))
-            actionSheet.addAction(UIAlertAction(title: "Future events", style: .default, handler: { _ in self.deleteEvent(span: .futureEvents) }))
+            actionSheet.addAction(UIAlertAction(title: "All future events", style: .default, handler: { _ in self.deleteEvent(span: .futureEvents) }))
             actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             present(actionSheet, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "Delete this event?", message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { _ in self.deleteEvent(span: .thisEvent) }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
         }
     }
 
