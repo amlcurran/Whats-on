@@ -39,9 +39,17 @@ platform :ios do
   lane :release do
     # match(type: "appstore")
     # snapshot
+    version = prompt(text: "version number: ")
+    update_build(version)
     gym(scheme: "whatson")
     deliver(force: true)
     # frameit
+    commit_version_bump(
+      xcodeproj: "whatson.xcodeproj"
+    )
+    add_git_tag(
+        tag: "#{version}"
+    )
   end
 
 end
