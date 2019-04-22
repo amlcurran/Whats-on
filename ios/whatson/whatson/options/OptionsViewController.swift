@@ -31,7 +31,7 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
     init() {
         super.init(nibName: nil, bundle: nil)
         self.tableView.estimatedRowHeight = 44
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
     }
 
     required init?(coder aDecoder: NSCoder) {

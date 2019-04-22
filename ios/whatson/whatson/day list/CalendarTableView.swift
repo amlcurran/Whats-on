@@ -107,7 +107,7 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
         tableView.register(DayCell.self, forCellReuseIdentifier: "day")
         tableView.register(EventCell.self, forCellReuseIdentifier: "event")
         tableView.backgroundColor = .clear
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 120
         tableView.separatorStyle = .none
         tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)

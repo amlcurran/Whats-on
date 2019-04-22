@@ -53,7 +53,7 @@ class BuildableTableSource: NSObject, UITableViewDataSource, UITableViewDelegate
     }
 
     func sectionIndex(of section: TableSection) -> Int? {
-        return sections.index(where: { $0.title == section.title })
+        return sections.firstIndex(where: { $0.title == section.title })
     }
 
 }

@@ -61,7 +61,7 @@ class StubTableView: UITableView {
         calledReloadData = true
     }
 
-    override func reloadRows(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation) {
+    override func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
         reloadedRowIndexes = indexPaths
     }
 }

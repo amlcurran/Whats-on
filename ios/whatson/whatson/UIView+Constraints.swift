@@ -2,13 +2,13 @@ import UIKit
 
 extension UIView {
 
-    func constrain(toSuperview edges: NSLayoutAttribute..., insetBy inset: CGFloat = 0) {
+    func constrain(toSuperview edges: NSLayoutConstraint.Attribute..., insetBy inset: CGFloat = 0) {
         for edge in edges {
             constrain(toSuperview: edge, withOffset: offset(for: edge, ofInset: inset))
         }
     }
 
-    func constrain(toSuperviewSafeArea edges: NSLayoutAttribute..., insetBy inset: CGFloat = 0) {
+    func constrain(toSuperviewSafeArea edges: NSLayoutConstraint.Attribute..., insetBy inset: CGFloat = 0) {
         _ = prepareForConstraints()
         var edges = edges
         if edges.contains(.leading) {
@@ -76,7 +76,7 @@ extension UIView {
         }
     }
 
-    private func offset(for edge: NSLayoutAttribute, ofInset inset: CGFloat) -> CGFloat {
+    private func offset(for edge: NSLayoutConstraint.Attribute, ofInset inset: CGFloat) -> CGFloat {
         switch edge {
         case .top, .topMargin, .leading, .leadingMargin:
             return inset
@@ -93,20 +93,20 @@ extension UIView {
         bottomAnchor.constraint(equalTo: viewController.view.safeAreaLayoutGuide.bottomAnchor, constant: -inset).isActive = true
     }
 
-    @discardableResult func constrain(toSuperview edge: NSLayoutAttribute, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
+    @discardableResult func constrain(toSuperview edge: NSLayoutConstraint.Attribute, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
         let superview = prepareForConstraints()
         let constraint = NSLayoutConstraint(item: self, attribute: edge, relatedBy: .equal, toItem: superview, attribute: edge, multiplier: 1, constant: offset)
         constraint.isActive = true
         return constraint
     }
 
-    @discardableResult func constrain(to view: UIView, _ edge: NSLayoutAttribute, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
+    @discardableResult func constrain(to view: UIView, _ edge: NSLayoutConstraint.Attribute, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
         let constraint = NSLayoutConstraint(item: self, attribute: edge, relatedBy: .equal, toItem: view, attribute: edge, multiplier: 1, constant: offset)
         constraint.isActive = true
         return constraint
     }
 
-    func constrain(to view: UIView, edges: NSLayoutAttribute..., withOffset offset: CGFloat = 0) {
+    func constrain(to view: UIView, edges: NSLayoutConstraint.Attribute..., withOffset offset: CGFloat = 0) {
         for edge in edges {
             constrain(to: view, edge, withOffset: offset)
         }
@@ -128,14 +128,14 @@ extension UIView {
         return constrain(height: 0)
     }
 
-    @discardableResult func constrain(_ edge: NSLayoutAttribute, to view: UIView, _ otherEdge: NSLayoutAttribute, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
+    @discardableResult func constrain(_ edge: NSLayoutConstraint.Attribute, to view: UIView, _ otherEdge: NSLayoutConstraint.Attribute, withOffset offset: CGFloat = 0) -> NSLayoutConstraint {
         _ = prepareForConstraints()
         let constraint = NSLayoutConstraint(item: self, attribute: edge, relatedBy: .equal, toItem: view, attribute: otherEdge, multiplier: 1, constant: offset)
         constraint.isActive = true
         return constraint
     }
 
-    func add(_ view: UIView, constrainedTo edges: [NSLayoutAttribute], withInset inset: CGFloat = 0) {
+    func add(_ view: UIView, constrainedTo edges: [NSLayoutConstraint.Attribute], withInset inset: CGFloat = 0) {
         addSubview(view)
         for edge in edges {
             view.constrain(toSuperview: edge, insetBy: inset)
@@ -150,16 +150,16 @@ extension UIView {
         return superview
     }
 
-    func hugContent(_ axis: UILayoutConstraintAxis) {
+    func hugContent(_ axis: NSLayoutConstraint.Axis) {
         setContentHuggingPriority(.required, for: axis)
     }
 
 }
 
-private extension Array where Element == NSLayoutAttribute {
+private extension Array where Element == NSLayoutConstraint.Attribute {
 
-    mutating func remove(_ attribute: NSLayoutAttribute) {
-        if let foundIndex = index(of: attribute) {
+    mutating func remove(_ attribute: NSLayoutConstraint.Attribute) {
+        if let foundIndex = firstIndex(of: attribute) {
             remove(at: foundIndex)
         }
     }

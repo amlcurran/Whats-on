@@ -59,7 +59,7 @@ class LoadingView: UIView {
         animation.fromValue = 0
         animation.toValue = 2 * Double.pi
         animation.duration = 1
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         loadingLayer.add(animation, forKey: "rotation")
     }
 
@@ -90,11 +90,16 @@ private class LoadingLayer: CAShapeLayer {
         lineWidth = 8
         strokeStart = 0.0
         strokeEnd = 0.6
-        lineCap = "round"
+        lineCap = convertToCAShapeLayerLineCap("round")
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToCAShapeLayerLineCap(_ input: String) -> CAShapeLayerLineCap {
+	return CAShapeLayerLineCap(rawValue: input)
 }

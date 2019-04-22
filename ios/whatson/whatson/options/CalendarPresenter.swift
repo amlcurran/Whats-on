@@ -51,7 +51,7 @@ class CalendarPresenter {
     func toggle(_ item: TableItem, at index: Int) {
         if let checkableItem = item as? CheckableTableItem {
             let identifier = self.calendars[index].id
-            if let index = preferenceStore.excludedCalendars.index(of: identifier) {
+            if let index = preferenceStore.excludedCalendars.firstIndex(of: identifier) {
                 preferenceStore.excludedCalendars.remove(at: index)
             } else {
                 preferenceStore.excludedCalendars.append(identifier)
