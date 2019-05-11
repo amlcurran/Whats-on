@@ -9,11 +9,11 @@
             android:layout_height="match_parent"
             android:text="Large Text"
             android:id="@+id/textView"
-            style="@style/TextAppearance.AppCompat.Body1"
+            style="@style/TextAppearance.MaterialComponents.Body1"
             android:gravity="center_vertical"
             android:paddingStart="16dip"
             android:paddingEnd="16dip"
-            android:textColor="@color/secondary_text_default_material_light"
+            android:textColor="?attr/colorOnBackground"
             android:background="@drawable/empty_border"
             android:layout_margin="@dimen/item_margin"/>
 </LinearLayout>

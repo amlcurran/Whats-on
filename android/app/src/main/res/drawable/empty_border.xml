@@ -6,7 +6,7 @@
                     android:dashWidth="8dip"
                     android:dashGap="4dip"
                     android:width="2dip"
-                    android:color="#33000000"/>
+                    android:color="?attr/colorOnBackground"/>
             <corners android:radius="4dip"/>
         </shape>
     </item>

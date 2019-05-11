@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/event_bg_color">
-        <shape xmlns:android="http://schemas.android.com/apk/res/android">
-            <solid android:color="?android:colorPrimary"/>
+        <shape>
+            <solid android:color="?colorSurface"/>
             <corners android:radius="4dip"/>
         </shape>
     </item>
