@@ -2,8 +2,8 @@ package uk.co.amlcurran.social;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.util.SparseArrayCompat;
+import androidx.core.content.ContextCompat;
+import androidx.collection.SparseArrayCompat;
 
 public class Permissions {
     private final Activity activity;

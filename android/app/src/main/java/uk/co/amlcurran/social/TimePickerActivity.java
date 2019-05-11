@@ -2,7 +2,7 @@ package uk.co.amlcurran.social;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class TimePickerActivity extends AppCompatActivity {
 
