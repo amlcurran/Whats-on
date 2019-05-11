@@ -6,17 +6,20 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
 
 import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
@@ -48,6 +51,9 @@ public class WhatsOnActivity extends AppCompatActivity {
         adapter = new WhatsOnAdapter(LayoutInflater.from(this), eventSelectedListener, calendarSource);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+
+        TextView today = findViewById(R.id.today_date);
+        today.setText(DateTimeFormat.forPattern("EEEE, dd MMMMM").print(now));
 
         permissions.requestPermission(REQUEST_CODE_REQUEST_CALENDAR, Manifest.permission.READ_CALENDAR, new Permissions.OnPermissionRequestListener() {
             @Override
