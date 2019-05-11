@@ -90,16 +90,11 @@ private class LoadingLayer: CAShapeLayer {
         lineWidth = 8
         strokeStart = 0.0
         strokeEnd = 0.6
-        lineCap = convertToCAShapeLayerLineCap("round")
+        lineCap = .round
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToCAShapeLayerLineCap(_ input: String) -> CAShapeLayerLineCap {
-	return CAShapeLayerLineCap(rawValue: input)
 }
