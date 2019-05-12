@@ -1,4 +1,4 @@
-package uk.co.amlcurran.social.core;
+package uk.co.amlcurran.social.utils;
 
 public class ContainerHelpers {
 

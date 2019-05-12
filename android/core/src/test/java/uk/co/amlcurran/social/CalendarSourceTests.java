@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.amlcurran.social.core.SparseArray;
+import uk.co.amlcurran.social.utils.SparseArray;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 

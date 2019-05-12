@@ -3,7 +3,7 @@ package uk.co.amlcurran.social;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import uk.co.amlcurran.social.core.SparseArray;
+import uk.co.amlcurran.social.utils.SparseArray;
 
 class CalendarSource {
 

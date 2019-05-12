@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import uk.co.amlcurran.social.core.SparseArray;
+import uk.co.amlcurran.social.utils.SparseArray;
 
 public class EventsService {
     private final TimeRepository timeRepository;
