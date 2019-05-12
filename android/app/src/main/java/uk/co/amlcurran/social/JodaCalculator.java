@@ -1,5 +1,6 @@
 package uk.co.amlcurran.social;
 
+import org.jetbrains.annotations.NotNull;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.Days;
@@ -7,6 +8,7 @@ import org.joda.time.Days;
 class JodaCalculator implements TimeCalculator {
     private static final DateTime EPOCH = new DateTime(0, DateTimeZone.getDefault());
 
+    @NotNull
     @Override
     public Timestamp plusHours(Timestamp time, int hours) {
         return new Timestamp(getDateTime(time).plusHours(hours).getMillis(), this);
@@ -22,6 +24,7 @@ class JodaCalculator implements TimeCalculator {
         return Days.daysBetween(EPOCH, getDateTime(time)).getDays();
     }
 
+    @NotNull
     @Override
     public Timestamp plusDays(int days, Timestamp time) {
         return new Timestamp(getDateTime(time).plusDays(days).getMillis(), this);
