@@ -12,6 +12,7 @@
         <item name="colorOnSurface">?colorSecondary</item>
         <item name="android:colorBackground">@color/background</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:spotShadowAlpha">0.05</item>
     </style>
 
     <color name="background">#edf1f5</color>
