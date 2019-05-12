@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:text="Monday, October 3"
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp"
+    android:textColor="?colorOnBackground"
+    style="@style/TextAppearance.MaterialComponents.Subtitle2">
+
+</TextView>
