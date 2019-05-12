@@ -5,5 +5,5 @@
             android:id="@+id/pick_times"
             android:title="@string/pick_times"
             app:showAsAction="ifRoom"
-            android:icon="@drawable/ic_action_time"/>
+            android:icon="@drawable/ic_edit"/>
 </menu>

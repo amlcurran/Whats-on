@@ -26,6 +26,7 @@
         android:background="?android:attr/colorBackground"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
+        tools:menu="@menu/activity_whats_on"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout

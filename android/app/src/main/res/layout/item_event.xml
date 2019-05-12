@@ -7,6 +7,8 @@
     android:layout_margin="8dp"
     app:cardElevation="2dp"
     app:cardCornerRadius="4dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:stateListAnimator="@animator/lift_on_touch"
     app:contentPadding="16dp">
 
     <LinearLayout

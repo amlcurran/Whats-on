@@ -47,6 +47,7 @@ class WhatsOnActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_whats_on)
+        setSupportActionBar(findViewById(R.id.toolbar))
         permissions = Permissions(this)
         val eventsRepository = AndroidEventsRepository(contentResolver)
         val dateCreator = AndroidTimeRepository()
