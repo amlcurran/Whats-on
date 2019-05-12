@@ -4,7 +4,7 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#3ad970</item>
-        <item name="colorPrimaryVariant">#007566</item>
+        <item name="colorPrimaryVariant">#2DA655</item>
         <item name="colorPrimaryDark">#edf1f5</item>
         <item name="colorSecondary">#44526c</item>
         <item name="colorOnBackground">#bac2c7</item>
