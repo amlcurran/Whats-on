@@ -1,19 +1,20 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme.Base" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">#3ad970</item>
         <item name="colorPrimaryVariant">#007566</item>
         <item name="colorPrimaryDark">#edf1f5</item>
         <item name="colorSecondary">#44526c</item>
         <item name="colorOnBackground">#bac2c7</item>
-        <item name="colorSurface">#ffffff</item>
         <item name="colorOnSurface">?colorSecondary</item>
         <item name="android:colorBackground">@color/background</item>
-        <item name="android:windowLightStatusBar">true</item>
         <item name="android:spotShadowAlpha">0.05</item>
         <item name="fontFamily">@font/open_sans</item>
+    </style>
+
+    <style name="AppTheme" parent="AppTheme.Base">
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <color name="background">#edf1f5</color>
