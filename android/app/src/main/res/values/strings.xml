@@ -2,5 +2,5 @@
     <string name="app_name">What\'s on</string>
     <string name="pick_times">Pick times</string>
     <string name="nothing_on">Nothing on</string>
-    <string name="from_time">From %1$s</string>
+    <string name="event_from">From %1$s</string>
 </resources>
