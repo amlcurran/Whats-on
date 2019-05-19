@@ -8,7 +8,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 public class EventViewHolder extends CalendarItemViewHolder<EventCalendarItem> {
 
-    private final TextView textView;;
+    private final TextView textView;
     private final WhatsOnAdapter.EventSelectedListener eventSelectedListener;
     private final TextView subtitle;
     private final DateTimeFormatter formatter = DateTimeFormat.shortTime();
@@ -28,7 +28,7 @@ public class EventViewHolder extends CalendarItemViewHolder<EventCalendarItem> {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                eventSelectedListener.eventSelected(item);
+                eventSelectedListener.eventSelected(item, itemView);
             }
         });
     }

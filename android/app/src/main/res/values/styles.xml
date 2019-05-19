@@ -17,6 +17,10 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <style name="Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:colorControlNormal">?attr/colorSecondary</item>
+    </style>
+
     <color name="background">#edf1f5</color>
 
 </resources>

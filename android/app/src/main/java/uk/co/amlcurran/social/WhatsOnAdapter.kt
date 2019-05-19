@@ -68,7 +68,7 @@ internal class WhatsOnAdapter(
     }
 
     interface EventSelectedListener {
-        fun eventSelected(calendarItem: EventCalendarItem)
+        fun eventSelected(calendarItem: EventCalendarItem, itemView: View)
 
         fun emptySelected(calendarItem: EmptyCalendarItem)
     }

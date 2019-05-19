@@ -1,15 +1,16 @@
 package uk.co.amlcurran.social
 
 import android.Manifest
-import android.content.ContentUris
 import android.content.Intent
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.joda.time.DateTime
@@ -25,10 +26,8 @@ class WhatsOnActivity : AppCompatActivity() {
     private lateinit var events: Events
 
     private val eventSelectedListener = object : WhatsOnAdapter.EventSelectedListener {
-        override fun eventSelected(calendarItem: EventCalendarItem) {
-            val id = java.lang.Long.valueOf(calendarItem.id())
-            val eventUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, id)
-            startActivity(Intent(Intent.ACTION_VIEW).setData(eventUri))
+        override fun eventSelected(calendarItem: EventCalendarItem, itemView: View) {
+            startActivity(EventDetailActivity.show(calendarItem.id(), this@WhatsOnActivity))
         }
 
         override fun emptySelected(calendarItem: EmptyCalendarItem) {

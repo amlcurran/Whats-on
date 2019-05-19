@@ -27,6 +27,7 @@
                     android:value=".WhatsOnActivity"/>
 
         </activity>
+        <activity android:name=".EventDetailActivity" />
 
     </application>
 
