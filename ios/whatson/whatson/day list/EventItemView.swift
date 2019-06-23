@@ -20,7 +20,7 @@ class EventItemView: UIView {
     var secondaryLabelZeroHeightConstraint: NSLayoutConstraint?
     var secondaryLabelBelowConstraint: NSLayoutConstraint?
 
-    private var type: SlotCellStyle = .empty {
+    private var type: SlotStyle = .empty {
         didSet {
             roundedView.backgroundColor = type.cellBackground
             eventLabel.textColor = type.mainText

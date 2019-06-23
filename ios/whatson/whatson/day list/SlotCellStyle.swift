@@ -1,39 +1,20 @@
 import UIKit
 
-private let backgrounds: [SlotCellStyle: UIColor] = [.empty: .clear, .full: .white]
-private let mainTexts: [SlotCellStyle: UIColor] = [.empty: .lightText, .full: .secondary]
-private let secondaryTexts: [SlotCellStyle: UIColor] = [.empty: .lightText, .full: .lightText]
-private let borderColors: [SlotCellStyle: UIColor] = [.empty: .emptyOutline, .full: .clear]
+struct SlotStyle {
+    let cellBackground: UIColor
+    let mainText: UIColor
+    let secondaryText: UIColor
+    let borderColor: UIColor
+    let borderWidth: CGFloat
+    let borderDash: Border
+    let isSecondaryTextShown: Bool
 
-enum SlotCellStyle {
-    case empty
-    case full
-
-    var cellBackground: UIColor {
-        return backgrounds[self].or(.white)
+    static var empty: SlotStyle {
+        return SlotStyle(cellBackground: .clear, mainText: .lightText, secondaryText: .lightText, borderColor: .emptyOutline, borderWidth: 2.0, borderDash: .dashed(width: 12), isSecondaryTextShown: false)
     }
 
-    var mainText: UIColor {
-        return mainTexts[self].or(.secondary)
+    static var full: SlotStyle {
+        return SlotStyle(cellBackground: .white, mainText: .secondary, secondaryText: .lightText, borderColor: .clear, borderWidth: 0, borderDash: .full, isSecondaryTextShown: true)
     }
 
-    var secondaryText: UIColor {
-        return secondaryTexts[self].or(.lightText)
-    }
-
-    var borderColor: UIColor {
-        return borderColors[self].or(.clear)
-    }
-
-    var borderWidth: CGFloat {
-        return self == .empty ? 2 : 0
-    }
-
-    var borderDash: Border {
-        return self == .empty ? .dashed(width: 12) : .full
-    }
-
-    var isSecondaryTextShown: Bool {
-        return self == .full
-    }
 }
