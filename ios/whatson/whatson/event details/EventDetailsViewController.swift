@@ -102,7 +102,7 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
     private func layoutViews() {
         view.addSubview(navBar)
         navBar.constrain(toSuperview: .leading, .trailing)
-        navBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
+        navBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
 
         let scrollView = UIScrollView()
         view.addSubview(scrollView)
