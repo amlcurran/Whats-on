@@ -19,6 +19,13 @@ class RoundedRectBorderView: UIView {
             layer.masksToBounds = cornerRadius > 0
         }
     }
+
+    var corners: CACornerMask = .all {
+        didSet {
+            layer.maskedCorners = corners
+        }
+    }
+
     @IBInspectable var borderWidth: CGFloat = 0 {
         didSet {
             borderLayer.lineWidth = borderWidth
@@ -61,4 +68,11 @@ class RoundedRectBorderView: UIView {
 enum Border {
     case full
     case dashed(width: Float)
+}
+
+extension CACornerMask {
+
+    static var all: CACornerMask {
+        return [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner]
+    }
 }

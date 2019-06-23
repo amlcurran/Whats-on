@@ -41,6 +41,7 @@
 		8618A51F1BDA92F900A4845E /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8618A51E1BDA92F900A4845E /* EventCell.swift */; };
 		861BD0E01D9FC4290032FBAB /* Optional+Fluency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */; };
 		8620886D22BFE2E200268B3D /* MultipleEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8620886C22BFE2E200268B3D /* MultipleEventCell.swift */; };
+		8620886F22BFEDF000268B3D /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 8620886E22BFEDF000268B3D /* Localizable.stringsdict */; };
 		862468C41F091ACE00FE5A49 /* CalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 862468AB1F091ACE00FE5A49 /* CalendarItem.m */; };
 		862468C51F091ACE00FE5A49 /* CalendarSlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 862468AD1F091ACE00FE5A49 /* CalendarSlot.m */; };
 		862468C61F091ACE00FE5A49 /* CalendarSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 862468AF1F091ACE00FE5A49 /* CalendarSource.m */; };
@@ -166,6 +167,7 @@
 		8618A51E1BDA92F900A4845E /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Fluency.swift"; sourceTree = "<group>"; };
 		8620886C22BFE2E200268B3D /* MultipleEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleEventCell.swift; sourceTree = "<group>"; };
+		8620886E22BFEDF000268B3D /* Localizable.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		862468AA1F091ACE00FE5A49 /* CalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarItem.h; sourceTree = "<group>"; };
 		862468AB1F091ACE00FE5A49 /* CalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarItem.m; sourceTree = "<group>"; };
 		862468AC1F091ACE00FE5A49 /* CalendarSlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarSlot.h; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 			isa = PBXGroup;
 			children = (
 				86B7D32020E12DA4001B0DF6 /* Today.entitlements */,
+				8620886E22BFEDF000268B3D /* Localizable.stringsdict */,
 				86075C321E3E228C005AF423 /* Localizable.strings */,
 				86FCF4411D455ADE000938E3 /* dependencies */,
 				86CAD49B1BACC9B1009C9CFD /* whatson */,
@@ -649,6 +652,7 @@
 				86075C331E3E228C005AF423 /* Localizable.strings in Resources */,
 				86CAD4AC1BACC9B1009C9CFD /* LaunchScreen.storyboard in Resources */,
 				86CAD4A91BACC9B1009C9CFD /* Assets.xcassets in Resources */,
+				8620886F22BFEDF000268B3D /* Localizable.stringsdict in Resources */,
 				69853D85F37E68B39053DB9F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1032,7 +1036,7 @@
 					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
 				);
 				INFOPLIST_FILE = whatson/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1106,7 +1110,7 @@
 					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
 				);
 				INFOPLIST_FILE = whatson/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
