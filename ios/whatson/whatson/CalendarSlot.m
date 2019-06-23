@@ -24,9 +24,9 @@
 
 J2OBJC_FIELD_SETTER(SCCalendarSlot, calendarItems_, id<JavaUtilList>)
 
-__attribute__((unused)) static IOSObjectArray *SCCalendarSlot__Annotations$0();
+__attribute__((unused)) static IOSObjectArray *SCCalendarSlot__Annotations$0(void);
 
-__attribute__((unused)) static IOSObjectArray *SCCalendarSlot__Annotations$1();
+__attribute__((unused)) static IOSObjectArray *SCCalendarSlot__Annotations$1(void);
 
 @implementation SCCalendarSlot
 
@@ -37,7 +37,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (id<SCCalendarItem> __nullable)firstItem {
+- (id<SCCalendarItem>)firstItem {
   return [((id<JavaUtilList>) nil_chk(calendarItems_)) getWithInt:0];
 }
 
@@ -53,7 +53,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [((id<JavaUtilList>) nil_chk(calendarItems_)) isEmpty];
 }
 
-- (id<JavaUtilList> __nonnull)items {
+- (id<JavaUtilList>)items {
   return calendarItems_;
 }
 
@@ -68,6 +68,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(init);
   methods[1].selector = @selector(firstItem);
   methods[2].selector = @selector(addItemWithSCCalendarItem:);
@@ -107,3 +108,5 @@ IOSObjectArray *SCCalendarSlot__Annotations$1() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(SCCalendarSlot)
+
+J2OBJC_NAME_MAPPING(SCCalendarSlot, "uk.co.amlcurran.social", "SC")

@@ -23,11 +23,11 @@
 J2OBJC_FIELD_SETTER(SCEmptyCalendarItem, startTime_, SCTimestamp *)
 J2OBJC_FIELD_SETTER(SCEmptyCalendarItem, endTime_, SCTimestamp *)
 
-__attribute__((unused)) static IOSObjectArray *SCEmptyCalendarItem__Annotations$0();
+__attribute__((unused)) static IOSObjectArray *SCEmptyCalendarItem__Annotations$0(void);
 
-__attribute__((unused)) static IOSObjectArray *SCEmptyCalendarItem__Annotations$1();
+__attribute__((unused)) static IOSObjectArray *SCEmptyCalendarItem__Annotations$1(void);
 
-__attribute__((unused)) static IOSObjectArray *SCEmptyCalendarItem__Annotations$2();
+__attribute__((unused)) static IOSObjectArray *SCEmptyCalendarItem__Annotations$2(void);
 
 @implementation SCEmptyCalendarItem
 
@@ -37,15 +37,15 @@ __attribute__((unused)) static IOSObjectArray *SCEmptyCalendarItem__Annotations$
   return self;
 }
 
-- (NSString * __nonnull)title {
+- (NSString *)title {
   return @"Empty";
 }
 
-- (SCTimestamp * __nonnull)startTime {
+- (SCTimestamp *)startTime {
   return startTime_;
 }
 
-- (SCTimestamp * __nonnull)endTime {
+- (SCTimestamp *)endTime {
   return endTime_;
 }
 
@@ -63,6 +63,7 @@ __attribute__((unused)) static IOSObjectArray *SCEmptyCalendarItem__Annotations$
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(initWithSCTimestamp:withSCTimestamp:);
   methods[1].selector = @selector(title);
   methods[2].selector = @selector(startTime);
@@ -107,3 +108,5 @@ IOSObjectArray *SCEmptyCalendarItem__Annotations$2() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(SCEmptyCalendarItem)
+
+J2OBJC_NAME_MAPPING(SCEmptyCalendarItem, "uk.co.amlcurran.social", "SC")

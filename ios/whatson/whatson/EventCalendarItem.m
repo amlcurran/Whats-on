@@ -27,11 +27,11 @@ J2OBJC_FIELD_SETTER(SCEventCalendarItem, title_, NSString *)
 J2OBJC_FIELD_SETTER(SCEventCalendarItem, start_, SCTimestamp *)
 J2OBJC_FIELD_SETTER(SCEventCalendarItem, endTime_, SCTimestamp *)
 
-__attribute__((unused)) static IOSObjectArray *SCEventCalendarItem__Annotations$0();
+__attribute__((unused)) static IOSObjectArray *SCEventCalendarItem__Annotations$0(void);
 
-__attribute__((unused)) static IOSObjectArray *SCEventCalendarItem__Annotations$1();
+__attribute__((unused)) static IOSObjectArray *SCEventCalendarItem__Annotations$1(void);
 
-__attribute__((unused)) static IOSObjectArray *SCEventCalendarItem__Annotations$2();
+__attribute__((unused)) static IOSObjectArray *SCEventCalendarItem__Annotations$2(void);
 
 @implementation SCEventCalendarItem
 
@@ -47,15 +47,15 @@ __attribute__((unused)) static IOSObjectArray *SCEventCalendarItem__Annotations$
   return eventId_;
 }
 
-- (NSString * __nonnull)title {
+- (NSString *)title {
   return title_;
 }
 
-- (SCTimestamp * __nonnull)startTime {
+- (SCTimestamp *)startTime {
   return start_;
 }
 
-- (SCTimestamp * __nonnull)endTime {
+- (SCTimestamp *)endTime {
   return endTime_;
 }
 
@@ -74,6 +74,7 @@ __attribute__((unused)) static IOSObjectArray *SCEventCalendarItem__Annotations$
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(initWithNSString:withNSString:withSCTimestamp:withSCTimestamp:);
   methods[1].selector = @selector(id__);
   methods[2].selector = @selector(title);

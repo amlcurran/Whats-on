@@ -15,9 +15,9 @@
 
 @end
 
-__attribute__((unused)) static IOSObjectArray *SCTimeCalculator__Annotations$0();
+__attribute__((unused)) static IOSObjectArray *SCTimeCalculator__Annotations$0(void);
 
-__attribute__((unused)) static IOSObjectArray *SCTimeCalculator__Annotations$1();
+__attribute__((unused)) static IOSObjectArray *SCTimeCalculator__Annotations$1(void);
 
 @implementation SCTimeCalculator
 
@@ -30,6 +30,7 @@ __attribute__((unused)) static IOSObjectArray *SCTimeCalculator__Annotations$1()
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(plusDaysWithInt:withSCTimestamp:);
   methods[1].selector = @selector(getDaysWithSCTimestamp:);
   methods[2].selector = @selector(plusHoursWithSCTimestamp:withInt:);
@@ -51,3 +52,5 @@ IOSObjectArray *SCTimeCalculator__Annotations$1() {
 }
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(SCTimeCalculator)
+
+J2OBJC_NAME_MAPPING(SCTimeCalculator, "uk.co.amlcurran.social", "SC")

@@ -23,11 +23,11 @@
 
 J2OBJC_FIELD_SETTER(SCTimestamp, timeCalculator_, id<SCTimeCalculator>)
 
-__attribute__((unused)) static IOSObjectArray *SCTimestamp__Annotations$0();
+__attribute__((unused)) static IOSObjectArray *SCTimestamp__Annotations$0(void);
 
-__attribute__((unused)) static IOSObjectArray *SCTimestamp__Annotations$1();
+__attribute__((unused)) static IOSObjectArray *SCTimestamp__Annotations$1(void);
 
-__attribute__((unused)) static IOSObjectArray *SCTimestamp__Annotations$2();
+__attribute__((unused)) static IOSObjectArray *SCTimestamp__Annotations$2(void);
 
 @implementation SCTimestamp
 
@@ -37,7 +37,7 @@ __attribute__((unused)) static IOSObjectArray *SCTimestamp__Annotations$2();
   return self;
 }
 
-- (SCTimestamp * __nonnull)plusDaysWithInt:(jint)days {
+- (SCTimestamp *)plusDaysWithInt:(jint)days {
   return [((id<SCTimeCalculator>) nil_chk(timeCalculator_)) plusDaysWithInt:days withSCTimestamp:self];
 }
 
@@ -49,11 +49,11 @@ __attribute__((unused)) static IOSObjectArray *SCTimestamp__Annotations$2();
   return millis_;
 }
 
-- (SCTimestamp * __nonnull)plusHoursWithInt:(jint)hours {
+- (SCTimestamp *)plusHoursWithInt:(jint)hours {
   return [((id<SCTimeCalculator>) nil_chk(timeCalculator_)) plusHoursWithSCTimestamp:self withInt:hours];
 }
 
-- (SCTimestamp * __nonnull)plusHoursOfWithSCTimeOfDay:(SCTimeOfDay *)timeOfDay {
+- (SCTimestamp *)plusHoursOfWithSCTimeOfDay:(SCTimeOfDay *)timeOfDay {
   return [((id<SCTimeCalculator>) nil_chk(timeCalculator_)) plusHoursWithSCTimestamp:self withInt:(jint) [((SCTimeOfDay *) nil_chk(timeOfDay)) hoursInDay]];
 }
 
@@ -68,6 +68,7 @@ __attribute__((unused)) static IOSObjectArray *SCTimestamp__Annotations$2();
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(initWithLong:withSCTimeCalculator:);
   methods[1].selector = @selector(plusDaysWithInt:);
   methods[2].selector = @selector(daysSinceEpoch);
@@ -113,3 +114,5 @@ IOSObjectArray *SCTimestamp__Annotations$2() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(SCTimestamp)
+
+J2OBJC_NAME_MAPPING(SCTimestamp, "uk.co.amlcurran.social", "SC")

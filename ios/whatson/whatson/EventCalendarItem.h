@@ -15,6 +15,7 @@
 
 #if __has_feature(nullability)
 #pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
 #pragma GCC diagnostic ignored "-Wnullability-completeness"
 #endif
 
@@ -31,10 +32,10 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)eventId
-                    withNSString:(NSString *)title
-                 withSCTimestamp:(SCTimestamp *)time
-                 withSCTimestamp:(SCTimestamp *)endTime;
+- (instancetype __nonnull)initWithNSString:(NSString *)eventId
+                              withNSString:(NSString *)title
+                           withSCTimestamp:(SCTimestamp *)time
+                           withSCTimestamp:(SCTimestamp *)endTime;
 
 - (SCTimestamp * __nonnull)endTime;
 
@@ -45,6 +46,10 @@
 - (SCTimestamp * __nonnull)startTime;
 
 - (NSString * __nonnull)title;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 

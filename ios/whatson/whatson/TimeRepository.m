@@ -15,9 +15,9 @@
 
 @end
 
-__attribute__((unused)) static IOSObjectArray *SCTimeRepository__Annotations$0();
+__attribute__((unused)) static IOSObjectArray *SCTimeRepository__Annotations$0(void);
 
-__attribute__((unused)) static IOSObjectArray *SCTimeRepository__Annotations$1();
+__attribute__((unused)) static IOSObjectArray *SCTimeRepository__Annotations$1(void);
 
 @implementation SCTimeRepository
 
@@ -28,6 +28,7 @@ __attribute__((unused)) static IOSObjectArray *SCTimeRepository__Annotations$1()
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(borderTimeEnd);
   methods[1].selector = @selector(borderTimeStart);
   #pragma clang diagnostic pop
@@ -47,3 +48,5 @@ IOSObjectArray *SCTimeRepository__Annotations$1() {
 }
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(SCTimeRepository)
+
+J2OBJC_NAME_MAPPING(SCTimeRepository, "uk.co.amlcurran.social", "SC")

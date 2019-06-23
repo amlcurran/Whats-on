@@ -15,6 +15,7 @@
 
 #if __has_feature(nullability)
 #pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
 #pragma GCC diagnostic ignored "-Wnullability-completeness"
 #endif
 
@@ -28,7 +29,7 @@
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype __nonnull)init;
 
 - (void)addItemWithSCCalendarItem:(id<SCCalendarItem>)item;
 
@@ -46,9 +47,9 @@ J2OBJC_EMPTY_STATIC_INIT(SCCalendarSlot)
 
 FOUNDATION_EXPORT void SCCalendarSlot_init(SCCalendarSlot *self);
 
-FOUNDATION_EXPORT SCCalendarSlot *new_SCCalendarSlot_init() NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT SCCalendarSlot *new_SCCalendarSlot_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT SCCalendarSlot *create_SCCalendarSlot_init();
+FOUNDATION_EXPORT SCCalendarSlot *create_SCCalendarSlot_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(SCCalendarSlot)
 

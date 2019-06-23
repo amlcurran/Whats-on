@@ -15,6 +15,7 @@
 
 #if __has_feature(nullability)
 #pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
 #pragma GCC diagnostic ignored "-Wnullability-completeness"
 #endif
 
@@ -22,7 +23,7 @@
 #define SCCalendarSource_
 
 @class SCCalendarSlot;
-@class UkCoAmlcurranSocialCoreSparseArray;
+@class UkCoAmlcurranSocialUtilsSparseArray;
 @protocol SCCalendarItem;
 @protocol SCTimeCalculator;
 @protocol SCTimeRepository;
@@ -31,10 +32,10 @@
 
 #pragma mark Public
 
-- (instancetype)initWithUkCoAmlcurranSocialCoreSparseArray:(UkCoAmlcurranSocialCoreSparseArray *)calendarItems
-                                                   withInt:(jint)daysSize
-                                      withSCTimeCalculator:(id<SCTimeCalculator>)timeCalculator
-                                      withSCTimeRepository:(id<SCTimeRepository>)timeRepository;
+- (instancetype __nonnull)initWithUkCoAmlcurranSocialUtilsSparseArray:(UkCoAmlcurranSocialUtilsSparseArray *)calendarItems
+                                                              withInt:(jint)daysSize
+                                                 withSCTimeCalculator:(id<SCTimeCalculator>)timeCalculator
+                                                 withSCTimeRepository:(id<SCTimeRepository>)timeRepository;
 
 - (jint)count;
 
@@ -44,15 +45,19 @@
 
 - (SCCalendarSlot * __nonnull)slotAtWithInt:(jint)position;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(SCCalendarSource)
 
-FOUNDATION_EXPORT void SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTimeCalculator_withSCTimeRepository_(SCCalendarSource *self, UkCoAmlcurranSocialCoreSparseArray *calendarItems, jint daysSize, id<SCTimeCalculator> timeCalculator, id<SCTimeRepository> timeRepository);
+FOUNDATION_EXPORT void SCCalendarSource_initWithUkCoAmlcurranSocialUtilsSparseArray_withInt_withSCTimeCalculator_withSCTimeRepository_(SCCalendarSource *self, UkCoAmlcurranSocialUtilsSparseArray *calendarItems, jint daysSize, id<SCTimeCalculator> timeCalculator, id<SCTimeRepository> timeRepository);
 
-FOUNDATION_EXPORT SCCalendarSource *new_SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTimeCalculator_withSCTimeRepository_(UkCoAmlcurranSocialCoreSparseArray *calendarItems, jint daysSize, id<SCTimeCalculator> timeCalculator, id<SCTimeRepository> timeRepository) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT SCCalendarSource *new_SCCalendarSource_initWithUkCoAmlcurranSocialUtilsSparseArray_withInt_withSCTimeCalculator_withSCTimeRepository_(UkCoAmlcurranSocialUtilsSparseArray *calendarItems, jint daysSize, id<SCTimeCalculator> timeCalculator, id<SCTimeRepository> timeRepository) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT SCCalendarSource *create_SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTimeCalculator_withSCTimeRepository_(UkCoAmlcurranSocialCoreSparseArray *calendarItems, jint daysSize, id<SCTimeCalculator> timeCalculator, id<SCTimeRepository> timeRepository);
+FOUNDATION_EXPORT SCCalendarSource *create_SCCalendarSource_initWithUkCoAmlcurranSocialUtilsSparseArray_withInt_withSCTimeCalculator_withSCTimeRepository_(UkCoAmlcurranSocialUtilsSparseArray *calendarItems, jint daysSize, id<SCTimeCalculator> timeCalculator, id<SCTimeRepository> timeRepository);
 
 J2OBJC_TYPE_LITERAL_HEADER(SCCalendarSource)
 

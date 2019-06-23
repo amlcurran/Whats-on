@@ -15,6 +15,7 @@
 
 #if __has_feature(nullability)
 #pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
 #pragma GCC diagnostic ignored "-Wnullability-completeness"
 #endif
 
@@ -28,8 +29,8 @@
 
 #pragma mark Public
 
-- (instancetype)initWithLong:(jlong)millis
-        withSCTimeCalculator:(id<SCTimeCalculator>)timeCalculator;
+- (instancetype __nonnull)initWithLong:(jlong)millis
+                  withSCTimeCalculator:(id<SCTimeCalculator>)timeCalculator;
 
 - (jint)daysSinceEpoch;
 
@@ -40,6 +41,10 @@
 - (SCTimestamp * __nonnull)plusHoursWithInt:(jint)hours;
 
 - (SCTimestamp * __nonnull)plusHoursOfWithSCTimeOfDay:(SCTimeOfDay *)timeOfDay;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype __nonnull)init NS_UNAVAILABLE;
 
 @end
 

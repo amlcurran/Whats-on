@@ -34,7 +34,7 @@ J2OBJC_FIELD_SETTER(SCEventsService, timeRepository_, id<SCTimeRepository>)
 J2OBJC_FIELD_SETTER(SCEventsService, eventsRepository_, id<SCEventsRepository>)
 J2OBJC_FIELD_SETTER(SCEventsService, timeCalculator_, id<SCTimeCalculator>)
 
-__attribute__((unused)) static IOSObjectArray *SCEventsService__Annotations$0();
+__attribute__((unused)) static IOSObjectArray *SCEventsService__Annotations$0(void);
 
 @implementation SCEventsService
 
@@ -45,14 +45,14 @@ __attribute__((unused)) static IOSObjectArray *SCEventsService__Annotations$0();
   return self;
 }
 
-- (SCCalendarSource * __nonnull)getCalendarSourceWithInt:(jint)numberOfDays
-                                         withSCTimestamp:(SCTimestamp *)now {
+- (SCCalendarSource *)getCalendarSourceWithInt:(jint)numberOfDays
+                               withSCTimestamp:(SCTimestamp *)now {
   SCTimestamp *nowTime = [((id<SCTimeCalculator>) nil_chk(timeCalculator_)) startOfToday];
   SCTimestamp *nextWeek = [((SCTimestamp *) nil_chk(nowTime)) plusDaysWithInt:numberOfDays];
   SCTimeOfDay *fivePm = [((id<SCTimeRepository>) nil_chk(timeRepository_)) borderTimeStart];
   SCTimeOfDay *elevenPm = [timeRepository_ borderTimeEnd];
   id<JavaUtilList> calendarItems = [((id<SCEventsRepository>) nil_chk(eventsRepository_)) getCalendarItemsWithSCTimestamp:nowTime withSCTimestamp:nextWeek withSCTimeOfDay:fivePm withSCTimeOfDay:elevenPm];
-  UkCoAmlcurranSocialCoreSparseArray *itemArray = new_UkCoAmlcurranSocialCoreSparseArray_initWithInt_(numberOfDays);
+  UkCoAmlcurranSocialUtilsSparseArray *itemArray = new_UkCoAmlcurranSocialUtilsSparseArray_initWithInt_(numberOfDays);
   jint epochToNow = [((SCTimestamp *) nil_chk(now)) daysSinceEpoch];
   for (id<SCCalendarItem> __strong item in nil_chk(calendarItems)) {
     jint key = [((SCTimestamp *) nil_chk([((id<SCCalendarItem>) nil_chk(item)) startTime])) daysSinceEpoch] - epochToNow;
@@ -60,7 +60,7 @@ __attribute__((unused)) static IOSObjectArray *SCEventsService__Annotations$0();
     [((SCCalendarSlot *) nil_chk(slot)) addItemWithSCCalendarItem:item];
     [itemArray putWithInt:key withId:slot];
   }
-  return new_SCCalendarSource_initWithUkCoAmlcurranSocialCoreSparseArray_withInt_withSCTimeCalculator_withSCTimeRepository_(itemArray, numberOfDays, timeCalculator_, timeRepository_);
+  return new_SCCalendarSource_initWithUkCoAmlcurranSocialUtilsSparseArray_withInt_withSCTimeCalculator_withSCTimeRepository_(itemArray, numberOfDays, timeCalculator_, timeRepository_);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -70,6 +70,7 @@ __attribute__((unused)) static IOSObjectArray *SCEventsService__Annotations$0();
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(initWithSCTimeRepository:withSCEventsRepository:withSCTimeCalculator:);
   methods[1].selector = @selector(getCalendarSourceWithInt:withSCTimestamp:);
   #pragma clang diagnostic pop
@@ -105,3 +106,5 @@ IOSObjectArray *SCEventsService__Annotations$0() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(SCEventsService)
+
+J2OBJC_NAME_MAPPING(SCEventsService, "uk.co.amlcurran.social", "SC")

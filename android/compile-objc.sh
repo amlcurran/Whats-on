@@ -1,6 +1,6 @@
 mkdir -p build/ios/objc
 echo '...transpilin'
-ios/whatson/j2objc/j2objc --nullability --prefix uk.co.amlcurran.social=SC -d build/ios/objc --no-package-directories -use-arc -classpath core/libs/annotations.jar -sourcepath core/src/main/java `find core/src/main/java/ -name '*.java'`
+$J2OBJC_HOME/j2objc --nullability --prefix uk.co.amlcurran.social=SC -d build/ios/objc --no-package-directories -use-arc -classpath core/libs/annotations.jar -sourcepath core/src/main/java `find core/src/main/java/ -name '*.java'`
 echo
 
 echo '...compilin'

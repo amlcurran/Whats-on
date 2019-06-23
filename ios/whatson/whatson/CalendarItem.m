@@ -15,11 +15,11 @@
 
 @end
 
-__attribute__((unused)) static IOSObjectArray *SCCalendarItem__Annotations$0();
+__attribute__((unused)) static IOSObjectArray *SCCalendarItem__Annotations$0(void);
 
-__attribute__((unused)) static IOSObjectArray *SCCalendarItem__Annotations$1();
+__attribute__((unused)) static IOSObjectArray *SCCalendarItem__Annotations$1(void);
 
-__attribute__((unused)) static IOSObjectArray *SCCalendarItem__Annotations$2();
+__attribute__((unused)) static IOSObjectArray *SCCalendarItem__Annotations$2(void);
 
 @implementation SCCalendarItem
 
@@ -32,6 +32,7 @@ __attribute__((unused)) static IOSObjectArray *SCCalendarItem__Annotations$2();
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(title);
   methods[1].selector = @selector(startTime);
   methods[2].selector = @selector(endTime);
@@ -57,3 +58,5 @@ IOSObjectArray *SCCalendarItem__Annotations$2() {
 }
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(SCCalendarItem)
+
+J2OBJC_NAME_MAPPING(SCCalendarItem, "uk.co.amlcurran.social", "SC")

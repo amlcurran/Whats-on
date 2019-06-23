@@ -15,7 +15,7 @@
 
 @end
 
-__attribute__((unused)) static IOSObjectArray *SCEventsRepository__Annotations$0();
+__attribute__((unused)) static IOSObjectArray *SCEventsRepository__Annotations$0(void);
 
 @implementation SCEventsRepository
 
@@ -25,6 +25,7 @@ __attribute__((unused)) static IOSObjectArray *SCEventsRepository__Annotations$0
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(getCalendarItemsWithSCTimestamp:withSCTimestamp:withSCTimeOfDay:withSCTimeOfDay:);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "getCalendarItems", "LSCTimestamp;LSCTimestamp;LSCTimeOfDay;LSCTimeOfDay;", "(Luk/co/amlcurran/social/Timestamp;Luk/co/amlcurran/social/Timestamp;Luk/co/amlcurran/social/TimeOfDay;Luk/co/amlcurran/social/TimeOfDay;)Ljava/util/List<Luk/co/amlcurran/social/CalendarItem;>;", (void *)&SCEventsRepository__Annotations$0 };
@@ -39,3 +40,5 @@ IOSObjectArray *SCEventsRepository__Annotations$0() {
 }
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(SCEventsRepository)
+
+J2OBJC_NAME_MAPPING(SCEventsRepository, "uk.co.amlcurran.social", "SC")

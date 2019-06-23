@@ -27,18 +27,18 @@ __attribute__((unused)) static SCTimeOfDay *new_SCTimeOfDay_initWithLong_(jlong 
 
 __attribute__((unused)) static SCTimeOfDay *create_SCTimeOfDay_initWithLong_(jlong millis);
 
-__attribute__((unused)) static IOSObjectArray *SCTimeOfDay__Annotations$0();
+__attribute__((unused)) static IOSObjectArray *SCTimeOfDay__Annotations$0(void);
 
-__attribute__((unused)) static IOSObjectArray *SCTimeOfDay__Annotations$1();
+__attribute__((unused)) static IOSObjectArray *SCTimeOfDay__Annotations$1(void);
 
 @implementation SCTimeOfDay
 
-+ (SCTimeOfDay * __nonnull)fromHoursWithInt:(jint)hours {
++ (SCTimeOfDay *)fromHoursWithInt:(jint)hours {
   return SCTimeOfDay_fromHoursWithInt_(hours);
 }
 
-+ (SCTimeOfDay * __nonnull)fromHoursAndMinuteWithInt:(jint)hours
-                                             withInt:(jint)minutes {
++ (SCTimeOfDay *)fromHoursAndMinuteWithInt:(jint)hours
+                                   withInt:(jint)minutes {
   return SCTimeOfDay_fromHoursAndMinuteWithInt_withInt_(hours, minutes);
 }
 
@@ -65,6 +65,7 @@ __attribute__((unused)) static IOSObjectArray *SCTimeOfDay__Annotations$1();
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(fromHoursWithInt:);
   methods[1].selector = @selector(fromHoursAndMinuteWithInt:withInt:);
   methods[2].selector = @selector(initWithLong:);
@@ -113,3 +114,5 @@ IOSObjectArray *SCTimeOfDay__Annotations$1() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(SCTimeOfDay)
+
+J2OBJC_NAME_MAPPING(SCTimeOfDay, "uk.co.amlcurran.social", "SC")
