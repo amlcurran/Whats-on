@@ -17,6 +17,18 @@ IOSObjectArray *UkCoAmlcurranSocialUtilsContainerHelpers_EMPTY_OBJECTS;
 
 @implementation UkCoAmlcurranSocialUtilsContainerHelpers
 
++ (IOSIntArray *)EMPTY_INTS {
+  return UkCoAmlcurranSocialUtilsContainerHelpers_EMPTY_INTS;
+}
+
++ (IOSLongArray *)EMPTY_LONGS {
+  return UkCoAmlcurranSocialUtilsContainerHelpers_EMPTY_LONGS;
+}
+
++ (IOSObjectArray *)EMPTY_OBJECTS {
+  return UkCoAmlcurranSocialUtilsContainerHelpers_EMPTY_OBJECTS;
+}
+
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   UkCoAmlcurranSocialUtilsContainerHelpers_init(self);

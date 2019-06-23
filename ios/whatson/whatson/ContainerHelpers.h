@@ -27,6 +27,15 @@
 @class IOSObjectArray;
 
 @interface UkCoAmlcurranSocialUtilsContainerHelpers : NSObject
+@property (readonly, class) IOSIntArray *EMPTY_INTS NS_SWIFT_NAME(EMPTY_INTS);
+@property (readonly, class) IOSLongArray *EMPTY_LONGS NS_SWIFT_NAME(EMPTY_LONGS);
+@property (readonly, class) IOSObjectArray *EMPTY_OBJECTS NS_SWIFT_NAME(EMPTY_OBJECTS);
+
++ (IOSIntArray *)EMPTY_INTS;
+
++ (IOSLongArray *)EMPTY_LONGS;
+
++ (IOSObjectArray *)EMPTY_OBJECTS;
 
 #pragma mark Public
 
