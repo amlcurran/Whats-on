@@ -1,6 +1,15 @@
 import UIKit
 
-class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
+protocol CalendarTable {
+    var view: UIView { get }
+    func update(_ source: SCCalendarSource)
+    func selection(under point: CGPoint) -> (UIView, SCCalendarItem)?
+    func show()
+    func hide()
+    func style()
+}
+
+class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, CalendarTable {
 
     private let dataProvider: DataProvider
     private let tableView: UITableView
@@ -69,6 +78,15 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate {
     func hide() {
         tableView.alpha = 0
         tableView.isUserInteractionEnabled = false
+    }
+
+    func selection(under point: CGPoint) -> (UIView, SCCalendarItem)? {
+        guard let indexPath = indexPath(under: point),
+            let cell = cell(at: indexPath),
+            let item = item(at: indexPath) else {
+                return nil
+        }
+        return (cell, item)
     }
 
     func item(at index: IndexPath) -> SCCalendarItem? {

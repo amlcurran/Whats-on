@@ -24,7 +24,7 @@ class WhatsOnViewController: UIViewController,
     private var eventService: SCEventsService!
     private var loadingDelay = DispatchTimeInterval.milliseconds(1500)
 
-    lazy var table = CalendarTableView(delegate: self, dataProvider: self.dataProvider, tableView: UITableView())
+    lazy var table: CalendarTable = CalendarTableView(delegate: self, dataProvider: self.dataProvider, tableView: UITableView())
 
     override func viewDidLoad() {
         super.viewDidLoad()
