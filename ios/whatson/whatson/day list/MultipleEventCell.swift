@@ -25,7 +25,7 @@ class MultipleEventCell: UITableViewCell, Row {
 
     private func layout() {
         secondItems.cornerRadius = 6
-        secondItems.backgroundColor = UIColor.windowBackground.darkened(by: 0.4).withAlphaComponent(0.3)
+        secondItems.backgroundColor = SlotStyle.full.cellBackground.darkened(by: 0.2).withAlphaComponent(0.6)
         secondItems.corners = [CACornerMask.layerMinXMaxYCorner, CACornerMask.layerMaxXMaxYCorner]
         secondText.font = .systemFont(ofSize: 14, weight: .medium)
         secondText.textColor = .white
@@ -34,11 +34,10 @@ class MultipleEventCell: UITableViewCell, Row {
         selectionStyle = .none
         eventView.constrain(toSuperview: .leading, .trailing, .top)
         contentView.addSubview(secondItems)
-        secondItems.constrain(toSuperview: .leading, .trailing, insetBy: 20)
+        secondItems.constrain(toSuperview: .leading, .trailing, insetBy: 16)
         secondItems.constrain(toSuperview: .bottom)
         secondItems.constrain(.top, to: eventView, .bottom)
-        secondItems.addSubview(secondText)
-        secondText.constrain(toSuperview: .leading, .trailing, .top, .bottom, insetBy: 4)
+        secondItems.constrain(height: 10)
     }
 
     func bound(to item: SCCalendarItem, slot: SCCalendarSlot) -> Self {
