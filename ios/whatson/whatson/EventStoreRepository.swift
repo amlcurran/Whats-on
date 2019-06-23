@@ -40,9 +40,9 @@ fileprivate extension Array {
     func toJavaList() -> JavaUtilList {
         let list = JavaUtilArrayList()
         for item in self {
-            list!.add(withId: item)
+            list.add(withId: item)
         }
-        return list!
+        return list
     }
 
 }
