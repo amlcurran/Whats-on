@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class EventCell: UITableViewCell {
+class MultipleEventCell: UITableViewCell {
 
     private let eventView = EventItemView()
 

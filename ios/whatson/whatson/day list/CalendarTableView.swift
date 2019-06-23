@@ -35,15 +35,21 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, C
                 preconditionFailure("Tried to dequeue a cell which wasn't a Calendar cell")
             }
             return cell.bound(to: item)
-        } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "event", for: indexPath) as? EventCell,
-                  let item = dataProvider.item(at: indexPath.dataIndexPath),
-                  let slot = dataProvider.slot(at: indexPath.dataIndexPath) else {
+        } else if dataProvider.slot(at: indexPath.dataIndexPath)!.items().size() > 1 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "multipleEvent", for: indexPath) as? MultipleEventCell else {
                 preconditionFailure("Tried to dequeue a cell which wasn't a Calendar cell")
             }
+            let item = dataProvider.item(at: indexPath.dataIndexPath).required()
+            let slot = dataProvider.slot(at: indexPath.dataIndexPath).required()
+            return cell.bound(to: item, slot: slot)
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "event", for: indexPath) as? EventCell else {
+                preconditionFailure("Tried to dequeue a cell which wasn't a Calendar cell")
+            }
+            let item = dataProvider.item(at: indexPath.dataIndexPath).required()
+            let slot = dataProvider.slot(at: indexPath.dataIndexPath).required()
             return cell.bound(to: item, slot: slot)
         }
-
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -124,6 +130,7 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, C
     func style() {
         tableView.register(DayCell.self, forCellReuseIdentifier: "day")
         tableView.register(EventCell.self, forCellReuseIdentifier: "event")
+        tableView.register(MultipleEventCell.self, forCellReuseIdentifier: "multipleEvent")
         tableView.backgroundColor = .clear
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 120

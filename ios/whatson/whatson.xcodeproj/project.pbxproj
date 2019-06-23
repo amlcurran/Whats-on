@@ -40,6 +40,7 @@
 		8614BABE1C825B7A00A3E570 /* NSDate+Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8614BABD1C825B7A00A3E570 /* NSDate+Time.swift */; };
 		8618A51F1BDA92F900A4845E /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8618A51E1BDA92F900A4845E /* EventCell.swift */; };
 		861BD0E01D9FC4290032FBAB /* Optional+Fluency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */; };
+		8620886D22BFE2E200268B3D /* MultipleEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8620886C22BFE2E200268B3D /* MultipleEventCell.swift */; };
 		862468C41F091ACE00FE5A49 /* CalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 862468AB1F091ACE00FE5A49 /* CalendarItem.m */; };
 		862468C51F091ACE00FE5A49 /* CalendarSlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 862468AD1F091ACE00FE5A49 /* CalendarSlot.m */; };
 		862468C61F091ACE00FE5A49 /* CalendarSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 862468AF1F091ACE00FE5A49 /* CalendarSource.m */; };
@@ -164,6 +165,7 @@
 		8614BABD1C825B7A00A3E570 /* NSDate+Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDate+Time.swift"; path = "../NSDate+Time.swift"; sourceTree = "<group>"; };
 		8618A51E1BDA92F900A4845E /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Fluency.swift"; sourceTree = "<group>"; };
+		8620886C22BFE2E200268B3D /* MultipleEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleEventCell.swift; sourceTree = "<group>"; };
 		862468AA1F091ACE00FE5A49 /* CalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarItem.h; sourceTree = "<group>"; };
 		862468AB1F091ACE00FE5A49 /* CalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarItem.m; sourceTree = "<group>"; };
 		862468AC1F091ACE00FE5A49 /* CalendarSlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarSlot.h; sourceTree = "<group>"; };
@@ -363,13 +365,14 @@
 				8695D0271DA023670034D52A /* HeaderView.swift */,
 				8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */,
 				8695D0321DA1A2A20034D52A /* SlotDetail.swift */,
+				6985333EBC410C0E8F45C969 /* FailedAccessView.swift */,
 				86A9E4561DA7A7DC00E8D019 /* CalendarTableView.swift */,
 				698536C18C7A4E830F167DAE /* DataProvider.swift */,
-				6985333EBC410C0E8F45C969 /* FailedAccessView.swift */,
 				86CFE11B1F1376A400D9AA8D /* EventForceTouchDisplayer.swift */,
 				698530C0F754D12F1E38397C /* DayCell.swift */,
 				86DEC9551FB3A069000FF4CD /* AddNewEventViewControllerFactory.swift */,
 				869B1EF420E180A40012A72D /* EventItemView.swift */,
+				8620886C22BFE2E200268B3D /* MultipleEventCell.swift */,
 			);
 			path = "day list";
 			sourceTree = "<group>";
@@ -800,6 +803,7 @@
 				69853EDF767415596862180F /* Analytics.swift in Sources */,
 				862468CD1F091ACE00FE5A49 /* TimeCalculator.m in Sources */,
 				698531761CD39981ABD5B75B /* Completion.swift in Sources */,
+				8620886D22BFE2E200268B3D /* MultipleEventCell.swift in Sources */,
 				2DBA1A1D4FF1A6199AD9D4FA /* BuildConfig.swift in Sources */,
 				862468CC1F091ACE00FE5A49 /* SparseArray.m in Sources */,
 				2DBA13D585CE5E035AE263D4 /* EventResponseView.swift in Sources */,
@@ -1064,8 +1068,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson;
 				PRODUCT_MODULE_NAME = Whatson;
 				PRODUCT_NAME = "What’s on";
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OBJC_BRIDGING_HEADER = "whatson-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "\"${J2OBJC_HOME}/include\"/**";
