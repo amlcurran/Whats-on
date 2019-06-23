@@ -15,7 +15,6 @@ class EventItemView: UIView {
     let timeFormatter = DateFormatter.shortTime
     let timeCalculator = NSDateCalculator.instance
     let secondaryLabel = UILabel()
-    let otherEventsLabel = UILabel()
 
     var secondaryLabelZeroHeightConstraint: NSLayoutConstraint?
     var secondaryLabelBelowConstraint: NSLayoutConstraint?
@@ -25,7 +24,6 @@ class EventItemView: UIView {
             roundedView.backgroundColor = type.cellBackground
             eventLabel.textColor = type.mainText
             secondaryLabel.textColor = type.secondaryText
-            otherEventsLabel.textColor = type.secondaryText
             roundedView.borderColor = type.borderColor
             roundedView.borderWidth = type.borderWidth
             roundedView.borderDash = type.borderDash
@@ -58,20 +56,15 @@ class EventItemView: UIView {
 
         eventLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.semibold)
         secondaryLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
-        otherEventsLabel.font = .systemFont(ofSize: 18, weight: UIFont.Weight.medium)
-        otherEventsLabel.textAlignment = .right
     }
 
     private func layout() {
-        roundedView.addSubview(otherEventsLabel)
-        otherEventsLabel.constrain(toSuperview: .trailing, .top, .bottom, insetBy: 16)
         roundedView.addSubview(eventLabel)
-        eventLabel.constrain(toSuperview: .top, .leading, insetBy: 16)
-        eventLabel.constrain(.trailing, to: otherEventsLabel, .leading)
-        eventLabel.setContentHuggingPriority(UILayoutPriority.required, for: .vertical)
+        eventLabel.constrain(toSuperview: .top, .leading, .trailing, insetBy: 16)
+        eventLabel.setContentHuggingPriority(.required, for: .vertical)
         roundedView.addSubview(secondaryLabel)
         secondaryLabel.constrain(toSuperview: .leading, .trailing, .bottom, insetBy: 16)
-        secondaryLabel.setContentHuggingPriority(UILayoutPriority.required, for: .vertical)
+        secondaryLabel.setContentHuggingPriority(.required, for: .vertical)
         secondaryLabelBelowConstraint = secondaryLabel.constrain(.top, to: eventLabel, .bottom, withOffset: 4)
         secondaryLabelZeroHeightConstraint = secondaryLabel.constrain(height: 0)
         updateSecondaryHeight()
@@ -104,19 +97,6 @@ class EventItemView: UIView {
             type = .full
             eventLabel.text = item.title()
         }
-        if slot.count() > 1 {
-            otherEventsLabel.text = "+\(slot.extraItemsCount)"
-        } else {
-            otherEventsLabel.text = nil
-        }
-    }
-
-}
-
-private extension SCCalendarSlot {
-
-    var extraItemsCount: Int {
-        return Int(count()) - 1
     }
 
 }

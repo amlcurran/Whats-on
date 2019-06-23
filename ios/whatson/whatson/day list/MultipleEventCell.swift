@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class MultipleEventCell: UITableViewCell {
+class MultipleEventCell: UITableViewCell, Row {
 
     private let eventView = EventItemView()
     private let secondItems = RoundedRectBorderView(frame: .zero, color: .red)

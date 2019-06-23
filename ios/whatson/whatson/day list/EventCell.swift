@@ -1,7 +1,11 @@
 import Foundation
 import UIKit
 
-class EventCell: UITableViewCell {
+protocol Row {
+    var roundedView: RoundedRectBorderView { get }
+}
+
+class EventCell: UITableViewCell, Row {
 
     private let eventView = EventItemView()
 
