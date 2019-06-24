@@ -5,7 +5,6 @@ class MultipleEventCell: UITableViewCell, Row {
 
     private let eventView = EventItemView()
     private let secondItems = RoundedRectBorderView(frame: .zero, color: .red)
-    private let secondText = UILabel()
 
     var roundedView: RoundedRectBorderView {
         return eventView.roundedView
@@ -27,8 +26,6 @@ class MultipleEventCell: UITableViewCell, Row {
         secondItems.cornerRadius = 6
         secondItems.backgroundColor = SlotStyle.full.cellBackground.darkened(by: 0.2).withAlphaComponent(0.6)
         secondItems.corners = [CACornerMask.layerMinXMaxYCorner, CACornerMask.layerMaxXMaxYCorner]
-        secondText.font = .systemFont(ofSize: 14, weight: .medium)
-        secondText.textColor = .white
         contentView.addSubview(eventView)
         contentView.backgroundColor = .clear
         selectionStyle = .none
@@ -42,7 +39,6 @@ class MultipleEventCell: UITableViewCell, Row {
 
     func bound(to item: SCCalendarItem, slot: SCCalendarSlot) -> Self {
         _ = eventView.bound(to: item, slot: slot)
-        secondText.text = String(format: NSLocalizedString("OtherEvents", comment: ""), slot.items().size() - 1)
         return self
     }
 
