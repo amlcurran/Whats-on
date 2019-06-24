@@ -119,11 +119,11 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, C
         if item.isEmpty() {
             delegate?.addEvent(for: item)
         } else {
-            guard let item = item as? SCEventCalendarItem else {
+            guard let calendarItem = item as? SCEventCalendarItem else {
                 preconditionFailure("Item isn't empty, but isn't event")
             }
-            let cell = tableView.cellForRow(at: indexPath).required()
-            delegate?.showDetails(for: item, at: indexPath, in: cell)
+            let cell = tableView.cellForRow(at: indexPath).required(as: (UIView & Row).self)
+            delegate?.showDetails(for: calendarItem, at: indexPath, in: cell)
         }
     }
 
@@ -163,7 +163,7 @@ fileprivate extension IndexPath {
 protocol CalendarTableViewDelegate: class {
     func addEvent(for item: SCCalendarItem)
 
-    func showDetails(for item: SCEventCalendarItem, at indexPath: IndexPath, in cell: UITableViewCell)
+    func showDetails(for item: SCEventCalendarItem, at indexPath: IndexPath, in cell: UIView & Row)
 
     func remove(_ event: SCEventCalendarItem)
 }

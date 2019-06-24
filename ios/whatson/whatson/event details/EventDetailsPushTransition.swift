@@ -6,7 +6,7 @@ private let alphaDuration: TimeInterval = 0.3
 class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitioning {
 
     var selectedIndexPath: IndexPath?
-    var selectedCell: UITableViewCell?
+    var selectedCell: (UIView & Row)?
     let animator: Animator = AnimatorHolder.animator
 
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -16,8 +16,7 @@ class EventDetailsPushTransition: NSObject, UIViewControllerAnimatedTransitionin
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard
                 let detailVC = transitionContext.viewController(forKey: .to) as? EventDetailsViewController,
-                let row = selectedCell,
-                let calendarRow = row as? UIView & Row,
+                let calendarRow = selectedCell,
                 let fromView = transitionContext.view(forKey: .from),
                 let toView = transitionContext.view(forKey: .to) else {
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)

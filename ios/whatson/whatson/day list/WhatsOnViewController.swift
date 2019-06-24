@@ -104,7 +104,7 @@ class WhatsOnViewController: UIViewController,
         navigationController?.present(addNewEventViewControllerFactory.newEventController(for: item, delegate: self), animated: true, completion: nil)
     }
 
-    func showDetails(for item: SCEventCalendarItem, at indexPath: IndexPath, in cell: UITableViewCell) {
+    func showDetails(for item: SCEventCalendarItem, at indexPath: IndexPath, in cell: UIView & Row) {
         navigationAnimations.prepareTransition(from: indexPath, using: cell)
         navigationController?.show(EventDetailsViewController(eventItem: item, showingNavBar: true), sender: nil)
     }
@@ -153,7 +153,7 @@ class EventTransitionNavigationDelegate: NSObject, UINavigationControllerDelegat
 
     private let pushTransition = EventDetailsPushTransition()
 
-    func prepareTransition(from indexPath: IndexPath, using cell: UITableViewCell) {
+    func prepareTransition(from indexPath: IndexPath, using cell: UIView & Row) {
         pushTransition.selectedIndexPath = indexPath
         pushTransition.selectedCell = cell
     }
