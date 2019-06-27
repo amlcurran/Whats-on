@@ -38,3 +38,36 @@ class EventCell: UITableViewCell, Row {
     }
 
 }
+
+class EventCollectionCell: UICollectionViewCell, Row {
+
+    private let eventView = EventItemView()
+
+    var roundedView: RoundedRectBorderView {
+        return eventView.roundedView
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
+        layout()
+        backgroundColor = .clear
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        layout()
+        backgroundColor = .clear
+    }
+
+    private func layout() {
+        contentView.addSubview(eventView)
+        contentView.backgroundColor = .clear
+        eventView.constrain(toSuperview: .leading, .trailing, .top, .bottom)
+    }
+
+    func bound(to item: SCCalendarItem, slot: SCCalendarSlot) -> Self {
+        _ = eventView.bound(to: item, slot: slot)
+        return self
+    }
+
+}

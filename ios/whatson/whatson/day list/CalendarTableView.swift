@@ -140,7 +140,7 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, C
 
 }
 
-fileprivate extension IndexPath {
+extension IndexPath {
 
     var dataIndexPath: IndexPath {
         if row % 2 == 1 {
