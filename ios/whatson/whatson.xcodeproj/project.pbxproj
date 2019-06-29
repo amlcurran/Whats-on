@@ -75,6 +75,17 @@
 		865C7B051EE574100047D8E0 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C7B041EE574100047D8E0 /* OptionsViewController.swift */; };
 		866560AB1FB88713000ED8A2 /* CalendarPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866560AA1FB88713000ED8A2 /* CalendarPickerViewController.swift */; };
 		866D2E771EEA045E008D76D5 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866D2E761EEA045E008D76D5 /* GradientView.swift */; };
+		86755DCE22C7BC2100E91DF4 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86755DC522C7BC2000E91DF4 /* Core.framework */; };
+		86755DD522C7BC2100E91DF4 /* CoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86755DD422C7BC2100E91DF4 /* CoreTests.swift */; };
+		86755DD722C7BC2100E91DF4 /* Core.h in Headers */ = {isa = PBXBuildFile; fileRef = 86755DC722C7BC2000E91DF4 /* Core.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		86755DDA22C7BC2100E91DF4 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86755DC522C7BC2000E91DF4 /* Core.framework */; };
+		86755DDB22C7BC2100E91DF4 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 86755DC522C7BC2000E91DF4 /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		86755DE422C7BC5100E91DF4 /* CalendarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86755DE322C7BC5100E91DF4 /* CalendarItem.swift */; };
+		86755DE622C7BC9500E91DF4 /* Timestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86755DE522C7BC9500E91DF4 /* Timestamp.swift */; };
+		86755DE822C7BD0D00E91DF4 /* TimeOfDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86755DE722C7BD0D00E91DF4 /* TimeOfDay.swift */; };
+		86755DEA22C7BD8D00E91DF4 /* TimeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86755DE922C7BD8D00E91DF4 /* TimeRepository.swift */; };
+		86755DEC22C7BDB500E91DF4 /* TimeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86755DEB22C7BDB500E91DF4 /* TimeCalculator.swift */; };
+		86755DEE22C7BDF100E91DF4 /* CalendarSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86755DED22C7BDF100E91DF4 /* CalendarSlot.swift */; };
 		8694756A1F376DE900925C2A /* CalendarPreferenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869475691F376DE900925C2A /* CalendarPreferenceStore.swift */; };
 		8694756C1F37726D00925C2A /* CalendarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8694756B1F37726D00925C2A /* CalendarPresenter.swift */; };
 		8694756E1F37742C00925C2A /* DatePickerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8694756D1F37742C00925C2A /* DatePickerPresenter.swift */; };
@@ -83,6 +94,11 @@
 		8695D0331DA1A2A20034D52A /* SlotDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0321DA1A2A20034D52A /* SlotDetail.swift */; };
 		869B1EF520E180A40012A72D /* EventItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869B1EF420E180A40012A72D /* EventItemView.swift */; };
 		869DAC7D1D44D15C005AF315 /* EventPredicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC7C1D44D15C005AF315 /* EventPredicates.swift */; };
+		86A9355522C7C04C003FC26C /* CalendarSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9355422C7C04C003FC26C /* CalendarSource.swift */; };
+		86A9355722C7C1B8003FC26C /* EmptyCalendarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9355622C7C1B8003FC26C /* EmptyCalendarItem.swift */; };
+		86A9355922C7C1F4003FC26C /* EventCalendarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9355822C7C1F4003FC26C /* EventCalendarItem.swift */; };
+		86A9355B22C7C246003FC26C /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9355A22C7C246003FC26C /* EventsRepository.swift */; };
+		86A9355D22C7C261003FC26C /* EventsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9355C22C7C261003FC26C /* EventsService.swift */; };
 		86A9C2CB1C444468009281A0 /* WhatsOnAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */; };
 		86A9E4571DA7A7DC00E8D019 /* CalendarTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E4561DA7A7DC00E8D019 /* CalendarTableView.swift */; };
 		86A9E4591DA8076400E8D019 /* EKEventStore+Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E4581DA8076400E8D019 /* EKEventStore+Singleton.swift */; };
@@ -109,6 +125,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		86755DCF22C7BC2100E91DF4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 86CAD4911BACC9B1009C9CFD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 86755DC422C7BC2000E91DF4;
+			remoteInfo = Core;
+		};
+		86755DD122C7BC2100E91DF4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 86CAD4911BACC9B1009C9CFD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 86CAD4981BACC9B1009C9CFD;
+			remoteInfo = whatson;
+		};
+		86755DD822C7BC2100E91DF4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 86CAD4911BACC9B1009C9CFD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 86755DC422C7BC2000E91DF4;
+			remoteInfo = Core;
+		};
 		869DAC751D449EFB005AF315 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 86CAD4911BACC9B1009C9CFD /* Project object */;
@@ -119,6 +156,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		86755DDC22C7BC2100E91DF4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				86755DDB22C7BC2100E91DF4 /* Core.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		86B7D2F620E123EC001B0DF6 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -215,6 +263,18 @@
 		865C7B041EE574100047D8E0 /* OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		866560AA1FB88713000ED8A2 /* CalendarPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPickerViewController.swift; sourceTree = "<group>"; };
 		866D2E761EEA045E008D76D5 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		86755DC522C7BC2000E91DF4 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		86755DC722C7BC2000E91DF4 /* Core.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
+		86755DC822C7BC2000E91DF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		86755DCD22C7BC2100E91DF4 /* CoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		86755DD422C7BC2100E91DF4 /* CoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreTests.swift; sourceTree = "<group>"; };
+		86755DD622C7BC2100E91DF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		86755DE322C7BC5100E91DF4 /* CalendarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarItem.swift; sourceTree = "<group>"; };
+		86755DE522C7BC9500E91DF4 /* Timestamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timestamp.swift; sourceTree = "<group>"; };
+		86755DE722C7BD0D00E91DF4 /* TimeOfDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeOfDay.swift; sourceTree = "<group>"; };
+		86755DE922C7BD8D00E91DF4 /* TimeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRepository.swift; sourceTree = "<group>"; };
+		86755DEB22C7BDB500E91DF4 /* TimeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCalculator.swift; sourceTree = "<group>"; };
+		86755DED22C7BDF100E91DF4 /* CalendarSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSlot.swift; sourceTree = "<group>"; };
 		869475691F376DE900925C2A /* CalendarPreferenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPreferenceStore.swift; sourceTree = "<group>"; };
 		8694756B1F37726D00925C2A /* CalendarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPresenter.swift; sourceTree = "<group>"; };
 		8694756D1F37742C00925C2A /* DatePickerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerPresenter.swift; sourceTree = "<group>"; };
@@ -225,6 +285,11 @@
 		869DAC701D449EFB005AF315 /* WhatsOnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatsOnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		869DAC741D449EFB005AF315 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		869DAC7C1D44D15C005AF315 /* EventPredicates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPredicates.swift; sourceTree = "<group>"; };
+		86A9355422C7C04C003FC26C /* CalendarSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSource.swift; sourceTree = "<group>"; };
+		86A9355622C7C1B8003FC26C /* EmptyCalendarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCalendarItem.swift; sourceTree = "<group>"; };
+		86A9355822C7C1F4003FC26C /* EventCalendarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCalendarItem.swift; sourceTree = "<group>"; };
+		86A9355A22C7C246003FC26C /* EventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsRepository.swift; sourceTree = "<group>"; };
+		86A9355C22C7C261003FC26C /* EventsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsService.swift; sourceTree = "<group>"; };
 		86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsOnAppDelegate.swift; sourceTree = "<group>"; };
 		86A9E4561DA7A7DC00E8D019 /* CalendarTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTableView.swift; sourceTree = "<group>"; };
 		86A9E4581DA8076400E8D019 /* EKEventStore+Singleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EKEventStore+Singleton.swift"; sourceTree = "<group>"; };
@@ -260,6 +325,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		86755DC222C7BC2000E91DF4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		86755DCA22C7BC2100E91DF4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86755DCE22C7BC2100E91DF4 /* Core.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		869DAC6D1D449EFB005AF315 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -273,6 +353,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				862468D21F091B8C00FE5A49 /* libiconv.tbd in Frameworks */,
+				86755DDA22C7BC2100E91DF4 /* Core.framework in Frameworks */,
 				86DE0FEB1BB88646004E20B5 /* libz.tbd in Frameworks */,
 				86DE0FE91BB8863D004E20B5 /* Security.framework in Frameworks */,
 				86DE0FE71BB885E8004E20B5 /* libicucore.tbd in Frameworks */,
@@ -360,6 +441,35 @@
 			path = "buildable-table";
 			sourceTree = "<group>";
 		};
+		86755DC622C7BC2000E91DF4 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				86755DC722C7BC2000E91DF4 /* Core.h */,
+				86755DC822C7BC2000E91DF4 /* Info.plist */,
+				86755DE322C7BC5100E91DF4 /* CalendarItem.swift */,
+				86755DE522C7BC9500E91DF4 /* Timestamp.swift */,
+				86755DE722C7BD0D00E91DF4 /* TimeOfDay.swift */,
+				86755DE922C7BD8D00E91DF4 /* TimeRepository.swift */,
+				86755DEB22C7BDB500E91DF4 /* TimeCalculator.swift */,
+				86755DED22C7BDF100E91DF4 /* CalendarSlot.swift */,
+				86A9355422C7C04C003FC26C /* CalendarSource.swift */,
+				86A9355622C7C1B8003FC26C /* EmptyCalendarItem.swift */,
+				86A9355822C7C1F4003FC26C /* EventCalendarItem.swift */,
+				86A9355A22C7C246003FC26C /* EventsRepository.swift */,
+				86A9355C22C7C261003FC26C /* EventsService.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		86755DD322C7BC2100E91DF4 /* CoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				86755DD422C7BC2100E91DF4 /* CoreTests.swift */,
+				86755DD622C7BC2100E91DF4 /* Info.plist */,
+			);
+			path = CoreTests;
+			sourceTree = "<group>";
+		};
 		8695D0311DA1A19B0034D52A /* day list */ = {
 			isa = PBXGroup;
 			children = (
@@ -402,6 +512,8 @@
 				86FCF4411D455ADE000938E3 /* dependencies */,
 				86CAD49B1BACC9B1009C9CFD /* whatson */,
 				869DAC711D449EFB005AF315 /* tests */,
+				86755DC622C7BC2000E91DF4 /* Core */,
+				86755DD322C7BC2100E91DF4 /* CoreTests */,
 				86CAD49A1BACC9B1009C9CFD /* Products */,
 				86C19EB91BBF287500BBCDF6 /* whatson-Bridging-Header.h */,
 				3C1168F9D8934AD69843604B /* Pods */,
@@ -415,6 +527,8 @@
 			children = (
 				86CAD4991BACC9B1009C9CFD /* What’s on.app */,
 				869DAC701D449EFB005AF315 /* WhatsOnTests.xctest */,
+				86755DC522C7BC2000E91DF4 /* Core.framework */,
+				86755DCD22C7BC2100E91DF4 /* CoreTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -545,7 +659,55 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		86755DC022C7BC2000E91DF4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86755DD722C7BC2100E91DF4 /* Core.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		86755DC422C7BC2000E91DF4 /* Core */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 86755DE122C7BC2100E91DF4 /* Build configuration list for PBXNativeTarget "Core" */;
+			buildPhases = (
+				86755DC022C7BC2000E91DF4 /* Headers */,
+				86755DC122C7BC2000E91DF4 /* Sources */,
+				86755DC222C7BC2000E91DF4 /* Frameworks */,
+				86755DC322C7BC2000E91DF4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Core;
+			productName = Core;
+			productReference = 86755DC522C7BC2000E91DF4 /* Core.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		86755DCC22C7BC2100E91DF4 /* CoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 86755DE222C7BC2100E91DF4 /* Build configuration list for PBXNativeTarget "CoreTests" */;
+			buildPhases = (
+				86755DC922C7BC2100E91DF4 /* Sources */,
+				86755DCA22C7BC2100E91DF4 /* Frameworks */,
+				86755DCB22C7BC2100E91DF4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				86755DD022C7BC2100E91DF4 /* PBXTargetDependency */,
+				86755DD222C7BC2100E91DF4 /* PBXTargetDependency */,
+			);
+			name = CoreTests;
+			productName = CoreTests;
+			productReference = 86755DCD22C7BC2100E91DF4 /* CoreTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		869DAC6F1D449EFB005AF315 /* WhatsOnTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 869DAC791D449EFB005AF315 /* Build configuration list for PBXNativeTarget "WhatsOnTests" */;
@@ -576,10 +738,12 @@
 				E06D633432F6E8A06756CA5A /* [CP] Embed Pods Frameworks */,
 				86A995CF1DEE1E8600DB5AF2 /* ShellScript */,
 				86B7D2F620E123EC001B0DF6 /* Embed App Extensions */,
+				86755DDC22C7BC2100E91DF4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				86755DD922C7BC2100E91DF4 /* PBXTargetDependency */,
 			);
 			name = whatson;
 			productName = whatson;
@@ -592,10 +756,22 @@
 		86CAD4911BACC9B1009C9CFD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1000;
+				LastSwiftUpdateCheck = 1100;
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "Alex Curran";
 				TargetAttributes = {
+					86755DC422C7BC2000E91DF4 = {
+						CreatedOnToolsVersion = 11.0;
+						DevelopmentTeam = 3H3SBN3AYY;
+						LastSwiftMigration = 1100;
+						ProvisioningStyle = Automatic;
+					};
+					86755DCC22C7BC2100E91DF4 = {
+						CreatedOnToolsVersion = 11.0;
+						DevelopmentTeam = 3H3SBN3AYY;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 86CAD4981BACC9B1009C9CFD;
+					};
 					869DAC6F1D449EFB005AF315 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 3H3SBN3AYY;
@@ -636,11 +812,27 @@
 			targets = (
 				86CAD4981BACC9B1009C9CFD /* whatson */,
 				869DAC6F1D449EFB005AF315 /* WhatsOnTests */,
+				86755DC422C7BC2000E91DF4 /* Core */,
+				86755DCC22C7BC2100E91DF4 /* CoreTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		86755DC322C7BC2000E91DF4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		86755DCB22C7BC2100E91DF4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		869DAC6E1D449EFB005AF315 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -735,6 +927,32 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		86755DC122C7BC2000E91DF4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86A9355B22C7C246003FC26C /* EventsRepository.swift in Sources */,
+				86755DE822C7BD0D00E91DF4 /* TimeOfDay.swift in Sources */,
+				86755DE622C7BC9500E91DF4 /* Timestamp.swift in Sources */,
+				86A9355722C7C1B8003FC26C /* EmptyCalendarItem.swift in Sources */,
+				86755DEA22C7BD8D00E91DF4 /* TimeRepository.swift in Sources */,
+				86755DE422C7BC5100E91DF4 /* CalendarItem.swift in Sources */,
+				86A9355D22C7C261003FC26C /* EventsService.swift in Sources */,
+				86A9355922C7C1F4003FC26C /* EventCalendarItem.swift in Sources */,
+				86755DEC22C7BDB500E91DF4 /* TimeCalculator.swift in Sources */,
+				86A9355522C7C04C003FC26C /* CalendarSource.swift in Sources */,
+				86755DEE22C7BDF100E91DF4 /* CalendarSlot.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		86755DC922C7BC2100E91DF4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86755DD522C7BC2100E91DF4 /* CoreTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		869DAC6C1D449EFB005AF315 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -840,6 +1058,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		86755DD022C7BC2100E91DF4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 86755DC422C7BC2000E91DF4 /* Core */;
+			targetProxy = 86755DCF22C7BC2100E91DF4 /* PBXContainerItemProxy */;
+		};
+		86755DD222C7BC2100E91DF4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 86CAD4981BACC9B1009C9CFD /* whatson */;
+			targetProxy = 86755DD122C7BC2100E91DF4 /* PBXContainerItemProxy */;
+		};
+		86755DD922C7BC2100E91DF4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 86755DC422C7BC2000E91DF4 /* Core */;
+			targetProxy = 86755DD822C7BC2100E91DF4 /* PBXContainerItemProxy */;
+		};
 		869DAC761D449EFB005AF315 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 86CAD4981BACC9B1009C9CFD /* whatson */;
@@ -859,6 +1092,140 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		86755DDD22C7BC2100E91DF4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3H3SBN3AYY;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = Core/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson.Core;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		86755DDE22C7BC2100E91DF4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3H3SBN3AYY;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Core/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson.Core;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		86755DDF22C7BC2100E91DF4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3H3SBN3AYY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = CoreTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson.CoreTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/What’s on.app/What’s on";
+			};
+			name = Debug;
+		};
+		86755DE022C7BC2100E91DF4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3H3SBN3AYY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = CoreTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson.CoreTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/What’s on.app/What’s on";
+			};
+			name = Release;
+		};
 		869DAC771D449EFB005AF315 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A4CB48EDFB7E394EAA7145B4 /* Pods-WhatsOnTests.debug.xcconfig */;
@@ -1160,6 +1527,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		86755DE122C7BC2100E91DF4 /* Build configuration list for PBXNativeTarget "Core" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				86755DDD22C7BC2100E91DF4 /* Debug */,
+				86755DDE22C7BC2100E91DF4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		86755DE222C7BC2100E91DF4 /* Build configuration list for PBXNativeTarget "CoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				86755DDF22C7BC2100E91DF4 /* Debug */,
+				86755DE022C7BC2100E91DF4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		869DAC791D449EFB005AF315 /* Build configuration list for PBXNativeTarget "WhatsOnTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
