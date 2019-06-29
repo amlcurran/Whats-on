@@ -1,5 +1,6 @@
 import XCTest
 import EventKit
+import Core
 @testable import Whatson
 
 class EventPredicateTests: XCTestCase {
@@ -119,38 +120,38 @@ private func today(atHour hour: Int, minutes: Int = 0, addingDays days: Int = 0)
     return Calendar.current.date(from: components)!
 }
 
-private class TestTimeRepository: NSObject, SCTimeRepository {
+private class TestTimeRepository: TimeRepository {
 
-    func borderTimeStart() -> SCTimeOfDay {
-        return SCTimeOfDay.fromHours(with: 8)
+    var borderTimeStart: TimeOfDay {
+        return TimeOfDay.fromHours(hours: 8)
     }
 
-    func borderTimeEnd() -> SCTimeOfDay {
-        return SCTimeOfDay.fromHours(with: 12)
-    }
-
-}
-
-private class TestTimeRepositoryWithMinutes: NSObject, SCTimeRepository {
-
-    func borderTimeStart() -> SCTimeOfDay {
-        return SCTimeOfDay.fromHoursAndMinute(with: 22, with: 0)
-    }
-
-    func borderTimeEnd() -> SCTimeOfDay {
-        return SCTimeOfDay.fromHoursAndMinute(with: 23, with: 58)
+    var borderTimeEnd: TimeOfDay {
+        return TimeOfDay.fromHours(hours: 12)
     }
 
 }
 
-private class TestTimeRepositoryWithMinutes2: NSObject, SCTimeRepository {
+private class TestTimeRepositoryWithMinutes: TimeRepository {
 
-    func borderTimeStart() -> SCTimeOfDay {
-        return SCTimeOfDay.fromHoursAndMinute(with: 22, with: 30)
+    var borderTimeStart: TimeOfDay {
+        return TimeOfDay.fromHours(hours: 22, andMinutes: 0)
     }
 
-    func borderTimeEnd() -> SCTimeOfDay {
-        return SCTimeOfDay.fromHoursAndMinute(with: 23, with: 59)
+    var borderTimeEnd: TimeOfDay {
+        return TimeOfDay.fromHours(hours: 23, andMinutes: 58)
+    }
+
+}
+
+private class TestTimeRepositoryWithMinutes2: TimeRepository {
+
+    var borderTimeStart: TimeOfDay {
+        return TimeOfDay.fromHours(hours: 22, andMinutes: 30)
+    }
+
+    var borderTimeEnd: TimeOfDay {
+        return TimeOfDay.fromHours(hours: 23, andMinutes: 59)
     }
 
 }

@@ -22,7 +22,6 @@
 		698538E5F918BCBD1F75C446 /* UserDefaultsTimeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */; };
 		698538F49DD3046F71BE4E01 /* AllowsGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853BC8BAF5893B6913918C /* AllowsGestureRecognizer.swift */; };
 		698539E35BDB526A55FA73A4 /* PropertyAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853939FC3A0F98F4792C0F /* PropertyAnimator.swift */; };
-		69853A438F323A331EE8B46E /* CalendarTableViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698534DCE645AF4CAB841A5F /* CalendarTableViewTests.swift */; };
 		69853B3AC06B29C271651CF0 /* UIDatePicker+Hours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985397DE155D32104662FA2 /* UIDatePicker+Hours.swift */; };
 		69853BB8C3723DD6A606DFFE /* DetailsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853ADAFB0D8A57C40FC7BA /* DetailsCard.swift */; };
 		69853C206C9404ACE2BD00BC /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853943917F0CF738ACB915 /* EventView.swift */; };
@@ -37,7 +36,6 @@
 		86075C331E3E228C005AF423 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86075C321E3E228C005AF423 /* Localizable.strings */; };
 		8607847A1DAD7E6100AAE856 /* LabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860784791DAD7E6100AAE856 /* LabelStyle.swift */; };
 		8609C5A41DB01AF100B44D76 /* EventDetailsPushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609C5A31DB01AF100B44D76 /* EventDetailsPushTransition.swift */; };
-		8614BABE1C825B7A00A3E570 /* NSDate+Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8614BABD1C825B7A00A3E570 /* NSDate+Time.swift */; };
 		8618A51F1BDA92F900A4845E /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8618A51E1BDA92F900A4845E /* EventCell.swift */; };
 		861BD0E01D9FC4290032FBAB /* Optional+Fluency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */; };
 		8620886D22BFE2E200268B3D /* MultipleEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8620886C22BFE2E200268B3D /* MultipleEventCell.swift */; };
@@ -85,6 +83,7 @@
 		86A9355922C7C1F4003FC26C /* EventCalendarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9355822C7C1F4003FC26C /* EventCalendarItem.swift */; };
 		86A9355B22C7C246003FC26C /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9355A22C7C246003FC26C /* EventsRepository.swift */; };
 		86A9355D22C7C261003FC26C /* EventsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9355C22C7C261003FC26C /* EventsService.swift */; };
+		86A9355F22C7D52D003FC26C /* NSDate+Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9355E22C7D52D003FC26C /* NSDate+Time.swift */; };
 		86A9C2CB1C444468009281A0 /* WhatsOnAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */; };
 		86A9E4571DA7A7DC00E8D019 /* CalendarTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E4561DA7A7DC00E8D019 /* CalendarTableView.swift */; };
 		86A9E4591DA8076400E8D019 /* EKEventStore+Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E4581DA8076400E8D019 /* EKEventStore+Singleton.swift */; };
@@ -171,7 +170,6 @@
 		698530C0F754D12F1E38397C /* DayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		6985328C217A9C753C09CFDE /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		6985333EBC410C0E8F45C969 /* FailedAccessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailedAccessView.swift; sourceTree = "<group>"; };
-		698534DCE645AF4CAB841A5F /* CalendarTableViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTableViewTests.swift; sourceTree = "<group>"; };
 		6985351AE5837369246C93AD /* EventDetailsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsPresenter.swift; sourceTree = "<group>"; };
 		6985358E9835009A7EA756E9 /* Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		69853687E86C131BBEA80025 /* EKEventKit+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "EKEventKit+Convenience.swift"; path = "utils/EKEventKit+Convenience.swift"; sourceTree = "<group>"; };
@@ -194,7 +192,6 @@
 		86075C321E3E228C005AF423 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		860784791DAD7E6100AAE856 /* LabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelStyle.swift; sourceTree = "<group>"; };
 		8609C5A31DB01AF100B44D76 /* EventDetailsPushTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsPushTransition.swift; sourceTree = "<group>"; };
-		8614BABD1C825B7A00A3E570 /* NSDate+Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDate+Time.swift"; path = "../NSDate+Time.swift"; sourceTree = "<group>"; };
 		8618A51E1BDA92F900A4845E /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Fluency.swift"; sourceTree = "<group>"; };
 		8620886C22BFE2E200268B3D /* MultipleEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleEventCell.swift; sourceTree = "<group>"; };
@@ -246,6 +243,7 @@
 		86A9355822C7C1F4003FC26C /* EventCalendarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCalendarItem.swift; sourceTree = "<group>"; };
 		86A9355A22C7C246003FC26C /* EventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsRepository.swift; sourceTree = "<group>"; };
 		86A9355C22C7C261003FC26C /* EventsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsService.swift; sourceTree = "<group>"; };
+		86A9355E22C7D52D003FC26C /* NSDate+Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Time.swift"; sourceTree = "<group>"; };
 		86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsOnAppDelegate.swift; sourceTree = "<group>"; };
 		86A9E4561DA7A7DC00E8D019 /* CalendarTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTableView.swift; sourceTree = "<group>"; };
 		86A9E4581DA8076400E8D019 /* EKEventStore+Singleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EKEventStore+Singleton.swift"; sourceTree = "<group>"; };
@@ -447,7 +445,6 @@
 			children = (
 				869DAC741D449EFB005AF315 /* Info.plist */,
 				86317A081EC258ED0009EE8A /* EventPredicateTests.swift */,
-				698534DCE645AF4CAB841A5F /* CalendarTableViewTests.swift */,
 			);
 			name = tests;
 			path = WhatsOnTests;
@@ -535,7 +532,7 @@
 		86FCF4401D455AC3000938E3 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
-				8614BABD1C825B7A00A3E570 /* NSDate+Time.swift */,
+				86A9355E22C7D52D003FC26C /* NSDate+Time.swift */,
 				86D751141C71316D00C0A607 /* UIColor+WhatsOn.swift */,
 				86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */,
 				861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */,
@@ -872,7 +869,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				86317A091EC258ED0009EE8A /* EventPredicateTests.swift in Sources */,
-				69853A438F323A331EE8B46E /* CalendarTableViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -889,7 +885,6 @@
 				8626886E1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift in Sources */,
 				865C7B031EE56AE80047D8E0 /* BuildableTableSource.swift in Sources */,
 				86F849991D046A3E007C41B0 /* EventDetailsViewController.swift in Sources */,
-				8614BABE1C825B7A00A3E570 /* NSDate+Time.swift in Sources */,
 				8658A2381F375ED500BF219C /* CustomViewTableItem.swift in Sources */,
 				8695D0331DA1A2A20034D52A /* SlotDetail.swift in Sources */,
 				86D751131C7128EB00C0A607 /* RoundedRectBorderView.swift in Sources */,
@@ -949,6 +944,7 @@
 				698534B8D95E1BCE5206D939 /* BasicAnimator.swift in Sources */,
 				69853044F5C74357E1751736 /* Animator.swift in Sources */,
 				698539E35BDB526A55FA73A4 /* PropertyAnimator.swift in Sources */,
+				86A9355F22C7D52D003FC26C /* NSDate+Time.swift in Sources */,
 				69853C93D4E8453CAAF42338 /* EventDetailsPresenter.swift in Sources */,
 				69853C206C9404ACE2BD00BC /* EventView.swift in Sources */,
 				6985339AD6136F4F0794DD59 /* EKEventKit+Convenience.swift in Sources */,
@@ -1083,7 +1079,6 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = CoreTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1112,7 +1107,6 @@
 				DEVELOPMENT_TEAM = 3H3SBN3AYY;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = CoreTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson.CoreTests;
@@ -1136,7 +1130,6 @@
 					"$(SRCROOT)/Pods/Firebase/**",
 				);
 				INFOPLIST_FILE = WhatsOnTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				J2OBJC_HOME = ./j2objc;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.WhatsOnTests;
@@ -1161,7 +1154,6 @@
 					"$(SRCROOT)/Pods/Firebase/**",
 				);
 				INFOPLIST_FILE = WhatsOnTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				J2OBJC_HOME = ./j2objc;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.WhatsOnTests;
