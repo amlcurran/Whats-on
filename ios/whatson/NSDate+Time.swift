@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import Core
 
 extension Date {
 
-    init(from time: SCTimestamp) {
-        self.init(timeIntervalSince1970: TimeInterval(time.getMillis() / 1000))
+    init(from time: Timestamp) {
+        self.init(timeIntervalSince1970: TimeInterval(time.millis / 1000))
     }
 
     static func startTime(from timeStore: UserDefaultsTimeStore, addingDays days: Int) -> Date? {

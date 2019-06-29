@@ -1,9 +1,10 @@
 import Foundation
+import Core
 
 class DataProvider: NSObject {
 
-    private var items: [SCCalendarItem?] = []
-    private var slots: [SCCalendarSlot] = []
+    private var items: [CalendarItem?] = []
+    private var slots: [CalendarSlot] = []
 
     var count: Int {
         get {
@@ -11,7 +12,7 @@ class DataProvider: NSObject {
         }
     }
 
-    func update(from source: SCCalendarSource) -> [Int] {
+    func update(from source: CalendarSource) -> [Int] {
         var changedIndexes = [Int]()
         let oldItems = items
         let oldSlots = slots
@@ -19,8 +20,8 @@ class DataProvider: NSObject {
         slots.removeAll()
         let sourceCount = Int(source.count())
         for index in 0..<sourceCount {
-            let newItem = source.itemAt(with: jint(index))
-            let newSlot = source.slotAt(with: jint(index))
+            let newItem = source.item(at: index)
+            let newSlot = source.slotAt(index)
             items.append(newItem)
             slots.append(newSlot)
             if index.isWithinBounds(of: oldSlots) && index.isWithinBounds(of: oldItems) {
@@ -35,11 +36,11 @@ class DataProvider: NSObject {
         return changedIndexes
     }
 
-    func item(at indexPath: IndexPath) -> SCCalendarItem? {
+    func item(at indexPath: IndexPath) -> CalendarItem? {
         return items[indexPath.row]
     }
 
-    func slot(at indexPath: IndexPath) -> SCCalendarSlot? {
+    func slot(at indexPath: IndexPath) -> CalendarSlot? {
         return slots[indexPath.row]
     }
 
@@ -53,18 +54,18 @@ extension Int {
 
 }
 
-extension SCCalendarSlot {
+extension CalendarSlot {
 
-    func view(matches otherSlot: SCCalendarSlot) -> Bool {
+    func view(matches otherSlot: CalendarSlot) -> Bool {
         return count() == otherSlot.count()
     }
 
 }
 
-func matchViews(_ one: SCCalendarItem?, _ two: SCCalendarItem?) -> Bool {
+func matchViews(_ one: CalendarItem?, _ two: CalendarItem?) -> Bool {
     if let one = one, let two = two {
-        return one.title() == two.title() &&
-                one.startTime().getMillis() == two.startTime().getMillis()
+        return one.title == two.title &&
+                one.startTime.millis == two.startTime.millis
     } else if one == nil && two == nil {
         return true
     } else {

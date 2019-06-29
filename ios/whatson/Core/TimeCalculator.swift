@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TimeCalculator {
+public protocol TimeCalculator {
 
     func plusDays(days: Int, time: Timestamp) -> Timestamp
 

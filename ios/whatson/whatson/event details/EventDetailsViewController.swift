@@ -4,6 +4,7 @@ import EventKitUI
 import MapKit
 import FirebaseAnalytics
 import CoreLocation
+import Core
 
 class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventViewDelegate, UINavigationBarDelegate, EventResponseViewDelegate, EKEventEditViewDelegate, EventView, DetailsCardDelegate {
 
@@ -21,15 +22,15 @@ class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventV
         }
     }
 
-    convenience init?(item: SCCalendarItem, showingNavBar: Bool = true) {
-        if let eventItem = item as? SCEventCalendarItem {
+    convenience init?(item: CalendarItem, showingNavBar: Bool = true) {
+        if let eventItem = item as? EventCalendarItem {
             self.init(eventItem: eventItem, showingNavBar: showingNavBar)
         } else {
             return nil
         }
     }
 
-    convenience init(eventItem: SCEventCalendarItem, showingNavBar: Bool) {
+    convenience init(eventItem: EventCalendarItem, showingNavBar: Bool) {
         guard let event = EKEventStore.instance.event(matching: eventItem) else {
             preconditionFailure("Trying to view an event which doesnt exist")
         }

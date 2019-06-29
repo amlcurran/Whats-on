@@ -1,10 +1,11 @@
 import EventKit
+import Core
 
 struct EventPredicates {
 
-    private let timeRepository: SCTimeRepository
+    private let timeRepository: TimeRepository
 
-    init(timeRepository: SCTimeRepository) {
+    init(timeRepository: TimeRepository) {
         self.timeRepository = timeRepository
     }
 
@@ -55,17 +56,17 @@ private func notAllDay() -> EventPredicate {
     }
 }
 
-private func isWithinBorder(timeRepository: SCTimeRepository, using calendar: Calendar) -> EventPredicate {
+private func isWithinBorder(timeRepository: TimeRepository, using calendar: Calendar) -> EventPredicate {
     return { event in
-        let start = timeRepository.borderTimeStart()
-        let end = timeRepository.borderTimeEnd()
+        let start = timeRepository.borderTimeStart
+        let end = timeRepository.borderTimeEnd
         return event.startDate.timeOfDay(isBetween: start, and: end, onSameDayAs: event.endDate, in: calendar) ||
             event.endDate.timeOfDay(isBetween: start, and: end, in: calendar) ||
             (event.startDate.isBefore(start, in: calendar) && event.endDate.isAfter(end, in: calendar))
     }
 }
 
-extension SCTimeOfDay {
+extension TimeOfDay {
 
     var hours: Int {
         get {

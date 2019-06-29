@@ -1,6 +1,7 @@
 import UIKit
 import EventKit
 import EventKitUI
+import Core
 
 class WhatsOnViewController: UIViewController,
         EKEventEditViewDelegate,
@@ -11,7 +12,7 @@ class WhatsOnViewController: UIViewController,
     private let dateFormatter = DateFormatter(dateFormat: "EEE")
     private let eventStore = EKEventStore.instance
     private let dataProvider = DataProvider()
-    private let timeRepo = TimeRepository()
+    private let timeRepo = NSDateTimeRepository()
     private let pushTransition = EventDetailsPushTransition()
     private let navigationAnimations = EventTransitionNavigationDelegate()
     private let failedAccessView = FailedAccessView()
@@ -21,7 +22,7 @@ class WhatsOnViewController: UIViewController,
 
     private var forceTouchDisplayer: Any?
     private var presenter: WhatsOnPresenter!
-    private var eventService: SCEventsService!
+    private var eventService: EventsService!
     private var loadingDelay = DispatchTimeInterval.milliseconds(1500)
 
     lazy var table: CalendarTable = {
@@ -42,7 +43,7 @@ class WhatsOnViewController: UIViewController,
         forceTouchDisplayer = displayer
 
         let eventRepo = EventStoreRepository(timeRepository: timeRepo, calendarPreferenceStore: CalendarPreferenceStore())
-        eventService = SCEventsService(scTimeRepository: timeRepo, with: eventRepo, with: NSDateCalculator.instance)
+        eventService = EventsService(timeRepository: timeRepo, eventsRepository: eventRepo, timeCalculator: NSDateCalculator.instance)
         presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService, dataProvider: dataProvider)
 
         let header = HeaderView(delegate: self)
@@ -106,16 +107,16 @@ class WhatsOnViewController: UIViewController,
         // Dispose of any resources that can be recreated.
     }
 
-    func addEvent(for item: SCCalendarItem) {
+    func addEvent(for item: CalendarItem) {
         navigationController?.present(addNewEventViewControllerFactory.newEventController(for: item, delegate: self), animated: true, completion: nil)
     }
 
-    func showDetails(for item: SCEventCalendarItem, at indexPath: IndexPath, in cell: UIView & Row) {
+    func showDetails(for item: EventCalendarItem, at indexPath: IndexPath, in cell: UIView & Row) {
         navigationAnimations.prepareTransition(from: indexPath, using: cell)
         navigationController?.show(EventDetailsViewController(eventItem: item, showingNavBar: true), sender: nil)
     }
 
-    func remove(_ event: SCEventCalendarItem) {
+    func remove(_ event: EventCalendarItem) {
         presenter.remove(event)
     }
 
@@ -127,7 +128,7 @@ class WhatsOnViewController: UIViewController,
 
     // MARK: - peek and pop
 
-    func showCalendar(_ source: SCCalendarSource) {
+    func showCalendar(_ source: CalendarSource) {
         table.update(source)
         loadingView.animateAlpha(to: 0)
         loadingView.isHidden = true
@@ -143,7 +144,7 @@ class WhatsOnViewController: UIViewController,
         table.hide()
     }
 
-    func failedToDelete(_ event: SCCalendarItem, withError error: Error) {
+    func failedToDelete(_ event: CalendarItem, withError error: Error) {
 
     }
 

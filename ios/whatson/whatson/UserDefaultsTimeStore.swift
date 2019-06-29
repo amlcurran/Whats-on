@@ -1,4 +1,5 @@
 import Foundation
+import Core
 
 class UserDefaultsTimeStore {
 
@@ -9,15 +10,15 @@ class UserDefaultsTimeStore {
         self.userDefaults = userDefaults
     }
 
-    var startTimestamp: SCTimestamp {
+    var startTimestamp: Timestamp {
         get {
-            return dateCalculator.startOfToday().plusHours(with: Int32(startTime))
+            return dateCalculator.startOfToday().plusHours(hours: startTime)
         }
     }
 
-    var endTimestamp: SCTimestamp {
+    var endTimestamp: Timestamp {
         get {
-            return dateCalculator.startOfToday().plusHours(with: Int32(endTime))
+            return dateCalculator.startOfToday().plusHours(hours: endTime)
         }
     }
 

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Core
 
 @available(iOS 13.0, *)
 class NewFoo: NSObject, CalendarTable, UICollectionViewDataSource {
@@ -28,14 +29,14 @@ class NewFoo: NSObject, CalendarTable, UICollectionViewDataSource {
         }
     }
 
-    func update(_ source: SCCalendarSource) {
+    func update(_ source: CalendarSource) {
         let snapshot = NSDiffableDataSourceSnapshot<String, String>()
         _ = dataProvider.update(from: source)
 
         dataSource.apply(snapshot)
     }
 
-    func selection(under point: CGPoint) -> (UIView, SCCalendarItem)? {
+    func selection(under point: CGPoint) -> (UIView, CalendarItem)? {
         return nil
     }
 

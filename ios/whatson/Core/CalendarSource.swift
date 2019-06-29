@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CalendarSource {
+public class CalendarSource {
 
     let calendarItems: [Int: CalendarSlot]
     let daysSize: Int
@@ -22,11 +22,11 @@ class CalendarSource {
         self.timeRepository = timeRepository
     }
 
-    func count() -> Int {
+    public func count() -> Int {
         return daysSize
     }
 
-    func item(at position: Int) -> CalendarItem? {
+    public func item(at position: Int) -> CalendarItem? {
         let calendarSlot = calendarItems[position]
         if calendarSlot == nil || calendarSlot!.isEmpty {
             let startTime = startOfTodayBlock(position)
@@ -48,11 +48,11 @@ class CalendarSource {
             .plusHours(of: timeRepository.borderTimeEnd)
     }
 
-    func slotAt(_ position: Int) -> CalendarSlot {
+    public func slotAt(_ position: Int) -> CalendarSlot {
         return calendarItems[position] ?? CalendarSlot()
     }
 
-    func isEmptySlot(at position: Int) -> Bool {
+    public func isEmptySlot(at position: Int) -> Bool {
         return slotAt(position).isEmpty
     }
 }

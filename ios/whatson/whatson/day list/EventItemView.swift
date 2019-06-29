@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Core
 
 class EventItemView: UIView {
 
@@ -87,15 +88,15 @@ class EventItemView: UIView {
         }
     }
 
-    func bound(to item: SCCalendarItem, slot: SCCalendarSlot) {
-        let startTime = timeFormatter.string(from: timeCalculator.date(from: item.startTime()))
+    func bound(to item: CalendarItem, slot: CalendarSlot) {
+        let startTime = timeFormatter.string(from: timeCalculator.date(from: item.startTime))
         secondaryLabel.text = String(format: "From %@", startTime)
-        if slot.isEmpty() {
+        if slot.isEmpty {
             type = .empty
             eventLabel.text = "Add event"
         } else {
             type = .full
-            eventLabel.text = item.title()
+            eventLabel.text = item.title
         }
     }
 

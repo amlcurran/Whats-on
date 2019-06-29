@@ -8,27 +8,27 @@
 
 import Foundation
 
-struct TimeOfDay {
+public struct TimeOfDay {
 
-    let measurement: Measurement<UnitDuration>
+    private let measurement: Measurement<UnitDuration>
 
     init(millis: Int) {
-        self.measurement = Measurement<UnitDuration>(value: Double(millis), unit: .milliseconds)
+        self.measurement = Measurement<UnitDuration>(value: Double(millis / 1000), unit: .seconds)
     }
 
     private init(measurement: Measurement<UnitDuration>) {
         self.measurement = measurement
     }
 
-    func hoursInDay() -> Double {
+    public func hoursInDay() -> Double {
         return measurement.converted(to: .hours).value
     }
 
-    func minutesInDay() -> Double {
+    public func minutesInDay() -> Double {
         return measurement.converted(to: .minutes).value
     }
 
-    static func fromHours(hours: Int) -> TimeOfDay {
+    public static func fromHours(hours: Int) -> TimeOfDay {
         let measurement = Measurement<UnitDuration>(value: Double(hours), unit: .hours)
         return TimeOfDay(measurement: measurement)
     }

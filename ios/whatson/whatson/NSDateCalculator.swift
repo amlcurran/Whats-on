@@ -1,36 +1,36 @@
 import Foundation
+import Core
 
-public class NSDateCalculator: NSObject, SCTimeCalculator {
+public class NSDateCalculator: TimeCalculator {
 
     static let instance = NSDateCalculator()
 
     private let calendar: Calendar
 
-    private override init() {
+    private init() {
         calendar = Calendar.current
-        super.init()
     }
 
-    @objc public func plusDays(with days: jint, with time: SCTimestamp!) -> SCTimestamp {
+    public func plusDays(days: Int, time: Timestamp) -> Timestamp {
         var components = DateComponents()
         components.day = Int(days)
         let newDate = calendar.date(byAdding: components, to: date(from: time))
-        return SCTimestamp(long: jlong(newDate!.timeIntervalSince1970 * 1000), with: self)
+        return Timestamp(millis: Int(newDate!.timeIntervalSince1970) * 1000, timeCalculator: self)
     }
 
-    @objc public func getDaysWith(_ time: SCTimestamp!) -> jint {
+    public func getDays(time: Timestamp) -> Int {
         let difference = self.calendar.dateComponents([.day], from: Date(timeIntervalSince1970: 0), to: date(from: time))
-        return jint(difference.day!)
+        return difference.day!
     }
 
-    @objc public func plusHours(with time: SCTimestamp!, with hours: jint) -> SCTimestamp {
+    public func plusHours(time: Timestamp, hours: Int) -> Timestamp {
         var components = DateComponents()
         components.hour = Int(hours)
         let newDate = calendar.date(byAdding: components, to: date(from: time))
-        return SCTimestamp(long: jlong(newDate!.timeIntervalSince1970 * 1000), with: self)
+        return Timestamp(millis: Int(newDate!.timeIntervalSince1970) * 1000, timeCalculator: self)
     }
 
-    @objc public func startOfToday() -> SCTimestamp {
+    public func startOfToday() -> Timestamp {
         var components = NSCalendar.current.dateComponents([.second, .minute, .hour, .day, .month, .year], from: Date())
         components.hour = 0
         components.minute = 0
@@ -39,12 +39,12 @@ public class NSDateCalculator: NSObject, SCTimeCalculator {
         return time(from: newDate)
     }
 
-    internal func date(from time: SCTimestamp) -> Date {
-        return Date(timeIntervalSince1970: (Double(time.getMillis()) / 1000.0))
+    internal func date(from time: Timestamp) -> Date {
+        return Date(timeIntervalSince1970: (Double(time.millis) / 1000.0))
     }
 
-    internal func time(from date: Date) -> SCTimestamp {
-        return SCTimestamp(long: jlong(date.timeIntervalSince1970 * 1000), with: self)
+    internal func time(from date: Date) -> Timestamp {
+        return Timestamp(millis: Int(date.timeIntervalSince1970 * 1000), timeCalculator: self)
     }
 
 }

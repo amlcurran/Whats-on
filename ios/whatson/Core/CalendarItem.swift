@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CalendarItem {
+public protocol CalendarItem {
 
     var isEmpty: Bool { get }
     var title: String { get }

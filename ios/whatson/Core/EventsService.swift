@@ -8,19 +8,19 @@
 
 import Foundation
 
-class EventsService {
+public class EventsService {
 
     private let timeRepository: TimeRepository
     private let eventsRepository: EventsRepository
     private let timeCalculator: TimeCalculator
 
-    init(timeRepository: TimeRepository, eventsRepository: EventsRepository, timeCalculator: TimeCalculator) {
+    public init(timeRepository: TimeRepository, eventsRepository: EventsRepository, timeCalculator: TimeCalculator) {
         self.timeRepository = timeRepository
         self.eventsRepository = eventsRepository
         self.timeCalculator = timeCalculator
     }
 
-    func getCalendarSource(numberOfDays: Int, now: Timestamp) -> CalendarSource {
+    public func getCalendarSource(numberOfDays: Int, now: Timestamp) -> CalendarSource {
         let nowTime = timeCalculator.startOfToday()
         let nextWeek = nowTime.plusDays(days: numberOfDays)
         let fivePm = timeRepository.borderTimeStart

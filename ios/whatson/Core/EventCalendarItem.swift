@@ -8,16 +8,18 @@
 
 import Foundation
 
-struct EventCalendarItem: CalendarItem {
+public struct EventCalendarItem: CalendarItem {
 
-    let eventId: String
-    let title: String
-    let startTime: Timestamp
-    let endTime: Timestamp
+    public let eventId: String
+    public let title: String
+    public let startTime: Timestamp
+    public let endTime: Timestamp
+    public let isEmpty: Bool = false
 
-    func id() -> String {
-        return eventId
+    public init(eventId: String, title: String, startTime: Timestamp, endTime: Timestamp) {
+        self.eventId = eventId
+        self.title = title
+        self.startTime = startTime
+        self.endTime = endTime
     }
-
-    let isEmpty: Bool = false
 }

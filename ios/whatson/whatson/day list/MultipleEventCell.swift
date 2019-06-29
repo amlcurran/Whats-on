@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import Core
 
 class MultipleEventCell: UITableViewCell, Row {
 
@@ -37,7 +38,7 @@ class MultipleEventCell: UITableViewCell, Row {
         secondItems.constrain(height: 10)
     }
 
-    func bound(to item: SCCalendarItem, slot: SCCalendarSlot) -> Self {
+    func bound(to item: CalendarItem, slot: CalendarSlot) -> Self {
         _ = eventView.bound(to: item, slot: slot)
         return self
     }

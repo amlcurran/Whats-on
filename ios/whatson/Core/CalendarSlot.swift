@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct CalendarSlot {
+public struct CalendarSlot {
     private var calendarItems = [CalendarItem]()
 
-    var isEmpty: Bool {
+    public var isEmpty: Bool {
         return calendarItems.isEmpty
     }
 
-    func firstItem() -> CalendarItem? {
+    public func firstItem() -> CalendarItem? {
         return calendarItems[0]
     }
 
@@ -23,11 +23,11 @@ struct CalendarSlot {
         calendarItems.append(item)
     }
 
-    func count() -> Int {
+    public func count() -> Int {
         return calendarItems.count
     }
 
-    func items() -> [CalendarItem] {
+    public func items() -> [CalendarItem] {
         return calendarItems
     }
 }

@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import Core
 
 protocol Row {
     var roundedView: RoundedRectBorderView { get }
@@ -32,7 +33,7 @@ class EventCell: UITableViewCell, Row {
         eventView.constrain(toSuperview: .leading, .trailing, .top, .bottom)
     }
 
-    func bound(to item: SCCalendarItem, slot: SCCalendarSlot) -> Self {
+    func bound(to item: CalendarItem, slot: CalendarSlot) -> Self {
         _ = eventView.bound(to: item, slot: slot)
         return self
     }
@@ -65,7 +66,7 @@ class EventCollectionCell: UICollectionViewCell, Row {
         eventView.constrain(toSuperview: .leading, .trailing, .top, .bottom)
     }
 
-    func bound(to item: SCCalendarItem, slot: SCCalendarSlot) -> Self {
+    func bound(to item: CalendarItem, slot: CalendarSlot) -> Self {
         _ = eventView.bound(to: item, slot: slot)
         return self
     }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol EventsRepository {
+public protocol EventsRepository {
 
     func getCalendarItems(nowTime: Timestamp, nextWeek: Timestamp, fivePm: TimeOfDay, elevenPm: TimeOfDay) -> [CalendarItem]
 }

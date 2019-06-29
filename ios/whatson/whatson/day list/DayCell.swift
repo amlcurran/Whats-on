@@ -1,4 +1,5 @@
 import UIKit
+import Core
 
 class DayCell: UITableViewCell {
 
@@ -34,8 +35,8 @@ class DayCell: UITableViewCell {
         dayLabel.constrain(.bottom, to: contentView, .bottom, withOffset: -4)
     }
 
-    func bound(to item: SCCalendarItem) -> Self {
-        dayLabel.text = dayFormatter.string(from: Date(from: item.startTime()))
+    func bound(to item: CalendarItem) -> Self {
+        dayLabel.text = dayFormatter.string(from: Date(from: item.startTime))
         return self
     }
 
@@ -75,8 +76,8 @@ class DayCollectionCell: UICollectionViewCell {
         dayLabel.constrain(.bottom, to: contentView, .bottom, withOffset: -4)
     }
 
-    func bound(to item: SCCalendarItem) -> Self {
-        dayLabel.text = dayFormatter.string(from: Date(from: item.startTime()))
+    func bound(to item: CalendarItem) -> Self {
+        dayLabel.text = dayFormatter.string(from: Date(from: item.startTime))
         return self
     }
 

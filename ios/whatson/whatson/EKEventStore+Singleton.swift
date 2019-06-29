@@ -1,5 +1,6 @@
 import Foundation
 import EventKit
+import Core
 
 private let singleton = EKEventStore()
 
@@ -9,11 +10,8 @@ extension EKEventStore {
         return singleton
     }
 
-    func event(matching eventItem: SCEventCalendarItem) -> EKEvent? {
-        if let itemId = eventItem.id__() {
-            return event(withIdentifier: itemId)
-        }
-        return nil
+    func event(matching eventItem: EventCalendarItem) -> EKEvent? {
+        return event(withIdentifier: eventItem.eventId)
     }
 
 }

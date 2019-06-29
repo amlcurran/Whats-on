@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Core
 
 class EventForceTouchDisplayer: NSObject, UIViewControllerPreviewingDelegate {
 
@@ -19,13 +20,13 @@ class EventForceTouchDisplayer: NSObject, UIViewControllerPreviewingDelegate {
     }
 
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        guard let selection: (UIView, SCCalendarItem) = table.selection(under: location) else {
+        guard let selection: (UIView, CalendarItem) = table.selection(under: location) else {
             return nil
         }
 
         previewingContext.sourceRect = selection.0.frame
 
-        if selection.1.isEmpty() {
+        if selection.1.isEmpty {
             return nil
         } else {
             return EventDetailsViewController(item: selection.1, showingNavBar: false)

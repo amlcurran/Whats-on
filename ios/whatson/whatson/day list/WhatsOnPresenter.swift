@@ -1,17 +1,18 @@
 import UIKit
 import EventKit
 import EventKitUI
+import Core
 
 class WhatsOnPresenter {
 
     private let eventStore: EKEventStore
-    private let eventService: SCEventsService
+    private let eventService: EventsService
     private let dataProvider: DataProvider
     private let delayer: Delayer
     private weak var view: WhatsOnPresenterView?
     private var notificationHandle: Any?
 
-    init(eventStore: EKEventStore, eventService: SCEventsService, dataProvider: DataProvider) {
+    init(eventStore: EKEventStore, eventService: EventsService, dataProvider: DataProvider) {
         self.eventStore = eventStore
         self.eventService = eventService
         self.dataProvider = dataProvider
@@ -46,18 +47,18 @@ class WhatsOnPresenter {
         })
     }
 
-    private func fetchEvents(_ completion: @escaping ((SCCalendarSource) -> Void)) {
+    private func fetchEvents(_ completion: @escaping ((CalendarSource) -> Void)) {
         DispatchQueue.global(qos: .default).async {
-            let source = self.eventService.getCalendarSource(with: 14, with: .now)
+            let source = self.eventService.getCalendarSource(numberOfDays: 14, now: .now)
             DispatchQueue.main.async {
                 completion(source)
             }
         }
     }
 
-    func remove(_ event: SCEventCalendarItem) {
+    func remove(_ event: EventCalendarItem) {
         do {
-            if let ekEvent = eventStore.event(withIdentifier: event.id__()) {
+            if let ekEvent = eventStore.event(withIdentifier: event.eventId) {
                 try eventStore.remove(ekEvent, span: .thisEvent)
             }
         } catch {
@@ -68,11 +69,11 @@ class WhatsOnPresenter {
 }
 
 protocol WhatsOnPresenterView: class {
-    func showCalendar(_ source: SCCalendarSource)
+    func showCalendar(_ source: CalendarSource)
 
     func showAccessFailure()
 
-    func failedToDelete(_ event: SCCalendarItem, withError error: Error)
+    func failedToDelete(_ event: CalendarItem, withError error: Error)
 
     func showLoading()
 }

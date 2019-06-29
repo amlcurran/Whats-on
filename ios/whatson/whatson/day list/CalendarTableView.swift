@@ -1,9 +1,10 @@
 import UIKit
+import Core
 
 protocol CalendarTable {
     var view: UIView { get }
-    func update(_ source: SCCalendarSource)
-    func selection(under point: CGPoint) -> (UIView, SCCalendarItem)?
+    func update(_ source: CalendarSource)
+    func selection(under point: CGPoint) -> (UIView, CalendarItem)?
     func show()
     func hide()
     func style()
@@ -35,7 +36,7 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, C
                 preconditionFailure("Tried to dequeue a cell which wasn't a Calendar cell")
             }
             return cell.bound(to: item)
-        } else if dataProvider.slot(at: indexPath.dataIndexPath)!.items().size() > 1 {
+        } else if dataProvider.slot(at: indexPath.dataIndexPath)!.count() > 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "multipleEvent", for: indexPath) as? MultipleEventCell else {
                 preconditionFailure("Tried to dequeue a cell which wasn't a Calendar cell")
             }
@@ -59,7 +60,7 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, C
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if let slot = dataProvider.slot(at: indexPath.dataIndexPath),
            slot.count() != 0,
-           let slotItem = dataProvider.item(at: indexPath.dataIndexPath) as? SCEventCalendarItem {
+           let slotItem = dataProvider.item(at: indexPath.dataIndexPath) as? EventCalendarItem {
             return [UITableViewRowAction(style: .destructive, title: "Delete", handler: { [weak self] _, _ in
                 self?.delegate?.remove(slotItem)
             })]
@@ -67,7 +68,7 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, C
         return nil
     }
 
-    func update(_ source: SCCalendarSource) {
+    func update(_ source: CalendarSource) {
         let indexes = dataProvider.update(from: source)
         if indexes.count > 0 {
             tableView.reloadRows(at: indexes.map { IndexPath.tableIndex(fromData: $0) }, with: .automatic)
@@ -86,7 +87,7 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, C
         tableView.isUserInteractionEnabled = false
     }
 
-    func selection(under point: CGPoint) -> (UIView, SCCalendarItem)? {
+    func selection(under point: CGPoint) -> (UIView, CalendarItem)? {
         guard let indexPath = indexPath(under: point),
             let cell = cell(at: indexPath),
             let item = item(at: indexPath) else {
@@ -95,7 +96,7 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, C
         return (cell, item)
     }
 
-    func item(at index: IndexPath) -> SCCalendarItem? {
+    func item(at index: IndexPath) -> CalendarItem? {
         return dataProvider.item(at: index.dataIndexPath)
     }
 
@@ -116,10 +117,10 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, C
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = dataProvider.item(at: indexPath.dataIndexPath).required(message: "Calendar didn't have item at expected index \((indexPath as NSIndexPath).row)")
-        if item.isEmpty() {
+        if item.isEmpty {
             delegate?.addEvent(for: item)
         } else {
-            guard let calendarItem = item as? SCEventCalendarItem else {
+            guard let calendarItem = item as? EventCalendarItem else {
                 preconditionFailure("Item isn't empty, but isn't event")
             }
             let cell = tableView.cellForRow(at: indexPath).required(as: (UIView & Row).self)
@@ -161,9 +162,9 @@ extension IndexPath {
 }
 
 protocol CalendarTableViewDelegate: class {
-    func addEvent(for item: SCCalendarItem)
+    func addEvent(for item: CalendarItem)
 
-    func showDetails(for item: SCEventCalendarItem, at indexPath: IndexPath, in cell: UIView & Row)
+    func showDetails(for item: EventCalendarItem, at indexPath: IndexPath, in cell: UIView & Row)
 
-    func remove(_ event: SCEventCalendarItem)
+    func remove(_ event: EventCalendarItem)
 }

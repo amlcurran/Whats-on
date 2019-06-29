@@ -1,22 +1,21 @@
 import UIKit
 import EventKit
+import Core
 
-@objc class EventStoreRepository: NSObject, SCEventsRepository {
+@objc class EventStoreRepository: NSObject, EventsRepository {
 
     let calculator: NSDateCalculator
     let predicates: EventPredicates
     let calendarPreferenceStore: CalendarPreferenceStore
 
-    init(timeRepository: SCTimeRepository, calendarPreferenceStore: CalendarPreferenceStore) {
+    init(timeRepository: TimeRepository, calendarPreferenceStore: CalendarPreferenceStore) {
         self.calculator = NSDateCalculator.instance
         self.predicates = EventPredicates(timeRepository: timeRepository)
         self.calendarPreferenceStore = calendarPreferenceStore
     }
 
-    public func getCalendarItems(with nowTime: SCTimestamp!,
-                                 with nextWeek: SCTimestamp!,
-                                 with fivePm: SCTimeOfDay!,
-                                 with elevenPm: SCTimeOfDay!) -> JavaUtilList {
+
+    func getCalendarItems(nowTime: Timestamp, nextWeek: Timestamp, fivePm: TimeOfDay, elevenPm: TimeOfDay) -> [CalendarItem] {
         let eventStore = EKEventStore.instance
         let startTime = calculator.date(from: nowTime)
         let endTime = calculator.date(from: nextWeek)
@@ -24,25 +23,12 @@ import EventKit
         let search = eventStore.predicateForEvents(withStart: startTime, end: endTime, calendars: calendars)
         let allEvents = eventStore.events(matching: search)
         let filtered = allEvents.filter(predicates.defaults)
-        let items = filtered.compactMap { ekEvent in
-            return SCEventCalendarItem(nsString: ekEvent.eventIdentifier,
-                    with: ekEvent.title,
-                    with: self.calculator.time(from: ekEvent.startDate),
-                    with: self.calculator.time(from: ekEvent.endDate))
+        return filtered.compactMap { ekEvent in
+            return EventCalendarItem(eventId: ekEvent.eventIdentifier,
+                                     title: ekEvent.title,
+                                     startTime: self.calculator.time(from: ekEvent.startDate),
+                                     endTime: self.calculator.time(from: ekEvent.endDate))
         }
-        return items.toJavaList()
-    }
-
-}
-
-fileprivate extension Array {
-
-    func toJavaList() -> JavaUtilList {
-        let list = JavaUtilArrayList()
-        for item in self {
-            list.add(withId: item)
-        }
-        return list
     }
 
 }

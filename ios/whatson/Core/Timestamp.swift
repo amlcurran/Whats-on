@@ -8,12 +8,17 @@
 
 import Foundation
 
-struct Timestamp {
+public struct Timestamp {
 
-    let millis: Int
+    public let millis: Int
     private let timeCalculator: TimeCalculator
 
-    func plusDays(days: Int) -> Timestamp {
+    public init(millis: Int, timeCalculator: TimeCalculator) {
+        self.millis = millis
+        self.timeCalculator = timeCalculator
+    }
+
+    public func plusDays(days: Int) -> Timestamp {
         return timeCalculator.plusDays(days: days, time: self)
     }
 
@@ -21,7 +26,7 @@ struct Timestamp {
         return timeCalculator.getDays(time: self)
     }
 
-    func plusHours(hours: Int) -> Timestamp {
+    public func plusHours(hours: Int) -> Timestamp {
         return timeCalculator.plusHours(time: self, hours: hours)
     }
 
