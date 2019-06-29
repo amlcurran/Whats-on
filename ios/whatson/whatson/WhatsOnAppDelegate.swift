@@ -4,6 +4,7 @@ import EventKit
 import EventKitUI
 import Firebase
 
+@UIApplicationMain
 class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelegate {
 
     let analytics = Analytics()
