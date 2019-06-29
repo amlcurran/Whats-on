@@ -18,7 +18,6 @@ import org.joda.time.DateTimeZone
 import org.joda.time.format.DateTimeFormat
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
-import uk.co.amlcurran.social.utils.SparseArray
 
 class WhatsOnActivity : AppCompatActivity() {
     private lateinit var permissions: Permissions
@@ -57,7 +56,7 @@ class WhatsOnActivity : AppCompatActivity() {
         val now = DateTime.now(DateTimeZone.getDefault())
 
         val recyclerView = findViewById<RecyclerView>(R.id.list_whats_on)
-        val calendarSource = CalendarSource(SparseArray(), 0, JodaCalculator(), AndroidTimeRepository())
+        val calendarSource = CalendarSource(HashMap(), 0, JodaCalculator(), AndroidTimeRepository())
         adapter = WhatsOnAdapter(LayoutInflater.from(this), eventSelectedListener, calendarSource)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter

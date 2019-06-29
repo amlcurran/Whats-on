@@ -23,19 +23,19 @@ public class EventsServiceTest {
 
         @Override
         public List<CalendarItem> getCalendarItems(Timestamp nowTime, Timestamp nextWeek, TimeOfDay fivePm, TimeOfDay elevenPm) {
-            return Arrays.asList(new TestCalendarItem(), new TestCalendarItem());
+            return Arrays.<CalendarItem>asList(new TestCalendarItem(), new TestCalendarItem());
         }
     }
 
     private static class MyTimeRepository implements TimeRepository {
         @Override
         public TimeOfDay borderTimeEnd() {
-            return TimeOfDay.fromHours(23);
+            return TimeOfDay.Companion.fromHours(23);
         }
 
         @Override
         public TimeOfDay borderTimeStart() {
-            return TimeOfDay.fromHours(17);
+            return TimeOfDay.Companion.fromHours(17);
         }
 
     }
