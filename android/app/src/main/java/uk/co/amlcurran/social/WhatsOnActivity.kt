@@ -32,7 +32,7 @@ class WhatsOnActivity : AppCompatActivity() {
         override fun emptySelected(calendarItem: EmptyCalendarItem) {
             val intent = Intent(Intent.ACTION_INSERT)
             intent.data = CalendarContract.Events.CONTENT_URI
-            val day = DateTime(0, DateTimeZone.getDefault()).plusDays(calendarItem.startTime().daysSinceEpoch())
+            val day = DateTime(0, DateTimeZone.getDefault()).plusDays(calendarItem.startTime.daysSinceEpoch())
             val startTime = day.plusHours(17)
             val endTime = day.plusHours(22)
             intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime.millis)

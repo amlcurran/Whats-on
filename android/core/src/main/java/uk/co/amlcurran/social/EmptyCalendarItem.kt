@@ -1,18 +1,11 @@
 package uk.co.amlcurran.social
 
-class EmptyCalendarItem(private val startTime: Timestamp, private val endTime: Timestamp) : CalendarItem {
+class EmptyCalendarItem(override val startTime: Timestamp, override val endTime: Timestamp) : CalendarItem {
 
-    override fun title(): String {
-        return "Empty"
-    }
-
-    override fun startTime(): Timestamp {
-        return startTime
-    }
-
-    override fun endTime(): Timestamp {
-        return endTime
-    }
+    override val title: String
+        get() {
+            return "Empty"
+        }
 
     override var isEmpty: Boolean = true
 }

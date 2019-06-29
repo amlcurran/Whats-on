@@ -23,8 +23,8 @@ public class EventViewHolder extends CalendarItemViewHolder<EventCalendarItem> {
 
     @Override
     public void bind(final EventCalendarItem item) {
-        textView.setText(item.title());
-        subtitle.setText(subtitle.getResources().getString(R.string.event_from, formatter.print(jodaCalculator.getDateTime(item.startTime()))));
+        textView.setText(item.getTitle());
+        subtitle.setText(subtitle.getResources().getString(R.string.event_from, formatter.print(jodaCalculator.getDateTime(item.getStartTime()))));
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

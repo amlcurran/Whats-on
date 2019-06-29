@@ -86,7 +86,7 @@ class DayViewHolder(itemView: View?) : CalendarItemViewHolder<CalendarItem>(item
     private val dateFormatter = DateTimeFormat.fullDate()
 
     override fun bind(item: CalendarItem) {
-        (itemView as TextView).text = dateFormatter.print(item.startTime().millis)
+        (itemView as TextView).text = dateFormatter.print(item.startTime.millis)
     }
 
 }

@@ -4,9 +4,9 @@ interface CalendarItem {
 
     val isEmpty: Boolean
 
-    fun title(): String
+    val title: String
 
-    fun startTime(): Timestamp
+    val startTime: Timestamp
 
-    fun endTime(): Timestamp
+    val endTime: Timestamp
 }

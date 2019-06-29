@@ -1,15 +1,13 @@
 package uk.co.amlcurran.social
 
-import java.util.*
-
-class CalendarSource(private val calendarItems: HashMap<Int, CalendarSlot>, private val daysSize: Int, private val timeCalculator: TimeCalculator, private val timeRepository: TimeRepository) {
+class CalendarSource(private val calendarItems: Map<Int, CalendarSlot>, private val daysSize: Int, private val timeCalculator: TimeCalculator, private val timeRepository: TimeRepository) {
 
     fun count(): Int {
         return daysSize
     }
 
     fun itemAt(position: Int): CalendarItem? {
-        val calendarSlot = calendarItems.get(position)
+        val calendarSlot = calendarItems[position]
         if (calendarSlot == null || calendarSlot.isEmpty) {
             val startTime = startOfTodayBlock(position)
             val endTime = endOfTodayBlock(position)
