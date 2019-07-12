@@ -14,7 +14,7 @@ struct SlotStyle {
     }
 
     static var full: SlotStyle {
-        return SlotStyle(cellBackground: .white, mainText: .secondary, secondaryText: .lightText, borderColor: .clear, borderWidth: 0, borderDash: .full, isSecondaryTextShown: true)
+        return SlotStyle(cellBackground: .surface, mainText: .secondary, secondaryText: .lightText, borderColor: .clear, borderWidth: 0, borderDash: .full, isSecondaryTextShown: true)
     }
 
 }

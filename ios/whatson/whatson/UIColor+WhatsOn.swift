@@ -29,6 +29,10 @@ extension UIColor {
         return UIColor(named: "cardDivider")!
     }
 
+    class var surface: UIColor {
+        return UIColor(named: "surface")!
+    }
+
     func darkened(by factor: CGFloat) -> UIColor {
         var red: CGFloat = 0
         var green: CGFloat = 0

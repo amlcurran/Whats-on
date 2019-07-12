@@ -27,7 +27,7 @@ class DetailsCard: UIView {
         layer.cornerRadius = 6
         layer.masksToBounds = true
         layoutMargins = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        backgroundColor = .white
+        backgroundColor = .surface
 
         addSubview(titleLabel)
         titleLabel.constrain(toSuperview: .leading, .top, .trailing, insetBy: 16)
