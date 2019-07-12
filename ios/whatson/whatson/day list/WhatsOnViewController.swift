@@ -23,14 +23,14 @@ class WhatsOnViewController: UIViewController,
     private var forceTouchDisplayer: Any?
     private var presenter: WhatsOnPresenter!
     private var eventService: EventsService!
-    private var loadingDelay = DispatchTimeInterval.milliseconds(1500)
+    private var loadingDelay = DispatchTimeInterval.milliseconds(1000)
 
     lazy var table: CalendarTable = {
-        if #available(iOS 13.0, *) {
-            return NewFoo(dataProvider: self.dataProvider)
-        } else {
+//        if #available(iOS 13.0, *) {
+//            return NewFoo(dataProvider: self.dataProvider)
+//        } else {
             return CalendarTableView(delegate: self, dataProvider: self.dataProvider, tableView: UITableView())
-        }
+//        }
     }()
 
     override func viewDidLoad() {
@@ -55,7 +55,7 @@ class WhatsOnViewController: UIViewController,
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController?.interactivePopGestureRecognizer?.delegate = gestureHandler
 
-        loadingDelay = DispatchTimeInterval.milliseconds(1500)
+        loadingDelay = DispatchTimeInterval.milliseconds(1000)
         showLoading()
     }
 

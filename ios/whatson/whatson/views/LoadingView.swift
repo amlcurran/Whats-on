@@ -71,6 +71,10 @@ private class LoadingLayer: CAShapeLayer {
         super.init()
     }
 
+    override init(layer: Any) {
+        super.init(layer: layer)
+    }
+
     override var bounds: CGRect {
         didSet {
             updatePath()

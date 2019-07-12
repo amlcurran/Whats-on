@@ -8,7 +8,7 @@ import Firebase
 class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelegate {
 
     let analytics = Analytics()
-    var window = UIWindow() as UIWindow?
+    lazy var window: UIWindow? = UIWindow()
     var rootViewController: UIViewController? {
         return window?.rootViewController
     }
