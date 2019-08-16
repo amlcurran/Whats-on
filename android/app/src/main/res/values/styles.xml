@@ -1,5 +1,7 @@
 <resources>
 
+    <bool name="isLightBackgroundStatusBar">true</bool>
+
     <!-- Base application theme. -->
     <style name="AppTheme.Base" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">#3ad970</item>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="background">#23232B</color>
+    <bool name="isLightBackgroundStatusBar">false</bool>
 
     <style name="AppTheme.Night.Base" parent="AppTheme.Base">
         <item name="android:statusBarColor">@color/background</item>
@@ -16,6 +17,8 @@
 
     <style name="ActionBarTheme" parent="ThemeOverlay.MaterialComponents.Toolbar.Surface">
         <item name="android:background">@color/background</item>
+        <item name="android:tint">?colorPrimary</item>
+        <item name="iconTint">?colorSecondary</item>
     </style>
 
 </resources>
