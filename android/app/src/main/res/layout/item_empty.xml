@@ -14,7 +14,7 @@
             android:gravity="center_vertical"
             android:paddingStart="16dip"
             android:paddingEnd="16dip"
-            android:textColor="?attr/colorOnBackground"
+            android:textColor="@color/empty_color"
             android:background="@drawable/empty_border"
             android:layout_margin="@dimen/item_margin"/>
 </LinearLayout>

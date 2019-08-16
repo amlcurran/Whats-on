@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="background">#edf1f5</color>
+    <color name="background_70">#B3edf1f5</color>
+    <color name="colorPrimary">#3ad970</color>
+    <color name="colorSecondary">#44526c</color>
+    <color name="colorOnBackground">@color/colorSecondary</color>
+    <color name="empty_color">#bac2c7</color>
+    <color name="colorOnSurface">@color/colorSecondary</color>
+    <color name="colorSurface">@android:color/white</color>
 </resources>

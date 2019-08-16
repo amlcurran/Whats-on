@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="background">#23232B</color>
+    <color name="background_70">#B323232B</color>
+    <color name="colorPrimary">#6CD991</color>
+    <color name="colorSecondary">#44526c</color>
+    <color name="colorOnBackground">#edf1f5</color>
+    <color name="empty_color">#bac2c7</color>
+    <color name="colorOnSurface">@color/colorOnBackground</color>
+    <color name="colorSurface">#4F4F5C</color>
 </resources>
