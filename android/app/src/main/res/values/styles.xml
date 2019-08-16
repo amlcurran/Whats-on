@@ -6,7 +6,7 @@
     <style name="AppTheme.Base" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">#3ad970</item>
         <item name="colorPrimaryVariant">#2DA655</item>
-        <item name="colorPrimaryDark">#edf1f5</item>
+        <item name="actionBarTheme">@style/Toolbar</item>
         <item name="colorSecondary">#44526c</item>
         <item name="colorOnBackground">#bac2c7</item>
         <item name="colorOnSurface">?colorSecondary</item>
@@ -20,10 +20,9 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
-    <style name="Toolbar" parent="Widget.MaterialComponents.Toolbar">
-        <item name="android:colorControlNormal">?attr/colorSecondary</item>
+    <style name="Toolbar" parent="ThemeOverlay.MaterialComponents.Toolbar.Surface">
+        <item name="android:background">@color/background</item>
+        <item name="iconTint">?attr/colorSecondary</item>
     </style>
-
-    <color name="background">#edf1f5</color>
 
 </resources>
