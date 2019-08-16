@@ -24,4 +24,14 @@
         <item name="iconTint">@color/colorOnBackground</item>
     </style>
 
+    <style name="TodayDate" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/opensansbold</item>
+        <item name="android:textColor">?colorPrimary</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="WhatsOn" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textColor">?colorOnSurface</item>
+    </style>
+
 </resources>
