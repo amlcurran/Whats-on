@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_whats_on.*
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
@@ -49,6 +48,7 @@ class WhatsOnActivity : AppCompatActivity() {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
 
         setContentView(R.layout.activity_whats_on)
+        setSupportActionBar(toolbar)
         permissions = Permissions(this)
         val eventsRepository = AndroidEventsRepository(contentResolver)
         val dateCreator = AndroidTimeRepository()
@@ -58,11 +58,10 @@ class WhatsOnActivity : AppCompatActivity() {
 
         val now = DateTime.now(DateTimeZone.getDefault())
 
-        val recyclerView = findViewById<RecyclerView>(R.id.list_whats_on)
         val calendarSource = CalendarSource(HashMap(), 0, JodaCalculator(), AndroidTimeRepository())
         adapter = WhatsOnAdapter(LayoutInflater.from(this), eventSelectedListener, calendarSource)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
+        list_whats_on.layoutManager = LinearLayoutManager(this)
+        list_whats_on.adapter = adapter
 
         val today = findViewById<TextView>(R.id.today_date)
         today.text = DateTimeFormat.forPattern("EEEE, dd MMMMM").print(now)
