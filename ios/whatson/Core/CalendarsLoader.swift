@@ -9,17 +9,17 @@
 import Foundation
 import EventKit
 
-class CalendarLoader {
+public class CalendarLoader {
 
     let eventStore: EKEventStore
     let preferenceStore: CalendarPreferenceStore
 
-    init(eventStore: EKEventStore = .instance, preferenceStore: CalendarPreferenceStore) {
+    public init(eventStore: EKEventStore = .instance, preferenceStore: CalendarPreferenceStore) {
         self.eventStore = eventStore
         self.preferenceStore = preferenceStore
     }
 
-    func load(onSuccess: ([EventCalendar]) -> Void, onError: (Error) -> Void) {
+    public func load(onSuccess: ([EventCalendar]) -> Void, onError: (Error) -> Void) {
         let ekCalendars = eventStore.calendars(for: .event)
         let excludedCalendars = preferenceStore.excludedCalendars
         let calendars = ekCalendars.map({ ekCalendar -> EventCalendar in
@@ -35,25 +35,25 @@ class CalendarLoader {
 
 }
 
-struct EventCalendar: Equatable {
+public struct EventCalendar: Equatable {
 
-    let name: String
-    let account: String
+    public let name: String
+    public let account: String
     //swiftlint:disable:next variable_name
-    let id: Id
-    let included: Bool
-    let editable: Bool
+    public let id: Id
+    public let included: Bool
+    public let editable: Bool
 
     //swiftlint:disable:next type_name
-    struct Id: Hashable {
-        let rawValue: String
+    public struct Id: Hashable {
+        public let rawValue: String
     }
 
 }
 
 extension Array where Element == EventCalendar {
 
-    var onlyEditable: [EventCalendar] {
+    public var onlyEditable: [EventCalendar] {
         return filter { calendar in
             calendar.editable
         }

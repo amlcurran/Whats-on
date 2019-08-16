@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Core
 
 protocol CalendarPickerViewControllerDelegate: class {
     func didSelect(_ calendar: EventCalendar)

@@ -1,5 +1,4 @@
 import EventKit
-import Core
 
 struct EventPredicates {
 

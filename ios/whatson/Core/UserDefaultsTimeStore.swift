@@ -1,28 +1,27 @@
 import Foundation
-import Core
 
-class UserDefaultsTimeStore {
+public class UserDefaultsTimeStore {
 
     private let userDefaults: UserDefaults
     private let dateCalculator = NSDateCalculator.instance
 
-    init(userDefaults: UserDefaults = UserDefaults(suiteName: "group.uk.co.amlcurran.social")!) {
+    public init(userDefaults: UserDefaults = UserDefaults(suiteName: "group.uk.co.amlcurran.social")!) {
         self.userDefaults = userDefaults
     }
 
-    var startTimestamp: Timestamp {
+    public var startTimestamp: Timestamp {
         get {
             return dateCalculator.startOfToday().plusHours(hours: startTime)
         }
     }
 
-    var endTimestamp: Timestamp {
+    public var endTimestamp: Timestamp {
         get {
             return dateCalculator.startOfToday().plusHours(hours: endTime)
         }
     }
 
-    var startTime: Int {
+    public var startTime: Int {
         get {
             if let startTime = userDefaults.value(forKey: "startHour") as? Int {
                 return startTime
@@ -34,7 +33,7 @@ class UserDefaultsTimeStore {
         }
     }
 
-    var endTime: Int {
+    public var endTime: Int {
         get {
             if let endTime = userDefaults.value(forKey: "endHour") as? Int {
                 return endTime

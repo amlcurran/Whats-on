@@ -1,10 +1,9 @@
 import Foundation
 import EventKit
-import Core
 
 private let singleton = EKEventStore()
 
-extension EKEventStore {
+public extension EKEventStore {
 
     static var instance: EKEventStore {
         return singleton

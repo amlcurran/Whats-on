@@ -1,9 +1,8 @@
 import Foundation
-import Core
 
 public class NSDateCalculator: TimeCalculator {
 
-    static let instance = NSDateCalculator()
+    public static let instance = NSDateCalculator()
 
     private let calendar: Calendar
 
@@ -39,11 +38,11 @@ public class NSDateCalculator: TimeCalculator {
         return time(from: newDate)
     }
 
-    internal func date(from time: Timestamp) -> Date {
+    public func date(from time: Timestamp) -> Date {
         return Date(timeIntervalSince1970: (Double(time.millis) / 1000.0))
     }
 
-    internal func time(from date: Date) -> Timestamp {
+    public func time(from date: Date) -> Timestamp {
         return Timestamp(millis: Int(date.timeIntervalSince1970 * 1000), timeCalculator: self)
     }
 

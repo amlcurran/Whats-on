@@ -6,7 +6,7 @@
 //  Copyright © 2017 Alex Curran. All rights reserved.
 //
 
-import Foundation
+import Core
 
 protocol CalendarsView: class {
     func updateCalendar(_ items: [TableItem])

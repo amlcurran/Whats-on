@@ -34,7 +34,7 @@ class WhatsOnActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_INSERT)
             intent.data = CalendarContract.Events.CONTENT_URI
             val day = DateTime(0, DateTimeZone.getDefault()).plusDays(calendarItem.startTime.daysSinceEpoch())
-            val startTime = day.plusHours(17)
+            val startTime = day.plusHours(18)
             val endTime = day.plusHours(22)
             intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime.millis)
             intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.millis)

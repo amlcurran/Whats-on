@@ -19,14 +19,12 @@
 		698533DEAF59954635D7E3CD /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985328C217A9C753C09CFDE /* Line.swift */; };
 		698534B8D95E1BCE5206D939 /* BasicAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853B71158DE94568DDC9FB /* BasicAnimator.swift */; };
 		6985372A302EA91FAB612301 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698536C18C7A4E830F167DAE /* DataProvider.swift */; };
-		698538E5F918BCBD1F75C446 /* UserDefaultsTimeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */; };
 		698538F49DD3046F71BE4E01 /* AllowsGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853BC8BAF5893B6913918C /* AllowsGestureRecognizer.swift */; };
 		698539E35BDB526A55FA73A4 /* PropertyAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853939FC3A0F98F4792C0F /* PropertyAnimator.swift */; };
 		69853B3AC06B29C271651CF0 /* UIDatePicker+Hours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985397DE155D32104662FA2 /* UIDatePicker+Hours.swift */; };
 		69853BB8C3723DD6A606DFFE /* DetailsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853ADAFB0D8A57C40FC7BA /* DetailsCard.swift */; };
 		69853C206C9404ACE2BD00BC /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853943917F0CF738ACB915 /* EventView.swift */; };
 		69853C93D4E8453CAAF42338 /* EventDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985351AE5837369246C93AD /* EventDetailsPresenter.swift */; };
-		69853D14E1379414F9593F8C /* Date+SCTimeOfDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698539EC9C2B0360E301F15F /* Date+SCTimeOfDay.swift */; };
 		69853D85F37E68B39053DB9F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69853D2C9F2840A9862339C4 /* GoogleService-Info.plist */; };
 		69853EB6AEFC9EE982D28388 /* TimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853F60E5391F881F006F7B /* TimeLabel.swift */; };
 		69853EDF767415596862180F /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985358E9835009A7EA756E9 /* Analytics.swift */; };
@@ -43,16 +41,13 @@
 		8620887122C119E200268B3D /* NewFoo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8620887022C119E200268B3D /* NewFoo.swift */; };
 		8626886E1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8626886D1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift */; };
 		86317A091EC258ED0009EE8A /* EventPredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86317A081EC258ED0009EE8A /* EventPredicateTests.swift */; };
-		864561C31C02709800ADDE44 /* NSDateCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864561C21C02709800ADDE44 /* NSDateCalculator.swift */; };
 		8648F18F1D984F6500C7BD48 /* EventDetailsTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8648F18E1D984F6500C7BD48 /* EventDetailsTracking.swift */; };
-		8650D7D01D9FA8F5002D5930 /* EventStoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8650D7CF1D9FA8F5002D5930 /* EventStoreRepository.swift */; };
 		8650D7D21D9FAE8E002D5930 /* TimeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8650D7D11D9FAE8E002D5930 /* TimeRepository.swift */; };
 		8658A2301F375DF800BF219C /* TableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658A22F1F375DF800BF219C /* TableSection.swift */; };
 		8658A2321F375E3A00BF219C /* TableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658A2311F375E3A00BF219C /* TableItem.swift */; };
 		8658A2341F375E6100BF219C /* TitleTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658A2331F375E6100BF219C /* TitleTableItem.swift */; };
 		8658A2361F375EA500BF219C /* SwitchTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658A2351F375EA500BF219C /* SwitchTableItem.swift */; };
 		8658A2381F375ED500BF219C /* CustomViewTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658A2371F375ED500BF219C /* CustomViewTableItem.swift */; };
-		8658A23A1F37605000BF219C /* CalendarsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658A2391F37605000BF219C /* CalendarsLoader.swift */; };
 		8658A23C1F37685400BF219C /* CheckableTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658A23B1F37685400BF219C /* CheckableTableItem.swift */; };
 		865C7B011EE4B00D0047D8E0 /* BoundaryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C7B001EE4B00D0047D8E0 /* BoundaryPickerView.swift */; };
 		865C7B031EE56AE80047D8E0 /* BuildableTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C7B021EE56AE80047D8E0 /* BuildableTableSource.swift */; };
@@ -70,14 +65,20 @@
 		86755DEA22C7BD8D00E91DF4 /* TimeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86755DE922C7BD8D00E91DF4 /* TimeRepository.swift */; };
 		86755DEC22C7BDB500E91DF4 /* TimeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86755DEB22C7BDB500E91DF4 /* TimeCalculator.swift */; };
 		86755DEE22C7BDF100E91DF4 /* CalendarSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86755DED22C7BDF100E91DF4 /* CalendarSlot.swift */; };
-		8694756A1F376DE900925C2A /* CalendarPreferenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869475691F376DE900925C2A /* CalendarPreferenceStore.swift */; };
+		868119DE2306D66E0035553B /* UserDefaultsTimeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */; };
+		868119DF2306D67E0035553B /* NSDateCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864561C21C02709800ADDE44 /* NSDateCalculator.swift */; };
+		868119E02306D71A0035553B /* EventStoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8650D7CF1D9FA8F5002D5930 /* EventStoreRepository.swift */; };
+		868119E12306D7390035553B /* EventPredicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC7C1D44D15C005AF315 /* EventPredicates.swift */; };
+		868119E22306D7490035553B /* Date+SCTimeOfDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698539EC9C2B0360E301F15F /* Date+SCTimeOfDay.swift */; };
+		868119E32306D76A0035553B /* CalendarPreferenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869475691F376DE900925C2A /* CalendarPreferenceStore.swift */; };
+		868119E42306D77C0035553B /* CalendarsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658A2391F37605000BF219C /* CalendarsLoader.swift */; };
+		868119E52306D7930035553B /* EKEventStore+Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E4581DA8076400E8D019 /* EKEventStore+Singleton.swift */; };
 		8694756C1F37726D00925C2A /* CalendarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8694756B1F37726D00925C2A /* CalendarPresenter.swift */; };
 		8694756E1F37742C00925C2A /* DatePickerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8694756D1F37742C00925C2A /* DatePickerPresenter.swift */; };
 		8695D0281DA023670034D52A /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0271DA023670034D52A /* HeaderView.swift */; };
 		8695D0301DA185DB0034D52A /* SlotCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */; };
 		8695D0331DA1A2A20034D52A /* SlotDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0321DA1A2A20034D52A /* SlotDetail.swift */; };
 		869B1EF520E180A40012A72D /* EventItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869B1EF420E180A40012A72D /* EventItemView.swift */; };
-		869DAC7D1D44D15C005AF315 /* EventPredicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DAC7C1D44D15C005AF315 /* EventPredicates.swift */; };
 		86A9355522C7C04C003FC26C /* CalendarSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9355422C7C04C003FC26C /* CalendarSource.swift */; };
 		86A9355722C7C1B8003FC26C /* EmptyCalendarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9355622C7C1B8003FC26C /* EmptyCalendarItem.swift */; };
 		86A9355922C7C1F4003FC26C /* EventCalendarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9355822C7C1F4003FC26C /* EventCalendarItem.swift */; };
@@ -86,7 +87,6 @@
 		86A9355F22C7D52D003FC26C /* NSDate+Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9355E22C7D52D003FC26C /* NSDate+Time.swift */; };
 		86A9C2CB1C444468009281A0 /* WhatsOnAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9C2CA1C444468009281A0 /* WhatsOnAppDelegate.swift */; };
 		86A9E4571DA7A7DC00E8D019 /* CalendarTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E4561DA7A7DC00E8D019 /* CalendarTableView.swift */; };
-		86A9E4591DA8076400E8D019 /* EKEventStore+Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E4581DA8076400E8D019 /* EKEventStore+Singleton.swift */; };
 		86A9E45B1DA80A4900E8D019 /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E45A1DA80A4900E8D019 /* UIViewController+Navigation.swift */; };
 		86A9E45D1DA80DA500E8D019 /* SCTimestamp+Now.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E45C1DA80DA500E8D019 /* SCTimestamp+Now.swift */; };
 		86A9E45F1DA80E9700E8D019 /* DateFormatter+Initialisers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E45E1DA80E9700E8D019 /* DateFormatter+Initialisers.swift */; };
@@ -353,7 +353,6 @@
 		69853E9117B0AD7E86F54338 /* business-logic */ = {
 			isa = PBXGroup;
 			children = (
-				698539EC9C2B0360E301F15F /* Date+SCTimeOfDay.swift */,
 			);
 			path = "business-logic";
 			sourceTree = "<group>";
@@ -365,8 +364,6 @@
 				6985397DE155D32104662FA2 /* UIDatePicker+Hours.swift */,
 				865C7B001EE4B00D0047D8E0 /* BoundaryPickerView.swift */,
 				865C7B041EE574100047D8E0 /* OptionsViewController.swift */,
-				8658A2391F37605000BF219C /* CalendarsLoader.swift */,
-				869475691F376DE900925C2A /* CalendarPreferenceStore.swift */,
 				8694756B1F37726D00925C2A /* CalendarPresenter.swift */,
 				8694756D1F37742C00925C2A /* DatePickerPresenter.swift */,
 				866560AA1FB88713000ED8A2 /* CalendarPickerViewController.swift */,
@@ -394,7 +391,15 @@
 			children = (
 				86755DC722C7BC2000E91DF4 /* Core.h */,
 				86755DC822C7BC2000E91DF4 /* Info.plist */,
+				698539EC9C2B0360E301F15F /* Date+SCTimeOfDay.swift */,
+				8658A2391F37605000BF219C /* CalendarsLoader.swift */,
 				86755DE322C7BC5100E91DF4 /* CalendarItem.swift */,
+				869475691F376DE900925C2A /* CalendarPreferenceStore.swift */,
+				864561C21C02709800ADDE44 /* NSDateCalculator.swift */,
+				8650D7CF1D9FA8F5002D5930 /* EventStoreRepository.swift */,
+				86A9E4581DA8076400E8D019 /* EKEventStore+Singleton.swift */,
+				869DAC7C1D44D15C005AF315 /* EventPredicates.swift */,
+				698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */,
 				86755DE522C7BC9500E91DF4 /* Timestamp.swift */,
 				86755DE722C7BD0D00E91DF4 /* TimeOfDay.swift */,
 				86755DE922C7BD8D00E91DF4 /* TimeRepository.swift */,
@@ -491,12 +496,8 @@
 				8695D0311DA1A19B0034D52A /* day list */,
 				86FB1C321D8F37310074431B /* event details */,
 				861BD0DE1D9FBFBB0032FBAB /* options */,
-				864561C21C02709800ADDE44 /* NSDateCalculator.swift */,
-				869DAC7C1D44D15C005AF315 /* EventPredicates.swift */,
-				8650D7CF1D9FA8F5002D5930 /* EventStoreRepository.swift */,
 				8650D7D11D9FAE8E002D5930 /* TimeRepository.swift */,
 				69853E6065D4384CD18D05CB /* views */,
-				698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */,
 				6985358E9835009A7EA756E9 /* Analytics.swift */,
 				2DBA1EBA1E19FC38477D7218 /* BuildConfig.swift */,
 				69853BA72CF4C2EAB206708F /* utils */,
@@ -536,7 +537,6 @@
 				86D751141C71316D00C0A607 /* UIColor+WhatsOn.swift */,
 				86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */,
 				861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */,
-				86A9E4581DA8076400E8D019 /* EKEventStore+Singleton.swift */,
 				86A9E45A1DA80A4900E8D019 /* UIViewController+Navigation.swift */,
 				86A9E45C1DA80DA500E8D019 /* SCTimestamp+Now.swift */,
 				86A9E45E1DA80E9700E8D019 /* DateFormatter+Initialisers.swift */,
@@ -842,16 +842,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				868119E52306D7930035553B /* EKEventStore+Singleton.swift in Sources */,
 				86A9355B22C7C246003FC26C /* EventsRepository.swift in Sources */,
 				86755DE822C7BD0D00E91DF4 /* TimeOfDay.swift in Sources */,
+				868119E42306D77C0035553B /* CalendarsLoader.swift in Sources */,
+				868119E22306D7490035553B /* Date+SCTimeOfDay.swift in Sources */,
+				868119E02306D71A0035553B /* EventStoreRepository.swift in Sources */,
+				868119DF2306D67E0035553B /* NSDateCalculator.swift in Sources */,
 				86755DE622C7BC9500E91DF4 /* Timestamp.swift in Sources */,
 				86A9355722C7C1B8003FC26C /* EmptyCalendarItem.swift in Sources */,
 				86755DEA22C7BD8D00E91DF4 /* TimeRepository.swift in Sources */,
+				868119E12306D7390035553B /* EventPredicates.swift in Sources */,
+				868119DE2306D66E0035553B /* UserDefaultsTimeStore.swift in Sources */,
 				86755DE422C7BC5100E91DF4 /* CalendarItem.swift in Sources */,
 				86A9355D22C7C261003FC26C /* EventsService.swift in Sources */,
 				86A9355922C7C1F4003FC26C /* EventCalendarItem.swift in Sources */,
 				86755DEC22C7BDB500E91DF4 /* TimeCalculator.swift in Sources */,
 				86A9355522C7C04C003FC26C /* CalendarSource.swift in Sources */,
+				868119E32306D76A0035553B /* CalendarPreferenceStore.swift in Sources */,
 				86755DEE22C7BDF100E91DF4 /* CalendarSlot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -878,7 +886,6 @@
 			files = (
 				86C19EBF1BBF28E600BBCDF6 /* WhatsOnViewController.swift in Sources */,
 				86DEC9581FB3B40D000FF4CD /* NextStepTableItem.swift in Sources */,
-				8650D7D01D9FA8F5002D5930 /* EventStoreRepository.swift in Sources */,
 				866560AB1FB88713000ED8A2 /* CalendarPickerViewController.swift in Sources */,
 				8607847A1DAD7E6100AAE856 /* LabelStyle.swift in Sources */,
 				8648F18F1D984F6500C7BD48 /* EventDetailsTracking.swift in Sources */,
@@ -893,11 +900,8 @@
 				86A9E45B1DA80A4900E8D019 /* UIViewController+Navigation.swift in Sources */,
 				8658A2341F375E6100BF219C /* TitleTableItem.swift in Sources */,
 				8694756C1F37726D00925C2A /* CalendarPresenter.swift in Sources */,
-				8658A23A1F37605000BF219C /* CalendarsLoader.swift in Sources */,
-				869DAC7D1D44D15C005AF315 /* EventPredicates.swift in Sources */,
 				861BD0E01D9FC4290032FBAB /* Optional+Fluency.swift in Sources */,
 				86F467F91C8AFFA500147F2E /* WhatsOnPresenter.swift in Sources */,
-				86A9E4591DA8076400E8D019 /* EKEventStore+Singleton.swift in Sources */,
 				865C7B051EE574100047D8E0 /* OptionsViewController.swift in Sources */,
 				866D2E771EEA045E008D76D5 /* GradientView.swift in Sources */,
 				8600B99F1F09429D008578E5 /* Delayer.swift in Sources */,
@@ -916,13 +920,11 @@
 				86A9E45D1DA80DA500E8D019 /* SCTimestamp+Now.swift in Sources */,
 				8600B9A11F0946F9008578E5 /* UIView+Animations.swift in Sources */,
 				8618A51F1BDA92F900A4845E /* EventCell.swift in Sources */,
-				864561C31C02709800ADDE44 /* NSDateCalculator.swift in Sources */,
 				8658A2321F375E3A00BF219C /* TableItem.swift in Sources */,
 				69853BB8C3723DD6A606DFFE /* DetailsCard.swift in Sources */,
 				865C7B011EE4B00D0047D8E0 /* BoundaryPickerView.swift in Sources */,
 				698533DEAF59954635D7E3CD /* Line.swift in Sources */,
 				69853EB6AEFC9EE982D28388 /* TimeLabel.swift in Sources */,
-				698538E5F918BCBD1F75C446 /* UserDefaultsTimeStore.swift in Sources */,
 				69853B3AC06B29C271651CF0 /* UIDatePicker+Hours.swift in Sources */,
 				69853EDF767415596862180F /* Analytics.swift in Sources */,
 				698531761CD39981ABD5B75B /* Completion.swift in Sources */,
@@ -932,13 +934,11 @@
 				8658A2361F375EA500BF219C /* SwitchTableItem.swift in Sources */,
 				8620887122C119E200268B3D /* NewFoo.swift in Sources */,
 				2DBA1FC7FB7A35811ADEDB84 /* EventResponse.swift in Sources */,
-				8694756A1F376DE900925C2A /* CalendarPreferenceStore.swift in Sources */,
 				8658A23C1F37685400BF219C /* CheckableTableItem.swift in Sources */,
 				8600B99D1F09383D008578E5 /* LoadingView.swift in Sources */,
 				6985372A302EA91FAB612301 /* DataProvider.swift in Sources */,
 				6985330727D25CE189AC7193 /* FailedAccessView.swift in Sources */,
 				698538F49DD3046F71BE4E01 /* AllowsGestureRecognizer.swift in Sources */,
-				69853D14E1379414F9593F8C /* Date+SCTimeOfDay.swift in Sources */,
 				698533858A420599E0C749F0 /* DayCell.swift in Sources */,
 				8694756E1F37742C00925C2A /* DatePickerPresenter.swift in Sources */,
 				698534B8D95E1BCE5206D939 /* BasicAnimator.swift in Sources */,

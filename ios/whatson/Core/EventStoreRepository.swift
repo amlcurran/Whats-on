@@ -1,21 +1,19 @@
 import UIKit
 import EventKit
-import Core
 
-@objc class EventStoreRepository: NSObject, EventsRepository {
+public class EventStoreRepository: EventsRepository {
 
     let calculator: NSDateCalculator
     let predicates: EventPredicates
     let calendarPreferenceStore: CalendarPreferenceStore
 
-    init(timeRepository: TimeRepository, calendarPreferenceStore: CalendarPreferenceStore) {
+    public init(timeRepository: TimeRepository, calendarPreferenceStore: CalendarPreferenceStore) {
         self.calculator = NSDateCalculator.instance
         self.predicates = EventPredicates(timeRepository: timeRepository)
         self.calendarPreferenceStore = calendarPreferenceStore
     }
 
-
-    func getCalendarItems(nowTime: Timestamp, nextWeek: Timestamp, fivePm: TimeOfDay, elevenPm: TimeOfDay) -> [CalendarItem] {
+    public func getCalendarItems(nowTime: Timestamp, nextWeek: Timestamp, fivePm: TimeOfDay, elevenPm: TimeOfDay) -> [CalendarItem] {
         let eventStore = EKEventStore.instance
         let startTime = calculator.date(from: nowTime)
         let endTime = calculator.date(from: nextWeek)

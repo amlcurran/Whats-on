@@ -8,17 +8,17 @@
 
 import Foundation
 
-class CalendarPreferenceStore {
+public class CalendarPreferenceStore {
 
     private let userDefaults: UserDefaults
     private let calendarsKey = "excludedCalendars"
     private let defaultCalendarKey = "defaultCalendar"
 
-    init(userDefaults: UserDefaults = UserDefaults(suiteName: "group.uk.co.amlcurran.social")!) {
+    public init(userDefaults: UserDefaults = UserDefaults(suiteName: "group.uk.co.amlcurran.social")!) {
         self.userDefaults = userDefaults
     }
 
-    var excludedCalendars: [EventCalendar.Id] {
+    public var excludedCalendars: [EventCalendar.Id] {
         get {
             if let stringIds = userDefaults.array(forKey: calendarsKey) as? [String] {
                 return stringIds.map { EventCalendar.Id(rawValue: $0) }
@@ -30,7 +30,7 @@ class CalendarPreferenceStore {
         }
     }
 
-    var defaultCalendar: EventCalendar.Id? {
+    public var defaultCalendar: EventCalendar.Id? {
         get {
             if let rawId = userDefaults.string(forKey: defaultCalendarKey) {
                 return EventCalendar.Id(rawValue: rawId)

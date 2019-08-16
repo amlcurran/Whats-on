@@ -3,6 +3,7 @@ import UIKit
 import EventKit
 import EventKitUI
 import Firebase
+import Core
 
 @UIApplicationMain
 class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelegate {

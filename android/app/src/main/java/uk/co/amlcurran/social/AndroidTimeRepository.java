@@ -9,7 +9,7 @@ public class AndroidTimeRepository implements TimeRepository {
 
     @Override
     public TimeOfDay borderTimeStart() {
-        return TimeOfDay.Companion.fromHours(17);
+        return TimeOfDay.Companion.fromHours(18);
     }
 
 }

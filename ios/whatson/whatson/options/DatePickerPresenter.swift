@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Core
 
 protocol DateView: class {
     func updateDate(_ items: [TableItem])
