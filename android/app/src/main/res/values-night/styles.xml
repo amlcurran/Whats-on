@@ -8,6 +8,7 @@
         <item name="colorPrimary">#6CD991</item>
         <item name="colorSecondary">#edf1f5</item>
         <item name="colorSurface">#4F4F5C</item>
+        <item name="android:navigationBarColor">#B323232B</item>
     </style>
 
     <style name="AppTheme" parent="AppTheme.Night.Base">

@@ -10,9 +10,11 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.ViewCompat
+import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_whats_on.*
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import org.joda.time.format.DateTimeFormat
@@ -44,8 +46,9 @@ class WhatsOnActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+
         setContentView(R.layout.activity_whats_on)
-        setSupportActionBar(findViewById(R.id.toolbar))
         permissions = Permissions(this)
         val eventsRepository = AndroidEventsRepository(contentResolver)
         val dateCreator = AndroidTimeRepository()
@@ -73,6 +76,16 @@ class WhatsOnActivity : AppCompatActivity() {
 
             }
         })
+
+        ViewCompat.setOnApplyWindowInsetsListener(toolbar) { _, insets ->
+            toolbar.updatePadding(top = insets.systemWindowInsetTop)
+            insets
+        }
+
+        ViewCompat.setOnApplyWindowInsetsListener(list_whats_on) { _, insets ->
+            list_whats_on.updatePadding(bottom = insets.systemWindowInsetBottom)
+            insets
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
