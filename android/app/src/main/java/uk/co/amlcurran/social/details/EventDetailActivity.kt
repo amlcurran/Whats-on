@@ -32,6 +32,9 @@ class EventDetailActivity: AppCompatActivity() {
         setContentView(R.layout.activity_event_details)
         eventId = intent.getStringExtra(KEY_EVENT_ID) ?: throw IllegalStateException("missing event ID")
 
+        toolbar2.setNavigationOnClickListener {
+            finish()
+        }
         setSupportActionBar(toolbar2)
     }
 
