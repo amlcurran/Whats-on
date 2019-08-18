@@ -19,6 +19,7 @@ import org.joda.time.DateTimeZone
 import org.joda.time.format.DateTimeFormat
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
+import uk.co.amlcurran.social.details.EventDetailActivity
 
 class WhatsOnActivity : AppCompatActivity() {
     private lateinit var permissions: Permissions
