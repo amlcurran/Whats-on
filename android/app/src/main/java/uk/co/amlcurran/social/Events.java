@@ -1,9 +1,12 @@
 package uk.co.amlcurran.social;
 
-import rx.Observable;
-import rx.Observer;
-import rx.Scheduler;
-import rx.Subscriber;
+import org.reactivestreams.Subscriber;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.Scheduler;
 
 public class Events {
     private final Scheduler mainThread;
@@ -17,13 +20,14 @@ public class Events {
     }
 
     public void load(final Timestamp now, Observer<CalendarSource> calendarSourceObserver) {
-        Observable.create(new Observable.OnSubscribe<CalendarSource>() {
+        Observable.create(new ObservableOnSubscribe<CalendarSource>() {
             @Override
-            public void call(Subscriber<? super CalendarSource> subscriber) {
+            public void subscribe(ObservableEmitter<CalendarSource> emitter) {
                 CalendarSource calendarSource = eventsService.getCalendarSource(14, now);
-                subscriber.onNext(calendarSource);
-                subscriber.onCompleted();
+                emitter.onNext(calendarSource);
+                emitter.onComplete();
             }
+
         })
                 .subscribeOn(mainThread)
                 .observeOn(workerThread)

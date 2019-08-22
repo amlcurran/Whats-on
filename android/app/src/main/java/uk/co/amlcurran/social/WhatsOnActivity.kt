@@ -13,12 +13,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.LinearLayoutManager
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_whats_on.*
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import org.joda.time.format.DateTimeFormat
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
 import uk.co.amlcurran.social.details.EventDetailActivity
 
 class WhatsOnActivity : AppCompatActivity() {

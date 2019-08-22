@@ -8,18 +8,19 @@ import android.provider.CalendarContract
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.disposables.Disposables
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_event_details.*
-import rx.Single
-import rx.Subscription
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
-import rx.subscriptions.Subscriptions
 import uk.co.amlcurran.social.*
 
 class EventDetailActivity: AppCompatActivity() {
 
     private lateinit var eventId: String
-    private var subscription: Subscription? = null
+    private var subscription: Disposable? = null
 
     companion object {
 
@@ -43,9 +44,9 @@ class EventDetailActivity: AppCompatActivity() {
         subscription = loadEvent(eventId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { event -> },
-                        { error -> }
+                .subscribeBy(
+                        onSuccess = { event -> },
+                        onError = { error -> }
                 )
 
         toolbar2.setNavigationOnClickListener {
@@ -68,7 +69,7 @@ class EventDetailActivity: AppCompatActivity() {
             } else {
                 it.onError(NoSuchElementException())
             }
-            Subscriptions.create {
+            Disposables.fromAction {
                 cursor.close()
             }
         }

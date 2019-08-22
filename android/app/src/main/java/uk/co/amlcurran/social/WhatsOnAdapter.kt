@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import io.reactivex.Observer
+import io.reactivex.disposables.Disposable
 import org.joda.time.format.DateTimeFormat
-
-import rx.Observer
 
 internal class WhatsOnAdapter(
         private val layoutInflater: LayoutInflater,
@@ -47,7 +47,11 @@ internal class WhatsOnAdapter(
         return source.count() * 2
     }
 
-    override fun onCompleted() {
+    override fun onComplete() {
+
+    }
+
+    override fun onSubscribe(d: Disposable) {
 
     }
 
