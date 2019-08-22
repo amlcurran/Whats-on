@@ -4,6 +4,7 @@ import android.database.Cursor
 import android.provider.CalendarContract
 
 class CursorEventRepositoryAccessor(private val calendarCursor: Cursor, private val timeCalculator: TimeCalculator) : EventRepositoryAccessor {
+
     private val titleColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Events.TITLE) }
     private val dtStartColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Events.DTSTART) }
     private val dtEndColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Events.DTEND) }
@@ -21,10 +22,6 @@ class CursorEventRepositoryAccessor(private val calendarCursor: Cursor, private 
         return calendarCursor.moveToNext()
     }
 
-    override fun endAccess() {
-        calendarCursor.close()
-    }
-
     override fun getStartTime(): Timestamp {
         val startMillis = calendarCursor.getLong(dtStartColumnIndex)
         return Timestamp(startMillis, timeCalculator)
@@ -33,5 +30,9 @@ class CursorEventRepositoryAccessor(private val calendarCursor: Cursor, private 
     override fun getEndTime(): Timestamp {
         val endMillis = calendarCursor.getLong(dtEndColumnIndex)
         return Timestamp(endMillis, timeCalculator)
+    }
+
+    override fun getString(columnName: String): String {
+        return calendarCursor.getString(calendarCursor.getColumnIndexOrThrow(columnName))
     }
 }

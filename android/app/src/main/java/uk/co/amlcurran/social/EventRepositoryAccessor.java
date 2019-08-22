@@ -7,9 +7,9 @@ public interface EventRepositoryAccessor {
 
     boolean nextItem();
 
-    void endAccess();
-
     Timestamp getStartTime();
 
     Timestamp getEndTime();
+
+    String getString(String columnName);
 }

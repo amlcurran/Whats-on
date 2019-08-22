@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <include
-        android:id="@+id/include"
+        android:id="@+id/event_card"
         layout="@layout/item_event"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

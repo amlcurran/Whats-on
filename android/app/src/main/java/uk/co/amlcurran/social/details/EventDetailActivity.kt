@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -60,8 +61,9 @@ class EventDetailActivity: AppCompatActivity() {
                                     timeFormatter.print(jodaCalculator.getDateTime(event.item.startTime)),
                                     timeFormatter.print(jodaCalculator.getDateTime(event.item.endTime))
                             )
+                            Log.d("foo", event.location)
                         },
-                        onError = { error -> Log.d("foo", error.localizedMessage) }
+                        onError = { Snackbar.make(event_card, R.string.something_went_wrong, Snackbar.LENGTH_LONG).show() }
                 )
 
         toolbar2.setNavigationOnClickListener {
@@ -80,7 +82,7 @@ class EventDetailActivity: AppCompatActivity() {
                 val time = accessor.startTime
                 val endTime = accessor.endTime
                 val item = EventCalendarItem(eventId, title, time, endTime)
-                it.onSuccess(Event(item))
+                it.onSuccess(Event(item, accessor.getString(CalendarContract.Events.EVENT_LOCATION)))
             } else {
                 it.onError(NoSuchElementException())
             }
@@ -110,4 +112,4 @@ class EventDetailActivity: AppCompatActivity() {
 
 }
 
-data class Event(val item: EventCalendarItem)
+data class Event(val item: EventCalendarItem, val location: String)
