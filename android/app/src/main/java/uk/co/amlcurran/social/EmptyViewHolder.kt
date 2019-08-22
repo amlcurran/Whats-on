@@ -5,7 +5,7 @@ import android.widget.TextView
 
 internal class EmptyViewHolder(itemView: View, private val eventSelectedListener: WhatsOnAdapter.EventSelectedListener) : CalendarItemViewHolder<EmptyCalendarItem>(itemView) {
 
-    private val textView: TextView = itemView.findViewById(R.id.textView)
+    private val textView: TextView = itemView.findViewById(R.id.event_title)
 
     override fun bind(item: EmptyCalendarItem) {
         textView.setText(R.string.nothing_on)

@@ -28,7 +28,7 @@ class WhatsOnActivity : AppCompatActivity() {
 
     private val eventSelectedListener = object : WhatsOnAdapter.EventSelectedListener {
         override fun eventSelected(calendarItem: EventCalendarItem, itemView: View) {
-            startActivity(EventDetailActivity.show(calendarItem.id(), this@WhatsOnActivity))
+            startActivity(EventDetailActivity.show(calendarItem, this@WhatsOnActivity))
         }
 
         override fun emptySelected(calendarItem: EmptyCalendarItem) {

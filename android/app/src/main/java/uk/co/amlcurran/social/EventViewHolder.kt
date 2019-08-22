@@ -7,7 +7,7 @@ import org.joda.time.format.DateTimeFormat
 
 internal class EventViewHolder(itemView: View, private val eventSelectedListener: WhatsOnAdapter.EventSelectedListener) : CalendarItemViewHolder<EventCalendarItem>(itemView) {
 
-    private val textView: TextView = itemView.findViewById(R.id.textView)
+    private val textView: TextView = itemView.findViewById(R.id.event_title)
     private val subtitle: TextView = itemView.findViewById(R.id.event_subtitle)
     private val formatter = DateTimeFormat.shortTime()
     private val jodaCalculator = JodaCalculator()

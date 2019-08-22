@@ -39,42 +39,9 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver) : Ev
         return calendarItems
     }
 
-    private class CursorEventRepositoryAccessor(private val calendarCursor: Cursor, private val timeCalculator: TimeCalculator) : EventRepositoryAccessor {
-        private val titleColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Events.TITLE) }
-        private val dtStartColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Events.DTSTART) }
-        private val dtEndColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Events.DTEND) }
-        private val eventIdColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Instances.EVENT_ID) }
-
-        override fun getTitle(): String {
-            return calendarCursor.getString(titleColumnIndex)
-        }
-
-        override fun getEventIdentifier(): String {
-            return calendarCursor.getString(eventIdColumnIndex)
-        }
-
-        override fun nextItem(): Boolean {
-            return calendarCursor.moveToNext()
-        }
-
-        override fun endAccess() {
-            calendarCursor.close()
-        }
-
-        override fun getStartTime(): Timestamp {
-            val startMillis = calendarCursor.getLong(dtStartColumnIndex)
-            return Timestamp(startMillis, timeCalculator)
-        }
-
-        override fun getEndTime(): Timestamp {
-            val endMillis = calendarCursor.getLong(dtEndColumnIndex)
-            return Timestamp(endMillis, timeCalculator)
-        }
-    }
-
     companion object {
 
-        private val PROJECTION = arrayOf(CalendarContract.Events.TITLE, CalendarContract.Instances.START_DAY, CalendarContract.Events.SELF_ATTENDEE_STATUS, CalendarContract.Events.DTSTART, CalendarContract.Events.DTEND, CalendarContract.Instances.EVENT_ID)
+        val PROJECTION = arrayOf(CalendarContract.Events.TITLE, CalendarContract.Instances.START_DAY, CalendarContract.Events.SELF_ATTENDEE_STATUS, CalendarContract.Events.DTSTART, CalendarContract.Events.DTEND, CalendarContract.Instances.EVENT_ID)
     }
 
 }

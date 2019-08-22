@@ -9,19 +9,27 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_event_details.*
-import uk.co.amlcurran.social.R
-
-private const val KEY_EVENT_ID = "event_id"
+import rx.Single
+import rx.Subscription
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
+import rx.subscriptions.Subscriptions
+import uk.co.amlcurran.social.*
 
 class EventDetailActivity: AppCompatActivity() {
 
     private lateinit var eventId: String
+    private var subscription: Subscription? = null
 
     companion object {
 
-        fun show(eventId: String, context: Context): Intent {
+        private const val KEY_EVENT_TITLE: String = "title"
+        private const val KEY_EVENT_ID = "event_id"
+
+        fun show(event: EventCalendarItem, context: Context): Intent {
             val intent = Intent(context, EventDetailActivity::class.java)
-            intent.putExtra(KEY_EVENT_ID, eventId)
+            intent.putExtra(KEY_EVENT_ID, event.id())
+            intent.putExtra(KEY_EVENT_TITLE, event.title)
             return intent
         }
 
@@ -32,10 +40,38 @@ class EventDetailActivity: AppCompatActivity() {
         setContentView(R.layout.activity_event_details)
         eventId = intent.getStringExtra(KEY_EVENT_ID) ?: throw IllegalStateException("missing event ID")
 
+        subscription = loadEvent(eventId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { event -> },
+                        { error -> }
+                )
+
         toolbar2.setNavigationOnClickListener {
             finish()
         }
         setSupportActionBar(toolbar2)
+    }
+
+    private fun loadEvent(eventId: String): Single<Event> {
+        return Single.create {
+            val cursor = contentResolver.query(ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventId.toLong()),
+                    AndroidEventsRepository.PROJECTION, null, null, null)
+            val accessor = CursorEventRepositoryAccessor(cursor!!, JodaCalculator())
+            if (accessor.nextItem()) {
+                val title = accessor.title
+                val time = accessor.startTime
+                val endTime = accessor.endTime
+                val item = EventCalendarItem(eventId, title, time, endTime)
+                it.onSuccess(Event(item))
+            } else {
+                it.onError(NoSuchElementException())
+            }
+            Subscriptions.create {
+                cursor.close()
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -55,5 +91,9 @@ class EventDetailActivity: AppCompatActivity() {
         val eventUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, id)
         startActivity(Intent(Intent.ACTION_VIEW).setData(eventUri))
     }
+
+}
+
+data class Event(private  val item: EventCalendarItem) {
 
 }

@@ -5,7 +5,7 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.Days;
 
-class JodaCalculator implements TimeCalculator {
+public class JodaCalculator implements TimeCalculator {
     private static final DateTime EPOCH = new DateTime(0, DateTimeZone.getDefault());
 
     @NotNull
