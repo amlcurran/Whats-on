@@ -42,6 +42,7 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver) : Ev
     companion object {
 
         val PROJECTION = arrayOf(CalendarContract.Events.TITLE, CalendarContract.Instances.START_DAY, CalendarContract.Events.SELF_ATTENDEE_STATUS, CalendarContract.Events.DTSTART, CalendarContract.Events.DTEND, CalendarContract.Instances.EVENT_ID)
+        val SINGLE_PROJECTION = arrayOf(CalendarContract.Events.TITLE, CalendarContract.Events.SELF_ATTENDEE_STATUS, CalendarContract.Events.DTSTART, CalendarContract.Events.DTEND)
     }
 
 }

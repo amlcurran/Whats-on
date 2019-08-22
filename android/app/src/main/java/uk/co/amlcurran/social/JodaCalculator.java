@@ -30,7 +30,7 @@ public class JodaCalculator implements TimeCalculator {
         return new Timestamp(getDateTime(time).plusDays(days).getMillis(), this);
     }
 
-    DateTime getDateTime(Timestamp time) {
+    public DateTime getDateTime(Timestamp time) {
         return new DateTime(time.getMillis(), DateTimeZone.getDefault());
     }
 }

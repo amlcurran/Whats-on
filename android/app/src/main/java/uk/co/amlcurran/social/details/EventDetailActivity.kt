@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.CalendarContract
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -15,12 +16,19 @@ import io.reactivex.disposables.Disposables
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_event_details.*
+import kotlinx.android.synthetic.main.item_event.*
+import org.joda.time.format.DateTimeFormat
+import org.joda.time.format.DateTimeFormatter
 import uk.co.amlcurran.social.*
 
 class EventDetailActivity: AppCompatActivity() {
 
     private lateinit var eventId: String
     private var subscription: Disposable? = null
+    private val timeFormatter: DateTimeFormatter by lazy {
+        DateTimeFormat.shortTime()
+    }
+    private val jodaCalculator = JodaCalculator()
 
     companion object {
 
@@ -45,8 +53,15 @@ class EventDetailActivity: AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
-                        onSuccess = { event -> },
-                        onError = { error -> }
+                        onSuccess = { event ->
+                            event_title.text = event.item.title
+                            event_subtitle.text = getString(
+                                    R.string.start_to_end,
+                                    timeFormatter.print(jodaCalculator.getDateTime(event.item.startTime)),
+                                    timeFormatter.print(jodaCalculator.getDateTime(event.item.endTime))
+                            )
+                        },
+                        onError = { error -> Log.d("foo", error.localizedMessage) }
                 )
 
         toolbar2.setNavigationOnClickListener {
@@ -58,7 +73,7 @@ class EventDetailActivity: AppCompatActivity() {
     private fun loadEvent(eventId: String): Single<Event> {
         return Single.create {
             val cursor = contentResolver.query(ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventId.toLong()),
-                    AndroidEventsRepository.PROJECTION, null, null, null)
+                    AndroidEventsRepository.SINGLE_PROJECTION, null, null, null)
             val accessor = CursorEventRepositoryAccessor(cursor!!, JodaCalculator())
             if (accessor.nextItem()) {
                 val title = accessor.title
@@ -95,6 +110,4 @@ class EventDetailActivity: AppCompatActivity() {
 
 }
 
-data class Event(private  val item: EventCalendarItem) {
-
-}
+data class Event(val item: EventCalendarItem)
