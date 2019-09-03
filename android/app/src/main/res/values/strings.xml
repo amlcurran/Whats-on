@@ -6,4 +6,5 @@
     <string name="open_in_calendar">Open in Calendar</string>
     <string name="start_to_end">From %1$s to %2$s</string>
     <string name="something_went_wrong">Something went wrong</string>
+    <string name="new_event_tonight">Add event today</string>
 </resources>
