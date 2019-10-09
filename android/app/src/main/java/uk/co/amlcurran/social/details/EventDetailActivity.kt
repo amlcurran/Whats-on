@@ -54,8 +54,8 @@ class EventDetailActivity: AppCompatActivity() {
                 .subscribeBy(
                         onSuccess = { event ->
                             event_title.text = event.item.title
-                            val startTime = timeFormatter.print(jodaCalculator.getDateTime(event.item.startTime))
-                            val endTime = timeFormatter.print(jodaCalculator.getDateTime(event.item.endTime))
+                            val startTime = event.item.startTime.format()
+                            val endTime = event.item.endTime.format()
                             event_subtitle.text = getString(R.string.start_to_end, startTime, endTime)
                             Log.d("foo", event.location)
                         },
@@ -67,6 +67,8 @@ class EventDetailActivity: AppCompatActivity() {
         }
         setSupportActionBar(toolbar2)
     }
+
+    private fun Timestamp.format() = timeFormatter.print(jodaCalculator.getDateTime(this))
 
     private fun loadEvent(eventId: String): Single<Event> {
         return Single.create {
