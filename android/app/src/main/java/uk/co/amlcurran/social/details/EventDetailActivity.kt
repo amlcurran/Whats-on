@@ -26,14 +26,12 @@ class EventDetailActivity: AppCompatActivity() {
 
     private lateinit var eventId: String
     private var subscription: Disposable? = null
-    private val timeFormatter: DateTimeFormatter by lazy {
-        DateTimeFormat.shortTime()
-    }
+    private val timeFormatter: DateTimeFormatter by lazy { DateTimeFormat.shortTime() }
     private val jodaCalculator = JodaCalculator()
 
     companion object {
 
-        private const val KEY_EVENT_TITLE: String = "title"
+        private const val KEY_EVENT_TITLE = "title"
         private const val KEY_EVENT_ID = "event_id"
 
         fun show(event: EventCalendarItem, context: Context): Intent {
@@ -56,11 +54,9 @@ class EventDetailActivity: AppCompatActivity() {
                 .subscribeBy(
                         onSuccess = { event ->
                             event_title.text = event.item.title
-                            event_subtitle.text = getString(
-                                    R.string.start_to_end,
-                                    timeFormatter.print(jodaCalculator.getDateTime(event.item.startTime)),
-                                    timeFormatter.print(jodaCalculator.getDateTime(event.item.endTime))
-                            )
+                            val startTime = timeFormatter.print(jodaCalculator.getDateTime(event.item.startTime))
+                            val endTime = timeFormatter.print(jodaCalculator.getDateTime(event.item.endTime))
+                            event_subtitle.text = getString(R.string.start_to_end, startTime, endTime)
                             Log.d("foo", event.location)
                         },
                         onError = { Snackbar.make(event_card, R.string.something_went_wrong, Snackbar.LENGTH_LONG).show() }
