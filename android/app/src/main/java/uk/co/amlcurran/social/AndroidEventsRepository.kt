@@ -4,22 +4,22 @@ import android.content.ContentResolver
 import android.content.ContentUris
 import android.database.Cursor
 import android.provider.CalendarContract
+import android.provider.CalendarContract.Instances.*
 
 import java.util.ArrayList
 
 class AndroidEventsRepository(private val contentResolver: ContentResolver) : EventsRepository {
 
     private fun getCursor(fivePm: TimeOfDay, elevenPm: TimeOfDay, searchStart: Timestamp, searchEnd: Timestamp): Cursor? {
-        val builder = CalendarContract.Instances.CONTENT_URI.buildUpon()
+        val builder = CONTENT_URI.buildUpon()
         ContentUris.appendId(builder, searchStart.millis)
         ContentUris.appendId(builder, searchEnd.millis)
 
-        val endsBefore = String.format("%1\$s < %2\$d", CalendarContract.Instances.END_MINUTE, fivePm.minutesInDay())
-        val startsAfter = String.format("%1\$s > %2\$d", CalendarContract.Instances.START_MINUTE, elevenPm.minutesInDay())
-        val selection = String.format("(NOT (%1\$s OR %2\$s)) AND %3\$s <> %4\$d AND %5\$s == %6\$d",
-                endsBefore, startsAfter,
-                CalendarContract.Instances.SELF_ATTENDEE_STATUS, CalendarContract.Instances.STATUS_CANCELED,
-                CalendarContract.Instances.ALL_DAY, 0)
+        val endsBefore = "$END_MINUTE < ${fivePm.minutesInDay()}"
+        val startsAfter = "$START_MINUTE > ${elevenPm.minutesInDay()}"
+        val selection = "(NOT (${endsBefore} OR ${startsAfter})) " +
+                "AND $SELF_ATTENDEE_STATUS <> $STATUS_CANCELED " +
+                "AND $ALL_DAY == 0"
 
         return contentResolver.query(builder.build(), PROJECTION, selection, null, null)
     }
@@ -41,7 +41,7 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver) : Ev
 
     companion object {
 
-        val PROJECTION = arrayOf(CalendarContract.Events.TITLE, CalendarContract.Instances.START_DAY, CalendarContract.Events.SELF_ATTENDEE_STATUS, CalendarContract.Events.DTSTART, CalendarContract.Events.DTEND, CalendarContract.Instances.EVENT_ID)
+        val PROJECTION = arrayOf(CalendarContract.Events.TITLE, START_DAY, CalendarContract.Events.SELF_ATTENDEE_STATUS, CalendarContract.Events.DTSTART, CalendarContract.Events.DTEND, EVENT_ID)
         val SINGLE_PROJECTION = arrayOf(CalendarContract.Events.TITLE, CalendarContract.Events.SELF_ATTENDEE_STATUS, CalendarContract.Events.EVENT_LOCATION, CalendarContract.Events.DTSTART, CalendarContract.Events.DTEND)
     }
 
