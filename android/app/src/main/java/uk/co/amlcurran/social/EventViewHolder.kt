@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.TextView
 
 import org.joda.time.format.DateTimeFormat
+import uk.co.amlcurran.social.details.format
 
 internal class EventViewHolder(itemView: View, private val eventSelectedListener: WhatsOnAdapter.EventSelectedListener) : CalendarItemViewHolder<EventCalendarItem>(itemView) {
 
@@ -14,8 +15,7 @@ internal class EventViewHolder(itemView: View, private val eventSelectedListener
 
     override fun bind(item: EventCalendarItem) {
         textView.text = item.title
-        val time = jodaCalculator.getDateTime(item.startTime)
-        subtitle.text = itemView.resources.getString(R.string.event_from, formatter.print(time))
+        subtitle.text = itemView.resources.getString(R.string.event_from, item.startTime.format(formatter, jodaCalculator))
         itemView.setOnClickListener { eventSelectedListener.eventSelected(item, itemView) }
     }
 
