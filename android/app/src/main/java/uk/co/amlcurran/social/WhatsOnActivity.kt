@@ -14,6 +14,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+import io.reactivex.disposables.Disposables
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_whats_on.*
 import org.joda.time.DateTime
@@ -25,6 +29,7 @@ class WhatsOnActivity : AppCompatActivity() {
     private lateinit var permissions: Permissions
     private lateinit var adapter: WhatsOnAdapter
     private lateinit var events: Events
+    private var loadDisposable: Disposable? = null
 
     private val eventSelectedListener = object : WhatsOnAdapter.EventSelectedListener {
         override fun eventSelected(calendarItem: EventCalendarItem, itemView: View) {
@@ -70,16 +75,6 @@ class WhatsOnActivity : AppCompatActivity() {
         val today = findViewById<TextView>(R.id.today_date)
         today.text = DateTimeFormat.forPattern("EEEE, dd MMMMM").print(now)
 
-        permissions.requestPermission(REQUEST_CODE_REQUEST_CALENDAR, Manifest.permission.READ_CALENDAR, object : Permissions.OnPermissionRequestListener {
-            override fun onPermissionGranted() {
-                events.load(Timestamp(now.millis, JodaCalculator()), adapter)
-            }
-
-            override fun onPermissionDenied() {
-
-            }
-        })
-
         ViewCompat.setOnApplyWindowInsetsListener(toolbar) { _, insets ->
             toolbar.updatePadding(top = insets.systemWindowInsetTop)
             insets
@@ -89,6 +84,28 @@ class WhatsOnActivity : AppCompatActivity() {
             list_whats_on.updatePadding(bottom = insets.systemWindowInsetBottom)
             insets
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        reload()
+    }
+
+    private fun reload() {
+        val now = DateTime.now(DateTimeZone.getDefault())
+        permissions.requestPermission(REQUEST_CODE_REQUEST_CALENDAR, Manifest.permission.READ_CALENDAR, object : Permissions.OnPermissionRequestListener {
+            override fun onPermissionGranted() {
+                loadDisposable = events.load(Timestamp(now.millis, JodaCalculator()))
+                        .subscribeBy(
+                                onSuccess = { adapter.onSuccess(it) },
+                                onError = { adapter.onError(it) }
+                        )
+            }
+
+            override fun onPermissionDenied() {
+
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
