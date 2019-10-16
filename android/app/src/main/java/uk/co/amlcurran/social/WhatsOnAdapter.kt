@@ -1,11 +1,11 @@
 package uk.co.amlcurran.social
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import io.reactivex.Observer
+import androidx.recyclerview.widget.RecyclerView
+import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
 import org.joda.time.format.DateTimeFormat
 
@@ -13,7 +13,7 @@ internal class WhatsOnAdapter(
         private val layoutInflater: LayoutInflater,
         private val eventSelectedListener: EventSelectedListener,
         private var source: CalendarSource
-) : RecyclerView.Adapter<CalendarItemViewHolder<*>>(), Observer<CalendarSource> {
+) : RecyclerView.Adapter<CalendarItemViewHolder<*>>(), SingleObserver<CalendarSource> {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarItemViewHolder<*> {
         return when (viewType) {
@@ -47,10 +47,6 @@ internal class WhatsOnAdapter(
         return source.count() * 2
     }
 
-    override fun onComplete() {
-
-    }
-
     override fun onSubscribe(d: Disposable) {
 
     }
@@ -66,7 +62,7 @@ internal class WhatsOnAdapter(
         e.printStackTrace()
     }
 
-    override fun onNext(source: CalendarSource) {
+    override fun onSuccess(source: CalendarSource) {
         this.source = source
         notifyDataSetChanged()
     }
