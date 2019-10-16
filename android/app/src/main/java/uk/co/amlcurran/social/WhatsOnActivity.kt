@@ -62,7 +62,6 @@ class WhatsOnActivity : AppCompatActivity() {
         val background = Schedulers.io()
         events = Events(mainThread, background, EventsService(dateCreator, eventsRepository, JodaCalculator()))
 
-        toolbar.inflateMenu(R.menu.activity_whats_on)
         toolbar.setOnMenuItemClickListener { onOptionsItemSelected(it) }
 
         val now = DateTime.now(DateTimeZone.getDefault())
