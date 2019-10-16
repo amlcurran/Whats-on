@@ -26,8 +26,8 @@ public class Permissions {
         PermissionRequest permissionRequest = requestMap.get(requestCode);
         if (permissionRequest != null) {
             boolean passedAll = true;
-            for (int i = 0, length = grantResults.length; i < length; i++) {
-                passedAll = passedAll && grantResults[i] == PackageManager.PERMISSION_GRANTED;
+            for (int grantResult : grantResults) {
+                passedAll = passedAll && grantResult == PackageManager.PERMISSION_GRANTED;
             }
             if (passedAll) {
                 permissionRequest.requestCode.onPermissionGranted();
