@@ -62,9 +62,7 @@ class EventDetailActivity: AppCompatActivity() {
                         onError = { Snackbar.make(event_card, R.string.something_went_wrong, Snackbar.LENGTH_LONG).show() }
                 )
 
-        toolbar2.setNavigationOnClickListener {
-            finish()
-        }
+        toolbar2.setNavigationOnClickListener { finish() }
         setSupportActionBar(toolbar2)
     }
 
