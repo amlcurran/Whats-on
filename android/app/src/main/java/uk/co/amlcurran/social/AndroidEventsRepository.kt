@@ -19,7 +19,8 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver) : Ev
         val startsAfter = "$START_MINUTE > ${elevenPm.minutesInDay()}"
         val selection = "(NOT (${endsBefore} OR ${startsAfter})) " +
                 "AND $SELF_ATTENDEE_STATUS <> $STATUS_CANCELED " +
-                "AND $ALL_DAY == 0"
+                "AND $ALL_DAY == 0 " +
+                "AND ${CalendarContract.Events.DELETED} <> 1"
 
         return contentResolver.query(builder.build(), PROJECTION, selection, null, null)
     }
