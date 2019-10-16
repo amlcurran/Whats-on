@@ -55,13 +55,15 @@ class WhatsOnActivity : AppCompatActivity() {
         }
 
         setContentView(R.layout.activity_whats_on)
-        setSupportActionBar(toolbar)
         permissions = Permissions(this)
         val eventsRepository = AndroidEventsRepository(contentResolver)
         val dateCreator = AndroidTimeRepository()
         val mainThread = AndroidSchedulers.mainThread()
         val background = Schedulers.io()
         events = Events(mainThread, background, EventsService(dateCreator, eventsRepository, JodaCalculator()))
+
+        toolbar.inflateMenu(R.menu.activity_whats_on)
+        toolbar.setOnMenuItemClickListener { onOptionsItemSelected(it) }
 
         val now = DateTime.now(DateTimeZone.getDefault())
 
@@ -104,11 +106,6 @@ class WhatsOnActivity : AppCompatActivity() {
 
             }
         })
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.activity_whats_on, menu)
-        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

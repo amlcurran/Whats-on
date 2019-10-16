@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -24,7 +25,7 @@ class EventDetailActivity: AppCompatActivity() {
     private var subscription: Disposable? = null
     private val timeFormatter: DateTimeFormatter by lazy { DateTimeFormat.shortTime() }
     private val jodaCalculator = JodaCalculator()
-    private val events: Events by lazy { Events(eventsService = EventsService(AndroidTimeRepository(), AndroidEventsRepository(contentResolver), JodaCalculator())) }
+    private val events: Events by lazy { Events(eventsService = EventsService(AndroidTimeRepository(), AndroidEventsRepository(contentResolver), jodaCalculator)) }
 
     companion object {
 
@@ -54,8 +55,13 @@ class EventDetailActivity: AppCompatActivity() {
                         }
                 )
 
+        toolbar2.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.menu_open_outside -> launchInExternalCalendar()
+            }
+            true
+        }
         toolbar2.setNavigationOnClickListener { finish() }
-        setSupportActionBar(toolbar2)
     }
 
     private fun render(event: Event) {
@@ -63,12 +69,8 @@ class EventDetailActivity: AppCompatActivity() {
         val startTime = event.item.startTime.format(timeFormatter, jodaCalculator)
         val endTime = event.item.endTime.format(timeFormatter, jodaCalculator)
         event_subtitle.text = getString(R.string.start_to_end, startTime, endTime)
+        toolbar2.menu.findItem(R.id.menu_open_outside).isVisible = true
         Log.d("foo", event.location)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.activity_details, menu)
-        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
