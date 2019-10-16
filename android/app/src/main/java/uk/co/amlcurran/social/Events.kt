@@ -6,8 +6,8 @@ class Events(private val mainThread: Scheduler, private val workerThread: Schedu
 
     fun load(now: Timestamp): Single<CalendarSource> {
         return Single.fromCallable { eventsService.getCalendarSource(14, now) }
-                .subscribeOn(mainThread)
-                .observeOn(workerThread)
+                .subscribeOn(workerThread)
+                .observeOn(mainThread)
     }
 
 }
