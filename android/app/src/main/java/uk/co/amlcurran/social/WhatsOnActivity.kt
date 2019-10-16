@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
@@ -92,7 +91,7 @@ class WhatsOnActivity : AppCompatActivity() {
 
     private fun reload() {
         val now = DateTime.now(DateTimeZone.getDefault())
-        permissions.requestPermission(REQUEST_CODE_REQUEST_CALENDAR, Manifest.permission.READ_CALENDAR, object : Permissions.OnPermissionRequestListener {
+        permissions.requestPermission(REQUEST_CODE_REQUEST_CALENDAR, object : Permissions.OnPermissionRequestListener {
             override fun onPermissionGranted() {
                 loadDisposable = events.load(Timestamp(now.millis, JodaCalculator()))
                         .subscribeBy(
@@ -104,7 +103,7 @@ class WhatsOnActivity : AppCompatActivity() {
             override fun onPermissionDenied() {
 
             }
-        })
+        }, Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -119,7 +118,7 @@ class WhatsOnActivity : AppCompatActivity() {
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        this.permissions.onRequestPermissionResult(requestCode, permissions, grantResults)
+        this.permissions.onRequestPermissionResult(requestCode, grantResults)
     }
 
     companion object {

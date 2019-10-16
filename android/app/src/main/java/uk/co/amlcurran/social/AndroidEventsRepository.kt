@@ -57,10 +57,15 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver) : Ev
         }
     }
 
+    override fun delete(eventId: String): Boolean {
+        val contentUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventId.toLong())
+        return contentResolver.delete(contentUri, null, null) == 1
+    }
+
     companion object {
 
         val PROJECTION = arrayOf(CalendarContract.Events.TITLE, START_DAY, CalendarContract.Events.SELF_ATTENDEE_STATUS, CalendarContract.Events.DTSTART, CalendarContract.Events.DTEND, EVENT_ID)
-        val SINGLE_PROJECTION = arrayOf(CalendarContract.Events.TITLE, CalendarContract.Events.SELF_ATTENDEE_STATUS, CalendarContract.Events.EVENT_LOCATION, CalendarContract.Events.DTSTART, CalendarContract.Events.DTEND)
+        val SINGLE_PROJECTION = arrayOf(CalendarContract.Events.TITLE, CalendarContract.Events._ID, CalendarContract.Events.SELF_ATTENDEE_STATUS, CalendarContract.Events.EVENT_LOCATION, CalendarContract.Events.DTSTART, CalendarContract.Events.DTEND)
     }
 
 }

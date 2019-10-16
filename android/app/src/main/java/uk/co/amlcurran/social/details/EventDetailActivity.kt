@@ -1,17 +1,20 @@
 package uk.co.amlcurran.social.details
 
+import android.app.Dialog
 import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.util.Log
-import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
+import androidx.fragment.app.DialogFragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_event_details.*
 import kotlinx.android.synthetic.main.item_event.*
@@ -22,7 +25,7 @@ import uk.co.amlcurran.social.*
 class EventDetailActivity: AppCompatActivity() {
 
     private lateinit var eventId: String
-    private var subscription: Disposable? = null
+    private val subscriptions = CompositeDisposable()
     private val timeFormatter: DateTimeFormatter by lazy { DateTimeFormat.shortTime() }
     private val jodaCalculator = JodaCalculator()
     private val events: Events by lazy { Events(eventsService = EventsService(AndroidTimeRepository(), AndroidEventsRepository(contentResolver), jodaCalculator)) }
@@ -46,7 +49,7 @@ class EventDetailActivity: AppCompatActivity() {
         setContentView(R.layout.activity_event_details)
         eventId = intent.getStringExtra(KEY_EVENT_ID) ?: throw IllegalStateException("missing event ID")
 
-        subscription = events.loadSingleEvent(eventId)
+        subscriptions += events.loadSingleEvent(eventId)
                 .subscribeBy(
                         onSuccess = ::render,
                         onError = {
@@ -55,12 +58,7 @@ class EventDetailActivity: AppCompatActivity() {
                         }
                 )
 
-        toolbar2.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.menu_open_outside -> launchInExternalCalendar()
-            }
-            true
-        }
+        toolbar2.setOnMenuItemClickListener(::onOptionsItemSelected)
         toolbar2.setNavigationOnClickListener { finish() }
     }
 
@@ -70,14 +68,32 @@ class EventDetailActivity: AppCompatActivity() {
         val endTime = event.item.endTime.format(timeFormatter, jodaCalculator)
         event_subtitle.text = getString(R.string.start_to_end, startTime, endTime)
         toolbar2.menu.findItem(R.id.menu_open_outside).isVisible = true
+        toolbar2.menu.findItem(R.id.menu_delete_event).isVisible = true
         Log.d("foo", event.location)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_open_outside -> launchInExternalCalendar()
+            R.id.menu_delete_event -> confirmDelete()
         }
         return true
+    }
+
+    private fun confirmDelete() {
+        ConfirmDelete().apply {
+            onConfirm = { deleteEvent() }
+            show(supportFragmentManager, null)
+        }
+
+    }
+
+    private fun deleteEvent() {
+        subscriptions += events.delete(eventId)
+                .subscribeBy(
+                        onComplete = { finish() },
+                        onError = { Snackbar.make(event_card, getString(R.string.couldnt_delete_event), Snackbar.LENGTH_SHORT).show() }
+                )
     }
 
     private fun launchInExternalCalendar() {
@@ -86,6 +102,19 @@ class EventDetailActivity: AppCompatActivity() {
         startActivity(Intent(Intent.ACTION_VIEW).setData(eventUri))
     }
 
+}
+
+class ConfirmDelete: DialogFragment() {
+
+    lateinit var onConfirm: () -> Unit
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return MaterialAlertDialogBuilder(requireContext())
+                .setMessage(R.string.confirm_delete_message)
+                .setPositiveButton(R.string.delete) { _, _ -> onConfirm() }
+                .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
+                .create()
+    }
 }
 
 fun Timestamp.format(dateTimeFormatter: DateTimeFormatter, calculator: JodaCalculator) = dateTimeFormatter.print(calculator.getDateTime(this))

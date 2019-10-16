@@ -7,4 +7,8 @@
     <string name="start_to_end">From %1$s to %2$s</string>
     <string name="something_went_wrong">Something went wrong</string>
     <string name="new_event_tonight">Add event today</string>
+    <string name="delete">Delete</string>
+    <string name="confirm_delete_message">Delete this event?</string>
+    <string name="cancel">Cancel</string>
+    <string name="couldnt_delete_event">Couldn\'t delete the event</string>
 </resources>

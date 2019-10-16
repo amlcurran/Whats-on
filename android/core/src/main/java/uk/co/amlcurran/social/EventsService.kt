@@ -30,4 +30,6 @@ class EventsService(
 
     fun eventWithId(eventId: String): Event? = eventsRepository.event(eventId)
 
+    fun delete(eventId: String): Boolean = eventsRepository.delete(eventId)
+
 }

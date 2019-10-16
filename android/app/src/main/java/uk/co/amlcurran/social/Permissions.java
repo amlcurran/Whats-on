@@ -13,16 +13,24 @@ public class Permissions {
         this.activity = activity;
     }
 
-    void requestPermission(int requestCode, String requiredPermission, OnPermissionRequestListener permissionRequestListener) {
-        if (ContextCompat.checkSelfPermission(activity, requiredPermission) == PackageManager.PERMISSION_GRANTED) {
+    void requestPermission(int requestCode, OnPermissionRequestListener permissionRequestListener, String... requiredPermissions) {
+        if (hasAllPermissions(requiredPermissions)) {
             permissionRequestListener.onPermissionGranted();
         } else {
-            requestMap.put(requestCode, new PermissionRequest(permissionRequestListener, new String[] {requiredPermission}));
-            activity.requestPermissions(new String[]{requiredPermission}, requestCode);
+            requestMap.put(requestCode, new PermissionRequest(permissionRequestListener, requiredPermissions));
+            activity.requestPermissions(requiredPermissions, requestCode);
         }
     }
 
-    public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) {
+    private boolean hasAllPermissions(String[] requiredPermissions) {
+        boolean passedAll = true;
+        for (String permission : requiredPermissions) {
+            passedAll = passedAll && ContextCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_GRANTED;
+        }
+        return passedAll;
+    }
+
+    public void onRequestPermissionResult(int requestCode, int[] grantResults) {
         PermissionRequest permissionRequest = requestMap.get(requestCode);
         if (permissionRequest != null) {
             boolean passedAll = true;
