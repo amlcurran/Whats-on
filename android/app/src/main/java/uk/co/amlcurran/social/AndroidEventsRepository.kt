@@ -39,6 +39,24 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver) : Ev
         return calendarItems
     }
 
+    override fun event(eventId: String): Event? {
+        val cursor = contentResolver.query(ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventId.toLong()),
+                SINGLE_PROJECTION, null, null, null)
+        val accessor = CursorEventRepositoryAccessor(cursor!!, JodaCalculator())
+        if (accessor.nextItem()) {
+            val title = accessor.title
+            val time = accessor.startTime
+            val endTime = accessor.endTime
+            val item = EventCalendarItem(eventId, title, time, endTime)
+            val location = accessor.getString(CalendarContract.Events.EVENT_LOCATION)
+            cursor.close()
+            return Event(item, location)
+        } else {
+            cursor.close()
+            return null
+        }
+    }
+
     companion object {
 
         val PROJECTION = arrayOf(CalendarContract.Events.TITLE, START_DAY, CalendarContract.Events.SELF_ATTENDEE_STATUS, CalendarContract.Events.DTSTART, CalendarContract.Events.DTEND, EVENT_ID)

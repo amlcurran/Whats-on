@@ -1,6 +1,12 @@
 package uk.co.amlcurran.social
 
-class EventsService(private val timeRepository: TimeRepository, private val eventsRepository: EventsRepository, private val timeCalculator: TimeCalculator) {
+data class Event(val item: EventCalendarItem, val location: String)
+
+class EventsService(
+        private val timeRepository: TimeRepository,
+        private val eventsRepository: EventsRepository,
+        private val timeCalculator: TimeCalculator
+) {
 
     fun getCalendarSource(numberOfDays: Int, now: Timestamp): CalendarSource {
         val nowTime = timeCalculator.startOfToday()
@@ -21,5 +27,7 @@ class EventsService(private val timeRepository: TimeRepository, private val even
 
         return CalendarSource(itemArray, numberOfDays, timeCalculator, timeRepository)
     }
+
+    fun eventWithId(eventId: String): Event? = eventsRepository.event(eventId)
 
 }

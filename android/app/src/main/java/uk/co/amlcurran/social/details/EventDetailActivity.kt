@@ -10,12 +10,8 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.disposables.Disposables
 import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_event_details.*
 import kotlinx.android.synthetic.main.item_event.*
 import org.joda.time.format.DateTimeFormat
@@ -28,6 +24,7 @@ class EventDetailActivity: AppCompatActivity() {
     private var subscription: Disposable? = null
     private val timeFormatter: DateTimeFormatter by lazy { DateTimeFormat.shortTime() }
     private val jodaCalculator = JodaCalculator()
+    private val events: Events by lazy { Events(eventsService = EventsService(AndroidTimeRepository(), AndroidEventsRepository(contentResolver), JodaCalculator())) }
 
     companion object {
 
@@ -48,40 +45,25 @@ class EventDetailActivity: AppCompatActivity() {
         setContentView(R.layout.activity_event_details)
         eventId = intent.getStringExtra(KEY_EVENT_ID) ?: throw IllegalStateException("missing event ID")
 
-        subscription = loadEvent(eventId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        subscription = events.loadSingleEvent(eventId)
                 .subscribeBy(
-                        onSuccess = { event ->
-                            event_title.text = event.item.title
-                            val startTime = event.item.startTime.format(timeFormatter, jodaCalculator)
-                            val endTime = event.item.endTime.format(timeFormatter, jodaCalculator)
-                            event_subtitle.text = getString(R.string.start_to_end, startTime, endTime)
-                            Log.d("foo", event.location)
-                        },
-                        onError = { Snackbar.make(event_card, R.string.something_went_wrong, Snackbar.LENGTH_LONG).show() }
+                        onSuccess = ::render,
+                        onError = {
+                            it.printStackTrace()
+                            Snackbar.make(event_card, R.string.something_went_wrong, Snackbar.LENGTH_LONG).show()
+                        }
                 )
 
         toolbar2.setNavigationOnClickListener { finish() }
         setSupportActionBar(toolbar2)
     }
 
-    private fun loadEvent(eventId: String): Single<Event> {
-        return Single.create {
-            val cursor = contentResolver.query(ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventId.toLong()),
-                    AndroidEventsRepository.SINGLE_PROJECTION, null, null, null)
-            val accessor = CursorEventRepositoryAccessor(cursor!!, JodaCalculator())
-            if (accessor.nextItem()) {
-                val title = accessor.title
-                val time = accessor.startTime
-                val endTime = accessor.endTime
-                val item = EventCalendarItem(eventId, title, time, endTime)
-                it.onSuccess(Event(item, accessor.getString(CalendarContract.Events.EVENT_LOCATION)))
-            } else {
-                it.onError(NoSuchElementException())
-            }
-            cursor.close()
-        }
+    private fun render(event: Event) {
+        event_title.text = event.item.title
+        val startTime = event.item.startTime.format(timeFormatter, jodaCalculator)
+        val endTime = event.item.endTime.format(timeFormatter, jodaCalculator)
+        event_subtitle.text = getString(R.string.start_to_end, startTime, endTime)
+        Log.d("foo", event.location)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -103,7 +85,5 @@ class EventDetailActivity: AppCompatActivity() {
     }
 
 }
-
-data class Event(val item: EventCalendarItem, val location: String)
 
 fun Timestamp.format(dateTimeFormatter: DateTimeFormatter, calculator: JodaCalculator) = dateTimeFormatter.print(calculator.getDateTime(this))
