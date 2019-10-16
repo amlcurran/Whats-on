@@ -80,9 +80,7 @@ class EventDetailActivity: AppCompatActivity() {
             } else {
                 it.onError(NoSuchElementException())
             }
-            Disposables.fromAction {
-                cursor.close()
-            }
+            cursor.close()
         }
     }
 
