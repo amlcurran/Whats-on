@@ -110,7 +110,7 @@ class WhatsOnActivity : AppCompatActivity() {
         when (item.itemId) {
 
             R.id.pick_times -> {
-                TimePickerActivity.start(this)
+                SettingsActivity.start(this)
                 return true
             }
         }

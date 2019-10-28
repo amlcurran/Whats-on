@@ -16,7 +16,7 @@
         </activity>
 
         <activity
-            android:name=".TimePickerActivity"
+            android:name=".SettingsActivity"
             android:label="@string/pick_times"
             android:parentActivityName=".WhatsOnActivity">
 

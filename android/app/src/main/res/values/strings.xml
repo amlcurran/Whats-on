@@ -11,4 +11,5 @@
     <string name="confirm_delete_message">Delete this event?</string>
     <string name="cancel">Cancel</string>
     <string name="couldnt_delete_event">Couldn\'t delete the event</string>
+    <string name="back">Back</string>
 </resources>
