@@ -23,6 +23,7 @@
         <item name="android:background">@color/background</item>
         <item name="android:tint">@color/colorOnBackground</item>
         <item name="iconTint">@color/colorOnBackground</item>
+        <item name="titleTextAppearance">@style/TextAppearance.MaterialComponents.Headline6</item>
     </style>
 
     <style name="TodayDate" parent="TextAppearance.MaterialComponents.Body1">

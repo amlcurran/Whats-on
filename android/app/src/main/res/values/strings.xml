@@ -12,4 +12,5 @@
     <string name="cancel">Cancel</string>
     <string name="couldnt_delete_event">Couldn\'t delete the event</string>
     <string name="back">Back</string>
+    <string name="settings">Settings</string>
 </resources>
