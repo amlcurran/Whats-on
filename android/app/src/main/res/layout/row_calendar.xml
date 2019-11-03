@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="calendar"
+            type="uk.co.amlcurran.social.Calendar" />
+
+    </data>
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:buttonTint="@{calendar.color}"
+        android:minHeight="48dp"
+        android:text="@{calendar.name}"
+        tools:buttonTint="@color/colorPrimary"
+        tools:checked="true"
+        tools:text="My current calendar" />
+
+</layout>
