@@ -49,8 +49,7 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver, priv
             val title = accessor.title
             val time = accessor.startTime
             val endTime = accessor.endTime
-            val calendarId = accessor.calendarId
-            val item = EventCalendarItem(eventId, calendarId, title, time, endTime)
+            val item = EventCalendarItem(eventId, "", title, time, endTime)
             val location = accessor.getString(CalendarContract.Events.EVENT_LOCATION)
             cursor.close()
             return Event(item, location)
