@@ -16,6 +16,7 @@
         android:buttonTint="@{calendar.color}"
         android:minHeight="48dp"
         android:text="@{calendar.name}"
+        android:checked="@{calendar.selected}"
         tools:buttonTint="@color/colorPrimary"
         tools:checked="true"
         tools:text="My current calendar" />

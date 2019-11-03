@@ -55,7 +55,7 @@ class WhatsOnActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_whats_on)
         permissions = Permissions(this)
-        val eventsRepository = AndroidEventsRepository(contentResolver)
+        val eventsRepository = AndroidEventsRepository(contentResolver, CalendarRepository(this))
         val dateCreator = AndroidTimeRepository()
         val mainThread = AndroidSchedulers.mainThread()
         val background = Schedulers.io()

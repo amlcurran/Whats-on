@@ -43,11 +43,12 @@ class SettingsActivity : AppCompatActivity() {
             override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
                 if (data != null) {
                     val list = data.map {
+                        val calendarId = it.string(CalendarContract.Calendars._ID)
                         Calendar(
-                                it.string(CalendarContract.Calendars._ID),
+                                calendarId,
                                 it.string(CalendarContract.Calendars.NAME),
                                 it.int(CalendarContract.Calendars.CALENDAR_COLOR),
-                                false
+                                calendarRepository.showEventsFrom(calendarId)
                         )
                     }
                     adapter.update(list)

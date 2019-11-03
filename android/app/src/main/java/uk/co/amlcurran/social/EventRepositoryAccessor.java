@@ -11,5 +11,7 @@ public interface EventRepositoryAccessor {
 
     Timestamp getEndTime();
 
+    String getCalendarId();
+
     String getString(String columnName);
 }

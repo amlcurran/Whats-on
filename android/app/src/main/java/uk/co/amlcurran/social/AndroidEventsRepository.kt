@@ -8,7 +8,7 @@ import android.provider.CalendarContract.Instances.*
 
 import java.util.ArrayList
 
-class AndroidEventsRepository(private val contentResolver: ContentResolver) : EventsRepository {
+class AndroidEventsRepository(private val contentResolver: ContentResolver, private val calendarRepository: CalendarRepository) : EventsRepository {
 
     private fun getCursor(fivePm: TimeOfDay, elevenPm: TimeOfDay, searchStart: Timestamp, searchEnd: Timestamp): Cursor? {
         val builder = CONTENT_URI.buildUpon()
@@ -32,12 +32,13 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver) : Ev
         while (accessor.nextItem()) {
             val title = accessor.title
             val eventId = accessor.eventIdentifier
+            val calendarId = accessor.calendarId
             val time = accessor.startTime
             val endTime = accessor.endTime
-            calendarItems.add(EventCalendarItem(eventId, title, time, endTime))
+            calendarItems.add(EventCalendarItem(eventId, calendarId, title, time, endTime))
         }
         calendarCursor.close()
-        return calendarItems
+        return calendarItems.filter { calendarRepository.shouldShow(it) }
     }
 
     override fun event(eventId: String): Event? {
@@ -48,7 +49,8 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver) : Ev
             val title = accessor.title
             val time = accessor.startTime
             val endTime = accessor.endTime
-            val item = EventCalendarItem(eventId, title, time, endTime)
+            val calendarId = accessor.calendarId
+            val item = EventCalendarItem(eventId, calendarId, title, time, endTime)
             val location = accessor.getString(CalendarContract.Events.EVENT_LOCATION)
             cursor.close()
             return Event(item, location)
@@ -65,7 +67,7 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver) : Ev
 
     companion object {
 
-        val PROJECTION = arrayOf(CalendarContract.Events.TITLE, START_DAY, CalendarContract.Events.SELF_ATTENDEE_STATUS, CalendarContract.Events.DTSTART, CalendarContract.Events.DTEND, EVENT_ID)
+        val PROJECTION = arrayOf(CalendarContract.Events.TITLE, START_DAY, CalendarContract.Events.SELF_ATTENDEE_STATUS, CalendarContract.Events.DTSTART, CalendarContract.Events.DTEND, EVENT_ID, CalendarContract.Events.CALENDAR_ID)
         val SINGLE_PROJECTION = arrayOf(CalendarContract.Events.TITLE, CalendarContract.Events._ID, CalendarContract.Events.SELF_ATTENDEE_STATUS, CalendarContract.Events.EVENT_LOCATION, CalendarContract.Events.DTSTART, CalendarContract.Events.DTEND)
     }
 

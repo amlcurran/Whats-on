@@ -9,16 +9,16 @@ class CalendarRepository(context: Context) {
     private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     fun exclude(calendar: Calendar) {
-        val excludedCalendars = preferences.getStringSet("excluded", emptySet()) ?: emptySet()
         preferences.edit {
-            putStringSet("excluded", excludedCalendars.inserting(calendar.id))
+            putStringSet("excluded", excludedCalendars().inserting(calendar.id))
         }
     }
 
+    private fun excludedCalendars() = preferences.getStringSet("excluded", emptySet()) ?: emptySet()
+
     fun include(calendar: Calendar) {
-        val excludedCalendars = preferences.getStringSet("excluded", emptySet()) ?: emptySet()
         preferences.edit {
-            putStringSet("excluded", excludedCalendars.removing(calendar.id))
+            putStringSet("excluded", excludedCalendars().removing(calendar.id))
         }
     }
 
@@ -26,8 +26,20 @@ class CalendarRepository(context: Context) {
         add(element)
     }
 
-    private fun <E> MutableSet<E>.removing(element: E): MutableSet<E> = toMutableSet().apply {
+    private fun <E> Set<E>.removing(element: E): Set<E> = toMutableSet().apply {
         remove(element)
+    }
+
+    fun shouldShow(it: CalendarItem): Boolean {
+        return if (it is EventCalendarItem) {
+            !excludedCalendars().contains(it.calendarId)
+        } else {
+            true
+        }
+    }
+
+    fun showEventsFrom(calendarId: String): Boolean {
+        return !excludedCalendars().contains(calendarId)
     }
 
 }
