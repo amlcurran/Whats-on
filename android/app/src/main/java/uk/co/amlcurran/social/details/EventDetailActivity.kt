@@ -4,25 +4,35 @@ import android.app.Dialog
 import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
+import android.location.Geocoder
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.provider.CalendarContract
 import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
+import com.google.android.gms.maps.CameraUpdate
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import io.reactivex.Maybe
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_event_details.*
 import kotlinx.android.synthetic.main.item_event.*
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 import uk.co.amlcurran.social.*
 
-class EventDetailActivity: AppCompatActivity() {
+class EventDetailActivity : AppCompatActivity() {
 
     private lateinit var eventId: String
     private val subscriptions = CompositeDisposable()
@@ -51,7 +61,9 @@ class EventDetailActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_details)
-        eventId = intent.getStringExtra(KEY_EVENT_ID) ?: throw IllegalStateException("missing event ID")
+        eventId = intent.getStringExtra(KEY_EVENT_ID)
+                ?: throw IllegalStateException("missing event ID")
+        mapView.onCreate(savedInstanceState)
 
         subscriptions += events.loadSingleEvent(eventId)
                 .subscribeBy(
@@ -73,7 +85,26 @@ class EventDetailActivity: AppCompatActivity() {
         event_subtitle.text = getString(R.string.start_to_end, startTime, endTime)
         toolbar2.menu.findItem(R.id.menu_open_outside).isVisible = true
         toolbar2.menu.findItem(R.id.menu_delete_event).isVisible = true
-        Log.d("foo", event.location)
+        updateMap(event.location)
+    }
+
+    private fun updateMap(location: String) {
+        mapView.getMapAsync { map ->
+            subscriptions += findLocation(location)
+                    .subscribeBy(onSuccess = {
+                        map.addMarker(MarkerOptions().position(it))
+                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(it, 15f))
+                    })
+        }
+    }
+
+    private fun findLocation(location: String): Maybe<LatLng> {
+        return Maybe.fromCallable { Geocoder(this).getFromLocationName(location, 1).firstOrNull() }
+                .map {
+                    LatLng(it.latitude, it.longitude)
+                }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -106,9 +137,39 @@ class EventDetailActivity: AppCompatActivity() {
         startActivity(Intent(Intent.ACTION_VIEW).setData(eventUri))
     }
 
+    override fun onStart() {
+        super.onStart()
+        mapView.onStart()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mapView.onSaveInstanceState(outState)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mapView.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView.onDestroy()
+    }
+
 }
 
-class ConfirmDelete: DialogFragment() {
+class ConfirmDelete : DialogFragment() {
 
     lateinit var onConfirm: () -> Unit
 
