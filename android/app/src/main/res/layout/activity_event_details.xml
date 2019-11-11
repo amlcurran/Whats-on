@@ -24,19 +24,27 @@
         android:background="?android:attr/colorBackground"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/toolbarStyle"
-        app:menu="@menu/activity_details"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/activity_details"
         app:navigationIcon="@drawable/ic_back" />
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:layout_marginTop="16dp"
+        android:id="@+id/mapHost"
         app:layout_constraintEnd_toEndOf="@+id/event_card"
         app:layout_constraintStart_toStartOf="@+id/event_card"
-        app:layout_constraintTop_toBottomOf="@+id/event_card" />
+        app:layout_constraintTop_toBottomOf="@+id/event_card"
+        android:foreground="?attr/selectableItemBackground">
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,6 @@
 package uk.co.amlcurran.social
 
-data class Event(val item: EventCalendarItem, val location: String)
+data class Event(val item: EventCalendarItem, val location: String?)
 
 class EventsService(
         private val timeRepository: TimeRepository,

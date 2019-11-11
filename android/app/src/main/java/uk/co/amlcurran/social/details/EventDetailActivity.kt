@@ -5,22 +5,19 @@ import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
 import android.location.Geocoder
+import android.net.Uri
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.provider.CalendarContract
-import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
-import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.Maybe
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
@@ -62,17 +59,17 @@ class EventDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_details)
         eventId = intent.getStringExtra(KEY_EVENT_ID)
-                ?: throw IllegalStateException("missing event ID")
+            ?: throw IllegalStateException("missing event ID")
         mapView.onCreate(savedInstanceState)
 
         subscriptions += events.loadSingleEvent(eventId)
-                .subscribeBy(
-                        onSuccess = ::render,
-                        onError = {
-                            it.printStackTrace()
-                            Snackbar.make(event_card, R.string.something_went_wrong, Snackbar.LENGTH_LONG).show()
-                        }
-                )
+            .subscribeBy(
+                onSuccess = ::render,
+                onError = {
+                    it.printStackTrace()
+                    Snackbar.make(event_card, R.string.something_went_wrong, Snackbar.LENGTH_LONG).show()
+                }
+            )
 
         toolbar2.setOnMenuItemClickListener(::onOptionsItemSelected)
         toolbar2.setNavigationOnClickListener { finish() }
@@ -88,23 +85,42 @@ class EventDetailActivity : AppCompatActivity() {
         updateMap(event.location)
     }
 
-    private fun updateMap(location: String) {
-        mapView.getMapAsync { map ->
-            subscriptions += findLocation(location)
-                    .subscribeBy(onSuccess = {
-                        map.addMarker(MarkerOptions().position(it))
-                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(it, 15f))
+    private fun updateMap(location: String?) {
+        location?.let {
+            mapView.visibility = View.GONE
+            mapView.getMapAsync { map ->
+                map.uiSettings.setAllGesturesEnabled(false)
+                subscriptions += findLocation(location)
+                    .subscribeBy(onSuccess = { latLng ->
+                        mapView.alphaIn()
+                        map.addMarker(MarkerOptions().position(latLng))
+                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+                        mapHost.setOnClickListener {
+                            startActivity(Intent(Intent.ACTION_VIEW).apply {
+                                data = Uri.parse("https://www.google.com/maps/dir/?api=1&destination=${latLng.latitude},${latLng.longitude}")
+                            })
+                        }
+                    }, onError = {
+                        mapView.visibility = View.GONE
                     })
+            }
         }
+    }
+
+    private fun View.alphaIn() {
+        alpha = 0f
+        visibility = View.VISIBLE
+        animate()
+            .alpha(1f)
+            .setDuration(200)
+            .start()
     }
 
     private fun findLocation(location: String): Maybe<LatLng> {
         return Maybe.fromCallable { Geocoder(this).getFromLocationName(location, 1).firstOrNull() }
-                .map {
-                    LatLng(it.latitude, it.longitude)
-                }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+            .map { LatLng(it.latitude, it.longitude) }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -125,10 +141,10 @@ class EventDetailActivity : AppCompatActivity() {
 
     private fun deleteEvent() {
         subscriptions += events.delete(eventId)
-                .subscribeBy(
-                        onComplete = { finish() },
-                        onError = { Snackbar.make(event_card, getString(R.string.couldnt_delete_event), Snackbar.LENGTH_SHORT).show() }
-                )
+            .subscribeBy(
+                onComplete = { finish() },
+                onError = { Snackbar.make(event_card, getString(R.string.couldnt_delete_event), Snackbar.LENGTH_SHORT).show() }
+            )
     }
 
     private fun launchInExternalCalendar() {
@@ -175,10 +191,10 @@ class ConfirmDelete : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return MaterialAlertDialogBuilder(requireContext())
-                .setMessage(R.string.confirm_delete_message)
-                .setPositiveButton(R.string.delete) { _, _ -> onConfirm() }
-                .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
-                .create()
+            .setMessage(R.string.confirm_delete_message)
+            .setPositiveButton(R.string.delete) { _, _ -> onConfirm() }
+            .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
+            .create()
     }
 }
 
