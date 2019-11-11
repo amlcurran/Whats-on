@@ -9,6 +9,4 @@
     android:paddingTop="12dp"
     android:paddingBottom="0dp"
     android:textColor="?colorOnBackground"
-    style="@style/TextAppearance.MaterialComponents.Subtitle2">
-
-</TextView>
+    style="@style/TextAppearance.MaterialComponents.Subtitle2" />
