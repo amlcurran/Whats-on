@@ -3,19 +3,19 @@
     <item>
         <shape>
             <stroke
-                    android:dashWidth="8dip"
-                    android:dashGap="4dip"
-                    android:width="2dip"
-                    android:color="@color/empty_color"/>
-            <corners android:radius="4dip"/>
+                android:width="2dip"
+                android:color="@color/empty_color"
+                android:dashWidth="8dip"
+                android:dashGap="4dip" />
+            <corners android:radius="4dip" />
         </shape>
     </item>
     <item>
         <ripple android:color="@color/colorOnSurface">
             <item android:id="@android:id/mask">
                 <shape>
-                    <solid android:color="@android:color/white"/>
-                    <corners android:radius="4dip"/>
+                    <solid android:color="@android:color/white" />
+                    <corners android:radius="4dip" />
                 </shape>
             </item>
         </ripple>

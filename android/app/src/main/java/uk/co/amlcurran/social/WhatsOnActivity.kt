@@ -29,6 +29,7 @@ class WhatsOnActivity : AppCompatActivity() {
     private lateinit var adapter: WhatsOnAdapter
     private lateinit var events: Events
     private var loadDisposable: Disposable? = null
+    private var firstLoad = true
 
     private val eventSelectedListener = object : WhatsOnAdapter.EventSelectedListener {
         override fun eventSelected(calendarItem: EventCalendarItem, itemView: View) {
@@ -96,14 +97,17 @@ class WhatsOnActivity : AppCompatActivity() {
         permissions.requestPermission(REQUEST_CODE_REQUEST_CALENDAR, object : Permissions.OnPermissionRequestListener {
             override fun onPermissionGranted() {
                 progressBar.alphaIn()
-                loadDisposable = events.load(Timestamp(now.millis, JodaCalculator()))
+                val timestamp = Timestamp(now.millis, JodaCalculator())
+                loadDisposable = events.load(timestamp, if (firstLoad) 1000 else 0)
                         .subscribeBy(
                                 onSuccess = {
+                                    firstLoad = false
                                     adapter.onSuccess(it)
                                     progressBar.alphaOut()
                                     list_whats_on.alphaIn()
                                 },
                                 onError = {
+                                    firstLoad = false
                                     progressBar.alphaOut()
                                     adapter.onError(it)
                                 }

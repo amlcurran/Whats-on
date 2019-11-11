@@ -13,9 +13,9 @@ class Events(
         private val eventsService: EventsService
 ) {
 
-    fun load(now: Timestamp): Single<CalendarSource> {
+    fun load(now: Timestamp, delay: Long): Single<CalendarSource> {
         return Single.fromCallable { eventsService.getCalendarSource(14, now) }
-                .delay(1000, TimeUnit.MILLISECONDS)
+                .delay(delay, TimeUnit.MILLISECONDS)
                 .subscribeOn(workerThread)
                 .observeOn(mainThread)
     }
