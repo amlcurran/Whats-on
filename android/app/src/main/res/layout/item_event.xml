@@ -10,14 +10,14 @@
 
     <TextView
         android:id="@+id/event_title"
-        style="@style/TextAppearance.MaterialComponents.Body1"
+        style="@style/Body1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Large Text" />
 
     <TextView
         android:id="@+id/event_subtitle"
-        style="@style/TextAppearance.MaterialComponents.Body2"
+        style="@style/Body2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
