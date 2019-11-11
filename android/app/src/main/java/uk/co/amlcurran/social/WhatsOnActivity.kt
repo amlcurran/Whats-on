@@ -21,6 +21,8 @@ import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import org.joda.time.format.DateTimeFormat
 import uk.co.amlcurran.social.details.EventDetailActivity
+import uk.co.amlcurran.social.details.alphaIn
+import uk.co.amlcurran.social.details.alphaOut
 
 class WhatsOnActivity : AppCompatActivity() {
     private lateinit var permissions: Permissions
@@ -93,10 +95,18 @@ class WhatsOnActivity : AppCompatActivity() {
         val now = DateTime.now(DateTimeZone.getDefault())
         permissions.requestPermission(REQUEST_CODE_REQUEST_CALENDAR, object : Permissions.OnPermissionRequestListener {
             override fun onPermissionGranted() {
+                progressBar.alphaIn()
                 loadDisposable = events.load(Timestamp(now.millis, JodaCalculator()))
                         .subscribeBy(
-                                onSuccess = { adapter.onSuccess(it) },
-                                onError = { adapter.onError(it) }
+                                onSuccess = {
+                                    adapter.onSuccess(it)
+                                    progressBar.alphaOut()
+                                    list_whats_on.alphaIn()
+                                },
+                                onError = {
+                                    progressBar.alphaOut()
+                                    adapter.onError(it)
+                                }
                         )
             }
 

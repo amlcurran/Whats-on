@@ -107,15 +107,6 @@ class EventDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun View.alphaIn() {
-        alpha = 0f
-        visibility = View.VISIBLE
-        animate()
-            .alpha(1f)
-            .setDuration(200)
-            .start()
-    }
-
     private fun findLocation(location: String): Maybe<LatLng> {
         return Maybe.fromCallable { Geocoder(this).getFromLocationName(location, 1).firstOrNull() }
             .map { LatLng(it.latitude, it.longitude) }
@@ -196,6 +187,24 @@ class ConfirmDelete : DialogFragment() {
             .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
             .create()
     }
+}
+
+fun View.alphaIn() {
+    alpha = 0f
+    visibility = View.VISIBLE
+    animate()
+        .alpha(1f)
+        .setDuration(300)
+        .start()
+}
+
+fun View.alphaOut() {
+    alpha = 1f
+    animate()
+        .alpha(0f)
+        .setDuration(300)
+        .withEndAction { visibility = View.GONE }
+        .start()
 }
 
 fun Timestamp.format(dateTimeFormatter: DateTimeFormatter, calculator: JodaCalculator) = dateTimeFormatter.print(calculator.getDateTime(this))

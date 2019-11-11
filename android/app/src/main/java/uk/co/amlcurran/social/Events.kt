@@ -5,6 +5,7 @@ import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
 class Events(
         private val mainThread: Scheduler = AndroidSchedulers.mainThread(),
@@ -14,6 +15,7 @@ class Events(
 
     fun load(now: Timestamp): Single<CalendarSource> {
         return Single.fromCallable { eventsService.getCalendarSource(14, now) }
+                .delay(1000, TimeUnit.MILLISECONDS)
                 .subscribeOn(workerThread)
                 .observeOn(mainThread)
     }
