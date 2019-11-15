@@ -13,6 +13,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -60,7 +61,6 @@ class EventDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_event_details)
         eventId = intent.getStringExtra(KEY_EVENT_ID)
             ?: throw IllegalStateException("missing event ID")
-        mapView.onCreate(savedInstanceState)
 
         subscriptions += events.loadSingleEvent(eventId)
             .subscribeBy(
@@ -87,22 +87,29 @@ class EventDetailActivity : AppCompatActivity() {
 
     private fun updateMap(location: String?) {
         location?.let {
-            mapView.visibility = View.GONE
-            mapView.getMapAsync { map ->
-                map.uiSettings.setAllGesturesEnabled(false)
-                subscriptions += findLocation(location)
-                    .subscribeBy(onSuccess = { latLng ->
-                        mapView.alphaIn()
-                        map.addMarker(MarkerOptions().position(latLng))
-                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-                        mapHost.setOnClickListener {
-                            startActivity(Intent(Intent.ACTION_VIEW).apply {
-                                data = Uri.parse("https://www.google.com/maps/dir/?api=1&destination=${latLng.latitude},${latLng.longitude}")
-                            })
-                        }
-                    }, onError = {
-                        mapView.visibility = View.GONE
-                    })
+            subscriptions += findLocation(location)
+                .subscribeBy(onSuccess = ::show, onError = ::doNothing)
+        }
+    }
+
+    private fun doNothing(throwable: Throwable) {
+        // Do nothing
+    }
+
+    private fun show(latLng: LatLng) {
+        val mapFragment = SupportMapFragment.newInstance()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.mapHost, mapFragment)
+        mapHost.alpha = 0f
+        mapFragment.getMapAsync { map ->
+            map.uiSettings.setAllGesturesEnabled(false)
+            mapHost.alphaIn()
+            map.addMarker(MarkerOptions().position(latLng))
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+            mapHost.setOnClickListener {
+                startActivity(Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse("https://www.google.com/maps/dir/?api=1&destination=${latLng.latitude},${latLng.longitude}")
+                })
             }
         }
     }
@@ -142,36 +149,6 @@ class EventDetailActivity : AppCompatActivity() {
         val id = eventId.toLong()
         val eventUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, id)
         startActivity(Intent(Intent.ACTION_VIEW).setData(eventUri))
-    }
-
-    override fun onStart() {
-        super.onStart()
-        mapView.onStart()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mapView.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        mapView.onPause()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        mapView.onSaveInstanceState(outState)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        mapView.onStop()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mapView.onDestroy()
     }
 
 }
