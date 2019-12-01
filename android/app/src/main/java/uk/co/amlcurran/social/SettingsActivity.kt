@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-class SettingsActivity : AppCompatActivity() {
+class SettingsActivity : AppCompatActivity(), SettingsDelegate {
 
     companion object {
 
@@ -20,11 +20,13 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_settings)
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.settingsFrame, SettingsFragment().apply {
-                onNavigationTapped = { finish() }
-            })
+            .add(R.id.settingsFrame, SettingsFragment())
             .commit()
     }
+
+    override fun closeSettings() = finish()
+
+    override fun onCalendarSettingsChanged() { }
 
 }
 

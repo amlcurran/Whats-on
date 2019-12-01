@@ -1,6 +1,7 @@
 package uk.co.amlcurran.social
 
 import android.app.TimePickerDialog
+import android.content.Context
 import android.database.Cursor
 import android.os.Bundle
 import android.provider.CalendarContract
@@ -28,7 +29,7 @@ class SettingsFragment: Fragment() {
     private val timeFormatter: DateTimeFormatter by lazy { DateTimeFormat.shortTime() }
     private val androidTimeRepository: AndroidTimeRepository by lazy { AndroidTimeRepository(requireContext()) }
 
-    lateinit var onNavigationTapped: () -> Unit
+    private lateinit var delegate: SettingsDelegate
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.settings)
@@ -37,7 +38,7 @@ class SettingsFragment: Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        toolbar3.setNavigationOnClickListener { onNavigationTapped() }
+        toolbar3.setNavigationOnClickListener { delegate.closeSettings() }
         val adapter = CalendarViewHolderAdapter(::calendarSelectionChange)
         settingsList.adapter = adapter
         settingsList.isNestedScrollingEnabled = false
@@ -71,6 +72,11 @@ class SettingsFragment: Fragment() {
             }
 
         })
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        delegate = context as SettingsDelegate
     }
 
     private fun updateToFromText() {
@@ -118,10 +124,13 @@ class SettingsFragment: Fragment() {
 
 }
 
+interface SettingsDelegate {
+    fun closeSettings()
+    fun onCalendarSettingsChanged()
+}
+
 private class FunctionSpan(val onClick: () -> Unit): ClickableSpan() {
-    override fun onClick(widget: View) {
-        onClick()
-    }
+    override fun onClick(widget: View) = onClick()
 
 }
 

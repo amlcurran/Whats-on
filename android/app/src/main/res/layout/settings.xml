@@ -8,7 +8,8 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar3"
@@ -35,20 +36,20 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/settingsFromToTiming"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/settingsFromToTiming"
-                android:textColorLink="@color/colorPrimary"
                 android:gravity="center_horizontal"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:lineSpacingMultiplier="1.3"
-                android:text="@string/show_events_from_x_y" />
+                android:text="@string/show_events_from_x_y"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:textColorLink="@color/colorPrimary" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/show_calendars"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="16dp"
+                android:text="@string/show_calendars" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/settingsList"
