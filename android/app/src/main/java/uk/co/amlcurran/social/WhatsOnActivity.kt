@@ -7,7 +7,6 @@ import android.provider.CalendarContract
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.updatePadding
@@ -73,8 +72,7 @@ class WhatsOnActivity : AppCompatActivity() {
         list_whats_on.layoutManager = LinearLayoutManager(this)
         list_whats_on.adapter = adapter
 
-        val today = findViewById<TextView>(R.id.today_date)
-        today.text = DateTimeFormat.forPattern("EEEE, dd MMMMM").print(now)
+        today_date.text = DateTimeFormat.forPattern("EEEE, dd MMMMM").print(now)
 
         ViewCompat.setOnApplyWindowInsetsListener(toolbar) { _, insets ->
             toolbar.updatePadding(top = insets.systemWindowInsetTop)

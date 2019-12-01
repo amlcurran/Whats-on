@@ -91,6 +91,7 @@ class SettingsFragment: Fragment() {
         TimePickerDialog(requireActivity(), ::updateStartTime, hoursInDay, 0, true).show()
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun updateStartTime(view: View, hourOfDay: Int, minute: Int) {
         androidTimeRepository.updateStartTime(TimeOfDay.fromHours(hourOfDay))
         updateToFromText()
@@ -101,6 +102,7 @@ class SettingsFragment: Fragment() {
         TimePickerDialog(requireActivity(), ::updateEndTime, hoursInDay, 0, true).show()
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun updateEndTime(view: View, hourOfDay: Int, minute: Int) {
         androidTimeRepository.updateEndTime(TimeOfDay.fromHours(hourOfDay))
         updateToFromText()
