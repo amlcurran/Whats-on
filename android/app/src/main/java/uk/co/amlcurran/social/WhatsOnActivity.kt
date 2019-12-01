@@ -59,7 +59,7 @@ class WhatsOnActivity : AppCompatActivity() {
         setContentView(R.layout.activity_whats_on)
         permissions = Permissions(this)
         val eventsRepository = AndroidEventsRepository(contentResolver, CalendarRepository(this))
-        val dateCreator = AndroidTimeRepository()
+        val dateCreator = AndroidTimeRepository(this)
         val mainThread = AndroidSchedulers.mainThread()
         val background = Schedulers.io()
         events = Events(mainThread, background, EventsService(dateCreator, eventsRepository, JodaCalculator()))
@@ -68,7 +68,7 @@ class WhatsOnActivity : AppCompatActivity() {
 
         val now = DateTime.now(DateTimeZone.getDefault())
 
-        val calendarSource = CalendarSource(HashMap(), 0, JodaCalculator(), AndroidTimeRepository())
+        val calendarSource = CalendarSource(HashMap(), 0, JodaCalculator(), AndroidTimeRepository(this))
         adapter = WhatsOnAdapter(LayoutInflater.from(this), eventSelectedListener, calendarSource)
         list_whats_on.layoutManager = LinearLayoutManager(this)
         list_whats_on.adapter = adapter

@@ -6,4 +6,8 @@ interface TimeRepository {
 
     fun borderTimeStart(): TimeOfDay
 
+    fun updateStartTime(timeOfDay: TimeOfDay)
+
+    fun updateEndTime(timeOfDay: TimeOfDay)
+
 }

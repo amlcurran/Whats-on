@@ -39,7 +39,7 @@ class EventDetailActivity : AppCompatActivity() {
     private val events: Events by lazy {
         val calendarRepository = CalendarRepository(this)
         val eventsRepository = AndroidEventsRepository(contentResolver, calendarRepository)
-        Events(eventsService = EventsService(AndroidTimeRepository(), eventsRepository, jodaCalculator))
+        Events(eventsService = EventsService(AndroidTimeRepository(this), eventsRepository, jodaCalculator))
     }
 
     companion object {

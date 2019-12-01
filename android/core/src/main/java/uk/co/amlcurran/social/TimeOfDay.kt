@@ -18,8 +18,5 @@ class TimeOfDay private constructor(private val millis: Long) {
             return TimeOfDay(TimeUnit.HOURS.toMillis(hours.toLong()))
         }
 
-        fun fromHoursAndMinute(hours: Int, minutes: Int): TimeOfDay {
-            return TimeOfDay(TimeUnit.HOURS.toMillis(hours.toLong()) + TimeUnit.MINUTES.toMillis(minutes.toLong()))
-        }
     }
 }
