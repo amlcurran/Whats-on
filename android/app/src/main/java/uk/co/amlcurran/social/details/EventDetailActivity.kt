@@ -71,8 +71,8 @@ class EventDetailActivity : AppCompatActivity() {
                 }
             )
 
-        toolbar2.setOnMenuItemClickListener(::onOptionsItemSelected)
-        toolbar2.setNavigationOnClickListener { finish() }
+        detail_toolbar.setOnMenuItemClickListener(::onOptionsItemSelected)
+        detail_toolbar.setNavigationOnClickListener { finish() }
     }
 
     private fun render(event: Event) {
@@ -80,8 +80,8 @@ class EventDetailActivity : AppCompatActivity() {
         val startTime = event.item.startTime.format(timeFormatter, jodaCalculator)
         val endTime = event.item.endTime.format(timeFormatter, jodaCalculator)
         event_subtitle.text = getString(R.string.start_to_end, startTime, endTime)
-        toolbar2.menu.findItem(R.id.menu_open_outside).isVisible = true
-        toolbar2.menu.findItem(R.id.menu_delete_event).isVisible = true
+        detail_toolbar.menu.findItem(R.id.menu_open_outside).isVisible = true
+        detail_toolbar.menu.findItem(R.id.menu_delete_event).isVisible = true
         updateMap(event.location)
     }
 
