@@ -12,7 +12,6 @@
         android:id="@+id/place_selector_list"
         android:layout_width="match_parent"
         tools:listitem="@layout/item_place"
-        android:background="#ffffff"
         android:layout_height="match_parent" />
 
     <com.google.android.gms.maps.MapView

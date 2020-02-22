@@ -7,18 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.item_place.view.*
 import kotlinx.android.synthetic.main.place_selector.view.*
 import uk.co.amlcurran.social.R
 import uk.co.amlcurran.social.inflate
 import kotlin.properties.Delegates
 
-data class AutocompletePlace(val id: String, val name: CharSequence)
+data class AutocompletePlace(val id: String, val name: CharSequence, val secondLine: CharSequence)
 
 data class Place(val id: String, val name: CharSequence, val latLng: LatLng)
 
@@ -40,7 +40,8 @@ private class ListAdapter : RecyclerView.Adapter<ViewHolder>() {
     override fun getItemCount(): Int = autocompletePlaces.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        (holder.itemView as TextView).text = autocompletePlaces[position].name
+        holder.itemView.place_name.text = autocompletePlaces[position].name
+        holder.itemView.place_description.text = autocompletePlaces[position].secondLine
         holder.itemView.setOnClickListener {
             onPlaceSelected(autocompletePlaces[position])
         }

@@ -53,10 +53,12 @@ class AddEventFragment : Fragment() {
         add_place_edit.textChanges()
             .debounce(100, TimeUnit.MILLISECONDS)
             .subscribeOn(Schedulers.io())
+            .doOnSubscribe { add_select_place.state = PlaceSelectorState.Initial }
             .filter { it.length > 3 }
-            .flatMapSingle { geocode(it) }
-            .startWith(PlaceSelectorState.Initial)
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnNext { add_select_place.state = PlaceSelectorState.Loading }
+            .observeOn(Schedulers.io())
+            .switchMapSingle { geocode(it) }
             .subscribeBy(
                 onNext = { add_select_place.state = it },
                 onError = { Log.w("Foo", it) }
@@ -80,10 +82,6 @@ class AddEventFragment : Fragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onStart() {
         super.onStart()
         add_select_place.start()
@@ -104,9 +102,9 @@ class AddEventFragment : Fragment() {
         add_select_place.stop()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        add_select_place.destroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        add_select_place?.destroy()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -125,7 +123,7 @@ class AddEventFragment : Fragment() {
             .flatMapMaybe { placesClient.findAutocompletePredictions(it).reactive() }
             .map {
                 it.autocompletePredictions.map { prediction ->
-                    AutocompletePlace(prediction.placeId, prediction.getPrimaryText(null))
+                    AutocompletePlace(prediction.placeId, prediction.getPrimaryText(null), prediction.getSecondaryText(null))
                 }
             }
             .toSingle(emptyList())
