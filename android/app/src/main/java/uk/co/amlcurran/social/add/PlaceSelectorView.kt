@@ -15,6 +15,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.item_place.view.*
 import kotlinx.android.synthetic.main.place_selector.view.*
 import uk.co.amlcurran.social.R
+import uk.co.amlcurran.social.details.alphaIn
+import uk.co.amlcurran.social.details.alphaOut
 import uk.co.amlcurran.social.inflate
 import kotlin.properties.Delegates
 
@@ -80,28 +82,28 @@ class PlaceSelectorView @JvmOverloads constructor(
     }
 
     private fun showList(autocompletePlaces: List<AutocompletePlace>) {
-        place_selector_loader.visibility = View.GONE
-        place_selector_list.visibility = View.VISIBLE
-        place_selector_map.visibility = View.GONE
+        place_selector_loader.alphaOut()
+        place_selector_map.alphaOut()
         placesAdapter.autocompletePlaces = autocompletePlaces
+        place_selector_list.alphaIn(translate = true)
     }
 
     private fun displayMap(latLng: LatLng) {
-        place_selector_loader.visibility = View.GONE
-        place_selector_list.visibility = View.GONE
-        place_selector_map.visibility = View.VISIBLE
+        place_selector_loader.alphaOut()
+        place_selector_list.alphaOut()
         place_selector_map.getMapAsync {
             it.clear()
             it.uiSettings.setAllGesturesEnabled(false)
             it.addMarker(MarkerOptions().position(latLng))
             it.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13f))
         }
+        place_selector_map.alphaIn(translate = true)
     }
 
     private fun goLoading() {
-        place_selector_loader.visibility = View.VISIBLE
-        place_selector_list.visibility = View.GONE
-        place_selector_map.visibility = View.GONE
+        place_selector_list.alphaOut()
+        place_selector_map.alphaOut()
+        place_selector_loader.alphaIn()
     }
 
     fun create(savedInstanceState: Bundle?) = place_selector_map.onCreate(savedInstanceState)
