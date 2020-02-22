@@ -16,4 +16,10 @@
     <string name="show_calendars">Calendars shown:</string>
     <string name="show_events_from_x_y">Show events from\n<xliff:g id="from" example="5:00pm">%1$s</xliff:g>\n to \n<xliff:g id="to" example="8:00pm">%2$s</xliff:g></string>
     <string name="start_time">Starting from</string>
+    <string name="add_event">Add event</string>
+    <string name="add">Add</string>
+    <string name="event_name">Event name</string>
+    <string name="default_event_start">%1$s</string>
+    <string name="to">to</string>
+    <string name="location">Location</string>
 </resources>

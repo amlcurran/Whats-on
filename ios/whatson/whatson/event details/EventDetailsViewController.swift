@@ -6,7 +6,7 @@ import FirebaseAnalytics
 import CoreLocation
 import Core
 
-class EventDetailsViewController: UIViewController, UITextViewDelegate, EKEventViewDelegate, UINavigationBarDelegate, EventResponseViewDelegate, EKEventEditViewDelegate, EventView, DetailsCardDelegate {
+class EventDetailsViewController: UIViewController, EKEventViewDelegate, UINavigationBarDelegate, EventResponseViewDelegate, EKEventEditViewDelegate, EventView, DetailsCardDelegate {
 
     lazy var detailsCard = DetailsCard()
     lazy var moreInfoButton = UIButton()

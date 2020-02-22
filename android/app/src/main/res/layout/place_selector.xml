@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:parentTag="android.widget.FrameLayout">
+
+    <ProgressBar android:layout_width="wrap_content"
+        android:id="@+id/place_selector_loader"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/place_selector_list"
+        android:layout_width="match_parent"
+        tools:listitem="@layout/item_place"
+        android:background="#ffffff"
+        android:layout_height="match_parent" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/place_selector_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+</merge>
