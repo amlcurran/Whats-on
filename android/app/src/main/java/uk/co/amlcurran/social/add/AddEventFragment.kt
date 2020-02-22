@@ -65,6 +65,10 @@ class AddEventFragment : Fragment() {
             )
             .addTo(disposable)
 
+        toolbar.setNavigationOnClickListener {
+            requireActivity().finish()
+        }
+
         add_select_place.onPlaceSelected = { autocompletePlace ->
             val fields = listOf(Place.Field.LAT_LNG, Place.Field.ID, Place.Field.NAME)
             placesClient.fetchPlace(FetchPlaceRequest.builder(autocompletePlace.id, fields)
