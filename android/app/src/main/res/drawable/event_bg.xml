@@ -3,7 +3,7 @@
     <item android:id="@+id/event_bg_color">
         <shape>
             <solid android:color="?colorSurface"/>
-            <corners android:radius="4dip"/>
+            <corners android:radius="8dip"/>
         </shape>
     </item>
     <item>
@@ -11,7 +11,7 @@
             <item android:id="@android:id/mask">
                 <shape>
                     <solid android:color="@android:color/white"/>
-                    <corners android:radius="4dip"/>
+                    <corners android:radius="8dip"/>
                 </shape>
             </item>
         </ripple>
