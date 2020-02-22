@@ -8,6 +8,7 @@ import android.location.Geocoder
 import android.net.Uri
 import android.os.Bundle
 import android.provider.CalendarContract
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -93,17 +94,18 @@ class EventDetailActivity : AppCompatActivity() {
     }
 
     private fun doNothing(throwable: Throwable) {
-        // Do nothing
+        Log.w("Failure", throwable)
     }
 
     private fun show(latLng: LatLng) {
         val mapFragment = SupportMapFragment.newInstance()
         supportFragmentManager.beginTransaction()
             .add(R.id.mapHost, mapFragment)
+            .commit()
         mapHost.alpha = 0f
         mapFragment.getMapAsync { map ->
             map.uiSettings.setAllGesturesEnabled(false)
-            mapHost.alphaIn()
+            mapHost.alphaIn(translate = true)
             map.addMarker(MarkerOptions().position(latLng))
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
             mapHost.setOnClickListener {
@@ -115,7 +117,7 @@ class EventDetailActivity : AppCompatActivity() {
     }
 
     private fun findLocation(location: String): Maybe<LatLng> {
-        return Maybe.fromCallable { Geocoder(this).getFromLocationName(location, 1).firstOrNull() }
+        return Maybe.fromCallable { Geocoder(this).getFromLocationName(location, 10).firstOrNull() }
             .map { LatLng(it.latitude, it.longitude) }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -166,12 +168,16 @@ class ConfirmDelete : DialogFragment() {
     }
 }
 
-fun View.alphaIn() {
+fun View.alphaIn(translate: Boolean = false) {
     alpha = 0f
     visibility = View.VISIBLE
+    if (translate) {
+        translationY = -context.resources.getDimension(R.dimen.slide_in_length)
+    }
     animate()
         .alpha(1f)
-        .setDuration(300)
+        .translationY(0f)
+        .setDuration(context.resources.getInteger(android.R.integer.config_shortAnimTime).toLong())
         .start()
 }
 

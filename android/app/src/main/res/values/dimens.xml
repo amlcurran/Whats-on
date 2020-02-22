@@ -3,4 +3,5 @@
     <dimen name="item_margin">8dip</dimen>
     <dimen name="item_margin_half">4dip</dimen>
     <dimen name="item_height">64dip</dimen>
+    <dimen name="slide_in_length">24dp</dimen>
 </resources>
