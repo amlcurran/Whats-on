@@ -11,5 +11,10 @@
         android:icon="@drawable/ic_delete_event"
         android:id="@+id/menu_delete_event"
         android:visible="false"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
+    <item android:title="@string/hide"
+        android:icon="@drawable/ic_visibility_off_black_24dp"
+        android:id="@+id/menu_hide_event"
+        android:visible="false"
+        app:showAsAction="never" />
 </menu>

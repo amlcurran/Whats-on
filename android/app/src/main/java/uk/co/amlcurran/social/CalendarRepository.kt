@@ -42,4 +42,16 @@ class CalendarRepository(context: Context) {
         return !excludedCalendars().contains(calendarId)
     }
 
+    private fun hiddenEvents() = preferences.getStringSet("hidden_events", emptySet()) ?: emptySet()
+
+    fun hide(eventId: String) {
+        preferences.edit {
+            putStringSet("hidden_events", hiddenEvents().inserting(eventId))
+        }
+    }
+
+    fun shouldShowEvent(eventId: String): Boolean {
+        return preferences.getStringSet("hidden_events", emptySet())!!.contains(eventId) == false
+    }
+
 }

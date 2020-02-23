@@ -41,6 +41,7 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver, priv
             .filter { it.attendingStatus != CalendarContract.Events.STATUS_CANCELED }
             .filter { it.isDeleted == false }
             .filter { (it.startMinute > elevenPm.minutesInDay() || it.endMinute < fivePm.minutesInDay()) == false }
+            .filter { calendarRepository.shouldShowEvent(it.eventId) }
             .map { EventCalendarItem(it.eventId, it.calendarId, it.title, it.time, it.endTime) }
             .filter { calendarRepository.shouldShow(it) }
     }

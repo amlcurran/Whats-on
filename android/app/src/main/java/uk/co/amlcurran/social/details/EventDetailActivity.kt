@@ -83,6 +83,7 @@ class EventDetailActivity : AppCompatActivity() {
         event_subtitle.text = getString(R.string.start_to_end, startTime, endTime)
         detail_toolbar.menu.findItem(R.id.menu_open_outside).isVisible = true
         detail_toolbar.menu.findItem(R.id.menu_delete_event).isVisible = true
+        detail_toolbar.menu.findItem(R.id.menu_hide_event).isVisible = true
         updateMap(event.location)
     }
 
@@ -127,8 +128,15 @@ class EventDetailActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.menu_open_outside -> launchInExternalCalendar()
             R.id.menu_delete_event -> confirmDelete()
+            R.id.menu_hide_event -> hideEvent()
         }
         return true
+    }
+
+    private fun hideEvent() {
+        val calendarRepository = CalendarRepository(this)
+        calendarRepository.hide(eventId)
+        finish()
     }
 
     private fun confirmDelete() {
