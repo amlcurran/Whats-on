@@ -4,41 +4,45 @@ import android.content.ContentResolver
 import android.content.ContentUris
 import android.database.Cursor
 import android.provider.CalendarContract
-import android.provider.CalendarContract.Instances.*
-
-import java.util.ArrayList
+import android.provider.CalendarContract.Instances.CONTENT_URI
 
 class AndroidEventsRepository(private val contentResolver: ContentResolver, private val calendarRepository: CalendarRepository) : EventsRepository {
 
-    private fun getCursor(fivePm: TimeOfDay, elevenPm: TimeOfDay, searchStart: Timestamp, searchEnd: Timestamp): Cursor? {
+    private fun getCursor(searchStart: Timestamp, searchEnd: Timestamp): Cursor? {
         val builder = CONTENT_URI.buildUpon()
         ContentUris.appendId(builder, searchStart.millis)
         ContentUris.appendId(builder, searchEnd.millis)
 
-        val endsBefore = "$END_MINUTE < ${fivePm.minutesInDay()}"
-        val startsAfter = "$START_MINUTE > ${elevenPm.minutesInDay()}"
-        val selection = "(NOT (${endsBefore} OR ${startsAfter})) " +
-                "AND $SELF_ATTENDEE_STATUS <> $STATUS_CANCELED " +
-                "AND $ALL_DAY == 0 " +
-                "AND ${CalendarContract.Events.DELETED} <> 1"
-
-        return contentResolver.query(builder.build(), PROJECTION, selection, null, null)
+        return contentResolver.query(builder.build(), CursorEventRepositoryAccessor.projection, "", null, null)
     }
 
+    data class Foo(val eventId: String, val calendarId: String, val title: String, val time: Timestamp, val endTime: Timestamp, val allDay: Boolean, val attendingStatus: Int, val isDeleted: Boolean, val startMinute: Int, val endMinute: Int)
+
     override fun getCalendarItems(nowTime: Timestamp, nextWeek: Timestamp, fivePm: TimeOfDay, elevenPm: TimeOfDay): List<CalendarItem> {
-        val calendarCursor = getCursor(fivePm, elevenPm, nowTime, nextWeek)
+        val calendarCursor = getCursor(nowTime, nextWeek)
         val accessor = CursorEventRepositoryAccessor(calendarCursor!!, JodaCalculator())
-        val calendarItems = ArrayList<CalendarItem>()
+        val calendarItems = ArrayList<Foo>()
         while (accessor.nextItem()) {
             val title = accessor.title
             val eventId = accessor.eventIdentifier
             val calendarId = accessor.calendarId
             val time = accessor.startTime
             val endTime = accessor.endTime
-            calendarItems.add(EventCalendarItem(eventId, calendarId, title, time, endTime))
+            val allDay = accessor.allDay
+            val attendingStatus = accessor.attendingStatus
+            val deleted = accessor.isDeleted
+            val startMinute = accessor.startMinuteInDay
+            val endMinute = accessor.endMinuteInDay
+            calendarItems.add(Foo(eventId, calendarId, title, time, endTime, allDay, attendingStatus, deleted, startMinute, endMinute))
         }
         calendarCursor.close()
-        return calendarItems.filter { calendarRepository.shouldShow(it) }
+        return calendarItems
+            .filter { it.allDay == false }
+            .filter { it.attendingStatus != CalendarContract.Events.STATUS_CANCELED }
+            .filter { it.isDeleted == false }
+            .filter { (it.startMinute > elevenPm.minutesInDay() || it.endMinute < fivePm.minutesInDay()) == false }
+            .map { EventCalendarItem(it.eventId, it.calendarId, it.title, it.time, it.endTime) }
+            .filter { calendarRepository.shouldShow(it) }
     }
 
     override fun event(eventId: String): Event? {
@@ -66,7 +70,6 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver, priv
 
     companion object {
 
-        val PROJECTION = arrayOf(CalendarContract.Events.TITLE, START_DAY, CalendarContract.Events.SELF_ATTENDEE_STATUS, CalendarContract.Events.DTSTART, CalendarContract.Events.DTEND, EVENT_ID, CalendarContract.Events.CALENDAR_ID)
         val SINGLE_PROJECTION = arrayOf(CalendarContract.Events.TITLE, CalendarContract.Events._ID, CalendarContract.Events.SELF_ATTENDEE_STATUS, CalendarContract.Events.EVENT_LOCATION, CalendarContract.Events.DTSTART, CalendarContract.Events.DTEND)
     }
 

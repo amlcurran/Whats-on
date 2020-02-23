@@ -13,5 +13,15 @@ public interface EventRepositoryAccessor {
 
     String getCalendarId();
 
+    boolean getAllDay();
+
+    boolean isDeleted();
+
+    int getAttendingStatus();
+
+    int getStartMinuteInDay();
+
+    int getEndMinuteInDay();
+
     String getString(String columnName);
 }

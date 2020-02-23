@@ -10,6 +10,42 @@ class CursorEventRepositoryAccessor(private val calendarCursor: Cursor, private 
     private val dtEndColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Events.DTEND) }
     private val eventIdColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Instances.EVENT_ID) }
     private val calendarIdColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Instances.CALENDAR_ID) }
+    private val allDayColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Instances.ALL_DAY) }
+    private val selfAttendanceColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Instances.SELF_ATTENDEE_STATUS) }
+    private val deletedColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Events.DELETED) }
+    private val startMinuteColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Instances.START_MINUTE) }
+    private val endMinuteColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Instances.END_MINUTE) }
+
+    companion object {
+        val projection = arrayOf(
+            CalendarContract.Events.TITLE,
+            CalendarContract.Events.DTSTART,
+            CalendarContract.Events.DTEND,
+            CalendarContract.Instances.EVENT_ID,
+            CalendarContract.Instances.CALENDAR_ID,
+            CalendarContract.Instances.ALL_DAY,
+            CalendarContract.Instances.SELF_ATTENDEE_STATUS,
+            CalendarContract.Instances.START_MINUTE,
+            CalendarContract.Instances.END_MINUTE,
+            CalendarContract.Events.DELETED
+        )
+    }
+
+    override fun getAllDay(): Boolean {
+        return calendarCursor.getInt(allDayColumnIndex) != 0
+    }
+
+    override fun isDeleted(): Boolean {
+        return calendarCursor.getInt(deletedColumnIndex) == 1
+    }
+
+    override fun getAttendingStatus(): Int {
+        return calendarCursor.getInt(selfAttendanceColumnIndex)
+    }
+
+    override fun getStartMinuteInDay(): Int {
+        return calendarCursor.getInt(startMinuteColumnIndex)
+    }
 
     override fun getTitle(): String {
         return calendarCursor.getString(titleColumnIndex)
@@ -35,6 +71,10 @@ class CursorEventRepositoryAccessor(private val calendarCursor: Cursor, private 
 
     override fun getCalendarId(): String {
         return calendarCursor.getString(calendarIdColumnIndex)
+    }
+
+    override fun getEndMinuteInDay(): Int {
+        return calendarCursor.getInt(endMinuteColumnIndex)
     }
 
     override fun getString(columnName: String): String {
