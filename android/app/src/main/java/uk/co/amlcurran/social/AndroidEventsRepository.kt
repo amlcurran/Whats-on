@@ -51,8 +51,8 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver, priv
         val accessor = CursorEventRepositoryAccessor(cursor!!, JodaCalculator())
         if (accessor.nextItem()) {
             val title = accessor.title
-            val time = accessor.startTime
-            val endTime = accessor.endTime
+            val time = accessor.dtStartTime
+            val endTime = accessor.dtEndTime
             val item = EventCalendarItem(eventId, "", title, time, endTime)
             val location = accessor.getString(CalendarContract.Events.EVENT_LOCATION)
             cursor.close()

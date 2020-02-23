@@ -6,8 +6,10 @@ import android.provider.CalendarContract
 class CursorEventRepositoryAccessor(private val calendarCursor: Cursor, private val timeCalculator: TimeCalculator) : EventRepositoryAccessor {
 
     private val titleColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Events.TITLE) }
-    private val dtStartColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Events.DTSTART) }
-    private val dtEndColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Events.DTEND) }
+    private val dtStartColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Instances.DTSTART) }
+    private val dtEndColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Instances.DTEND) }
+    private val beginColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Instances.BEGIN) }
+    private val endColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Instances.END) }
     private val eventIdColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Instances.EVENT_ID) }
     private val calendarIdColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Instances.CALENDAR_ID) }
     private val allDayColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Instances.ALL_DAY) }
@@ -19,8 +21,8 @@ class CursorEventRepositoryAccessor(private val calendarCursor: Cursor, private 
     companion object {
         val projection = arrayOf(
             CalendarContract.Events.TITLE,
-            CalendarContract.Events.DTSTART,
-            CalendarContract.Events.DTEND,
+            CalendarContract.Instances.BEGIN,
+            CalendarContract.Instances.END,
             CalendarContract.Instances.EVENT_ID,
             CalendarContract.Instances.CALENDAR_ID,
             CalendarContract.Instances.ALL_DAY,
@@ -60,11 +62,21 @@ class CursorEventRepositoryAccessor(private val calendarCursor: Cursor, private 
     }
 
     override fun getStartTime(): Timestamp {
-        val startMillis = calendarCursor.getLong(dtStartColumnIndex)
+        val startMillis = calendarCursor.getLong(beginColumnIndex)
         return Timestamp(startMillis, timeCalculator)
     }
 
     override fun getEndTime(): Timestamp {
+        val endMillis = calendarCursor.getLong(endColumnIndex)
+        return Timestamp(endMillis, timeCalculator)
+    }
+
+    override fun getDtStartTime(): Timestamp {
+        val startMillis = calendarCursor.getLong(dtStartColumnIndex)
+        return Timestamp(startMillis, timeCalculator)
+    }
+
+    override fun getDtEndTime(): Timestamp {
         val endMillis = calendarCursor.getLong(dtEndColumnIndex)
         return Timestamp(endMillis, timeCalculator)
     }

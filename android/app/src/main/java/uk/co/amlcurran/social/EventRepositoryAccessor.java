@@ -11,6 +11,10 @@ public interface EventRepositoryAccessor {
 
     Timestamp getEndTime();
 
+    Timestamp getDtStartTime();
+
+    Timestamp getDtEndTime();
+
     String getCalendarId();
 
     boolean getAllDay();
