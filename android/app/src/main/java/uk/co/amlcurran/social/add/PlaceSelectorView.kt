@@ -24,9 +24,7 @@ data class AutocompletePlace(val id: String, val name: CharSequence, val secondL
 
 data class Place(val id: String, val name: CharSequence, val latLng: LatLng)
 
-private class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-}
+private class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
 private class ListAdapter : RecyclerView.Adapter<ViewHolder>() {
 

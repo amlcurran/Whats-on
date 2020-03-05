@@ -1,7 +1,9 @@
 package uk.co.amlcurran.social
 
+import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.database.Cursor
 import android.os.Bundle
 import android.provider.CalendarContract
@@ -13,11 +15,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.text.buildSpannedString
 import androidx.fragment.app.Fragment
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.settings.*
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
@@ -47,6 +51,8 @@ class SettingsFragment: Fragment() {
         settingsFromToTiming.isClickable = true
         settingsFromToTiming.movementMethod = LinkMovementMethod.getInstance()
 
+        updateTheme()
+
         LoaderManager.getInstance(this).initLoader(0, null, object : LoaderManager.LoaderCallbacks<Cursor> {
             override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
                 return CursorLoader(requireContext(), CalendarContract.Calendars.CONTENT_URI, null, null, null, null)
@@ -72,6 +78,37 @@ class SettingsFragment: Fragment() {
             }
 
         })
+    }
+
+    private fun updateTheme() {
+        val currentTheme = when (AppCompatDelegate.getDefaultNightMode()) {
+            AppCompatDelegate.MODE_NIGHT_YES -> getString(R.string.dark)
+            AppCompatDelegate.MODE_NIGHT_NO -> getString(R.string.light)
+            else -> getString(R.string.default_theme)
+        }
+        settingsTheme.text = currentTheme
+
+        settingsThemeChanger.setOnClickListener { showThemeDialog() }
+    }
+
+    private fun showThemeDialog() {
+        val currentMode = when (AppCompatDelegate.getDefaultNightMode()) {
+            AppCompatDelegate.MODE_NIGHT_YES -> 2
+            AppCompatDelegate.MODE_NIGHT_NO -> 1
+            else -> 0
+        }
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.app_theme)
+            .setSingleChoiceItems(arrayOf(getString(R.string.default_theme), getString(R.string.light), getString(R.string.dark)), currentMode) { di, selected: Int ->
+                when (selected) {
+                    0 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                    1 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    else -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }
+                di.dismiss()
+                updateTheme()
+            }
+            .show()
     }
 
     override fun onAttach(context: Context) {

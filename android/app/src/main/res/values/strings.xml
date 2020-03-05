@@ -23,4 +23,8 @@
     <string name="to">to</string>
     <string name="location">Location</string>
     <string name="hide">Hide</string>
+    <string name="app_theme">App theme</string>
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
+    <string name="default_theme">System</string>
 </resources>
