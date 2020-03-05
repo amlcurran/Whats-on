@@ -1,9 +1,7 @@
 package uk.co.amlcurran.social
 
-import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.database.Cursor
 import android.os.Bundle
 import android.provider.CalendarContract
@@ -82,9 +80,9 @@ class SettingsFragment: Fragment() {
 
     private fun updateTheme() {
         val currentTheme = when (AppCompatDelegate.getDefaultNightMode()) {
-            AppCompatDelegate.MODE_NIGHT_YES -> getString(R.string.dark)
-            AppCompatDelegate.MODE_NIGHT_NO -> getString(R.string.light)
-            else -> getString(R.string.default_theme)
+            AppCompatDelegate.MODE_NIGHT_YES -> "🌜 " + getString(R.string.dark)
+            AppCompatDelegate.MODE_NIGHT_NO -> "🌞 " + getString(R.string.light)
+            else -> "🌓 " + getString(R.string.default_theme)
         }
         settingsTheme.text = currentTheme
 
@@ -97,9 +95,10 @@ class SettingsFragment: Fragment() {
             AppCompatDelegate.MODE_NIGHT_NO -> 1
             else -> 0
         }
+        val themes = arrayOf(getString(R.string.default_theme), getString(R.string.light), getString(R.string.dark))
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.app_theme)
-            .setSingleChoiceItems(arrayOf(getString(R.string.default_theme), getString(R.string.light), getString(R.string.dark)), currentMode) { di, selected: Int ->
+            .setSingleChoiceItems(themes, currentMode) { di, selected: Int ->
                 when (selected) {
                     0 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                     1 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
