@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_whats_on.*
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import org.joda.time.format.DateTimeFormat
+import uk.co.amlcurran.social.add.AddEventActivity
 import uk.co.amlcurran.social.details.EventDetailActivity
 import uk.co.amlcurran.social.details.alphaIn
 import uk.co.amlcurran.social.details.alphaOut
@@ -43,7 +44,11 @@ class WhatsOnActivity : AppCompatActivity() {
             val endTime = day.plusHours(22)
             intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime.millis)
             intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.millis)
-            startActivity(intent)
+            if (true) {
+                startActivity(Intent(this@WhatsOnActivity, AddEventActivity::class.java))
+            } else {
+                startActivity(intent)
+            }
         }
 
     }
