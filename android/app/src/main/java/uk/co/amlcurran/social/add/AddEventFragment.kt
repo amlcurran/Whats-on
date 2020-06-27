@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.google.android.gms.tasks.Task
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken
@@ -24,6 +27,7 @@ import io.reactivex.disposables.Disposables
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.add_event_fragment.*
 import uk.co.amlcurran.social.R
 import uk.co.amlcurran.social.inflate
@@ -32,14 +36,8 @@ import java.util.concurrent.TimeUnit
 class AddEventFragment : Fragment() {
 
     private val disposable = CompositeDisposable()
-    private val placesClient: PlacesClient by lazy {
-        if (!Places.isInitialized()) {
-            Places.initialize(requireContext(), getString(R.string.maps_api_key))
-        }
-        Places.createClient(requireContext())
-    }
-    private val token: AutocompleteSessionToken by lazy {
-        AutocompleteSessionToken.newInstance()
+    private val viewModel: AddEventViewModel by viewModels {
+        ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -49,40 +47,23 @@ class AddEventFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         add_select_place.create(savedInstanceState)
+        val selectedPlace = BehaviorSubject.create<AutocompletePlace>()
 
-        add_place_edit.textChanges()
-            .debounce(100, TimeUnit.MILLISECONDS)
-            .subscribeOn(Schedulers.io())
-            .doOnSubscribe { add_select_place.state = PlaceSelectorState.Initial }
-            .filter { it.length > 3 }
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext { add_select_place.state = PlaceSelectorState.Loading }
-            .observeOn(Schedulers.io())
-            .switchMapSingle { geocode(it) }
-            .subscribeBy(
-                onNext = { add_select_place.state = it },
-                onError = { Log.w("Foo", it) }
-            )
-            .addTo(disposable)
+        viewModel.placeSelectorState.observe(viewLifecycleOwner) {
+            add_select_place.state = it
+        }
+
+        viewModel.bind(
+            add_place_edit.textChanges(),
+            selectedPlace
+        )
 
         toolbar.setNavigationOnClickListener {
             requireActivity().finish()
         }
 
         add_select_place.onPlaceSelected = { autocompletePlace ->
-            val fields = listOf(Place.Field.LAT_LNG, Place.Field.ID, Place.Field.NAME)
-            placesClient.fetchPlace(FetchPlaceRequest.builder(autocompletePlace.id, fields)
-                .setSessionToken(token)
-                .build())
-                .reactive()
-                .subscribeOn(Schedulers.io())
-                .map { Place(it.place.id!!, it.place.name!!, it.place.latLng!!) }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                    onSuccess = { add_select_place.state = PlaceSelectorState.SelectedPlace(it) },
-                    onError = { Log.w("Error", it) }
-                )
-                .addTo(disposable)
+            selectedPlace.onNext(autocompletePlace)
         }
     }
 
@@ -121,27 +102,6 @@ class AddEventFragment : Fragment() {
         add_select_place.lowMemory()
     }
 
-    fun geocode(string: String): Single<PlaceSelectorState> {
-        return Single.just(string)
-            .map { buildRequest(it) }
-            .flatMapMaybe { placesClient.findAutocompletePredictions(it).reactive() }
-            .map {
-                it.autocompletePredictions.map { prediction ->
-                    AutocompletePlace(prediction.placeId, prediction.getPrimaryText(null), prediction.getSecondaryText(null))
-                }
-            }
-            .toSingle(emptyList())
-            .map { PlaceSelectorState.PlaceList(it) }
-
-    }
-
-    private fun buildRequest(it: String): FindAutocompletePredictionsRequest {
-        return FindAutocompletePredictionsRequest.builder()
-            .setQuery(it)
-            .setSessionToken(token)
-            .build()
-    }
-
     override fun onDetach() {
         super.onDetach()
         disposable.clear()
@@ -160,7 +120,7 @@ private fun TextInputEditText.textChanges(): Observable<String> {
     }
 }
 
-private fun <Result> Task<Result>.reactive(): Maybe<Result> {
+fun <Result> Task<Result>.reactive(): Maybe<Result> {
     return Maybe.create<Result> { emitter ->
         addOnCanceledListener {
             emitter.onComplete()
