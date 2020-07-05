@@ -13,10 +13,8 @@ public class EventStoreRepository: EventsRepository {
         self.calendarPreferenceStore = calendarPreferenceStore
     }
 
-    public func getCalendarItems(nowTime: Timestamp, nextWeek: Timestamp, fivePm: TimeOfDay, elevenPm: TimeOfDay) -> [CalendarItem] {
+    public func getCalendarItems(between startTime: Date, and endTime: Date, borderStart fivePm: TimeOfDay, borderEnd elevenPm: TimeOfDay) -> [CalendarItem] {
         let eventStore = EKEventStore.instance
-        let startTime = calculator.date(from: nowTime)
-        let endTime = calculator.date(from: nextWeek)
         let calendars = eventStore.supportedCalendars(from: calendarPreferenceStore)
         let search = eventStore.predicateForEvents(withStart: startTime, end: endTime, calendars: calendars)
         let allEvents = eventStore.events(matching: search)

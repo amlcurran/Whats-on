@@ -27,7 +27,7 @@ struct Provider: TimelineProvider {
     public func timeline(with context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
 
         DispatchQueue.global(qos: .default).async {
-            let events = self.eventsService.getCalendarSource(numberOfDays: 2, now: .now)
+            let events = self.eventsService.getCalendarSource(numberOfDays: 2, now: Date())
             let calculator = NSDateCalculator.instance
 
             var dayEntries: [Day] = []

@@ -26,16 +26,16 @@ public class EventsService {
         self.timeCalculator = timeCalculator
     }
 
-    public func getCalendarSource(numberOfDays: Int, now: Timestamp) -> CalendarSource {
-        let nowTime = timeCalculator.startOfToday()
-        let nextWeek = nowTime.plusDays(days: numberOfDays)
+    public func getCalendarSource(numberOfDays: Int, now: Date) -> CalendarSource {
+        let nowTime = timeCalculator.dateAtStartOfToday()
+        let nextWeek = timeCalculator.add(days: numberOfDays, to: nowTime)
         let fivePm = timeRepository.borderTimeStart
         let elevenPm = timeRepository.borderTimeEnd
 
-        let calendarItems = eventsRepository.getCalendarItems(nowTime: nowTime, nextWeek: nextWeek, fivePm: fivePm, elevenPm: elevenPm)
+        let calendarItems = eventsRepository.getCalendarItems(between: nowTime, and: nextWeek, borderStart: fivePm, borderEnd: elevenPm)
 
         var itemArray = [Int: CalendarSlot]()
-        let epochToNow = now.daysSinceEpoch()
+        let epochToNow = timeCalculator.daysSinceEpoch(in: now)
         for item in calendarItems {
             let key = timeCalculator.daysSinceEpoch(in: item.startTime) - epochToNow
             var slot = itemArray[key] ?? CalendarSlot()

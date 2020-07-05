@@ -73,7 +73,6 @@
 		868119E32306D76A0035553B /* CalendarPreferenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869475691F376DE900925C2A /* CalendarPreferenceStore.swift */; };
 		868119E42306D77C0035553B /* CalendarsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658A2391F37605000BF219C /* CalendarsLoader.swift */; };
 		868119E52306D7930035553B /* EKEventStore+Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E4581DA8076400E8D019 /* EKEventStore+Singleton.swift */; };
-		8686BE9424B11A5A001C72A9 /* SCTimestamp+Now.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8686BE9324B11A5A001C72A9 /* SCTimestamp+Now.swift */; };
 		8686BE9524B1218D001C72A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */; };
 		8694756C1F37726D00925C2A /* CalendarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8694756B1F37726D00925C2A /* CalendarPresenter.swift */; };
 		8694756E1F37742C00925C2A /* DatePickerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8694756D1F37742C00925C2A /* DatePickerPresenter.swift */; };
@@ -266,7 +265,6 @@
 		86755DE922C7BD8D00E91DF4 /* BorderTimeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderTimeRepository.swift; sourceTree = "<group>"; };
 		86755DEB22C7BDB500E91DF4 /* TimeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCalculator.swift; sourceTree = "<group>"; };
 		86755DED22C7BDF100E91DF4 /* CalendarSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSlot.swift; sourceTree = "<group>"; };
-		8686BE9324B11A5A001C72A9 /* SCTimestamp+Now.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCTimestamp+Now.swift"; sourceTree = "<group>"; };
 		869475691F376DE900925C2A /* CalendarPreferenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPreferenceStore.swift; sourceTree = "<group>"; };
 		8694756B1F37726D00925C2A /* CalendarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPresenter.swift; sourceTree = "<group>"; };
 		8694756D1F37742C00925C2A /* DatePickerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerPresenter.swift; sourceTree = "<group>"; };
@@ -445,7 +443,6 @@
 		86755DC622C7BC2000E91DF4 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				8686BE9324B11A5A001C72A9 /* SCTimestamp+Now.swift */,
 				8650D7D11D9FAE8E002D5930 /* NSDateTimeRepository.swift */,
 				86755DC722C7BC2000E91DF4 /* Core.h */,
 				86755DC822C7BC2000E91DF4 /* Info.plist */,
@@ -954,7 +951,6 @@
 				86BE23F524B1192F00B0B72F /* NSDateTimeRepository.swift in Sources */,
 				868119E42306D77C0035553B /* CalendarsLoader.swift in Sources */,
 				868119E22306D7490035553B /* Date+SCTimeOfDay.swift in Sources */,
-				8686BE9424B11A5A001C72A9 /* SCTimestamp+Now.swift in Sources */,
 				868119E02306D71A0035553B /* EventStoreRepository.swift in Sources */,
 				868119DF2306D67E0035553B /* NSDateCalculator.swift in Sources */,
 				86755DE622C7BC9500E91DF4 /* Timestamp.swift in Sources */,
