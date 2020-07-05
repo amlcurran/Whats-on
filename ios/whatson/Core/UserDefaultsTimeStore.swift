@@ -11,13 +11,13 @@ public class UserDefaultsTimeStore {
 
     public var startTimestamp: Timestamp {
         get {
-            return dateCalculator.startOfToday().plusHours(hours: startTime)
+            return dateCalculator.time(from: dateCalculator.add(hours: startTime, to: dateCalculator.dateAtStartOfToday()))
         }
     }
 
     public var endTimestamp: Timestamp {
         get {
-            return dateCalculator.startOfToday().plusHours(hours: endTime)
+            return dateCalculator.time(from: dateCalculator.add(hours: endTime, to: dateCalculator.dateAtStartOfToday()))
         }
     }
 

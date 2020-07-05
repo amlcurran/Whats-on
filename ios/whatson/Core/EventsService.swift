@@ -10,7 +10,7 @@ import Foundation
 
 public class EventsService {
 
-    private let timeRepository: TimeRepository
+    private let timeRepository: BorderTimeRepository
     private let eventsRepository: EventsRepository
     private let timeCalculator: TimeCalculator
 
@@ -20,7 +20,7 @@ public class EventsService {
         return EventsService(timeRepository: timeRepo, eventsRepository: repo, timeCalculator: NSDateCalculator.instance)
     }
 
-    public init(timeRepository: TimeRepository, eventsRepository: EventsRepository, timeCalculator: TimeCalculator) {
+    public init(timeRepository: BorderTimeRepository, eventsRepository: EventsRepository, timeCalculator: TimeCalculator) {
         self.timeRepository = timeRepository
         self.eventsRepository = eventsRepository
         self.timeCalculator = timeCalculator

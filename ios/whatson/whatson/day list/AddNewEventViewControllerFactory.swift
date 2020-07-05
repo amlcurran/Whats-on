@@ -37,7 +37,7 @@ fileprivate extension EKEventEditViewController {
 fileprivate extension EKEvent {
 
     convenience init(representing calendarItem: CalendarItem,
-                     calculator: NSDateCalculator = .instance,
+                     calculator: TimeCalculator = NSDateCalculator.instance,
                      eventStore: EKEventStore = .instance,
                      preferenceStore: CalendarPreferenceStore) {
         self.init(eventStore: eventStore)

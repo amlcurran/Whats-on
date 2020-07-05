@@ -3,11 +3,11 @@ import EventKit
 
 public class EventStoreRepository: EventsRepository {
 
-    let calculator: NSDateCalculator
+    let calculator: TimeCalculator
     let predicates: EventPredicates
     let calendarPreferenceStore: CalendarPreferenceStore
 
-    public init(timeRepository: TimeRepository, calendarPreferenceStore: CalendarPreferenceStore) {
+    public init(timeRepository: BorderTimeRepository, calendarPreferenceStore: CalendarPreferenceStore) {
         self.calculator = NSDateCalculator.instance
         self.predicates = EventPredicates(timeRepository: timeRepository)
         self.calendarPreferenceStore = calendarPreferenceStore

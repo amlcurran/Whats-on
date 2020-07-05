@@ -2,9 +2,9 @@ import EventKit
 
 struct EventPredicates {
 
-    private let timeRepository: TimeRepository
+    private let timeRepository: BorderTimeRepository
 
-    init(timeRepository: TimeRepository) {
+    init(timeRepository: BorderTimeRepository) {
         self.timeRepository = timeRepository
     }
 
@@ -55,7 +55,7 @@ private func notAllDay() -> EventPredicate {
     }
 }
 
-private func isWithinBorder(timeRepository: TimeRepository, using calendar: Calendar) -> EventPredicate {
+private func isWithinBorder(timeRepository: BorderTimeRepository, using calendar: Calendar) -> EventPredicate {
     return { event in
         let start = timeRepository.borderTimeStart
         let end = timeRepository.borderTimeEnd

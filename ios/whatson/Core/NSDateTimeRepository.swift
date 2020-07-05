@@ -1,6 +1,6 @@
 import UIKit
 
-public class NSDateTimeRepository: NSObject, TimeRepository {
+public class NSDateTimeRepository: NSObject, BorderTimeRepository {
 
     let calculator = NSDateCalculator.instance
     let timeStore = UserDefaultsTimeStore()

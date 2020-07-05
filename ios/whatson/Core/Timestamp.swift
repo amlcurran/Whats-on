@@ -26,10 +26,12 @@ public struct Timestamp {
         return timeCalculator.getDays(time: self)
     }
 
+    @available(*, deprecated)
     public func plusHours(hours: Int) -> Timestamp {
         return timeCalculator.plusHours(time: self, hours: hours)
     }
 
+    @available(*, deprecated)
     func plusHours(of timeOfDay: TimeOfDay) -> Timestamp {
         return timeCalculator.plusHours(time: self, hours: Int(timeOfDay.hoursInDay()))
     }

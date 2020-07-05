@@ -13,9 +13,9 @@ public class CalendarSource {
     let calendarItems: [Int: CalendarSlot]
     let daysSize: Int
     let timeCalculator: TimeCalculator
-    let timeRepository: TimeRepository
+    let timeRepository: BorderTimeRepository
 
-    init(calendarItems: [Int: CalendarSlot], daysSize: Int, timeCalculator: TimeCalculator, timeRepository: TimeRepository) {
+    init(calendarItems: [Int: CalendarSlot], daysSize: Int, timeCalculator: TimeCalculator, timeRepository: BorderTimeRepository) {
         self.calendarItems = calendarItems
         self.daysSize = daysSize
         self.timeCalculator = timeCalculator

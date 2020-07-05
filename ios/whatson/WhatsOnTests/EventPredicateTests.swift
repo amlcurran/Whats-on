@@ -120,7 +120,7 @@ private func today(atHour hour: Int, minutes: Int = 0, addingDays days: Int = 0)
     return Calendar.current.date(from: components)!
 }
 
-private class TestTimeRepository: TimeRepository {
+private class TestTimeRepository: BorderTimeRepository {
 
     var borderTimeStart: TimeOfDay {
         return TimeOfDay.fromHours(hours: 8)
@@ -132,7 +132,7 @@ private class TestTimeRepository: TimeRepository {
 
 }
 
-private class TestTimeRepositoryWithMinutes: TimeRepository {
+private class TestTimeRepositoryWithMinutes: BorderTimeRepository {
 
     var borderTimeStart: TimeOfDay {
         return TimeOfDay.fromHours(hours: 22, andMinutes: 0)
@@ -144,7 +144,7 @@ private class TestTimeRepositoryWithMinutes: TimeRepository {
 
 }
 
-private class TestTimeRepositoryWithMinutes2: TimeRepository {
+private class TestTimeRepositoryWithMinutes2: BorderTimeRepository {
 
     var borderTimeStart: TimeOfDay {
         return TimeOfDay.fromHours(hours: 22, andMinutes: 30)

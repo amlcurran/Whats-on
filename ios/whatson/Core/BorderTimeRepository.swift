@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol TimeRepository {
+public protocol BorderTimeRepository {
 
     var borderTimeEnd: TimeOfDay { get }
 
