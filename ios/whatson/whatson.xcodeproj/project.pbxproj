@@ -60,7 +60,6 @@
 		86755DDA22C7BC2100E91DF4 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86755DC522C7BC2000E91DF4 /* Core.framework */; };
 		86755DDB22C7BC2100E91DF4 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 86755DC522C7BC2000E91DF4 /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		86755DE422C7BC5100E91DF4 /* CalendarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86755DE322C7BC5100E91DF4 /* CalendarItem.swift */; };
-		86755DE622C7BC9500E91DF4 /* Timestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86755DE522C7BC9500E91DF4 /* Timestamp.swift */; };
 		86755DE822C7BD0D00E91DF4 /* TimeOfDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86755DE722C7BD0D00E91DF4 /* TimeOfDay.swift */; };
 		86755DEA22C7BD8D00E91DF4 /* BorderTimeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86755DE922C7BD8D00E91DF4 /* BorderTimeRepository.swift */; };
 		86755DEC22C7BDB500E91DF4 /* TimeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86755DEB22C7BDB500E91DF4 /* TimeCalculator.swift */; };
@@ -260,7 +259,6 @@
 		86755DD422C7BC2100E91DF4 /* CoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreTests.swift; sourceTree = "<group>"; };
 		86755DD622C7BC2100E91DF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86755DE322C7BC5100E91DF4 /* CalendarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarItem.swift; sourceTree = "<group>"; };
-		86755DE522C7BC9500E91DF4 /* Timestamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timestamp.swift; sourceTree = "<group>"; };
 		86755DE722C7BD0D00E91DF4 /* TimeOfDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeOfDay.swift; sourceTree = "<group>"; };
 		86755DE922C7BD8D00E91DF4 /* BorderTimeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderTimeRepository.swift; sourceTree = "<group>"; };
 		86755DEB22C7BDB500E91DF4 /* TimeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCalculator.swift; sourceTree = "<group>"; };
@@ -455,7 +453,6 @@
 				86A9E4581DA8076400E8D019 /* EKEventStore+Singleton.swift */,
 				869DAC7C1D44D15C005AF315 /* EventPredicates.swift */,
 				698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */,
-				86755DE522C7BC9500E91DF4 /* Timestamp.swift */,
 				86755DE722C7BD0D00E91DF4 /* TimeOfDay.swift */,
 				86755DE922C7BD8D00E91DF4 /* BorderTimeRepository.swift */,
 				86755DEB22C7BDB500E91DF4 /* TimeCalculator.swift */,
@@ -953,7 +950,6 @@
 				868119E22306D7490035553B /* Date+SCTimeOfDay.swift in Sources */,
 				868119E02306D71A0035553B /* EventStoreRepository.swift in Sources */,
 				868119DF2306D67E0035553B /* NSDateCalculator.swift in Sources */,
-				86755DE622C7BC9500E91DF4 /* Timestamp.swift in Sources */,
 				86A9355722C7C1B8003FC26C /* EmptyCalendarItem.swift in Sources */,
 				86755DEA22C7BD8D00E91DF4 /* BorderTimeRepository.swift in Sources */,
 				868119E12306D7390035553B /* EventPredicates.swift in Sources */,

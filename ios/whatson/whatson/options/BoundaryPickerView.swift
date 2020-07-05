@@ -71,9 +71,9 @@ class BoundaryPickerView: UIView {
 
     func updateText(from timeStore: UserDefaultsTimeStore) {
         beginningLabel.text = NSLocalizedString("Options.Beginning", comment: "Text explaining the time boundaries")
-        startSelectableView.text = dateFormatter.string(from: NSDateCalculator.instance.date(from: timeStore.startTimestamp))
+        startSelectableView.text = dateFormatter.string(from: timeStore.startTimestamp)
         intermediateLabel.text = NSLocalizedString("Options.Intermediate", comment: "Text explaining the time boundaries")
-        endSelectableView.text = dateFormatter.string(from: NSDateCalculator.instance.date(from: timeStore.endTimestamp))
+        endSelectableView.text = dateFormatter.string(from: timeStore.endTimestamp)
     }
 
 }

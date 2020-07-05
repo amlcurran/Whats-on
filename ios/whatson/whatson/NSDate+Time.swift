@@ -10,11 +10,7 @@ import UIKit
 import Core
 
 extension Date {
-
-    init(from time: Timestamp) {
-        self.init(timeIntervalSince1970: TimeInterval(time.millis / 1000))
-    }
-
+    
     static func startTime(from timeStore: UserDefaultsTimeStore, addingDays days: Int) -> Date? {
         var components = Calendar.current.dateComponents([.day, .minute, .hour, .second, .month, .year], from: Date())
         components.hour = timeStore.startTime

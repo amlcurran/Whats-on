@@ -9,15 +9,15 @@ public class UserDefaultsTimeStore {
         self.userDefaults = userDefaults
     }
 
-    public var startTimestamp: Timestamp {
+    public var startTimestamp: Date {
         get {
-            return dateCalculator.time(from: dateCalculator.add(hours: startTime, to: dateCalculator.dateAtStartOfToday()))
+            return dateCalculator.add(hours: startTime, to: dateCalculator.dateAtStartOfToday())
         }
     }
 
-    public var endTimestamp: Timestamp {
+    public var endTimestamp: Date {
         get {
-            return dateCalculator.time(from: dateCalculator.add(hours: endTime, to: dateCalculator.dateAtStartOfToday()))
+            return dateCalculator.add(hours: endTime, to: dateCalculator.dateAtStartOfToday())
         }
     }
 
