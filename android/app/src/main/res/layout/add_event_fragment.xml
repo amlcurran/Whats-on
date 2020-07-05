@@ -69,6 +69,7 @@
                 app:layout_constraintTop_toBottomOf="@id/event_input_name">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/event_input_begin_time_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="18:00" />

@@ -14,6 +14,12 @@ public class EventsService {
     private let eventsRepository: EventsRepository
     private let timeCalculator: TimeCalculator
 
+    public static func standard() -> EventsService {
+        let timeRepo = NSDateTimeRepository()
+        let repo = EventStoreRepository(timeRepository: timeRepo, calendarPreferenceStore: CalendarPreferenceStore())
+        return EventsService(timeRepository: timeRepo, eventsRepository: repo, timeCalculator: NSDateCalculator.instance)
+    }
+
     public init(timeRepository: TimeRepository, eventsRepository: EventsRepository, timeCalculator: TimeCalculator) {
         self.timeRepository = timeRepository
         self.eventsRepository = eventsRepository

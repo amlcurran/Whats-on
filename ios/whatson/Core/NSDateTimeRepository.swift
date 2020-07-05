@@ -1,16 +1,15 @@
 import UIKit
-import Core
 
-class NSDateTimeRepository: NSObject, TimeRepository {
+public class NSDateTimeRepository: NSObject, TimeRepository {
 
     let calculator = NSDateCalculator.instance
     let timeStore = UserDefaultsTimeStore()
 
-    var borderTimeStart: TimeOfDay {
+    public var borderTimeStart: TimeOfDay {
         return TimeOfDay.fromHours(hours: timeStore.startTime)
     }
 
-    var borderTimeEnd: TimeOfDay {
+    public var borderTimeEnd: TimeOfDay {
         return TimeOfDay.fromHours(hours: timeStore.endTime)
     }
 

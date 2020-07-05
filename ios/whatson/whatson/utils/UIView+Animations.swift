@@ -10,10 +10,10 @@ import UIKit
 
 extension UIView {
 
-    func animateAlpha(to alpha: Float) {
-        UIView.animate(withDuration: 0.3, animations: {
+    func animateAlpha(to alpha: Float, onEnd: @escaping (UIView) -> Void) {
+        UIView.animate(withDuration: 0.2, animations: {
             self.alpha = CGFloat(alpha)
-        })
+        }, completion: { _ in onEnd(self) })
     }
 
 }

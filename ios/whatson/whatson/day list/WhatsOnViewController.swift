@@ -55,7 +55,7 @@ class WhatsOnViewController: UIViewController,
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController?.interactivePopGestureRecognizer?.delegate = gestureHandler
 
-        loadingDelay = DispatchTimeInterval.milliseconds(1000)
+        loadingDelay = DispatchTimeInterval.milliseconds(600)
         showLoading()
     }
 
@@ -129,9 +129,10 @@ class WhatsOnViewController: UIViewController,
     // MARK: - peek and pop
 
     func showCalendar(_ source: CalendarSource) {
+        table.view.alpha = 0
+        table.view.animateAlpha(to: 1) { _ in }
         table.update(source)
-        loadingView.animateAlpha(to: 0)
-        loadingView.isHidden = true
+        loadingView.animateAlpha(to: 0) { $0.isHidden = true }
         failedAccessView.isHidden = true
         failedAccessView.isUserInteractionEnabled = false
         table.show()

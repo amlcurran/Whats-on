@@ -1,47 +1,29 @@
 package uk.co.amlcurran.social.add
 
+import android.app.TimePickerDialog
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.TimePicker
+import android.text.format.DateFormat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.google.android.gms.tasks.Task
-import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.model.AutocompleteSessionToken
-import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.net.FetchPlaceRequest
-import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
-import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.material.textfield.TextInputEditText
 import io.reactivex.Maybe
 import io.reactivex.Observable
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposables
-import io.reactivex.rxkotlin.addTo
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.add_event_fragment.*
 import uk.co.amlcurran.social.R
-import uk.co.amlcurran.social.inflate
-import java.util.concurrent.TimeUnit
 
-class AddEventFragment : Fragment() {
+class AddEventFragment : Fragment(R.layout.add_event_fragment) {
 
     private val disposable = CompositeDisposable()
     private val viewModel: AddEventViewModel by viewModels {
         ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return container?.inflate(R.layout.add_event_fragment, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -62,6 +44,11 @@ class AddEventFragment : Fragment() {
             requireActivity().finish()
         }
 
+        event_input_begin_time_text.setOnClickListener {
+            TimePickerDialog(requireContext(), TimePickerDialog.OnTimeSetListener { _: TimePicker, hour: Int, minute: Int ->
+
+            }, 18, 0, DateFormat.is24HourFormat(requireActivity())).show()
+        }
         add_select_place.onPlaceSelected = { autocompletePlace ->
             selectedPlace.onNext(autocompletePlace)
         }

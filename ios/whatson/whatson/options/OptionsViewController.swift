@@ -76,12 +76,14 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
     }
 
     private func layoutViews() {
+        view.backgroundColor = .windowBackground
         view.addSubview(tableView)
         tableView.constrain(toSuperview: .leading, .trailing, .topMargin)
 
         pickerHeightConstraint = picker.constrain(height: 0)
         pickerHeightConstraint.isActive = true
-        view.add(picker, constrainedTo: [.leading, .trailing, .bottom])
+        view.addSubview(picker)
+        picker.constrain(toSuperviewSafeArea: .leading, .trailing, .bottom)
         picker.constrain(.top, to: tableView, .bottom)
     }
 
