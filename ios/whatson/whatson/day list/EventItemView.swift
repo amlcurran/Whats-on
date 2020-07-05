@@ -89,7 +89,7 @@ class EventItemView: UIView {
     }
 
     func bound(to item: CalendarItem, slot: CalendarSlot) {
-        let startTime = timeFormatter.string(from: timeCalculator.date(from: item.startTime))
+        let startTime = timeFormatter.string(from: item.startTime)
         secondaryLabel.text = String(format: "From %@", startTime)
         if slot.isEmpty {
             type = .empty

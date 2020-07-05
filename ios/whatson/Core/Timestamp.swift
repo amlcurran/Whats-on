@@ -31,7 +31,6 @@ public struct Timestamp {
         return timeCalculator.plusHours(time: self, hours: hours)
     }
 
-    @available(*, deprecated)
     func plusHours(of timeOfDay: TimeOfDay) -> Timestamp {
         return timeCalculator.plusHours(time: self, hours: Int(timeOfDay.hoursInDay()))
     }

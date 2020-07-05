@@ -36,7 +36,7 @@ class DayCell: UITableViewCell {
     }
 
     func bound(to item: CalendarItem) -> Self {
-        dayLabel.text = dayFormatter.string(from: Date(from: item.startTime))
+        dayLabel.text = dayFormatter.string(from: item.startTime)
         return self
     }
 
@@ -77,7 +77,7 @@ class DayCollectionCell: UICollectionViewCell {
     }
 
     func bound(to item: CalendarItem) -> Self {
-        dayLabel.text = dayFormatter.string(from: Date(from: item.startTime))
+        dayLabel.text = dayFormatter.string(from: item.startTime)
         return self
     }
 

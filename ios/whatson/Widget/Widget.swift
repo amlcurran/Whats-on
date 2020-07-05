@@ -33,7 +33,7 @@ struct Provider: TimelineProvider {
             var dayEntries: [Day] = []
             for i in 0..<events.count() {
                 let event = events.item(at: i).map { eventItem in
-                    Event(name: eventItem.title, date: calculator.date(from: eventItem.startTime))
+                    Event(name: eventItem.title, date: eventItem.startTime)
                 }
 
                 if events.isEmptySlot(at: i) {

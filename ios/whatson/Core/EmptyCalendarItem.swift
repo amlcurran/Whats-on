@@ -10,8 +10,8 @@ import Foundation
 
 public struct EmptyCalendarItem: CalendarItem {
 
-    public let startTime: Timestamp
-    public let endTime: Timestamp
+    public let startTime: Date
+    public let endTime: Date
     public let title: String = "Empty"
     public let isEmpty: Bool = true
 }

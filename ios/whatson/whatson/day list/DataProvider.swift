@@ -65,7 +65,7 @@ extension CalendarSlot {
 func matchViews(_ one: CalendarItem?, _ two: CalendarItem?) -> Bool {
     if let one = one, let two = two {
         return one.title == two.title &&
-                one.startTime.millis == two.startTime.millis
+            one.startTime.timeIntervalSince1970 == two.startTime.timeIntervalSince1970
     } else if one == nil && two == nil {
         return true
     } else {

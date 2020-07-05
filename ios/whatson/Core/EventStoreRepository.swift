@@ -21,11 +21,11 @@ public class EventStoreRepository: EventsRepository {
         let search = eventStore.predicateForEvents(withStart: startTime, end: endTime, calendars: calendars)
         let allEvents = eventStore.events(matching: search)
         let filtered = allEvents.filter(predicates.defaults)
-        return filtered.compactMap { ekEvent in
+        return filtered.compactMap { ekEvent -> CalendarItem in
             return EventCalendarItem(eventId: ekEvent.eventIdentifier,
                                      title: ekEvent.title,
-                                     startTime: self.calculator.time(from: ekEvent.startDate),
-                                     endTime: self.calculator.time(from: ekEvent.endDate))
+                                     startTime: ekEvent.startDate,
+                                     endTime: ekEvent.endDate)
         }
     }
 

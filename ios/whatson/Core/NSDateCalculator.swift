@@ -11,18 +11,23 @@ public class NSDateCalculator: TimeCalculator {
     }
 
     public func plusDays(days: Int, time: Timestamp) -> Timestamp {
-        let newDate = add(days: days, to: time)
+        let newDate = add(days: days, to: date(from: time))
         return Timestamp(millis: Int(newDate.timeIntervalSince1970) * 1000, timeCalculator: self)
     }
 
-    public func add(days: Int, to time: Timestamp) -> Date {
+    public func add(days: Int, to time: Date) -> Date {
         var components = DateComponents()
         components.day = Int(days)
-        return calendar.date(byAdding: components, to: date(from: time))!
+        return calendar.date(byAdding: components, to: time)!
     }
 
     public func getDays(time: Timestamp) -> Int {
         let difference = self.calendar.dateComponents([.day], from: Date(timeIntervalSince1970: 0), to: date(from: time))
+        return difference.day!
+    }
+
+    public func daysSinceEpoch(in date: Date) -> Int {
+        let difference = self.calendar.dateComponents([.day], from: Date(timeIntervalSince1970: 0), to: date)
         return difference.day!
     }
 

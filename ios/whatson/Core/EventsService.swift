@@ -37,7 +37,7 @@ public class EventsService {
         var itemArray = [Int: CalendarSlot]()
         let epochToNow = now.daysSinceEpoch()
         for item in calendarItems {
-            let key = item.startTime.daysSinceEpoch() - epochToNow
+            let key = timeCalculator.daysSinceEpoch(in: item.startTime) - epochToNow
             var slot = itemArray[key] ?? CalendarSlot()
             slot.add(item)
             itemArray[key] = slot

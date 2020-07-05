@@ -36,16 +36,14 @@ public class CalendarSource {
         return calendarSlot?.firstItem()
     }
 
-    private func startOfTodayBlock(_ position: Int) -> Timestamp {
-        return timeCalculator.startOfToday()
-            .plusDays(days: position)
-            .plusHours(of: timeRepository.borderTimeStart)
+    private func startOfTodayBlock(_ position: Int) -> Date {
+        let one = timeCalculator.add(hours: timeRepository.borderTimeStart.hours, to: timeCalculator.dateAtStartOfToday())
+        return timeCalculator.add(days: position, to: one)
     }
 
-    private func endOfTodayBlock(_ position: Int) -> Timestamp {
-        return timeCalculator.startOfToday()
-            .plusDays(days: position)
-            .plusHours(of: timeRepository.borderTimeEnd)
+    private func endOfTodayBlock(_ position: Int) -> Date {
+        let one = timeCalculator.add(hours: timeRepository.borderTimeEnd.hours, to: timeCalculator.dateAtStartOfToday())
+        return timeCalculator.add(days: position, to: one)
     }
 
     public func slotAt(_ position: Int) -> CalendarSlot {

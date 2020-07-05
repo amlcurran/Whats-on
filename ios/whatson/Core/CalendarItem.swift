@@ -12,6 +12,6 @@ public protocol CalendarItem {
 
     var isEmpty: Bool { get }
     var title: String { get }
-    var startTime: Timestamp { get }
-    var endTime: Timestamp { get }
+    var startTime: Date { get }
+    var endTime: Date { get }
 }

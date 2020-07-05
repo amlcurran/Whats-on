@@ -12,11 +12,11 @@ public struct EventCalendarItem: CalendarItem {
 
     public let eventId: String
     public let title: String
-    public let startTime: Timestamp
-    public let endTime: Timestamp
+    public let startTime: Date
+    public let endTime: Date
     public let isEmpty: Bool = false
 
-    public init(eventId: String, title: String, startTime: Timestamp, endTime: Timestamp) {
+    public init(eventId: String, title: String, startTime: Date, endTime: Date) {
         self.eventId = eventId
         self.title = title
         self.startTime = startTime

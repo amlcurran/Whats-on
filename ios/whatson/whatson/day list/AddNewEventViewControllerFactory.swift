@@ -44,8 +44,8 @@ fileprivate extension EKEvent {
         if let defaultCalendarId = preferenceStore.defaultCalendar?.rawValue {
             self.calendar = eventStore.calendar(withIdentifier: defaultCalendarId)
         }
-        self.startDate = calculator.date(from: calendarItem.startTime)
-        self.endDate = calculator.date(from: calendarItem.endTime)
+        self.startDate = calendarItem.startTime
+        self.endDate = calendarItem.endTime
     }
 
 }
