@@ -42,7 +42,7 @@ class WhatsOnViewController: UIViewController,
         registerForPreviewing(with: displayer, sourceView: table.view)
         forceTouchDisplayer = displayer
 
-        let eventRepo = EventStoreRepository(timeRepository: timeRepo, calendarPreferenceStore: CalendarPreferenceStore())
+        let eventRepo = EventKitEventRepository(timeRepository: timeRepo, calendarPreferenceStore: CalendarPreferenceStore())
         eventService = EventsService(timeRepository: timeRepo, eventsRepository: eventRepo, timeCalculator: NSDateCalculator.instance)
         presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService, dataProvider: dataProvider)
 

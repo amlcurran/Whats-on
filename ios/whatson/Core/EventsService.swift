@@ -16,7 +16,7 @@ public class EventsService {
 
     public static func standard() -> EventsService {
         let timeRepo = NSDateTimeRepository()
-        let repo = EventStoreRepository(timeRepository: timeRepo, calendarPreferenceStore: CalendarPreferenceStore())
+        let repo = EventKitEventRepository(timeRepository: timeRepo, calendarPreferenceStore: CalendarPreferenceStore())
         return EventsService(timeRepository: timeRepo, eventsRepository: repo, timeCalculator: NSDateCalculator.instance)
     }
 

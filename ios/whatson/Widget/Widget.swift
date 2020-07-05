@@ -28,7 +28,6 @@ struct Provider: TimelineProvider {
 
         DispatchQueue.global(qos: .default).async {
             let events = self.eventsService.getCalendarSource(numberOfDays: 2, now: Date())
-            let calculator = NSDateCalculator.instance
 
             var dayEntries: [Day] = []
             for i in 0..<events.count() {

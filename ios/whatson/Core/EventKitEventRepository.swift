@@ -1,7 +1,7 @@
 import UIKit
 import EventKit
 
-public class EventStoreRepository: EventsRepository {
+public class EventKitEventRepository: EventsRepository {
 
     let calculator: TimeCalculator
     let predicates: EventPredicates
