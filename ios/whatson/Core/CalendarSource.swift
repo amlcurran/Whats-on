@@ -26,14 +26,14 @@ public class CalendarSource {
         return daysSize
     }
 
-    public func item(at position: Int) -> CalendarItem? {
+    public func item(at position: Int) -> CalendarItem {
         let calendarSlot = calendarItems[position]
         if calendarSlot == nil || calendarSlot!.isEmpty {
             let startTime = startOfTodayBlock(position)
             let endTime = endOfTodayBlock(position)
             return EmptyCalendarItem(startTime: startTime, endTime: endTime)
         }
-        return calendarSlot?.firstItem()
+        return calendarSlot!.firstItem()!
     }
 
     private func startOfTodayBlock(_ position: Int) -> Date {

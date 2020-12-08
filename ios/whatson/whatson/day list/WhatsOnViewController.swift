@@ -27,7 +27,7 @@ class WhatsOnViewController: UIViewController,
 
     lazy var table: CalendarTable = {
 //        if #available(iOS 13.0, *) {
-//            return NewFoo(dataProvider: self.dataProvider)
+//            return CalendarDiffableTableView(tableView: UITableView(), delegate: self)
 //        } else {
             return CalendarTableView(delegate: self, dataProvider: self.dataProvider, tableView: UITableView())
 //        }

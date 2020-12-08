@@ -10,6 +10,101 @@ protocol CalendarTable {
     func style()
 }
 
+struct Day: Equatable, Hashable {
+    let position: Int
+    let slot: CalendarSlot
+    let item: CalendarItem
+
+    static func == (lhs: Day, rhs: Day) -> Bool {
+        return lhs.position == rhs.position &&
+            lhs.slot.count() == lhs.slot.count() &&
+            lhs.item.title == rhs.item.title &&
+            lhs.item.startTime == rhs.item.endTime &&
+            lhs.item.isEmpty == rhs.item.isEmpty
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(position)
+        hasher.combine(slot.count())
+        hasher.combine(item.title)
+        hasher.combine(item.startTime)
+        hasher.combine(item.endTime)
+        hasher.combine(item.isEmpty)
+    }
+}
+
+@available(iOS 13.0, *)
+class CalendarDiffableTableView: NSObject, CalendarTable, UITableViewDelegate {
+
+    private let tableView: UITableView
+    private let dataSource: UITableViewDiffableDataSource<Int, Day>
+    private weak var delegate: CalendarTableViewDelegate?
+
+    var view: UIView {
+        tableView
+    }
+
+    init(tableView: UITableView, delegate: CalendarTableViewDelegate) {
+        self.tableView = tableView
+        self.dataSource = UITableViewDiffableDataSource<Int, Day>(tableView: tableView, cellProvider: { (_, indexPath, item) -> UITableViewCell? in
+            let cell = tableView.dequeueReusableCell(withIdentifier: "event", for: indexPath) as? EventCell
+            return cell?.bound(to: item.item, slot: item.slot)
+        })
+        self.delegate = delegate
+        self.tableView.dataSource = dataSource
+        super.init()
+        self.tableView.delegate = self
+    }
+
+    func update(_ source: CalendarSource) {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, Day>()
+        snapshot.appendSections([0])
+        var items = [Day]()
+        for i in 0..<source.count() {
+            items.append(Day(position: i, slot: source.slotAt(i), item: source.item(at: i)))
+        }
+        snapshot.appendItems(items)
+        dataSource.apply(snapshot, animatingDifferences: true)
+    }
+
+    func selection(under point: CGPoint) -> (UIView, CalendarItem)? {
+        nil
+    }
+
+    func show() {
+
+    }
+
+    func hide() {
+
+    }
+
+    func style() {
+        tableView.register(DayCell.self, forCellReuseIdentifier: "day")
+        tableView.register(EventCell.self, forCellReuseIdentifier: "event")
+        tableView.register(MultipleEventCell.self, forCellReuseIdentifier: "multipleEvent")
+        tableView.backgroundColor = .clear
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 120
+        tableView.separatorStyle = .none
+        tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = dataSource.snapshot().itemIdentifiers[indexPath.row]
+        if item.slot.isEmpty {
+            delegate?.addEvent(for: item.item)
+        } else {
+            guard let calendarItem = item.item as? EventCalendarItem else {
+                preconditionFailure("Item isn't empty, but isn't event")
+            }
+            let cell = tableView.cellForRow(at: indexPath).required(as: (UIView & Row).self)
+            delegate?.showDetails(for: calendarItem, at: indexPath, in: cell)
+        }
+    }
+
+}
+
 class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, CalendarTable {
 
     private let dataProvider: DataProvider
