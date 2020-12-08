@@ -11,6 +11,7 @@ struct EventPredicates {
     var defaults: EventPredicate {
         return compound(from: notDeclinedOrCancelled(),
                         notAllDay(),
+                        notMultiDay(),
                         isWithinBorder(timeRepository: timeRepository, using: .autoupdatingCurrent))
     }
 
@@ -52,6 +53,16 @@ extension Array where Element == EKParticipant {
 private func notAllDay() -> EventPredicate {
     return { event in
         return !event.isAllDay
+    }
+}
+
+private func notMultiDay() -> EventPredicate {
+    return { event in
+        if #available(iOS 13.0, *) {
+            return abs(event.startDate.distance(to: event.endDate)) < 24 * 60 * 60
+        } else {
+            return false
+        }
     }
 }
 
