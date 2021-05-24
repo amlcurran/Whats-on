@@ -1,6 +1,6 @@
 import CoreLocation
 
-protocol EventView: class {
+protocol EventView: AnyObject {
 
     func eventDeleted()
 

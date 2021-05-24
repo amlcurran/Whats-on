@@ -8,7 +8,7 @@
 
 import Core
 
-protocol CalendarsView: class {
+protocol CalendarsView: AnyObject {
     func updateCalendar(_ items: [TableItem])
     func updateSingleCalendar(_ item: TableItem, at index: Int)
     func updateDefaultCalendar(_ calendar: EventCalendar?)

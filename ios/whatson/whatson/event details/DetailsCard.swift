@@ -3,7 +3,7 @@ import EventKit
 import CoreLocation
 import MapKit
 
-protocol DetailsCardDelegate: class {
+protocol DetailsCardDelegate: AnyObject {
     func didTapMap(on detailsCard: DetailsCard, onRegion region: MKCoordinateRegion)
 }
 

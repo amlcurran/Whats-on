@@ -68,7 +68,7 @@ class WhatsOnPresenter {
 
 }
 
-protocol WhatsOnPresenterView: class {
+protocol WhatsOnPresenterView: AnyObject {
     func showCalendar(_ source: CalendarSource)
 
     func showAccessFailure()

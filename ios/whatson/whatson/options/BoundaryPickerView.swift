@@ -78,7 +78,7 @@ class BoundaryPickerView: UIView {
 
 }
 
-protocol BoundaryPickerViewDelegate: class {
+protocol BoundaryPickerViewDelegate: AnyObject {
 
     func boundaryPickerDidBeginEditing(in state: BoundaryPickerView.EditState)
 

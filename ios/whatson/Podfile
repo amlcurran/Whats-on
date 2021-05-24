@@ -6,7 +6,7 @@ target 'whatson' do
   use_frameworks!
 
   # Pods for whatson
-  pod 'Firebase'
+  # pod 'Firebase'
   pod 'SwiftLint'
 
   target 'WhatsOnTests' do

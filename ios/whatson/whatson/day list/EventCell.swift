@@ -34,7 +34,7 @@ class EventCell: UITableViewCell, Row {
     }
 
     func bound(to item: CalendarItem, slot: CalendarSlot) -> Self {
-        _ = eventView.bound(to: item, slot: slot)
+        eventView.bound(to: item, slot: slot)
         return self
     }
 

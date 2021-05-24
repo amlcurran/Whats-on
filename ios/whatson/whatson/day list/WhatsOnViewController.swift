@@ -38,10 +38,6 @@ class WhatsOnViewController: UIViewController,
         view.backgroundColor = .windowBackground
         title = " "
 
-        let displayer = EventForceTouchDisplayer(table: table, navigationController: navigationController)
-        registerForPreviewing(with: displayer, sourceView: table.view)
-        forceTouchDisplayer = displayer
-
         let eventRepo = EventKitEventRepository(timeRepository: timeRepo, calendarPreferenceStore: CalendarPreferenceStore())
         eventService = EventsService(timeRepository: timeRepo, eventsRepository: eventRepo, timeCalculator: NSDateCalculator.instance)
         presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService, dataProvider: dataProvider)
@@ -135,14 +131,12 @@ class WhatsOnViewController: UIViewController,
         loadingView.animateAlpha(to: 0) { $0.isHidden = true }
         failedAccessView.isHidden = true
         failedAccessView.isUserInteractionEnabled = false
-        table.show()
     }
 
     func showAccessFailure() {
         loadingView.isHidden = true
         failedAccessView.isHidden = false
         failedAccessView.isUserInteractionEnabled = true
-        table.hide()
     }
 
     func failedToDelete(_ event: CalendarItem, withError error: Error) {
@@ -152,7 +146,6 @@ class WhatsOnViewController: UIViewController,
     func showLoading() {
         loadingView.isHidden = false
         failedAccessView.isHidden = true
-        table.hide()
     }
 
 }

@@ -9,7 +9,7 @@
 import UIKit
 import Core
 
-protocol DateView: class {
+protocol DateView: AnyObject {
     func updateDate(_ items: [TableItem])
     func showPicker()
 }

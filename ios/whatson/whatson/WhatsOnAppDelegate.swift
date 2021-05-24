@@ -2,7 +2,6 @@ import Foundation
 import UIKit
 import EventKit
 import EventKitUI
-import Firebase
 import Core
 
 @UIApplicationMain
@@ -16,10 +15,9 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         window?.tintColor = UIColor.secondary
-        window?.backgroundColor = UIColor.windowBackground
         window?.rootViewController = UINavigationController(rootViewController: WhatsOnViewController())
         window?.makeKeyAndVisible()
-        FirebaseApp.configure()
+//        FirebaseApp.configure()
         return true
     }
 

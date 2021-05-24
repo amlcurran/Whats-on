@@ -47,4 +47,9 @@ class GradientView: UIView {
         gradient.endPoint = CGPoint(x: 0, y: 1)
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        gradient.colors = colors.map(\.cgColor)
+    }
+
 }

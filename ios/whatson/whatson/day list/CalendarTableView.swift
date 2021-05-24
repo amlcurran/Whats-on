@@ -4,9 +4,6 @@ import Core
 protocol CalendarTable {
     var view: UIView { get }
     func update(_ source: CalendarSource)
-    func selection(under point: CGPoint) -> (UIView, CalendarItem)?
-    func show()
-    func hide()
     func style()
 }
 
@@ -69,14 +66,6 @@ class CalendarDiffableTableView: NSObject, CalendarTable, UITableViewDelegate {
 
     func selection(under point: CGPoint) -> (UIView, CalendarItem)? {
         nil
-    }
-
-    func show() {
-
-    }
-
-    func hide() {
-
     }
 
     func style() {
@@ -152,17 +141,6 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, C
         return dataProvider.count * 2
     }
 
-    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        if let slot = dataProvider.slot(at: indexPath.dataIndexPath),
-           slot.count() != 0,
-           let slotItem = dataProvider.item(at: indexPath.dataIndexPath) as? EventCalendarItem {
-            return [UITableViewRowAction(style: .destructive, title: "Delete", handler: { [weak self] _, _ in
-                self?.delegate?.remove(slotItem)
-            })]
-        }
-        return nil
-    }
-
     func update(_ source: CalendarSource) {
         let indexes = dataProvider.update(from: source)
         if indexes.count > 0 {
@@ -170,16 +148,6 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, C
         } else {
             tableView.reloadData()
         }
-    }
-
-    func show() {
-        tableView.alpha = 1
-        tableView.isUserInteractionEnabled = true
-    }
-
-    func hide() {
-        tableView.alpha = 0
-        tableView.isUserInteractionEnabled = false
     }
 
     func selection(under point: CGPoint) -> (UIView, CalendarItem)? {
@@ -256,7 +224,7 @@ extension IndexPath {
 
 }
 
-protocol CalendarTableViewDelegate: class {
+protocol CalendarTableViewDelegate: AnyObject {
     func addEvent(for item: CalendarItem)
 
     func showDetails(for item: EventCalendarItem, at indexPath: IndexPath, in cell: UIView & Row)

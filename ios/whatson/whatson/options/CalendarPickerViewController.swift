@@ -9,7 +9,7 @@
 import UIKit
 import Core
 
-protocol CalendarPickerViewControllerDelegate: class {
+protocol CalendarPickerViewControllerDelegate: AnyObject {
     func didSelect(_ calendar: EventCalendar)
 }
 

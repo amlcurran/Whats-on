@@ -64,6 +64,6 @@ class HeaderView: UIView {
 
 }
 
-protocol HeaderViewDelegate: class {
+protocol HeaderViewDelegate: AnyObject {
     func didTapEdit()
 }

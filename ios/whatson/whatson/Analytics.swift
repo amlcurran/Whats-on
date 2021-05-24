@@ -1,10 +1,10 @@
 import Foundation
-import FirebaseAnalytics
+//import FirebaseAnalytics
 
 struct Analytics {
 
     func sendEvent(named name: String, withParameters parameters: [String: String] = [:]) {
-        FirebaseAnalytics.Analytics.logEvent(name, parameters: parameters.convertValuesToNSString())
+//        FirebaseAnalytics.Analytics.logEvent(name, parameters: parameters.convertValuesToNSString())
     }
 
 }

@@ -2,7 +2,6 @@ import UIKit
 import EventKit
 import EventKitUI
 import MapKit
-import FirebaseAnalytics
 import CoreLocation
 import Core
 

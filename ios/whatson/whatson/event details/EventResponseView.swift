@@ -67,6 +67,6 @@ class EventResponseView: UIStackView {
 
 }
 
-protocol EventResponseViewDelegate: class {
+protocol EventResponseViewDelegate: AnyObject {
     func changeResponse(to state: EventResponse)
 }
