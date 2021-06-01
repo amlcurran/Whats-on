@@ -10,5 +10,5 @@ import Foundation
 
 public protocol EventsRepository {
 
-    func getCalendarItems(between nowTime: Date, and nextWeek: Date, borderStart fivePm: TimeOfDay, borderEnd elevenPm: TimeOfDay) -> [CalendarItem]
+    func getCalendarItems(between nowTime: Date, and nextWeek: Date, borderStart fivePm: TimeOfDay, borderEnd elevenPm: TimeOfDay) -> [EventCalendarItem]
 }

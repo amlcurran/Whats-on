@@ -8,18 +8,18 @@
 
 import Foundation
 
-public struct CalendarSlot {
-    private var calendarItems = [CalendarItem]()
+public struct CalendarSlot: Equatable, Hashable {
+    private var calendarItems = [EventCalendarItem]()
 
     public var isEmpty: Bool {
         return calendarItems.isEmpty
     }
 
-    public func firstItem() -> CalendarItem? {
-        return calendarItems[0]
+    public func firstItem() -> EventCalendarItem? {
+        return calendarItems.first
     }
 
-    mutating func add(_ item: CalendarItem) {
+    mutating func add(_ item: EventCalendarItem) {
         calendarItems.append(item)
     }
 

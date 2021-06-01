@@ -13,13 +13,13 @@ public class EventKitEventRepository: EventsRepository {
         self.calendarPreferenceStore = calendarPreferenceStore
     }
 
-    public func getCalendarItems(between startTime: Date, and endTime: Date, borderStart fivePm: TimeOfDay, borderEnd elevenPm: TimeOfDay) -> [CalendarItem] {
+    public func getCalendarItems(between startTime: Date, and endTime: Date, borderStart fivePm: TimeOfDay, borderEnd elevenPm: TimeOfDay) -> [EventCalendarItem] {
         let eventStore = EKEventStore.instance
         let calendars = eventStore.supportedCalendars(from: calendarPreferenceStore)
         let search = eventStore.predicateForEvents(withStart: startTime, end: endTime, calendars: calendars)
         let allEvents = eventStore.events(matching: search)
         let filtered = allEvents.filter(predicates.defaults)
-        return filtered.compactMap { ekEvent -> CalendarItem in
+        return filtered.compactMap { ekEvent -> EventCalendarItem in
             return EventCalendarItem(eventId: ekEvent.eventIdentifier,
                                      title: ekEvent.title,
                                      startTime: ekEvent.startDate,

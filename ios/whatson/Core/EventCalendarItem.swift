@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct EventCalendarItem: CalendarItem {
+public struct EventCalendarItem: CalendarItem, Equatable, Hashable {
 
     public let eventId: String
     public let title: String

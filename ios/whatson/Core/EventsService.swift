@@ -43,7 +43,10 @@ public class EventsService {
             itemArray[key] = slot
         }
 
-        return CalendarSource(calendarItems: itemArray, daysSize: numberOfDays, timeCalculator: timeCalculator, timeRepository: timeRepository)
+        return CalendarSource(calendarItems: itemArray,
+                              daysSize: numberOfDays,
+                              timeCalculator: timeCalculator,
+                              timeRepository: timeRepository)
     }
 
 }
