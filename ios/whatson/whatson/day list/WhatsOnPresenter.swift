@@ -7,15 +7,13 @@ class WhatsOnPresenter {
 
     private let eventStore: EKEventStore
     private let eventService: EventsService
-    private let dataProvider: DataProvider
     private let delayer: Delayer
     private weak var view: WhatsOnPresenterView?
     private var notificationHandle: Any?
 
-    init(eventStore: EKEventStore, eventService: EventsService, dataProvider: DataProvider) {
+    init(eventStore: EKEventStore, eventService: EventsService) {
         self.eventStore = eventStore
         self.eventService = eventService
-        self.dataProvider = dataProvider
         self.delayer = Delayer(queue: .main)
     }
 

@@ -38,7 +38,6 @@
 		861BD0E01D9FC4290032FBAB /* Optional+Fluency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */; };
 		8620886D22BFE2E200268B3D /* MultipleEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8620886C22BFE2E200268B3D /* MultipleEventCell.swift */; };
 		8620886F22BFEDF000268B3D /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 8620886E22BFEDF000268B3D /* Localizable.stringsdict */; };
-		8620887122C119E200268B3D /* NewFoo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8620887022C119E200268B3D /* NewFoo.swift */; };
 		8626886E1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8626886D1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift */; };
 		86302CDA23ABD16300008124 /* OptionsView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86302CD923ABD16300008124 /* OptionsView2.swift */; };
 		86317A091EC258ED0009EE8A /* EventPredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86317A081EC258ED0009EE8A /* EventPredicateTests.swift */; };
@@ -195,7 +194,6 @@
 		861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Fluency.swift"; sourceTree = "<group>"; };
 		8620886C22BFE2E200268B3D /* MultipleEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleEventCell.swift; sourceTree = "<group>"; };
 		8620886E22BFEDF000268B3D /* Localizable.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
-		8620887022C119E200268B3D /* NewFoo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFoo.swift; sourceTree = "<group>"; };
 		862468D11F091B8C00FE5A49 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		8626886D1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplicationShortcuts.swift; sourceTree = "<group>"; };
 		86302CD923ABD16300008124 /* OptionsView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView2.swift; sourceTree = "<group>"; };
@@ -436,7 +434,6 @@
 				86DEC9551FB3A069000FF4CD /* AddNewEventViewControllerFactory.swift */,
 				869B1EF420E180A40012A72D /* EventItemView.swift */,
 				8620886C22BFE2E200268B3D /* MultipleEventCell.swift */,
-				8620887022C119E200268B3D /* NewFoo.swift */,
 			);
 			path = "day list";
 			sourceTree = "<group>";
@@ -917,7 +914,6 @@
 				2DBA1A1D4FF1A6199AD9D4FA /* BuildConfig.swift in Sources */,
 				2DBA13D585CE5E035AE263D4 /* EventResponseView.swift in Sources */,
 				8658A2361F375EA500BF219C /* SwitchTableItem.swift in Sources */,
-				8620887122C119E200268B3D /* NewFoo.swift in Sources */,
 				2DBA1FC7FB7A35811ADEDB84 /* EventResponse.swift in Sources */,
 				8658A23C1F37685400BF219C /* CheckableTableItem.swift in Sources */,
 				8600B99D1F09383D008578E5 /* LoadingView.swift in Sources */,

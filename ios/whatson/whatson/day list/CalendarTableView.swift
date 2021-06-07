@@ -96,18 +96,18 @@ class CalendarDiffableTableView: NSObject, CalendarTable, UITableViewDelegate {
 
 class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, CalendarTable {
 
-    private let dataProvider: DataProvider
     private let tableView: UITableView
     private weak var delegate: CalendarTableViewDelegate?
+    private var slots: [CalendarSlot] = []
+    private var items: [CalendarItem] = []
 
     var view: UIView {
         return tableView
     }
 
-    init(delegate: CalendarTableViewDelegate, dataProvider: DataProvider, tableView: UITableView) {
+    init(delegate: CalendarTableViewDelegate, tableView: UITableView) {
         self.delegate = delegate
         self.tableView = tableView
-        self.dataProvider = dataProvider
         super.init()
         tableView.dataSource = self
         tableView.delegate = self
@@ -115,34 +115,53 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, C
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.isDay {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "day", for: indexPath) as? DayCell,
-                  let item = dataProvider.item(at: indexPath.dataIndexPath) else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "day", for: indexPath) as? DayCell else {
                 preconditionFailure("Tried to dequeue a cell which wasn't a Calendar cell")
             }
-            return cell.bound(to: item)
-        } else if dataProvider.slot(at: indexPath.dataIndexPath)!.count() > 1 {
+            return cell.bound(to: items[indexPath.dataIndexPath.row])
+        } else if slots[indexPath.dataIndexPath.row].count() > 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "multipleEvent", for: indexPath) as? MultipleEventCell else {
                 preconditionFailure("Tried to dequeue a cell which wasn't a Calendar cell")
             }
-            let item = dataProvider.item(at: indexPath.dataIndexPath).required()
-            let slot = dataProvider.slot(at: indexPath.dataIndexPath).required()
+            let item = items[indexPath.dataIndexPath.row]
+            let slot = slots[indexPath.dataIndexPath.row]
             return cell.bound(to: item, slot: slot)
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "event", for: indexPath) as? EventCell else {
                 preconditionFailure("Tried to dequeue a cell which wasn't a Calendar cell")
             }
-            let item = dataProvider.item(at: indexPath.dataIndexPath).required()
-            let slot = dataProvider.slot(at: indexPath.dataIndexPath).required()
+            let item = items[indexPath.dataIndexPath.row]
+            let slot = slots[indexPath.dataIndexPath.row]
             return cell.bound(to: item, slot: slot)
         }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataProvider.count * 2
+        return slots.count * 2
     }
 
     func update(_ source: CalendarSource) {
-        let indexes = dataProvider.update(from: source)
+        var changedIndexes = [Int]()
+        let oldItems = items
+        let oldSlots = slots
+        items.removeAll()
+        slots.removeAll()
+        let sourceCount = Int(source.count())
+        for index in 0..<sourceCount {
+            let newItem = source.item(at: index)
+            let newSlot = source.slotAt(index)
+            items.append(newItem)
+            slots.append(newSlot)
+            if index.isWithinBounds(of: oldSlots) && index.isWithinBounds(of: oldItems) {
+                if !newSlot.view(matches: oldSlots[index]) || !matchViews(newItem, oldItems[index]) {
+                    changedIndexes.append(index)
+                }
+            }
+        }
+        if oldSlots.count != Int(source.count()) {
+            changedIndexes.removeAll()
+        }
+        let indexes = changedIndexes
         if indexes.count > 0 {
             tableView.reloadRows(at: indexes.map { IndexPath.tableIndex(fromData: $0) }, with: .automatic)
         } else {
@@ -151,24 +170,7 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, C
     }
 
     func selection(under point: CGPoint) -> (UIView, CalendarItem)? {
-        guard let indexPath = indexPath(under: point),
-            let cell = cell(at: indexPath),
-            let item = item(at: indexPath) else {
-                return nil
-        }
-        return (cell, item)
-    }
-
-    func item(at index: IndexPath) -> CalendarItem? {
-        return dataProvider.item(at: index.dataIndexPath)
-    }
-
-    func indexPath(under location: CGPoint) -> IndexPath? {
-        return tableView.indexPathForRow(at: location)
-    }
-
-    func cell(at index: IndexPath) -> UITableViewCell? {
-        return tableView.cellForRow(at: index)
+        return nil
     }
 
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
@@ -179,7 +181,7 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, C
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = dataProvider.item(at: indexPath.dataIndexPath).required(message: "Calendar didn't have item at expected index \((indexPath as NSIndexPath).row)")
+        let item = items[indexPath.dataIndexPath.row]
         if item.isEmpty {
             delegate?.addEvent(for: item)
         } else {

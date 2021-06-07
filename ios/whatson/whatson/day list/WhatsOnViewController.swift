@@ -11,7 +11,6 @@ class WhatsOnViewController: UIViewController,
 
     private let dateFormatter = DateFormatter(dateFormat: "EEE")
     private let eventStore = EKEventStore.instance
-    private let dataProvider = DataProvider()
     private let timeRepo = NSDateTimeRepository()
     private let pushTransition = EventDetailsPushTransition()
     private let navigationAnimations = EventTransitionNavigationDelegate()
@@ -29,7 +28,7 @@ class WhatsOnViewController: UIViewController,
 //        if #available(iOS 13.0, *) {
 //            return CalendarDiffableTableView(tableView: UITableView(), delegate: self)
 //        } else {
-            return CalendarTableView(delegate: self, dataProvider: self.dataProvider, tableView: UITableView())
+            return CalendarTableView(delegate: self, tableView: UITableView())
 //        }
     }()
 
@@ -40,7 +39,7 @@ class WhatsOnViewController: UIViewController,
 
         let eventRepo = EventKitEventRepository(timeRepository: timeRepo, calendarPreferenceStore: CalendarPreferenceStore())
         eventService = EventsService(timeRepository: timeRepo, eventsRepository: eventRepo, timeCalculator: NSDateCalculator.instance)
-        presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService, dataProvider: dataProvider)
+        presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService)
 
         let header = HeaderView(delegate: self)
         anchor(header)
