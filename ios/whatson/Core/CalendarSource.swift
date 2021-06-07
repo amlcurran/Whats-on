@@ -10,30 +10,28 @@ import Foundation
 
 public class CalendarSource {
 
-    let calendarItems: [Int: CalendarSlot]
-    let daysSize: Int
+    let calendarItems: [CalendarSlot]
     let timeCalculator: TimeCalculator
     let timeRepository: BorderTimeRepository
 
-    init(calendarItems: [Int: CalendarSlot], daysSize: Int, timeCalculator: TimeCalculator, timeRepository: BorderTimeRepository) {
+    init(calendarItems: [CalendarSlot], timeCalculator: TimeCalculator, timeRepository: BorderTimeRepository) {
         self.calendarItems = calendarItems
-        self.daysSize = daysSize
         self.timeCalculator = timeCalculator
         self.timeRepository = timeRepository
     }
 
     public func count() -> Int {
-        return daysSize
+        return calendarItems.count
     }
 
     public func item(at position: Int) -> CalendarItem {
         let calendarSlot = calendarItems[position]
-        if calendarSlot == nil || calendarSlot!.isEmpty {
+        if calendarSlot.isEmpty {
             let startTime = startOfTodayBlock(position)
             let endTime = endOfTodayBlock(position)
             return EmptyCalendarItem(startTime: startTime, endTime: endTime)
         }
-        return calendarSlot!.firstItem()!
+        return calendarSlot.firstItem()!
     }
 
     private func startOfTodayBlock(_ position: Int) -> Date {
@@ -47,7 +45,7 @@ public class CalendarSource {
     }
 
     public func slotAt(_ position: Int) -> CalendarSlot {
-        return calendarItems[position] ?? CalendarSlot()
+        return calendarItems[position]
     }
 
     public func isEmptySlot(at position: Int) -> Bool {

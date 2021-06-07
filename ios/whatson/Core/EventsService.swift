@@ -32,19 +32,21 @@ public class EventsService {
         let fivePm = timeRepository.borderTimeStart
         let elevenPm = timeRepository.borderTimeEnd
 
-        let calendarItems = eventsRepository.getCalendarItems(between: nowTime, and: nextWeek, borderStart: fivePm, borderEnd: elevenPm)
+        let calendarItems = eventsRepository.getCalendarItems(between: nowTime,
+                                                              and: nextWeek,
+                                                              borderStart: fivePm,
+                                                              borderEnd: elevenPm)
 
-        var itemArray = [Int: CalendarSlot]()
+        var itemArray = [CalendarSlot](repeating: CalendarSlot(), count: numberOfDays)
         let epochToNow = timeCalculator.daysSinceEpoch(in: now)
         for item in calendarItems {
             let key = timeCalculator.daysSinceEpoch(in: item.startTime) - epochToNow
-            var slot = itemArray[key] ?? CalendarSlot()
+            var slot = itemArray[key]
             slot.add(item)
             itemArray[key] = slot
         }
 
         return CalendarSource(calendarItems: itemArray,
-                              daysSize: numberOfDays,
                               timeCalculator: timeCalculator,
                               timeRepository: timeRepository)
     }
