@@ -12,7 +12,7 @@ import Core
 
 class AddNewEventViewControllerFactory {
 
-    func newEventController(for calendarItem: CalendarItem, delegate: EKEventEditViewDelegate) -> UIViewController {
+    func newEventController(for calendarItem: CalendarSlot, delegate: EKEventEditViewDelegate) -> UIViewController {
         let eventController = EKEventEditViewController(calendarItem: calendarItem, delegate: delegate)
         eventController.modalPresentationStyle = .formSheet
         return eventController
@@ -22,7 +22,7 @@ class AddNewEventViewControllerFactory {
 
 fileprivate extension EKEventEditViewController {
 
-    convenience init(calendarItem: CalendarItem,
+    convenience init(calendarItem: CalendarSlot,
                      delegate: EKEventEditViewDelegate,
                      eventStore: EKEventStore = EKEventStore.instance,
                      calendarPreferenceStore: CalendarPreferenceStore = CalendarPreferenceStore()) {
@@ -36,7 +36,7 @@ fileprivate extension EKEventEditViewController {
 
 fileprivate extension EKEvent {
 
-    convenience init(representing calendarItem: CalendarItem,
+    convenience init(representing calendarItem: CalendarSlot,
                      calculator: TimeCalculator = NSDateCalculator.instance,
                      eventStore: EKEventStore = .instance,
                      preferenceStore: CalendarPreferenceStore) {
@@ -44,8 +44,8 @@ fileprivate extension EKEvent {
         if let defaultCalendarId = preferenceStore.defaultCalendar?.rawValue {
             self.calendar = eventStore.calendar(withIdentifier: defaultCalendarId)
         }
-        self.startDate = calendarItem.startTime
-        self.endDate = calendarItem.endTime
+        self.startDate = calendarItem.boundaryStart
+        self.endDate = calendarItem.boundaryEnd
     }
 
 }

@@ -88,15 +88,17 @@ class EventItemView: UIView {
         }
     }
 
-    func bound(to item: CalendarItem, slot: CalendarSlot) {
-        let startTime = timeFormatter.string(from: item.startTime)
-        secondaryLabel.text = String(format: "From %@", startTime)
-        if slot.isEmpty {
-            type = .empty
-            eventLabel.text = "Add event"
-        } else {
+    func bound(to slot: CalendarSlot) {
+        if let item = slot.firstItem(), !slot.isEmpty {
             type = .full
             eventLabel.text = item.title
+            let startTime = timeFormatter.string(from: item.startTime)
+            secondaryLabel.text = String(format: "From %@", startTime)
+        } else {
+            type = .empty
+            eventLabel.text = "Add event"
+            let startTime = timeFormatter.string(from: slot.boundaryStart)
+            secondaryLabel.text = String(format: "From %@", startTime)
         }
     }
 

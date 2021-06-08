@@ -24,26 +24,6 @@ public class CalendarSource {
         return calendarItems.count
     }
 
-    public func item(at position: Int) -> CalendarItem {
-        let calendarSlot = calendarItems[position]
-        if calendarSlot.isEmpty {
-            let startTime = startOfTodayBlock(position)
-            let endTime = endOfTodayBlock(position)
-            return EmptyCalendarItem(startTime: startTime, endTime: endTime)
-        }
-        return calendarSlot.firstItem()!
-    }
-
-    private func startOfTodayBlock(_ position: Int) -> Date {
-        let one = timeCalculator.add(hours: timeRepository.borderTimeStart.hours, to: timeCalculator.dateAtStartOfToday())
-        return timeCalculator.add(days: position, to: one)
-    }
-
-    private func endOfTodayBlock(_ position: Int) -> Date {
-        let one = timeCalculator.add(hours: timeRepository.borderTimeEnd.hours, to: timeCalculator.dateAtStartOfToday())
-        return timeCalculator.add(days: position, to: one)
-    }
-
     public func slotAt(_ position: Int) -> CalendarSlot {
         return calendarItems[position]
     }

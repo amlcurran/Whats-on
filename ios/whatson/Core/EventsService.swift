@@ -37,8 +37,12 @@ public class EventsService {
                                                               borderStart: fivePm,
                                                               borderEnd: elevenPm)
 
-        var itemArray = [CalendarSlot](repeating: CalendarSlot(), count: numberOfDays)
+        var itemArray = [CalendarSlot]()
         let epochToNow = timeCalculator.daysSinceEpoch(in: now)
+        for i in 0..<numberOfDays {
+            let slot = CalendarSlot(boundaryStart: startOfTodayBlock(i), boundaryEnd: endOfTodayBlock(i))
+            itemArray.append(slot)
+        }
         for item in calendarItems {
             let key = timeCalculator.daysSinceEpoch(in: item.startTime) - epochToNow
             var slot = itemArray[key]
@@ -49,6 +53,16 @@ public class EventsService {
         return CalendarSource(calendarItems: itemArray,
                               timeCalculator: timeCalculator,
                               timeRepository: timeRepository)
+    }
+
+    private func startOfTodayBlock(_ position: Int) -> Date {
+        let one = timeCalculator.add(hours: timeRepository.borderTimeStart.hours, to: timeCalculator.dateAtStartOfToday())
+        return timeCalculator.add(days: position, to: one)
+    }
+
+    private func endOfTodayBlock(_ position: Int) -> Date {
+        let one = timeCalculator.add(hours: timeRepository.borderTimeEnd.hours, to: timeCalculator.dateAtStartOfToday())
+        return timeCalculator.add(days: position, to: one)
     }
 
 }

@@ -39,7 +39,7 @@ class MultipleEventCell: UITableViewCell, Row {
     }
 
     func bound(to item: CalendarItem, slot: CalendarSlot) -> Self {
-        eventView.bound(to: item, slot: slot)
+        eventView.bound(to: slot)
         return self
     }
 

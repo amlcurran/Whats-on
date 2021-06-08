@@ -9,7 +9,14 @@
 import Foundation
 
 public struct CalendarSlot: Equatable, Hashable {
+    public init(boundaryStart: Date, boundaryEnd: Date) {
+        self.boundaryStart = boundaryStart
+        self.boundaryEnd = boundaryEnd
+    }
+
     private var calendarItems = [EventCalendarItem]()
+    public let boundaryStart: Date
+    public let boundaryEnd: Date
 
     public var isEmpty: Bool {
         return calendarItems.isEmpty

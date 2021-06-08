@@ -45,7 +45,7 @@ class CalendarDiffableTableView: NSObject, CalendarTable, UITableViewDelegate {
         self.tableView = tableView
         self.dataSource = UITableViewDiffableDataSource<Int, Day>(tableView: tableView, cellProvider: { (_, indexPath, item) -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: "event", for: indexPath) as? EventCell
-            return cell?.bound(to: item.item, slot: item.slot)
+            return cell?.bound(to: item.slot)
         })
         self.delegate = delegate
         self.tableView.dataSource = dataSource
@@ -58,7 +58,7 @@ class CalendarDiffableTableView: NSObject, CalendarTable, UITableViewDelegate {
         snapshot.appendSections([0])
         var items = [Day]()
         for i in 0..<source.count() {
-            items.append(Day(position: i, slot: source.slotAt(i), item: source.item(at: i)))
+            //items.append(Day(position: i, slot: source.slotAt(i), item: source.item(at: i)))
         }
         snapshot.appendItems(items)
         dataSource.apply(snapshot, animatingDifferences: true)
@@ -82,7 +82,7 @@ class CalendarDiffableTableView: NSObject, CalendarTable, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = dataSource.snapshot().itemIdentifiers[indexPath.row]
         if item.slot.isEmpty {
-            delegate?.addEvent(for: item.item)
+            delegate?.addEvent(for: item.slot)
         } else {
             guard let calendarItem = item.item as? EventCalendarItem else {
                 preconditionFailure("Item isn't empty, but isn't event")
@@ -99,7 +99,6 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, C
     private let tableView: UITableView
     private weak var delegate: CalendarTableViewDelegate?
     private var slots: [CalendarSlot] = []
-    private var items: [CalendarItem] = []
 
     var view: UIView {
         return tableView
@@ -118,21 +117,19 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, C
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "day", for: indexPath) as? DayCell else {
                 preconditionFailure("Tried to dequeue a cell which wasn't a Calendar cell")
             }
-            return cell.bound(to: items[indexPath.dataIndexPath.row])
+            return cell.bound(to: slots[indexPath.dataIndexPath.row])
         } else if slots[indexPath.dataIndexPath.row].count() > 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "multipleEvent", for: indexPath) as? MultipleEventCell else {
                 preconditionFailure("Tried to dequeue a cell which wasn't a Calendar cell")
             }
-            let item = items[indexPath.dataIndexPath.row]
             let slot = slots[indexPath.dataIndexPath.row]
-            return cell.bound(to: item, slot: slot)
+            return cell.bound(to: slots[indexPath.dataIndexPath.row].firstItem()!, slot: slot)
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "event", for: indexPath) as? EventCell else {
                 preconditionFailure("Tried to dequeue a cell which wasn't a Calendar cell")
             }
-            let item = items[indexPath.dataIndexPath.row]
             let slot = slots[indexPath.dataIndexPath.row]
-            return cell.bound(to: item, slot: slot)
+            return cell.bound(to: slot)
         }
     }
 
@@ -141,32 +138,12 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, C
     }
 
     func update(_ source: CalendarSource) {
-        var changedIndexes = [Int]()
-        let oldItems = items
-        let oldSlots = slots
-        items.removeAll()
         slots.removeAll()
-        let sourceCount = Int(source.count())
-        for index in 0..<sourceCount {
-            let newItem = source.item(at: index)
+        for index in 0..<source.count() {
             let newSlot = source.slotAt(index)
-            items.append(newItem)
             slots.append(newSlot)
-            if index.isWithinBounds(of: oldSlots) && index.isWithinBounds(of: oldItems) {
-                if !newSlot.view(matches: oldSlots[index]) || !matchViews(newItem, oldItems[index]) {
-                    changedIndexes.append(index)
-                }
-            }
         }
-        if oldSlots.count != Int(source.count()) {
-            changedIndexes.removeAll()
-        }
-        let indexes = changedIndexes
-        if indexes.count > 0 {
-            tableView.reloadRows(at: indexes.map { IndexPath.tableIndex(fromData: $0) }, with: .automatic)
-        } else {
-            tableView.reloadData()
-        }
+        tableView.reloadData()
     }
 
     func selection(under point: CGPoint) -> (UIView, CalendarItem)? {
@@ -181,9 +158,10 @@ class CalendarTableView: NSObject, UITableViewDataSource, UITableViewDelegate, C
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = items[indexPath.dataIndexPath.row]
-        if item.isEmpty {
-            delegate?.addEvent(for: item)
+        let slot = slots[indexPath.dataIndexPath.row]
+        let item = slot.items().first
+        if slot.isEmpty {
+            delegate?.addEvent(for: slot)
         } else {
             guard let calendarItem = item as? EventCalendarItem else {
                 preconditionFailure("Item isn't empty, but isn't event")
@@ -227,7 +205,7 @@ extension IndexPath {
 }
 
 protocol CalendarTableViewDelegate: AnyObject {
-    func addEvent(for item: CalendarItem)
+    func addEvent(for slot: CalendarSlot)
 
     func showDetails(for item: EventCalendarItem, at indexPath: IndexPath, in cell: UIView & Row)
 

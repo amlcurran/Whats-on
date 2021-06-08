@@ -33,8 +33,8 @@ class EventCell: UITableViewCell, Row {
         eventView.constrain(toSuperview: .leading, .trailing, .top, .bottom)
     }
 
-    func bound(to item: CalendarItem, slot: CalendarSlot) -> Self {
-        eventView.bound(to: item, slot: slot)
+    func bound(to slot: CalendarSlot) -> Self {
+        eventView.bound(to: slot)
         return self
     }
 
@@ -67,7 +67,7 @@ class EventCollectionCell: UICollectionViewCell, Row {
     }
 
     func bound(to item: CalendarItem, slot: CalendarSlot) -> Self {
-        _ = eventView.bound(to: item, slot: slot)
+        _ = eventView.bound(to: slot)
         return self
     }
 

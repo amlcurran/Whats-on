@@ -20,12 +20,10 @@ class DataProvider: NSObject {
         slots.removeAll()
         let sourceCount = Int(source.count())
         for index in 0..<sourceCount {
-            let newItem = source.item(at: index)
             let newSlot = source.slotAt(index)
-            items.append(newItem)
             slots.append(newSlot)
             if index.isWithinBounds(of: oldSlots) && index.isWithinBounds(of: oldItems) {
-                if !newSlot.view(matches: oldSlots[index]) || !matchViews(newItem, oldItems[index]) {
+                if !newSlot.view(matches: oldSlots[index]) {
                     changedIndexes.append(index)
                 }
             }

@@ -102,7 +102,7 @@ class WhatsOnViewController: UIViewController,
         // Dispose of any resources that can be recreated.
     }
 
-    func addEvent(for item: CalendarItem) {
+    func addEvent(for item: CalendarSlot) {
         navigationController?.present(addNewEventViewControllerFactory.newEventController(for: item, delegate: self), animated: true, completion: nil)
     }
 
