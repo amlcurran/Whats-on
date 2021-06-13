@@ -41,10 +41,6 @@ class CalendarDiffableTableView: NSObject, CalendarTable, UITableViewDelegate {
         dataSource.apply(snapshot, animatingDifferences: true)
     }
 
-    func selection(under point: CGPoint) -> (UIView, CalendarItem)? {
-        nil
-    }
-
     func style() {
         tableView.register(DayCell.self, forCellReuseIdentifier: "day")
         tableView.register(EventCell.self, forCellReuseIdentifier: "event")

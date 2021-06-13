@@ -79,6 +79,9 @@ class WhatsOnViewController: UIViewController,
         loadingView.constrain(.centerY, to: view, .centerY)
         loadingView.constrain(height: 96)
         loadingView.constrain(width: 96)
+
+        presenter.beginPresenting(on: self, delayingBy: loadingDelay)
+        loadingDelay = DispatchTimeInterval.milliseconds(0)
     }
 
     func didTapEdit() {
@@ -88,8 +91,6 @@ class WhatsOnViewController: UIViewController,
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        presenter.beginPresenting(on: self, delayingBy: loadingDelay)
-        loadingDelay = DispatchTimeInterval.milliseconds(0)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
