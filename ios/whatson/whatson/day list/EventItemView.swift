@@ -20,6 +20,12 @@ class EventItemView: UIView {
     var secondaryLabelZeroHeightConstraint: NSLayoutConstraint?
     var secondaryLabelBelowConstraint: NSLayoutConstraint?
 
+    var highlighted: Bool = false {
+        didSet {
+            roundedView.backgroundColor = highlighted ? type.selectedBackground : type.cellBackground
+        }
+    }
+
     private var type: SlotStyle = .empty {
         didSet {
             roundedView.backgroundColor = type.cellBackground
@@ -55,7 +61,6 @@ class EventItemView: UIView {
         timeFormatter.timeStyle = .short
         backgroundColor = .clear
 
-        eventLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.semibold)
         secondaryLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
     }
 
@@ -94,11 +99,13 @@ class EventItemView: UIView {
             eventLabel.text = item.title
             let startTime = timeFormatter.string(from: item.startTime)
             secondaryLabel.text = String(format: "From %@", startTime)
+            eventLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.semibold)
         } else {
             type = .empty
             eventLabel.text = "Add event"
             let startTime = timeFormatter.string(from: slot.boundaryStart)
             secondaryLabel.text = String(format: "From %@", startTime)
+            eventLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.regular)
         }
     }
 

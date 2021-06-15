@@ -30,9 +30,9 @@ class DayCell: UITableViewCell {
 
     private func layout() {
         contentView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        contentView.add(dayLabel, constrainedTo: [.leadingMargin, .trailingMargin], withInset: 8)
+        contentView.add(dayLabel, constrainedTo: [.leadingMargin, .trailingMargin], withInset: 0)
         dayLabel.constrain(.top, to: contentView, .top, withOffset: 16)
-        dayLabel.constrain(.bottom, to: contentView, .bottom, withOffset: -4)
+        dayLabel.constrain(.bottom, to: contentView, .bottom, withOffset: -8)
     }
 
     func bound(to item: CalendarSlot) -> Self {
@@ -70,8 +70,7 @@ class DayCollectionCell: UICollectionViewCell {
     }
 
     private func layout() {
-        contentView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        contentView.add(dayLabel, constrainedTo: [.leadingMargin, .trailingMargin], withInset: 8)
+        contentView.add(dayLabel, constrainedTo: [.leadingMargin, .trailingMargin], withInset: 16)
         dayLabel.constrain(.top, to: contentView, .top, withOffset: 16)
         dayLabel.constrain(.bottom, to: contentView, .bottom, withOffset: -4)
     }

@@ -38,6 +38,13 @@ class EventCell: UITableViewCell, Row {
         return self
     }
 
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        UIView.animate(withDuration: 0.1) {
+            self.eventView.highlighted = highlighted
+        }
+    }
+
 }
 
 class EventCollectionCell: UICollectionViewCell, Row {
