@@ -1,9 +1,7 @@
 import UIKit
 import EventKit
-import EventKitUI
-import Core
 
-class WhatsOnPresenter {
+public class WhatsOnPresenter {
 
     private let eventStore: EKEventStore
     private let eventService: EventsService
@@ -11,13 +9,13 @@ class WhatsOnPresenter {
     private weak var view: WhatsOnPresenterView?
     private var notificationHandle: Any?
 
-    init(eventStore: EKEventStore, eventService: EventsService) {
+    public init(eventStore: EKEventStore, eventService: EventsService) {
         self.eventStore = eventStore
         self.eventService = eventService
         self.delayer = Delayer(queue: .main)
     }
 
-    func beginPresenting(on view: WhatsOnPresenterView, delayingBy delay: DispatchTimeInterval = .seconds(0)) {
+    public func beginPresenting(on view: WhatsOnPresenterView, delayingBy delay: DispatchTimeInterval = .seconds(0)) {
         self.view = view
         delayer.delayUpcomingEvents(by: delay)
         notificationHandle = NotificationCenter.default.addObserver(forName: .EKEventStoreChanged, do: { [weak self] in
@@ -32,16 +30,16 @@ class WhatsOnPresenter {
         }
     }
 
-    func stopPresenting() {
+    public func stopPresenting() {
         self.view = nil
         NotificationCenter.default.removeOptionalObserver(notificationHandle)
     }
 
     @objc func refreshEvents() {
         fetchEvents({ [weak self] (source) in
-            self?.delayer.runAfterExpiryTime({ [weak self] in
+//            self?.delayer.runAfterExpiryTime({ [weak self] in
                 self?.view?.showCalendar(source)
-            })
+//            })
         })
     }
 
@@ -54,7 +52,7 @@ class WhatsOnPresenter {
         }
     }
 
-    func remove(_ event: EventCalendarItem) {
+    public func remove(_ event: EventCalendarItem) {
         do {
             if let ekEvent = eventStore.event(withIdentifier: event.eventId) {
                 try eventStore.remove(ekEvent, span: .thisEvent)
@@ -66,7 +64,7 @@ class WhatsOnPresenter {
 
 }
 
-protocol WhatsOnPresenterView: AnyObject {
+public protocol WhatsOnPresenterView: AnyObject {
     func showCalendar(_ source: CalendarSource)
 
     func showAccessFailure()

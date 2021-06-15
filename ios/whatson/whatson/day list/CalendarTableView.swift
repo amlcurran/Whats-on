@@ -7,11 +7,17 @@ protocol CalendarTable {
     func style()
 }
 
+enum DiffableType: Hashable {
+    case dayTitle(CalendarSlot)
+    case emptySlot(CalendarSlot)
+    case filledSlot(CalendarSlot)
+}
+
 @available(iOS 13.0, *)
 class CalendarDiffableTableView: NSObject, CalendarTable, UITableViewDelegate {
 
     private let tableView: UITableView
-    private let dataSource: UITableViewDiffableDataSource<Int, CalendarSlot>
+    private let dataSource: UITableViewDiffableDataSource<Int, DiffableType>
     private weak var delegate: CalendarTableViewDelegate?
 
     var view: UIView {
@@ -20,9 +26,18 @@ class CalendarDiffableTableView: NSObject, CalendarTable, UITableViewDelegate {
 
     init(tableView: UITableView, delegate: CalendarTableViewDelegate) {
         self.tableView = tableView
-        self.dataSource = UITableViewDiffableDataSource<Int, CalendarSlot>(tableView: tableView, cellProvider: { (_, indexPath, item) -> UITableViewCell? in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "event", for: indexPath) as? EventCell
-            return cell?.bound(to: item)
+        self.dataSource = UITableViewDiffableDataSource<Int, DiffableType>(tableView: tableView, cellProvider: { (_, indexPath, item) -> UITableViewCell? in
+            switch item {
+            case .emptySlot(let slot):
+                let cell = tableView.dequeueReusableCell(withIdentifier: "event", for: indexPath) as? EventCell
+                return cell?.bound(to: slot)
+            case .filledSlot(let slot):
+                let cell = tableView.dequeueReusableCell(withIdentifier: "event", for: indexPath) as? EventCell
+                return cell?.bound(to: slot)
+            case .dayTitle(let slot):
+                let cell = tableView.dequeueReusableCell(withIdentifier: "day", for: indexPath) as? DayCell
+                return cell?.bound(to: slot)
+            }
         })
         self.delegate = delegate
         self.tableView.dataSource = dataSource
@@ -31,11 +46,17 @@ class CalendarDiffableTableView: NSObject, CalendarTable, UITableViewDelegate {
     }
 
     func update(_ source: CalendarSource) {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, CalendarSlot>()
+        var snapshot = NSDiffableDataSourceSnapshot<Int, DiffableType>()
         snapshot.appendSections([0])
-        var items = [CalendarSlot]()
+        var items = [DiffableType]()
         for i in 0..<source.count() {
-            items.append(source.slotAt(i))
+            let slot = source.slotAt(i)
+            items.append(.dayTitle(slot))
+            if slot.isEmpty {
+                items.append(.emptySlot(slot))
+            } else {
+                items.append(.filledSlot(slot))
+            }
         }
         snapshot.appendItems(items)
         dataSource.apply(snapshot, animatingDifferences: true)
@@ -54,15 +75,25 @@ class CalendarDiffableTableView: NSObject, CalendarTable, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = dataSource.snapshot().itemIdentifiers[indexPath.row]
-        if item.isEmpty {
-            delegate?.addEvent(for: item)
-        } else {
-            guard let calendarItem = item.firstItem() else {
+        switch item {
+        case .dayTitle(_):
+            fatalError()
+        case .emptySlot(let slot):
+            delegate?.addEvent(for: slot)
+        case .filledSlot(let slot):
+            guard let calendarItem = slot.firstItem() else {
                 preconditionFailure("Item isn't empty, but isn't event")
             }
             let cell = tableView.cellForRow(at: indexPath).required(as: (UIView & Row).self)
             delegate?.showDetails(for: calendarItem, at: indexPath, in: cell)
         }
+    }
+
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if case .dayTitle = dataSource.snapshot().itemIdentifiers[indexPath.row] {
+            return nil
+        }
+        return indexPath
     }
 
 }

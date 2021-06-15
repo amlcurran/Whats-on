@@ -18,7 +18,6 @@
 		6985339AD6136F4F0794DD59 /* EKEventKit+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853687E86C131BBEA80025 /* EKEventKit+Convenience.swift */; };
 		698533DEAF59954635D7E3CD /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985328C217A9C753C09CFDE /* Line.swift */; };
 		698534B8D95E1BCE5206D939 /* BasicAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853B71158DE94568DDC9FB /* BasicAnimator.swift */; };
-		6985372A302EA91FAB612301 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698536C18C7A4E830F167DAE /* DataProvider.swift */; };
 		698538F49DD3046F71BE4E01 /* AllowsGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853BC8BAF5893B6913918C /* AllowsGestureRecognizer.swift */; };
 		698539E35BDB526A55FA73A4 /* PropertyAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853939FC3A0F98F4792C0F /* PropertyAnimator.swift */; };
 		69853B3AC06B29C271651CF0 /* UIDatePicker+Hours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985397DE155D32104662FA2 /* UIDatePicker+Hours.swift */; };
@@ -29,7 +28,6 @@
 		69853EB6AEFC9EE982D28388 /* TimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853F60E5391F881F006F7B /* TimeLabel.swift */; };
 		69853EDF767415596862180F /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985358E9835009A7EA756E9 /* Analytics.swift */; };
 		8600B99D1F09383D008578E5 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8600B99C1F09383D008578E5 /* LoadingView.swift */; };
-		8600B99F1F09429D008578E5 /* Delayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8600B99E1F09429D008578E5 /* Delayer.swift */; };
 		8600B9A11F0946F9008578E5 /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8600B9A01F0946F9008578E5 /* UIView+Animations.swift */; };
 		86075C331E3E228C005AF423 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86075C321E3E228C005AF423 /* Localizable.strings */; };
 		8607847A1DAD7E6100AAE856 /* LabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860784791DAD7E6100AAE856 /* LabelStyle.swift */; };
@@ -94,9 +92,10 @@
 		86CAD4AC1BACC9B1009C9CFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4AA1BACC9B1009C9CFD /* LaunchScreen.storyboard */; };
 		86D751131C7128EB00C0A607 /* RoundedRectBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */; };
 		86D751151C71316D00C0A607 /* UIColor+WhatsOn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D751141C71316D00C0A607 /* UIColor+WhatsOn.swift */; };
+		86DB90182676A05200F8BB72 /* WhatsOnPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F467F81C8AFFA500147F2E /* WhatsOnPresenter.swift */; };
+		86DB90192676A09100F8BB72 /* Delayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8600B99E1F09429D008578E5 /* Delayer.swift */; };
 		86DEC9561FB3A069000FF4CD /* AddNewEventViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DEC9551FB3A069000FF4CD /* AddNewEventViewControllerFactory.swift */; };
 		86DEC9581FB3B40D000FF4CD /* NextStepTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DEC9571FB3B40D000FF4CD /* NextStepTableItem.swift */; };
-		86F467F91C8AFFA500147F2E /* WhatsOnPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F467F81C8AFFA500147F2E /* WhatsOnPresenter.swift */; };
 		86F849991D046A3E007C41B0 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */; };
 		86F8499B1D046AAE007C41B0 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */; };
 		86FFFE491EC10E01009D772E /* Optional+Requirements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FFFE481EC10E01009D772E /* Optional+Requirements.swift */; };
@@ -171,7 +170,6 @@
 		6985351AE5837369246C93AD /* EventDetailsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsPresenter.swift; sourceTree = "<group>"; };
 		6985358E9835009A7EA756E9 /* Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		69853687E86C131BBEA80025 /* EKEventKit+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "EKEventKit+Convenience.swift"; path = "utils/EKEventKit+Convenience.swift"; sourceTree = "<group>"; };
-		698536C18C7A4E830F167DAE /* DataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		698538EBD0B5796034B50A5C /* UserDefaultsTimeStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsTimeStore.swift; sourceTree = "<group>"; };
 		69853939FC3A0F98F4792C0F /* PropertyAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyAnimator.swift; sourceTree = "<group>"; };
 		69853943917F0CF738ACB915 /* EventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
@@ -329,7 +327,6 @@
 			children = (
 				69853BC8BAF5893B6913918C /* AllowsGestureRecognizer.swift */,
 				86FFFE481EC10E01009D772E /* Optional+Requirements.swift */,
-				8600B99E1F09429D008578E5 /* Delayer.swift */,
 				8600B9A01F0946F9008578E5 /* UIView+Animations.swift */,
 			);
 			path = utils;
@@ -384,6 +381,8 @@
 		86755DC622C7BC2000E91DF4 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				86F467F81C8AFFA500147F2E /* WhatsOnPresenter.swift */,
+				8600B99E1F09429D008578E5 /* Delayer.swift */,
 				8650D7D11D9FAE8E002D5930 /* NSDateTimeRepository.swift */,
 				86755DC722C7BC2000E91DF4 /* Core.h */,
 				86755DC822C7BC2000E91DF4 /* Info.plist */,
@@ -422,14 +421,12 @@
 			isa = PBXGroup;
 			children = (
 				86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */,
-				86F467F81C8AFFA500147F2E /* WhatsOnPresenter.swift */,
 				8618A51E1BDA92F900A4845E /* EventCell.swift */,
 				8695D0271DA023670034D52A /* HeaderView.swift */,
 				8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */,
 				8695D0321DA1A2A20034D52A /* SlotDetail.swift */,
 				6985333EBC410C0E8F45C969 /* FailedAccessView.swift */,
 				86A9E4561DA7A7DC00E8D019 /* CalendarTableView.swift */,
-				698536C18C7A4E830F167DAE /* DataProvider.swift */,
 				698530C0F754D12F1E38397C /* DayCell.swift */,
 				86DEC9551FB3A069000FF4CD /* AddNewEventViewControllerFactory.swift */,
 				869B1EF420E180A40012A72D /* EventItemView.swift */,
@@ -503,8 +500,8 @@
 				861BD0DE1D9FBFBB0032FBAB /* options */,
 				69853E6065D4384CD18D05CB /* views */,
 				6985358E9835009A7EA756E9 /* Analytics.swift */,
-				2DBA1EBA1E19FC38477D7218 /* BuildConfig.swift */,
 				69853BA72CF4C2EAB206708F /* utils */,
+				2DBA1EBA1E19FC38477D7218 /* BuildConfig.swift */,
 				8626886D1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift */,
 			);
 			path = whatson;
@@ -830,6 +827,7 @@
 				86755DE822C7BD0D00E91DF4 /* TimeOfDay.swift in Sources */,
 				86BE23F524B1192F00B0B72F /* NSDateTimeRepository.swift in Sources */,
 				868119E42306D77C0035553B /* CalendarsLoader.swift in Sources */,
+				86DB90182676A05200F8BB72 /* WhatsOnPresenter.swift in Sources */,
 				868119E22306D7490035553B /* Date+SCTimeOfDay.swift in Sources */,
 				868119E02306D71A0035553B /* EventKitEventRepository.swift in Sources */,
 				868119DF2306D67E0035553B /* NSDateCalculator.swift in Sources */,
@@ -837,6 +835,7 @@
 				86755DEA22C7BD8D00E91DF4 /* BorderTimeRepository.swift in Sources */,
 				868119E12306D7390035553B /* EventPredicates.swift in Sources */,
 				868119DE2306D66E0035553B /* UserDefaultsTimeStore.swift in Sources */,
+				86DB90192676A09100F8BB72 /* Delayer.swift in Sources */,
 				86755DE422C7BC5100E91DF4 /* CalendarItem.swift in Sources */,
 				86A9355D22C7C261003FC26C /* EventsService.swift in Sources */,
 				86A9355922C7C1F4003FC26C /* EventCalendarItem.swift in Sources */,
@@ -885,11 +884,9 @@
 				8658A2341F375E6100BF219C /* TitleTableItem.swift in Sources */,
 				8694756C1F37726D00925C2A /* CalendarPresenter.swift in Sources */,
 				861BD0E01D9FC4290032FBAB /* Optional+Fluency.swift in Sources */,
-				86F467F91C8AFFA500147F2E /* WhatsOnPresenter.swift in Sources */,
 				865C7B051EE574100047D8E0 /* OptionsViewController.swift in Sources */,
 				86BE23E924AFBA4400B0B72F /* Widget.intentdefinition in Sources */,
 				866D2E771EEA045E008D76D5 /* GradientView.swift in Sources */,
-				8600B99F1F09429D008578E5 /* Delayer.swift in Sources */,
 				8658A2301F375DF800BF219C /* TableSection.swift in Sources */,
 				86A9E45F1DA80E9700E8D019 /* DateFormatter+Initialisers.swift in Sources */,
 				8695D0281DA023670034D52A /* HeaderView.swift in Sources */,
@@ -917,7 +914,6 @@
 				2DBA1FC7FB7A35811ADEDB84 /* EventResponse.swift in Sources */,
 				8658A23C1F37685400BF219C /* CheckableTableItem.swift in Sources */,
 				8600B99D1F09383D008578E5 /* LoadingView.swift in Sources */,
-				6985372A302EA91FAB612301 /* DataProvider.swift in Sources */,
 				6985330727D25CE189AC7193 /* FailedAccessView.swift in Sources */,
 				698538F49DD3046F71BE4E01 /* AllowsGestureRecognizer.swift in Sources */,
 				698533858A420599E0C749F0 /* DayCell.swift in Sources */,
@@ -972,6 +968,7 @@
 		86755DDD22C7BC2100E91DF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1011,6 +1008,7 @@
 		86755DDE22C7BC2100E91DF4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

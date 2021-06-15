@@ -26,9 +26,9 @@ class WhatsOnViewController: UIViewController,
 
     lazy var table: CalendarTable = {
 //        if #available(iOS 13.0, *) {
-//            return CalendarDiffableTableView(tableView: UITableView(), delegate: self)
+            return CalendarDiffableTableView(tableView: UITableView(), delegate: self)
 //        } else {
-            return CalendarTableView(delegate: self, tableView: UITableView())
+//            return CalendarTableView(delegate: self, tableView: UITableView())
 //        }
     }()
 
@@ -80,8 +80,6 @@ class WhatsOnViewController: UIViewController,
         loadingView.constrain(height: 96)
         loadingView.constrain(width: 96)
 
-        presenter.beginPresenting(on: self, delayingBy: loadingDelay)
-        loadingDelay = DispatchTimeInterval.milliseconds(0)
     }
 
     func didTapEdit() {
@@ -91,6 +89,8 @@ class WhatsOnViewController: UIViewController,
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        presenter.beginPresenting(on: self, delayingBy: loadingDelay)
+        loadingDelay = DispatchTimeInterval.milliseconds(0)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -125,7 +125,6 @@ class WhatsOnViewController: UIViewController,
     // MARK: - peek and pop
 
     func showCalendar(_ source: CalendarSource) {
-        table.view.alpha = 0
         table.view.animateAlpha(to: 1) { _ in }
         table.update(source)
         loadingView.animateAlpha(to: 0) { $0.isHidden = true }
