@@ -74,7 +74,7 @@ class EventCollectionCell: UICollectionViewCell, Row {
     }
 
     func bound(to item: CalendarItem, slot: CalendarSlot) -> Self {
-        _ = eventView.bound(to: slot)
+        eventView.bound(to: slot)
         return self
     }
 
