@@ -23,6 +23,7 @@ class WhatsOnViewController: UIViewController,
     private var presenter: WhatsOnPresenter!
     private var eventService: EventsService!
     private var loadingDelay = DispatchTimeInterval.milliseconds(1000)
+    private var hasShownOnce = false
 
     lazy var table: CalendarTable = {
 //        if #available(iOS 13.0, *) {
@@ -56,8 +57,7 @@ class WhatsOnViewController: UIViewController,
 
     private func anchor(_ header: UIView) {
         let blurView = GradientView()
-        blurView.colors = [.windowBackground, .windowBackground, UIColor.windowBackground.withAlphaComponent(0)]
-        blurView.locations = [0.0, 0.85, 1.0]
+        blurView.backgroundColor = .windowBackground
         blurView.addSubview(header)
         header.constrain(toSuperview: .top, .trailing, .bottom, insetBy: 16)
         header.hugContent(.vertical)
@@ -66,7 +66,7 @@ class WhatsOnViewController: UIViewController,
         view.add(mainView, constrainedTo: [.bottom, .leading, .trailing])
         view.add(blurView, constrainedTo: [.top, .leading, .trailing])
         header.constrain(toSafeAreaTopOf: self, insetBy: 16)
-        mainView.constrain(.top, to: header, .bottom, withOffset: -16)
+        mainView.constrain(.top, to: header, .bottom)
         mainView.add(table.view, constrainedTo: [.top, .bottom])
         table.view.leadingAnchor.constraint(equalTo: mainView.readableContentGuide.leadingAnchor).isActive = true
         table.view.trailingAnchor.constraint(equalTo: mainView.readableContentGuide.trailingAnchor).isActive = true
@@ -126,7 +126,8 @@ class WhatsOnViewController: UIViewController,
 
     func showCalendar(_ source: CalendarSource) {
         table.view.animateAlpha(to: 1) { _ in }
-        table.update(source)
+        table.update(source, isFirst: !hasShownOnce)
+        hasShownOnce = true
         loadingView.animateAlpha(to: 0) { $0.isHidden = true }
         failedAccessView.isHidden = true
         failedAccessView.isUserInteractionEnabled = false

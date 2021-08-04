@@ -33,7 +33,7 @@ class GradientView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layer.addSublayer(gradient)
+//        layer.addSublayer(gradient)
     }
 
     required init?(coder aDecoder: NSCoder) {

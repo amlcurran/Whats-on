@@ -3,7 +3,7 @@ import Core
 
 protocol CalendarTable {
     var view: UIView { get }
-    func update(_ source: CalendarSource)
+    func update(_ source: CalendarSource, isFirst: Bool)
     func style()
 }
 
@@ -45,7 +45,7 @@ class CalendarDiffableTableView: NSObject, CalendarTable, UITableViewDelegate {
         self.tableView.delegate = self
     }
 
-    func update(_ source: CalendarSource) {
+    func update(_ source: CalendarSource, isFirst: Bool) {
         var snapshot = NSDiffableDataSourceSnapshot<Int, DiffableType>()
         snapshot.appendSections([0])
         var items = [DiffableType]()
@@ -59,7 +59,7 @@ class CalendarDiffableTableView: NSObject, CalendarTable, UITableViewDelegate {
             }
         }
         snapshot.appendItems(items)
-        dataSource.apply(snapshot, animatingDifferences: true)
+        dataSource.apply(snapshot, animatingDifferences: !isFirst)
     }
 
     func style() {
