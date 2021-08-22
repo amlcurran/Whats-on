@@ -51,9 +51,12 @@ struct Provider: IntentTimelineProvider {
             source.slotAt(1)
         ]
 
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+        let refresh = Calendar.current.date(bySettingHour: 0, minute: 1, second: 0, of: tomorrow)
+
         let timeline = Timeline(entries: [
             SimpleEntry(date: Date(), slots: slots, configuration: configuration)
-        ], policy: .atEnd)
+        ], policy: .after(refresh!))
         completion(timeline)
     }
 }
@@ -75,7 +78,7 @@ struct Widget3EntryView: View {
         .padding([.leading, .trailing], 10)
         .padding([.top, .bottom], 10)
         .background(Color("windowBackground"))
-        .tint(Color("accent"))
+        .accentColor(Color("accent"))
     }
 }
 
@@ -146,53 +149,67 @@ struct FullSlot: View {
     let item: CalendarItem
 
     var body: some View {
-        ZStack {
-            ContainerRelativeShape()
-                .foregroundColor(Color("surface"))
-            VStack(alignment: .leading) {
-                Text(item.title)
-                    .minimumScaleFactor(0.7)
-                    .foregroundColor(Color("secondary"))
-                    .font(.system(size: 14).weight(.semibold))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Text(formatter.string(from: item.startTime))
-                    .minimumScaleFactor(0.7)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(Color("lightText"))
-                    .lineLimit(1)
-                    .font(.caption)
-            }
-            .padding(8)
+        VStack(alignment: .leading) {
+            Text(item.title)
+                .minimumScaleFactor(0.7)
+                .foregroundColor(Color("secondary"))
+                .font(.system(size: 14).weight(.semibold))
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Text(formatter.string(from: item.startTime))
+                .minimumScaleFactor(0.7)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .foregroundColor(Color("lightText"))
+                .lineLimit(1)
+                .font(.caption)
         }
+        .padding(8)
+        .modifier(SlotStyle(empty: false))
     }
 }
 
+struct SlotStyle: ViewModifier {
+
+    let empty: Bool
+
+    func body(content: Content) -> some View {
+        if empty {
+            ZStack {
+                ContainerRelativeShape()
+                    .stroke(style: .init(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 0, dash: [8], dashPhase: 0))
+                    .foregroundColor(Color("emptyOutline"))
+                content
+            }
+        } else {
+            ZStack {
+                ContainerRelativeShape()
+                    .foregroundColor(Color("surface"))
+                content
+            }
+        }
+    }
+
+}
 
 struct EmptySlot: View {
 
     let slot: CalendarSlot
 
     var body: some View {
-        ZStack {
-            ContainerRelativeShape()
-                .stroke(style: .init(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 0, dash: [8], dashPhase: 0))
+        VStack(alignment: .leading) {
+            Text("Nothing on")
+                .minimumScaleFactor(0.7)
                 .foregroundColor(Color("emptyOutline"))
-
-            VStack(alignment: .leading) {
-                Text("Nothing on")
-                    .minimumScaleFactor(0.7)
-                    .foregroundColor(Color("emptyOutline"))
-                    .font(.system(size: 14).weight(.semibold))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Text(dateOnlyFormatter.string(from: slot.boundaryStart))
-                    .minimumScaleFactor(0.7)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(Color("lightText"))
-                    .lineLimit(1)
-                    .font(.caption)
-            }
-            .padding(8)
+                .font(.system(size: 14).weight(.semibold))
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Text(dateOnlyFormatter.string(from: slot.boundaryStart))
+                .minimumScaleFactor(0.7)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .foregroundColor(Color("lightText"))
+                .lineLimit(1)
+                .font(.caption)
         }
+        .padding(8)
+        .modifier(SlotStyle(empty: true))
     }
 
 }
