@@ -85,7 +85,6 @@
 		86A9E4571DA7A7DC00E8D019 /* CalendarTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E4561DA7A7DC00E8D019 /* CalendarTableView.swift */; };
 		86A9E45B1DA80A4900E8D019 /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E45A1DA80A4900E8D019 /* UIViewController+Navigation.swift */; };
 		86A9E45F1DA80E9700E8D019 /* DateFormatter+Initialisers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E45E1DA80E9700E8D019 /* DateFormatter+Initialisers.swift */; };
-		86BE23E924AFBA4400B0B72F /* Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 86BE23E424AFBA4200B0B72F /* Widget.intentdefinition */; };
 		86BE23F524B1192F00B0B72F /* NSDateTimeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8650D7D11D9FAE8E002D5930 /* NSDateTimeRepository.swift */; };
 		86C19EBF1BBF28E600BBCDF6 /* WhatsOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */; };
 		86CAD4A91BACC9B1009C9CFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */; };
@@ -248,10 +247,6 @@
 		86B7D32020E12DA4001B0DF6 /* Today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Today.entitlements; sourceTree = "<group>"; };
 		86BE23DD24AFBA4200B0B72F /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		86BE23DF24AFBA4200B0B72F /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		86BE23E224AFBA4200B0B72F /* Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widget.swift; sourceTree = "<group>"; };
-		86BE23E424AFBA4200B0B72F /* Widget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Widget.intentdefinition; sourceTree = "<group>"; };
-		86BE23E524AFBA4400B0B72F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		86BE23E724AFBA4400B0B72F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsOnViewController.swift; sourceTree = "<group>"; };
 		86C85A121EA80B080085C9C6 /* What’s on.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "What’s on.entitlements"; sourceTree = "<group>"; };
 		86CAD4991BACC9B1009C9CFD /* What’s on.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "What’s on.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -445,17 +440,6 @@
 			path = WhatsOnTests;
 			sourceTree = "<group>";
 		};
-		86BE23E124AFBA4200B0B72F /* Widget */ = {
-			isa = PBXGroup;
-			children = (
-				86BE23E224AFBA4200B0B72F /* Widget.swift */,
-				86BE23E424AFBA4200B0B72F /* Widget.intentdefinition */,
-				86BE23E524AFBA4400B0B72F /* Assets.xcassets */,
-				86BE23E724AFBA4400B0B72F /* Info.plist */,
-			);
-			path = Widget;
-			sourceTree = "<group>";
-		};
 		86CAD4901BACC9B1009C9CFD = {
 			isa = PBXGroup;
 			children = (
@@ -467,7 +451,6 @@
 				869DAC711D449EFB005AF315 /* tests */,
 				86755DC622C7BC2000E91DF4 /* Core */,
 				86755DD322C7BC2100E91DF4 /* CoreTests */,
-				86BE23E124AFBA4200B0B72F /* Widget */,
 				86CAD49A1BACC9B1009C9CFD /* Products */,
 				3C1168F9D8934AD69843604B /* Pods */,
 				BC38BE0C51940461A7C28C6F /* Frameworks */,
@@ -667,7 +650,7 @@
 		86CAD4911BACC9B1009C9CFD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1200;
+				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Alex Curran";
 				TargetAttributes = {
@@ -885,7 +868,6 @@
 				8694756C1F37726D00925C2A /* CalendarPresenter.swift in Sources */,
 				861BD0E01D9FC4290032FBAB /* Optional+Fluency.swift in Sources */,
 				865C7B051EE574100047D8E0 /* OptionsViewController.swift in Sources */,
-				86BE23E924AFBA4400B0B72F /* Widget.intentdefinition in Sources */,
 				866D2E771EEA045E008D76D5 /* GradientView.swift in Sources */,
 				8658A2301F375DF800BF219C /* TableSection.swift in Sources */,
 				86A9E45F1DA80E9700E8D019 /* DateFormatter+Initialisers.swift in Sources */,
