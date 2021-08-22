@@ -43,16 +43,18 @@ struct SimpleEntry: TimelineEntry {
 
 struct Widget3EntryView: View {
     var entry: Provider.Entry
-    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 10) {
             Day(title: "First event",
                 time: Date())
             Day(title: "Second event",
                 time: Date().addingTimeInterval(60 * 60 * 24))
         }
+        .padding([.leading, .trailing], 10)
+        .padding([.top, .bottom], 10)
         .background(Color("windowBackground"))
+        .tint(Color("accent"))
     }
 }
 
@@ -68,6 +70,14 @@ extension Color {
 
 }
 
+private let formatter: DateFormatter = {
+    var format = DateFormatter()
+    format.timeStyle = .short
+    format.dateStyle = .long
+    format.doesRelativeDateFormatting = true
+    return format
+}()
+
 struct Day: View {
 
     var isEmpty: Bool = false
@@ -75,21 +85,27 @@ struct Day: View {
     let time: Date
 
     var body: some View {
-        ZStack {
-            ContainerRelativeShape()
-                .foregroundColor(Color("surface"))
-
-            VStack(alignment: .leading) {
-                Text(title)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Text(time, style: .time)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.caption)
+        VStack(spacing: 0) {
+            ZStack {
+                ContainerRelativeShape()
+                    .foregroundColor(Color("surface"))
+                VStack(alignment: .leading) {
+                    Text(title)
+                        .minimumScaleFactor(0.7)
+                        .foregroundColor(Color("secondary"))
+                        .font(.system(size: 14).weight(.semibold))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Text(formatter.string(from: time))
+                        .minimumScaleFactor(0.7)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .foregroundColor(Color("lightText"))
+                        .lineLimit(1)
+                        .font(.caption)
+                }
+                .padding(8)
             }
-            .padding(8)
         }
         .frame(maxWidth: .infinity)
-        .padding(10)
     }
 
 }
