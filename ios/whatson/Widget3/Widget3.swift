@@ -9,35 +9,58 @@
 import WidgetKit
 import SwiftUI
 import Intents
+import Core
 
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent())
+        SimpleEntry(date: Date(),
+                    slots: [
+                        .empty(duration: 5 * 60 * 60),
+                        .empty(inFuture: 24 * 60 * 60, duration: 5 * 60 * 60)
+                    ],
+                    configuration: ConfigurationIntent())
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> Void) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration)
+        let timeRepo = NSDateTimeRepository()
+        let eventService = EventsService(timeRepository: timeRepo,
+                                         eventsRepository: EventKitEventRepository(timeRepository: timeRepo,
+                                                                                   calendarPreferenceStore: CalendarPreferenceStore()),
+                                         timeCalculator: NSDateCalculator.instance)
+
+        let source = eventService.getCalendarSource(numberOfDays: 2, now: Date())
+        let slots = [
+            source.slotAt(0),
+            source.slotAt(1)
+        ]
+
+        let entry = SimpleEntry(date: Date(), slots: slots, configuration: configuration)
         completion(entry)
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
-        var entries: [SimpleEntry] = []
+        let timeRepo = NSDateTimeRepository()
+        let eventService = EventsService(timeRepository: timeRepo,
+                                         eventsRepository: EventKitEventRepository(timeRepository: timeRepo,
+                                                                                   calendarPreferenceStore: CalendarPreferenceStore()),
+                                         timeCalculator: NSDateCalculator.instance)
 
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
-            entries.append(entry)
-        }
+        let source = eventService.getCalendarSource(numberOfDays: 2, now: Date())
+        let slots = [
+            source.slotAt(0),
+            source.slotAt(1)
+        ]
 
-        let timeline = Timeline(entries: entries, policy: .atEnd)
+        let timeline = Timeline(entries: [
+            SimpleEntry(date: Date(), slots: slots, configuration: configuration)
+        ], policy: .atEnd)
         completion(timeline)
     }
 }
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
+    let slots: [CalendarSlot]
     let configuration: ConfigurationIntent
 }
 
@@ -46,10 +69,8 @@ struct Widget3EntryView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Day(title: "First event",
-                time: Date())
-            Day(title: "Second event",
-                time: Date().addingTimeInterval(60 * 60 * 24))
+            Day(slot: entry.slots.first!)
+            Day(slot: entry.slots.reversed().first!)
         }
         .padding([.leading, .trailing], 10)
         .padding([.top, .bottom], 10)
@@ -78,34 +99,100 @@ private let formatter: DateFormatter = {
     return format
 }()
 
+private let dateOnlyFormatter: DateFormatter = {
+    var format = DateFormatter()
+    format.timeStyle = .none
+    format.dateStyle = .long
+    format.doesRelativeDateFormatting = true
+    return format
+}()
+
+extension CalendarSlot {
+
+    static func empty(inFuture delay: Int = 0,
+                      duration: Int) -> CalendarSlot {
+        CalendarSlot(boundaryStart: Date() + TimeInterval(delay * 60 * 60),
+                     boundaryEnd: Date() + TimeInterval(60 * 60 * (delay + duration)))
+    }
+
+    func withEvent(named name: String) -> CalendarSlot {
+        var new = self
+        new.add(EventCalendarItem(eventId: "abc", title: name, startTime: self.boundaryStart, endTime: self.boundaryEnd))
+        return new
+    }
+
+}
+
 struct Day: View {
 
     var isEmpty: Bool = false
-    let title: String
-    let time: Date
+    let slot: CalendarSlot
 
     var body: some View {
         VStack(spacing: 0) {
-            ZStack {
-                ContainerRelativeShape()
-                    .foregroundColor(Color("surface"))
-                VStack(alignment: .leading) {
-                    Text(title)
-                        .minimumScaleFactor(0.7)
-                        .foregroundColor(Color("secondary"))
-                        .font(.system(size: 14).weight(.semibold))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Text(formatter.string(from: time))
-                        .minimumScaleFactor(0.7)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .foregroundColor(Color("lightText"))
-                        .lineLimit(1)
-                        .font(.caption)
-                }
-                .padding(8)
+            if let item = slot.firstItem() {
+                FullSlot(item: item)
+            } else {
+                EmptySlot(slot: slot)
             }
         }
         .frame(maxWidth: .infinity)
+    }
+
+}
+
+struct FullSlot: View {
+
+    let item: CalendarItem
+
+    var body: some View {
+        ZStack {
+            ContainerRelativeShape()
+                .foregroundColor(Color("surface"))
+            VStack(alignment: .leading) {
+                Text(item.title)
+                    .minimumScaleFactor(0.7)
+                    .foregroundColor(Color("secondary"))
+                    .font(.system(size: 14).weight(.semibold))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Text(formatter.string(from: item.startTime))
+                    .minimumScaleFactor(0.7)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(Color("lightText"))
+                    .lineLimit(1)
+                    .font(.caption)
+            }
+            .padding(8)
+        }
+    }
+}
+
+
+struct EmptySlot: View {
+
+    let slot: CalendarSlot
+
+    var body: some View {
+        ZStack {
+            ContainerRelativeShape()
+                .stroke(style: .init(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 0, dash: [8], dashPhase: 0))
+                .foregroundColor(Color("emptyOutline"))
+
+            VStack(alignment: .leading) {
+                Text("Nothing on")
+                    .minimumScaleFactor(0.7)
+                    .foregroundColor(Color("emptyOutline"))
+                    .font(.system(size: 14).weight(.semibold))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Text(dateOnlyFormatter.string(from: slot.boundaryStart))
+                    .minimumScaleFactor(0.7)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(Color("lightText"))
+                    .lineLimit(1)
+                    .font(.caption)
+            }
+            .padding(8)
+        }
     }
 
 }
@@ -127,12 +214,28 @@ struct Widget3: Widget {
 struct Widget3_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            Widget3EntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+            Widget3EntryView(entry: SimpleEntry(date: Date(),
+                                                slots: [
+                                                    .empty(duration: 5),
+                                                    .empty(inFuture: 24, duration: 5)
+                                                        .withEvent(named: "Test event 1")
+                                                ],
+                                                configuration: ConfigurationIntent()))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
-            Widget3EntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+            Widget3EntryView(entry: SimpleEntry(date: Date(),slots: [
+                .empty(duration: 5),
+                .empty(inFuture: 24, duration: 5)
+                    .withEvent(named: "Test event 1")
+            ],
+                                                configuration: ConfigurationIntent()))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
                 .preferredColorScheme(.dark)
-            Widget3EntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+            Widget3EntryView(entry: SimpleEntry(date: Date(),slots: [
+                .empty(duration: 5),
+                .empty(inFuture: 24, duration: 5)
+                    .withEvent(named: "Test event 1")
+            ],
+                                                configuration: ConfigurationIntent()))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
         }
     }

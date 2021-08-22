@@ -1,6 +1,7 @@
 import UIKit
 import EventKit
 import EventKitUI
+import WidgetKit
 import Core
 
 class WhatsOnViewController: UIViewController,
@@ -105,6 +106,7 @@ class WhatsOnViewController: UIViewController,
 
     func addEvent(for item: CalendarSlot) {
         navigationController?.present(addNewEventViewControllerFactory.newEventController(for: item, delegate: self), animated: true, completion: nil)
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     func showDetails(for item: EventCalendarItem, at indexPath: IndexPath, in cell: UIView & Row) {
@@ -114,6 +116,7 @@ class WhatsOnViewController: UIViewController,
 
     func remove(_ event: EventCalendarItem) {
         presenter.remove(event)
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     // MARK: - edit view delegate

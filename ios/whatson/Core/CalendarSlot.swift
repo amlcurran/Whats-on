@@ -26,7 +26,7 @@ public struct CalendarSlot: Equatable, Hashable {
         return calendarItems.first
     }
 
-    mutating func add(_ item: EventCalendarItem) {
+    public mutating func add(_ item: EventCalendarItem) {
         calendarItems.append(item)
     }
 

@@ -102,6 +102,8 @@
 		86DB90192676A09100F8BB72 /* Delayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8600B99E1F09429D008578E5 /* Delayer.swift */; };
 		86DEC9561FB3A069000FF4CD /* AddNewEventViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DEC9551FB3A069000FF4CD /* AddNewEventViewControllerFactory.swift */; };
 		86DEC9581FB3B40D000FF4CD /* NextStepTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DEC9571FB3B40D000FF4CD /* NextStepTableItem.swift */; };
+		86DF23DF26D287100051D3A8 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86755DC522C7BC2000E91DF4 /* Core.framework */; };
+		86DF23E026D287100051D3A8 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 86755DC522C7BC2000E91DF4 /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		86F849991D046A3E007C41B0 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */; };
 		86F8499B1D046AAE007C41B0 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */; };
 		86FFFE491EC10E01009D772E /* Optional+Requirements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FFFE481EC10E01009D772E /* Optional+Requirements.swift */; };
@@ -144,6 +146,13 @@
 			remoteGlobalIDString = 86CAD4981BACC9B1009C9CFD;
 			remoteInfo = whatson;
 		};
+		86DF23E126D287100051D3A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 86CAD4911BACC9B1009C9CFD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 86755DC422C7BC2000E91DF4;
+			remoteInfo = Core;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -167,6 +176,17 @@
 				868A16CC26D257C30090D6E4 /* Widget3Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		86DF23E326D287100051D3A8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				86DF23E026D287100051D3A8 /* Core.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -312,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				868A16C026D257BF0090D6E4 /* SwiftUI.framework in Frameworks */,
+				86DF23DF26D287100051D3A8 /* Core.framework in Frameworks */,
 				868A16BF26D257BF0090D6E4 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -654,10 +675,12 @@
 				868A16BA26D257BF0090D6E4 /* Sources */,
 				868A16BB26D257BF0090D6E4 /* Frameworks */,
 				868A16BC26D257BF0090D6E4 /* Resources */,
+				86DF23E326D287100051D3A8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				86DF23E226D287100051D3A8 /* PBXTargetDependency */,
 			);
 			name = Widget3Extension;
 			productName = Widget3Extension;
@@ -1023,6 +1046,11 @@
 			isa = PBXTargetDependency;
 			target = 86CAD4981BACC9B1009C9CFD /* whatson */;
 			targetProxy = 869DAC751D449EFB005AF315 /* PBXContainerItemProxy */;
+		};
+		86DF23E226D287100051D3A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 86755DC422C7BC2000E91DF4 /* Core */;
+			targetProxy = 86DF23E126D287100051D3A8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
