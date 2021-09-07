@@ -9,32 +9,13 @@
 import Foundation
 
 public struct CalendarSlot: Equatable, Hashable {
-    public init(boundaryStart: Date, boundaryEnd: Date) {
+    public init(items: [EventCalendarItem], boundaryStart: Date, boundaryEnd: Date) {
+        self.items = items
         self.boundaryStart = boundaryStart
         self.boundaryEnd = boundaryEnd
     }
 
-    private var calendarItems = [EventCalendarItem]()
+    public let items: [EventCalendarItem]
     public let boundaryStart: Date
     public let boundaryEnd: Date
-
-    public var isEmpty: Bool {
-        return calendarItems.isEmpty
-    }
-
-    public func firstItem() -> EventCalendarItem? {
-        return calendarItems.first
-    }
-
-    public mutating func add(_ item: EventCalendarItem) {
-        calendarItems.append(item)
-    }
-
-    public func count() -> Int {
-        return calendarItems.count
-    }
-
-    public func items() -> [CalendarItem] {
-        return calendarItems
-    }
 }

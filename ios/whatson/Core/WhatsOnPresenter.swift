@@ -43,7 +43,7 @@ public class WhatsOnPresenter {
         })
     }
 
-    private func fetchEvents(_ completion: @escaping ((CalendarSource) -> Void)) {
+    private func fetchEvents(_ completion: @escaping ([CalendarSlot]) -> Void) {
         DispatchQueue.global(qos: .default).async {
             let source = self.eventService.getCalendarSource(numberOfDays: 14, now: Date())
             DispatchQueue.main.async {
@@ -65,7 +65,7 @@ public class WhatsOnPresenter {
 }
 
 public protocol WhatsOnPresenterView: AnyObject {
-    func showCalendar(_ source: CalendarSource)
+    func showCalendar(_ source: [CalendarSlot])
 
     func showAccessFailure()
 

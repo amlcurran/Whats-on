@@ -94,7 +94,7 @@ class EventItemView: UIView {
     }
 
     func bound(to slot: CalendarSlot) {
-        if let item = slot.firstItem(), !slot.isEmpty {
+        if let item = slot.items.first {
             type = .full
             eventLabel.text = item.title
             let startTime = timeFormatter.string(from: item.startTime)

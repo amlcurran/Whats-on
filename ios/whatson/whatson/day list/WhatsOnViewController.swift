@@ -127,7 +127,7 @@ class WhatsOnViewController: UIViewController,
 
     // MARK: - peek and pop
 
-    func showCalendar(_ source: CalendarSource) {
+    func showCalendar(_ source: [CalendarSlot]) {
         table.view.animateAlpha(to: 1) { _ in }
         table.update(source, isFirst: !hasShownOnce)
         hasShownOnce = true

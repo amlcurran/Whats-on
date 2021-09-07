@@ -3,7 +3,7 @@ import Core
 
 protocol CalendarTable {
     var view: UIView { get }
-    func update(_ source: CalendarSource, isFirst: Bool)
+    func update(_ source: [CalendarSlot], isFirst: Bool)
     func style()
 }
 
@@ -45,14 +45,13 @@ class CalendarDiffableTableView: NSObject, CalendarTable, UITableViewDelegate {
         self.tableView.delegate = self
     }
 
-    func update(_ source: CalendarSource, isFirst: Bool) {
+    func update(_ source: [CalendarSlot], isFirst: Bool) {
         var snapshot = NSDiffableDataSourceSnapshot<Int, DiffableType>()
         snapshot.appendSections([0])
         var items = [DiffableType]()
-        for i in 0..<source.count() {
-            let slot = source.slotAt(i)
+        for slot in source {
             items.append(.dayTitle(slot))
-            if slot.isEmpty {
+            if slot.items.isEmpty {
                 items.append(.emptySlot(slot))
             } else {
                 items.append(.filledSlot(slot))
@@ -81,7 +80,7 @@ class CalendarDiffableTableView: NSObject, CalendarTable, UITableViewDelegate {
         case .emptySlot(let slot):
             delegate?.addEvent(for: slot)
         case .filledSlot(let slot):
-            guard let calendarItem = slot.firstItem() else {
+            guard let calendarItem = slot.items.first else {
                 preconditionFailure("Item isn't empty, but isn't event")
             }
             let cell = tableView.cellForRow(at: indexPath).required(as: (UIView & Row).self)

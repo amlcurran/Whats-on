@@ -20,7 +20,7 @@ extension Color {
 
 }
 
-private let formatter: DateFormatter = {
+private let dayAndTime: DateFormatter = {
     var format = DateFormatter()
     format.timeStyle = .short
     format.dateStyle = .long
@@ -28,7 +28,7 @@ private let formatter: DateFormatter = {
     return format
 }()
 
-private let dateOnlyFormatter: DateFormatter = {
+private let dayOnly: DateFormatter = {
     var format = DateFormatter()
     format.timeStyle = .none
     format.dateStyle = .long
@@ -45,7 +45,7 @@ public struct Day: View {
     }
 
     public var body: some View {
-        if let item = slot.firstItem() {
+        if let item = slot.items.first {
             FullSlot(item: item)
         } else {
             EmptySlot(slot: slot)
@@ -65,7 +65,7 @@ struct FullSlot: View {
                 .foregroundColor(Color("secondary"))
                 .font(.system(size: 14).weight(.semibold))
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Text(formatter.string(from: item.startTime))
+            Text(item.startTime, formatter: dayAndTime)
                 .minimumScaleFactor(0.7)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(Color("lightText"))
@@ -75,23 +75,6 @@ struct FullSlot: View {
         .padding(8)
         .modifier(SlotStyle(empty: false))
     }
-}
-
-struct Background: View {
-
-    let empty: Bool
-
-    var body: some View {
-        if empty {
-                            ContainerRelativeShape()
-                                .stroke(style: .init(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 0, dash: [8], dashPhase: 0))
-                                .foregroundColor(Color("emptyOutline"))
-        } else {
-            ContainerRelativeShape()
-                                .foregroundColor(Color("surface"))
-            }
-    }
-
 }
 
 struct SlotStyle: ViewModifier {
@@ -128,7 +111,7 @@ struct EmptySlot: View {
                 .foregroundColor(Color("emptyOutline"))
                 .font(.system(size: 14).weight(.semibold))
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Text(dateOnlyFormatter.string(from: slot.boundaryStart))
+            Text(slot.boundaryStart, formatter: dayOnly)
                 .minimumScaleFactor(0.7)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(Color("lightText"))
@@ -141,6 +124,7 @@ struct EmptySlot: View {
 
 }
 
+@available(iOSApplicationExtension 15.0, *)
 // swiftlint:disable:next type_name
 struct Slots_Previews: PreviewProvider {
     static var previews: some View {
@@ -160,7 +144,24 @@ struct Slots_Previews: PreviewProvider {
             Day(slot: .empty(inFuture: 24, duration: 5))
                 .previewLayout(.sizeThatFits)
                 .padding()
+
+            List((0..<5).map { CalendarSlot.empty(inFuture: $0, duration: 5) }) { slot in
+                VStack {
+                    Text(slot.boundaryStart.formatted(date: .long, time: .omitted))
+                        .font(.caption)
+                    Day(slot: slot)
+                }
+            }
+            .listStyle(PlainListStyle())
+            .listRowSeparator(.hidden)
+            .listSectionSeparator(.hidden)
         }
+    }
+}
+
+extension CalendarSlot: Identifiable {
+    public var id: Date {
+        boundaryStart
     }
 }
 
@@ -168,14 +169,21 @@ public extension CalendarSlot {
 
     static func empty(inFuture delay: Int = 0,
                       duration: Int) -> CalendarSlot {
-        CalendarSlot(boundaryStart: Date() + TimeInterval(delay * 60 * 60),
+        CalendarSlot(items: [], boundaryStart: Date() + TimeInterval(delay * 60 * 60),
                      boundaryEnd: Date() + TimeInterval(60 * 60 * (delay + duration)))
     }
 
     func withEvent(named name: String) -> CalendarSlot {
-        var new = self
-        new.add(EventCalendarItem(eventId: "abc", title: name, startTime: self.boundaryStart, endTime: self.boundaryEnd))
-        return new
+        let newItem = EventCalendarItem(eventId: "abc", title: name, startTime: self.boundaryStart, endTime: self.boundaryEnd)
+        return CalendarSlot(items: self.items + [newItem],
+                            boundaryStart: self.boundaryStart,
+                            boundaryEnd: self.boundaryEnd)
+    }
+
+    func appending(_ eventItem: EventCalendarItem) -> CalendarSlot {
+        CalendarSlot(items: self.items + [eventItem],
+                            boundaryStart: self.boundaryStart,
+                            boundaryEnd: self.boundaryEnd)
     }
 
 }

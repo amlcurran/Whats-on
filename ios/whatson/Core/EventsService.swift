@@ -26,7 +26,7 @@ public class EventsService {
         self.timeCalculator = timeCalculator
     }
 
-    public func getCalendarSource(numberOfDays: Int, now: Date) -> CalendarSource {
+    public func getCalendarSource(numberOfDays: Int, now: Date) -> [CalendarSlot] {
         let nowTime = timeCalculator.dateAtStartOfToday()
         let nextWeek = timeCalculator.add(days: numberOfDays, to: nowTime)
         let fivePm = timeRepository.borderTimeStart
@@ -40,19 +40,15 @@ public class EventsService {
         var itemArray = [CalendarSlot]()
         let epochToNow = timeCalculator.daysSinceEpoch(in: now)
         for i in 0..<numberOfDays {
-            let slot = CalendarSlot(boundaryStart: startOfTodayBlock(i), boundaryEnd: endOfTodayBlock(i))
+            let slot = CalendarSlot(items: [], boundaryStart: startOfTodayBlock(i), boundaryEnd: endOfTodayBlock(i))
             itemArray.append(slot)
         }
         for item in calendarItems {
             let key = timeCalculator.daysSinceEpoch(in: item.startTime) - epochToNow
-            var slot = itemArray[key]
-            slot.add(item)
-            itemArray[key] = slot
+            itemArray[key] = itemArray[key].appending(item)
         }
 
-        return CalendarSource(calendarItems: itemArray,
-                              timeCalculator: timeCalculator,
-                              timeRepository: timeRepository)
+        return itemArray
     }
 
     private func startOfTodayBlock(_ position: Int) -> Date {

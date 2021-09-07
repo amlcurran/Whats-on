@@ -3,6 +3,7 @@ import UIKit
 import EventKit
 import EventKitUI
 import Core
+import SwiftUI
 
 @UIApplicationMain
 class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelegate {

@@ -30,8 +30,8 @@ struct Provider: IntentTimelineProvider {
 
         let source = eventService.getCalendarSource(numberOfDays: 2, now: Date())
         let slots = [
-            source.slotAt(0),
-            source.slotAt(1)
+            source[0],
+            source[1]
         ]
 
         let entry = SimpleEntry(date: Date(), slots: slots, configuration: configuration)
@@ -47,8 +47,8 @@ struct Provider: IntentTimelineProvider {
 
         let source = eventService.getCalendarSource(numberOfDays: 2, now: Date())
         let slots = [
-            source.slotAt(0),
-            source.slotAt(1)
+            source[0],
+            source[1]
         ]
 
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
