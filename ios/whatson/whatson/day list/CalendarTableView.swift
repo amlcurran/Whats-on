@@ -14,10 +14,10 @@ enum DiffableType: Hashable {
 }
 
 @available(iOS 13.0, *)
-class CalendarDiffableTableView: NSObject, CalendarTable, UITableViewDelegate {
+class CalendarDiffableTableView: NSObject, CalendarTable, UICollectionViewDelegate {
 
-    private let tableView: UITableView
-    private let dataSource: UITableViewDiffableDataSource<Int, DiffableType>
+    private let tableView: UICollectionView
+    private let dataSource: UICollectionViewDiffableDataSource<Int, DiffableType>
     private weak var delegate: CalendarTableViewDelegate?
 
     var view: UIView {
@@ -25,17 +25,21 @@ class CalendarDiffableTableView: NSObject, CalendarTable, UITableViewDelegate {
     }
 
     init(tableView: UITableView, delegate: CalendarTableViewDelegate) {
-        self.tableView = tableView
-        self.dataSource = UITableViewDiffableDataSource<Int, DiffableType>(tableView: tableView, cellProvider: { (_, indexPath, item) -> UITableViewCell? in
+        var config = UICollectionLayoutListConfiguration(appearance: .plain)
+        config.backgroundColor = .clear
+        config.showsSeparators = false
+        let layout = UICollectionViewCompositionalLayout.list(using: config)
+        self.tableView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        self.dataSource = UICollectionViewDiffableDataSource<Int, DiffableType>(collectionView: self.tableView, cellProvider: { (tableView, indexPath, item) -> UICollectionViewCell? in
             switch item {
             case .emptySlot(let slot):
-                let cell = tableView.dequeueReusableCell(withIdentifier: "event", for: indexPath) as? EventCell
+                let cell = tableView.dequeueReusableCell(withReuseIdentifier: "event", for: indexPath) as? EventCollectionCell
                 return cell?.bound(to: slot)
             case .filledSlot(let slot):
-                let cell = tableView.dequeueReusableCell(withIdentifier: "event", for: indexPath) as? EventCell
+                let cell = tableView.dequeueReusableCell(withReuseIdentifier: "event", for: indexPath) as? EventCollectionCell
                 return cell?.bound(to: slot)
             case .dayTitle(let slot):
-                let cell = tableView.dequeueReusableCell(withIdentifier: "day", for: indexPath) as? DayCell
+                let cell = tableView.dequeueReusableCell(withReuseIdentifier: "day", for: indexPath) as? DayCollectionCell
                 return cell?.bound(to: slot)
             }
         })
@@ -62,13 +66,10 @@ class CalendarDiffableTableView: NSObject, CalendarTable, UITableViewDelegate {
     }
 
     func style() {
-        tableView.register(DayCell.self, forCellReuseIdentifier: "day")
-        tableView.register(EventCell.self, forCellReuseIdentifier: "event")
-        tableView.register(MultipleEventCell.self, forCellReuseIdentifier: "multipleEvent")
+        tableView.register(DayCollectionCell.self, forCellWithReuseIdentifier: "day")
+        tableView.register(EventCollectionCell.self, forCellWithReuseIdentifier: "event")
+//        tableView.register(MultipleEventCell.self, forCellReuseIdentifier: "multipleEvent")
         tableView.backgroundColor = .clear
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 120
-        tableView.separatorStyle = .none
         tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
     }
 
@@ -93,6 +94,29 @@ class CalendarDiffableTableView: NSObject, CalendarTable, UITableViewDelegate {
             return nil
         }
         return indexPath
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = dataSource.snapshot().itemIdentifiers[indexPath.row]
+        switch item {
+        case .dayTitle(_):
+            fatalError()
+        case .emptySlot(let slot):
+            delegate?.addEvent(for: slot)
+        case .filledSlot(let slot):
+            guard let calendarItem = slot.items.first else {
+                preconditionFailure("Item isn't empty, but isn't event")
+            }
+            let cell = tableView.cellForItem(at: indexPath).required(as: (UIView & Row).self)
+            delegate?.showDetails(for: calendarItem, at: indexPath, in: cell)
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if case .dayTitle = dataSource.snapshot().itemIdentifiers[indexPath.row] {
+            return false
+        }
+        return true
     }
 
 }

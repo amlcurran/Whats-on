@@ -1,6 +1,0 @@
-framework module Pods_WhatsOnTests {
-  umbrella header "Pods-WhatsOnTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
