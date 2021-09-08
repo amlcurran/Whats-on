@@ -16,23 +16,14 @@ class WhatsOnViewController: UIViewController,
     private let pushTransition = EventDetailsPushTransition()
     private let navigationAnimations = EventTransitionNavigationDelegate()
     private let failedAccessView = FailedAccessView()
-    private let loadingView = LoadingView(pathColor: .accent)
     private let gestureHandler = AllowsGestureRecognizer()
     private let addNewEventViewControllerFactory = AddNewEventViewControllerFactory()
 
     private var forceTouchDisplayer: Any?
     private var presenter: WhatsOnPresenter!
     private var eventService: EventsService!
-    private var loadingDelay = DispatchTimeInterval.milliseconds(1000)
-    private var hasShownOnce = false
 
-    lazy var table: CalendarTable = {
-//        if #available(iOS 13.0, *) {
-            return CalendarDiffableTableView(tableView: UITableView(), delegate: self)
-//        } else {
-//            return CalendarTableView(delegate: self, tableView: UITableView())
-//        }
-    }()
+    private lazy var table = CalendarDiffableTableView(tableView: UITableView(), delegate: self)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,9 +42,6 @@ class WhatsOnViewController: UIViewController,
         navigationController?.delegate = navigationAnimations
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController?.interactivePopGestureRecognizer?.delegate = gestureHandler
-
-        loadingDelay = DispatchTimeInterval.milliseconds(600)
-        showLoading()
     }
 
     private func anchor(_ header: UIView) {
@@ -62,6 +50,8 @@ class WhatsOnViewController: UIViewController,
         blurView.addSubview(header)
         header.constrain(toSuperview: .top, .trailing, .bottom, insetBy: 16)
         header.hugContent(.vertical)
+
+        failedAccessView.isHidden = true
 
         let mainView = UIView()
         view.add(mainView, constrainedTo: [.bottom, .leading, .trailing])
@@ -74,13 +64,6 @@ class WhatsOnViewController: UIViewController,
         mainView.add(failedAccessView, constrainedTo: [.leading, .top, .trailing, .bottom])
 
         header.constrain(toSuperviewSafeArea: .leading, .trailing, insetBy: 16)
-
-        view.addSubview(loadingView)
-        loadingView.constrain(.centerX, to: view, .centerX)
-        loadingView.constrain(.centerY, to: view, .centerY)
-        loadingView.constrain(height: 96)
-        loadingView.constrain(width: 96)
-
     }
 
     func didTapEdit() {
@@ -90,8 +73,7 @@ class WhatsOnViewController: UIViewController,
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        presenter.beginPresenting(on: self, delayingBy: loadingDelay)
-        loadingDelay = DispatchTimeInterval.milliseconds(0)
+        presenter.beginPresenting(on: self, delayingBy: .seconds(0))
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -119,25 +101,18 @@ class WhatsOnViewController: UIViewController,
         WidgetCenter.shared.reloadAllTimelines()
     }
 
-    // MARK: - edit view delegate
-
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         navigationController?.dismiss(animated: true, completion: nil)
     }
 
-    // MARK: - peek and pop
-
     func showCalendar(_ source: [CalendarSlot]) {
         table.view.animateAlpha(to: 1) { _ in }
-        table.update(source, isFirst: !hasShownOnce)
-        hasShownOnce = true
-        loadingView.animateAlpha(to: 0) { $0.isHidden = true }
+        table.update(source)
         failedAccessView.isHidden = true
         failedAccessView.isUserInteractionEnabled = false
     }
 
     func showAccessFailure() {
-        loadingView.isHidden = true
         failedAccessView.isHidden = false
         failedAccessView.isUserInteractionEnabled = true
     }
@@ -147,7 +122,6 @@ class WhatsOnViewController: UIViewController,
     }
 
     func showLoading() {
-        loadingView.isHidden = false
         failedAccessView.isHidden = true
     }
 

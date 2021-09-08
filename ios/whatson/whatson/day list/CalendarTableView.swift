@@ -1,23 +1,16 @@
 import UIKit
 import Core
 
-protocol CalendarTable {
-    var view: UIView { get }
-    func update(_ source: [CalendarSlot], isFirst: Bool)
-    func style()
-}
-
 enum DiffableType: Hashable {
     case dayTitle(CalendarSlot)
     case emptySlot(CalendarSlot)
     case filledSlot(CalendarSlot)
 }
 
-@available(iOS 13.0, *)
-class CalendarDiffableTableView: NSObject, CalendarTable, UICollectionViewDelegate {
+class CalendarDiffableTableView: NSObject, UICollectionViewDelegate {
 
-    private let tableView: UICollectionView
-    private let dataSource: UICollectionViewDiffableDataSource<Int, DiffableType>
+    private var tableView: UICollectionView!
+    private var dataSource: UICollectionViewDiffableDataSource<Int, DiffableType>!
     private weak var delegate: CalendarTableViewDelegate?
 
     var view: UIView {
@@ -25,9 +18,26 @@ class CalendarDiffableTableView: NSObject, CalendarTable, UICollectionViewDelega
     }
 
     init(tableView: UITableView, delegate: CalendarTableViewDelegate) {
+        self.delegate = delegate
+        super.init()
         var config = UICollectionLayoutListConfiguration(appearance: .plain)
         config.backgroundColor = .clear
         config.showsSeparators = false
+        config.trailingSwipeActionsConfigurationProvider = { (indexPath: IndexPath?) in
+            if let indexPath = indexPath {
+                let snapshot = self.dataSource.snapshot()
+                let item = snapshot.itemIdentifiers(inSection: indexPath.section)[indexPath.row]
+                if case let DiffableType.filledSlot(slot) = item, let item = slot.items.first {
+                    return UISwipeActionsConfiguration(actions: [
+                        UIContextualAction(style: .destructive, title: "Delete", handler: { _, _, handler in
+                            self.delegate?.remove(item)
+                            handler(true)
+                        })
+                    ])
+                }
+            }
+            return nil
+        }
         let layout = UICollectionViewCompositionalLayout.list(using: config)
         self.tableView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         self.dataSource = UICollectionViewDiffableDataSource<Int, DiffableType>(collectionView: self.tableView, cellProvider: { (tableView, indexPath, item) -> UICollectionViewCell? in
@@ -43,13 +53,11 @@ class CalendarDiffableTableView: NSObject, CalendarTable, UICollectionViewDelega
                 return cell?.bound(to: slot)
             }
         })
-        self.delegate = delegate
         self.tableView.dataSource = dataSource
-        super.init()
         self.tableView.delegate = self
     }
 
-    func update(_ source: [CalendarSlot], isFirst: Bool) {
+    func update(_ source: [CalendarSlot]) {
         var snapshot = NSDiffableDataSourceSnapshot<Int, DiffableType>()
         snapshot.appendSections([0])
         var items = [DiffableType]()
@@ -62,44 +70,20 @@ class CalendarDiffableTableView: NSObject, CalendarTable, UICollectionViewDelega
             }
         }
         snapshot.appendItems(items)
-        dataSource.apply(snapshot, animatingDifferences: !isFirst)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
 
     func style() {
         tableView.register(DayCollectionCell.self, forCellWithReuseIdentifier: "day")
         tableView.register(EventCollectionCell.self, forCellWithReuseIdentifier: "event")
-//        tableView.register(MultipleEventCell.self, forCellReuseIdentifier: "multipleEvent")
         tableView.backgroundColor = .clear
         tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = dataSource.snapshot().itemIdentifiers[indexPath.row]
-        switch item {
-        case .dayTitle(_):
-            fatalError()
-        case .emptySlot(let slot):
-            delegate?.addEvent(for: slot)
-        case .filledSlot(let slot):
-            guard let calendarItem = slot.items.first else {
-                preconditionFailure("Item isn't empty, but isn't event")
-            }
-            let cell = tableView.cellForRow(at: indexPath).required(as: (UIView & Row).self)
-            delegate?.showDetails(for: calendarItem, at: indexPath, in: cell)
-        }
-    }
-
-    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if case .dayTitle = dataSource.snapshot().itemIdentifiers[indexPath.row] {
-            return nil
-        }
-        return indexPath
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = dataSource.snapshot().itemIdentifiers[indexPath.row]
         switch item {
-        case .dayTitle(_):
+        case .dayTitle:
             fatalError()
         case .emptySlot(let slot):
             delegate?.addEvent(for: slot)
