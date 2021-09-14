@@ -36,6 +36,7 @@
 		8620886D22BFE2E200268B3D /* MultipleEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8620886C22BFE2E200268B3D /* MultipleEventCell.swift */; };
 		8620886F22BFEDF000268B3D /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 8620886E22BFEDF000268B3D /* Localizable.stringsdict */; };
 		8626886E1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8626886D1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift */; };
+		862F0BAE26EFE8A200BE5350 /* NewEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862F0BAD26EFE8A200BE5350 /* NewEventView.swift */; };
 		86302CDA23ABD16300008124 /* OptionsView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86302CD923ABD16300008124 /* OptionsView2.swift */; };
 		86317A091EC258ED0009EE8A /* EventPredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86317A081EC258ED0009EE8A /* EventPredicateTests.swift */; };
 		8648F18F1D984F6500C7BD48 /* EventDetailsTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8648F18E1D984F6500C7BD48 /* EventDetailsTracking.swift */; };
@@ -224,6 +225,7 @@
 		8620886E22BFEDF000268B3D /* Localizable.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		862468D11F091B8C00FE5A49 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		8626886D1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplicationShortcuts.swift; sourceTree = "<group>"; };
+		862F0BAD26EFE8A200BE5350 /* NewEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventView.swift; sourceTree = "<group>"; };
 		86302CD923ABD16300008124 /* OptionsView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView2.swift; sourceTree = "<group>"; };
 		86317A081EC258ED0009EE8A /* EventPredicateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPredicateTests.swift; sourceTree = "<group>"; };
 		864561C21C02709800ADDE44 /* NSDateCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateCalculator.swift; sourceTree = "<group>"; };
@@ -531,6 +533,7 @@
 				69853BA72CF4C2EAB206708F /* utils */,
 				2DBA1EBA1E19FC38477D7218 /* BuildConfig.swift */,
 				8626886D1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift */,
+				862F0BAD26EFE8A200BE5350 /* NewEventView.swift */,
 			);
 			path = whatson;
 			sourceTree = "<group>";
@@ -925,6 +928,7 @@
 				2DBA1A1D4FF1A6199AD9D4FA /* BuildConfig.swift in Sources */,
 				2DBA13D585CE5E035AE263D4 /* EventResponseView.swift in Sources */,
 				8658A2361F375EA500BF219C /* SwitchTableItem.swift in Sources */,
+				862F0BAE26EFE8A200BE5350 /* NewEventView.swift in Sources */,
 				2DBA1FC7FB7A35811ADEDB84 /* EventResponse.swift in Sources */,
 				8658A23C1F37685400BF219C /* CheckableTableItem.swift in Sources */,
 				8600B99D1F09383D008578E5 /* LoadingView.swift in Sources */,

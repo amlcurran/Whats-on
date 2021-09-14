@@ -11,22 +11,18 @@ import SwiftUI
 import Intents
 import Core
 
-struct Provider: IntentTimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(),
+struct Provider: TimelineProvider {
+
+    func placeholder(in context: Context) -> EventsEntry {
+        EventsEntry(date: Date(),
                     slots: [
                         .empty(duration: 5 * 60 * 60),
                         .empty(inFuture: 24 * 60 * 60, duration: 5 * 60 * 60)
-                    ],
-                    configuration: ConfigurationIntent())
+                    ])
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> Void) {
-        let timeRepo = NSDateTimeRepository()
-        let eventService = EventsService(timeRepository: timeRepo,
-                                         eventsRepository: EventKitEventRepository(timeRepository: timeRepo,
-                                                                                   calendarPreferenceStore: CalendarPreferenceStore()),
-                                         timeCalculator: NSDateCalculator.instance)
+    func getSnapshot(in context: Context, completion: @escaping (EventsEntry) -> Void) {
+        let eventService = EventsService.standard()
 
         let source = eventService.getCalendarSource(numberOfDays: 2, now: Date())
         let slots = [
@@ -34,37 +30,27 @@ struct Provider: IntentTimelineProvider {
             source[1]
         ]
 
-        let entry = SimpleEntry(date: Date(), slots: slots, configuration: configuration)
+        let entry = EventsEntry(date: Date(), slots: slots)
         completion(entry)
     }
 
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
-        let timeRepo = NSDateTimeRepository()
-        let eventService = EventsService(timeRepository: timeRepo,
-                                         eventsRepository: EventKitEventRepository(timeRepository: timeRepo,
-                                                                                   calendarPreferenceStore: CalendarPreferenceStore()),
-                                         timeCalculator: NSDateCalculator.instance)
-
+    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
+        let eventService = EventsService.standard()
         let source = eventService.getCalendarSource(numberOfDays: 2, now: Date())
-        let slots = [
-            source[0],
-            source[1]
-        ]
 
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
-        let refresh = Calendar.current.date(bySettingHour: 0, minute: 1, second: 0, of: tomorrow)
+        let refresh = Calendar.current.date(bySettingHour: 0, minute: 3, second: 0, of: tomorrow)
 
         let timeline = Timeline(entries: [
-            SimpleEntry(date: Date(), slots: slots, configuration: configuration)
+            EventsEntry(date: Date(), slots: source)
         ], policy: .after(refresh!))
         completion(timeline)
     }
 }
 
-struct SimpleEntry: TimelineEntry {
+struct EventsEntry: TimelineEntry {
     let date: Date
     let slots: [CalendarSlot]
-    let configuration: ConfigurationIntent
 }
 
 struct Widget3EntryView: View {
@@ -86,7 +72,7 @@ struct Widget3: Widget {
     let kind: String = "Widget3"
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
+        StaticConfiguration(kind: kind, provider: Provider()) { entry in
             Widget3EntryView(entry: entry)
         }
         .configurationDisplayName("My Widget")
@@ -99,37 +85,34 @@ struct Widget3_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             Widget3EntryView(
-                entry: SimpleEntry(
+                entry: EventsEntry(
                     date: Date(),
                     slots: [
                         .empty(duration: 5),
                         .empty(inFuture: 24, duration: 5)
                             .withEvent(named: "Test event 1")
-                    ],
-                    configuration: ConfigurationIntent()
+                    ]
                 ))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
             Widget3EntryView(
-                entry: SimpleEntry(
+                entry: EventsEntry(
                     date: Date(),
                     slots: [
                         .empty(duration: 5),
                         .empty(inFuture: 24, duration: 5)
                             .withEvent(named: "Test event 1")
-                    ],
-                    configuration: ConfigurationIntent()
+                    ]
                 ))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
                 .preferredColorScheme(.dark)
             Widget3EntryView(
-                entry: SimpleEntry(
+                entry: EventsEntry(
                     date: Date(),
                     slots: [
                         .empty(duration: 5),
                         .empty(inFuture: 24, duration: 5)
                             .withEvent(named: "Test event 1")
-                    ],
-                    configuration: ConfigurationIntent()))
+                    ]))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
         }
     }
