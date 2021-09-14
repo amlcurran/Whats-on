@@ -45,7 +45,7 @@ public class WhatsOnPresenter {
 
     private func fetchEvents(_ completion: @escaping ([CalendarSlot]) -> Void) {
         DispatchQueue.global(qos: .default).async {
-            let source = self.eventService.getCalendarSource(numberOfDays: 14, now: Date())
+            let source = self.eventService.fetchEvents(inNumberOfDays: 14, startingFrom: Date())
             DispatchQueue.main.async {
                 completion(source)
             }

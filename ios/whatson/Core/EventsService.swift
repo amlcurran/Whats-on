@@ -14,7 +14,7 @@ public class EventsService {
     private let eventsRepository: EventsRepository
     private let timeCalculator: TimeCalculator
 
-    public static func standard() -> EventsService {
+    public static var `default`: EventsService {
         let timeRepo = NSDateTimeRepository()
         let repo = EventKitEventRepository(timeRepository: timeRepo, calendarPreferenceStore: CalendarPreferenceStore())
         return EventsService(timeRepository: timeRepo, eventsRepository: repo, timeCalculator: NSDateCalculator.instance)
@@ -26,7 +26,7 @@ public class EventsService {
         self.timeCalculator = timeCalculator
     }
 
-    public func getCalendarSource(numberOfDays: Int, now: Date) -> [CalendarSlot] {
+    public func fetchEvents(inNumberOfDays numberOfDays: Int, startingFrom startDate: Date) -> [CalendarSlot] {
         let nowTime = timeCalculator.dateAtStartOfToday()
         let nextWeek = timeCalculator.add(days: numberOfDays, to: nowTime)
         let fivePm = timeRepository.borderTimeStart
@@ -38,7 +38,7 @@ public class EventsService {
                                                               borderEnd: elevenPm)
 
         var itemArray = [CalendarSlot]()
-        let epochToNow = timeCalculator.daysSinceEpoch(in: now)
+        let epochToNow = timeCalculator.daysSinceEpoch(in: startDate)
         for i in 0..<numberOfDays {
             let slot = CalendarSlot(items: [], boundaryStart: startOfTodayBlock(i), boundaryEnd: endOfTodayBlock(i))
             itemArray.append(slot)
