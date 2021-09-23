@@ -144,17 +144,6 @@ struct Slots_Previews: PreviewProvider {
             Day(slot: .empty(inFuture: 24, duration: 5))
                 .previewLayout(.sizeThatFits)
                 .padding()
-
-            List((0..<5).map { CalendarSlot.empty(inFuture: $0, duration: 5) }) { slot in
-                VStack {
-                    Text(slot.boundaryStart.formatted(date: .long, time: .omitted))
-                        .font(.caption)
-                    Day(slot: slot)
-                }
-            }
-            .listStyle(PlainListStyle())
-            .listRowSeparator(.hidden)
-            .listSectionSeparator(.hidden)
         }
     }
 }

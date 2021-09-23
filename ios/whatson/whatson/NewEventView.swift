@@ -47,7 +47,7 @@ struct NewEventView: View {
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
-            }.listStyle(.insetGrouped)
+            }
                 .frame(maxHeight: 200)
             Button(action: {
 
