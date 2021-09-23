@@ -17,7 +17,8 @@ struct Provider: TimelineProvider {
         EventsEntry(date: Date(),
                     slots: [
                         .empty(duration: 5 * 60 * 60),
-                        .empty(inFuture: 24 * 60 * 60, duration: 5 * 60 * 60)
+                        .empty(inFuture: 24 * 60 * 60, duration: 3 * 60 * 60)
+                            .withEvent(named: "Dinner with Tim")
                     ])
     }
 
@@ -67,8 +68,9 @@ struct Widget3: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             Widget3EntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .supportedFamilies([.systemSmall, .systemMedium])
+        .configurationDisplayName("Coming up")
+        .description("Displays what's on today and tomorrow")
     }
 }
 
