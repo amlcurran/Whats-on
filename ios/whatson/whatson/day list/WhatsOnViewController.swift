@@ -3,6 +3,7 @@ import EventKit
 import EventKitUI
 import WidgetKit
 import Core
+import Intents
 
 class WhatsOnViewController: UIViewController,
         EKEventEditViewDelegate,
@@ -110,6 +111,23 @@ class WhatsOnViewController: UIViewController,
         table.update(source)
         failedAccessView.isHidden = true
         failedAccessView.isUserInteractionEnabled = false
+
+        let intent = CheckCalendarIntent()
+        intent.day = PickDay.today
+        let interaction = INInteraction(intent: intent, response: nil)
+        interaction.donate { error in
+            if let error = error {
+                print(error)
+            }
+        }
+
+        let tomorrowIntent = CheckCalendarIntent()
+        tomorrowIntent.day = PickDay.tomorrow
+        INInteraction(intent: tomorrowIntent, response: nil).donate { error in
+            if let error = error {
+                print(error)
+            }
+        }
     }
 
     func showAccessFailure() {

@@ -4,6 +4,7 @@ import EventKit
 import EventKitUI
 import Core
 import SwiftUI
+import Intents
 
 @UIApplicationMain
 class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelegate {
@@ -36,6 +37,24 @@ class WhatsOnAppDelegate: NSObject, UIApplicationDelegate, EKEventEditViewDelega
 
         let editController = EKEventEditViewController(editing: event, delegate: self)
         rootViewController?.present(editController, animated: false, completion: nil)
+    }
+
+    func application(_ application: UIApplication, handlerFor intent: INIntent) -> Any? {
+        print(intent)
+        if intent is CheckCalendarIntent {
+            print("Returning intent")
+            return CheckCalendarHandler()
+        }
+        return self
+    }
+
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        if let interaction = userActivity.interaction {
+            print(interaction)
+            return true
+        }
+        return false
+
     }
 
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {

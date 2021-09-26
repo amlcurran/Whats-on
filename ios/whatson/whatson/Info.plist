@@ -34,6 +34,10 @@
 	<string>Apple uses this when showing you more information about your event</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Access to your location is used to suggest nearby locations for events</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>CheckCalendarIntent</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
