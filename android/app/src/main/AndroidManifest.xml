@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="uk.co.amlcurran.social">
 
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -8,7 +11,7 @@
         android:name=".App"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".WhatsOnActivity">
+        <activity android:name=".WhatsOnActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -33,9 +36,5 @@
             android:value="@string/maps_api_key"/>
 
     </application>
-
-    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
-
-    <uses-permission android:name="android.permission.READ_CALENDAR" />
 
 </manifest>
