@@ -5,31 +5,57 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.updatePadding
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_whats_on.*
+import kotlinx.coroutines.launch
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import org.joda.time.format.DateTimeFormat
 import uk.co.amlcurran.social.add.AddEventActivity
+import uk.co.amlcurran.social.databinding.ActivityWhatsOnBinding
 import uk.co.amlcurran.social.details.EventDetailActivity
 import uk.co.amlcurran.social.details.alphaIn
 import uk.co.amlcurran.social.details.alphaOut
 
 class WhatsOnActivity : AppCompatActivity() {
-    private lateinit var permissions: Permissions
     private lateinit var adapter: WhatsOnAdapter
-    private lateinit var events: Events
-    private var loadDisposable: Disposable? = null
     private var firstLoad = true
+    private val eventsRepository = AndroidEventsRepository(contentResolver, CalendarRepository(this))
+    private val dateCreator = AndroidTimeRepository(this)
+    private val eventsService = EventsService(dateCreator, eventsRepository, JodaCalculator())
+    private lateinit var binding: ActivityWhatsOnBinding
+
+    private val permissionRequest = registerForActivityResult(RequestMultiplePermissions()) { permissions ->
+        if (permissions.all { (_, granted) -> granted }) {
+            binding.progressBar.alphaIn()
+            val now = DateTime.now(DateTimeZone.getDefault())
+            val timestamp = Timestamp(now.millis, JodaCalculator())
+            lifecycleScope.launch {
+                try {
+                    val it = eventsService.getCalendarSource(14, timestamp)
+                    firstLoad = false
+                    adapter.onSuccess(it)
+                    binding.progressBar.alphaOut()
+                    binding.listWhatsOn.alphaIn()
+                } catch (e: Throwable) {
+                    firstLoad = false
+                    binding.progressBar.alphaOut()
+                    adapter.onError(e)
+
+                }
+
+            }
+        }
+    }
 
     private val eventSelectedListener = object : WhatsOnAdapter.EventSelectedListener {
         override fun eventSelected(calendarItem: EventCalendarItem, itemView: View) {
@@ -61,31 +87,33 @@ class WhatsOnActivity : AppCompatActivity() {
         }
 
         setContentView(R.layout.activity_whats_on)
-        permissions = Permissions(this)
-        val eventsRepository = AndroidEventsRepository(contentResolver, CalendarRepository(this))
-        val dateCreator = AndroidTimeRepository(this)
-        val mainThread = AndroidSchedulers.mainThread()
-        val background = Schedulers.io()
-        events = Events(mainThread, background, EventsService(dateCreator, eventsRepository, JodaCalculator()))
 
-        toolbar.setOnMenuItemClickListener { onOptionsItemSelected(it) }
+        binding.toolbar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.pick_times -> {
+                    SettingsActivity.start(this)
+                    true
+                }
+                else -> false
+            }
+        }
 
         val now = DateTime.now(DateTimeZone.getDefault())
 
         val calendarSource = CalendarSource(HashMap(), 0, JodaCalculator(), AndroidTimeRepository(this))
         adapter = WhatsOnAdapter(LayoutInflater.from(this), eventSelectedListener, calendarSource)
-        list_whats_on.layoutManager = LinearLayoutManager(this)
-        list_whats_on.adapter = adapter
+        binding.listWhatsOn.layoutManager = LinearLayoutManager(this)
+        binding.listWhatsOn.adapter = adapter
 
-        today_date.text = DateTimeFormat.forPattern("EEEE, dd MMMMM").print(now)
+        binding.todayDate.text = DateTimeFormat.forPattern("EEEE, dd MMMMM").print(now)
 
-        ViewCompat.setOnApplyWindowInsetsListener(toolbar) { _, insets ->
-            toolbar.updatePadding(top = insets.systemWindowInsetTop)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.toolbar) { _, insets ->
+            binding.toolbar.updatePadding(top = insets.systemWindowInsetTop)
             insets
         }
 
-        ViewCompat.setOnApplyWindowInsetsListener(list_whats_on) { _, insets ->
-            list_whats_on.updatePadding(bottom = insets.systemWindowInsetBottom)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.listWhatsOn) { _, insets ->
+            binding.listWhatsOn.updatePadding(bottom = insets.systemWindowInsetBottom)
             insets
         }
     }
@@ -96,52 +124,7 @@ class WhatsOnActivity : AppCompatActivity() {
     }
 
     private fun reload() {
-        val now = DateTime.now(DateTimeZone.getDefault())
-        permissions.requestPermission(REQUEST_CODE_REQUEST_CALENDAR, object : Permissions.OnPermissionRequestListener {
-            override fun onPermissionGranted() {
-                progressBar.alphaIn()
-                val timestamp = Timestamp(now.millis, JodaCalculator())
-                loadDisposable = events.load(timestamp, if (firstLoad) 1000 else 0)
-                        .subscribeBy(
-                                onSuccess = {
-                                    firstLoad = false
-                                    adapter.onSuccess(it)
-                                    progressBar.alphaOut()
-                                    list_whats_on.alphaIn()
-                                },
-                                onError = {
-                                    firstLoad = false
-                                    progressBar.alphaOut()
-                                    adapter.onError(it)
-                                }
-                        )
-            }
-
-            override fun onPermissionDenied() {
-
-            }
-        }, Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-
-            R.id.pick_times -> {
-                SettingsActivity.start(this)
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        this.permissions.onRequestPermissionResult(requestCode, grantResults)
-    }
-
-    companion object {
-
-        private const val REQUEST_CODE_REQUEST_CALENDAR = 1
+        permissionRequest.launch(arrayOf(Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR))
     }
 
 }

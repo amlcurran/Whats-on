@@ -8,7 +8,7 @@ class EventsService(
     private val timeCalculator: TimeCalculator
 ) {
 
-    fun getCalendarSource(numberOfDays: Int, now: Timestamp): CalendarSource {
+    suspend fun getCalendarSource(numberOfDays: Int, now: Timestamp): CalendarSource {
         val nowTime = timeCalculator.startOfToday()
         val nextWeek = nowTime.plusDays(numberOfDays)
         val fivePm = timeRepository.borderTimeStart()

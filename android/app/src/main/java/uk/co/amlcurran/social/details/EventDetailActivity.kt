@@ -13,6 +13,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
@@ -27,6 +28,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_event_details.*
 import kotlinx.android.synthetic.main.item_event.*
+import kotlinx.coroutines.launch
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 import uk.co.amlcurran.social.*
@@ -37,10 +39,10 @@ class EventDetailActivity : AppCompatActivity() {
     private val subscriptions = CompositeDisposable()
     private val timeFormatter: DateTimeFormatter by lazy { DateTimeFormat.shortTime() }
     private val jodaCalculator = JodaCalculator()
-    private val events: Events by lazy {
+    private val events by lazy {
         val calendarRepository = CalendarRepository(this)
         val eventsRepository = AndroidEventsRepository(contentResolver, calendarRepository)
-        Events(eventsService = EventsService(AndroidTimeRepository(this), eventsRepository, jodaCalculator))
+        EventsService(AndroidTimeRepository(this), eventsRepository, jodaCalculator)
     }
 
     companion object {
@@ -63,14 +65,16 @@ class EventDetailActivity : AppCompatActivity() {
         eventId = intent.getStringExtra(KEY_EVENT_ID)
             ?: throw IllegalStateException("missing event ID")
 
-        subscriptions += events.loadSingleEvent(eventId)
-            .subscribeBy(
-                onSuccess = ::render,
-                onError = {
-                    it.printStackTrace()
-                    Snackbar.make(event_card, R.string.something_went_wrong, Snackbar.LENGTH_LONG).show()
-                }
-            )
+        lifecycleScope.launchWhenCreated {
+            try {
+                val event = events.eventWithId(eventId)!!
+                render(event)
+            } catch (e: Error) {
+                e.printStackTrace()
+                Snackbar.make(event_card, R.string.something_went_wrong, Snackbar.LENGTH_LONG)
+                    .show()
+            }
+        }
 
         detail_toolbar.setOnMenuItemClickListener(::onOptionsItemSelected)
         detail_toolbar.setNavigationOnClickListener { finish() }
@@ -148,11 +152,10 @@ class EventDetailActivity : AppCompatActivity() {
     }
 
     private fun deleteEvent() {
-        subscriptions += events.delete(eventId)
-            .subscribeBy(
-                onComplete = { finish() },
-                onError = { Snackbar.make(event_card, getString(R.string.couldnt_delete_event), Snackbar.LENGTH_SHORT).show() }
-            )
+        lifecycleScope.launch {
+            events.delete(eventId)
+            finish()
+        }
     }
 
     private fun launchInExternalCalendar() {
