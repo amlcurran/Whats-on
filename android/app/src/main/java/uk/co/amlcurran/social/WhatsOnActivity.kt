@@ -34,7 +34,7 @@ class WhatsOnActivity : AppCompatActivity() {
         if (permissions.all { (_, granted) -> granted }) {
             binding.progressBar.alphaIn()
             val now = DateTime.now(DateTimeZone.getDefault())
-            val timestamp = Timestamp(now.millis, JodaCalculator())
+            val timestamp = Timestamp(now.millis)
             lifecycleScope.launch {
                 try {
                     val it = eventsService.getCalendarSource(14, timestamp)
@@ -61,7 +61,7 @@ class WhatsOnActivity : AppCompatActivity() {
         override fun emptySelected(calendarItem: EmptyCalendarItem) {
             val intent = Intent(Intent.ACTION_INSERT)
             intent.data = CalendarContract.Events.CONTENT_URI
-            val day = DateTime(0, DateTimeZone.getDefault()).plusDays(calendarItem.startTime.daysSinceEpoch())
+            val day = DateTime(0, DateTimeZone.getDefault()).plusDays(calendarItem.startTime.daysSinceEpoch(JodaCalculator()))
             val startTime = day.plusHours(18)
             val endTime = day.plusHours(22)
             intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime.millis)

@@ -63,22 +63,22 @@ class CursorEventRepositoryAccessor(private val calendarCursor: Cursor, private 
 
     override fun getStartTime(): Timestamp {
         val startMillis = calendarCursor.getLong(beginColumnIndex)
-        return Timestamp(startMillis, timeCalculator)
+        return Timestamp(startMillis)
     }
 
     override fun getEndTime(): Timestamp {
         val endMillis = calendarCursor.getLong(endColumnIndex)
-        return Timestamp(endMillis, timeCalculator)
+        return Timestamp(endMillis)
     }
 
     override fun getDtStartTime(): Timestamp {
         val startMillis = calendarCursor.getLong(dtStartColumnIndex)
-        return Timestamp(startMillis, timeCalculator)
+        return Timestamp(startMillis)
     }
 
     override fun getDtEndTime(): Timestamp {
         val endMillis = calendarCursor.getLong(dtEndColumnIndex)
-        return Timestamp(endMillis, timeCalculator)
+        return Timestamp(endMillis)
     }
 
     override fun getCalendarId(): String {

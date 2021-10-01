@@ -17,11 +17,15 @@ class CalendarSource(private val calendarItems: Map<Int, CalendarSlot>, private 
     }
 
     private fun startOfTodayBlock(position: Int): Timestamp {
-        return timeCalculator.startOfToday().plusDays(position).plusHoursOf(timeRepository.borderTimeStart())
+        return timeCalculator.startOfToday()
+            .plusDays(position, timeCalculator)
+            .plusHoursOf(timeRepository.borderTimeStart(), timeCalculator)
     }
 
     private fun endOfTodayBlock(position: Int): Timestamp {
-        return timeCalculator.startOfToday().plusDays(position).plusHoursOf(timeRepository.borderTimeEnd())
+        return timeCalculator.startOfToday()
+            .plusDays(position, timeCalculator)
+            .plusHoursOf(timeRepository.borderTimeEnd(), timeCalculator)
     }
 
     fun slotAt(position: Int): CalendarSlot {

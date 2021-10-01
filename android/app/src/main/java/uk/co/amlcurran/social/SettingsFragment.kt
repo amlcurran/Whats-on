@@ -116,10 +116,13 @@ class SettingsFragment: Fragment() {
     }
 
     private fun updateToFromText() {
+        val timeCalculator = JodaCalculator()
         settingsFromToTiming.text = buildSpannedString {
             val jodaCalculator = JodaCalculator()
-            val startTime = jodaCalculator.getDateTime(jodaCalculator.startOfToday().plusHoursOf(androidTimeRepository.borderTimeStart()))
-            val endTime = jodaCalculator.getDateTime(jodaCalculator.startOfToday().plusHoursOf(androidTimeRepository.borderTimeEnd()))
+            val startTime = jodaCalculator.getDateTime(jodaCalculator.startOfToday()
+                .plusHoursOf(androidTimeRepository.borderTimeStart(), timeCalculator))
+            val endTime = jodaCalculator.getDateTime(jodaCalculator.startOfToday()
+                .plusHoursOf(androidTimeRepository.borderTimeEnd(), timeCalculator))
             val startText = timeFormatter.print(startTime)
             val endText = timeFormatter.print(endTime)
             append(getString(R.string.show_events_from_x_y, startText, endText))

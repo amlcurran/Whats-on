@@ -7,11 +7,11 @@ import org.joda.time.Days
 class JodaCalculator : TimeCalculator {
 
     override fun plusHours(time: Timestamp, hours: Int): Timestamp {
-        return Timestamp(getDateTime(time).plusHours(hours).millis, this)
+        return Timestamp(getDateTime(time).plusHours(hours).millis)
     }
 
     override fun startOfToday(): Timestamp {
-        return Timestamp(DateTime.now().withTimeAtStartOfDay().millis, this)
+        return Timestamp(DateTime.now().withTimeAtStartOfDay().millis)
     }
 
     override fun getDays(time: Timestamp): Int {
@@ -19,7 +19,7 @@ class JodaCalculator : TimeCalculator {
     }
 
     override fun plusDays(days: Int, time: Timestamp): Timestamp {
-        return Timestamp(getDateTime(time).plusDays(days).millis, this)
+        return Timestamp(getDateTime(time).plusDays(days).millis)
     }
 
     fun getDateTime(time: Timestamp): DateTime {

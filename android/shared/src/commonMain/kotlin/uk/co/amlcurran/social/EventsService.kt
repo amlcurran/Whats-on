@@ -14,7 +14,7 @@ class EventsService(
 
     suspend fun getCalendarSource(numberOfDays: Int, now: Timestamp): CalendarSource {
         val nowTime = timeCalculator.startOfToday()
-        val nextWeek = nowTime.plusDays(numberOfDays)
+        val nextWeek = nowTime.plusDays(numberOfDays, timeCalculator)
         val fivePm = timeRepository.borderTimeStart()
         val elevenPm = timeRepository.borderTimeEnd()
 
@@ -30,9 +30,9 @@ class EventsService(
             .toList()
 
         val itemArray = mutableMapOf<Int, CalendarSlot>()
-        val epochToNow = now.daysSinceEpoch()
+        val epochToNow = now.daysSinceEpoch(timeCalculator)
         for (item in calendarItems) {
-            val key = item.startTime.daysSinceEpoch() - epochToNow
+            val key = item.startTime.daysSinceEpoch(timeCalculator) - epochToNow
             val slot = itemArray[key] ?: CalendarSlot()
             slot.addItem(item)
             itemArray[key] = slot
