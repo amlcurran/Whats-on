@@ -4,33 +4,25 @@ import android.content.Context
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 
-class CalendarRepository(context: Context) {
+actual class CalendarRepository(context: Context) {
 
     private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
 
-    fun exclude(calendar: Calendar) {
+    actual fun exclude(calendar: Calendar) {
         preferences.edit {
-            putStringSet("excluded", excludedCalendars().inserting(calendar.id))
+            putStringSet("excluded", excludedCalendars().inserting(calendar.id).toSet())
         }
     }
 
     private fun excludedCalendars() = preferences.getStringSet("excluded", emptySet()) ?: emptySet()
 
-    fun include(calendar: Calendar) {
+    actual fun include(calendar: Calendar) {
         preferences.edit {
-            putStringSet("excluded", excludedCalendars().removing(calendar.id))
+            putStringSet("excluded", excludedCalendars().removing(calendar.id).toSet())
         }
     }
 
-    private fun <E> Set<E>.inserting(element: E): Set<E> = toMutableSet().apply {
-        add(element)
-    }
-
-    private fun <E> Set<E>.removing(element: E): Set<E> = toMutableSet().apply {
-        remove(element)
-    }
-
-    fun shouldShow(it: CalendarItem): Boolean {
+    actual fun shouldShow(it: CalendarItem): Boolean {
         return if (it is EventCalendarItem) {
             !excludedCalendars().contains(it.calendarId)
         } else {
@@ -38,19 +30,19 @@ class CalendarRepository(context: Context) {
         }
     }
 
-    fun showEventsFrom(calendarId: String): Boolean {
+    actual fun showEventsFrom(calendarId: String): Boolean {
         return !excludedCalendars().contains(calendarId)
     }
 
     private fun hiddenEvents() = preferences.getStringSet("hidden_events", emptySet()) ?: emptySet()
 
-    fun hide(eventId: String) {
+    actual fun hide(eventId: String) {
         preferences.edit {
-            putStringSet("hidden_events", hiddenEvents().inserting(eventId))
+            putStringSet("hidden_events", hiddenEvents().inserting(eventId).toSet())
         }
     }
 
-    fun shouldShowEvent(eventId: String): Boolean {
+    actual fun shouldShowEvent(eventId: String): Boolean {
         return preferences.getStringSet("hidden_events", emptySet())!!.contains(eventId) == false
     }
 

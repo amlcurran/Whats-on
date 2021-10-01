@@ -6,7 +6,7 @@ import android.database.Cursor
 import android.provider.CalendarContract
 import android.provider.CalendarContract.Instances.CONTENT_URI
 
-class AndroidEventsRepository(private val contentResolver: ContentResolver, private val calendarRepository: CalendarRepository) : EventsRepository {
+class AndroidEventsRepository(private val contentResolver: ContentResolver) : EventsRepository {
 
     private fun getCursor(searchStart: Timestamp, searchEnd: Timestamp): Cursor? {
         val builder = CONTENT_URI.buildUpon()
@@ -16,9 +16,7 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver, priv
         return contentResolver.query(builder.build(), CursorEventRepositoryAccessor.projection, "", null, null)
     }
 
-    data class Foo(val eventId: String, val calendarId: String, val title: String, val time: Timestamp, val endTime: Timestamp, val allDay: Boolean, val attendingStatus: Int, val isDeleted: Boolean, val startMinute: Int, val endMinute: Int)
-
-    override fun getCalendarItems(nowTime: Timestamp, nextWeek: Timestamp, fivePm: TimeOfDay, elevenPm: TimeOfDay): List<CalendarItem> {
+    override fun getCalendarItems(nowTime: Timestamp, nextWeek: Timestamp, fivePm: TimeOfDay, elevenPm: TimeOfDay): List<Foo> {
         val calendarCursor = getCursor(nowTime, nextWeek)
         val accessor = CursorEventRepositoryAccessor(calendarCursor!!, JodaCalculator())
         val calendarItems = ArrayList<Foo>()
@@ -37,30 +35,23 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver, priv
         }
         calendarCursor.close()
         return calendarItems
-            .filter { it.allDay == false }
-            .filter { it.attendingStatus != CalendarContract.Events.STATUS_CANCELED }
-            .filter { it.isDeleted == false }
-            .filter { (it.startMinute > elevenPm.minutesInDay() || it.endMinute < fivePm.minutesInDay()) == false }
-            .filter { calendarRepository.shouldShowEvent(it.eventId) }
-            .map { EventCalendarItem(it.eventId, it.calendarId, it.title, it.time, it.endTime) }
-            .filter { calendarRepository.shouldShow(it) }
     }
 
     override fun event(eventId: String): Event? {
         val cursor = contentResolver.query(ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventId.toLong()),
                 SINGLE_PROJECTION, null, null, null)
         val accessor = CursorEventRepositoryAccessor(cursor!!, JodaCalculator())
-        if (accessor.nextItem()) {
+        return if (accessor.nextItem()) {
             val title = accessor.title
             val time = accessor.dtStartTime
             val endTime = accessor.dtEndTime
             val item = EventCalendarItem(eventId, "", title, time, endTime)
             val location = accessor.getString(CalendarContract.Events.EVENT_LOCATION)
             cursor.close()
-            return Event(item, location)
+            Event(item, location)
         } else {
             cursor.close()
-            return null
+            null
         }
     }
 

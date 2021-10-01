@@ -188,5 +188,3 @@ private fun <T> Cursor.map(function: (Cursor) -> T): List<T> {
 
 internal fun ViewGroup.inflate(@LayoutRes layout: Int, insert: Boolean = false): View =
     LayoutInflater.from(context).inflate(layout, this, insert)
-
-data class Calendar(val id: String, val name: String, val color: Int, val isSelected: Boolean)

@@ -12,10 +12,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.updatePadding
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
@@ -25,13 +21,14 @@ import uk.co.amlcurran.social.databinding.ActivityWhatsOnBinding
 import uk.co.amlcurran.social.details.EventDetailActivity
 import uk.co.amlcurran.social.details.alphaIn
 import uk.co.amlcurran.social.details.alphaOut
+import uk.co.amlcurran.social.CalendarRepository
 
 class WhatsOnActivity : AppCompatActivity() {
     private lateinit var adapter: WhatsOnAdapter
     private var firstLoad = true
-    private val eventsRepository = AndroidEventsRepository(contentResolver, CalendarRepository(this))
+    private val eventsRepository = AndroidEventsRepository(contentResolver)
     private val dateCreator = AndroidTimeRepository(this)
-    private val eventsService = EventsService(dateCreator, eventsRepository, JodaCalculator())
+    private val eventsService = EventsService(dateCreator, eventsRepository, JodaCalculator(), CalendarRepository(this))
     private lateinit var binding: ActivityWhatsOnBinding
 
     private val permissionRequest = registerForActivityResult(RequestMultiplePermissions()) { permissions ->

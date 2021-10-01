@@ -30,7 +30,13 @@ kotlin {
                 implementation("junit:junit:4.13.2")
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                implementation("androidx.preference:preference-ktx:1.1.1")
+                implementation("joda-time:joda-time:2.10.5")
+                implementation("androidx.core:core-ktx:1.6.0")
+            }
+        }
         val androidTest by getting {
             dependencies {
             }

@@ -1,11 +1,15 @@
 package uk.co.amlcurran.social
 
+import android.provider.CalendarContract
+
 data class Event(val item: EventCalendarItem, val location: String?)
+data class Foo(val eventId: String, val calendarId: String, val title: String, val time: Timestamp, val endTime: Timestamp, val allDay: Boolean, val attendingStatus: Int, val isDeleted: Boolean, val startMinute: Int, val endMinute: Int)
 
 class EventsService(
     private val timeRepository: TimeRepository,
     private val eventsRepository: EventsRepository,
-    private val timeCalculator: TimeCalculator
+    private val timeCalculator: TimeCalculator,
+    private val calendarRepository: CalendarRepository
 ) {
 
     suspend fun getCalendarSource(numberOfDays: Int, now: Timestamp): CalendarSource {
@@ -15,6 +19,15 @@ class EventsService(
         val elevenPm = timeRepository.borderTimeEnd()
 
         val calendarItems = eventsRepository.getCalendarItems(nowTime, nextWeek, fivePm, elevenPm)
+            .asSequence()
+            .filter { it.allDay == false }
+            .filter { it.attendingStatus != CalendarContract.Events.STATUS_CANCELED }
+            .filter { it.isDeleted == false }
+            .filter { (it.startMinute > elevenPm.minutesInDay() || it.endMinute < fivePm.minutesInDay()) == false }
+            .filter { calendarRepository.shouldShowEvent(it.eventId) }
+            .map { EventCalendarItem(it.eventId, it.calendarId, it.title, it.time, it.endTime) }
+            .filter { calendarRepository.shouldShow(it) }
+            .toList()
 
         val itemArray = mutableMapOf<Int, CalendarSlot>()
         val epochToNow = now.daysSinceEpoch()

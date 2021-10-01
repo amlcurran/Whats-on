@@ -23,7 +23,7 @@ class CalendarViewHolderAdapter(private val onCalendarEnable: (Calendar, Boolean
         differ.submitList(list)
     }
 
-    private val differ = AsyncListDiffer<Calendar>(this, object : DiffUtil.ItemCallback<Calendar>() {
+    private val differ = AsyncListDiffer(this, object : DiffUtil.ItemCallback<Calendar>() {
         override fun areContentsTheSame(oldItem: Calendar, newItem: Calendar): Boolean =
                 newItem.isSelected == oldItem.isSelected && newItem.name == oldItem.name
 
