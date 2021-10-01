@@ -1,6 +1,7 @@
 package uk.co.amlcurran.social
 
 import platform.Foundation.NSUserDefaults
+import platform.darwin.NSInteger
 
 actual class UserSettings {
 
@@ -36,6 +37,30 @@ actual class UserSettings {
 
     actual fun shouldShowEvent(eventId: String): Boolean {
         return preferences.stringArrayForKey("hidden_events")!!.contains(eventId) == false
+    }
+
+    actual fun borderTimeStart() = preferences
+        .nullableIntegerForKey("startTime")
+        .let { TimeOfDay.fromHours(it ?: 18) }
+
+    actual fun borderTimeEnd() = preferences
+        .nullableIntegerForKey("endTime")
+        .let { TimeOfDay.fromHours(it ?: 23) }
+
+    actual fun updateStartTime(timeOfDay: TimeOfDay) {
+        preferences.setInteger(timeOfDay.hoursInDay(), "startTime")
+    }
+
+    actual fun updateEndTime(timeOfDay: TimeOfDay) {
+        preferences.setInteger(timeOfDay.hoursInDay(), "endTime")
+    }
+
+    private fun NSUserDefaults.nullableIntegerForKey(key: String): Int? {
+        return if (objectForKey(key) != null) {
+            integerForKey(key).toInt()
+        } else {
+            null
+        }
     }
 
 }

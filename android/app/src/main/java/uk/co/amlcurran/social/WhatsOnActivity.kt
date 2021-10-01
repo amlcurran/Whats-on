@@ -26,8 +26,7 @@ class WhatsOnActivity : AppCompatActivity() {
     private lateinit var adapter: WhatsOnAdapter
     private var firstLoad = true
     private val eventsRepository = AndroidEventsRepository(contentResolver)
-    private val dateCreator = AndroidTimeRepository(this)
-    private val eventsService = EventsService(dateCreator, eventsRepository, JodaCalculator(), UserSettings(this))
+    private val eventsService = EventsService(eventsRepository, JodaCalculator(), UserSettings(this))
     private lateinit var binding: ActivityWhatsOnBinding
 
     private val permissionRequest = registerForActivityResult(RequestMultiplePermissions()) { permissions ->
@@ -96,7 +95,7 @@ class WhatsOnActivity : AppCompatActivity() {
 
         val now = DateTime.now(DateTimeZone.getDefault())
 
-        val calendarSource = CalendarSource(HashMap(), 0, JodaCalculator(), AndroidTimeRepository(this))
+        val calendarSource = CalendarSource(HashMap(), 0, JodaCalculator(), UserSettings(this))
         adapter = WhatsOnAdapter(LayoutInflater.from(this), eventSelectedListener, calendarSource)
         binding.listWhatsOn.layoutManager = LinearLayoutManager(this)
         binding.listWhatsOn.adapter = adapter

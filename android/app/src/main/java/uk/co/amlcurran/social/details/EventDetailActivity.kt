@@ -29,6 +29,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_event_details.*
 import kotlinx.android.synthetic.main.item_event.*
 import kotlinx.coroutines.launch
+import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 import uk.co.amlcurran.social.*
@@ -43,7 +44,7 @@ class EventDetailActivity : AppCompatActivity() {
     private val events by lazy {
         val calendarRepository = UserSettings(this)
         val eventsRepository = AndroidEventsRepository(contentResolver)
-        EventsService(AndroidTimeRepository(this), eventsRepository, jodaCalculator, calendarRepository)
+        EventsService(eventsRepository, jodaCalculator, calendarRepository)
     }
 
     companion object {
@@ -83,8 +84,8 @@ class EventDetailActivity : AppCompatActivity() {
 
     private fun render(event: Event) {
         event_title.text = event.item.title
-        val startTime = event.item.startTime.format(timeFormatter, jodaCalculator)
-        val endTime = event.item.endTime.format(timeFormatter, jodaCalculator)
+        val startTime = event.item.startTime.format(timeFormatter)
+        val endTime = event.item.endTime.format(timeFormatter)
         event_subtitle.text = getString(R.string.start_to_end, startTime, endTime)
         detail_toolbar.menu.findItem(R.id.menu_open_outside).isVisible = true
         detail_toolbar.menu.findItem(R.id.menu_delete_event).isVisible = true
@@ -201,5 +202,3 @@ fun View.alphaOut() {
         .withEndAction { visibility = View.GONE }
         .start()
 }
-
-fun Timestamp.format(dateTimeFormatter: DateTimeFormatter, calculator: JodaCalculator) = dateTimeFormatter.print(calculator.getDateTime(this))

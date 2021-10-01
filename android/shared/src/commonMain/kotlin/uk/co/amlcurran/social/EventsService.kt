@@ -6,7 +6,6 @@ data class Event(val item: EventCalendarItem, val location: String?)
 data class Foo(val eventId: String, val calendarId: String, val title: String, val time: Timestamp, val endTime: Timestamp, val allDay: Boolean, val attendingStatus: Int, val isDeleted: Boolean, val startMinute: Int, val endMinute: Int)
 
 class EventsService(
-    private val timeRepository: TimeRepository,
     private val eventsRepository: EventsRepository,
     private val timeCalculator: TimeCalculator,
     private val userSettings: UserSettings
@@ -15,8 +14,8 @@ class EventsService(
     suspend fun getCalendarSource(numberOfDays: Int, now: Timestamp): CalendarSource {
         val nowTime = timeCalculator.startOfToday()
         val nextWeek = nowTime.plusDays(numberOfDays, timeCalculator)
-        val fivePm = timeRepository.borderTimeStart()
-        val elevenPm = timeRepository.borderTimeEnd()
+        val fivePm = userSettings.borderTimeStart()
+        val elevenPm = userSettings.borderTimeEnd()
 
         val calendarItems = eventsRepository.getCalendarItems(nowTime, nextWeek, fivePm, elevenPm)
             .asSequence()
@@ -38,7 +37,7 @@ class EventsService(
             itemArray[key] = slot
         }
 
-        return CalendarSource(itemArray, numberOfDays, timeCalculator, timeRepository)
+        return CalendarSource(itemArray, numberOfDays, timeCalculator, userSettings)
     }
 
     fun eventWithId(eventId: String): Event? = eventsRepository.event(eventId)

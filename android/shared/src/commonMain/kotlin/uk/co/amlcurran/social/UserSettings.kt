@@ -14,4 +14,12 @@ expect class UserSettings {
 
     fun shouldShowEvent(eventId: String): Boolean
 
+    fun borderTimeStart(): TimeOfDay
+
+    fun borderTimeEnd(): TimeOfDay
+
+    fun updateStartTime(timeOfDay: TimeOfDay)
+
+    fun updateEndTime(timeOfDay: TimeOfDay)
+
 }

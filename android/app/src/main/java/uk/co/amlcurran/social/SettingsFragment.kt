@@ -29,7 +29,6 @@ class SettingsFragment: Fragment() {
 
     private val userSettings: UserSettings by lazy { UserSettings(requireContext()) }
     private val timeFormatter: DateTimeFormatter by lazy { DateTimeFormat.shortTime() }
-    private val androidTimeRepository: AndroidTimeRepository by lazy { AndroidTimeRepository(requireContext()) }
 
     private lateinit var delegate: SettingsDelegate
 
@@ -120,9 +119,9 @@ class SettingsFragment: Fragment() {
         settingsFromToTiming.text = buildSpannedString {
             val jodaCalculator = JodaCalculator()
             val startTime = jodaCalculator.getDateTime(jodaCalculator.startOfToday()
-                .plusHoursOf(androidTimeRepository.borderTimeStart(), timeCalculator))
+                .plusHoursOf(userSettings.borderTimeStart(), timeCalculator))
             val endTime = jodaCalculator.getDateTime(jodaCalculator.startOfToday()
-                .plusHoursOf(androidTimeRepository.borderTimeEnd(), timeCalculator))
+                .plusHoursOf(userSettings.borderTimeEnd(), timeCalculator))
             val startText = timeFormatter.print(startTime)
             val endText = timeFormatter.print(endTime)
             append(getString(R.string.show_events_from_x_y, startText, endText))
@@ -132,24 +131,24 @@ class SettingsFragment: Fragment() {
     }
 
     private fun changeStartTime() {
-        val hoursInDay = androidTimeRepository.borderTimeStart().hoursInDay().toInt()
+        val hoursInDay = userSettings.borderTimeStart().hoursInDay().toInt()
         TimePickerDialog(requireActivity(), ::updateStartTime, hoursInDay, 0, true).show()
     }
 
     @Suppress("UNUSED_PARAMETER")
     private fun updateStartTime(view: View, hourOfDay: Int, minute: Int) {
-        androidTimeRepository.updateStartTime(TimeOfDay.fromHours(hourOfDay))
+        userSettings.updateStartTime(TimeOfDay.fromHours(hourOfDay))
         updateToFromText()
     }
 
     private fun changeEndTime() {
-        val hoursInDay = androidTimeRepository.borderTimeEnd().hoursInDay().toInt()
+        val hoursInDay = userSettings.borderTimeEnd().hoursInDay().toInt()
         TimePickerDialog(requireActivity(), ::updateEndTime, hoursInDay, 0, true).show()
     }
 
     @Suppress("UNUSED_PARAMETER")
     private fun updateEndTime(view: View, hourOfDay: Int, minute: Int) {
-        androidTimeRepository.updateEndTime(TimeOfDay.fromHours(hourOfDay))
+        userSettings.updateEndTime(TimeOfDay.fromHours(hourOfDay))
         updateToFromText()
     }
 

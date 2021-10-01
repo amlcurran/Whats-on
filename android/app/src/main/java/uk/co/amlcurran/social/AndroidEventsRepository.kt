@@ -18,7 +18,7 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver) : Ev
 
     override fun getCalendarItems(nowTime: Timestamp, nextWeek: Timestamp, fivePm: TimeOfDay, elevenPm: TimeOfDay): List<Foo> {
         val calendarCursor = getCursor(nowTime, nextWeek)
-        val accessor = CursorEventRepositoryAccessor(calendarCursor!!, JodaCalculator())
+        val accessor = CursorEventRepositoryAccessor(calendarCursor!!)
         val calendarItems = ArrayList<Foo>()
         while (accessor.nextItem()) {
             val title = accessor.title
@@ -40,7 +40,7 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver) : Ev
     override fun event(eventId: String): Event? {
         val cursor = contentResolver.query(ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventId.toLong()),
                 SINGLE_PROJECTION, null, null, null)
-        val accessor = CursorEventRepositoryAccessor(cursor!!, JodaCalculator())
+        val accessor = CursorEventRepositoryAccessor(cursor!!)
         return if (accessor.nextItem()) {
             val title = accessor.title
             val time = accessor.dtStartTime

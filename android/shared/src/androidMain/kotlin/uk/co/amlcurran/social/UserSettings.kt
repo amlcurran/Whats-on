@@ -46,4 +46,16 @@ actual class UserSettings(context: Context) {
         return preferences.getStringSet("hidden_events", emptySet())!!.contains(eventId) == false
     }
 
+    actual fun borderTimeStart() = preferences.getInt("startTime", 18).let { TimeOfDay.fromHours(it) }
+
+    actual fun borderTimeEnd() = preferences.getInt("endTime", 23).let { TimeOfDay.fromHours(it) }
+
+    actual fun updateStartTime(timeOfDay: TimeOfDay) = preferences.edit {
+        putInt("startTime", timeOfDay.hoursInDay().toInt())
+    }
+
+    actual fun updateEndTime(timeOfDay: TimeOfDay) = preferences.edit {
+        putInt("endTime", timeOfDay.hoursInDay().toInt())
+    }
+
 }

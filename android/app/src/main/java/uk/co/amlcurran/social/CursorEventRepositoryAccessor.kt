@@ -3,7 +3,7 @@ package uk.co.amlcurran.social
 import android.database.Cursor
 import android.provider.CalendarContract
 
-class CursorEventRepositoryAccessor(private val calendarCursor: Cursor, private val timeCalculator: TimeCalculator) : EventRepositoryAccessor {
+class CursorEventRepositoryAccessor(private val calendarCursor: Cursor) {
 
     private val titleColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Events.TITLE) }
     private val dtStartColumnIndex: Int by lazy { calendarCursor.getColumnIndexOrThrow(CalendarContract.Instances.DTSTART) }
@@ -33,63 +33,75 @@ class CursorEventRepositoryAccessor(private val calendarCursor: Cursor, private 
         )
     }
 
-    override fun getAllDay(): Boolean {
-        return calendarCursor.getInt(allDayColumnIndex) != 0
-    }
+    val allDay: Boolean
+        get() {
+            return calendarCursor.getInt(allDayColumnIndex) != 0
+        }
 
-    override fun isDeleted(): Boolean {
-        return calendarCursor.getInt(deletedColumnIndex) == 1
-    }
+    val isDeleted: Boolean
+        get() {
+            return calendarCursor.getInt(deletedColumnIndex) == 1
+        }
 
-    override fun getAttendingStatus(): Int {
-        return calendarCursor.getInt(selfAttendanceColumnIndex)
-    }
+    val attendingStatus: Int
+        get() {
+            return calendarCursor.getInt(selfAttendanceColumnIndex)
+        }
 
-    override fun getStartMinuteInDay(): Int {
-        return calendarCursor.getInt(startMinuteColumnIndex)
-    }
+    val startMinuteInDay: Int
+        get() {
+            return calendarCursor.getInt(startMinuteColumnIndex)
+        }
 
-    override fun getTitle(): String {
-        return calendarCursor.getString(titleColumnIndex)
-    }
+    val title: String
+        get() {
+            return calendarCursor.getString(titleColumnIndex)
+        }
 
-    override fun getEventIdentifier(): String {
-        return calendarCursor.getString(eventIdColumnIndex)
-    }
+    val eventIdentifier: String
+        get() {
+            return calendarCursor.getString(eventIdColumnIndex)
+        }
 
-    override fun nextItem(): Boolean {
+    fun nextItem(): Boolean {
         return calendarCursor.moveToNext()
     }
 
-    override fun getStartTime(): Timestamp {
-        val startMillis = calendarCursor.getLong(beginColumnIndex)
-        return Timestamp(startMillis)
-    }
+    val startTime: Timestamp
+        get() {
+            val startMillis = calendarCursor.getLong(beginColumnIndex)
+            return Timestamp(startMillis)
+        }
 
-    override fun getEndTime(): Timestamp {
-        val endMillis = calendarCursor.getLong(endColumnIndex)
-        return Timestamp(endMillis)
-    }
+    val endTime: Timestamp
+        get() {
+            val endMillis = calendarCursor.getLong(endColumnIndex)
+            return Timestamp(endMillis)
+        }
 
-    override fun getDtStartTime(): Timestamp {
-        val startMillis = calendarCursor.getLong(dtStartColumnIndex)
-        return Timestamp(startMillis)
-    }
+    val dtStartTime: Timestamp
+        get() {
+            val startMillis = calendarCursor.getLong(dtStartColumnIndex)
+            return Timestamp(startMillis)
+        }
 
-    override fun getDtEndTime(): Timestamp {
-        val endMillis = calendarCursor.getLong(dtEndColumnIndex)
-        return Timestamp(endMillis)
-    }
+    val dtEndTime: Timestamp
+        get() {
+            val endMillis = calendarCursor.getLong(dtEndColumnIndex)
+            return Timestamp(endMillis)
+        }
 
-    override fun getCalendarId(): String {
-        return calendarCursor.getString(calendarIdColumnIndex)
-    }
+    val calendarId: String
+        get() {
+            return calendarCursor.getString(calendarIdColumnIndex)
+        }
 
-    override fun getEndMinuteInDay(): Int {
-        return calendarCursor.getInt(endMinuteColumnIndex)
-    }
+    val endMinuteInDay: Int
+        get() {
+            return calendarCursor.getInt(endMinuteColumnIndex)
+        }
 
-    override fun getString(columnName: String): String {
+    fun getString(columnName: String): String {
         return calendarCursor.getString(calendarCursor.getColumnIndexOrThrow(columnName))
     }
 }
