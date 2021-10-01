@@ -9,7 +9,7 @@ class EventsService(
     private val timeRepository: TimeRepository,
     private val eventsRepository: EventsRepository,
     private val timeCalculator: TimeCalculator,
-    private val calendarRepository: CalendarRepository
+    private val userSettings: UserSettings
 ) {
 
     suspend fun getCalendarSource(numberOfDays: Int, now: Timestamp): CalendarSource {
@@ -24,9 +24,9 @@ class EventsService(
             .filter { it.attendingStatus != CalendarContract.Events.STATUS_CANCELED }
             .filter { it.isDeleted == false }
             .filter { (it.startMinute > elevenPm.minutesInDay() || it.endMinute < fivePm.minutesInDay()) == false }
-            .filter { calendarRepository.shouldShowEvent(it.eventId) }
+            .filter { userSettings.shouldShowEvent(it.eventId) }
             .map { EventCalendarItem(it.eventId, it.calendarId, it.title, it.time, it.endTime) }
-            .filter { calendarRepository.shouldShow(it) }
+            .filter { userSettings.shouldShow(it) }
             .toList()
 
         val itemArray = mutableMapOf<Int, CalendarSlot>()

@@ -27,7 +27,7 @@ import org.joda.time.format.DateTimeFormatter
 
 class SettingsFragment: Fragment() {
 
-    private val calendarRepository: CalendarRepository by lazy { CalendarRepository(requireContext()) }
+    private val userSettings: UserSettings by lazy { UserSettings(requireContext()) }
     private val timeFormatter: DateTimeFormatter by lazy { DateTimeFormat.shortTime() }
     private val androidTimeRepository: AndroidTimeRepository by lazy { AndroidTimeRepository(requireContext()) }
 
@@ -64,7 +64,7 @@ class SettingsFragment: Fragment() {
                             calendarId,
                             it.string(CalendarContract.Calendars.NAME),
                             it.int(CalendarContract.Calendars.CALENDAR_COLOR),
-                            calendarRepository.showEventsFrom(calendarId)
+                            userSettings.showEventsFrom(calendarId)
                         )
                     }
                     adapter.update(list)
@@ -152,9 +152,9 @@ class SettingsFragment: Fragment() {
 
     private fun calendarSelectionChange(calendar: Calendar, enabled: Boolean) {
         if (enabled) {
-            calendarRepository.include(calendar)
+            userSettings.include(calendar)
         } else {
-            calendarRepository.exclude(calendar)
+            userSettings.exclude(calendar)
         }
     }
 

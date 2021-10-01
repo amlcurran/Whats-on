@@ -21,14 +21,13 @@ import uk.co.amlcurran.social.databinding.ActivityWhatsOnBinding
 import uk.co.amlcurran.social.details.EventDetailActivity
 import uk.co.amlcurran.social.details.alphaIn
 import uk.co.amlcurran.social.details.alphaOut
-import uk.co.amlcurran.social.CalendarRepository
 
 class WhatsOnActivity : AppCompatActivity() {
     private lateinit var adapter: WhatsOnAdapter
     private var firstLoad = true
     private val eventsRepository = AndroidEventsRepository(contentResolver)
     private val dateCreator = AndroidTimeRepository(this)
-    private val eventsService = EventsService(dateCreator, eventsRepository, JodaCalculator(), CalendarRepository(this))
+    private val eventsService = EventsService(dateCreator, eventsRepository, JodaCalculator(), UserSettings(this))
     private lateinit var binding: ActivityWhatsOnBinding
 
     private val permissionRequest = registerForActivityResult(RequestMultiplePermissions()) { permissions ->

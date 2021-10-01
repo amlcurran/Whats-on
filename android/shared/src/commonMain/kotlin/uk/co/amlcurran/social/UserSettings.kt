@@ -1,6 +1,6 @@
 package uk.co.amlcurran.social
 
-expect class CalendarRepository {
+expect class UserSettings {
 
     fun exclude(calendar: Calendar)
 

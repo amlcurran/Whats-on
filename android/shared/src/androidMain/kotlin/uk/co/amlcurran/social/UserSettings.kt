@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 
-actual class CalendarRepository(context: Context) {
+actual class UserSettings(context: Context) {
 
     private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
 

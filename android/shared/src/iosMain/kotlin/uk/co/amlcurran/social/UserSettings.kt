@@ -2,7 +2,7 @@ package uk.co.amlcurran.social
 
 import platform.Foundation.NSUserDefaults
 
-actual class CalendarRepository {
+actual class UserSettings {
 
     private val preferences = NSUserDefaults.standardUserDefaults
 

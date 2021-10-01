@@ -32,7 +32,7 @@ import kotlinx.coroutines.launch
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 import uk.co.amlcurran.social.*
-import uk.co.amlcurran.social.CalendarRepository
+import uk.co.amlcurran.social.UserSettings
 
 class EventDetailActivity : AppCompatActivity() {
 
@@ -41,7 +41,7 @@ class EventDetailActivity : AppCompatActivity() {
     private val timeFormatter: DateTimeFormatter by lazy { DateTimeFormat.shortTime() }
     private val jodaCalculator = JodaCalculator()
     private val events by lazy {
-        val calendarRepository = CalendarRepository(this)
+        val calendarRepository = UserSettings(this)
         val eventsRepository = AndroidEventsRepository(contentResolver)
         EventsService(AndroidTimeRepository(this), eventsRepository, jodaCalculator, calendarRepository)
     }
@@ -139,7 +139,7 @@ class EventDetailActivity : AppCompatActivity() {
     }
 
     private fun hideEvent() {
-        val calendarRepository = CalendarRepository(this)
+        val calendarRepository = UserSettings(this)
         calendarRepository.hide(eventId)
         finish()
     }
