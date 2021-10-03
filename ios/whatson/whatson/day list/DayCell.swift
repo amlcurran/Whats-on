@@ -75,8 +75,48 @@ class DayCollectionCell: UICollectionViewCell {
         dayLabel.constrain(.bottom, to: contentView, .bottom, withOffset: -4)
     }
 
-    func bound(to item: CalendarSlot) -> Self {
-        dayLabel.text = dayFormatter.string(from: item.boundaryStart)
+    func bound(to item: Date) -> Self {
+        dayLabel.text = dayFormatter.string(from: item)
+        return self
+    }
+
+}
+
+class DayCollectionReusableView: UICollectionReusableView {
+
+    let dayLabel = UILabel()
+    let dayFormatter = DateFormatter()
+
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
+        styleViews()
+        layout()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        styleViews()
+        layout()
+    }
+
+    private func styleViews() {
+        dayFormatter.dateStyle = .full
+        dayFormatter.timeStyle = .none
+        dayFormatter.doesRelativeDateFormatting = true
+        backgroundColor = .clear
+
+        dayLabel.textColor = .lightText
+        dayLabel.font = .systemFont(ofSize: 14, weight: UIFont.Weight.medium)
+    }
+
+    private func layout() {
+        add(dayLabel, constrainedTo: [.leadingMargin, .trailingMargin], withInset: 16)
+        dayLabel.constrain(.top, to: self, .top, withOffset: 16)
+        dayLabel.constrain(.bottom, to: self, .bottom, withOffset: -4)
+    }
+
+    func bound(to item: Date) -> Self {
+        dayLabel.text = dayFormatter.string(from: item)
         return self
     }
 

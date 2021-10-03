@@ -28,7 +28,6 @@ class MultipleEventCell: UICollectionViewCell, UICollectionViewDelegate, Row {
     private lazy var dataSource = UICollectionViewDiffableDataSource<Int, DiffableType>(collectionView: self.collectionView, cellProvider: { (tableView, indexPath, item) -> UICollectionViewCell? in
         switch item {
         case .emptySlot,
-                .multipleEventSlot,
                 .dayTitle:
             fatalError()
         case .singleEventSlot(let slot):

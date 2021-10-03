@@ -5,13 +5,12 @@ enum DiffableType: Hashable {
     case dayTitle(CalendarSlot)
     case emptySlot(CalendarSlot)
     case singleEventSlot(EventCalendarItem)
-    case multipleEventSlot(CalendarSlot)
 }
 
 class CalendarDiffableTableView: NSObject, UICollectionViewDelegate {
 
     private var tableView: UICollectionView!
-    private var dataSource: UICollectionViewDiffableDataSource<Int, DiffableType>!
+    private var dataSource: UICollectionViewDiffableDataSource<Date, DiffableType>!
     private weak var delegate: CalendarTableViewDelegate?
 
     var view: UIView {
@@ -27,7 +26,7 @@ class CalendarDiffableTableView: NSObject, UICollectionViewDelegate {
         config.trailingSwipeActionsConfigurationProvider = { (indexPath: IndexPath?) in
             if let indexPath = indexPath {
                 let snapshot = self.dataSource.snapshot()
-                let item = snapshot.itemIdentifiers(inSection: indexPath.section)[indexPath.row]
+                let item = snapshot.itemIdentifiers(inSection: snapshot.sectionIdentifiers[indexPath.section])[indexPath.row]
                 if case let DiffableType.singleEventSlot(slot) = item {
                     return UISwipeActionsConfiguration(actions: [
                         UIContextualAction(style: .destructive, title: "Delete", handler: { _, _, handler in
@@ -39,9 +38,10 @@ class CalendarDiffableTableView: NSObject, UICollectionViewDelegate {
             }
             return nil
         }
+        config.headerMode = .supplementary
         let layout = UICollectionViewCompositionalLayout.list(using: config)
         self.tableView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        self.dataSource = UICollectionViewDiffableDataSource<Int, DiffableType>(collectionView: self.tableView, cellProvider: { (tableView, indexPath, item) -> UICollectionViewCell? in
+        self.dataSource = UICollectionViewDiffableDataSource<Date, DiffableType>(collectionView: self.tableView, cellProvider: { (tableView, indexPath, item) -> UICollectionViewCell? in
             switch item {
             case .emptySlot(let slot):
                 let cell = tableView.dequeueReusableCell(withReuseIdentifier: "event", for: indexPath) as? EventCollectionCell
@@ -51,31 +51,32 @@ class CalendarDiffableTableView: NSObject, UICollectionViewDelegate {
                 return cell?.bound(to: slot)
             case .dayTitle(let slot):
                 let cell = tableView.dequeueReusableCell(withReuseIdentifier: "day", for: indexPath) as? DayCollectionCell
-                return cell?.bound(to: slot)
-            case .multipleEventSlot(let slot):
-                let cell = tableView.dequeueReusableCell(withReuseIdentifier: "multievent", for: indexPath) as! MultipleEventCell
-                return cell.bound(to: slot)
+                return cell?.bound(to: slot.boundaryStart)
             }
         })
+        let headerRegistration = UICollectionView.SupplementaryRegistration<DayCollectionReusableView>(elementKind: "Header") { supplementaryView, String, indexPath in
+            _ = supplementaryView.bound(to: self.dataSource.snapshot().sectionIdentifiers[indexPath.section])
+        }
+        self.dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+            collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: indexPath)
+        }
         self.tableView.dataSource = dataSource
         self.tableView.delegate = self
     }
 
     func update(_ source: [CalendarSlot]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, DiffableType>()
-        snapshot.appendSections([0])
-        var items = [DiffableType]()
+        var snapshot = NSDiffableDataSourceSnapshot<Date, DiffableType>()
         for slot in source {
-            items.append(.dayTitle(slot))
+            snapshot.appendSections([slot.boundaryStart])
+            var items = [DiffableType]()
+//            items.append(.dayTitle(slot))
             if slot.items.isEmpty {
                 items.append(.emptySlot(slot))
-            } else if slot.items.count == 1 {
-                items.append(.singleEventSlot(slot.items.first!))
             } else {
-                items.append(.multipleEventSlot(slot))
+                items.append(contentsOf: slot.items.map(DiffableType.singleEventSlot))
             }
+            snapshot.appendItems(items)
         }
-        snapshot.appendItems(items)
         dataSource.apply(snapshot, animatingDifferences: true)
     }
 
@@ -97,8 +98,6 @@ class CalendarDiffableTableView: NSObject, UICollectionViewDelegate {
         case .singleEventSlot(let item):
             let cell = tableView.cellForItem(at: indexPath).required(as: (UIView & Row).self)
             delegate?.showDetails(for: item, at: indexPath, in: cell)
-        case .multipleEventSlot:
-            print("Do nothing, the cell handles it")
         }
     }
 
