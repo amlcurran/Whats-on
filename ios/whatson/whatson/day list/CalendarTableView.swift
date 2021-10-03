@@ -1,10 +1,50 @@
 import UIKit
 import Core
+import SwiftUI
 
 enum DiffableType: Hashable {
     case dayTitle(CalendarSlot)
     case emptySlot(CalendarSlot)
     case singleEventSlot(EventCalendarItem)
+}
+
+private extension NSCollectionLayoutItem {
+
+    static var fullSize: NSCollectionLayoutItem {
+        NSCollectionLayoutItem(
+            layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        )
+    }
+
+}
+
+
+private extension NSCollectionLayoutSection {
+
+    static var staticSection: NSCollectionLayoutSection {
+        let staticSection = NSCollectionLayoutSection(group: .vertical(
+            layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(72)),
+            subitems: [.fullSize]
+        ))
+        staticSection.boundarySupplementaryItems = [
+            .init(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(24)), elementKind: "Header", alignment: .top)
+        ]
+        return staticSection
+    }
+
+    static var horizontalScrollingSection: NSCollectionLayoutSection {
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: .init(widthDimension: .fractionalWidth(0.8), heightDimension: .estimated(72)),
+            subitems: [.fullSize]
+        )
+        let scrollableSection = NSCollectionLayoutSection(group: group)
+        scrollableSection.orthogonalScrollingBehavior = .groupPaging
+        scrollableSection.boundarySupplementaryItems = [
+            .init(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(24)), elementKind: "Header", alignment: .top)
+        ]
+        return scrollableSection
+    }
+
 }
 
 class CalendarDiffableTableView: NSObject, UICollectionViewDelegate {
@@ -20,26 +60,14 @@ class CalendarDiffableTableView: NSObject, UICollectionViewDelegate {
     init(tableView: UITableView, delegate: CalendarTableViewDelegate) {
         self.delegate = delegate
         super.init()
-        var config = UICollectionLayoutListConfiguration(appearance: .plain)
-        config.backgroundColor = .clear
-        config.showsSeparators = false
-        config.trailingSwipeActionsConfigurationProvider = { (indexPath: IndexPath?) in
-            if let indexPath = indexPath {
-                let snapshot = self.dataSource.snapshot()
-                let item = snapshot.itemIdentifiers(inSection: snapshot.sectionIdentifiers[indexPath.section])[indexPath.row]
-                if case let DiffableType.singleEventSlot(slot) = item {
-                    return UISwipeActionsConfiguration(actions: [
-                        UIContextualAction(style: .destructive, title: "Delete", handler: { _, _, handler in
-                            self.delegate?.remove(slot)
-                            handler(true)
-                        })
-                    ])
-                }
+        let layout = UICollectionViewCompositionalLayout { sectionIndex, environment in
+            let sectionId = self.dataSource.snapshot().sectionIdentifiers[sectionIndex]
+            if self.dataSource.snapshot().itemIdentifiers(inSection: sectionId).count > 1 {
+                return .horizontalScrollingSection
+            } else {
+                return .staticSection
             }
-            return nil
         }
-        config.headerMode = .supplementary
-        let layout = UICollectionViewCompositionalLayout.list(using: config)
         self.tableView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         self.dataSource = UICollectionViewDiffableDataSource<Date, DiffableType>(collectionView: self.tableView, cellProvider: { (tableView, indexPath, item) -> UICollectionViewCell? in
             switch item {
@@ -69,7 +97,6 @@ class CalendarDiffableTableView: NSObject, UICollectionViewDelegate {
         for slot in source {
             snapshot.appendSections([slot.boundaryStart])
             var items = [DiffableType]()
-//            items.append(.dayTitle(slot))
             if slot.items.isEmpty {
                 items.append(.emptySlot(slot))
             } else {
@@ -89,7 +116,7 @@ class CalendarDiffableTableView: NSObject, UICollectionViewDelegate {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = dataSource.snapshot().itemIdentifiers[indexPath.row]
+        let item = dataSource.snapshot().item(for: indexPath)
         switch item {
         case .dayTitle:
             fatalError()
@@ -116,4 +143,13 @@ protocol CalendarTableViewDelegate: AnyObject {
     func showDetails(for item: EventCalendarItem, at indexPath: IndexPath, in cell: UIView & Row)
 
     func remove(_ event: EventCalendarItem)
+}
+
+extension NSDiffableDataSourceSnapshot where SectionIdentifierType == Date, ItemIdentifierType == DiffableType {
+
+    func item(for indexPath: IndexPath) -> ItemIdentifierType {
+        let sectionId = sectionIdentifiers[indexPath.section]
+        return itemIdentifiers(inSection: sectionId)[indexPath.row]
+    }
+
 }
