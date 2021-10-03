@@ -29,6 +29,7 @@ private extension NSCollectionLayoutSection {
         staticSection.boundarySupplementaryItems = [
             .init(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(24)), elementKind: "Header", alignment: .top)
         ]
+        staticSection.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
         return staticSection
     }
 
@@ -42,6 +43,7 @@ private extension NSCollectionLayoutSection {
         scrollableSection.boundarySupplementaryItems = [
             .init(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(24)), elementKind: "Header", alignment: .top)
         ]
+        scrollableSection.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
         return scrollableSection
     }
 

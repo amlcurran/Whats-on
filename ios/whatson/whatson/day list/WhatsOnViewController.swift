@@ -59,8 +59,8 @@ class WhatsOnViewController: UIViewController,
         header.constrain(toSafeAreaTopOf: self, insetBy: 16)
         mainView.constrain(.top, to: header, .bottom)
         mainView.add(table.view, constrainedTo: [.top, .bottom])
-        table.view.leadingAnchor.constraint(equalTo: mainView.readableContentGuide.leadingAnchor).isActive = true
-        table.view.trailingAnchor.constraint(equalTo: mainView.readableContentGuide.trailingAnchor).isActive = true
+        table.view.leadingAnchor.constraint(equalTo: mainView.leadingAnchor).isActive = true
+        table.view.trailingAnchor.constraint(equalTo: mainView.trailingAnchor).isActive = true
         mainView.add(failedAccessView, constrainedTo: [.leading, .top, .trailing, .bottom])
 
         header.constrain(toSuperviewSafeArea: .leading, .trailing, insetBy: 16)

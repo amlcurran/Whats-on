@@ -38,17 +38,19 @@ class HeaderView: UIView {
         dateFormatter.timeStyle = .none
         todayLabel.text = (dateFormatter.string(from: Date()) as NSString).uppercased
         todayLabel.textColor = .accent
-        todayLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.semibold)
+        todayLabel.font = .systemFont(ofSize: 14, weight: .semibold)
     }
 
     func styleAppLabel() {
         appLabel.text = "What’s on"
         appLabel.textColor = .secondary
-        appLabel.font = UIFont.systemFont(ofSize: 32, weight: UIFont.Weight.heavy)
+        appLabel.font = .systemFont(ofSize: 32, weight: .heavy)
     }
 
     func styleEditButton() {
-        editButton.setTitle("Edit", for: .normal)
+        editButton.setImage(UIImage(systemName: "gear")?.withRenderingMode(.alwaysTemplate).applyingSymbolConfiguration(.init(pointSize: 20)), for: .normal)
+        editButton.tintColor = .accent
+//        editButton.setTitle("Edit", for: .normal)
         editButton.setTitleColor(.accent, for: .normal)
         editButton.addTarget(self, action: #selector(editTapped), for: .touchUpInside)
     }

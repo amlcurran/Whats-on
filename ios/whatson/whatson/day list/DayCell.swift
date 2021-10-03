@@ -110,7 +110,7 @@ class DayCollectionReusableView: UICollectionReusableView {
     }
 
     private func layout() {
-        add(dayLabel, constrainedTo: [.leadingMargin, .trailingMargin], withInset: 16)
+        add(dayLabel, constrainedTo: [.leadingMargin, .trailingMargin], withInset: 8)
         dayLabel.constrain(.top, to: self, .top, withOffset: 16)
         dayLabel.constrain(.bottom, to: self, .bottom, withOffset: -4)
     }
