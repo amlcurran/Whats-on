@@ -176,3 +176,13 @@ public extension CalendarSlot {
     }
 
 }
+
+public extension EventCalendarItem {
+
+    static func named(_ name: String, delayDays: Int, hours: Double, duration: Int) -> EventCalendarItem {
+        let start = Date().startOfDay(in: .current)! + TimeInterval(delayDays * 24 * 60 * 60) + TimeInterval(hours * 60 * 60)
+        let end = start + TimeInterval(60 * 60 * duration)
+        return EventCalendarItem(eventId: "\(name.hashValue)", title: name, startTime: start, endTime: end)
+    }
+
+}

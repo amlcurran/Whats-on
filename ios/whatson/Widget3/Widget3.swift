@@ -23,13 +23,13 @@ struct Provider: TimelineProvider {
     }
 
     func getSnapshot(in context: Context, completion: @escaping (EventsEntry) -> Void) {
-        let source = EventsService.default.fetchEvents(inNumberOfDays: 2, startingFrom: Date())
+        let source = EventsService.demo.fetchEvents(inNumberOfDays: 2, startingFrom: Date())
         let entry = EventsEntry(date: Date(), slots: source)
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
-        let source = EventsService.default.fetchEvents(inNumberOfDays: 2, startingFrom: Date())
+        let source = EventsService.demo.fetchEvents(inNumberOfDays: 2, startingFrom: Date())
 
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
         let refresh = Calendar.current.date(bySettingHour: 0, minute: 3, second: 0, of: tomorrow)

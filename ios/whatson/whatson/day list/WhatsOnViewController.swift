@@ -31,8 +31,7 @@ class WhatsOnViewController: UIViewController,
         view.backgroundColor = .windowBackground
         title = " "
 
-        let eventRepo = EventKitEventRepository(timeRepository: timeRepo, calendarPreferenceStore: CalendarPreferenceStore())
-        eventService = EventsService(timeRepository: timeRepo, eventsRepository: eventRepo, timeCalculator: NSDateCalculator.instance)
+        eventService = .default
         presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService)
 
         let header = HeaderView(delegate: self)
@@ -112,22 +111,22 @@ class WhatsOnViewController: UIViewController,
         failedAccessView.isHidden = true
         failedAccessView.isUserInteractionEnabled = false
 
-        let intent = CheckCalendarIntent()
-        intent.day = PickDay.today
-        let interaction = INInteraction(intent: intent, response: nil)
-        interaction.donate { error in
-            if let error = error {
-                print(error)
-            }
-        }
-
-        let tomorrowIntent = CheckCalendarIntent()
-        tomorrowIntent.day = PickDay.tomorrow
-        INInteraction(intent: tomorrowIntent, response: nil).donate { error in
-            if let error = error {
-                print(error)
-            }
-        }
+//        let intent = CheckCalendarIntent()
+//        intent.day = PickDay.today
+//        let interaction = INInteraction(intent: intent, response: nil)
+//        interaction.donate { error in
+//            if let error = error {
+//                print(error)
+//            }
+//        }
+//
+//        let tomorrowIntent = CheckCalendarIntent()
+//        tomorrowIntent.day = PickDay.tomorrow
+//        INInteraction(intent: tomorrowIntent, response: nil).donate { error in
+//            if let error = error {
+//                print(error)
+//            }
+//        }
     }
 
     func showAccessFailure() {

@@ -20,6 +20,12 @@ public class EventsService {
         return EventsService(timeRepository: timeRepo, eventsRepository: repo, timeCalculator: NSDateCalculator.instance)
     }
 
+    public static var demo: EventsService {
+        let timeRepo = NSDateTimeRepository()
+        let repo = DemoEventRepository()
+        return EventsService(timeRepository: timeRepo, eventsRepository: repo, timeCalculator: NSDateCalculator.instance)
+    }
+
     public init(timeRepository: BorderTimeRepository, eventsRepository: EventsRepository, timeCalculator: TimeCalculator) {
         self.timeRepository = timeRepository
         self.eventsRepository = eventsRepository

@@ -109,4 +109,12 @@ class EventItemView: UIView {
         }
     }
 
+    func bound(to item: CalendarItem) {
+        type = .full
+        eventLabel.text = item.title
+        let startTime = timeFormatter.string(from: item.startTime)
+        secondaryLabel.text = String(format: "From %@", startTime)
+        eventLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.semibold)
+    }
+
 }
