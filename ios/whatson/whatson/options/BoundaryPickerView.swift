@@ -19,24 +19,15 @@ class BoundaryPickerView: UIView {
 
     private let beginningLabel = UILabel()
     private let intermediateLabel = UILabel()
-    private let startSelectableView = TimeLabel()
-    private let endSelectableView = TimeLabel()
-    private let dateFormatter = DateFormatter.shortTime
+    private let startSelectableView = UIDatePicker()
+    private let endSelectableView = UIDatePicker()
 
     weak var delegate: BoundaryPickerViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        startSelectableView.tapClosure = { [weak self] in
-            self?.startSelectableView.selected = true
-            self?.endSelectableView.selected = false
-            self?.delegate?.boundaryPickerDidBeginEditing(in: .start)
-        }
-        endSelectableView.tapClosure = { [weak self] in
-            self?.startSelectableView.selected = false
-            self?.endSelectableView.selected = true
-            self?.delegate?.boundaryPickerDidBeginEditing(in: .end)
-        }
+        startSelectableView.addTarget(self, action: #selector(didUpdate), for: .valueChanged)
+        endSelectableView.addTarget(self, action: #selector(didUpdate), for: .valueChanged)
         layout()
         style()
     }
@@ -62,18 +53,31 @@ class BoundaryPickerView: UIView {
         stackView.constrain(toSuperview: .top, withOffset: 8)
         stackView.constrain(toSuperview: .bottom, withOffset: -8)
         stackView.hugContent(.vertical)
+
+        startSelectableView.preferredDatePickerStyle = .inline
+        startSelectableView.datePickerMode = .time
+
+        endSelectableView.preferredDatePickerStyle = .inline
+        endSelectableView.datePickerMode = .time
+        beginningLabel.text = NSLocalizedString("Options.Beginning", comment: "Text explaining the time boundaries")
+        intermediateLabel.text = NSLocalizedString("Options.Intermediate", comment: "Text explaining the time boundaries")
     }
 
     private func style() {
-        beginningLabel.set(style: .header)
-        intermediateLabel.set(style: .header)
+    }
+
+    @objc
+    func didUpdate(picker: UIDatePicker) {
+        if picker == startSelectableView {
+            delegate?.boundaryPicker(inState: .start, didChangeValue: picker.date)
+        } else {
+            delegate?.boundaryPicker(inState: .end, didChangeValue: picker.date)
+        }
     }
 
     func updateText(from timeStore: UserDefaultsTimeStore) {
-        beginningLabel.text = NSLocalizedString("Options.Beginning", comment: "Text explaining the time boundaries")
-        startSelectableView.text = dateFormatter.string(from: timeStore.startTimestamp)
-        intermediateLabel.text = NSLocalizedString("Options.Intermediate", comment: "Text explaining the time boundaries")
-        endSelectableView.text = dateFormatter.string(from: timeStore.endTimestamp)
+        startSelectableView.date = timeStore.startTimestamp
+        endSelectableView.date = timeStore.endTimestamp
     }
 
 }
@@ -81,5 +85,7 @@ class BoundaryPickerView: UIView {
 protocol BoundaryPickerViewDelegate: AnyObject {
 
     func boundaryPickerDidBeginEditing(in state: BoundaryPickerView.EditState)
+
+    func boundaryPicker(inState state: BoundaryPickerView.EditState, didChangeValue: Date)
 
 }

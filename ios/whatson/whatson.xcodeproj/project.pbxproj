@@ -31,6 +31,7 @@
 		86075C331E3E228C005AF423 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86075C321E3E228C005AF423 /* Localizable.strings */; };
 		8607847A1DAD7E6100AAE856 /* LabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860784791DAD7E6100AAE856 /* LabelStyle.swift */; };
 		8609C5A41DB01AF100B44D76 /* EventDetailsPushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609C5A31DB01AF100B44D76 /* EventDetailsPushTransition.swift */; };
+		860BD732270A4BD5000D46F7 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 860BD731270A4BD5000D46F7 /* Intents.intentdefinition */; };
 		8618A51F1BDA92F900A4845E /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8618A51E1BDA92F900A4845E /* EventCell.swift */; };
 		861BD0E01D9FC4290032FBAB /* Optional+Fluency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */; };
 		8620886D22BFE2E200268B3D /* MultipleEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8620886C22BFE2E200268B3D /* MultipleEventCell.swift */; };
@@ -41,7 +42,6 @@
 		862F235D26FD2E68000A8BFD /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862F235C26FD2E68000A8BFD /* IntentHandler.swift */; };
 		862F236126FD2E68000A8BFD /* WhatsOnIntents.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 862F235926FD2E68000A8BFD /* WhatsOnIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		862F236626FD2EAA000A8BFD /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86755DC522C7BC2000E91DF4 /* Core.framework */; };
-		862F236B26FD2F23000A8BFD /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 862F234126FD2989000A8BFD /* Intents.intentdefinition */; };
 		862F236D26FD3591000A8BFD /* CheckCalendarHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862F236C26FD3591000A8BFD /* CheckCalendarHandler.swift */; };
 		86302CDA23ABD16300008124 /* OptionsView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86302CD923ABD16300008124 /* OptionsView2.swift */; };
 		86317A091EC258ED0009EE8A /* EventPredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86317A081EC258ED0009EE8A /* EventPredicateTests.swift */; };
@@ -229,6 +229,7 @@
 		86075C321E3E228C005AF423 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		860784791DAD7E6100AAE856 /* LabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelStyle.swift; sourceTree = "<group>"; };
 		8609C5A31DB01AF100B44D76 /* EventDetailsPushTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsPushTransition.swift; sourceTree = "<group>"; };
+		860BD731270A4BD5000D46F7 /* Intents.intentdefinition */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
 		8618A51E1BDA92F900A4845E /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Fluency.swift"; sourceTree = "<group>"; };
 		8620886C22BFE2E200268B3D /* MultipleEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleEventCell.swift; sourceTree = "<group>"; };
@@ -236,7 +237,6 @@
 		862468D11F091B8C00FE5A49 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		8626886D1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplicationShortcuts.swift; sourceTree = "<group>"; };
 		862F0BAD26EFE8A200BE5350 /* NewEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventView.swift; sourceTree = "<group>"; };
-		862F234126FD2989000A8BFD /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
 		862F234826FD2DCF000A8BFD /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		862F235926FD2E68000A8BFD /* WhatsOnIntents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WhatsOnIntents.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		862F235C26FD2E68000A8BFD /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
@@ -446,8 +446,8 @@
 		86755DC622C7BC2000E91DF4 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				860BD731270A4BD5000D46F7 /* Intents.intentdefinition */,
 				8687F8B82700AE4F00220163 /* DemoRepository.swift */,
-				862F234126FD2989000A8BFD /* Intents.intentdefinition */,
 				86F467F81C8AFFA500147F2E /* WhatsOnPresenter.swift */,
 				8600B99E1F09429D008578E5 /* Delayer.swift */,
 				8650D7D11D9FAE8E002D5930 /* NSDateTimeRepository.swift */,
@@ -917,6 +917,7 @@
 				86BE23F524B1192F00B0B72F /* NSDateTimeRepository.swift in Sources */,
 				868119E42306D77C0035553B /* CalendarsLoader.swift in Sources */,
 				86DB90182676A05200F8BB72 /* WhatsOnPresenter.swift in Sources */,
+				860BD732270A4BD5000D46F7 /* Intents.intentdefinition in Sources */,
 				868119E22306D7490035553B /* Date+SCTimeOfDay.swift in Sources */,
 				862F236D26FD3591000A8BFD /* CheckCalendarHandler.swift in Sources */,
 				868119E02306D71A0035553B /* EventKitEventRepository.swift in Sources */,
@@ -926,7 +927,6 @@
 				868119E12306D7390035553B /* EventPredicates.swift in Sources */,
 				868119DE2306D66E0035553B /* UserDefaultsTimeStore.swift in Sources */,
 				86DB90192676A09100F8BB72 /* Delayer.swift in Sources */,
-				862F236B26FD2F23000A8BFD /* Intents.intentdefinition in Sources */,
 				86755DE422C7BC5100E91DF4 /* CalendarItem.swift in Sources */,
 				867C4A1426D812A800B718DD /* DayViews.swift in Sources */,
 				86A9355D22C7C261003FC26C /* EventsService.swift in Sources */,

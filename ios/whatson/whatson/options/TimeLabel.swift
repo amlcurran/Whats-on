@@ -1,6 +1,8 @@
 import Foundation
 import UIKit
 
+private let dateFormatter = DateFormatter.shortTime
+
 class TimeLabel: UIView {
 
     private let label = UILabel()
@@ -46,12 +48,9 @@ class TimeLabel: UIView {
         tapClosure?()
     }
 
-    var text: String? {
-        get {
-            return label.text
-        }
-        set {
-            label.text = newValue
+    var text: Date = Date() {
+        didSet {
+            label.text = dateFormatter.string(from: text)
         }
     }
 

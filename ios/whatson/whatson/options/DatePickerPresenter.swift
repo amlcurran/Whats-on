@@ -68,4 +68,12 @@ class DatePickerPresenter: BoundaryPickerViewDelegate {
         }
     }
 
+    func boundaryPicker(inState state: BoundaryPickerView.EditState, didChangeValue date: Date) {
+        if state == .start {
+            timeStore.startTime = Calendar.current.component(.hour, from: date)
+        } else if editState == .end {
+            timeStore.endTime = Calendar.current.component(.hour, from: date)
+        }
+    }
+
 }
