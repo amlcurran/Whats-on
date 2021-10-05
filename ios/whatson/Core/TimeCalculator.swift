@@ -8,14 +8,16 @@
 
 import Foundation
 
+@available(*, deprecated)
 public protocol TimeCalculator {
 
+    @available(*, deprecated)
     func add(days: Int, to time: Date) -> Date
 
-    func daysSinceEpoch(in date: Date) -> Int
-
+    @available(*, deprecated)
     func add(hours: Int, to time: Date) -> Date
 
+    @available(*, deprecated)
     func dateAtStartOfToday() -> Date
 
 }

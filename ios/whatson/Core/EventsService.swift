@@ -44,13 +44,13 @@ public class EventsService {
                                                               borderEnd: elevenPm)
 
         var itemArray = [CalendarSlot]()
-        let epochToNow = timeCalculator.daysSinceEpoch(in: startDate)
+        let epochToNow = startDate.daysSinceEpoch()
         for i in 0..<numberOfDays {
             let slot = CalendarSlot(items: [], boundaryStart: startOfTodayBlock(i), boundaryEnd: endOfTodayBlock(i))
             itemArray.append(slot)
         }
         for item in calendarItems {
-            let key = timeCalculator.daysSinceEpoch(in: item.startTime) - epochToNow
+            let key = item.startTime.daysSinceEpoch() - epochToNow
             itemArray[key] = itemArray[key].appending(item)
         }
 

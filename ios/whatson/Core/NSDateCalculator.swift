@@ -16,11 +16,6 @@ public class NSDateCalculator: TimeCalculator {
         return calendar.date(byAdding: components, to: time)!
     }
 
-    public func daysSinceEpoch(in date: Date) -> Int {
-        let difference = self.calendar.dateComponents([.day], from: Date(timeIntervalSince1970: 0), to: date)
-        return difference.day!
-    }
-
     public func add(hours: Int, to time: Date) -> Date {
         var components = DateComponents()
         components.hour = Int(hours)
@@ -33,6 +28,19 @@ public class NSDateCalculator: TimeCalculator {
         components.minute = 0
         components.second = 0
         return NSCalendar.current.date(from: components)!
+    }
+
+}
+
+extension Date {
+
+    func daysSinceEpoch(in calendar: Calendar = .current) -> Int {
+        let difference = calendar.dateComponents(
+            [.day],
+            from: Date(timeIntervalSince1970: 0),
+            to: self
+        )
+        return difference.day!
     }
 
 }
