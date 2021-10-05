@@ -31,9 +31,7 @@ class DatePickerPresenter: BoundaryPickerViewDelegate {
         self.view = view
         self.picker = picker
         boundaryView.delegate = self
-        updateText()
-        picker.addTarget(self, action: #selector(spinnerUpdated), for: .valueChanged)
-        picker.datePickerMode = .time
+        boundaryView.updateText(from: timeStore)
         view.updateDate(
             [
                 CustomViewTableItem(customViewFactory: {
@@ -41,31 +39,6 @@ class DatePickerPresenter: BoundaryPickerViewDelegate {
                 })
             ]
         )
-    }
-
-    @objc func spinnerUpdated() {
-        updateText()
-    }
-
-    func updateText() {
-        if editState == .start {
-            timeStore.startTime = (picker?.hour).or(17)
-        }
-        if editState == .end {
-            timeStore.endTime = (picker?.hour).or(23)
-        }
-        boundaryView.updateText(from: timeStore)
-    }
-
-    func boundaryPickerDidBeginEditing(in state: BoundaryPickerView.EditState) {
-        view?.showPicker()
-        editState = state
-        if editState == .start {
-            picker?.set(hour: timeStore.startTime, limitedBefore: timeStore.endTime)
-        }
-        if editState == .end {
-            picker?.set(hour: timeStore.endTime, limitedAfter: timeStore.startTime)
-        }
     }
 
     func boundaryPicker(inState state: BoundaryPickerView.EditState, didChangeValue date: Date) {

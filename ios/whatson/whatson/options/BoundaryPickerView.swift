@@ -59,6 +59,7 @@ class BoundaryPickerView: UIView {
 
         endSelectableView.preferredDatePickerStyle = .inline
         endSelectableView.datePickerMode = .time
+        
         beginningLabel.text = NSLocalizedString("Options.Beginning", comment: "Text explaining the time boundaries")
         intermediateLabel.text = NSLocalizedString("Options.Intermediate", comment: "Text explaining the time boundaries")
     }
@@ -83,8 +84,6 @@ class BoundaryPickerView: UIView {
 }
 
 protocol BoundaryPickerViewDelegate: AnyObject {
-
-    func boundaryPickerDidBeginEditing(in state: BoundaryPickerView.EditState)
 
     func boundaryPicker(inState state: BoundaryPickerView.EditState, didChangeValue: Date)
 
