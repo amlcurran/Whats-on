@@ -1,6 +1,6 @@
 import Foundation
 
-public class UserDefaultsTimeStore {
+public class UserDefaultsTimeStore: BorderTimeRepository {
 
     private let userDefaults: UserDefaults
 
@@ -26,6 +26,7 @@ public class UserDefaultsTimeStore {
         }
     }
 
+    @available(*, deprecated)
     public var startTime: Int {
         get {
             if let startTime = userDefaults.value(forKey: "startHour") as? Int {
@@ -38,6 +39,7 @@ public class UserDefaultsTimeStore {
         }
     }
 
+    @available(*, deprecated)
     public var endTime: Int {
         get {
             if let endTime = userDefaults.value(forKey: "endHour") as? Int {
@@ -48,6 +50,14 @@ public class UserDefaultsTimeStore {
         set {
             userDefaults.set(newValue, forKey: "endHour")
         }
+    }
+
+    public var borderTimeStart: TimeOfDay {
+        return TimeOfDay.fromHours(hours: startTime)
+    }
+
+    public var borderTimeEnd: TimeOfDay {
+        return TimeOfDay.fromHours(hours: endTime)
     }
 
 }

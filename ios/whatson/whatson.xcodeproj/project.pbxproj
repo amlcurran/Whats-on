@@ -100,7 +100,6 @@
 		86A9E4571DA7A7DC00E8D019 /* CalendarTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E4561DA7A7DC00E8D019 /* CalendarTableView.swift */; };
 		86A9E45B1DA80A4900E8D019 /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E45A1DA80A4900E8D019 /* UIViewController+Navigation.swift */; };
 		86A9E45F1DA80E9700E8D019 /* DateFormatter+Initialisers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E45E1DA80E9700E8D019 /* DateFormatter+Initialisers.swift */; };
-		86BE23F524B1192F00B0B72F /* NSDateTimeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8650D7D11D9FAE8E002D5930 /* NSDateTimeRepository.swift */; };
 		86C19EBF1BBF28E600BBCDF6 /* WhatsOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */; };
 		86CAD4A91BACC9B1009C9CFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */; };
 		86CAD4AC1BACC9B1009C9CFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4AA1BACC9B1009C9CFD /* LaunchScreen.storyboard */; };
@@ -248,7 +247,6 @@
 		864561C21C02709800ADDE44 /* NSDateCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateCalculator.swift; sourceTree = "<group>"; };
 		8648F18E1D984F6500C7BD48 /* EventDetailsTracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsTracking.swift; sourceTree = "<group>"; };
 		8650D7CF1D9FA8F5002D5930 /* EventKitEventRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventKitEventRepository.swift; sourceTree = "<group>"; };
-		8650D7D11D9FAE8E002D5930 /* NSDateTimeRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateTimeRepository.swift; sourceTree = "<group>"; };
 		8658A22F1F375DF800BF219C /* TableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSection.swift; sourceTree = "<group>"; };
 		8658A2311F375E3A00BF219C /* TableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableItem.swift; sourceTree = "<group>"; };
 		8658A2331F375E6100BF219C /* TitleTableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableItem.swift; sourceTree = "<group>"; };
@@ -450,7 +448,6 @@
 				8687F8B82700AE4F00220163 /* DemoRepository.swift */,
 				86F467F81C8AFFA500147F2E /* WhatsOnPresenter.swift */,
 				8600B99E1F09429D008578E5 /* Delayer.swift */,
-				8650D7D11D9FAE8E002D5930 /* NSDateTimeRepository.swift */,
 				86755DC722C7BC2000E91DF4 /* Core.h */,
 				86755DC822C7BC2000E91DF4 /* Info.plist */,
 				698539EC9C2B0360E301F15F /* Date+SCTimeOfDay.swift */,
@@ -914,7 +911,6 @@
 				868119E52306D7930035553B /* EKEventStore+Singleton.swift in Sources */,
 				86A9355B22C7C246003FC26C /* EventsRepository.swift in Sources */,
 				86755DE822C7BD0D00E91DF4 /* TimeOfDay.swift in Sources */,
-				86BE23F524B1192F00B0B72F /* NSDateTimeRepository.swift in Sources */,
 				868119E42306D77C0035553B /* CalendarsLoader.swift in Sources */,
 				86DB90182676A05200F8BB72 /* WhatsOnPresenter.swift in Sources */,
 				860BD732270A4BD5000D46F7 /* Intents.intentdefinition in Sources */,

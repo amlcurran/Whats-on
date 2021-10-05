@@ -28,6 +28,7 @@ public struct TimeOfDay {
         return measurement.converted(to: .minutes).value
     }
 
+    @available(*, deprecated)
     public static func fromHours(hours: Int) -> TimeOfDay {
         let measurement = Measurement<UnitDuration>(value: Double(hours), unit: .hours)
         return TimeOfDay(measurement: measurement)

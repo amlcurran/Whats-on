@@ -14,13 +14,13 @@ public class EventsService {
     private let eventsRepository: EventsRepository
 
     public static var `default`: EventsService {
-        let timeRepo = NSDateTimeRepository()
+        let timeRepo = UserDefaultsTimeStore()
         let repo = EventKitEventRepository(timeRepository: timeRepo, calendarPreferenceStore: CalendarPreferenceStore())
         return EventsService(timeRepository: timeRepo, eventsRepository: repo)
     }
 
     public static var demo: EventsService {
-        let timeRepo = NSDateTimeRepository()
+        let timeRepo = UserDefaultsTimeStore()
         let repo = DemoEventRepository()
         return EventsService(timeRepository: timeRepo, eventsRepository: repo)
     }
