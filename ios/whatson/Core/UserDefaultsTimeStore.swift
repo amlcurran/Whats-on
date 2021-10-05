@@ -3,7 +3,6 @@ import Foundation
 public class UserDefaultsTimeStore {
 
     private let userDefaults: UserDefaults
-    private let dateCalculator = NSDateCalculator.instance
 
     public init(userDefaults: UserDefaults = UserDefaults(suiteName: "group.uk.co.amlcurran.social")!) {
         self.userDefaults = userDefaults
@@ -11,13 +10,19 @@ public class UserDefaultsTimeStore {
 
     public var startTimestamp: Date {
         get {
-            return dateCalculator.add(hours: startTime, to: dateCalculator.dateAtStartOfToday())
+            Calendar.current.startOfToday
+                .addingComponents([
+                    .hour: startTime
+                ])!
         }
     }
 
     public var endTimestamp: Date {
         get {
-            return dateCalculator.add(hours: endTime, to: dateCalculator.dateAtStartOfToday())
+            return Calendar.current.startOfToday
+                .addingComponents([
+                    .hour: endTime
+                ])!
         }
     }
 

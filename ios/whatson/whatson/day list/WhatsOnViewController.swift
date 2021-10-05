@@ -13,7 +13,6 @@ class WhatsOnViewController: UIViewController,
 
     private let dateFormatter = DateFormatter(dateFormat: "EEE")
     private let eventStore = EKEventStore.instance
-    private let timeRepo = NSDateTimeRepository()
     private let pushTransition = EventDetailsPushTransition()
     private let navigationAnimations = EventTransitionNavigationDelegate()
     private let failedAccessView = FailedAccessView()
@@ -79,11 +78,6 @@ class WhatsOnViewController: UIViewController,
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         presenter.stopPresenting()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     func addEvent(for item: CalendarSlot) {

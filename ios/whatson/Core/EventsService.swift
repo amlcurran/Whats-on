@@ -12,29 +12,29 @@ public class EventsService {
 
     private let timeRepository: BorderTimeRepository
     private let eventsRepository: EventsRepository
-    private let timeCalculator: TimeCalculator
 
     public static var `default`: EventsService {
         let timeRepo = NSDateTimeRepository()
         let repo = EventKitEventRepository(timeRepository: timeRepo, calendarPreferenceStore: CalendarPreferenceStore())
-        return EventsService(timeRepository: timeRepo, eventsRepository: repo, timeCalculator: NSDateCalculator.instance)
+        return EventsService(timeRepository: timeRepo, eventsRepository: repo)
     }
 
     public static var demo: EventsService {
         let timeRepo = NSDateTimeRepository()
         let repo = DemoEventRepository()
-        return EventsService(timeRepository: timeRepo, eventsRepository: repo, timeCalculator: NSDateCalculator.instance)
+        return EventsService(timeRepository: timeRepo, eventsRepository: repo)
     }
 
-    public init(timeRepository: BorderTimeRepository, eventsRepository: EventsRepository, timeCalculator: TimeCalculator) {
+    public init(timeRepository: BorderTimeRepository, eventsRepository: EventsRepository) {
         self.timeRepository = timeRepository
         self.eventsRepository = eventsRepository
-        self.timeCalculator = timeCalculator
     }
 
     public func fetchEvents(inNumberOfDays numberOfDays: Int, startingFrom startDate: Date) -> [CalendarSlot] {
-        let nowTime = timeCalculator.dateAtStartOfToday()
-        let nextWeek = timeCalculator.add(days: numberOfDays, to: nowTime)
+        let nowTime = Calendar.current.startOfToday
+        let nextWeek = Calendar.current.date(byAdding: [
+            .day: numberOfDays
+        ], to: nowTime)!
         let fivePm = timeRepository.borderTimeStart
         let elevenPm = timeRepository.borderTimeEnd
 
@@ -58,13 +58,19 @@ public class EventsService {
     }
 
     private func startOfTodayBlock(_ position: Int) -> Date {
-        let one = timeCalculator.add(hours: timeRepository.borderTimeStart.hours, to: timeCalculator.dateAtStartOfToday())
-        return timeCalculator.add(days: position, to: one)
+        Calendar.current.startOfToday
+            .addingComponents([
+                .hour: timeRepository.borderTimeStart.hours,
+                .day: position
+            ])!
     }
 
     private func endOfTodayBlock(_ position: Int) -> Date {
-        let one = timeCalculator.add(hours: timeRepository.borderTimeEnd.hours, to: timeCalculator.dateAtStartOfToday())
-        return timeCalculator.add(days: position, to: one)
+        Calendar.current.startOfToday
+            .addingComponents([
+                .hour: timeRepository.borderTimeEnd.hours,
+                .day: position
+            ])!
     }
 
 }

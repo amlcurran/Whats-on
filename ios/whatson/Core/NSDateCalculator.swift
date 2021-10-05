@@ -1,37 +1,5 @@
 import Foundation
 
-public class NSDateCalculator: TimeCalculator {
-
-    public static let instance: TimeCalculator = NSDateCalculator()
-
-    private let calendar: Calendar
-
-    private init() {
-        calendar = Calendar.current
-    }
-
-    public func add(days: Int, to time: Date) -> Date {
-        var components = DateComponents()
-        components.day = Int(days)
-        return calendar.date(byAdding: components, to: time)!
-    }
-
-    public func add(hours: Int, to time: Date) -> Date {
-        var components = DateComponents()
-        components.hour = Int(hours)
-        return calendar.date(byAdding: components, to: time)!
-    }
-
-    public func dateAtStartOfToday() -> Date {
-        var components = NSCalendar.current.dateComponents([.second, .minute, .hour, .day, .month, .year], from: Date())
-        components.hour = 0
-        components.minute = 0
-        components.second = 0
-        return NSCalendar.current.date(from: components)!
-    }
-
-}
-
 extension Date {
 
     func daysSinceEpoch(in calendar: Calendar = .current) -> Int {
@@ -41,6 +9,40 @@ extension Date {
             to: self
         )
         return difference.day!
+    }
+
+    public func settingComponents(_ components: [Calendar.Component: Int], in calendar: Calendar = Calendar.current) -> Date? {
+        calendar.date(bySetting: components, of: self)
+    }
+
+    public func addingComponents(_ components: [Calendar.Component: Int], in calendar: Calendar = Calendar.current) -> Date? {
+        calendar.date(byAdding: components, to: self)
+    }
+
+}
+
+extension Calendar {
+
+    public func date(bySetting components: [Calendar.Component: Int], of date: Date) -> Date? {
+        return components.reduce(Optional.some(date)) { (date: Date?, kvPair: (key: Calendar.Component, value: Int)) in
+            let (component, value) = kvPair
+            return date.flatMap { self.date(bySetting: component, value: value, of: $0) }
+        }
+    }
+
+    public func date(byAdding components: [Calendar.Component: Int], to date: Date) -> Date? {
+        return components.reduce(Optional.some(date)) { (date: Date?, kvPair: (key: Calendar.Component, value: Int)) in
+            let (component, value) = kvPair
+            return date.flatMap { self.date(byAdding: component, value: value, to: $0) }
+        }
+    }
+
+    public var startOfToday: Date {
+        return date(bySetting: [
+            .hour: 0,
+            .minute: 0,
+            .second: 1
+        ], of: Date())!
     }
 
 }

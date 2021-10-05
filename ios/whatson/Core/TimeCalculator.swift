@@ -17,7 +17,4 @@ public protocol TimeCalculator {
     @available(*, deprecated)
     func add(hours: Int, to time: Date) -> Date
 
-    @available(*, deprecated)
-    func dateAtStartOfToday() -> Date
-
 }
