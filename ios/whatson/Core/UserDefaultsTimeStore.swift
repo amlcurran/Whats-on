@@ -12,7 +12,8 @@ public class UserDefaultsTimeStore: BorderTimeRepository {
         get {
             Calendar.current.startOfToday
                 .addingComponents([
-                    .hour: startTime
+                    .hour: startTime.hours,
+                    .minute: startTime.minutes
                 ])!
         }
     }
@@ -21,43 +22,48 @@ public class UserDefaultsTimeStore: BorderTimeRepository {
         get {
             return Calendar.current.startOfToday
                 .addingComponents([
-                    .hour: endTime
+                    .hour: endTime.hours,
+                    .minute: endTime.minutes
                 ])!
         }
     }
 
-    @available(*, deprecated)
-    public var startTime: Int {
+    public var startTime: (hours: Int, minutes: Int) {
         get {
-            if let startTime = userDefaults.value(forKey: "startHour") as? Int {
-                return startTime
-            }
-            return 17
+            return (userDefaults[asInt: "startHour"] ?? 17,
+                    userDefaults[asInt: "startMinutes"] ?? 0)
         }
         set {
-            userDefaults.set(newValue, forKey: "startHour")
+            userDefaults.set(newValue.hours, forKey: "startHour")
+            userDefaults.set(newValue.minutes, forKey: "startMinutes")
         }
     }
 
-    @available(*, deprecated)
-    public var endTime: Int {
+    public var endTime: (hours: Int, minutes: Int) {
         get {
-            if let endTime = userDefaults.value(forKey: "endHour") as? Int {
-                return endTime
-            }
-            return 23
+            (userDefaults[asInt: "endHour"] ?? 23,
+             userDefaults[asInt: "endMinutes"] ?? 0)
         }
         set {
-            userDefaults.set(newValue, forKey: "endHour")
+            userDefaults.set(newValue.hours, forKey: "endHour")
+            userDefaults.set(newValue.minutes, forKey: "endMinutes")
         }
     }
 
     public var borderTimeStart: TimeOfDay {
-        return TimeOfDay.fromHours(hours: startTime)
+        return TimeOfDay.fromHours(hours: startTime.hours, andMinutes: startTime.minutes)
     }
 
     public var borderTimeEnd: TimeOfDay {
-        return TimeOfDay.fromHours(hours: endTime)
+        return TimeOfDay.fromHours(hours: endTime.hours, andMinutes: endTime.minutes)
+    }
+
+}
+
+extension UserDefaults {
+
+    subscript(asInt key: String) -> Int? {
+        return self.value(forKey: key) as? Int
     }
 
 }

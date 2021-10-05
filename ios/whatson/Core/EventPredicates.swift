@@ -70,9 +70,10 @@ private func isWithinBorder(timeRepository: BorderTimeRepository, using calendar
     return { event in
         let start = timeRepository.borderTimeStart
         let end = timeRepository.borderTimeEnd
-        return event.startDate.timeOfDay(isBetween: start, and: end, onSameDayAs: event.endDate, in: calendar) ||
-            event.endDate.timeOfDay(isBetween: start, and: end, in: calendar) ||
-            (event.startDate.isBefore(start, in: calendar) && event.endDate.isAfter(end, in: calendar))
+        let test = event.startDate.timeOfDay(isBetween: start, and: end, onSameDayAs: event.endDate, in: calendar) ||
+        event.endDate.timeOfDay(isBetween: start, and: end, in: calendar) ||
+        (event.startDate.isBefore(start, in: calendar) && event.endDate.isAfter(end, in: calendar))
+        return test
     }
 }
 

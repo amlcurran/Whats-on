@@ -11,7 +11,7 @@ extension Date {
     }
 
     func timeOfDay(isBetween borderStart: TimeOfDay, and borderEnd: TimeOfDay, onSameDayAs otherDate: Date, in calendar: Calendar) -> Bool {
-        let components = calendar.dateComponents([.hour, .minute, .day], from: self)
+        let components = calendar.dateComponents([.hour, .minute], from: self)
         if components.hour != nil {
             return isAfter(borderStart, in: calendar) && isBefore(borderEnd, in: calendar) ||
                 isBefore(borderEnd, in: calendar) && otherDate.startOfDay(in: calendar)! > self.startOfDay(in: calendar)!
@@ -20,7 +20,7 @@ extension Date {
     }
 
     func isBefore(_ timeOfDay: TimeOfDay, in calendar: Calendar) -> Bool {
-        let components = calendar.dateComponents([.hour, .minute, .day], from: self)
+        let components = calendar.dateComponents([.hour, .minute], from: self)
         if let hour = components.hour {
             if hour == timeOfDay.hours, let minute = components.minute {
                 return minute <= timeOfDay.minutes
@@ -31,7 +31,7 @@ extension Date {
     }
 
     func isAfter(_ timeOfDay: TimeOfDay, in calendar: Calendar) -> Bool {
-        let components = calendar.dateComponents([.hour, .minute, .day], from: self)
+        let components = calendar.dateComponents([.hour, .minute], from: self)
         if let hour = components.hour {
             if hour == timeOfDay.hours, let minute = components.minute {
                 return minute > timeOfDay.minutes

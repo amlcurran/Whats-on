@@ -14,14 +14,12 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
     private let analytics = Analytics()
     private let calendarPresenter = CalendarPresenter(loader: CalendarLoader(preferenceStore: CalendarPreferenceStore()), preferenceStore: CalendarPreferenceStore())
     private let pickerPresenter = DatePickerPresenter(timeStore: UserDefaultsTimeStore())
-    private let picker = UIDatePicker()
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private let pickerSection = StaticTableSection(title: NSLocalizedString("Options.DisplayOptions", comment: "Options"),
                                                    footer: NSLocalizedString("Options.MinuteLimitation", comment: "Minute limitations in the options"),
                                                    items: [])
     private var defaultCalendarSection: StaticTableSection!
     private var calendarsSection: StaticTableSection!
-    private var pickerHeightConstraint: NSLayoutConstraint!
     private var source: BuildableTableSource! {
         didSet {
             tableView.dataSource = source
@@ -60,7 +58,7 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: "Navigation Item"), style: .plain, target: self, action: #selector(cancelTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Navigation Item"), style: .plain, target: self, action: #selector(doneTapped))
 
-        pickerPresenter.beginPresenting(using: picker, on: self)
+        pickerPresenter.beginPresenting(on: self)
         calendarPresenter.beginPresenting(on: self)
     }
 
@@ -68,28 +66,13 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
         dismiss(animated: true, completion: nil)
     }
 
-    func showPicker() {
-        UIView.animate(withDuration: 0.2, animations: { [weak self] in
-            self?.pickerHeightConstraint.isActive = false
-            self?.view.layoutIfNeeded()
-        })
-    }
-
     private func layoutViews() {
         view.backgroundColor = .windowBackground
         view.addSubview(tableView)
-        tableView.constrain(toSuperview: .leading, .trailing, .topMargin)
-
-        pickerHeightConstraint = picker.constrain(height: 0)
-        pickerHeightConstraint.isActive = true
-        view.addSubview(picker)
-        picker.constrain(toSuperviewSafeArea: .leading, .trailing, .bottom)
-        picker.constrain(.top, to: tableView, .bottom)
+        tableView.constrain(toSuperview: .leading, .trailing, .topMargin, .bottomMargin)
     }
 
     @objc func doneTapped() {
-        let timeStore = UserDefaultsTimeStore()
-        analytics.changedTimes(starting: timeStore.startTime, finishing: timeStore.endTime)
         dismiss(animated: true, completion: nil)
     }
 
