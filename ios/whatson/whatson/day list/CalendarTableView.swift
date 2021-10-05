@@ -24,7 +24,9 @@ private extension NSCollectionLayoutSection {
     static var staticSection: NSCollectionLayoutSection {
         let staticSection = NSCollectionLayoutSection(group: .vertical(
             layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(72)),
-            subitems: [.fullSize]
+            subitems: [NSCollectionLayoutItem(
+                layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(72))
+            )]
         ))
         staticSection.boundarySupplementaryItems = [
             .init(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(24)), elementKind: "Header", alignment: .top)
@@ -36,7 +38,9 @@ private extension NSCollectionLayoutSection {
     static var horizontalScrollingSection: NSCollectionLayoutSection {
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: .init(widthDimension: .fractionalWidth(0.8), heightDimension: .estimated(72)),
-            subitems: [.fullSize]
+            subitems: [NSCollectionLayoutItem(
+                layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(72))
+            )]
         )
         let scrollableSection = NSCollectionLayoutSection(group: group)
         scrollableSection.orthogonalScrollingBehavior = .groupPaging
