@@ -16,8 +16,9 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
     private let pickerPresenter = DatePickerPresenter(timeStore: UserDefaultsTimeStore())
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private let pickerSection = StaticTableSection(title: NSLocalizedString("Options.DisplayOptions", comment: "Options"),
-                                                   footer: NSLocalizedString("Options.MinuteLimitation", comment: "Minute limitations in the options"),
                                                    items: [])
+    private let onSetttingsChanged: () -> Void
+
     private var defaultCalendarSection: StaticTableSection!
     private var calendarsSection: StaticTableSection!
     private var source: BuildableTableSource! {
@@ -26,8 +27,10 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
             tableView.delegate = source
         }
     }
+    private var changedSettings = false
 
-    init() {
+    init(onSettingsChanged: @escaping () -> Void) {
+        self.onSetttingsChanged = onSettingsChanged
         super.init(nibName: nil, bundle: nil)
         self.tableView.estimatedRowHeight = 44
         self.tableView.rowHeight = UITableView.automaticDimension
@@ -76,6 +79,14 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
         dismiss(animated: true, completion: nil)
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if self.changedSettings {
+            self.onSetttingsChanged()
+            self.changedSettings = false
+        }
+    }
+
     func updateCalendar(_ items: [TableItem]) {
         calendarsSection.items = items
         tableView.reload(calendarsSection, from: source)
@@ -101,6 +112,10 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
     func didSelect(_ calendar: EventCalendar) {
         calendarPresenter.defaultCalendar = calendar
         self.navigationController?.popViewController(animated: true)
+    }
+
+    func didChangeBoundaries() {
+        self.changedSettings = true
     }
 
 }

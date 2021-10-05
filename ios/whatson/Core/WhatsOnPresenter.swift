@@ -35,7 +35,7 @@ public class WhatsOnPresenter {
         NotificationCenter.default.removeOptionalObserver(notificationHandle)
     }
 
-    @objc func refreshEvents() {
+    @objc public func refreshEvents() {
         fetchEvents({ [weak self] (source) in
 //            self?.delayer.runAfterExpiryTime({ [weak self] in
                 self?.view?.showCalendar(source)

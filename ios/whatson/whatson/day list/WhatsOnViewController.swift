@@ -66,7 +66,9 @@ class WhatsOnViewController: UIViewController,
     }
 
     func didTapEdit() {
-        let settings = OptionsViewController()
+        let settings = OptionsViewController {
+            self.presenter.refreshEvents()
+        }
         present(settings.inNavigationController(), animated: true)
     }
 

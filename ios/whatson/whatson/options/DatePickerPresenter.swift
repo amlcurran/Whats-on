@@ -11,6 +11,7 @@ import Core
 
 protocol DateView: AnyObject {
     func updateDate(_ items: [TableItem])
+    func didChangeBoundaries()
 }
 
 class DatePickerPresenter: BoundaryPickerViewDelegate {
@@ -49,6 +50,7 @@ class DatePickerPresenter: BoundaryPickerViewDelegate {
                 Calendar.current.component(.minute, from: date)
             )
         }
+        view?.didChangeBoundaries()
     }
 
 }
