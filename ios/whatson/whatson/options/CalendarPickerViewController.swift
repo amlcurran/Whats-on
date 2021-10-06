@@ -37,9 +37,11 @@ class CalendarPickerViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Calendar", for: indexPath)
-        cell.textLabel?.text = calendars[indexPath.row].name
         let isSelected = calendars[indexPath.row] == selectedCalendar
         cell.accessoryType = isSelected ? .checkmark : .none
+        var configuration = cell.defaultContentConfiguration()
+        configuration.text = calendars[indexPath.row].name
+        cell.contentConfiguration = configuration
         return cell
     }
 

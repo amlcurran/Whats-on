@@ -42,7 +42,7 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        calendarsSection = StaticTableSection(title: "Calendars", items: [], onSelect: { (item: TableItem, index: Int) in
+        calendarsSection = StaticTableSection(title: "Shown calendars", items: [], onSelect: { (item: TableItem, index: Int) in
             self.calendarPresenter.toggle(item, at: index)
         })
         defaultCalendarSection = StaticTableSection(title: "Other options", footer: nil, items: [], onSelect: { (_, index) in

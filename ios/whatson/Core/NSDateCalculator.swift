@@ -38,11 +38,7 @@ extension Calendar {
     }
 
     public var startOfToday: Date {
-        return date(bySetting: [
-            .hour: 0,
-            .minute: 0,
-            .second: 1
-        ], of: Date())!
+        return startOfDay(for: Date())
     }
 
 }
