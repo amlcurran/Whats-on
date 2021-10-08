@@ -8,6 +8,7 @@
 
 import UIKit
 import Core
+import SwiftUI
 
 class OptionsViewController: UIViewController, CalendarsView, DateView, CalendarPickerViewControllerDelegate {
 
@@ -42,6 +43,7 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         calendarsSection = StaticTableSection(title: "Shown calendars", items: [], onSelect: { (item: TableItem, index: Int) in
             self.calendarPresenter.toggle(item, at: index)
         })
@@ -73,6 +75,46 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
         view.backgroundColor = .windowBackground
         view.addSubview(tableView)
         tableView.constrain(toSuperview: .leading, .trailing, .topMargin, .bottomMargin)
+    }
+
+    private func layoutNewUi() {
+
+        let timeStore = UserDefaultsTimeStore()
+        let calendarPreferenceStore = CalendarPreferenceStore()
+        let startDateBinding: Binding<Date> = Binding(get: {
+            timeStore.startTimestamp
+        }, set: { date, _ in
+            timeStore.startTime = (
+                Calendar.current.component(.hour, from: date),
+                Calendar.current.component(.minute, from: date)
+            )
+        })
+        let endDateBinding: Binding<Date> = Binding(get: {
+            timeStore.endTimestamp
+        }, set: { date, _ in
+            timeStore.endTime = (
+                Calendar.current.component(.hour, from: date),
+                Calendar.current.component(.minute, from: date)
+            )
+        })
+
+
+        let defaultCalendarBinding = Binding<EventCalendar.Id?>(get: {
+            print("getting value \(String(describing: calendarPreferenceStore.defaultCalendar))")
+            return calendarPreferenceStore.defaultCalendar
+        }) { value in
+            print("setting value to \(String(describing: value))")
+            calendarPreferenceStore.defaultCalendar = value
+        }
+        let shownCalendars = Binding.constant(CalendarLoader(preferenceStore: calendarPreferenceStore).load())
+        let hostingVc = UIHostingController(rootView: OptionsView(startDate: startDateBinding,
+                                                                  endDate: endDateBinding,
+                                                                  shownCalendars: shownCalendars,
+                                                                  defaultCalendar: defaultCalendarBinding))
+        view.addSubview(hostingVc.view)
+        hostingVc.view.constrain(toSuperview: .leading, .trailing, .topMargin, .bottomMargin)
+        addChild(hostingVc)
+        hostingVc.didMove(toParent: self)
     }
 
     @objc func doneTapped() {
