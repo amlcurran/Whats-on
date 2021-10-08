@@ -99,6 +99,7 @@
 		86A9E4571DA7A7DC00E8D019 /* CalendarTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E4561DA7A7DC00E8D019 /* CalendarTableView.swift */; };
 		86A9E45B1DA80A4900E8D019 /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E45A1DA80A4900E8D019 /* UIViewController+Navigation.swift */; };
 		86A9E45F1DA80E9700E8D019 /* DateFormatter+Initialisers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E45E1DA80E9700E8D019 /* DateFormatter+Initialisers.swift */; };
+		86B638DB270F8ADE0054C85C /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B638DA270F8ADE0054C85C /* OptionsView.swift */; };
 		86C19EBF1BBF28E600BBCDF6 /* WhatsOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */; };
 		86CAD4A91BACC9B1009C9CFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */; };
 		86CAD4AC1BACC9B1009C9CFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4AA1BACC9B1009C9CFD /* LaunchScreen.storyboard */; };
@@ -297,6 +298,7 @@
 		86A9E4581DA8076400E8D019 /* EKEventStore+Singleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EKEventStore+Singleton.swift"; sourceTree = "<group>"; };
 		86A9E45A1DA80A4900E8D019 /* UIViewController+Navigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Navigation.swift"; sourceTree = "<group>"; };
 		86A9E45E1DA80E9700E8D019 /* DateFormatter+Initialisers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Initialisers.swift"; sourceTree = "<group>"; };
+		86B638DA270F8ADE0054C85C /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
 		86B7D2E720E123EC001B0DF6 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		86B7D32020E12DA4001B0DF6 /* Today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Today.entitlements; sourceTree = "<group>"; };
 		86BE23DD24AFBA4200B0B72F /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -406,6 +408,7 @@
 				6985397DE155D32104662FA2 /* UIDatePicker+Hours.swift */,
 				865C7B001EE4B00D0047D8E0 /* BoundaryPickerView.swift */,
 				865C7B041EE574100047D8E0 /* OptionsViewController.swift */,
+				86B638DA270F8ADE0054C85C /* OptionsView.swift */,
 				8694756B1F37726D00925C2A /* CalendarPresenter.swift */,
 				8694756D1F37742C00925C2A /* DatePickerPresenter.swift */,
 				866560AA1FB88713000ED8A2 /* CalendarPickerViewController.swift */,
@@ -1001,6 +1004,7 @@
 				69853EB6AEFC9EE982D28388 /* TimeLabel.swift in Sources */,
 				69853B3AC06B29C271651CF0 /* UIDatePicker+Hours.swift in Sources */,
 				69853EDF767415596862180F /* Analytics.swift in Sources */,
+				86B638DB270F8ADE0054C85C /* OptionsView.swift in Sources */,
 				698531761CD39981ABD5B75B /* Completion.swift in Sources */,
 				8620886D22BFE2E200268B3D /* MultipleEventCell.swift in Sources */,
 				2DBA1A1D4FF1A6199AD9D4FA /* BuildConfig.swift in Sources */,
@@ -1530,6 +1534,7 @@
 				INFOPLIST_FILE = whatson/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.1;
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson;
 				PRODUCT_MODULE_NAME = Whatson;
@@ -1558,6 +1563,7 @@
 				INFOPLIST_FILE = whatson/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.1;
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson;
 				PRODUCT_MODULE_NAME = Whatson;

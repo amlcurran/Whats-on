@@ -19,10 +19,10 @@ public class CalendarLoader {
         self.preferenceStore = preferenceStore
     }
 
-    public func load(onSuccess: ([EventCalendar]) -> Void, onError: (Error) -> Void) {
+    public func load() -> [EventCalendar] {
         let ekCalendars = eventStore.calendars(for: .event)
         let excludedCalendars = preferenceStore.excludedCalendars
-        let calendars = ekCalendars.map({ ekCalendar -> EventCalendar in
+        return ekCalendars.map({ ekCalendar -> EventCalendar in
             let calendarId = EventCalendar.Id(rawValue: ekCalendar.calendarIdentifier)
             return EventCalendar(name: ekCalendar.title,
                                  account: ekCalendar.source.title,
@@ -30,12 +30,19 @@ public class CalendarLoader {
                                  included: excludedCalendars.contains(calendarId) == false,
                                  editable: ekCalendar.allowsContentModifications)
         })
-        onSuccess(calendars)
     }
 
 }
 
-public struct EventCalendar: Equatable {
+public struct EventCalendar: Identifiable, Hashable, Equatable {
+    public init(name: String, account: String, id: EventCalendar.Id, included: Bool, editable: Bool) {
+        self.name = name
+        self.account = account
+        self.id = id
+        self.included = included
+        self.editable = editable
+    }
+
 
     public let name: String
     public let account: String
@@ -46,6 +53,10 @@ public struct EventCalendar: Equatable {
 
     //swiftlint:disable:next type_name
     public struct Id: Hashable {
+        public init(rawValue: String) {
+            self.rawValue = rawValue
+        }
+
         public let rawValue: String
     }
 

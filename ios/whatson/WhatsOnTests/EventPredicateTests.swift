@@ -123,11 +123,11 @@ private func today(atHour hour: Int, minutes: Int = 0, addingDays days: Int = 0)
 private class TestTimeRepository: BorderTimeRepository {
 
     var borderTimeStart: TimeOfDay {
-        return TimeOfDay.fromHours(hours: 8)
+        return TimeOfDay.fromHours(hours: 8, andMinutes: 0)
     }
 
     var borderTimeEnd: TimeOfDay {
-        return TimeOfDay.fromHours(hours: 12)
+        return TimeOfDay.fromHours(hours: 12, andMinutes: 0)
     }
 
 }

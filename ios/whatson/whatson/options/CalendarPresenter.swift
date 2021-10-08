@@ -34,18 +34,13 @@ class CalendarPresenter {
 
     func beginPresenting(on view: CalendarsView) {
         self.view = view
-        loader.load(onSuccess: { calendars in
-            self.calendars = calendars
-            let items = calendars.map({ calendar in
-                return CheckableTableItem(title: calendar.name, subtitle: calendar.account, isChecked: calendar.included)
-            })
-            view.updateCalendar(items)
-            self.defaultCalendar = calendars.first(where: isDefault)
-            view.updateDefaultCalendar(self.defaultCalendar)
-        }, onError: { _ in
-            let items = [TitleTableItem(title: "No calendars available", isEnabled: false)]
-            view.updateCalendar(items)
+        self.calendars = loader.load()
+        let items = calendars.map({ calendar in
+            return CheckableTableItem(title: calendar.name, subtitle: calendar.account, isChecked: calendar.included)
         })
+        view.updateCalendar(items)
+        self.defaultCalendar = calendars.first(where: isDefault)
+        view.updateDefaultCalendar(self.defaultCalendar)
     }
 
     func toggle(_ item: TableItem, at index: Int) {
