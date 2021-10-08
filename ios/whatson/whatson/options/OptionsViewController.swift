@@ -75,6 +75,7 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
         view.backgroundColor = .windowBackground
         view.addSubview(tableView)
         tableView.constrain(toSuperview: .leading, .trailing, .topMargin, .bottomMargin)
+        tableView.backgroundColor = .windowBackground
     }
 
     private func layoutNewUi() {
