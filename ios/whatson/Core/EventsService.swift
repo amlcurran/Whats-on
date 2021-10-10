@@ -19,6 +19,7 @@ public class EventsService {
         return EventsService(timeRepository: timeRepo, eventsRepository: repo)
     }
 
+    @available(*, deprecated)
     public static var demo: EventsService {
         let timeRepo = UserDefaultsTimeStore()
         let repo = DemoEventRepository()

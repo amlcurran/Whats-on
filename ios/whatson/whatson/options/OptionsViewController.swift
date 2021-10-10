@@ -9,6 +9,7 @@
 import UIKit
 import Core
 import SwiftUI
+import Combine
 
 class OptionsViewController: UIViewController, CalendarsView, DateView, CalendarPickerViewControllerDelegate {
 
@@ -59,6 +60,7 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
         source = BuildableTableSource(sections: [pickerSection, defaultCalendarSection, calendarsSection], tableView: tableView)
 
         layoutViews()
+        //layoutNewUi()
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: "Navigation Item"), style: .plain, target: self, action: #selector(cancelTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Navigation Item"), style: .plain, target: self, action: #selector(doneTapped))
@@ -99,19 +101,25 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
             )
         })
 
-
-        let defaultCalendarBinding = Binding<EventCalendar.Id?>(get: {
-            print("getting value \(String(describing: calendarPreferenceStore.defaultCalendar))")
-            return calendarPreferenceStore.defaultCalendar
-        }) { value in
-            print("setting value to \(String(describing: value))")
-            calendarPreferenceStore.defaultCalendar = value
-        }
         let shownCalendars = Binding.constant(CalendarLoader(preferenceStore: calendarPreferenceStore).load())
+
+        let excludedCalendars = Binding<[EventCalendar.Id]>(get: {
+            if let json = UserDefaults.appGroup.string(forKey: "excludedCalendars"),
+               let jsonData = json.data(using: .utf8) {
+                return (try? JSONDecoder().decode([EventCalendar.Id]?.self, from: jsonData)) ?? []
+            } else {
+                return []
+            }
+        }, set: { newValue, transaction in
+            if let data = try? JSONEncoder().encode(newValue),
+               let jsonString = String(data: data, encoding: .utf8) {
+                UserDefaults.appGroup.set(jsonString, forKey: "excludedCalendars")
+            }
+        })
         let hostingVc = UIHostingController(rootView: OptionsView(startDate: startDateBinding,
                                                                   endDate: endDateBinding,
-                                                                  shownCalendars: shownCalendars,
-                                                                  defaultCalendar: defaultCalendarBinding))
+                                                                  allCalendars: shownCalendars,
+                                                                  excludedCalendars: excludedCalendars))
         view.addSubview(hostingVc.view)
         hostingVc.view.constrain(toSuperview: .leading, .trailing, .topMargin, .bottomMargin)
         addChild(hostingVc)

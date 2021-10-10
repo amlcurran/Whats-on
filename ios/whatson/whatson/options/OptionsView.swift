@@ -9,55 +9,53 @@
 import SwiftUI
 import Core
 
+@propertyWrapper
+struct CodableAppStorage<T: Codable> {
+
+    let key: String
+    let store: UserDefaults
+
+    var wrappedValue: T? {
+        get {
+            if let json = store.string(forKey: key),
+                let jsonData = json.data(using: .utf8) {
+                return try? JSONDecoder().decode(T.self, from: jsonData)
+            } else {
+                return nil
+            }
+        }
+        set {
+            if let data = try? JSONEncoder().encode(newValue),
+               let jsonString = String(data: data, encoding: .utf8) {
+                store.set(jsonString, forKey: key)
+            }
+
+        }
+    }
+
+}
+
 struct OptionsView: View {
 
     @Binding var startDate: Date
     @Binding var endDate: Date
-    @Binding var shownCalendars: [EventCalendar]
-    @Binding var defaultCalendar: EventCalendar.Id?
+    @Binding var allCalendars: [EventCalendar]
+    @AppStorage("defaultCalendar", store: .appGroup) var defaultCalendar: EventCalendar.Id?
+    @Binding var excludedCalendars: [EventCalendar.Id]
 
     var body: some View {
         VStack {
             BoundaryPickerView2()
-            Form {
+                .padding(.top)
+            List {
                 Section(header: Text("Options")) {
-                    DefaultCalendarPicker(selection: $defaultCalendar,
-                                          calendars: shownCalendars)
+                    DefaultCalendarPicker(defaultCalendar: $defaultCalendar,
+                                          calendars: allCalendars)
                 }
                 Section(header: Text("Shown calendars")) {
-                    ForEach(shownCalendars) { calendar in
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(calendar.name)
-                                Text(calendar.account)
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                            }
-                            Spacer()
-                            if calendar.included {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(Color("accent"))
-                            }
-                        }
-                    }
+                    ShownCalendarPicker(allCalendars: $allCalendars,
+                                        excludedCalendars: excludedCalendars)
                 }
-            }
-        }.tint(Color("accent"))
-    }
-
-    @ViewBuilder
-    func DefaultCalendarPicker(selection: Binding<EventCalendar.Id?>, calendars: [EventCalendar]) -> some View {
-        Picker("Default calendar", selection: selection) {
-            ForEach(calendars.filter(\.editable)) { calendar in
-                HStack {
-                    Text(calendar.name)
-                    Spacer()
-                    if selection.wrappedValue == calendar.id {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(Color("accent"))
-                    }
-                }
-                .tag(calendar.id)
             }
         }
     }
@@ -65,20 +63,20 @@ struct OptionsView: View {
     @ViewBuilder
     func BoundaryPickerView2() -> some View {
         VStack {
-                Text("Show events between")
-                HStack {
-                    DatePicker("",
-                               selection: $startDate,
-                               displayedComponents: .hourAndMinute)
-                        .datePickerStyle(.compact)
-                        .labelsHidden()
-                    Text("and")
-                    DatePicker("",
-                               selection: $endDate,
-                               displayedComponents: .hourAndMinute)
-                        .datePickerStyle(.compact)
-                        .labelsHidden()
-                }
+            Text("Show events between")
+            HStack {
+                DatePicker("",
+                           selection: $startDate,
+                           displayedComponents: .hourAndMinute)
+                    .datePickerStyle(.compact)
+                    .labelsHidden()
+                Text("and")
+                DatePicker("",
+                           selection: $endDate,
+                           displayedComponents: .hourAndMinute)
+                    .datePickerStyle(.compact)
+                    .labelsHidden()
+            }
         }
     }
 
@@ -89,12 +87,12 @@ struct OptionsView_Previews: PreviewProvider {
         OptionsView(
             startDate: .constant(Date()),
             endDate: .constant(Date().addingTimeInterval(-68000)),
-            shownCalendars: .constant([
+            allCalendars: .constant([
                 EventCalendar(name: "Calendar 1", account: "Gmail", id: EventCalendar.Id(rawValue: "foo"), included: true, editable: false),
                 EventCalendar(name: "Calendar 2", account: "iCloud", id: EventCalendar.Id(rawValue: "bar"), included: false, editable: true),
                 EventCalendar(name: "Calendar 3", account: "Outlook", id: EventCalendar.Id(rawValue: "baz"), included: true, editable: false)
             ]),
-            defaultCalendar: .constant(EventCalendar.Id(rawValue: "bar"))
+            excludedCalendars: .constant([EventCalendar.Id(rawValue: "foo")])
         )
     }
 }

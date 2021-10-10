@@ -52,7 +52,7 @@ public struct EventCalendar: Identifiable, Hashable, Equatable {
     public let editable: Bool
 
     //swiftlint:disable:next type_name
-    public struct Id: Hashable {
+    public struct Id: RawRepresentable, Codable, Hashable {
         public init(rawValue: String) {
             self.rawValue = rawValue
         }

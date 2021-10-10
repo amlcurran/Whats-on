@@ -14,7 +14,8 @@ public class DemoEventRepository: EventsRepository {
         return [
             .named("Board game night", delayDays: 1, hours: 18.5, duration: 5),
             .named("Dinner out", delayDays: 3, hours: 19.0, duration: 5),
-            .named("Board game night", delayDays: 6, hours: 20.5, duration: 5)
+            .named("Concert", delayDays: 3, hours: 21.0, duration: 5),
+            .named("Book launch", delayDays: 6, hours: 20.5, duration: 5)
         ].filter { $0.endTime < endTime }
     }
 

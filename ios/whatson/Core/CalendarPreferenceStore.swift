@@ -14,7 +14,7 @@ public class CalendarPreferenceStore {
     private let calendarsKey = "excludedCalendars"
     private let defaultCalendarKey = "defaultCalendar"
 
-    public init(userDefaults: UserDefaults = UserDefaults(suiteName: "group.uk.co.amlcurran.social")!) {
+    public init(userDefaults: UserDefaults = .appGroup) {
         self.userDefaults = userDefaults
     }
 
@@ -46,5 +46,11 @@ public class CalendarPreferenceStore {
             }
         }
     }
+
+}
+
+public extension UserDefaults {
+
+    static var appGroup = UserDefaults(suiteName: "group.uk.co.amlcurran.social")!
 
 }
