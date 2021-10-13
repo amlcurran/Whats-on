@@ -101,7 +101,7 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
             )
         })
 
-        let shownCalendars = Binding.constant(CalendarLoader(preferenceStore: calendarPreferenceStore).load())
+        let shownCalendars = CalendarLoader(preferenceStore: calendarPreferenceStore).load()
 
         let excludedCalendars = Binding<[EventCalendar.Id]>(get: {
             if let json = UserDefaults.appGroup.string(forKey: "excludedCalendars"),

@@ -39,7 +39,7 @@ struct OptionsView: View {
 
     @Binding var startDate: Date
     @Binding var endDate: Date
-    @Binding var allCalendars: [EventCalendar]
+    let allCalendars: [EventCalendar]
     @AppStorage("defaultCalendar", store: .appGroup) var defaultCalendar: EventCalendar.Id?
     @Binding var excludedCalendars: [EventCalendar.Id]
 
@@ -53,7 +53,7 @@ struct OptionsView: View {
                                           calendars: allCalendars)
                 }
                 Section(header: Text("Shown calendars")) {
-                    ShownCalendarPicker(allCalendars: $allCalendars,
+                    ShownCalendarPicker(allCalendars: allCalendars,
                                         excludedCalendars: excludedCalendars)
                 }
             }
@@ -87,11 +87,11 @@ struct OptionsView_Previews: PreviewProvider {
         OptionsView(
             startDate: .constant(Date()),
             endDate: .constant(Date().addingTimeInterval(-68000)),
-            allCalendars: .constant([
+            allCalendars: [
                 EventCalendar(name: "Calendar 1", account: "Gmail", id: EventCalendar.Id(rawValue: "foo"), included: true, editable: false),
                 EventCalendar(name: "Calendar 2", account: "iCloud", id: EventCalendar.Id(rawValue: "bar"), included: false, editable: true),
                 EventCalendar(name: "Calendar 3", account: "Outlook", id: EventCalendar.Id(rawValue: "baz"), included: true, editable: false)
-            ]),
+            ],
             excludedCalendars: .constant([EventCalendar.Id(rawValue: "foo")])
         )
     }

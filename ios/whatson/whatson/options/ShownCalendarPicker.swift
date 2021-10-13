@@ -11,7 +11,7 @@ import Core
 
 struct ShownCalendarPicker: View {
 
-    @Binding var allCalendars: [EventCalendar]
+    let allCalendars: [EventCalendar]
     @State var excludedCalendars: [EventCalendar.Id]
 
     var body: some View {
@@ -38,11 +38,11 @@ struct ShownCalendarPicker: View {
 struct ShownCalendarPicker_Previews: PreviewProvider {
     static var previews: some View {
         Form {
-            ShownCalendarPicker(allCalendars: .constant([
+            ShownCalendarPicker(allCalendars: [
                 EventCalendar(name: "Calendar 1", account: "Gmail", id: EventCalendar.Id(rawValue: "foo"), included: true, editable: false),
                 EventCalendar(name: "Calendar 2", account: "iCloud", id: EventCalendar.Id(rawValue: "bar"), included: false, editable: true),
                 EventCalendar(name: "Calendar 3", account: "Outlook", id: EventCalendar.Id(rawValue: "baz"), included: true, editable: false)
-            ]), excludedCalendars: [EventCalendar.Id(rawValue: "foo")])
+            ], excludedCalendars: [EventCalendar.Id(rawValue: "foo")])
         }
     }
 }
