@@ -69,7 +69,7 @@ class WhatsOnViewController: UIViewController,
         let settings = OptionsViewController {
             self.presenter.refreshEvents()
         }
-        present(settings.inNavigationController(), animated: true)
+        present(settings, animated: true)
     }
 
     override func viewDidAppear(_ animated: Bool) {

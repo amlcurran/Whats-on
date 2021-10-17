@@ -34,20 +34,33 @@ struct OptionsView: View {
     @Binding var startDate: Date
     @Binding var endDate: Date
     let allCalendars: [EventCalendar]
+    let onDismiss: () -> Void
 
     var body: some View {
-        VStack {
-            List {
-                Section {
-                    BoundaryPickerView2(startDate: $startDate, endDate: $endDate)
-                        .padding()
-                    DefaultCalendarPicker(calendars: allCalendars)
+        NavigationView {
+            VStack {
+                List {
+                    Section {
+                        BoundaryPickerView2(startDate: $startDate, endDate: $endDate)
+                            .padding()
+                            .frame(maxWidth: .infinity, alignment: .center)
+                        DefaultCalendarPicker(calendars: allCalendars)
+                    }
+                    Section(header: Text("Shown calendars"), footer: Text("Only events from checked calendars will be shown in your schedule.")) {
+                        ShownCalendarPicker(allCalendars: allCalendars)
+                    }
+                    .listRowBackground(Color("surface"))
                 }
-                Section(header: Text("Shown calendars")) {
-                    ShownCalendarPicker(allCalendars: allCalendars)
+                .listStyle(.insetGrouped)
+            }.toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Done") {
+                        onDismiss()
+                    }
                 }
             }
         }
+        .accentColor(Color("secondary"))
     }
 
 }
@@ -62,7 +75,9 @@ struct OptionsView_Previews: PreviewProvider {
                 EventCalendar(name: "Calendar 2", account: "iCloud", id: EventCalendar.Id(rawValue: "bar"), included: false, editable: true),
                 EventCalendar(name: "Calendar 3", account: "Outlook", id: EventCalendar.Id(rawValue: "baz"), included: true, editable: false)
             ]
-        )
+        ) {
+            
+        }
     }
 }
 

@@ -11,31 +11,14 @@ import Core
 import SwiftUI
 import Combine
 
-class OptionsViewController: UIViewController, CalendarsView, DateView, CalendarPickerViewControllerDelegate {
+class OptionsViewController: UIViewController {
 
     private let analytics = Analytics()
-    private let calendarPresenter = CalendarPresenter(loader: CalendarLoader(preferenceStore: CalendarPreferenceStore()), preferenceStore: CalendarPreferenceStore())
-    private let pickerPresenter = DatePickerPresenter(timeStore: UserDefaultsTimeStore())
-    private let tableView = UITableView(frame: .zero, style: .grouped)
-    private let pickerSection = StaticTableSection(title: NSLocalizedString("Options.DisplayOptions", comment: "Options"),
-                                                   items: [])
     private let onSetttingsChanged: () -> Void
-
-    private var defaultCalendarSection: StaticTableSection!
-    private var calendarsSection: StaticTableSection!
-    private var source: BuildableTableSource! {
-        didSet {
-            tableView.dataSource = source
-            tableView.delegate = source
-        }
-    }
-    private var changedSettings = false
 
     init(onSettingsChanged: @escaping () -> Void) {
         self.onSetttingsChanged = onSettingsChanged
         super.init(nibName: nil, bundle: nil)
-        self.tableView.estimatedRowHeight = 44
-        self.tableView.rowHeight = UITableView.automaticDimension
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -44,40 +27,7 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        calendarsSection = StaticTableSection(title: "Shown calendars", items: [], onSelect: { (item: TableItem, index: Int) in
-            self.calendarPresenter.toggle(item, at: index)
-        })
-        defaultCalendarSection = StaticTableSection(title: "Other options", footer: nil, items: [], onSelect: { (_, index) in
-            let picker = CalendarPickerViewController(calendars: self.calendarPresenter.calendars.onlyEditable, selectedCalendar: self.calendarPresenter.defaultCalendar, delegate: self)
-            if self.navigationController == nil {
-                preconditionFailure("View wasn't in a navigation controller, even though it was expected to be.")
-            }
-            self.navigationController?.pushViewController(picker, animated: true)
-            self.tableView.deselectRow(at: IndexPath(row: index, section: 1), animated: true)
-        })
-
-        source = BuildableTableSource(sections: [pickerSection, defaultCalendarSection, calendarsSection], tableView: tableView)
-
-//        layoutViews()
         layoutNewUi()
-
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: "Navigation Item"), style: .plain, target: self, action: #selector(cancelTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Navigation Item"), style: .plain, target: self, action: #selector(doneTapped))
-
-        pickerPresenter.beginPresenting(on: self)
-        calendarPresenter.beginPresenting(on: self)
-    }
-
-    @objc func cancelTapped() {
-        dismiss(animated: true, completion: nil)
-    }
-
-    private func layoutViews() {
-        view.backgroundColor = .windowBackground
-        view.addSubview(tableView)
-        tableView.constrain(toSuperview: .leading, .trailing, .topMargin, .bottomMargin)
-        tableView.backgroundColor = .windowBackground
     }
 
     private func layoutNewUi() {
@@ -85,11 +35,15 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
         let timeStore = UserDefaultsTimeStore()
         let calendarPreferenceStore = CalendarPreferenceStore()
         let shownCalendars = CalendarLoader(preferenceStore: calendarPreferenceStore).load()
-        let hostingVc = UIHostingController(rootView: OptionsView(startDate: timeStore.startDateBinding,
-                                                                  endDate: timeStore.endDateBinding,
-                                                                  allCalendars: shownCalendars))
+        let optionsView = OptionsView(startDate: timeStore.startDateBinding,
+                               endDate: timeStore.endDateBinding,
+                               allCalendars: shownCalendars) { [weak self] in
+            self?.doneTapped()
+        }
+//        UITableView.appearance(whenContainedInInstancesOf: [OptionsViewController.self]).backgroundColor = .windowBackground
+        let hostingVc = UIHostingController(rootView: optionsView)
         view.addSubview(hostingVc.view)
-        hostingVc.view.constrain(toSuperview: .leading, .trailing, .topMargin, .bottomMargin)
+        hostingVc.view.constrain(toSuperview: .leading, .trailing, .top, .bottom)
         addChild(hostingVc)
         hostingVc.didMove(toParent: self)
     }
@@ -100,41 +54,7 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        if self.changedSettings {
-            self.onSetttingsChanged()
-            self.changedSettings = false
-        }
-    }
-
-    func updateCalendar(_ items: [TableItem]) {
-        calendarsSection.items = items
-        tableView.reload(calendarsSection, from: source)
-    }
-
-    func updateSingleCalendar(_ item: TableItem, at index: Int) {
-        calendarsSection.items.replaceSubrange(index..<index+1, with: [item])
-        tableView.reload(index, in: calendarsSection, from: source)
-    }
-
-    func updateDate(_ items: [TableItem]) {
-        pickerSection.items = items
-        tableView.reload(pickerSection, from: source)
-    }
-
-    func updateDefaultCalendar(_ calendar: EventCalendar?) {
-        defaultCalendarSection.items = [
-            NextStepTableItem(label: "Default calendar", currentValue: calendar?.name)
-        ]
-        tableView.reload(defaultCalendarSection, from: source)
-    }
-
-    func didSelect(_ calendar: EventCalendar) {
-        calendarPresenter.defaultCalendar = calendar
-        self.navigationController?.popViewController(animated: true)
-    }
-
-    func didChangeBoundaries() {
-        self.changedSettings = true
+        self.onSetttingsChanged()
     }
 
 }
