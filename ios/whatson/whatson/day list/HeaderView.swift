@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 
 class HeaderView: UIView {
 
@@ -48,7 +49,7 @@ class HeaderView: UIView {
     }
 
     func styleEditButton() {
-        editButton.setImage(UIImage(systemName: "gear")?.withRenderingMode(.alwaysTemplate).applyingSymbolConfiguration(.init(pointSize: 20)), for: .normal)
+        editButton.setImage(UIImage(systemName: "gear")?.withRenderingMode(.alwaysTemplate).applyingSymbolConfiguration(.init(pointSize: 20, weight: .light)), for: .normal)
         editButton.tintColor = .accent
 //        editButton.setTitle("Edit", for: .normal)
         editButton.setTitleColor(.accent, for: .normal)

@@ -12,7 +12,7 @@ import Core
 struct ShownCalendarPicker: View {
 
     let allCalendars: [EventCalendar]
-    @State var excludedCalendars: [EventCalendar.Id]
+    @AppStorage("excludedCalendars", store: .appGroup) var excludedCalendars: [EventCalendar.Id] = []
 
     var body: some View {
         ForEach(allCalendars) { calendar in
@@ -24,15 +24,32 @@ struct ShownCalendarPicker: View {
                         .foregroundColor(.secondary)
                 }
                 Spacer()
-                if !excludedCalendars.contains(where: { $0 == calendar.id }) {
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(Color("accent"))
-                }
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(Color("accent"))
+                    .visible(!excludedCalendars.contains(calendar.id))
             }.onTapGesture {
                 self.excludedCalendars = excludedCalendars.toggle(calendar.id)
             }
         }
     }
+}
+
+struct VisibilityModifier: ViewModifier {
+
+    let visible: Bool
+
+    func body(content: Content) -> some View {
+        content.opacity(visible ? 1 : 0)
+    }
+
+}
+
+extension View {
+
+    func visible(_ bool: Bool) -> some View {
+        modifier(VisibilityModifier(visible: bool))
+    }
+
 }
 
 struct ShownCalendarPicker_Previews: PreviewProvider {

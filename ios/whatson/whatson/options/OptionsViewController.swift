@@ -59,8 +59,8 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
 
         source = BuildableTableSource(sections: [pickerSection, defaultCalendarSection, calendarsSection], tableView: tableView)
 
-        layoutViews()
-        //layoutNewUi()
+//        layoutViews()
+        layoutNewUi()
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: "Navigation Item"), style: .plain, target: self, action: #selector(cancelTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Navigation Item"), style: .plain, target: self, action: #selector(doneTapped))
@@ -84,42 +84,10 @@ class OptionsViewController: UIViewController, CalendarsView, DateView, Calendar
 
         let timeStore = UserDefaultsTimeStore()
         let calendarPreferenceStore = CalendarPreferenceStore()
-        let startDateBinding: Binding<Date> = Binding(get: {
-            timeStore.startTimestamp
-        }, set: { date, _ in
-            timeStore.startTime = (
-                Calendar.current.component(.hour, from: date),
-                Calendar.current.component(.minute, from: date)
-            )
-        })
-        let endDateBinding: Binding<Date> = Binding(get: {
-            timeStore.endTimestamp
-        }, set: { date, _ in
-            timeStore.endTime = (
-                Calendar.current.component(.hour, from: date),
-                Calendar.current.component(.minute, from: date)
-            )
-        })
-
         let shownCalendars = CalendarLoader(preferenceStore: calendarPreferenceStore).load()
-
-        let excludedCalendars = Binding<[EventCalendar.Id]>(get: {
-            if let json = UserDefaults.appGroup.string(forKey: "excludedCalendars"),
-               let jsonData = json.data(using: .utf8) {
-                return (try? JSONDecoder().decode([EventCalendar.Id]?.self, from: jsonData)) ?? []
-            } else {
-                return []
-            }
-        }, set: { newValue, transaction in
-            if let data = try? JSONEncoder().encode(newValue),
-               let jsonString = String(data: data, encoding: .utf8) {
-                UserDefaults.appGroup.set(jsonString, forKey: "excludedCalendars")
-            }
-        })
-        let hostingVc = UIHostingController(rootView: OptionsView(startDate: startDateBinding,
-                                                                  endDate: endDateBinding,
-                                                                  allCalendars: shownCalendars,
-                                                                  excludedCalendars: excludedCalendars))
+        let hostingVc = UIHostingController(rootView: OptionsView(startDate: timeStore.startDateBinding,
+                                                                  endDate: timeStore.endDateBinding,
+                                                                  allCalendars: shownCalendars))
         view.addSubview(hostingVc.view)
         hostingVc.view.constrain(toSuperview: .leading, .trailing, .topMargin, .bottomMargin)
         addChild(hostingVc)
@@ -185,6 +153,32 @@ private extension UITableView {
             preconditionFailure("Attempting to find a section \(section) which doesn't exist in the table")
         }
         reloadRows(at: [IndexPath(row: index, section: sectionIndex)], with: .automatic)
+    }
+
+}
+
+extension UserDefaultsTimeStore {
+
+    var startDateBinding: Binding<Date> {
+        Binding(get: {
+            self.startTimestamp
+        }, set: { date, _ in
+            self.startTime = (
+                Calendar.current.component(.hour, from: date),
+                Calendar.current.component(.minute, from: date)
+            )
+        })
+    }
+
+    var endDateBinding: Binding<Date> {
+        Binding(get: {
+            self.endTimestamp
+        }, set: { date, _ in
+            self.endTime = (
+                Calendar.current.component(.hour, from: date),
+                Calendar.current.component(.minute, from: date)
+            )
+        })
     }
 
 }

@@ -9,30 +9,24 @@
 import SwiftUI
 import Core
 
-@propertyWrapper
-struct CodableAppStorage<T: Codable> {
-
-    let key: String
-    let store: UserDefaults
-
-    var wrappedValue: T? {
-        get {
-            if let json = store.string(forKey: key),
-                let jsonData = json.data(using: .utf8) {
-                return try? JSONDecoder().decode(T.self, from: jsonData)
-            } else {
-                return nil
-            }
+extension Array: RawRepresentable where Element: Codable {
+    public init?(rawValue: String) {
+        guard let data = rawValue.data(using: .utf8),
+              let result = try? JSONDecoder().decode([Element].self, from: data)
+        else {
+            return nil
         }
-        set {
-            if let data = try? JSONEncoder().encode(newValue),
-               let jsonString = String(data: data, encoding: .utf8) {
-                store.set(jsonString, forKey: key)
-            }
-
-        }
+        self = result
     }
 
+    public var rawValue: String {
+        guard let data = try? JSONEncoder().encode(self),
+              let result = String(data: data, encoding: .utf8)
+        else {
+            return "[]"
+        }
+        return result
+    }
 }
 
 struct OptionsView: View {
@@ -40,42 +34,18 @@ struct OptionsView: View {
     @Binding var startDate: Date
     @Binding var endDate: Date
     let allCalendars: [EventCalendar]
-    @AppStorage("defaultCalendar", store: .appGroup) var defaultCalendar: EventCalendar.Id?
-    @Binding var excludedCalendars: [EventCalendar.Id]
 
     var body: some View {
         VStack {
-            BoundaryPickerView2()
-                .padding(.top)
             List {
-                Section(header: Text("Options")) {
-                    DefaultCalendarPicker(defaultCalendar: $defaultCalendar,
-                                          calendars: allCalendars)
+                Section {
+                    BoundaryPickerView2(startDate: $startDate, endDate: $endDate)
+                        .padding()
+                    DefaultCalendarPicker(calendars: allCalendars)
                 }
                 Section(header: Text("Shown calendars")) {
-                    ShownCalendarPicker(allCalendars: allCalendars,
-                                        excludedCalendars: excludedCalendars)
+                    ShownCalendarPicker(allCalendars: allCalendars)
                 }
-            }
-        }
-    }
-
-    @ViewBuilder
-    func BoundaryPickerView2() -> some View {
-        VStack {
-            Text("Show events between")
-            HStack {
-                DatePicker("",
-                           selection: $startDate,
-                           displayedComponents: .hourAndMinute)
-                    .datePickerStyle(.compact)
-                    .labelsHidden()
-                Text("and")
-                DatePicker("",
-                           selection: $endDate,
-                           displayedComponents: .hourAndMinute)
-                    .datePickerStyle(.compact)
-                    .labelsHidden()
             }
         }
     }
@@ -91,8 +61,7 @@ struct OptionsView_Previews: PreviewProvider {
                 EventCalendar(name: "Calendar 1", account: "Gmail", id: EventCalendar.Id(rawValue: "foo"), included: true, editable: false),
                 EventCalendar(name: "Calendar 2", account: "iCloud", id: EventCalendar.Id(rawValue: "bar"), included: false, editable: true),
                 EventCalendar(name: "Calendar 3", account: "Outlook", id: EventCalendar.Id(rawValue: "baz"), included: true, editable: false)
-            ],
-            excludedCalendars: .constant([EventCalendar.Id(rawValue: "foo")])
+            ]
         )
     }
 }
