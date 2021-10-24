@@ -8,6 +8,27 @@
 
 import Foundation
 
+public extension UserDefaults {
+
+    func codable<T: Codable>(forKey key: String) -> T? {
+        if let string = self.string(forKey: key),
+           let jsonData = string.data(using: .utf8),
+           let decoded = try? JSONDecoder().decode(T.self, from: jsonData) {
+            return decoded
+        } else {
+            return nil
+        }
+    }
+
+    func setCodable<T: Codable>(_ codable: T, forKey key: String) {
+        if let foo = try? JSONEncoder().encode(codable),
+           let jsonString = String(data: foo, encoding: .utf8) {
+            self.set(jsonString, forKey: key)
+        }
+    }
+
+}
+
 public class CalendarPreferenceStore {
 
     private let userDefaults: UserDefaults
@@ -20,13 +41,10 @@ public class CalendarPreferenceStore {
 
     public var excludedCalendars: [EventCalendar.Id] {
         get {
-            if let stringIds = userDefaults.array(forKey: calendarsKey) as? [String] {
-                return stringIds.map { EventCalendar.Id(rawValue: $0) }
-            }
-            return []
+            userDefaults.codable(forKey: calendarsKey) ?? []
         }
         set {
-            userDefaults.set(newValue.map({ $0.rawValue }), forKey: calendarsKey)
+            userDefaults.setCodable(newValue, forKey: calendarsKey)
         }
     }
 
