@@ -25,8 +25,8 @@ import uk.co.amlcurran.social.details.alphaOut
 class WhatsOnActivity : AppCompatActivity() {
     private lateinit var adapter: WhatsOnAdapter
     private var firstLoad = true
-    private val eventsRepository = AndroidEventsRepository(contentResolver)
-    private val eventsService = EventsService(eventsRepository, JodaCalculator(), UserSettings(this))
+    private val eventsRepository: AndroidEventsRepository by lazy { AndroidEventsRepository(contentResolver) }
+    private val eventsService: EventsService by lazy { EventsService(eventsRepository, JodaCalculator(), UserSettings(this)) }
     private lateinit var binding: ActivityWhatsOnBinding
 
     private val permissionRequest = registerForActivityResult(RequestMultiplePermissions()) { permissions ->
@@ -65,7 +65,7 @@ class WhatsOnActivity : AppCompatActivity() {
             val endTime = day.plusHours(22)
             intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime.millis)
             intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.millis)
-            if (true) {
+            if (false) {
                 startActivity(Intent(this@WhatsOnActivity, AddEventActivity::class.java))
             } else {
                 startActivity(intent)
@@ -81,7 +81,8 @@ class WhatsOnActivity : AppCompatActivity() {
             window.decorView.systemUiVisibility += View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
 
-        setContentView(R.layout.activity_whats_on)
+        binding = ActivityWhatsOnBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding.root)
 
         binding.toolbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {

@@ -12,6 +12,14 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -83,6 +91,9 @@ class EventDetailActivity : AppCompatActivity() {
     }
 
     private fun render(event: Event) {
+        event_card_2.setContent {
+            EventCard(event = event)
+        }
         event_title.text = event.item.title
         val startTime = event.item.startTime.format(timeFormatter)
         val endTime = event.item.endTime.format(timeFormatter)

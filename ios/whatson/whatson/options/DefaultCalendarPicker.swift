@@ -57,3 +57,11 @@ extension Array where Element == EventCalendar {
     }
 
 }
+
+#if targetEnvironment(macCatalyst)
+
+//extension AppStorage where AppStorage.Value: RawRepresentable {
+//
+//}
+
+#endif
