@@ -73,8 +73,8 @@ class EventCollectionCell: UICollectionViewCell, Row {
         eventView.constrain(toSuperview: .leading, .trailing, .top, .bottom)
     }
 
-    func bound(to slot: CalendarItem) -> Self {
-        eventView.bound(to: slot)
+    func bound(to slot: CalendarItem, sharingMode: Bool) -> Self {
+        eventView.bound(to: slot, sharingMode: sharingMode)
         return self
     }
 

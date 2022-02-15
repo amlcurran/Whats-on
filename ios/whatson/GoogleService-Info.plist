@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>275742970915-e447oc8vo4n1ua8anp9es0gmk2i6cj7u.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.275742970915-e447oc8vo4n1ua8anp9es0gmk2i6cj7u</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDxn7HQoGl1VI85Ui46RmL7bRAjjVCoPyI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>275742970915</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>uk.co.amlcurran.whatson</string>
+	<key>PROJECT_ID</key>
+	<string>whats-on-4a3b9</string>
+	<key>STORAGE_BUCKET</key>
+	<string>whats-on-4a3b9.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:275742970915:ios:1127467ad4eb9d02</string>
+	<key>DATABASE_URL</key>
+	<string>https://whats-on-4a3b9.firebaseio.com</string>
+</dict>
+</plist>

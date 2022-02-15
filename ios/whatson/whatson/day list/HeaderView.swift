@@ -1,22 +1,79 @@
 import UIKit
 import SwiftUI
 
+struct HeaderView2: View {
+    
+    let onEditTapped: () -> Void
+    let onShareModeTapped: (Bool) -> Void
+    @State var sharingMode = false
+    
+    var body: some View {
+        HStack(alignment: .top) {
+            VStack(alignment: .leading) {
+                Text(Date(), format: .dateTime
+                        .year()
+                        .month(.wide)
+                        .day()
+                        .weekday(.wide))
+                    .textCase(.uppercase)
+                    .font(.system(size: 14)
+                            .weight(.semibold))
+                    .foregroundColor(.accentColor)
+                Text("What's on")
+                    .font(.system(size: 32)
+                            .weight(.heavy))
+                    .foregroundColor(Color("secondary"))
+            }
+            Spacer(minLength: 16)
+            Menu {
+                Button("Settings") {
+                    onEditTapped()
+                }
+                Button {
+                    sharingMode.toggle()
+                    onShareModeTapped(sharingMode)
+                } label: {
+                    Label("Sharing mode", systemImage: sharingMode ? "checkmark" : "")
+                }
+            } label: {
+                Image(systemName: "ellipsis.circle")
+                    .font(.system(size: 20))
+            }
+        }
+        .padding()
+        .accentColor(Color("accent"))
+        .background(Color("windowBackground"))
+    }
+}
+
+struct HeaderView2_Preview: PreviewProvider {
+    
+    static var previews: some View {
+        HeaderView2 {
+            
+        } onShareModeTapped: { _ in
+            
+        }
+        .previewLayout(.sizeThatFits)
+    }
+    
+}
+
 class HeaderView: UIView {
 
     let todayLabel = UILabel()
     let appLabel = UILabel()
     let dateFormatter = DateFormatter()
     let editButton = UIButton()
+    let onEditTapped: () -> Void
 
-    private weak var delegate: HeaderViewDelegate?
-
-    init(delegate: HeaderViewDelegate) {
+    init(onEditTapped: @escaping () -> Void) {
+        self.onEditTapped = onEditTapped
         super.init(frame: .zero)
         layout()
         styleTodayLabel()
         styleAppLabel()
         styleEditButton()
-        self.delegate = delegate
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -57,16 +114,11 @@ class HeaderView: UIView {
     }
 
     @objc func editTapped() {
-        delegate?.didTapEdit()
+        onEditTapped()
     }
 
     override var intrinsicContentSize: CGSize {
         let height = todayLabel.font.pointSize + 3 + appLabel.font.pointSize
         return CGSize(width: 0, height: height)
     }
-
-}
-
-protocol HeaderViewDelegate: AnyObject {
-    func didTapEdit()
 }

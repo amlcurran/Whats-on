@@ -62,6 +62,12 @@ class CalendarDiffableTableView: NSObject, UICollectionViewDelegate {
     var view: UIView {
         tableView
     }
+    
+    var sharingMode = false {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     init(tableView: UITableView, delegate: CalendarTableViewDelegate) {
         self.delegate = delegate
@@ -82,7 +88,7 @@ class CalendarDiffableTableView: NSObject, UICollectionViewDelegate {
                 return cell?.bound(to: slot)
             case .singleEventSlot(let slot):
                 let cell = tableView.dequeueReusableCell(withReuseIdentifier: "event", for: indexPath) as? EventCollectionCell
-                return cell?.bound(to: slot)
+                return cell?.bound(to: slot, sharingMode: self.sharingMode)
             case .dayTitle(let slot):
                 let cell = tableView.dequeueReusableCell(withReuseIdentifier: "day", for: indexPath) as? DayCollectionCell
                 return cell?.bound(to: slot.boundaryStart)

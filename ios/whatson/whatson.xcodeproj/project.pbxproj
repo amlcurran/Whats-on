@@ -23,7 +23,6 @@
 		69853BB8C3723DD6A606DFFE /* DetailsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853ADAFB0D8A57C40FC7BA /* DetailsCard.swift */; };
 		69853C206C9404ACE2BD00BC /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853943917F0CF738ACB915 /* EventView.swift */; };
 		69853C93D4E8453CAAF42338 /* EventDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985351AE5837369246C93AD /* EventDetailsPresenter.swift */; };
-		69853D85F37E68B39053DB9F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69853D2C9F2840A9862339C4 /* GoogleService-Info.plist */; };
 		69853EB6AEFC9EE982D28388 /* TimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853F60E5391F881F006F7B /* TimeLabel.swift */; };
 		69853EDF767415596862180F /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985358E9835009A7EA756E9 /* Analytics.swift */; };
 		8600B99D1F09383D008578E5 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8600B99C1F09383D008578E5 /* LoadingView.swift */; };
@@ -114,6 +113,7 @@
 		86F849991D046A3E007C41B0 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */; };
 		86F8499B1D046AAE007C41B0 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */; };
 		86FFFE491EC10E01009D772E /* Optional+Requirements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FFFE481EC10E01009D772E /* Optional+Requirements.swift */; };
+		9F41E8E827A204DC0083C1EC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F41E8E727A204DC0083C1EC /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -213,7 +213,6 @@
 		69853B71158DE94568DDC9FB /* BasicAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicAnimator.swift; sourceTree = "<group>"; };
 		69853BC8BAF5893B6913918C /* AllowsGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllowsGestureRecognizer.swift; sourceTree = "<group>"; };
 		69853BE8F4A525FC03DF7E20 /* Completion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Completion.swift; sourceTree = "<group>"; };
-		69853D2C9F2840A9862339C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		69853F60E5391F881F006F7B /* TimeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLabel.swift; sourceTree = "<group>"; };
 		8600B99C1F09383D008578E5 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		8600B99E1F09429D008578E5 /* Delayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delayer.swift; sourceTree = "<group>"; };
@@ -315,6 +314,7 @@
 		86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
 		86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		86FFFE481EC10E01009D772E /* Optional+Requirements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Requirements.swift"; sourceTree = "<group>"; };
+		9F41E8E727A204DC0083C1EC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -523,6 +523,7 @@
 		86CAD4901BACC9B1009C9CFD = {
 			isa = PBXGroup;
 			children = (
+				9F41E8E727A204DC0083C1EC /* GoogleService-Info.plist */,
 				868A16CD26D257C30090D6E4 /* Widget3Extension.entitlements */,
 				86B7D32020E12DA4001B0DF6 /* Today.entitlements */,
 				8620886E22BFEDF000268B3D /* Localizable.stringsdict */,
@@ -536,7 +537,6 @@
 				862F235B26FD2E68000A8BFD /* WhatsOnIntents */,
 				86CAD49A1BACC9B1009C9CFD /* Products */,
 				BC38BE0C51940461A7C28C6F /* Frameworks */,
-				69853D2C9F2840A9862339C4 /* GoogleService-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -883,9 +883,9 @@
 			files = (
 				86075C331E3E228C005AF423 /* Localizable.strings in Resources */,
 				86CAD4AC1BACC9B1009C9CFD /* LaunchScreen.storyboard in Resources */,
+				9F41E8E827A204DC0083C1EC /* GoogleService-Info.plist in Resources */,
 				86CAD4A91BACC9B1009C9CFD /* Assets.xcassets in Resources */,
 				8620886F22BFEDF000268B3D /* Localizable.stringsdict in Resources */,
-				69853D85F37E68B39053DB9F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1307,7 +1307,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Widget3;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Alex Curran. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -1348,7 +1347,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Widget3;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Alex Curran. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;

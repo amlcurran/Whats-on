@@ -108,9 +108,9 @@ class EventItemView: UIView {
         }
     }
 
-    func bound(to item: CalendarItem) {
+    func bound(to item: CalendarItem, sharingMode: Bool) {
         type = .full
-        eventLabel.text = item.title
+        eventLabel.text = sharingMode ? "Busy" : item.title
         let startTime = timeFormatter.string(from: item.startTime)
         secondaryLabel.text = String(format: "From %@", startTime)
         eventLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.semibold)

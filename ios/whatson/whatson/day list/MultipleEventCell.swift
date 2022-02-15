@@ -32,9 +32,10 @@ class MultipleEventCell: UICollectionViewCell, UICollectionViewDelegate, Row {
             fatalError()
         case .singleEventSlot(let slot):
             let cell = tableView.dequeueReusableCell(withReuseIdentifier: "event", for: indexPath) as? EventCollectionCell
-            return cell?.bound(to: slot)
+            return cell?.bound(to: slot, sharingMode: self.sharingMode)
         }
     })
+    private var sharingMode = false
 
     var roundedView: RoundedRectBorderView {
         return eventView.roundedView
@@ -62,7 +63,7 @@ class MultipleEventCell: UICollectionViewCell, UICollectionViewDelegate, Row {
         collectionView.constrain(height: 80)
     }
 
-    func bound(to slot: CalendarSlot) -> Self {
+    func bound(to slot: CalendarSlot, sharingMode: Bool) -> Self {
         var snapshot = NSDiffableDataSourceSnapshot<Int, DiffableType>()
         snapshot.appendSections([0])
         slot.items.forEach { item in

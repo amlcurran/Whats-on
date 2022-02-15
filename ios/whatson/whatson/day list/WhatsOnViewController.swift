@@ -8,14 +8,12 @@ import Intents
 class WhatsOnViewController: UIViewController,
         EKEventEditViewDelegate,
         WhatsOnPresenterView,
-        CalendarTableViewDelegate,
-        HeaderViewDelegate {
+        CalendarTableViewDelegate {
 
     private let dateFormatter = DateFormatter(dateFormat: "EEE")
     private let eventStore = EKEventStore.instance
     private let pushTransition = EventDetailsPushTransition()
     private let navigationAnimations = EventTransitionNavigationDelegate()
-    private let failedAccessView = FailedAccessView()
     private let gestureHandler = AllowsGestureRecognizer()
     private let addNewEventViewControllerFactory = AddNewEventViewControllerFactory()
 
@@ -32,9 +30,15 @@ class WhatsOnViewController: UIViewController,
 
         eventService = .default
         presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService)
-
-        let header = HeaderView(delegate: self)
-        anchor(header)
+        
+        let header = HeaderView2 { [weak self] in
+            self?.didTapEdit()
+        } onShareModeTapped: { [weak self] sharing in
+            self?.table.sharingMode = sharing
+        }
+        let hostingView = UIHostingController(rootView: header)
+        anchor(hostingView.view)
+        hostingView.didMove(toParent: self)
 
         table.style()
 
@@ -44,25 +48,15 @@ class WhatsOnViewController: UIViewController,
     }
 
     private func anchor(_ header: UIView) {
-        let blurView = GradientView()
-        blurView.backgroundColor = .windowBackground
-        blurView.addSubview(header)
-        header.constrain(toSuperview: .top, .trailing, .bottom, insetBy: 16)
-        header.hugContent(.vertical)
-
-        failedAccessView.isHidden = true
-
-        let mainView = UIView()
-        view.add(mainView, constrainedTo: [.bottom, .leading, .trailing])
-        view.add(blurView, constrainedTo: [.top, .leading, .trailing])
-        header.constrain(toSafeAreaTopOf: self, insetBy: 16)
-        mainView.constrain(.top, to: header, .bottom)
-        mainView.add(table.view, constrainedTo: [.top, .bottom])
-        table.view.leadingAnchor.constraint(equalTo: mainView.leadingAnchor).isActive = true
-        table.view.trailingAnchor.constraint(equalTo: mainView.trailingAnchor).isActive = true
-        mainView.add(failedAccessView, constrainedTo: [.leading, .top, .trailing, .bottom])
-
-        header.constrain(toSuperviewSafeArea: .leading, .trailing, insetBy: 16)
+        let stackView = UIStackView()
+        stackView.alignment = .fill
+        stackView.axis = .vertical
+        
+        stackView.addArrangedSubview(header)
+        stackView.addArrangedSubview(table.view)
+        
+        view.add(stackView, constrainedTo: [.bottom, .leading, .trailing])
+        stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
     }
 
     func didTapEdit() {
@@ -104,30 +98,9 @@ class WhatsOnViewController: UIViewController,
     func showCalendar(_ source: [CalendarSlot]) {
         table.view.animateAlpha(to: 1) { _ in }
         table.update(source)
-        failedAccessView.isHidden = true
-        failedAccessView.isUserInteractionEnabled = false
-
-//        let intent = CheckCalendarIntent()
-//        intent.day = PickDay.today
-//        let interaction = INInteraction(intent: intent, response: nil)
-//        interaction.donate { error in
-//            if let error = error {
-//                print(error)
-//            }
-//        }
-//
-//        let tomorrowIntent = CheckCalendarIntent()
-//        tomorrowIntent.day = PickDay.tomorrow
-//        INInteraction(intent: tomorrowIntent, response: nil).donate { error in
-//            if let error = error {
-//                print(error)
-//            }
-//        }
     }
 
     func showAccessFailure() {
-        failedAccessView.isHidden = false
-        failedAccessView.isUserInteractionEnabled = true
     }
 
     func failedToDelete(_ event: CalendarItem, withError error: Error) {
@@ -135,7 +108,7 @@ class WhatsOnViewController: UIViewController,
     }
 
     func showLoading() {
-        failedAccessView.isHidden = true
+        
     }
 
 }
@@ -156,4 +129,45 @@ class EventTransitionNavigationDelegate: NSObject, UINavigationControllerDelegat
         return nil
     }
 
+}
+
+import SwiftUI
+
+struct WhatsOnViewController_Preview: PreviewProvider {
+    
+    static var previews: some View {
+        SimplePreviews {
+            WhatsOnViewController()
+        }
+    }
+    
+}
+
+struct SimplePreviews<T: UIViewController>: View {
+    
+    let builder: () -> T
+    
+    var body: some View {
+        Group {
+            ViewControllerPreview(builder: builder)
+            ViewControllerPreview(builder: builder)
+                .preferredColorScheme(.dark)
+        }
+    }
+    
+}
+
+struct ViewControllerPreview<T: UIViewController>: UIViewControllerRepresentable {
+    typealias UIViewControllerType = T
+    
+    let builder: () -> T
+    
+    func makeUIViewController(context: Context) -> T {
+        builder()
+    }
+    
+    func updateUIViewController(_ uiViewController: T, context: Context) {
+        
+    }
+    
 }
