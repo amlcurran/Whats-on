@@ -33,18 +33,42 @@ class WhatsOnViewController: UIViewController,
         
         let header = HeaderView2 { [weak self] in
             self?.didTapEdit()
-        } onShareModeTapped: { [weak self] sharing in
-            self?.table.sharingMode = sharing
+        } onShareModeTapped: { [weak self] in
+            self?.snapshotAndShare()
         }
         let hostingView = UIHostingController(rootView: header)
         anchor(hostingView.view)
         hostingView.didMove(toParent: self)
 
-        table.style()
+//        table.style()
 
         navigationController?.delegate = navigationAnimations
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController?.interactivePopGestureRecognizer?.delegate = gestureHandler
+    }
+    
+    private func snapshotAndShare() {
+        UIView.performWithoutAnimation {
+            table.sharingMode = true
+        }
+        defer {
+            UIView.performWithoutAnimation {
+                table.sharingMode = false
+            }
+        }
+        if let snapshot = view.getImageFromCurrentContext(bounds: nil) {
+            if let png = snapshot.pngData(),
+               let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
+                do {
+                    let temporary = url.appendingPathComponent("\(Date().formatted(date: .long, time: .omitted)).png")
+                    try png.write(to: temporary)
+                    let viewController = UIActivityViewController(activityItems: [temporary], applicationActivities: nil)
+                    present(viewController, animated: true, completion: nil)
+                } catch {
+                    print(error)
+                }
+            }
+        }
     }
 
     private func anchor(_ header: UIView) {
@@ -170,4 +194,21 @@ struct ViewControllerPreview<T: UIViewController>: UIViewControllerRepresentable
         
     }
     
+}
+
+import CoreGraphics
+
+extension UIView {
+    func getImageFromCurrentContext(bounds: CGRect? = nil) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(bounds?.size ?? self.bounds.size, false, 0.0)
+        self.drawHierarchy(in: bounds ?? self.bounds, afterScreenUpdates: true)
+
+        guard let currentImage = UIGraphicsGetImageFromCurrentImageContext() else {
+            return nil
+        }
+
+        UIGraphicsEndImageContext()
+
+        return currentImage
+    }
 }

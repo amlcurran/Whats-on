@@ -92,7 +92,7 @@ class EventItemView: UIView {
         }
     }
 
-    func bound(to slot: CalendarSlot) {
+    func bound(to slot: CalendarSlot, sharingMode: Bool) {
         if let item = slot.items.first {
             type = .full
             eventLabel.text = item.title
@@ -101,11 +101,17 @@ class EventItemView: UIView {
             eventLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.semibold)
         } else {
             type = .empty
-            eventLabel.text = "Add event"
+            eventLabel.text = sharingMode ? "Available" : "Add event"
             let startTime = timeFormatter.string(from: slot.boundaryStart)
             secondaryLabel.text = String(format: "From %@", startTime)
             eventLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.regular)
         }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        let resetType = type
+        self.type = resetType
     }
 
     func bound(to item: CalendarItem, sharingMode: Bool) {

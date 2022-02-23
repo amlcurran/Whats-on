@@ -38,7 +38,7 @@ class DayListViewModel: ObservableObject, WhatsOnPresenterView {
     }
 
     func startLoading() {
-        presenter.beginPresenting(on: self)
+//        presenter.beginPresenting(on: self)
     }
 
     func showCalendar(_ source: [CalendarSlot]) {

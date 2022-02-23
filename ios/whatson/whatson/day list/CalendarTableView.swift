@@ -81,14 +81,14 @@ class CalendarDiffableTableView: NSObject, UICollectionViewDelegate {
             }
         }
         self.tableView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        self.dataSource = UICollectionViewDiffableDataSource<Date, DiffableType>(collectionView: self.tableView, cellProvider: { (tableView, indexPath, item) -> UICollectionViewCell? in
+        self.dataSource = UICollectionViewDiffableDataSource<Date, DiffableType>(collectionView: self.tableView, cellProvider: { [weak self] (tableView, indexPath, item) -> UICollectionViewCell? in
             switch item {
             case .emptySlot(let slot):
                 let cell = tableView.dequeueReusableCell(withReuseIdentifier: "event", for: indexPath) as? EventCollectionCell
-                return cell?.bound(to: slot)
+                return cell?.bound(to: slot, sharingMode: self?.sharingMode ?? false)
             case .singleEventSlot(let slot):
                 let cell = tableView.dequeueReusableCell(withReuseIdentifier: "event", for: indexPath) as? EventCollectionCell
-                return cell?.bound(to: slot, sharingMode: self.sharingMode)
+                return cell?.bound(to: slot, sharingMode: self?.sharingMode ?? false)
             case .dayTitle(let slot):
                 let cell = tableView.dequeueReusableCell(withReuseIdentifier: "day", for: indexPath) as? DayCollectionCell
                 return cell?.bound(to: slot.boundaryStart)
@@ -102,6 +102,11 @@ class CalendarDiffableTableView: NSObject, UICollectionViewDelegate {
         }
         self.tableView.dataSource = dataSource
         self.tableView.delegate = self
+        self.tableView.register(DayCollectionCell.self, forCellWithReuseIdentifier: "day")
+        self.tableView.register(EventCollectionCell.self, forCellWithReuseIdentifier: "event")
+        self.tableView.register(MultipleEventCell.self, forCellWithReuseIdentifier: "multievent")
+        self.tableView.backgroundColor = .clear
+        self.tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
     }
 
     func update(_ source: [CalendarSlot]) {
@@ -120,11 +125,6 @@ class CalendarDiffableTableView: NSObject, UICollectionViewDelegate {
     }
 
     func style() {
-        tableView.register(DayCollectionCell.self, forCellWithReuseIdentifier: "day")
-        tableView.register(EventCollectionCell.self, forCellWithReuseIdentifier: "event")
-        tableView.register(MultipleEventCell.self, forCellWithReuseIdentifier: "multievent")
-        tableView.backgroundColor = .clear
-        tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

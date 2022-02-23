@@ -163,7 +163,7 @@ public extension CalendarSlot {
     }
 
     func withEvent(named name: String) -> CalendarSlot {
-        let newItem = EventCalendarItem(eventId: "abc", title: name, startTime: self.boundaryStart, endTime: self.boundaryEnd)
+        let newItem = EventCalendarItem(eventId: "\(name.hashValue)", title: name, startTime: self.boundaryStart, endTime: self.boundaryEnd)
         return CalendarSlot(items: self.items + [newItem],
                             boundaryStart: self.boundaryStart,
                             boundaryEnd: self.boundaryEnd)

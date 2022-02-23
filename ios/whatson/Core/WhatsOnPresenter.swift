@@ -1,13 +1,14 @@
 import UIKit
 import EventKit
 
-public class WhatsOnPresenter {
+public class WhatsOnPresenter: ObservableObject {
 
     private let eventStore: EKEventStore
     private let eventService: EventsService
     private let delayer: Delayer
     private weak var view: WhatsOnPresenterView?
     private var notificationHandle: Any?
+    @Published public var events: [CalendarSlot] = []
 
     public init(eventStore: EKEventStore, eventService: EventsService) {
         self.eventStore = eventStore

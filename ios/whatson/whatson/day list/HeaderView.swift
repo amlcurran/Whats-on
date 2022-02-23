@@ -4,8 +4,7 @@ import SwiftUI
 struct HeaderView2: View {
     
     let onEditTapped: () -> Void
-    let onShareModeTapped: (Bool) -> Void
-    @State var sharingMode = false
+    let onShareModeTapped: () -> Void
     
     var body: some View {
         HStack(alignment: .top) {
@@ -29,11 +28,8 @@ struct HeaderView2: View {
                 Button("Settings") {
                     onEditTapped()
                 }
-                Button {
-                    sharingMode.toggle()
-                    onShareModeTapped(sharingMode)
-                } label: {
-                    Label("Sharing mode", systemImage: sharingMode ? "checkmark" : "")
+                Button("Share") {
+                    onShareModeTapped()
                 }
             } label: {
                 Image(systemName: "ellipsis.circle")
@@ -51,7 +47,7 @@ struct HeaderView2_Preview: PreviewProvider {
     static var previews: some View {
         HeaderView2 {
             
-        } onShareModeTapped: { _ in
+        } onShareModeTapped: {
             
         }
         .previewLayout(.sizeThatFits)

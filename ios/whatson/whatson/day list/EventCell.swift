@@ -33,8 +33,8 @@ class EventCell: UITableViewCell, Row {
         eventView.constrain(toSuperview: .leading, .trailing, .top, .bottom)
     }
 
-    func bound(to slot: CalendarSlot) -> Self {
-        eventView.bound(to: slot)
+    func bound(to slot: CalendarSlot, sharingMode: Bool) -> Self {
+        eventView.bound(to: slot, sharingMode: sharingMode)
         return self
     }
 
@@ -78,8 +78,8 @@ class EventCollectionCell: UICollectionViewCell, Row {
         return self
     }
 
-    func bound(to slot: CalendarSlot) -> Self {
-        eventView.bound(to: slot)
+    func bound(to slot: CalendarSlot, sharingMode: Bool) -> Self {
+        eventView.bound(to: slot, sharingMode: sharingMode)
         return self
     }
 }

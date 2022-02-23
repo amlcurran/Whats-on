@@ -113,6 +113,7 @@
 		86F849991D046A3E007C41B0 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */; };
 		86F8499B1D046AAE007C41B0 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */; };
 		86FFFE491EC10E01009D772E /* Optional+Requirements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FFFE481EC10E01009D772E /* Optional+Requirements.swift */; };
+		9F0A3D2427BC552E00D3B660 /* NewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A3D2327BC552E00D3B660 /* NewListView.swift */; };
 		9F41E8E827A204DC0083C1EC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F41E8E727A204DC0083C1EC /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -314,6 +315,7 @@
 		86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
 		86F8499A1D046AAE007C41B0 /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		86FFFE481EC10E01009D772E /* Optional+Requirements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Requirements.swift"; sourceTree = "<group>"; };
+		9F0A3D2327BC552E00D3B660 /* NewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListView.swift; sourceTree = "<group>"; };
 		9F41E8E727A204DC0083C1EC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -506,6 +508,7 @@
 				869B1EF420E180A40012A72D /* EventItemView.swift */,
 				8620886C22BFE2E200268B3D /* MultipleEventCell.swift */,
 				8687CAF526E6BBA20032F6B1 /* DayListView.swift */,
+				9F0A3D2327BC552E00D3B660 /* NewListView.swift */,
 			);
 			path = "day list";
 			sourceTree = "<group>";
@@ -972,6 +975,7 @@
 				8695D0331DA1A2A20034D52A /* SlotDetail.swift in Sources */,
 				86D751131C7128EB00C0A607 /* RoundedRectBorderView.swift in Sources */,
 				869B1EF520E180A40012A72D /* EventItemView.swift in Sources */,
+				9F0A3D2427BC552E00D3B660 /* NewListView.swift in Sources */,
 				86F8499B1D046AAE007C41B0 /* UIView+Constraints.swift in Sources */,
 				86A9E45B1DA80A4900E8D019 /* UIViewController+Navigation.swift in Sources */,
 				8658A2341F375E6100BF219C /* TitleTableItem.swift in Sources */,
