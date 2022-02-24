@@ -21,7 +21,8 @@ class WhatsOnViewController: UIViewController,
     private var presenter: WhatsOnPresenter!
     private var eventService: EventsService!
 
-    private lazy var table = CalendarDiffableTableView(tableView: UITableView(), delegate: self)
+    private lazy var table = CalendarDiffableTableView(delegate: self)
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,6 @@ class WhatsOnViewController: UIViewController,
 
         eventService = .default
         presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService)
-        
         let header = HeaderView2 { [weak self] in
             self?.didTapEdit()
         } onShareModeTapped: { [weak self] in
@@ -60,7 +60,7 @@ class WhatsOnViewController: UIViewController,
             if let png = snapshot.pngData(),
                let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
                 do {
-                    let temporary = url.appendingPathComponent("\(Date().formatted(date: .long, time: .omitted)).png")
+                    let temporary = url.appendingPathComponent("temporary.png")
                     try png.write(to: temporary)
                     let viewController = UIActivityViewController(activityItems: [temporary], applicationActivities: nil)
                     present(viewController, animated: true, completion: nil)

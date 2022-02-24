@@ -8,7 +8,7 @@ public class WhatsOnPresenter: ObservableObject {
     private let delayer: Delayer
     private weak var view: WhatsOnPresenterView?
     private var notificationHandle: Any?
-    @Published public var events: [CalendarSlot] = []
+    public var events: [CalendarSlot] = []
 
     public init(eventStore: EKEventStore, eventService: EventsService) {
         self.eventStore = eventStore
@@ -39,6 +39,7 @@ public class WhatsOnPresenter: ObservableObject {
     @objc public func refreshEvents() {
         fetchEvents({ [weak self] (source) in
 //            self?.delayer.runAfterExpiryTime({ [weak self] in
+            self?.events = source
                 self?.view?.showCalendar(source)
 //            })
         })

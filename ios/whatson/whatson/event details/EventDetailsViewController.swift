@@ -55,7 +55,6 @@ class EventDetailsViewController: UIViewController, EKEventViewDelegate, UINavig
         view.backgroundColor = .windowBackground
 
         moreInfoButton.set(style: .cta)
-        detailsCard.style()
 
         navBar.shadowImage = UIImage()
         navBar.setBackgroundImage(UIImage.from(color: .windowBackground), for: .default)
@@ -115,7 +114,6 @@ class EventDetailsViewController: UIViewController, EKEventViewDelegate, UINavig
         detailsCard.constrain(toSuperview: .top, insetBy: 8)
         detailsCard.constrain(toSuperview: .leading)
         detailsCard.widthAnchor.constraint(equalTo: view.readableContentGuide.widthAnchor).isActive = true
-        detailsCard.layout()
 
         let line = UIView()
         line.backgroundColor = .divider
@@ -213,11 +211,11 @@ class EventDetailsViewController: UIViewController, EKEventViewDelegate, UINavig
     }
 
     func expandMap() {
-        detailsCard.expandMap()
+//        detailsCard.expandMap()
     }
 
     func collapseMap() {
-        detailsCard.collapseMap()
+//        detailsCard.collapseMap()
     }
 
     func display(_ location: CLLocation) {

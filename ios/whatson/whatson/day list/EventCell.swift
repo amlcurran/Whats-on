@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import Core
+import EventKit
 
 protocol Row {
     var roundedView: RoundedRectBorderView { get }
@@ -82,4 +83,48 @@ class EventCollectionCell: UICollectionViewCell, Row {
         eventView.bound(to: slot, sharingMode: sharingMode)
         return self
     }
+}
+
+import MapKit
+
+class FullEventCell: UICollectionViewCell, DetailsCardDelegate {
+    
+    func didTapMap(on detailsCard: DetailsCard, onRegion region: MKCoordinateRegion) {
+        
+    }
+    
+    private let eventView = DetailsCard()
+    private let geocoder = CLGeocoder()
+    private var task: Task<(), Never>?
+    
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
+        layout()
+        backgroundColor = .clear
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        layout()
+        backgroundColor = .clear
+    }
+
+    private func layout() {
+        contentView.addSubview(eventView)
+        contentView.backgroundColor = .clear
+        eventView.constrain(toSuperview: .top, .bottom)
+        eventView.constrain(toSuperview: .leading, .trailing, insetBy: 8)
+    }
+
+    func bind(to event: EKEvent) {
+        self.task?.cancel()
+        eventView.set(event: event, delegate: self)
+        self.task = Task {
+            eventView.hideMap()
+            let location = await geocoder.loadLocation(from: event)
+            eventView.show(location)
+        }
+        
+    }
+    
 }

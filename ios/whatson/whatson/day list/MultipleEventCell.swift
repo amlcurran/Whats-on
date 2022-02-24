@@ -27,10 +27,9 @@ class MultipleEventCell: UICollectionViewCell, UICollectionViewDelegate, Row {
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: viewLayout)
     private lazy var dataSource = UICollectionViewDiffableDataSource<Int, DiffableType>(collectionView: self.collectionView, cellProvider: { (tableView, indexPath, item) -> UICollectionViewCell? in
         switch item {
-        case .emptySlot,
-                .dayTitle:
+        case .emptySlot, .dayTitle, .fullEvent:
             fatalError()
-        case .singleEventSlot(let slot):
+        case .singleEventSlot(let slot, _):
             let cell = tableView.dequeueReusableCell(withReuseIdentifier: "event", for: indexPath) as? EventCollectionCell
             return cell?.bound(to: slot, sharingMode: self.sharingMode)
         }
@@ -68,7 +67,7 @@ class MultipleEventCell: UICollectionViewCell, UICollectionViewDelegate, Row {
         snapshot.appendSections([0])
         slot.items.forEach { item in
             snapshot.appendItems([
-                .singleEventSlot(item)
+                .singleEventSlot(item, slot)
             ], toSection: 0)
         }
         dataSource.apply(snapshot)

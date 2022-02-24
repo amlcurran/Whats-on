@@ -52,3 +52,21 @@ class EventPresenter {
     }
 
 }
+
+extension CLGeocoder {
+    
+    func loadLocation(from event: EKEvent) async -> CLLocation? {
+        if let location = event.structuredLocation?.geoLocation {
+            return location
+        } else if let location = event.location, !location.isEmpty {
+            do {
+                let results = try await self.geocodeAddressString(location)
+                return results.first?.location
+            } catch {
+                return nil
+            }
+        }
+        return nil
+    }
+    
+}

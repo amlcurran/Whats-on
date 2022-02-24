@@ -1,42 +1,45 @@
 import UIKit
 import SwiftUI
+import Core
 
 struct HeaderView2: View {
-    
+
     let onEditTapped: () -> Void
     let onShareModeTapped: () -> Void
     
     var body: some View {
-        HStack(alignment: .top) {
-            VStack(alignment: .leading) {
-                Text(Date(), format: .dateTime
-                        .year()
-                        .month(.wide)
-                        .day()
-                        .weekday(.wide))
-                    .textCase(.uppercase)
-                    .font(.system(size: 14)
-                            .weight(.semibold))
-                    .foregroundColor(.accentColor)
-                Text("What's on")
-                    .font(.system(size: 32)
-                            .weight(.heavy))
-                    .foregroundColor(Color("secondary"))
-            }
-            Spacer(minLength: 16)
-            Menu {
-                Button("Settings") {
-                    onEditTapped()
+        VStack {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading) {
+                    Text(Date(), format: .dateTime
+                            .year()
+                            .month(.wide)
+                            .day()
+                            .weekday(.wide))
+                        .textCase(.uppercase)
+                        .font(.system(size: 14)
+                                .weight(.semibold))
+                        .foregroundColor(.accentColor)
+                    Text("What's on")
+                        .font(.system(size: 32)
+                                .weight(.heavy))
+                        .foregroundColor(Color("secondary"))
                 }
-                Button("Share") {
-                    onShareModeTapped()
+                Spacer(minLength: 16)
+                Menu {
+                    Button("Settings") {
+                        onEditTapped()
+                    }
+                    Button("Private Share") {
+                        onShareModeTapped()
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                        .font(.system(size: 20))
                 }
-            } label: {
-                Image(systemName: "ellipsis.circle")
-                    .font(.system(size: 20))
             }
+            .padding()
         }
-        .padding()
         .accentColor(Color("accent"))
         .background(Color("windowBackground"))
     }

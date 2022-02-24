@@ -11,12 +11,11 @@ import Core
 
 struct NewListView: View {
     
-    @ObservedObject var presenter: WhatsOnPresenter
     @State var slots: [CalendarSlot] = []
     
     var body: some View {
         VStack(alignment: .leading) {
-            ForEach(presenter.events, id: \.boundaryStart) { slot in
+            ForEach(slots, id: \.boundaryStart) { slot in
                 switch slot.items.count {
                 case 0:
                     EventCardView(item: .or(slot))
@@ -95,17 +94,17 @@ enum EitherOr<Either, Or> {
     case or(Or)
 }
 
-//struct NewListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NewListView(slots: .constant([
-//            .empty(duration: 2),
-//            .empty(inFuture: 1, duration: 2)
-//                .withEvent(named: "Bar"),
-//            .empty(inFuture: 2, duration: 2),
-//            .empty(inFuture: 3, duration: 2),
-//            .empty(inFuture: 4, duration: 2)
-//                .withEvent(named: "Foo")
-//                .withEvent(named: "Another item")
-//        ]))
-//    }
-//}
+struct NewListView_Previews: PreviewProvider {
+    static var previews: some View {
+        NewListView(slots: [
+            .empty(duration: 2),
+            .empty(inFuture: 1, duration: 2)
+                .withEvent(named: "Bar"),
+            .empty(inFuture: 2, duration: 2),
+            .empty(inFuture: 3, duration: 2),
+            .empty(inFuture: 4, duration: 2)
+                .withEvent(named: "Foo")
+                .withEvent(named: "Another item")
+        ])
+    }
+}

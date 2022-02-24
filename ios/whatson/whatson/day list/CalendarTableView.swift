@@ -1,11 +1,13 @@
 import UIKit
 import Core
 import SwiftUI
+import EventKit
 
 enum DiffableType: Hashable {
     case dayTitle(CalendarSlot)
     case emptySlot(CalendarSlot)
-    case singleEventSlot(EventCalendarItem)
+    case singleEventSlot(EventCalendarItem, CalendarSlot)
+    case fullEvent(EventCalendarItem, EKEvent, CalendarSlot)
 }
 
 private extension NSCollectionLayoutItem {
@@ -69,7 +71,7 @@ class CalendarDiffableTableView: NSObject, UICollectionViewDelegate {
         }
     }
 
-    init(tableView: UITableView, delegate: CalendarTableViewDelegate) {
+    init(delegate: CalendarTableViewDelegate) {
         self.delegate = delegate
         super.init()
         let layout = UICollectionViewCompositionalLayout { sectionIndex, environment in
@@ -86,12 +88,16 @@ class CalendarDiffableTableView: NSObject, UICollectionViewDelegate {
             case .emptySlot(let slot):
                 let cell = tableView.dequeueReusableCell(withReuseIdentifier: "event", for: indexPath) as? EventCollectionCell
                 return cell?.bound(to: slot, sharingMode: self?.sharingMode ?? false)
-            case .singleEventSlot(let slot):
+            case .singleEventSlot(let slot, _):
                 let cell = tableView.dequeueReusableCell(withReuseIdentifier: "event", for: indexPath) as? EventCollectionCell
                 return cell?.bound(to: slot, sharingMode: self?.sharingMode ?? false)
             case .dayTitle(let slot):
                 let cell = tableView.dequeueReusableCell(withReuseIdentifier: "day", for: indexPath) as? DayCollectionCell
                 return cell?.bound(to: slot.boundaryStart)
+            case .fullEvent(_, let event, _):
+                let cell = tableView.dequeueReusableCell(withReuseIdentifier: "fullEvent", for: indexPath) as? FullEventCell
+                cell?.bind(to: event)
+                return cell
             }
         })
         let headerRegistration = UICollectionView.SupplementaryRegistration<DayCollectionReusableView>(elementKind: "Header") { supplementaryView, String, indexPath in
@@ -105,6 +111,7 @@ class CalendarDiffableTableView: NSObject, UICollectionViewDelegate {
         self.tableView.register(DayCollectionCell.self, forCellWithReuseIdentifier: "day")
         self.tableView.register(EventCollectionCell.self, forCellWithReuseIdentifier: "event")
         self.tableView.register(MultipleEventCell.self, forCellWithReuseIdentifier: "multievent")
+        self.tableView.register(FullEventCell.self, forCellWithReuseIdentifier: "fullEvent")
         self.tableView.backgroundColor = .clear
         self.tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
     }
@@ -117,7 +124,7 @@ class CalendarDiffableTableView: NSObject, UICollectionViewDelegate {
             if slot.items.isEmpty {
                 items.append(.emptySlot(slot))
             } else {
-                items.append(contentsOf: slot.items.map(DiffableType.singleEventSlot))
+                items.append(contentsOf: slot.items.map { DiffableType.singleEventSlot($0, slot) })
             }
             snapshot.appendItems(items)
         }
@@ -134,9 +141,14 @@ class CalendarDiffableTableView: NSObject, UICollectionViewDelegate {
             fatalError()
         case .emptySlot(let slot):
             delegate?.addEvent(for: slot)
-        case .singleEventSlot(let item):
-            let cell = tableView.cellForItem(at: indexPath).required(as: (UIView & Row).self)
-            delegate?.showDetails(for: item, at: indexPath, in: cell)
+        case .singleEventSlot(let item, let slot):
+            var snapshot = NSDiffableDataSourceSectionSnapshot<DiffableType>()
+            snapshot.append([.fullEvent(item, EKEventStore.instance.event(matching: item)!, slot)])
+            dataSource.apply(snapshot, to: slot.boundaryStart)
+        case .fullEvent(let item, _, let slot):
+            var snapshot = NSDiffableDataSourceSectionSnapshot<DiffableType>()
+            snapshot.append([.singleEventSlot(item, slot)])
+            dataSource.apply(snapshot, to: slot.boundaryStart)
         }
     }
 
