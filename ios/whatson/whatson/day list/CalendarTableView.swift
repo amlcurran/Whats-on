@@ -141,14 +141,30 @@ class CalendarDiffableTableView: NSObject, UICollectionViewDelegate {
             fatalError()
         case .emptySlot(let slot):
             delegate?.addEvent(for: slot)
-        case .singleEventSlot(let item, let slot):
-            var snapshot = NSDiffableDataSourceSectionSnapshot<DiffableType>()
-            snapshot.append([.fullEvent(item, EKEventStore.instance.event(matching: item)!, slot)])
-            dataSource.apply(snapshot, to: slot.boundaryStart)
-        case .fullEvent(let item, _, let slot):
-            var snapshot = NSDiffableDataSourceSectionSnapshot<DiffableType>()
-            snapshot.append([.singleEventSlot(item, slot)])
-            dataSource.apply(snapshot, to: slot.boundaryStart)
+        case .singleEventSlot(let event, let slot):
+            var oldSnapshot = dataSource.snapshot(for: slot.boundaryStart)
+            let newItems = oldSnapshot.items.map { (oldItem: DiffableType) -> DiffableType in
+                if oldItem == item {
+                    return .fullEvent(event, EKEventStore.instance.event(matching: event)!, slot)
+                } else {
+                    return oldItem
+                }
+            }
+            oldSnapshot.deleteAll()
+            oldSnapshot.append(newItems, to: nil)
+            dataSource.apply(oldSnapshot, to: slot.boundaryStart)
+        case .fullEvent(let event, _, let slot):
+            var oldSnapshot = dataSource.snapshot(for: slot.boundaryStart)
+            let newItems = oldSnapshot.items.map { (oldItem: DiffableType) -> DiffableType in
+                if oldItem == item {
+                    return .singleEventSlot(event, slot)
+                } else {
+                    return oldItem
+                }
+            }
+            oldSnapshot.deleteAll()
+            oldSnapshot.append(newItems, to: nil)
+            dataSource.apply(oldSnapshot, to: slot.boundaryStart)
         }
     }
 
