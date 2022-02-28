@@ -115,6 +115,7 @@
 		86FFFE491EC10E01009D772E /* Optional+Requirements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FFFE481EC10E01009D772E /* Optional+Requirements.swift */; };
 		9F0A3D2427BC552E00D3B660 /* NewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A3D2327BC552E00D3B660 /* NewListView.swift */; };
 		9F41E8E827A204DC0083C1EC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F41E8E727A204DC0083C1EC /* GoogleService-Info.plist */; };
+		9FBE073827CD6C7E00C6BF96 /* DetailsCard2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBE073727CD6C7E00C6BF96 /* DetailsCard2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -317,6 +318,7 @@
 		86FFFE481EC10E01009D772E /* Optional+Requirements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Requirements.swift"; sourceTree = "<group>"; };
 		9F0A3D2327BC552E00D3B660 /* NewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListView.swift; sourceTree = "<group>"; };
 		9F41E8E727A204DC0083C1EC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9FBE073727CD6C7E00C6BF96 /* DetailsCard2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCard2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -496,6 +498,7 @@
 		8695D0311DA1A19B0034D52A /* day list */ = {
 			isa = PBXGroup;
 			children = (
+				9FBE073727CD6C7E00C6BF96 /* DetailsCard2.swift */,
 				86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */,
 				8618A51E1BDA92F900A4845E /* EventCell.swift */,
 				8695D0271DA023670034D52A /* HeaderView.swift */,
@@ -1026,6 +1029,7 @@
 				69853C93D4E8453CAAF42338 /* EventDetailsPresenter.swift in Sources */,
 				69853C206C9404ACE2BD00BC /* EventView.swift in Sources */,
 				6985339AD6136F4F0794DD59 /* EKEventKit+Convenience.swift in Sources */,
+				9FBE073827CD6C7E00C6BF96 /* DetailsCard2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

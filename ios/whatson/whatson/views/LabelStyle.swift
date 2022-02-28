@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 
 private let textColors: [LabelStyle: UIColor] = [
         .cta: .accent,
@@ -27,6 +28,26 @@ extension UILabel {
         font = fonts[style]
     }
 
+}
+
+struct LabelStyleModifier: ViewModifier {
+    
+    let style: LabelStyle
+    
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(Color(uiColor: textColors[style]!))
+            .font(Font(fonts[style]!))
+    }
+    
+}
+
+extension View {
+    
+    func labelStyle(_ style: LabelStyle) -> some View {
+        self.modifier(LabelStyleModifier(style: style))
+    }
+    
 }
 
 extension UIButton {
