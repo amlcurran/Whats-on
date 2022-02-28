@@ -90,7 +90,7 @@ import MapKit
 class FullEventCell: UICollectionViewCell, DetailsCardDelegate {
     
     func didTapMap(on detailsCard: DetailsCard, onRegion region: MKCoordinateRegion) {
-        
+        //MKMapItem(placemark: MKPlacemark(coordinate: region.center)).openInMaps(launchOptions: nil)
     }
     
     private let eventView = DetailsCard()
@@ -118,13 +118,20 @@ class FullEventCell: UICollectionViewCell, DetailsCardDelegate {
 
     func bind(to event: EKEvent) {
         self.task?.cancel()
-        eventView.set(event: event, delegate: self)
+        eventView.set(event: event.asEvent, delegate: self)
         self.task = Task {
-            eventView.hideMap()
             let location = await geocoder.loadLocation(from: event)
             eventView.show(location)
         }
         
+    }
+    
+}
+
+extension EKEvent {
+    
+    var asEvent: Event {
+        Event(title: title, location: location, startDate: startDate, endDate: endDate)
     }
     
 }

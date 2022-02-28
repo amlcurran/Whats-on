@@ -2,6 +2,7 @@ import UIKit
 import EventKit
 import CoreLocation
 import MapKit
+import SwiftUI
 
 protocol DetailsCardDelegate: AnyObject {
     func didTapMap(on detailsCard: DetailsCard, onRegion region: MKCoordinateRegion)
@@ -38,28 +39,23 @@ class DetailsCard: UIView {
         layer.masksToBounds = true
         layoutMargins = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         backgroundColor = .surface
+        
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 16
+        
+        addSubview(stackView)
+        stackView.constrain(toSuperview: .bottom)
+        stackView.constrain(toSuperview: .leading, .trailing, .top, insetBy: 16)
 
-        addSubview(titleLabel)
-        titleLabel.constrain(toSuperview: .leading, .top, .trailing, insetBy: 16)
-
-        addSubview(timingLabel)
-        timingLabel.constrain(toSuperview: .leading, .trailing, insetBy: 16)
-        timingTitleContraint = timingLabel.constrain(.top, to: titleLabel, .bottom, withOffset: 4)
-
-        addSubview(line)
-        line.constrain(toSuperview: .leading, .trailing, insetBy: 16)
-        line.constrain(.top, to: timingLabel, .bottom, withOffset: 16)
-
-        addSubview(locationLabel)
-        locationLabel.constrain(toSuperview: .leading, .trailing, insetBy: 16)
-        locationLabel.constrain(.top, to: line, .bottom, withOffset: 16)
-
-        let locationHostView = UIView()
-        add(locationHostView, constrainedTo: [.leading, .trailing, .bottom])
-        mapHeightConstraint = locationHostView.constrain(height: 160)
-        locationHostView.constrain(.top, to: locationLabel, .bottom, withOffset: 16)
-        locationHostView.addGestureRecognizer(mapTapRecognizer)
-        locationHostView.add(locationMapView, constrainedTo: [.leading, .top, .trailing, .bottom])
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(timingLabel)
+        stackView.setCustomSpacing(4, after: titleLabel)
+        stackView.addArrangedSubview(line)
+        stackView.addArrangedSubview(locationLabel)
+        stackView.addArrangedSubview(locationMapView)
+        mapHeightConstraint = locationMapView.constrain(height: 160)
+        locationMapView.addGestureRecognizer(mapTapRecognizer)
         
 //        hideMap()
     }
@@ -75,7 +71,7 @@ class DetailsCard: UIView {
         locationMapView.isUserInteractionEnabled = false
     }
 
-    func set(event: EKEvent, delegate: DetailsCardDelegate) {
+    func set(event: Event, delegate: DetailsCardDelegate) {
         self.delegate = delegate
         titleLabel.text = event.title
         locationLabel.text = event.location
@@ -85,10 +81,14 @@ class DetailsCard: UIView {
     @MainActor
     func hideMap() {
         mapHeightConstraint.constant = 0
+        line.isHidden = true
+        locationLabel.isHidden = true
     }
 
     private func expandMap() {
         self.mapHeightConstraint.constant = 160
+        line.isHidden = false
+        locationLabel.isHidden = false
         superview?.layoutIfNeeded()
     }
 
@@ -107,4 +107,56 @@ class DetailsCard: UIView {
         }
     }
 
+}
+
+struct Event: Equatable {
+    let title: String
+    let location: String?
+    let startDate: Date
+    let endDate: Date
+}
+
+struct DetailsCard_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack {
+            ViewPreview {
+                let card = DetailsCard()
+                let event = Event(title: "An event", location: nil, startDate: Date().addingTimeInterval(-60*60), endDate: Date())
+                card.set(event: event, delegate: NoOpDetailDelegate())
+                card.hideMap()
+                return card
+            }
+            ViewPreview {
+                let card = DetailsCard()
+                let event = Event(title: "An event", location: "Fink's", startDate: Date().addingTimeInterval(-60*60), endDate: Date())
+                card.set(event: event, delegate: NoOpDetailDelegate())
+                card.show(CLLocation(latitude: 51.5675456, longitude: -0.105891))
+                return card
+            }
+        }
+        .previewLayout(.sizeThatFits)
+    }
+}
+
+class NoOpDetailDelegate: DetailsCardDelegate {
+    func didTapMap(on detailsCard: DetailsCard, onRegion region: MKCoordinateRegion) {
+        
+    }
+    
+    
+}
+
+struct ViewPreview<T: UIView>: UIViewRepresentable {
+    
+    typealias UIViewType = T
+    let bodyBuilder: () -> T
+    
+    func updateUIView(_ uiView: T, context: Context) {
+        
+    }
+
+    func makeUIView(context: Context) -> T {
+        return bodyBuilder()
+    }
+    
 }
