@@ -61,6 +61,7 @@ struct DetailsCard2: View {
                     .frame(height: 160)
             }
         }
+        .privacySensitive()
         .frame(maxWidth: .infinity, alignment: .leading)
         .animation(.easeInOut.speed(3), value: coordinate)
         .background {

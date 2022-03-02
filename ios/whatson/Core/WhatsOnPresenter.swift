@@ -1,5 +1,6 @@
 import UIKit
 import EventKit
+import SwiftUI
 
 public class WhatsOnPresenter: ObservableObject {
 
@@ -9,6 +10,7 @@ public class WhatsOnPresenter: ObservableObject {
     private weak var view: WhatsOnPresenterView?
     private var notificationHandle: Any?
     @Published public var events: [CalendarSlot] = []
+    @Published public var redaction: RedactionReasons = []
 
     public init(eventStore: EKEventStore, eventService: EventsService) {
         self.eventStore = eventStore
@@ -43,6 +45,14 @@ public class WhatsOnPresenter: ObservableObject {
         })
     }
 
+    public func redact() {
+        redaction = [.privacy]
+    }
+    
+    public func unredact() {
+        redaction = []
+    }
+    
     private func fetchEvents(_ completion: @escaping ([CalendarSlot]) -> Void) {
         DispatchQueue.global(qos: .default).async {
             let source = self.eventService.fetchEvents(inNumberOfDays: 14, startingFrom: Date())

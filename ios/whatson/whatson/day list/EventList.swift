@@ -12,6 +12,7 @@ import Core
 struct EventList: View {
     
     @Binding var events: [CalendarSlot]
+    @Binding var redaction: RedactionReasons
     let onEmptyTapped: (CalendarSlot) -> Void
     
     var body: some View {
@@ -32,6 +33,7 @@ struct EventList: View {
             }
             .padding(.bottom, 32)
             .padding(.horizontal)
+            .redacted(reason: redaction)
         }
         .background(Color("windowBackground"))
     }
@@ -45,6 +47,7 @@ struct EmptySlot: View {
     
     var body: some View {
         Text("Empty")
+            .privacySensitive()
             .labelStyle(.lower)
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -85,13 +88,25 @@ struct EmptySlot: View {
 
 struct EventList_Previews: PreviewProvider {
     static var previews: some View {
-        EventList(events: .constant([.empty(duration: 2),
-                            .empty(inFuture: 1, duration: 2)
-                                .withEvent(named: "Bar"),
-                            .empty(inFuture: 2, duration: 2),
-                            .empty(inFuture: 3, duration: 2),
-                            .empty(inFuture: 4, duration: 2)
-                                .withEvent(named: "Foo")
-                                        .withEvent(named: "Another item")])) { _ in }
+        Group {
+            
+                EventList(events: .constant([.empty(duration: 2),
+                                    .empty(inFuture: 1, duration: 2)
+                                        .withEvent(named: "Bar"),
+                                    .empty(inFuture: 2, duration: 2),
+                                    .empty(inFuture: 3, duration: 2),
+                                    .empty(inFuture: 4, duration: 2)
+                                        .withEvent(named: "Foo")
+                                                .withEvent(named: "Another item")]), redaction: .constant([])) { _ in }
+            
+                EventList(events: .constant([.empty(duration: 2),
+                                    .empty(inFuture: 1, duration: 2)
+                                        .withEvent(named: "Bar"),
+                                    .empty(inFuture: 2, duration: 2),
+                                    .empty(inFuture: 3, duration: 2),
+                                    .empty(inFuture: 4, duration: 2)
+                                        .withEvent(named: "Foo")
+                                                .withEvent(named: "Another item")]), redaction: .constant([.privacy])) { _ in }
+        }
     }
 }

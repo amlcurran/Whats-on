@@ -11,7 +11,7 @@ struct PresenterEventList: View {
     let onEmptyTapped: (CalendarSlot) -> Void
     
     var body: some View {
-        EventList(events: $presenter.events, onEmptyTapped: onEmptyTapped)
+        EventList(events: $presenter.events, redaction: $presenter.redaction, onEmptyTapped: onEmptyTapped)
     }
     
 }
@@ -33,7 +33,7 @@ class WhatsOnViewController: UIViewController,
     private var eventService: EventsService!
 
     private lazy var table = CalendarDiffableTableView(delegate: self)
-    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,11 +64,11 @@ class WhatsOnViewController: UIViewController,
     
     private func snapshotAndShare() {
         UIView.performWithoutAnimation {
-            table.sharingMode = true
+            presenter.redact()
         }
         defer {
             UIView.performWithoutAnimation {
-                table.sharingMode = false
+                presenter.unredact()
             }
         }
         if let snapshot = view.getImageFromCurrentContext(bounds: nil) {
