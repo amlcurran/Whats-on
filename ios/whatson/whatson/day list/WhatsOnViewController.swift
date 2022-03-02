@@ -8,9 +8,10 @@ import Intents
 struct PresenterEventList: View {
     
     @ObservedObject var presenter: WhatsOnPresenter
+    let onEmptyTapped: (CalendarSlot) -> Void
     
     var body: some View {
-        EventList(events: $presenter.events)
+        EventList(events: $presenter.events, onEmptyTapped: onEmptyTapped)
     }
     
 }
@@ -47,7 +48,9 @@ class WhatsOnViewController: UIViewController,
             } onShareModeTapped: { [weak self] in
                 self?.snapshotAndShare()
             }
-            PresenterEventList(presenter: presenter)
+            PresenterEventList(presenter: presenter) { [weak self] slot in
+                self?.addEvent(for: slot)
+            }
         })
         anchor(hostingView.view)
         hostingView.didMove(toParent: self)
