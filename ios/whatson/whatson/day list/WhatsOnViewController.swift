@@ -5,6 +5,16 @@ import WidgetKit
 import Core
 import Intents
 
+struct PresenterEventList: View {
+    
+    @ObservedObject var presenter: WhatsOnPresenter
+    
+    var body: some View {
+        EventList(events: $presenter.events)
+    }
+    
+}
+
 class WhatsOnViewController: UIViewController,
         EKEventEditViewDelegate,
         WhatsOnPresenterView,
@@ -31,12 +41,14 @@ class WhatsOnViewController: UIViewController,
 
         eventService = .default
         presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService)
-        let header = HeaderView2 { [weak self] in
-            self?.didTapEdit()
-        } onShareModeTapped: { [weak self] in
-            self?.snapshotAndShare()
-        }
-        let hostingView = UIHostingController(rootView: header)
+        let hostingView = UIHostingController(rootView: VStack(spacing: 0) {
+            HeaderView2 { [weak self] in
+                self?.didTapEdit()
+            } onShareModeTapped: { [weak self] in
+                self?.snapshotAndShare()
+            }
+            PresenterEventList(presenter: presenter)
+        })
         anchor(hostingView.view)
         hostingView.didMove(toParent: self)
 
@@ -77,7 +89,7 @@ class WhatsOnViewController: UIViewController,
         stackView.axis = .vertical
         
         stackView.addArrangedSubview(header)
-        stackView.addArrangedSubview(table.view)
+//        stackView.addArrangedSubview(table.view)
         
         view.add(stackView, constrainedTo: [.bottom, .leading, .trailing])
         stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true

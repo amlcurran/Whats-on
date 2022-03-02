@@ -20,6 +20,7 @@ public class EventKitEventRepository: EventsRepository {
         return filtered.compactMap { ekEvent -> EventCalendarItem in
             return EventCalendarItem(eventId: ekEvent.eventIdentifier,
                                      title: ekEvent.title,
+                                     location: ekEvent.location,
                                      startTime: ekEvent.startDate,
                                      endTime: ekEvent.endDate)
         }

@@ -18,6 +18,10 @@ extension CLLocationCoordinate2D: Equatable {
     
 }
 
+struct Foo: Identifiable {
+    var id: String
+}
+
 struct DetailsCard2: View {
     
     typealias ViewState = Event
@@ -27,54 +31,62 @@ struct DetailsCard2: View {
         let coordinate: CLLocationCoordinate2D?
     }
     
-    @State var viewState: ViewState {
-        didSet {
-            if let location = viewState.location {
-                self.location = Location(location: location, coordinate: nil)
-            } else {
-                self.location = nil
-            }
-        }
-    }
-    @State var location: Location?
+    @State var viewState: ViewState
+    @State var isExpanded: Bool = false
+    @State var coordinate: CLLocationCoordinate2D?
     
     private let geocoder = CLGeocoder()
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             VStack(alignment: .leading, spacing: 4) {
-            Text(viewState.title)
-                .labelStyle(.header)
-            Text("From " + viewState.startDate.formatted(date: .omitted, time: .shortened) + " to " + viewState.endDate.formatted(date: .omitted, time: .shortened))
-                .labelStyle(.lower)
-            }
-            .padding()
-            if let location = location {
-                Text(location.location)
-                    .labelStyle(.lower)
-                    .padding(.horizontal)
-                if let coordinate = location.coordinate {
-                    Map(coordinateRegion: .constant(MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))))
-                        .frame(maxHeight: 160)
+                Text(viewState.title)
+                    .labelStyle(.header)
+                if isExpanded {
+                    Text("From " + viewState.startDate.formatted(date: .omitted, time: .shortened) + " to " + viewState.endDate.formatted(date: .omitted, time: .shortened))
+                        .labelStyle(.lower)
+                } else {
+                    Text("From " + viewState.startDate.formatted(date: .omitted, time: .shortened))
+                        .labelStyle(.lower)
                 }
             }
+            .padding()
+            if let coordinate = coordinate, isExpanded {
+                Text(viewState.location ?? "")
+                    .labelStyle(.lower)
+                    .padding(.horizontal)
+                Map(coordinateRegion: .constant(MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))), annotationItems: [Foo(id: "abc")], annotationContent: { _ in
+                    MapMarker(coordinate: coordinate, tint: .pink)
+                })
+                    .frame(height: 160)
+            }
         }
-        .animation(.easeInOut.speed(3), value: location)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .animation(.easeInOut.speed(3), value: coordinate)
         .background {
             Rectangle()
                 .fill(Color("surface"))
         }
         .clipShape(RoundedRectangle(cornerRadius: 8))
-        .task {
-            if let location = location {
+        .onTapGesture {
+            isExpanded.toggle()
+            showMoreDetails()
+        }
+    }
+    
+    func showMoreDetails() {
+        Task {
+            if let location = viewState.location {
                 do {
-                    try await geocoder.geocodeAddressString(location.location)
+                    let geocoded = try await geocoder.geocodeAddressString(location)
+                    self.coordinate = geocoded.first?.location?.coordinate
                 } catch {
                     print(error)
                 }
             }
         }
     }
+    
 }
 
 struct DetailsCard2_Previews: PreviewProvider {
@@ -83,12 +95,12 @@ struct DetailsCard2_Previews: PreviewProvider {
             DetailsCard2(
                 viewState: .init(title: "Foo",
                                  location: "Tate Modern", startDate: Date(), endDate: Date().addingTimeInterval(60 * 60)),
-                location: DetailsCard2.Location(location: "Tate Modern", coordinate: CLLocationCoordinate2D(latitude: 51.5675456, longitude: -0.105891))
+                isExpanded: true, coordinate: CLLocationCoordinate2D(latitude: 51.5675456, longitude: -0.105891)
             )
             DetailsCard2(
                 viewState: .init(title: "Foo",
                                  location: "Tate Modern", startDate: Date(), endDate: Date().addingTimeInterval(60 * 60)),
-                location: nil
+                coordinate: nil
             )
         }
         .preferredColorScheme(.dark)

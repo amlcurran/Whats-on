@@ -12,13 +12,15 @@ public struct EventCalendarItem: CalendarItem, Equatable, Hashable {
 
     public let eventId: String
     public let title: String
+    public let location: String?
     public let startTime: Date
     public let endTime: Date
     public let isEmpty: Bool = false
 
-    public init(eventId: String, title: String, startTime: Date, endTime: Date) {
+    public init(eventId: String, title: String, location: String?, startTime: Date, endTime: Date) {
         self.eventId = eventId
         self.title = title
+        self.location = location
         self.startTime = startTime
         self.endTime = endTime
     }
