@@ -18,18 +18,20 @@ struct EventList: View {
     var body: some View {
         ScrollView(.vertical) {
             VStack(alignment: .leading) {
-                ForEach(events) { slot in
+                ForEach(events, id: \.id) { slot in
                     Spacer(minLength: 16)
                     Text(slot.boundaryStart.formatted(date: .complete, time: .omitted))
                         .labelStyle(.lower)
                     if let event = slot.items.first {
-                        DetailsCard2(viewState: Event(title: event.title, location: event.location, startDate: event.startTime, endDate: event.endTime)) 
+                        DetailsCard2(viewState: Event(title: event.title, location: event.location, startDate: event.startTime, endDate: event.endTime))
+                            .transition(.scale)
                     } else {
                         EmptySlot {
                             onEmptyTapped(slot)
-                        }
+                        }.transition(.scale)
                     }
                 }
+                .animation(.easeInOut.speed(4), value: events)
             }
             .padding(.bottom, 32)
             .padding(.horizontal)
@@ -52,23 +54,9 @@ struct EmptySlot: View {
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
             .contentShape(Rectangle())
-            .simultaneousGesture(
-                TapGesture()
-                    .onEnded {
-                        onTapped()
-                    }
-            )
-            .simultaneousGesture(
-                DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                    .onChanged { _ in
-                        if !isTapped {
-                            isTapped = true
-                        }
-                    }
-                    .onEnded { _ in
-                        isTapped = false
-                    }
-            )
+            .onTapGesture {
+                onTapped()
+            }
             .background  {
                 ZStack {
                 RoundedRectangle(cornerRadius: 8)

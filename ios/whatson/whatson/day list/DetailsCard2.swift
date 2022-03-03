@@ -51,14 +51,40 @@ struct DetailsCard2: View {
                 }
             }
             .padding()
-            if let coordinate = coordinate, isExpanded {
+            if isExpanded {
                 Text(viewState.location ?? "")
                     .labelStyle(.lower)
                     .padding(.horizontal)
-                Map(coordinateRegion: .constant(MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))), annotationItems: [Foo(id: "abc")], annotationContent: { _ in
-                    MapMarker(coordinate: coordinate, tint: .pink)
-                })
-                    .frame(height: 160)
+                if let coordinate = coordinate {
+                    Map(coordinateRegion: .constant(MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))), annotationItems: [Foo(id: "abc")], annotationContent: { _ in
+                        MapMarker(coordinate: coordinate, tint: .pink)
+                    })
+                        .frame(height: 160)
+                }
+            }
+            if isExpanded {
+                HStack {
+                    Button {
+                        
+                    } label: {
+                        Label("Edit", systemImage: "pencil")
+                    }
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                    Button {
+                        
+                    } label: {
+                        Label("More", systemImage: "ellipsis.circle")
+                    }
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                    Button {
+                        
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                }
+                .frame(maxWidth: .infinity)
+                .accentColor(Color("accent"))
             }
         }
         .privacySensitive()
@@ -69,8 +95,11 @@ struct DetailsCard2: View {
                 .fill(Color("surface"))
         }
         .clipShape(RoundedRectangle(cornerRadius: 8))
+        .shadow(color: .black.opacity(0.1), radius: 2, x: 1, y: 2)
         .onTapGesture {
-            isExpanded.toggle()
+            withAnimation(.easeInOut.speed(2)) {
+                isExpanded.toggle()
+            }
             showMoreDetails()
         }
     }
@@ -80,7 +109,9 @@ struct DetailsCard2: View {
             if let location = viewState.location {
                 do {
                     let geocoded = try await geocoder.geocodeAddressString(location)
+                    withAnimation(.easeInOut.speed(2)) {
                     self.coordinate = geocoded.first?.location?.coordinate
+                    }
                 } catch {
                     print(error)
                 }
@@ -103,7 +134,10 @@ struct DetailsCard2_Previews: PreviewProvider {
                                  location: "Tate Modern", startDate: Date(), endDate: Date().addingTimeInterval(60 * 60)),
                 coordinate: nil
             )
+            Spacer(minLength: 0)
         }
-        .preferredColorScheme(.dark)
+        .padding()
+        .background(Color.green.opacity(0.2))
+//        .preferredColorScheme(.dark)
     }
 }

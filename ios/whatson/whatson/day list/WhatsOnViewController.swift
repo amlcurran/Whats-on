@@ -11,7 +11,9 @@ struct PresenterEventList: View {
     let onEmptyTapped: (CalendarSlot) -> Void
     
     var body: some View {
-        EventList(events: $presenter.events, redaction: $presenter.redaction, onEmptyTapped: onEmptyTapped)
+        EventList(events: $presenter.events,
+                  redaction: $presenter.redaction,
+                  onEmptyTapped: onEmptyTapped)
     }
     
 }
@@ -42,16 +44,18 @@ class WhatsOnViewController: UIViewController,
 
         eventService = .default
         presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService)
-        let hostingView = UIHostingController(rootView: VStack(spacing: 0) {
-            HeaderView2 { [weak self] in
-                self?.didTapEdit()
-            } onShareModeTapped: { [weak self] in
-                self?.snapshotAndShare()
+        let hostingView = UIHostingController(
+            rootView: VStack(spacing: 0) {
+                HeaderView2 { [weak self] in
+                    self?.didTapEdit()
+                } onShareModeTapped: { [weak self] in
+                    self?.snapshotAndShare()
+                }
+                PresenterEventList(presenter: presenter) { [weak self] slot in
+                    self?.addEvent(for: slot)
+                }
             }
-            PresenterEventList(presenter: presenter) { [weak self] slot in
-                self?.addEvent(for: slot)
-            }
-        })
+        )
         anchor(hostingView.view)
         hostingView.didMove(toParent: self)
 
@@ -66,21 +70,25 @@ class WhatsOnViewController: UIViewController,
         UIView.performWithoutAnimation {
             presenter.redact()
         }
-        defer {
-            UIView.performWithoutAnimation {
-                presenter.unredact()
-            }
-        }
-        if let snapshot = view.getImageFromCurrentContext(bounds: nil) {
-            if let png = snapshot.pngData(),
-               let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
-                do {
-                    let temporary = url.appendingPathComponent("temporary.png")
-                    try png.write(to: temporary)
-                    let viewController = UIActivityViewController(activityItems: [temporary], applicationActivities: nil)
-                    present(viewController, animated: true, completion: nil)
-                } catch {
-                    print(error)
+//        defer {
+//            UIView.performWithoutAnimation {
+//                presenter.unredact()
+//            }
+//        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+            if let snapshot = self.view.getImageFromCurrentContext(bounds: nil) {
+                if let png = snapshot.pngData(),
+                   let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
+                    do {
+                        let temporary = url.appendingPathComponent("temporary.png")
+                        try png.write(to: temporary)
+                        let viewController = UIActivityViewController(activityItems: [temporary], applicationActivities: nil)
+                        self.present(viewController, animated: true) {
+                            self.presenter.unredact()
+                        }
+                    } catch {
+                        print(error)
+                    }
                 }
             }
         }
