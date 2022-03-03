@@ -17,63 +17,31 @@ struct EventList: View {
     let onEmptyTapped: (CalendarSlot) -> Void
     
     var body: some View {
-        ScrollView(.vertical) {
-            VStack(alignment: .leading) {
-                ForEach(events, id: \.id) { slot in
-                    Spacer(minLength: 16)
-                    Text(slot.boundaryStart.formatted(date: .complete, time: .omitted))
-                        .labelStyle(.lower)
-                    if let event = slot.items.first {
-                        DetailsCard2(viewState: Event(title: event.title, location: event.location, startDate: event.startTime, endDate: event.endTime)) { coordinate in
-                            let item = MKMapItem(placemark: MKPlacemark(placemark: coordinate))
-                            item.openInMaps(launchOptions: [:])
-                        }
-                            .transition(.scale)
-                    } else {
-                        EmptySlot {
-                            onEmptyTapped(slot)
-                        }.transition(.scale)
+        List {
+            ForEach(events, id: \.id) { slot in
+                Text(slot.boundaryStart.formatted(date: .complete, time: .omitted))
+                    .labelStyle(.lower)
+                    .padding(.top, 8)
+                if let event = slot.items.first {
+                    DetailsCard2(viewState: Event(title: event.title, location: event.location, startDate: event.startTime, endDate: event.endTime)) { coordinate in
+                        let item = MKMapItem(placemark: MKPlacemark(placemark: coordinate))
+                        item.openInMaps(launchOptions: [:])
+                    }
+                } else {
+                    EmptySlot {
+                        onEmptyTapped(slot)
                     }
                 }
-                .animation(.easeInOut.speed(4), value: events)
             }
-            .padding(.bottom, 32)
-            .padding(.horizontal)
-            .redacted(reason: redaction)
+            .animation(.easeInOut.speed(4), value: events)
+            .listRowBackground(Color("windowBackground"))
+            .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+            .listRowSeparator(.hidden)
         }
+        .redacted(reason: redaction)
+        .listStyle(.plain)
+        .padding(.bottom, 32)
         .background(Color("windowBackground"))
-    }
-    
-}
-
-struct EmptySlot: View {
-    
-    var onTapped: () -> Void
-    @State var isTapped = false
-    
-    var body: some View {
-        Text("Nothing on")
-            .privacySensitive()
-            .labelStyle(.lower)
-            .padding()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .contentShape(Rectangle())
-            .onTapGesture {
-                onTapped()
-            }
-            .background  {
-                ZStack {
-                RoundedRectangle(cornerRadius: 8)
-                    .strokeBorder(style: .init(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 8, dash: [8, 8], dashPhase: 0))
-                    .foregroundColor(Color("lightText"))
-                    RoundedRectangle(cornerRadius: 8)
-                        .foregroundColor(Color("lightText"))
-                        .opacity(isTapped ? 0.3 : 0.0)
-                        .scaleEffect(x: isTapped ? 1.0 : 0.9, y: 1.0, anchor: .center)
-                        .animation(.easeInOut.speed(3), value: isTapped)
-                        
-                }
-            }
     }
     
 }
