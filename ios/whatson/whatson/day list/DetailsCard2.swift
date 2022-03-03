@@ -33,8 +33,8 @@ struct DetailsCard2: View {
     
     @State var viewState: ViewState
     @State var isExpanded: Bool = false
-    @State var coordinate: CLLocationCoordinate2D?
-    let onMapTapped: (MKCoordinateRegion) -> Void
+    @State var placemark: CLPlacemark?
+    let onMapTapped: (CLPlacemark) -> Void
     
     private let geocoder = CLGeocoder()
     
@@ -53,28 +53,35 @@ struct DetailsCard2: View {
                     }
                 }
             }
-            .padding()
+            .padding([.leading, .top, .trailing])
             if isExpanded {
                 if let location = viewState.location {
                     Text(location)
                         .labelStyle(.lower)
-                        .padding(.horizontal)
-                        .padding(.bottom, 4)
+                        .padding([.leading, .trailing])
                 }
-                if let coordinate = coordinate {
-                    Map(coordinateRegion: .constant(MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))), annotationItems: [Foo(id: "abc")], annotationContent: { _ in
-                        MapMarker(coordinate: coordinate, tint: .pink)
-                    })
-                        .frame(height: 160)
+                if let placemark = placemark {
+                    DetailMap(placemark: placemark)
                         .onTapGesture {
-                            onMapTapped(MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)))
+                            onMapTapped(placemark)
                         }
+                        .padding(.top, 4)
+                } else {
+                    HStack {
+                        
+                    }
+                    .frame(height: 8)
                 }
+            } else {
+                HStack {
+                    
+                }
+                .frame(height: 8)
             }
         }
         .privacySensitive()
         .frame(maxWidth: .infinity, alignment: .leading)
-        .animation(.easeInOut.speed(3), value: coordinate)
+        .animation(.easeInOut.speed(3), value: placemark)
         .background {
             Rectangle()
                 .fill(Color("surface"))
@@ -95,7 +102,7 @@ struct DetailsCard2: View {
                 do {
                     let geocoded = try await geocoder.geocodeAddressString(location)
                     withAnimation(.easeInOut.speed(2)) {
-                    self.coordinate = geocoded.first?.location?.coordinate
+                    self.placemark = geocoded.first
                     }
                 } catch {
                     print(error)
@@ -112,12 +119,12 @@ struct DetailsCard2_Previews: PreviewProvider {
             DetailsCard2(
                 viewState: .init(title: "Foo",
                                  location: "Tate Modern", startDate: Date(), endDate: Date().addingTimeInterval(60 * 60)),
-                isExpanded: true, coordinate: CLLocationCoordinate2D(latitude: 51.5675456, longitude: -0.105891)
+                isExpanded: true, placemark: nil
             ) { _ in }
             DetailsCard2(
                 viewState: .init(title: "Foo",
                                  location: "Tate Modern", startDate: Date(), endDate: Date().addingTimeInterval(60 * 60)),
-                coordinate: nil
+                placemark: nil
             ) { _ in }
             Spacer(minLength: 0)
         }

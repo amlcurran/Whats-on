@@ -115,6 +115,7 @@
 		86FFFE491EC10E01009D772E /* Optional+Requirements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FFFE481EC10E01009D772E /* Optional+Requirements.swift */; };
 		9F0A3D2427BC552E00D3B660 /* NewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A3D2327BC552E00D3B660 /* NewListView.swift */; };
 		9F41E8E827A204DC0083C1EC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F41E8E727A204DC0083C1EC /* GoogleService-Info.plist */; };
+		9FA8B40B27D1855C00BF89B3 /* DetailMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA8B40A27D1855C00BF89B3 /* DetailMap.swift */; };
 		9FBE073827CD6C7E00C6BF96 /* DetailsCard2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBE073727CD6C7E00C6BF96 /* DetailsCard2.swift */; };
 		9FBE073A27D0087B00C6BF96 /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBE073927D0087B00C6BF96 /* EventList.swift */; };
 /* End PBXBuildFile section */
@@ -319,6 +320,7 @@
 		86FFFE481EC10E01009D772E /* Optional+Requirements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Requirements.swift"; sourceTree = "<group>"; };
 		9F0A3D2327BC552E00D3B660 /* NewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListView.swift; sourceTree = "<group>"; };
 		9F41E8E727A204DC0083C1EC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9FA8B40A27D1855C00BF89B3 /* DetailMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMap.swift; sourceTree = "<group>"; };
 		9FBE073727CD6C7E00C6BF96 /* DetailsCard2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCard2.swift; sourceTree = "<group>"; };
 		9FBE073927D0087B00C6BF96 /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -515,6 +517,7 @@
 				8687CAF526E6BBA20032F6B1 /* DayListView.swift */,
 				9F0A3D2327BC552E00D3B660 /* NewListView.swift */,
 				9FBE073927D0087B00C6BF96 /* EventList.swift */,
+				9FA8B40A27D1855C00BF89B3 /* DetailMap.swift */,
 			);
 			path = "day list";
 			sourceTree = "<group>";
@@ -1009,6 +1012,7 @@
 				8658A2321F375E3A00BF219C /* TableItem.swift in Sources */,
 				69853BB8C3723DD6A606DFFE /* DetailsCard.swift in Sources */,
 				865C7B011EE4B00D0047D8E0 /* BoundaryPickerView.swift in Sources */,
+				9FA8B40B27D1855C00BF89B3 /* DetailMap.swift in Sources */,
 				698533DEAF59954635D7E3CD /* Line.swift in Sources */,
 				69853EB6AEFC9EE982D28388 /* TimeLabel.swift in Sources */,
 				69853B3AC06B29C271651CF0 /* UIDatePicker+Hours.swift in Sources */,

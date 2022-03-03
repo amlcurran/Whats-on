@@ -49,7 +49,6 @@ struct OptionsView: View {
                     Section(header: Text("Shown calendars"), footer: Text("Only events from checked calendars will be shown in your schedule.")) {
                         ShownCalendarPicker(allCalendars: allCalendars)
                     }
-                    .listRowBackground(Color("surface"))
                 }
                 .listStyle(.insetGrouped)
             }.toolbar {

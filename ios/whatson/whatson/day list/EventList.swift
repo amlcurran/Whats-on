@@ -25,11 +25,8 @@ struct EventList: View {
                         .labelStyle(.lower)
                     if let event = slot.items.first {
                         DetailsCard2(viewState: Event(title: event.title, location: event.location, startDate: event.startTime, endDate: event.endTime)) { coordinate in
-                            let item = MKMapItem(placemark: MKPlacemark(coordinate: coordinate.center))
-                            item.openInMaps(launchOptions: [
-                                MKLaunchOptionsMapCenterKey: coordinate.center,
-                                MKLaunchOptionsMapSpanKey: coordinate.span
-                            ])
+                            let item = MKMapItem(placemark: MKPlacemark(placemark: coordinate))
+                            item.openInMaps(launchOptions: [:])
                         }
                             .transition(.scale)
                     } else {
@@ -55,7 +52,7 @@ struct EmptySlot: View {
     @State var isTapped = false
     
     var body: some View {
-        Text("Empty")
+        Text("Nothing on")
             .privacySensitive()
             .labelStyle(.lower)
             .padding()
