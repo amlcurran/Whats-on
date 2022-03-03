@@ -34,57 +34,42 @@ struct DetailsCard2: View {
     @State var viewState: ViewState
     @State var isExpanded: Bool = false
     @State var coordinate: CLLocationCoordinate2D?
+    let onMapTapped: (MKCoordinateRegion) -> Void
     
     private let geocoder = CLGeocoder()
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(viewState.title)
-                    .labelStyle(.header)
-                if isExpanded {
-                    Text("From " + viewState.startDate.formatted(date: .omitted, time: .shortened) + " to " + viewState.endDate.formatted(date: .omitted, time: .shortened))
-                        .labelStyle(.lower)
-                } else {
-                    Text("From " + viewState.startDate.formatted(date: .omitted, time: .shortened))
-                        .labelStyle(.lower)
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(viewState.title)
+                        .labelStyle(.header)
+                    if isExpanded {
+                        Text("From " + viewState.startDate.formatted(date: .omitted, time: .shortened) + " to " + viewState.endDate.formatted(date: .omitted, time: .shortened))
+                            .labelStyle(.lower)
+                    } else {
+                        Text("From " + viewState.startDate.formatted(date: .omitted, time: .shortened))
+                            .labelStyle(.lower)
+                    }
                 }
             }
             .padding()
             if isExpanded {
-                Text(viewState.location ?? "")
-                    .labelStyle(.lower)
-                    .padding(.horizontal)
+                if let location = viewState.location {
+                    Text(location)
+                        .labelStyle(.lower)
+                        .padding(.horizontal)
+                        .padding(.bottom, 4)
+                }
                 if let coordinate = coordinate {
                     Map(coordinateRegion: .constant(MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))), annotationItems: [Foo(id: "abc")], annotationContent: { _ in
                         MapMarker(coordinate: coordinate, tint: .pink)
                     })
                         .frame(height: 160)
+                        .onTapGesture {
+                            onMapTapped(MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)))
+                        }
                 }
-            }
-            if isExpanded {
-                HStack {
-                    Button {
-                        
-                    } label: {
-                        Label("Edit", systemImage: "pencil")
-                    }
-                    .frame(maxWidth: .infinity, minHeight: 44)
-                    Button {
-                        
-                    } label: {
-                        Label("More", systemImage: "ellipsis.circle")
-                    }
-                    .frame(maxWidth: .infinity, minHeight: 44)
-                    Button {
-                        
-                    } label: {
-                        Label("Delete", systemImage: "trash")
-                    }
-                    .frame(maxWidth: .infinity, minHeight: 44)
-                }
-                .frame(maxWidth: .infinity)
-                .accentColor(Color("accent"))
             }
         }
         .privacySensitive()
@@ -128,12 +113,12 @@ struct DetailsCard2_Previews: PreviewProvider {
                 viewState: .init(title: "Foo",
                                  location: "Tate Modern", startDate: Date(), endDate: Date().addingTimeInterval(60 * 60)),
                 isExpanded: true, coordinate: CLLocationCoordinate2D(latitude: 51.5675456, longitude: -0.105891)
-            )
+            ) { _ in }
             DetailsCard2(
                 viewState: .init(title: "Foo",
                                  location: "Tate Modern", startDate: Date(), endDate: Date().addingTimeInterval(60 * 60)),
                 coordinate: nil
-            )
+            ) { _ in }
             Spacer(minLength: 0)
         }
         .padding()

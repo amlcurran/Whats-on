@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Core
+import MapKit
 
 struct EventList: View {
     
@@ -23,7 +24,13 @@ struct EventList: View {
                     Text(slot.boundaryStart.formatted(date: .complete, time: .omitted))
                         .labelStyle(.lower)
                     if let event = slot.items.first {
-                        DetailsCard2(viewState: Event(title: event.title, location: event.location, startDate: event.startTime, endDate: event.endTime))
+                        DetailsCard2(viewState: Event(title: event.title, location: event.location, startDate: event.startTime, endDate: event.endTime)) { coordinate in
+                            let item = MKMapItem(placemark: MKPlacemark(coordinate: coordinate.center))
+                            item.openInMaps(launchOptions: [
+                                MKLaunchOptionsMapCenterKey: coordinate.center,
+                                MKLaunchOptionsMapSpanKey: coordinate.span
+                            ])
+                        }
                             .transition(.scale)
                     } else {
                         EmptySlot {
