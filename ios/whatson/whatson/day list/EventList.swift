@@ -23,7 +23,7 @@ struct EventList: View {
                     .labelStyle(.lower)
                     .padding(.top, 8)
                 if let event = slot.items.first {
-                    DetailsCard2(viewState: Event(title: event.title, location: event.location, startDate: event.startTime, endDate: event.endTime)) { coordinate in
+                    DetailsCard2(viewState: event) { coordinate in
                         let item = MKMapItem(placemark: MKPlacemark(placemark: coordinate))
                         item.openInMaps(launchOptions: [:])
                     }
@@ -37,10 +37,27 @@ struct EventList: View {
             .listRowBackground(Color("windowBackground"))
             .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
             .listRowSeparator(.hidden)
+//            GeometryReader { (proxy: GeometryProxy) in
+//                ZStack {
+//                    Path { path in
+//                        path.addRelativeArc(center: CGPoint(x: proxy.size.width / 2, y: 200), radius: proxy.size.width / 2, startAngle: .degrees(180), delta: .degrees(180))
+//                    }.stroke()
+//                        .stroke(lineWidth: 8)
+//                        .foregroundColor(Color("secondary"))
+//                    let offset = UIScreen.main.bounds.maxY - proxy.frame(in: .global).maxY
+//                    let maxOffset: CGFloat = 150
+//                    let _ = print(offset)
+//                    Circle()
+//                        .size(width: 50, height: 50)
+//                        .offset(x: offset / maxOffset * proxy.size.width, y: 200 - 200 * sin(offset / maxOffset * .pi))
+//                }
+//                .frame(minHeight: 250)
+//            }
+//            .listRowBackground(Color("windowBackground"))
+//            .listRowSeparator(.hidden)
         }
         .redacted(reason: redaction)
         .listStyle(.plain)
-        .padding(.bottom, 32)
         .background(Color("windowBackground"))
     }
     

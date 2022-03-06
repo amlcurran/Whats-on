@@ -8,6 +8,7 @@
 
 import SwiftUI
 import MapKit
+import Core
 
 extension CLLocationCoordinate2D: Equatable {
     public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
@@ -24,7 +25,7 @@ struct Foo: Identifiable {
 
 struct DetailsCard2: View {
     
-    typealias ViewState = Event
+    typealias ViewState = EventCalendarItem
     
     struct Location: Equatable {
         let location: String
@@ -45,10 +46,10 @@ struct DetailsCard2: View {
                     Text(viewState.title)
                         .labelStyle(.header)
                     if isExpanded {
-                        Text("From " + viewState.startDate.formatted(date: .omitted, time: .shortened) + " to " + viewState.endDate.formatted(date: .omitted, time: .shortened))
+                        Text("From " + viewState.startTime.formatted(date: .omitted, time: .shortened) + " to " + viewState.endTime.formatted(date: .omitted, time: .shortened))
                             .labelStyle(.lower)
                     } else {
-                        Text("From " + viewState.startDate.formatted(date: .omitted, time: .shortened))
+                        Text("From " + viewState.startTime.formatted(date: .omitted, time: .shortened))
                             .labelStyle(.lower)
                     }
                 }
@@ -117,13 +118,19 @@ struct DetailsCard2_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             DetailsCard2(
-                viewState: .init(title: "Foo",
-                                 location: "Tate Modern", startDate: Date(), endDate: Date().addingTimeInterval(60 * 60)),
+                viewState: .init(eventId: "def",
+                                 title: "Foo",
+                                 location: "Tate Modern",
+                                 startTime: Date(),
+                                 endTime: Date().addingTimeInterval(60 * 60)),
                 isExpanded: true, placemark: nil
             ) { _ in }
             DetailsCard2(
-                viewState: .init(title: "Foo",
-                                 location: "Tate Modern", startDate: Date(), endDate: Date().addingTimeInterval(60 * 60)),
+                viewState: .init(eventId: "abc",
+                                 title: "Foo",
+                                 location: "Tate Modern",
+                                 startTime: Date(),
+                                 endTime: Date().addingTimeInterval(60 * 60)),
                 placemark: nil
             ) { _ in }
             Spacer(minLength: 0)
