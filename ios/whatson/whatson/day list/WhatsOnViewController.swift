@@ -24,28 +24,16 @@ struct PresenterEventList: View {
 
 class WhatsOnViewController: UIViewController {
 
-    private let dateFormatter = DateFormatter(dateFormat: "EEE")
-    private let eventStore = EKEventStore.instance
-    private let pushTransition = EventDetailsPushTransition()
-    private let navigationAnimations = EventTransitionNavigationDelegate()
-    private let gestureHandler = AllowsGestureRecognizer()
-
-    private var forceTouchDisplayer: Any?
-    private var presenter: WhatsOnPresenter!
-    private var eventService: EventsService!
+    private lazy var presenter = WhatsOnPresenter(eventStore: .instance, eventService: .default)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .windowBackground
         title = " "
 
-        eventService = .default
-        presenter = WhatsOnPresenter(eventStore: eventStore, eventService: eventService)
         let hostingView = UIHostingController(
             rootView: VStack(spacing: 0) {
                 HeaderView2 { [weak self] in
-                    self?.didTapEdit()
-                } onShareModeTapped: { [weak self] in
                     self?.snapshotAndShare()
                 }
                 PresenterEventList(presenter: presenter)
@@ -56,9 +44,7 @@ class WhatsOnViewController: UIViewController {
 
 //        table.style()
 
-        navigationController?.delegate = navigationAnimations
         navigationController?.setNavigationBarHidden(true, animated: false)
-        navigationController?.interactivePopGestureRecognizer?.delegate = gestureHandler
     }
     
     private func snapshotAndShare() {
@@ -99,23 +85,6 @@ class WhatsOnViewController: UIViewController {
         
         view.add(stackView, constrainedTo: [.bottom, .leading, .trailing])
         stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-    }
-
-    func didTapEdit() {
-        let settings = OptionsViewController {
-            self.presenter.refreshEvents()
-        }
-        present(settings, animated: true)
-    }
-
-    func showDetails(for item: EventCalendarItem, at indexPath: IndexPath, in cell: UIView & Row) {
-        navigationAnimations.prepareTransition(from: indexPath, using: cell)
-        navigationController?.show(EventDetailsViewController(eventItem: item, showingNavBar: true), sender: nil)
-    }
-
-    func remove(_ event: EventCalendarItem) {
-        presenter.remove(event)
-        WidgetCenter.shared.reloadAllTimelines()
     }
 
 }

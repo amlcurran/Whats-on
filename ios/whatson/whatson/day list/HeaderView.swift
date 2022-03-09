@@ -3,9 +3,17 @@ import SwiftUI
 import Core
 
 struct HeaderView2: View {
+    
+    private enum ShownSheet: String, Identifiable {
+        case settings
+        
+        var id: String {
+            rawValue
+        }
+    }
 
-    let onEditTapped: () -> Void
     let onShareModeTapped: () -> Void
+    @State private var shownSheet: ShownSheet?
     
     var body: some View {
         VStack {
@@ -28,7 +36,7 @@ struct HeaderView2: View {
                 Spacer(minLength: 16)
                 Menu {
                     Button("Settings") {
-                        onEditTapped()
+                        shownSheet = .settings
                     }
                     Button("Private Share") {
                         onShareModeTapped()
@@ -42,6 +50,20 @@ struct HeaderView2: View {
         }
         .accentColor(Color("accent"))
         .background(Color("windowBackground"))
+        .sheet(item: $shownSheet, onDismiss: nil) { sheet in
+            switch sheet {
+            case .settings:
+                let timeStore = UserDefaultsTimeStore()
+                let calendarPreferenceStore = CalendarPreferenceStore()
+                let shownCalendars = CalendarLoader(preferenceStore: calendarPreferenceStore).load()
+                OptionsView(startDate: timeStore.startDateBinding,
+                                       endDate: timeStore.endDateBinding,
+                                       allCalendars: shownCalendars) {
+                    shownSheet = nil
+                }
+            }
+            
+        }
     }
 }
 
@@ -49,8 +71,6 @@ struct HeaderView2_Preview: PreviewProvider {
     
     static var previews: some View {
         HeaderView2 {
-            
-        } onShareModeTapped: {
             
         }
         .previewLayout(.sizeThatFits)
