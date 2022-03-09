@@ -12,6 +12,12 @@ struct PresenterEventList: View {
     var body: some View {
         EventList(events: $presenter.events,
                   redaction: $presenter.redaction)
+            .onAppear {
+                presenter.beginPresenting()
+            }
+            .onDisappear {
+                presenter.stopPresenting()
+            }
     }
     
 }
@@ -23,7 +29,6 @@ class WhatsOnViewController: UIViewController {
     private let pushTransition = EventDetailsPushTransition()
     private let navigationAnimations = EventTransitionNavigationDelegate()
     private let gestureHandler = AllowsGestureRecognizer()
-    private let addNewEventViewControllerFactory = AddNewEventViewControllerFactory()
 
     private var forceTouchDisplayer: Any?
     private var presenter: WhatsOnPresenter!
@@ -101,16 +106,6 @@ class WhatsOnViewController: UIViewController {
             self.presenter.refreshEvents()
         }
         present(settings, animated: true)
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        presenter.beginPresenting(delayingBy: .seconds(0))
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        presenter.stopPresenting()
     }
 
     func showDetails(for item: EventCalendarItem, at indexPath: IndexPath, in cell: UIView & Row) {

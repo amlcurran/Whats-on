@@ -48,16 +48,6 @@ struct AddEventView: UIViewControllerRepresentable {
     
 }
 
-class AddNewEventViewControllerFactory {
-
-    func newEventController(for calendarItem: CalendarSlot, delegate: EKEventEditViewDelegate) -> UIViewController {
-        let eventController = EKEventEditViewController(calendarItem: calendarItem, delegate: delegate)
-        eventController.modalPresentationStyle = .formSheet
-        return eventController
-    }
-
-}
-
 fileprivate extension EKEventEditViewController {
 
     convenience init(calendarItem: CalendarSlot,

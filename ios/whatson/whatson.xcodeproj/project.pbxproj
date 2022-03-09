@@ -104,7 +104,7 @@
 		86D751151C71316D00C0A607 /* UIColor+WhatsOn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D751141C71316D00C0A607 /* UIColor+WhatsOn.swift */; };
 		86DB90182676A05200F8BB72 /* WhatsOnPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F467F81C8AFFA500147F2E /* WhatsOnPresenter.swift */; };
 		86DB90192676A09100F8BB72 /* Delayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8600B99E1F09429D008578E5 /* Delayer.swift */; };
-		86DEC9561FB3A069000FF4CD /* AddNewEventViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DEC9551FB3A069000FF4CD /* AddNewEventViewControllerFactory.swift */; };
+		86DEC9561FB3A069000FF4CD /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DEC9551FB3A069000FF4CD /* AddEventView.swift */; };
 		86DEC9581FB3B40D000FF4CD /* NextStepTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DEC9571FB3B40D000FF4CD /* NextStepTableItem.swift */; };
 		86DF23DF26D287100051D3A8 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86755DC522C7BC2000E91DF4 /* Core.framework */; };
 		86F849991D046A3E007C41B0 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */; };
@@ -307,7 +307,7 @@
 		86DE0FE61BB885E8004E20B5 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		86DE0FE81BB8863D004E20B5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		86DE0FEA1BB88646004E20B5 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		86DEC9551FB3A069000FF4CD /* AddNewEventViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewEventViewControllerFactory.swift; sourceTree = "<group>"; };
+		86DEC9551FB3A069000FF4CD /* AddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventView.swift; sourceTree = "<group>"; };
 		86DEC9571FB3B40D000FF4CD /* NextStepTableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextStepTableItem.swift; sourceTree = "<group>"; };
 		86F467F81C8AFFA500147F2E /* WhatsOnPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsOnPresenter.swift; sourceTree = "<group>"; };
 		86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
@@ -506,7 +506,7 @@
 				8695D0321DA1A2A20034D52A /* SlotDetail.swift */,
 				6985333EBC410C0E8F45C969 /* FailedAccessView.swift */,
 				698530C0F754D12F1E38397C /* DayCell.swift */,
-				86DEC9551FB3A069000FF4CD /* AddNewEventViewControllerFactory.swift */,
+				86DEC9551FB3A069000FF4CD /* AddEventView.swift */,
 				869B1EF420E180A40012A72D /* EventItemView.swift */,
 				9F0A3D2327BC552E00D3B660 /* NewListView.swift */,
 				9FBE073927D0087B00C6BF96 /* EventList.swift */,
@@ -997,7 +997,7 @@
 				86FFFE491EC10E01009D772E /* Optional+Requirements.swift in Sources */,
 				8609C5A41DB01AF100B44D76 /* EventDetailsPushTransition.swift in Sources */,
 				8695D0301DA185DB0034D52A /* SlotCellStyle.swift in Sources */,
-				86DEC9561FB3A069000FF4CD /* AddNewEventViewControllerFactory.swift in Sources */,
+				86DEC9561FB3A069000FF4CD /* AddEventView.swift in Sources */,
 				86A9C2CB1C444468009281A0 /* WhatsOnAppDelegate.swift in Sources */,
 				8600B9A11F0946F9008578E5 /* UIView+Animations.swift in Sources */,
 				862D5479271787D000B66FA5 /* BoundaryPickerView2.swift in Sources */,
