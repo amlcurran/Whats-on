@@ -9,6 +9,44 @@
 import Foundation
 import EventKitUI
 import Core
+import SwiftUI
+
+struct AddEventView: UIViewControllerRepresentable {
+    
+    let slot: CalendarSlot
+    let completion: () -> Void
+    
+    class Coordinator: NSObject, EKEventEditViewDelegate {
+        
+        let view: AddEventView
+        
+        init(view: AddEventView) {
+            self.view = view
+        }
+        
+        func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
+            view.completion()
+        }
+        
+        
+    }
+    
+    typealias UIViewControllerType = EKEventEditViewController
+    
+    func makeUIViewController(context: Context) -> EKEventEditViewController {
+        EKEventEditViewController(calendarItem: slot)
+    }
+    
+    func updateUIViewController(_ uiViewController: EKEventEditViewController, context: Context) {
+        //
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(view: self)
+    }
+    
+    
+}
 
 class AddNewEventViewControllerFactory {
 
@@ -23,7 +61,7 @@ class AddNewEventViewControllerFactory {
 fileprivate extension EKEventEditViewController {
 
     convenience init(calendarItem: CalendarSlot,
-                     delegate: EKEventEditViewDelegate,
+                     delegate: EKEventEditViewDelegate? = nil,
                      eventStore: EKEventStore = EKEventStore.instance,
                      calendarPreferenceStore: CalendarPreferenceStore = CalendarPreferenceStore()) {
         self.init()

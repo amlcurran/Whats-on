@@ -9,12 +9,13 @@
 import SwiftUI
 import Core
 import MapKit
+import WidgetKit
 
 struct EventList: View {
     
     @Binding var events: [CalendarSlot]
     @Binding var redaction: RedactionReasons
-    let onEmptyTapped: (CalendarSlot) -> Void
+    @State var addingSlot: CalendarSlot?
     
     var body: some View {
         List {
@@ -29,7 +30,7 @@ struct EventList: View {
                     }
                 } else {
                     EmptySlot {
-                        onEmptyTapped(slot)
+                        addingSlot = slot
                     }
                 }
             }
@@ -59,6 +60,12 @@ struct EventList: View {
         .redacted(reason: redaction)
         .listStyle(.plain)
         .background(Color("windowBackground"))
+        .sheet(item: $addingSlot, onDismiss: nil) { slot in
+            AddEventView(slot: slot) {
+                addingSlot = nil
+                WidgetCenter.shared.reloadAllTimelines()
+            }
+        }
     }
     
 }
@@ -74,7 +81,7 @@ struct EventList_Previews: PreviewProvider {
                                     .empty(inFuture: 3, duration: 2),
                                     .empty(inFuture: 4, duration: 2)
                                         .withEvent(named: "Foo")
-                                                .withEvent(named: "Another item")]), redaction: .constant([])) { _ in }
+                                                .withEvent(named: "Another item")]), redaction: .constant([]))
             
                 EventList(events: .constant([.empty(duration: 2),
                                     .empty(inFuture: 1, duration: 2)
@@ -83,7 +90,7 @@ struct EventList_Previews: PreviewProvider {
                                     .empty(inFuture: 3, duration: 2),
                                     .empty(inFuture: 4, duration: 2)
                                         .withEvent(named: "Foo")
-                                                .withEvent(named: "Another item")]), redaction: .constant([.privacy])) { _ in }
+                                                .withEvent(named: "Another item")]), redaction: .constant([.privacy]))
         }
     }
 }

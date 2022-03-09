@@ -8,18 +8,15 @@ import Intents
 struct PresenterEventList: View {
     
     @ObservedObject var presenter: WhatsOnPresenter
-    let onEmptyTapped: (CalendarSlot) -> Void
     
     var body: some View {
         EventList(events: $presenter.events,
-                  redaction: $presenter.redaction,
-                  onEmptyTapped: onEmptyTapped)
+                  redaction: $presenter.redaction)
     }
     
 }
 
-class WhatsOnViewController: UIViewController,
-        EKEventEditViewDelegate {
+class WhatsOnViewController: UIViewController {
 
     private let dateFormatter = DateFormatter(dateFormat: "EEE")
     private let eventStore = EKEventStore.instance
@@ -46,9 +43,7 @@ class WhatsOnViewController: UIViewController,
                 } onShareModeTapped: { [weak self] in
                     self?.snapshotAndShare()
                 }
-                PresenterEventList(presenter: presenter) { [weak self] slot in
-                    self?.addEvent(for: slot)
-                }
+                PresenterEventList(presenter: presenter)
             }
         )
         anchor(hostingView.view)
@@ -118,11 +113,6 @@ class WhatsOnViewController: UIViewController,
         presenter.stopPresenting()
     }
 
-    func addEvent(for item: CalendarSlot) {
-        navigationController?.present(addNewEventViewControllerFactory.newEventController(for: item, delegate: self), animated: true, completion: nil)
-        WidgetCenter.shared.reloadAllTimelines()
-    }
-
     func showDetails(for item: EventCalendarItem, at indexPath: IndexPath, in cell: UIView & Row) {
         navigationAnimations.prepareTransition(from: indexPath, using: cell)
         navigationController?.show(EventDetailsViewController(eventItem: item, showingNavBar: true), sender: nil)
@@ -131,10 +121,6 @@ class WhatsOnViewController: UIViewController,
     func remove(_ event: EventCalendarItem) {
         presenter.remove(event)
         WidgetCenter.shared.reloadAllTimelines()
-    }
-
-    func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
-        navigationController?.dismiss(animated: true, completion: nil)
     }
 
 }

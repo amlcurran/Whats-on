@@ -75,7 +75,6 @@
 		868119E32306D76A0035553B /* CalendarPreferenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869475691F376DE900925C2A /* CalendarPreferenceStore.swift */; };
 		868119E42306D77C0035553B /* CalendarsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658A2391F37605000BF219C /* CalendarsLoader.swift */; };
 		868119E52306D7930035553B /* EKEventStore+Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9E4581DA8076400E8D019 /* EKEventStore+Singleton.swift */; };
-		8687CAF626E6BBA20032F6B1 /* DayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8687CAF526E6BBA20032F6B1 /* DayListView.swift */; };
 		8687F8BA2700B19C00220163 /* DemoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8687F8B82700AE4F00220163 /* DemoRepository.swift */; };
 		868A16BF26D257BF0090D6E4 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86BE23DD24AFBA4200B0B72F /* WidgetKit.framework */; };
 		868A16C026D257BF0090D6E4 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86BE23DF24AFBA4200B0B72F /* SwiftUI.framework */; };
@@ -267,7 +266,6 @@
 		86755DEB22C7BDB500E91DF4 /* TimeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCalculator.swift; sourceTree = "<group>"; };
 		86755DED22C7BDF100E91DF4 /* CalendarSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSlot.swift; sourceTree = "<group>"; };
 		867C4A1126D811D800B718DD /* DayViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViews.swift; sourceTree = "<group>"; };
-		8687CAF526E6BBA20032F6B1 /* DayListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayListView.swift; sourceTree = "<group>"; };
 		8687F8B82700AE4F00220163 /* DemoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoRepository.swift; sourceTree = "<group>"; };
 		868A16BE26D257BF0090D6E4 /* Widget3Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Widget3Extension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		868A16C226D257BF0090D6E4 /* Widget3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widget3.swift; sourceTree = "<group>"; };
@@ -510,7 +508,6 @@
 				698530C0F754D12F1E38397C /* DayCell.swift */,
 				86DEC9551FB3A069000FF4CD /* AddNewEventViewControllerFactory.swift */,
 				869B1EF420E180A40012A72D /* EventItemView.swift */,
-				8687CAF526E6BBA20032F6B1 /* DayListView.swift */,
 				9F0A3D2327BC552E00D3B660 /* NewListView.swift */,
 				9FBE073927D0087B00C6BF96 /* EventList.swift */,
 				9FA8B40A27D1855C00BF89B3 /* DetailMap.swift */,
@@ -989,7 +986,6 @@
 				8694756C1F37726D00925C2A /* CalendarPresenter.swift in Sources */,
 				861BD0E01D9FC4290032FBAB /* Optional+Fluency.swift in Sources */,
 				865C7B051EE574100047D8E0 /* OptionsViewController.swift in Sources */,
-				8687CAF626E6BBA20032F6B1 /* DayListView.swift in Sources */,
 				866D2E771EEA045E008D76D5 /* GradientView.swift in Sources */,
 				9FA8B40D27D18A2800BF89B3 /* EmptySlot.swift in Sources */,
 				8658A2301F375DF800BF219C /* TableSection.swift in Sources */,
