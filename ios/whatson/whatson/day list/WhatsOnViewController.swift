@@ -39,7 +39,9 @@ class WhatsOnViewController: UIViewController {
                 PresenterEventList(presenter: presenter)
             }
         )
-        anchor(hostingView.view)
+        
+        view.add(hostingView.view, constrainedTo: [.bottom, .leading, .trailing])
+        hostingView.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         hostingView.didMove(toParent: self)
 
 //        table.style()
@@ -73,18 +75,6 @@ class WhatsOnViewController: UIViewController {
                 }
             }
         }
-    }
-
-    private func anchor(_ header: UIView) {
-        let stackView = UIStackView()
-        stackView.alignment = .fill
-        stackView.axis = .vertical
-        
-        stackView.addArrangedSubview(header)
-//        stackView.addArrangedSubview(table.view)
-        
-        view.add(stackView, constrainedTo: [.bottom, .leading, .trailing])
-        stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
     }
 
 }

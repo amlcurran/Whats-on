@@ -24,7 +24,7 @@ struct EventList: View {
                     .labelStyle(.lower)
                     .padding(.top, 8)
                 if let event = slot.items.first {
-                    DetailsCard2(viewState: event) { coordinate in
+                    DetailsCard2(calendarItem: event) { coordinate in
                         let item = MKMapItem(placemark: MKPlacemark(placemark: coordinate))
                         item.openInMaps(launchOptions: [:])
                     }
@@ -34,7 +34,6 @@ struct EventList: View {
                     }
                 }
             }
-            .animation(.easeInOut.speed(4), value: events)
             .listRowBackground(Color("windowBackground"))
             .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
             .listRowSeparator(.hidden)

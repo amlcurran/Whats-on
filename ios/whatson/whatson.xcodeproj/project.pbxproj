@@ -12,7 +12,6 @@
 		2DBA1FC7FB7A35811ADEDB84 /* EventResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA151F9881A527C9CC0A71 /* EventResponse.swift */; };
 		69853044F5C74357E1751736 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985300D9DA8F970ED4D589E /* Animator.swift */; };
 		698531761CD39981ABD5B75B /* Completion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853BE8F4A525FC03DF7E20 /* Completion.swift */; };
-		6985330727D25CE189AC7193 /* FailedAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985333EBC410C0E8F45C969 /* FailedAccessView.swift */; };
 		698533858A420599E0C749F0 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698530C0F754D12F1E38397C /* DayCell.swift */; };
 		6985339AD6136F4F0794DD59 /* EKEventKit+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69853687E86C131BBEA80025 /* EKEventKit+Convenience.swift */; };
 		698533DEAF59954635D7E3CD /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985328C217A9C753C09CFDE /* Line.swift */; };
@@ -202,7 +201,6 @@
 		6985300D9DA8F970ED4D589E /* Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		698530C0F754D12F1E38397C /* DayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		6985328C217A9C753C09CFDE /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
-		6985333EBC410C0E8F45C969 /* FailedAccessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailedAccessView.swift; sourceTree = "<group>"; };
 		6985351AE5837369246C93AD /* EventDetailsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsPresenter.swift; sourceTree = "<group>"; };
 		6985358E9835009A7EA756E9 /* Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		69853687E86C131BBEA80025 /* EKEventKit+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "EKEventKit+Convenience.swift"; path = "utils/EKEventKit+Convenience.swift"; sourceTree = "<group>"; };
@@ -504,7 +502,6 @@
 				8695D0271DA023670034D52A /* HeaderView.swift */,
 				8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */,
 				8695D0321DA1A2A20034D52A /* SlotDetail.swift */,
-				6985333EBC410C0E8F45C969 /* FailedAccessView.swift */,
 				698530C0F754D12F1E38397C /* DayCell.swift */,
 				86DEC9551FB3A069000FF4CD /* AddEventView.swift */,
 				869B1EF420E180A40012A72D /* EventItemView.swift */,
@@ -1019,7 +1016,6 @@
 				2DBA1FC7FB7A35811ADEDB84 /* EventResponse.swift in Sources */,
 				8658A23C1F37685400BF219C /* CheckableTableItem.swift in Sources */,
 				8600B99D1F09383D008578E5 /* LoadingView.swift in Sources */,
-				6985330727D25CE189AC7193 /* FailedAccessView.swift in Sources */,
 				698538F49DD3046F71BE4E01 /* AllowsGestureRecognizer.swift in Sources */,
 				698533858A420599E0C749F0 /* DayCell.swift in Sources */,
 				8694756E1F37742C00925C2A /* DatePickerPresenter.swift in Sources */,

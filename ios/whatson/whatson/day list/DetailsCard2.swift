@@ -25,14 +25,12 @@ struct Foo: Identifiable {
 
 struct DetailsCard2: View {
     
-    typealias ViewState = EventCalendarItem
-    
     struct Location: Equatable {
         let location: String
         let coordinate: CLLocationCoordinate2D?
     }
     
-    @State var viewState: ViewState
+    let calendarItem: EventCalendarItem
     @State var isExpanded: Bool = false
     @State var placemark: CLPlacemark?
     let onMapTapped: (CLPlacemark) -> Void
@@ -43,20 +41,20 @@ struct DetailsCard2: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(viewState.title)
+                    Text(calendarItem.title)
                         .labelStyle(.header)
                     if isExpanded {
-                        Text("From " + viewState.startTime.formatted(date: .omitted, time: .shortened) + " to " + viewState.endTime.formatted(date: .omitted, time: .shortened))
+                        Text("From " + calendarItem.startTime.formatted(date: .omitted, time: .shortened) + " to " + calendarItem.endTime.formatted(date: .omitted, time: .shortened))
                             .labelStyle(.lower)
                     } else {
-                        Text("From " + viewState.startTime.formatted(date: .omitted, time: .shortened))
+                        Text("From " + calendarItem.startTime.formatted(date: .omitted, time: .shortened))
                             .labelStyle(.lower)
                     }
                 }
             }
             .padding([.leading, .top, .trailing])
             if isExpanded {
-                if let location = viewState.location {
+                if let location = calendarItem.location {
                     Text(location)
                         .labelStyle(.lower)
                         .padding([.leading, .trailing])
@@ -82,7 +80,7 @@ struct DetailsCard2: View {
         }
         .privacySensitive()
         .frame(maxWidth: .infinity, alignment: .leading)
-        .animation(.easeInOut.speed(3), value: placemark)
+//        .animation(.easeInOut.speed(3), value: placemark)
         .background {
             Rectangle()
                 .fill(Color("surface"))
@@ -99,7 +97,7 @@ struct DetailsCard2: View {
     
     func showMoreDetails() {
         Task {
-            if let location = viewState.location {
+            if let location = calendarItem.location {
                 do {
                     let geocoded = try await geocoder.geocodeAddressString(location)
                     withAnimation(.easeInOut.speed(2)) {
@@ -118,7 +116,7 @@ struct DetailsCard2_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             DetailsCard2(
-                viewState: .init(eventId: "def",
+                calendarItem: .init(eventId: "def",
                                  title: "Foo",
                                  location: "Tate Modern",
                                  startTime: Date(),
@@ -126,7 +124,7 @@ struct DetailsCard2_Previews: PreviewProvider {
                 isExpanded: true, placemark: nil
             ) { _ in }
             DetailsCard2(
-                viewState: .init(eventId: "abc",
+                calendarItem: .init(eventId: "abc",
                                  title: "Foo",
                                  location: "Tate Modern",
                                  startTime: Date(),
