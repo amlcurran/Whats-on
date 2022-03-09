@@ -7,7 +7,6 @@ public class WhatsOnPresenter: ObservableObject {
     private let eventStore: EKEventStore
     private let eventService: EventsService
     private let delayer: Delayer
-    private weak var view: WhatsOnPresenterView?
     private var notificationHandle: Any?
     @Published public var events: [CalendarSlot] = []
     @Published public var redaction: RedactionReasons = []
@@ -18,8 +17,7 @@ public class WhatsOnPresenter: ObservableObject {
         self.delayer = Delayer(queue: .main)
     }
 
-    public func beginPresenting(on view: WhatsOnPresenterView, delayingBy delay: DispatchTimeInterval = .seconds(0)) {
-        self.view = view
+    public func beginPresenting(delayingBy delay: DispatchTimeInterval = .seconds(0)) {
         delayer.delayUpcomingEvents(by: delay)
         notificationHandle = NotificationCenter.default.addObserver(forName: .EKEventStoreChanged, do: { [weak self] in
             self?.refreshEvents()
@@ -28,20 +26,19 @@ public class WhatsOnPresenter: ObservableObject {
             if hasAccess {
                 self?.refreshEvents()
             } else if error != nil {
-                self?.view?.showAccessFailure()
+//                self?.view?.showAccessFailure()
             }
         }
     }
 
     public func stopPresenting() {
-        self.view = nil
+//        self.view = nil
         NotificationCenter.default.removeOptionalObserver(notificationHandle)
     }
 
     @objc public func refreshEvents() {
         fetchEvents({ [weak self] (source) in
             self?.events = source
-            self?.view?.showCalendar(source)
         })
     }
 
@@ -68,7 +65,7 @@ public class WhatsOnPresenter: ObservableObject {
                 try eventStore.remove(ekEvent, span: .thisEvent)
             }
         } catch {
-            view?.failedToDelete(event, withError: error)
+//            view?.failedToDelete(event, withError: error)
         }
     }
 

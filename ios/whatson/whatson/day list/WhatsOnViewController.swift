@@ -19,9 +19,7 @@ struct PresenterEventList: View {
 }
 
 class WhatsOnViewController: UIViewController,
-        EKEventEditViewDelegate,
-        WhatsOnPresenterView,
-        CalendarTableViewDelegate {
+        EKEventEditViewDelegate {
 
     private let dateFormatter = DateFormatter(dateFormat: "EEE")
     private let eventStore = EKEventStore.instance
@@ -33,9 +31,6 @@ class WhatsOnViewController: UIViewController,
     private var forceTouchDisplayer: Any?
     private var presenter: WhatsOnPresenter!
     private var eventService: EventsService!
-
-    private lazy var table = CalendarDiffableTableView(delegate: self)
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,7 +110,7 @@ class WhatsOnViewController: UIViewController,
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        presenter.beginPresenting(on: self, delayingBy: .seconds(0))
+        presenter.beginPresenting(delayingBy: .seconds(0))
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -140,22 +135,6 @@ class WhatsOnViewController: UIViewController,
 
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         navigationController?.dismiss(animated: true, completion: nil)
-    }
-
-    func showCalendar(_ source: [CalendarSlot]) {
-        table.view.animateAlpha(to: 1) { _ in }
-        table.update(source)
-    }
-
-    func showAccessFailure() {
-    }
-
-    func failedToDelete(_ event: CalendarItem, withError error: Error) {
-
-    }
-
-    func showLoading() {
-        
     }
 
 }
