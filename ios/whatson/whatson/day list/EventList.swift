@@ -18,25 +18,23 @@ struct EventList: View {
     @State var addingSlot: CalendarSlot?
     
     var body: some View {
-        List {
-            ForEach(events, id: \.id) { slot in
-                Text(slot.boundaryStart.formatted(date: .complete, time: .omitted))
-                    .labelStyle(.lower)
-                    .padding(.top, 8)
-                if let event = slot.items.first {
-                    DetailsCard2(calendarItem: event) { coordinate in
-                        let item = MKMapItem(placemark: MKPlacemark(placemark: coordinate))
-                        item.openInMaps(launchOptions: [:])
-                    }
-                } else {
-                    EmptySlot {
-                        addingSlot = slot
+        ScrollView {
+            LazyVStack(alignment: .leading) {
+                ForEach(events, id: \.id) { slot in
+                    Text(slot.boundaryStart.formatted(date: .complete, time: .omitted))
+                        .labelStyle(.lower)
+                        .padding(.top, 8)
+                    if let event = slot.items.first {
+                        DetailsCard2(calendarItem: event) { coordinate in
+                            let item = MKMapItem(placemark: MKPlacemark(placemark: coordinate))
+                            item.openInMaps(launchOptions: [:])
+                        }
+                    } else {
+                        EmptySlot {
+                            addingSlot = slot
+                        }
                     }
                 }
-            }
-            .listRowBackground(Color("windowBackground"))
-            .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
-            .listRowSeparator(.hidden)
 //            GeometryReader { (proxy: GeometryProxy) in
 //                ZStack {
 //                    Path { path in
@@ -55,9 +53,10 @@ struct EventList: View {
 //            }
 //            .listRowBackground(Color("windowBackground"))
 //            .listRowSeparator(.hidden)
+            }
         }
+        .padding(.horizontal)
         .redacted(reason: redaction)
-        .listStyle(.plain)
         .background(Color("windowBackground"))
         .sheet(item: $addingSlot, onDismiss: nil) { slot in
             AddEventView(slot: slot) {
