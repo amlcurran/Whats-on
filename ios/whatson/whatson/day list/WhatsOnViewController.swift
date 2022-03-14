@@ -25,26 +25,24 @@ struct PresenterEventList: View {
 class WhatsOnViewController: UIViewController {
 
     private lazy var presenter = WhatsOnPresenter(eventStore: .instance, eventService: .default)
+    
+    private lazy var hostingView = UIHostingController(
+        rootView: VStack(spacing: 0) {
+            HeaderView2 { [weak self] in
+                self?.snapshotAndShare()
+            }
+            PresenterEventList(presenter: presenter)
+        }
+    )
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .windowBackground
         title = " "
-
-        let hostingView = UIHostingController(
-            rootView: VStack(spacing: 0) {
-                HeaderView2 { [weak self] in
-                    self?.snapshotAndShare()
-                }
-                PresenterEventList(presenter: presenter)
-            }
-        )
         
         view.add(hostingView.view, constrainedTo: [.bottom, .leading, .trailing])
         hostingView.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         hostingView.didMove(toParent: self)
-
-//        table.style()
 
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
@@ -53,14 +51,9 @@ class WhatsOnViewController: UIViewController {
         UIView.performWithoutAnimation {
             presenter.redact()
         }
-//        defer {
-//            UIView.performWithoutAnimation {
-//                presenter.unredact()
-//            }
-//        }
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
-            if let snapshot = self.view.getImageFromCurrentContext(bounds: nil) {
-                if let png = snapshot.pngData(),
+            let snapshot = self.hostingView.rootView.snapshot(withWidth: 375)
+            if let png = snapshot.pngData(),
                    let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
                     do {
                         let temporary = url.appendingPathComponent("temporary.png")
@@ -72,11 +65,30 @@ class WhatsOnViewController: UIViewController {
                     } catch {
                         print(error)
                     }
-                }
             }
         }
     }
 
+}
+
+extension View {
+    func snapshot(withWidth width: Int? = nil) -> UIImage {
+        let controller = UIHostingController(rootView: self)
+        let view = controller.view
+
+        var targetSize = controller.view.intrinsicContentSize
+        if let width = width {
+            targetSize.width = CGFloat(width)
+        }
+        view?.bounds = CGRect(origin: .zero, size: targetSize)
+        view?.backgroundColor = .clear
+
+        let renderer = UIGraphicsImageRenderer(size: targetSize)
+
+        return renderer.image { _ in
+            view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
+        }
+    }
 }
 
 class EventTransitionNavigationDelegate: NSObject, UINavigationControllerDelegate {

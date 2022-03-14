@@ -15,7 +15,6 @@ struct EmptySlot: View {
     
     var body: some View {
         Text("Nothing on")
-            .privacySensitive()
             .labelStyle(.lower)
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)

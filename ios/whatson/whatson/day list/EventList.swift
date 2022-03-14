@@ -37,8 +37,8 @@ struct EventList: View {
                 }
 //                CuteView()
             }
+            .padding([.leading, .bottom, .trailing])
         }
-        .padding(.horizontal)
         .redacted(reason: redaction)
         .background(Color("windowBackground"))
         .sheet(item: $addingSlot, onDismiss: nil) { slot in

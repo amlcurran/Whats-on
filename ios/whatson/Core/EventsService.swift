@@ -19,13 +19,6 @@ public class EventsService {
         return EventsService(timeRepository: timeRepo, eventsRepository: repo)
     }
 
-    @available(*, deprecated)
-    public static var demo: EventsService {
-        let timeRepo = UserDefaultsTimeStore()
-        let repo = DemoEventRepository()
-        return EventsService(timeRepository: timeRepo, eventsRepository: repo)
-    }
-
     public init(timeRepository: BorderTimeRepository, eventsRepository: EventsRepository) {
         self.timeRepository = timeRepository
         self.eventsRepository = eventsRepository
@@ -52,7 +45,9 @@ public class EventsService {
         }
         for item in calendarItems {
             let key = item.startTime.daysSinceEpoch() - epochToNow
-            itemArray[key] = itemArray[key].appending(item)
+            if key >= 0 {
+                itemArray[key] = itemArray[key].appending(item)
+            }
         }
 
         return itemArray
