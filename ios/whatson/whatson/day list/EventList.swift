@@ -35,6 +35,7 @@ struct EventList: View {
                         }
                     }
                 }
+                Spacer(minLength: 16)
 //                CuteView()
             }
             .padding([.leading, .bottom, .trailing])

@@ -38,7 +38,7 @@ struct AddEventView: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: EKEventEditViewController, context: Context) {
-        //
+        uiViewController.editViewDelegate = context.coordinator
     }
     
     func makeCoordinator() -> Coordinator {
