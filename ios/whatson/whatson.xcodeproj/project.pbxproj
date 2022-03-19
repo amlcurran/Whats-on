@@ -28,9 +28,7 @@
 		8600B9A11F0946F9008578E5 /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8600B9A01F0946F9008578E5 /* UIView+Animations.swift */; };
 		86075C331E3E228C005AF423 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86075C321E3E228C005AF423 /* Localizable.strings */; };
 		8607847A1DAD7E6100AAE856 /* LabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860784791DAD7E6100AAE856 /* LabelStyle.swift */; };
-		8609C5A41DB01AF100B44D76 /* EventDetailsPushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609C5A31DB01AF100B44D76 /* EventDetailsPushTransition.swift */; };
 		860BD732270A4BD5000D46F7 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 860BD731270A4BD5000D46F7 /* Intents.intentdefinition */; };
-		8618A51F1BDA92F900A4845E /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8618A51E1BDA92F900A4845E /* EventCell.swift */; };
 		861BD0E01D9FC4290032FBAB /* Optional+Fluency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */; };
 		8620886F22BFEDF000268B3D /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 8620886E22BFEDF000268B3D /* Localizable.stringsdict */; };
 		8626886E1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8626886D1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift */; };
@@ -87,7 +85,6 @@
 		8695D0281DA023670034D52A /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0271DA023670034D52A /* HeaderView.swift */; };
 		8695D0301DA185DB0034D52A /* SlotCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */; };
 		8695D0331DA1A2A20034D52A /* SlotDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0321DA1A2A20034D52A /* SlotDetail.swift */; };
-		869B1EF520E180A40012A72D /* EventItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869B1EF420E180A40012A72D /* EventItemView.swift */; };
 		86A9355722C7C1B8003FC26C /* EmptyCalendarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9355622C7C1B8003FC26C /* EmptyCalendarItem.swift */; };
 		86A9355922C7C1F4003FC26C /* EventCalendarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9355822C7C1F4003FC26C /* EventCalendarItem.swift */; };
 		86A9355B22C7C246003FC26C /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9355A22C7C246003FC26C /* EventsRepository.swift */; };
@@ -219,9 +216,7 @@
 		8600B9A01F0946F9008578E5 /* UIView+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Animations.swift"; sourceTree = "<group>"; };
 		86075C321E3E228C005AF423 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		860784791DAD7E6100AAE856 /* LabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelStyle.swift; sourceTree = "<group>"; };
-		8609C5A31DB01AF100B44D76 /* EventDetailsPushTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsPushTransition.swift; sourceTree = "<group>"; };
 		860BD731270A4BD5000D46F7 /* Intents.intentdefinition */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
-		8618A51E1BDA92F900A4845E /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Fluency.swift"; sourceTree = "<group>"; };
 		8620886E22BFEDF000268B3D /* Localizable.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		862468D11F091B8C00FE5A49 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
@@ -277,7 +272,6 @@
 		8695D0271DA023670034D52A /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotCellStyle.swift; sourceTree = "<group>"; };
 		8695D0321DA1A2A20034D52A /* SlotDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotDetail.swift; sourceTree = "<group>"; };
-		869B1EF420E180A40012A72D /* EventItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventItemView.swift; sourceTree = "<group>"; };
 		869DAC701D449EFB005AF315 /* WhatsOnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatsOnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		869DAC741D449EFB005AF315 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		869DAC7C1D44D15C005AF315 /* EventPredicates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPredicates.swift; sourceTree = "<group>"; };
@@ -498,13 +492,11 @@
 			children = (
 				9FBE073727CD6C7E00C6BF96 /* DetailsCard2.swift */,
 				86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */,
-				8618A51E1BDA92F900A4845E /* EventCell.swift */,
 				8695D0271DA023670034D52A /* HeaderView.swift */,
 				8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */,
 				8695D0321DA1A2A20034D52A /* SlotDetail.swift */,
 				698530C0F754D12F1E38397C /* DayCell.swift */,
 				86DEC9551FB3A069000FF4CD /* AddEventView.swift */,
-				869B1EF420E180A40012A72D /* EventItemView.swift */,
 				9FBE073927D0087B00C6BF96 /* EventList.swift */,
 				9FA8B40A27D1855C00BF89B3 /* DetailMap.swift */,
 				9FA8B40C27D18A2800BF89B3 /* EmptySlot.swift */,
@@ -591,7 +583,6 @@
 			children = (
 				86F849981D046A3E007C41B0 /* EventDetailsViewController.swift */,
 				8648F18E1D984F6500C7BD48 /* EventDetailsTracking.swift */,
-				8609C5A31DB01AF100B44D76 /* EventDetailsPushTransition.swift */,
 				69853ADAFB0D8A57C40FC7BA /* DetailsCard.swift */,
 				2DBA11FDB477210F9D964D34 /* EventResponseView.swift */,
 				2DBA151F9881A527C9CC0A71 /* EventResponse.swift */,
@@ -974,7 +965,6 @@
 				8658A2381F375ED500BF219C /* CustomViewTableItem.swift in Sources */,
 				8695D0331DA1A2A20034D52A /* SlotDetail.swift in Sources */,
 				86D751131C7128EB00C0A607 /* RoundedRectBorderView.swift in Sources */,
-				869B1EF520E180A40012A72D /* EventItemView.swift in Sources */,
 				86F8499B1D046AAE007C41B0 /* UIView+Constraints.swift in Sources */,
 				86A9E45B1DA80A4900E8D019 /* UIViewController+Navigation.swift in Sources */,
 				8658A2341F375E6100BF219C /* TitleTableItem.swift in Sources */,
@@ -991,13 +981,11 @@
 				8695D0281DA023670034D52A /* HeaderView.swift in Sources */,
 				86D751151C71316D00C0A607 /* UIColor+WhatsOn.swift in Sources */,
 				86FFFE491EC10E01009D772E /* Optional+Requirements.swift in Sources */,
-				8609C5A41DB01AF100B44D76 /* EventDetailsPushTransition.swift in Sources */,
 				8695D0301DA185DB0034D52A /* SlotCellStyle.swift in Sources */,
 				86DEC9561FB3A069000FF4CD /* AddEventView.swift in Sources */,
 				86A9C2CB1C444468009281A0 /* WhatsOnAppDelegate.swift in Sources */,
 				8600B9A11F0946F9008578E5 /* UIView+Animations.swift in Sources */,
 				862D5479271787D000B66FA5 /* BoundaryPickerView2.swift in Sources */,
-				8618A51F1BDA92F900A4845E /* EventCell.swift in Sources */,
 				8658A2321F375E3A00BF219C /* TableItem.swift in Sources */,
 				69853BB8C3723DD6A606DFFE /* DetailsCard.swift in Sources */,
 				865C7B011EE4B00D0047D8E0 /* BoundaryPickerView.swift in Sources */,

@@ -75,7 +75,7 @@ class EventDetailsViewController: UIViewController, EKEventViewDelegate, UINavig
     }
 
     func updateUI() {
-        detailsCard.set(event: event.asEvent, delegate: self)
+//        detailsCard.set(event: event.asEvent, delegate: self)
     }
 
     func actionItems() -> [UIBarButtonItem] {

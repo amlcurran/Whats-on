@@ -4,6 +4,7 @@ import EventKitUI
 import WidgetKit
 import Core
 import Intents
+import SwiftUI
 
 struct PresenterEventList: View {
     
@@ -89,36 +90,6 @@ extension View {
             view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
         }
     }
-}
-
-class EventTransitionNavigationDelegate: NSObject, UINavigationControllerDelegate {
-
-    private let pushTransition = EventDetailsPushTransition()
-
-    func prepareTransition(from indexPath: IndexPath, using cell: UIView & Row) {
-        pushTransition.selectedIndexPath = indexPath
-        pushTransition.selectedCell = cell
-    }
-
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        if operation == .push && toVC is EventDetailsViewController && BuildConfig.Supports.eventTransitions {
-            return pushTransition
-        }
-        return nil
-    }
-
-}
-
-import SwiftUI
-
-struct WhatsOnViewController_Preview: PreviewProvider {
-    
-    static var previews: some View {
-        SimplePreviews {
-            WhatsOnViewController()
-        }
-    }
-    
 }
 
 struct SimplePreviews<T: UIViewController>: View {
