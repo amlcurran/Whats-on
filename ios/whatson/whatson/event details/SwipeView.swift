@@ -24,6 +24,8 @@ struct SwipeView<Content: View>: View {
                         .fill(Color.red)
                     Image(systemName: "trash.fill")
                         .font(.system(size: 24))
+                        .scaleEffect(min(1.0, offset / (maxGestureLength / 1.5)))
+                        .opacity(min(1.0, offset / (maxGestureLength / 1.5)))
                         .padding()
                         .foregroundColor(.white)
                 }
