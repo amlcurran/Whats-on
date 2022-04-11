@@ -16,6 +16,7 @@ struct EventList: View {
     @Binding var events: [CalendarSlot]
     @Binding var redaction: RedactionReasons
     @State var addingSlot: CalendarSlot?
+    let onDeleteTapped: (EventCalendarItem) -> Void
     
     var body: some View {
         ScrollView {
@@ -25,9 +26,13 @@ struct EventList: View {
                         .labelStyle(.lower)
                         .padding(.top, 8)
                     if let event = slot.items.first {
-                        DetailsCard2(calendarItem: event) { coordinate in
-                            let item = MKMapItem(placemark: MKPlacemark(placemark: coordinate))
-                            item.openInMaps(launchOptions: [:])
+                        SwipeView(onDeleteTapped: {
+                            onDeleteTapped(event)
+                        }) {
+                            DetailsCard2(calendarItem: event) { coordinate in
+                                let item = MKMapItem(placemark: MKPlacemark(placemark: coordinate))
+                                item.openInMaps(launchOptions: [:])
+                            }
                         }
                     } else {
                         EmptySlot {
@@ -63,7 +68,7 @@ struct EventList_Previews: PreviewProvider {
                                     .empty(inFuture: 3, duration: 2),
                                     .empty(inFuture: 4, duration: 2)
                                         .withEvent(named: "Foo")
-                                                .withEvent(named: "Another item")]), redaction: .constant([]))
+                                        .withEvent(named: "Another item")]), redaction: .constant([]), onDeleteTapped: { _ in })
             
                 EventList(events: .constant([.empty(duration: 2),
                                     .empty(inFuture: 1, duration: 2)
@@ -72,7 +77,7 @@ struct EventList_Previews: PreviewProvider {
                                     .empty(inFuture: 3, duration: 2),
                                     .empty(inFuture: 4, duration: 2)
                                         .withEvent(named: "Foo")
-                                                .withEvent(named: "Another item")]), redaction: .constant([.privacy]))
+                                        .withEvent(named: "Another item")]), redaction: .constant([.privacy]), onDeleteTapped: { _ in })
         }
     }
 }

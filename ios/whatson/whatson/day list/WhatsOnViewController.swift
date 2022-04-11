@@ -12,7 +12,9 @@ struct PresenterEventList: View {
     
     var body: some View {
         EventList(events: $presenter.events,
-                  redaction: $presenter.redaction)
+                  redaction: $presenter.redaction) { event in
+            presenter.remove(event)
+        }
             .onAppear {
                 presenter.beginPresenting()
             }

@@ -107,6 +107,7 @@
 		9FA8B40D27D18A2800BF89B3 /* EmptySlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA8B40C27D18A2800BF89B3 /* EmptySlot.swift */; };
 		9FBE073827CD6C7E00C6BF96 /* DetailsCard2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBE073727CD6C7E00C6BF96 /* DetailsCard2.swift */; };
 		9FBE073A27D0087B00C6BF96 /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBE073927D0087B00C6BF96 /* EventList.swift */; };
+		9FF09B112804D0A300FDBCFE /* SwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF09B102804D0A300FDBCFE /* SwipeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -301,6 +302,7 @@
 		9FA8B40C27D18A2800BF89B3 /* EmptySlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySlot.swift; sourceTree = "<group>"; };
 		9FBE073727CD6C7E00C6BF96 /* DetailsCard2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCard2.swift; sourceTree = "<group>"; };
 		9FBE073927D0087B00C6BF96 /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
+		9FF09B102804D0A300FDBCFE /* SwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -573,6 +575,7 @@
 				9FA8B40A27D1855C00BF89B3 /* DetailMap.swift */,
 				2DBA11FDB477210F9D964D34 /* EventResponseView.swift */,
 				2DBA151F9881A527C9CC0A71 /* EventResponse.swift */,
+				9FF09B102804D0A300FDBCFE /* SwipeView.swift */,
 			);
 			path = "event details";
 			sourceTree = "<group>";
@@ -980,6 +983,7 @@
 				86B638DB270F8ADE0054C85C /* OptionsView.swift in Sources */,
 				698531761CD39981ABD5B75B /* Completion.swift in Sources */,
 				2DBA1A1D4FF1A6199AD9D4FA /* BuildConfig.swift in Sources */,
+				9FF09B112804D0A300FDBCFE /* SwipeView.swift in Sources */,
 				2DBA13D585CE5E035AE263D4 /* EventResponseView.swift in Sources */,
 				8658A2361F375EA500BF219C /* SwitchTableItem.swift in Sources */,
 				862F0BAE26EFE8A200BE5350 /* NewEventView.swift in Sources */,

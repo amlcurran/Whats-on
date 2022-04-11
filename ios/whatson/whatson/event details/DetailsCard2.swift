@@ -80,7 +80,6 @@ struct DetailsCard2: View {
         }
         .privacySensitive()
         .frame(maxWidth: .infinity, alignment: .leading)
-//        .animation(.easeInOut.speed(3), value: placemark)
         .background {
             Rectangle()
                 .fill(Color("surface"))
@@ -121,7 +120,8 @@ struct DetailsCard2_Previews: PreviewProvider {
                                  location: "Tate Modern",
                                  startTime: Date(),
                                  endTime: Date().addingTimeInterval(60 * 60)),
-                isExpanded: true, placemark: nil
+                isExpanded: true,
+                placemark: nil
             ) { _ in }
             DetailsCard2(
                 calendarItem: .init(eventId: "abc",
@@ -135,6 +135,7 @@ struct DetailsCard2_Previews: PreviewProvider {
         }
         .padding()
         .background(Color.green.opacity(0.2))
+        .previewDevice("iPhone 13 mini")
 //        .preferredColorScheme(.dark)
     }
 }
