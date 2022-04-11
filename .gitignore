@@ -12,3 +12,5 @@ ios/core/whatson-core/DerivedData/
 Ios/whatson/j2objc/
 ios/whatson/whatson.xcodeproj/xcuserdata/
 ios/whatson/whatson.xcodeproj/project.xcworkspace/xcuserdata/
+
+**/GoogleService-Info.plist
