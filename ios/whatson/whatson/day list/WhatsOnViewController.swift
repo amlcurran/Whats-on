@@ -9,11 +9,13 @@ import SwiftUI
 struct PresenterEventList: View {
     
     @ObservedObject var presenter: WhatsOnPresenter
+    private let feedback = UINotificationFeedbackGenerator()
     
     var body: some View {
         EventList(events: $presenter.events,
                   redaction: $presenter.redaction) { event in
             presenter.remove(event)
+            feedback.notificationOccurred(.success)
         }
             .onAppear {
                 presenter.beginPresenting()

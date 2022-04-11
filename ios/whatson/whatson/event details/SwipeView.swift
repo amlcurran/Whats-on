@@ -13,7 +13,7 @@ struct SwipeView<Content: View>: View {
     let onDeleteTapped: () -> Void
     @ViewBuilder var content: () -> Content
     
-    private let maxGestureLength: CGFloat = -64
+    private let maxGestureLength: CGFloat = -60
     
     var body: some View {
         content()
@@ -21,7 +21,7 @@ struct SwipeView<Content: View>: View {
             .background {
                 ZStack(alignment: .trailing) {
                     RoundedRectangle(cornerRadius: 8)
-                        .fill(Color.red)
+                        .fill(Color("error"))
                     Image(systemName: "trash.fill")
                         .font(.system(size: 24))
                         .scaleEffect(min(1.0, offset / (maxGestureLength / 1.5)))
