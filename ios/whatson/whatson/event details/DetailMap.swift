@@ -19,6 +19,7 @@ struct DetailMap: View {
         format.unitsStyle = .brief
         return format
     }()
+    @AppStorage("direction") var direction: DirectionType = .any
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -27,13 +28,9 @@ struct DetailMap: View {
             })
             ZStack {
                 if let directions = directions {
-                    Button {
-                        
-                    } label: {
-                        Label(formatter.string(from: directions.expectedTravelTime)!, systemImage: "car.fill")
-                    }
-                    .padding(6)
-                    .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12))
+                    Label(formatter.string(from: directions.expectedTravelTime)!, systemImage: directions.transportType.image)
+                        .padding(6)
+                        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12))
                 }
             }
             .animation(.default, value: directions)
@@ -48,12 +45,31 @@ struct DetailMap: View {
                 let directionsRequest = MKDirections.Request()
                 directionsRequest.source = source
                 directionsRequest.destination = destination
+                directionsRequest.transportType = direction.asMapKitDirection
                 let directions = MKDirections(request: directionsRequest)
                 let eta = try await directions.calculateETA()
                 self.directions = eta
             } catch {
                 print(error)
             }
+        }
+    }
+    
+}
+
+extension MKDirectionsTransportType {
+    
+    var image: String {
+        switch self {
+        case .transit:
+            return "bus.fill"
+        case .automobile:
+            return "car.fill"
+        case .walking:
+            return "figure.walking"
+        default:
+            print("Unknown direction reponse type \(self.rawValue)")
+            return "car.fill"
         }
     }
     

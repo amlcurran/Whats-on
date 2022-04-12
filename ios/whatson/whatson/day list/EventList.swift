@@ -13,7 +13,7 @@ import WidgetKit
 
 struct EventList: View {
     
-    @Binding var events: [CalendarSlot]
+    @Binding var slots: [CalendarSlot]
     @Binding var redaction: RedactionReasons
     @State var addingSlot: CalendarSlot?
     let onDeleteTapped: (EventCalendarItem) -> Void
@@ -21,7 +21,7 @@ struct EventList: View {
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading) {
-                ForEach(events, id: \.id) { slot in
+                ForEach(slots, id: \.id) { slot in
                     Text(slot.boundaryStart.formatted(date: .complete, time: .omitted))
                         .labelStyle(.lower)
                         .padding(.top, 8)
@@ -45,6 +45,7 @@ struct EventList: View {
             }
             .padding([.leading, .bottom, .trailing])
         }
+        .animation(.easeInOut, value: slots)
         .redacted(reason: redaction)
         .background(Color("windowBackground"))
         .sheet(item: $addingSlot, onDismiss: nil) { slot in
@@ -61,7 +62,7 @@ struct EventList_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             
-                EventList(events: .constant([.empty(duration: 2),
+                EventList(slots: .constant([.empty(duration: 2),
                                     .empty(inFuture: 1, duration: 2)
                                         .withEvent(named: "Bar"),
                                     .empty(inFuture: 2, duration: 2),
@@ -70,7 +71,7 @@ struct EventList_Previews: PreviewProvider {
                                         .withEvent(named: "Foo")
                                         .withEvent(named: "Another item")]), redaction: .constant([]), onDeleteTapped: { _ in })
             
-                EventList(events: .constant([.empty(duration: 2),
+                EventList(slots: .constant([.empty(duration: 2),
                                     .empty(inFuture: 1, duration: 2)
                                         .withEvent(named: "Bar"),
                                     .empty(inFuture: 2, duration: 2),

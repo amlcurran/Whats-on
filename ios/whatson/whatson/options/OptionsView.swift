@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Core
+import MapKit
 
 extension Array: RawRepresentable where Element: Codable {
     public init?(rawValue: String) {
@@ -33,6 +34,7 @@ struct OptionsView: View {
 
     @Binding var startDate: Date
     @Binding var endDate: Date
+    @AppStorage("direction") var direction: DirectionType = .any
     let allCalendars: [EventCalendar]
     let onDismiss: () -> Void
 
@@ -46,8 +48,21 @@ struct OptionsView: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                         DefaultCalendarPicker(calendars: allCalendars)
                     }
-                    Section(header: Text("Shown calendars"), footer: Text("Only events from checked calendars will be shown in your schedule.")) {
+                    Section(header: Text("Shown calendars"),
+                            footer: Text("Only events from checked calendars will be shown in your schedule.")) {
                         ShownCalendarPicker(allCalendars: allCalendars)
+                    }
+                    Section("Transport") {
+                        Picker("Shown directions", selection: $direction) {
+                            Text("Any")
+                                .tag(DirectionType.any)
+                            Text("Car")
+                                .tag(DirectionType.car)
+                            Text("Walking")
+                                .tag(DirectionType.walking)
+                            Text("Public transport")
+                                .tag(DirectionType.publicTransport)
+                        }
                     }
                 }
                 .listStyle(.insetGrouped)
@@ -62,6 +77,24 @@ struct OptionsView: View {
         .accentColor(Color("secondary"))
     }
 
+}
+
+enum DirectionType: String, RawRepresentable {
+    case any, walking, car, publicTransport
+    
+    var asMapKitDirection: MKDirectionsTransportType {
+        switch self {
+        case .any:
+            return .any
+        case .walking:
+            return .walking
+        case .car:
+            return .automobile
+        case .publicTransport:
+            return .transit
+        }
+    }
+    
 }
 
 struct OptionsView_Previews: PreviewProvider {

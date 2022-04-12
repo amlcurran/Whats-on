@@ -12,7 +12,7 @@ struct PresenterEventList: View {
     private let feedback = UINotificationFeedbackGenerator()
     
     var body: some View {
-        EventList(events: $presenter.events,
+        EventList(slots: $presenter.events,
                   redaction: $presenter.redaction) { event in
             presenter.remove(event)
             feedback.notificationOccurred(.success)
