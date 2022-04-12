@@ -10,7 +10,6 @@ import SwiftUI
 
 struct EmptySlot: View {
     
-    var onTapped: () -> Void
     @State var isTapped = false
     
     var body: some View {
@@ -19,9 +18,6 @@ struct EmptySlot: View {
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
             .contentShape(Rectangle())
-            .onTapGesture {
-                onTapped()
-            }
             .background  {
                 ZStack {
                 RoundedRectangle(cornerRadius: 8)

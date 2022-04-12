@@ -35,9 +35,10 @@ struct EventList: View {
                             }
                         }
                     } else {
-                        EmptySlot {
-                            addingSlot = slot
-                        }
+                        EmptySlot()
+                            .onTapGesture {
+                                addingSlot = slot
+                            }
                     }
                 }
                 Spacer(minLength: 16)
