@@ -28,7 +28,6 @@
 		860BD732270A4BD5000D46F7 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 860BD731270A4BD5000D46F7 /* Intents.intentdefinition */; };
 		861BD0E01D9FC4290032FBAB /* Optional+Fluency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */; };
 		8620886F22BFEDF000268B3D /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 8620886E22BFEDF000268B3D /* Localizable.stringsdict */; };
-		8626886E1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8626886D1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift */; };
 		862D54752713758800B66FA5 /* DefaultCalendarPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862D54742713758800B66FA5 /* DefaultCalendarPicker.swift */; };
 		862D5477271381C800B66FA5 /* ShownCalendarPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862D5476271381C800B66FA5 /* ShownCalendarPicker.swift */; };
 		862D5479271787D000B66FA5 /* BoundaryPickerView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862D5478271787D000B66FA5 /* BoundaryPickerView2.swift */; };
@@ -46,8 +45,6 @@
 		8658A23C1F37685400BF219C /* CheckableTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658A23B1F37685400BF219C /* CheckableTableItem.swift */; };
 		865C7B011EE4B00D0047D8E0 /* BoundaryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C7B001EE4B00D0047D8E0 /* BoundaryPickerView.swift */; };
 		865C7B031EE56AE80047D8E0 /* BuildableTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C7B021EE56AE80047D8E0 /* BuildableTableSource.swift */; };
-		865C7B051EE574100047D8E0 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C7B041EE574100047D8E0 /* OptionsViewController.swift */; };
-		866560AB1FB88713000ED8A2 /* CalendarPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866560AA1FB88713000ED8A2 /* CalendarPickerViewController.swift */; };
 		866D2E771EEA045E008D76D5 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866D2E761EEA045E008D76D5 /* GradientView.swift */; };
 		86755DCE22C7BC2100E91DF4 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86755DC522C7BC2000E91DF4 /* Core.framework */; };
 		86755DD522C7BC2100E91DF4 /* CoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86755DD422C7BC2100E91DF4 /* CoreTests.swift */; };
@@ -76,8 +73,6 @@
 		868A16C826D257C30090D6E4 /* Widget3.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 868A16C426D257BF0090D6E4 /* Widget3.intentdefinition */; };
 		868A16C926D257C30090D6E4 /* Widget3.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 868A16C426D257BF0090D6E4 /* Widget3.intentdefinition */; };
 		868A16CC26D257C30090D6E4 /* Widget3Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 868A16BE26D257BF0090D6E4 /* Widget3Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		8694756C1F37726D00925C2A /* CalendarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8694756B1F37726D00925C2A /* CalendarPresenter.swift */; };
-		8694756E1F37742C00925C2A /* DatePickerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8694756D1F37742C00925C2A /* DatePickerPresenter.swift */; };
 		8695D0281DA023670034D52A /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0271DA023670034D52A /* HeaderView.swift */; };
 		8695D0301DA185DB0034D52A /* SlotCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */; };
 		8695D0331DA1A2A20034D52A /* SlotDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0321DA1A2A20034D52A /* SlotDetail.swift */; };
@@ -213,7 +208,6 @@
 		861BD0DF1D9FC4290032FBAB /* Optional+Fluency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Fluency.swift"; sourceTree = "<group>"; };
 		8620886E22BFEDF000268B3D /* Localizable.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		862468D11F091B8C00FE5A49 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
-		8626886D1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplicationShortcuts.swift; sourceTree = "<group>"; };
 		862D54742713758800B66FA5 /* DefaultCalendarPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCalendarPicker.swift; sourceTree = "<group>"; };
 		862D5476271381C800B66FA5 /* ShownCalendarPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShownCalendarPicker.swift; sourceTree = "<group>"; };
 		862D5478271787D000B66FA5 /* BoundaryPickerView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundaryPickerView2.swift; sourceTree = "<group>"; };
@@ -236,8 +230,6 @@
 		8658A23B1F37685400BF219C /* CheckableTableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckableTableItem.swift; sourceTree = "<group>"; };
 		865C7B001EE4B00D0047D8E0 /* BoundaryPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundaryPickerView.swift; sourceTree = "<group>"; };
 		865C7B021EE56AE80047D8E0 /* BuildableTableSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildableTableSource.swift; sourceTree = "<group>"; };
-		865C7B041EE574100047D8E0 /* OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
-		866560AA1FB88713000ED8A2 /* CalendarPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPickerViewController.swift; sourceTree = "<group>"; };
 		866D2E761EEA045E008D76D5 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		86755DC522C7BC2000E91DF4 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		86755DC722C7BC2000E91DF4 /* Core.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
@@ -259,8 +251,6 @@
 		868A16C726D257C30090D6E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		868A16CD26D257C30090D6E4 /* Widget3Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Widget3Extension.entitlements; sourceTree = "<group>"; };
 		869475691F376DE900925C2A /* CalendarPreferenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPreferenceStore.swift; sourceTree = "<group>"; };
-		8694756B1F37726D00925C2A /* CalendarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPresenter.swift; sourceTree = "<group>"; };
-		8694756D1F37742C00925C2A /* DatePickerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerPresenter.swift; sourceTree = "<group>"; };
 		8695D0271DA023670034D52A /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotCellStyle.swift; sourceTree = "<group>"; };
 		8695D0321DA1A2A20034D52A /* SlotDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotDetail.swift; sourceTree = "<group>"; };
@@ -390,11 +380,7 @@
 				69853F60E5391F881F006F7B /* TimeLabel.swift */,
 				6985397DE155D32104662FA2 /* UIDatePicker+Hours.swift */,
 				865C7B001EE4B00D0047D8E0 /* BoundaryPickerView.swift */,
-				865C7B041EE574100047D8E0 /* OptionsViewController.swift */,
 				86B638DA270F8ADE0054C85C /* OptionsView.swift */,
-				8694756B1F37726D00925C2A /* CalendarPresenter.swift */,
-				8694756D1F37742C00925C2A /* DatePickerPresenter.swift */,
-				866560AA1FB88713000ED8A2 /* CalendarPickerViewController.swift */,
 				862D54742713758800B66FA5 /* DefaultCalendarPicker.swift */,
 				862D5476271381C800B66FA5 /* ShownCalendarPicker.swift */,
 				862D5478271787D000B66FA5 /* BoundaryPickerView2.swift */,
@@ -554,7 +540,6 @@
 				6985358E9835009A7EA756E9 /* Analytics.swift */,
 				69853BA72CF4C2EAB206708F /* utils */,
 				2DBA1EBA1E19FC38477D7218 /* BuildConfig.swift */,
-				8626886D1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift */,
 				862F0BAD26EFE8A200BE5350 /* NewEventView.swift */,
 			);
 			path = whatson;
@@ -944,9 +929,7 @@
 				86C19EBF1BBF28E600BBCDF6 /* WhatsOnViewController.swift in Sources */,
 				868A16C926D257C30090D6E4 /* Widget3.intentdefinition in Sources */,
 				86DEC9581FB3B40D000FF4CD /* NextStepTableItem.swift in Sources */,
-				866560AB1FB88713000ED8A2 /* CalendarPickerViewController.swift in Sources */,
 				8607847A1DAD7E6100AAE856 /* LabelStyle.swift in Sources */,
-				8626886E1EEC94DE00D8FB79 /* UIApplicationShortcuts.swift in Sources */,
 				865C7B031EE56AE80047D8E0 /* BuildableTableSource.swift in Sources */,
 				8658A2381F375ED500BF219C /* CustomViewTableItem.swift in Sources */,
 				8695D0331DA1A2A20034D52A /* SlotDetail.swift in Sources */,
@@ -955,9 +938,7 @@
 				86A9E45B1DA80A4900E8D019 /* UIViewController+Navigation.swift in Sources */,
 				8658A2341F375E6100BF219C /* TitleTableItem.swift in Sources */,
 				862D54752713758800B66FA5 /* DefaultCalendarPicker.swift in Sources */,
-				8694756C1F37726D00925C2A /* CalendarPresenter.swift in Sources */,
 				861BD0E01D9FC4290032FBAB /* Optional+Fluency.swift in Sources */,
-				865C7B051EE574100047D8E0 /* OptionsViewController.swift in Sources */,
 				866D2E771EEA045E008D76D5 /* GradientView.swift in Sources */,
 				9FA8B40D27D18A2800BF89B3 /* EmptySlot.swift in Sources */,
 				8658A2301F375DF800BF219C /* TableSection.swift in Sources */,
@@ -992,7 +973,6 @@
 				8600B99D1F09383D008578E5 /* LoadingView.swift in Sources */,
 				698538F49DD3046F71BE4E01 /* AllowsGestureRecognizer.swift in Sources */,
 				698533858A420599E0C749F0 /* DayCell.swift in Sources */,
-				8694756E1F37742C00925C2A /* DatePickerPresenter.swift in Sources */,
 				698534B8D95E1BCE5206D939 /* BasicAnimator.swift in Sources */,
 				69853044F5C74357E1751736 /* Animator.swift in Sources */,
 				698539E35BDB526A55FA73A4 /* PropertyAnimator.swift in Sources */,

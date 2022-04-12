@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 public class UserDefaultsTimeStore: BorderTimeRepository {
 
@@ -56,6 +57,28 @@ public class UserDefaultsTimeStore: BorderTimeRepository {
 
     public var borderTimeEnd: TimeOfDay {
         return TimeOfDay.fromHours(hours: endTime.hours, andMinutes: endTime.minutes)
+    }
+    
+    public var startDateBinding: Binding<Date> {
+        Binding(get: {
+            self.startTimestamp
+        }, set: { date, _ in
+            self.startTime = (
+                Calendar.current.component(.hour, from: date),
+                Calendar.current.component(.minute, from: date)
+            )
+        })
+    }
+
+    public var endDateBinding: Binding<Date> {
+        Binding(get: {
+            self.endTimestamp
+        }, set: { date, _ in
+            self.endTime = (
+                Calendar.current.component(.hour, from: date),
+                Calendar.current.component(.minute, from: date)
+            )
+        })
     }
 
 }
