@@ -31,15 +31,17 @@ public struct EventCalendarItem: CalendarItem, Equatable, Hashable {
 
 public struct Attendee: Equatable, Hashable, Identifiable {
     
-    public let identifier: String
-    public let givenName: String
-    public let familyName: String
-    
-    public init(identifier: String, givenName: String, familyName: String) {
+    public init(identifier: String, givenName: String, familyName: String, image: Data? = nil) {
         self.identifier = identifier
         self.givenName = givenName
         self.familyName = familyName
+        self.image = image
     }
+    
+    public let identifier: String
+    public let givenName: String
+    public let familyName: String
+    public let image: Data?
     
     public var id: String {
         identifier

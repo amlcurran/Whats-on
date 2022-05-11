@@ -66,15 +66,8 @@ struct DetailsCard2: View {
                     Spacer(minLength: 8)
                     ZStack {
                         ForEach(Array(calendarItem.attendees.enumerated()), id: \.element) { (index, attendee) in
-                        Text(attendee.initials)
-                            .font(.caption.bold())
-                            .foregroundColor(.white)
-                            .frame(width: 32,
-                                   height: 32,
-                                   alignment: .center)
-                            .background(Circle().fill(.gray))
+                            ContactBadge(attendee: attendee)
                             .offset(x: -CGFloat(index * 16))
-                            .shadow(radius: 1)
                             .onTapGesture {
                                 selectedContact = try? CNContactStore().unifiedContact(withIdentifier: attendee.identifier, keysToFetch: [CNContactViewController.descriptorForRequiredKeys()])
                                 
