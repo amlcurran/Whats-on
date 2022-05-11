@@ -99,6 +99,7 @@
 		9FBE073827CD6C7E00C6BF96 /* DetailsCard2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBE073727CD6C7E00C6BF96 /* DetailsCard2.swift */; };
 		9FBE073A27D0087B00C6BF96 /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBE073927D0087B00C6BF96 /* EventList.swift */; };
 		9FF09B112804D0A300FDBCFE /* SwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF09B102804D0A300FDBCFE /* SwipeView.swift */; };
+		9FF09B8A282820E900FDBCFE /* ContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF09B89282820E900FDBCFE /* ContactView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -285,6 +286,7 @@
 		9FBE073727CD6C7E00C6BF96 /* DetailsCard2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCard2.swift; sourceTree = "<group>"; };
 		9FBE073927D0087B00C6BF96 /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
 		9FF09B102804D0A300FDBCFE /* SwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeView.swift; sourceTree = "<group>"; };
+		9FF09B89282820E900FDBCFE /* ContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -527,6 +529,7 @@
 				69853BA72CF4C2EAB206708F /* utils */,
 				2DBA1EBA1E19FC38477D7218 /* BuildConfig.swift */,
 				862F0BAD26EFE8A200BE5350 /* NewEventView.swift */,
+				9FF09B89282820E900FDBCFE /* ContactView.swift */,
 			);
 			path = whatson;
 			sourceTree = "<group>";
@@ -940,6 +943,7 @@
 				8658A2301F375DF800BF219C /* TableSection.swift in Sources */,
 				9FBE073A27D0087B00C6BF96 /* EventList.swift in Sources */,
 				86A9E45F1DA80E9700E8D019 /* DateFormatter+Initialisers.swift in Sources */,
+				9FF09B8A282820E900FDBCFE /* ContactView.swift in Sources */,
 				862D5477271381C800B66FA5 /* ShownCalendarPicker.swift in Sources */,
 				8695D0281DA023670034D52A /* HeaderView.swift in Sources */,
 				86D751151C71316D00C0A607 /* UIColor+WhatsOn.swift in Sources */,

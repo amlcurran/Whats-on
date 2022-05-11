@@ -163,7 +163,7 @@ public extension CalendarSlot {
     }
 
     func withEvent(named name: String) -> CalendarSlot {
-        let newItem = EventCalendarItem(eventId: "\(name.hashValue)", title: name, location: nil, startTime: self.boundaryStart, endTime: self.boundaryEnd)
+        let newItem = EventCalendarItem(eventId: "\(name.hashValue)", title: name, location: nil, startTime: self.boundaryStart, endTime: self.boundaryEnd, attendees: [])
         return CalendarSlot(items: self.items + [newItem],
                             boundaryStart: self.boundaryStart,
                             boundaryEnd: self.boundaryEnd)
@@ -182,7 +182,12 @@ public extension EventCalendarItem {
     static func named(_ name: String, delayDays: Int, hours: Double, duration: Int) -> EventCalendarItem {
         let start = Date().startOfDay(in: .current)! + TimeInterval(delayDays * 24 * 60 * 60) + TimeInterval(hours * 60 * 60)
         let end = start + TimeInterval(60 * 60 * duration)
-        return EventCalendarItem(eventId: "\(name.hashValue)", title: name, location: nil, startTime: start, endTime: end)
+        return EventCalendarItem(eventId: "\(name.hashValue)",
+                                 title: name,
+                                 location: nil,
+                                 startTime: start,
+                                 endTime: end,
+                                 attendees: [])
     }
 
 }

@@ -6,6 +6,7 @@
 //  Copyright © 2019 Alex Curran. All rights reserved.
 //
 
+import Contacts
 import Foundation
 
 public struct EventCalendarItem: CalendarItem, Equatable, Hashable {
@@ -16,12 +17,35 @@ public struct EventCalendarItem: CalendarItem, Equatable, Hashable {
     public let startTime: Date
     public let endTime: Date
     public let isEmpty: Bool = false
+    public let attendees: [Attendee]
 
-    public init(eventId: String, title: String, location: String?, startTime: Date, endTime: Date) {
+    public init(eventId: String, title: String, location: String?, startTime: Date, endTime: Date, attendees: [Attendee]) {
         self.eventId = eventId
         self.title = title
         self.location = location
         self.startTime = startTime
         self.endTime = endTime
+        self.attendees = attendees
+    }
+}
+
+public struct Attendee: Equatable, Hashable, Identifiable {
+    
+    public let identifier: String
+    public let givenName: String
+    public let familyName: String
+    
+    public init(identifier: String, givenName: String, familyName: String) {
+        self.identifier = identifier
+        self.givenName = givenName
+        self.familyName = familyName
+    }
+    
+    public var id: String {
+        identifier
+    }
+    
+    public var initials: String {
+        return [givenName, familyName].map { String($0.first ?? Character(" ")) }.joined().uppercased()
     }
 }

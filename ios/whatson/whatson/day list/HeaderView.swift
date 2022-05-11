@@ -45,6 +45,7 @@ struct HeaderView2: View {
                     Image(systemName: "ellipsis.circle")
                         .font(.system(size: 20))
                 }
+                .menuStyle(.borderlessButton)
             }
             .padding()
         }

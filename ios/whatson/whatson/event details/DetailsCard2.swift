@@ -9,6 +9,8 @@
 import SwiftUI
 import MapKit
 import Core
+import Contacts
+import ContactsUI
 
 extension CLLocationCoordinate2D: Equatable {
     public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
@@ -23,6 +25,14 @@ struct Foo: Identifiable {
     var id: String
 }
 
+extension CNContact: Identifiable {
+    
+    public var id: String {
+        identifier
+    }
+    
+}
+
 struct DetailsCard2: View {
     
     struct Location: Equatable {
@@ -33,13 +43,14 @@ struct DetailsCard2: View {
     let calendarItem: EventCalendarItem
     @State var isExpanded: Bool = false
     @State var placemark: CLPlacemark?
+    @State var selectedContact: CNContact?
     let onMapTapped: (CLPlacemark) -> Void
     
     private let geocoder = CLGeocoder()
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .top) {
+            HStack {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(calendarItem.title)
                         .labelStyle(.header)
@@ -51,6 +62,26 @@ struct DetailsCard2: View {
                             .labelStyle(.lower)
                     }
                 }
+//                if isExpanded {
+                    Spacer(minLength: 8)
+                    ZStack {
+                        ForEach(Array(calendarItem.attendees.enumerated()), id: \.element) { (index, attendee) in
+                        Text(attendee.initials)
+                            .font(.caption.bold())
+                            .foregroundColor(.white)
+                            .frame(width: 32,
+                                   height: 32,
+                                   alignment: .center)
+                            .background(Circle().fill(.gray))
+                            .offset(x: -CGFloat(index * 16))
+                            .shadow(radius: 1)
+                            .onTapGesture {
+                                selectedContact = try? CNContactStore().unifiedContact(withIdentifier: attendee.identifier, keysToFetch: [CNContactViewController.descriptorForRequiredKeys()])
+                                
+                            }
+                    }
+                    }
+//                }
             }
             .padding([.leading, .top, .trailing])
             if isExpanded {
@@ -92,6 +123,9 @@ struct DetailsCard2: View {
             }
             showMoreDetails()
         }
+        .sheet(item: $selectedContact) { contact in
+            ContactView(contact: contact)
+        }
     }
     
     func showMoreDetails() {
@@ -115,20 +149,33 @@ struct DetailsCard2_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             DetailsCard2(
-                calendarItem: .init(eventId: "def",
-                                 title: "Foo",
-                                 location: "Tate Modern",
-                                 startTime: Date(),
-                                 endTime: Date().addingTimeInterval(60 * 60)),
+                calendarItem: .init(
+                    eventId: "def",
+                    title: "Foo",
+                    location: "Tate Modern",
+                    startTime: Date(),
+                    endTime: Date().addingTimeInterval(60 * 60),
+                    attendees: [
+                        Attendee(identifier: "contacts://joeBloggs", givenName: "Joe",
+                                 familyName: "Bloggs"),
+                        Attendee(identifier: "contacts://joeFloggs", givenName: "Joe",
+                                 familyName: "Floggs")
+                    ]),
                 isExpanded: true,
                 placemark: nil
             ) { _ in }
             DetailsCard2(
-                calendarItem: .init(eventId: "abc",
-                                 title: "Foo",
-                                 location: "Tate Modern",
-                                 startTime: Date(),
-                                 endTime: Date().addingTimeInterval(60 * 60)),
+                calendarItem: .init(
+                    eventId: "abc",
+                    title: "Foo",
+                    location: "Tate Modern",
+                    startTime: Date(),
+                    endTime: Date().addingTimeInterval(60 * 60),
+                    attendees: [
+                        Attendee(identifier: "contacts://joeBloggs",
+                                 givenName: "Joe",
+                                 familyName: "Bloggs")
+                    ]),
                 placemark: nil
             ) { _ in }
             Spacer(minLength: 0)
