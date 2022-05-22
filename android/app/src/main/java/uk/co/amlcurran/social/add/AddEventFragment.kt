@@ -4,6 +4,9 @@ import android.app.TimePickerDialog
 import android.os.Bundle
 import android.widget.TimePicker
 import android.text.format.DateFormat
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,77 +19,84 @@ import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposables
 import io.reactivex.subjects.BehaviorSubject
-import kotlinx.android.synthetic.main.add_event_fragment.*
 import uk.co.amlcurran.social.R
+import uk.co.amlcurran.social.databinding.AddEventFragmentBinding
+import uk.co.amlcurran.social.databinding.SettingsBinding
 
-class AddEventFragment : Fragment(R.layout.add_event_fragment) {
+class AddEventFragment : Fragment() {
 
     private val disposable = CompositeDisposable()
     private val viewModel: AddEventViewModel by viewModels {
         ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
     }
+    private lateinit var binding: AddEventFragmentBinding
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = AddEventFragmentBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        add_select_place.create(savedInstanceState)
+        binding.addSelectPlace.create(savedInstanceState)
         val selectedPlace = BehaviorSubject.create<AutocompletePlace>()
 
         viewModel.placeSelectorState.observe(viewLifecycleOwner) {
-            add_select_place.state = it
+            binding.addSelectPlace.state = it
         }
 
         viewModel.bind(
-            add_place_edit.textChanges(),
+            binding.addPlaceEdit.textChanges(),
             selectedPlace
         )
 
-        toolbar.setNavigationOnClickListener {
+        binding.toolbar.setNavigationOnClickListener {
             requireActivity().finish()
         }
 
-        event_input_begin_time_text.setOnClickListener {
+        binding.eventInputBeginTime.setOnClickListener {
             TimePickerDialog(requireContext(), TimePickerDialog.OnTimeSetListener { _: TimePicker, hour: Int, minute: Int ->
 
             }, 18, 0, DateFormat.is24HourFormat(requireActivity())).show()
         }
-        add_select_place.onPlaceSelected = { autocompletePlace ->
+        binding.addSelectPlace.onPlaceSelected = { autocompletePlace ->
             selectedPlace.onNext(autocompletePlace)
         }
     }
 
     override fun onStart() {
         super.onStart()
-        add_select_place.start()
+        binding.addSelectPlace.start()
     }
 
     override fun onResume() {
         super.onResume()
-        add_select_place.resume()
+        binding.addSelectPlace.resume()
     }
 
     override fun onPause() {
         super.onPause()
-        add_select_place.pause()
+        binding.addSelectPlace.pause()
     }
 
     override fun onStop() {
         super.onStop()
-        add_select_place.stop()
+        binding.addSelectPlace.stop()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        add_select_place?.destroy()
+        binding.addSelectPlace?.destroy()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        add_select_place.saveInstanceState(outState)
+        binding.addSelectPlace.saveInstanceState(outState)
     }
 
     override fun onLowMemory() {
         super.onLowMemory()
-        add_select_place.lowMemory()
+        binding.addSelectPlace.lowMemory()
     }
 
     override fun onDetach() {

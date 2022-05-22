@@ -20,33 +20,35 @@ import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.android.synthetic.main.settings.*
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
+import uk.co.amlcurran.social.databinding.SettingsBinding
 
 
 class SettingsFragment: Fragment() {
 
     private val userSettings: UserSettings by lazy { UserSettings(requireContext()) }
     private val timeFormatter: DateTimeFormatter by lazy { DateTimeFormat.shortTime() }
+    private lateinit var binding: SettingsBinding
 
     private lateinit var delegate: SettingsDelegate
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return container?.inflate(R.layout.settings)
+        binding = SettingsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        toolbar3.setNavigationOnClickListener { delegate.closeSettings() }
+        binding.toolbar3.setNavigationOnClickListener { delegate.closeSettings() }
         val adapter = CalendarViewHolderAdapter(::calendarSelectionChange)
-        settingsList.adapter = adapter
-        settingsList.isNestedScrollingEnabled = false
+        binding.settingsList.adapter = adapter
+        binding.settingsList.isNestedScrollingEnabled = false
 
         updateToFromText()
-        settingsFromToTiming.isClickable = true
-        settingsFromToTiming.movementMethod = LinkMovementMethod.getInstance()
+        binding.settingsFromToTiming.isClickable = true
+        binding.settingsFromToTiming.movementMethod = LinkMovementMethod.getInstance()
 
         updateTheme()
 
@@ -83,9 +85,9 @@ class SettingsFragment: Fragment() {
             AppCompatDelegate.MODE_NIGHT_NO -> "🌞 " + getString(R.string.light)
             else -> "🌓 " + getString(R.string.default_theme)
         }
-        settingsTheme.text = currentTheme
+        binding.settingsTheme.text = currentTheme
 
-        settingsThemeChanger.setOnClickListener { showThemeDialog() }
+        binding.settingsThemeChanger.setOnClickListener { showThemeDialog() }
     }
 
     private fun showThemeDialog() {
@@ -116,7 +118,7 @@ class SettingsFragment: Fragment() {
 
     private fun updateToFromText() {
         val timeCalculator = JodaCalculator()
-        settingsFromToTiming.text = buildSpannedString {
+        binding.settingsFromToTiming.text = buildSpannedString {
             val jodaCalculator = JodaCalculator()
             val startTime = jodaCalculator.getDateTime(jodaCalculator.startOfToday()
                 .plusHoursOf(userSettings.borderTimeStart(), timeCalculator))

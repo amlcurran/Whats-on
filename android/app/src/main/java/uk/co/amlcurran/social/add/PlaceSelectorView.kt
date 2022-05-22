@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.item_place.view.*
-import kotlinx.android.synthetic.main.place_selector.view.*
 import uk.co.amlcurran.social.R
+import uk.co.amlcurran.social.databinding.ItemPlaceBinding
+import uk.co.amlcurran.social.databinding.PlaceSelectorBinding
 import uk.co.amlcurran.social.details.alphaIn
 import uk.co.amlcurran.social.details.alphaOut
 import uk.co.amlcurran.social.inflate
@@ -24,7 +24,7 @@ data class AutocompletePlace(val id: String, val name: CharSequence, val secondL
 
 data class Place(val id: String, val name: CharSequence, val latLng: LatLng)
 
-private class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+private class ViewHolder(val binding: ItemPlaceBinding) : RecyclerView.ViewHolder(binding.root)
 
 private class ListAdapter : RecyclerView.Adapter<ViewHolder>() {
 
@@ -34,14 +34,14 @@ private class ListAdapter : RecyclerView.Adapter<ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(parent.inflate(R.layout.item_place, false))
+        return ViewHolder(ItemPlaceBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun getItemCount(): Int = autocompletePlaces.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.place_name.text = autocompletePlaces[position].name
-        holder.itemView.place_description.text = autocompletePlaces[position].secondLine
+        holder.binding.placeName.text = autocompletePlaces[position].name
+        holder.binding.placeDescription.text = autocompletePlaces[position].secondLine
         holder.itemView.setOnClickListener {
             onPlaceSelected(autocompletePlaces[position])
         }
@@ -53,15 +53,17 @@ class PlaceSelectorView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
+    val binding: PlaceSelectorBinding
     private val placesAdapter: ListAdapter by lazy { ListAdapter() }
     var onPlaceSelected: (AutocompletePlace) -> Unit by Delegates.observable(initialValue = { _ -> }) { _, _, new ->
         placesAdapter.onPlaceSelected = onPlaceSelected
     }
 
     init {
+        binding = PlaceSelectorBinding.inflate(LayoutInflater.from(context), this)
         LayoutInflater.from(context).inflate(R.layout.place_selector, this)
-        place_selector_list.adapter = placesAdapter
-        place_selector_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.placeSelectorList.adapter = placesAdapter
+        binding.placeSelectorList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }
 
     var state: PlaceSelectorState by Delegates.observable<PlaceSelectorState>(initialValue = PlaceSelectorState.Initial) { _, _, newValue ->
@@ -74,51 +76,51 @@ class PlaceSelectorView @JvmOverloads constructor(
     }
 
     private fun hideAll() {
-        place_selector_loader.visibility = View.GONE
-        place_selector_list.visibility = View.GONE
-        place_selector_map.visibility = View.GONE
+        binding.placeSelectorLoader.visibility = View.GONE
+        binding.placeSelectorList.visibility = View.GONE
+        binding.placeSelectorMap.visibility = View.GONE
     }
 
     private fun showList(autocompletePlaces: List<AutocompletePlace>) {
-        place_selector_loader.alphaOut()
-        place_selector_map.alphaOut()
+        binding.placeSelectorLoader.alphaOut()
+        binding.placeSelectorMap.alphaOut()
         placesAdapter.autocompletePlaces = autocompletePlaces
-        place_selector_list.alphaIn(translate = true)
+        binding.placeSelectorList.alphaIn(translate = true)
     }
 
     private fun displayMap(latLng: LatLng) {
-        place_selector_loader.alphaOut()
-        place_selector_list.alphaOut()
-        place_selector_map.getMapAsync {
+        binding.placeSelectorLoader.alphaOut()
+        binding.placeSelectorList.alphaOut()
+        binding.placeSelectorMap.getMapAsync {
             it.clear()
             it.uiSettings.setAllGesturesEnabled(false)
             it.addMarker(MarkerOptions().position(latLng))
             it.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13f))
         }
-        place_selector_map.alphaIn(translate = true)
+        binding.placeSelectorMap.alphaIn(translate = true)
     }
 
     private fun goLoading() {
-        place_selector_list.alphaOut()
-        place_selector_map.alphaOut()
-        place_selector_loader.alphaIn()
+        binding.placeSelectorList.alphaOut()
+        binding.placeSelectorMap.alphaOut()
+        binding.placeSelectorLoader.alphaIn()
     }
 
-    fun create(savedInstanceState: Bundle?) = place_selector_map.onCreate(savedInstanceState)
+    fun create(savedInstanceState: Bundle?) = binding.placeSelectorMap.onCreate(savedInstanceState)
 
-    fun start() = place_selector_map.onStart()
+    fun start() = binding.placeSelectorMap.onStart()
 
-    fun resume() = place_selector_map.onResume()
+    fun resume() = binding.placeSelectorMap.onResume()
 
-    fun pause() = place_selector_map.onPause()
+    fun pause() = binding.placeSelectorMap.onPause()
 
-    fun stop() = place_selector_map.onStop()
+    fun stop() = binding.placeSelectorMap.onStop()
 
-    fun destroy() = place_selector_map.onDestroy()
+    fun destroy() = binding.placeSelectorMap.onDestroy()
 
-    fun saveInstanceState(bundle: Bundle) = place_selector_map.onSaveInstanceState(bundle)
+    fun saveInstanceState(bundle: Bundle) = binding.placeSelectorMap.onSaveInstanceState(bundle)
 
-    fun lowMemory() = place_selector_map.onLowMemory()
+    fun lowMemory() = binding.placeSelectorMap.onLowMemory()
 
 }
 

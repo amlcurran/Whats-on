@@ -9,17 +9,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -34,14 +27,11 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_event_details.*
-import kotlinx.android.synthetic.main.item_event.*
 import kotlinx.coroutines.launch
-import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 import uk.co.amlcurran.social.*
-import uk.co.amlcurran.social.UserSettings
+import uk.co.amlcurran.social.databinding.ActivityEventDetailsBinding
 
 class EventDetailActivity : AppCompatActivity() {
 
@@ -54,6 +44,7 @@ class EventDetailActivity : AppCompatActivity() {
         val eventsRepository = AndroidEventsRepository(contentResolver)
         EventsService(eventsRepository, jodaCalculator, calendarRepository)
     }
+    private lateinit var binding: ActivityEventDetailsBinding
 
     companion object {
 
@@ -71,7 +62,9 @@ class EventDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_event_details)
+        binding = ActivityEventDetailsBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding.root)
+
         eventId = intent.getStringExtra(KEY_EVENT_ID)
             ?: throw IllegalStateException("missing event ID")
 
@@ -81,26 +74,26 @@ class EventDetailActivity : AppCompatActivity() {
                 render(event)
             } catch (e: Error) {
                 e.printStackTrace()
-                Snackbar.make(event_card, R.string.something_went_wrong, Snackbar.LENGTH_LONG)
+                Snackbar.make(binding.eventCard.root, R.string.something_went_wrong, Snackbar.LENGTH_LONG)
                     .show()
             }
         }
 
-        detail_toolbar.setOnMenuItemClickListener(::onOptionsItemSelected)
-        detail_toolbar.setNavigationOnClickListener { finish() }
+        binding.detailToolbar.setOnMenuItemClickListener(::onOptionsItemSelected)
+        binding.detailToolbar.setNavigationOnClickListener { finish() }
     }
 
     private fun render(event: Event) {
-        event_card_2.setContent {
+        binding.eventCard2.setContent {
             EventCard(event = event)
         }
-        event_title.text = event.item.title
+        binding.eventCard.eventTitle.text = event.item.title
         val startTime = event.item.startTime.format(timeFormatter)
         val endTime = event.item.endTime.format(timeFormatter)
-        event_subtitle.text = getString(R.string.start_to_end, startTime, endTime)
-        detail_toolbar.menu.findItem(R.id.menu_open_outside).isVisible = true
-        detail_toolbar.menu.findItem(R.id.menu_delete_event).isVisible = true
-        detail_toolbar.menu.findItem(R.id.menu_hide_event).isVisible = true
+        binding.eventCard.eventSubtitle.text = getString(R.string.start_to_end, startTime, endTime)
+        binding.detailToolbar.menu.findItem(R.id.menu_open_outside).isVisible = true
+        binding.detailToolbar.menu.findItem(R.id.menu_delete_event).isVisible = true
+        binding.detailToolbar.menu.findItem(R.id.menu_hide_event).isVisible = true
         updateMap(event.location)
     }
 
@@ -120,13 +113,13 @@ class EventDetailActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .add(R.id.mapHost, mapFragment)
             .commit()
-        mapHost.alpha = 0f
+        binding.mapHost.alpha = 0f
         mapFragment.getMapAsync { map ->
             map.uiSettings.setAllGesturesEnabled(false)
-            mapHost.alphaIn(translate = true)
+            binding.mapHost.alphaIn(translate = true)
             map.addMarker(MarkerOptions().position(latLng))
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-            mapHost.setOnClickListener {
+            binding.mapHost.setOnClickListener {
                 startActivity(Intent(Intent.ACTION_VIEW).apply {
                     data = Uri.parse("https://www.google.com/maps/dir/?api=1&destination=${latLng.latitude},${latLng.longitude}")
                 })

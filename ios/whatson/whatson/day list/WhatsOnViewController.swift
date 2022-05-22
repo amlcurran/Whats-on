@@ -6,38 +6,56 @@ import Core
 import Intents
 import SwiftUI
 
-struct PresenterEventList: View {
+struct WhatsOnView: View {
     
-    @ObservedObject var presenter: WhatsOnPresenter
-    private let feedback = UINotificationFeedbackGenerator()
+    let presenter = WhatsOnPresenter(eventStore: .instance, eventService: .default)
+    @State var shareUrl: URL?
     
     var body: some View {
-        EventList(slots: $presenter.events,
-                  redaction: $presenter.redaction) { event in
-            presenter.remove(event)
-            feedback.notificationOccurred(.success)
+        VStack(spacing: 0) {
+            HeaderView2 {
+                self.snapshotAndShare()
+            }
+            PresenterEventList(presenter: presenter)
         }
-            .onAppear {
-                presenter.beginPresenting()
+        .sheet(item: $shareUrl, onDismiss: presenter.unredact) { temporary in
+            UIActivityView(url: temporary)
+        }
+    }
+    
+    private func snapshotAndShare() {
+        UIView.performWithoutAnimation {
+            presenter.redact()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+            let snapshot = self.snapshot(withWidth: 375)
+            if let png = snapshot.pngData(),
+               let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
+                do {
+                    let temporary = url.appendingPathComponent("temporary.png")
+                    try png.write(to: temporary)
+                    self.shareUrl = temporary
+                } catch {
+                    print(error)
+                }
             }
-            .onDisappear {
-                presenter.stopPresenting()
-            }
+        }
+    }
+    
+}
+
+extension URL: Identifiable {
+    
+    public var id: String {
+        absoluteString
     }
     
 }
 
 class WhatsOnViewController: UIViewController {
-
-    private lazy var presenter = WhatsOnPresenter(eventStore: .instance, eventService: .default)
     
     private lazy var hostingView = UIHostingController(
-        rootView: VStack(spacing: 0) {
-            HeaderView2 { [weak self] in
-                self?.snapshotAndShare()
-            }
-            PresenterEventList(presenter: presenter)
-        }
+        rootView: WhatsOnView()
     )
 
     override func viewDidLoad() {
@@ -51,93 +69,5 @@ class WhatsOnViewController: UIViewController {
 
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
-    
-    private func snapshotAndShare() {
-        UIView.performWithoutAnimation {
-            presenter.redact()
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
-            let snapshot = self.hostingView.rootView.snapshot(withWidth: 375)
-            if let png = snapshot.pngData(),
-                   let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
-                    do {
-                        let temporary = url.appendingPathComponent("temporary.png")
-                        try png.write(to: temporary)
-                        let viewController = UIActivityViewController(activityItems: [temporary], applicationActivities: nil)
-                        self.present(viewController, animated: true) {
-                            self.presenter.unredact()
-                        }
-                    } catch {
-                        print(error)
-                    }
-            }
-        }
-    }
 
-}
-
-extension View {
-    func snapshot(withWidth width: Int? = nil) -> UIImage {
-        let controller = UIHostingController(rootView: self)
-        let view = controller.view
-
-        var targetSize = controller.view.intrinsicContentSize
-        if let width = width {
-            targetSize.width = CGFloat(width)
-        }
-        view?.bounds = CGRect(origin: .zero, size: targetSize)
-        view?.backgroundColor = .clear
-
-        let renderer = UIGraphicsImageRenderer(size: targetSize)
-
-        return renderer.image { _ in
-            view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
-        }
-    }
-}
-
-struct SimplePreviews<T: UIViewController>: View {
-    
-    let builder: () -> T
-    
-    var body: some View {
-        Group {
-            ViewControllerPreview(builder: builder)
-            ViewControllerPreview(builder: builder)
-                .preferredColorScheme(.dark)
-        }
-    }
-    
-}
-
-struct ViewControllerPreview<T: UIViewController>: UIViewControllerRepresentable {
-    typealias UIViewControllerType = T
-    
-    let builder: () -> T
-    
-    func makeUIViewController(context: Context) -> T {
-        builder()
-    }
-    
-    func updateUIViewController(_ uiViewController: T, context: Context) {
-        
-    }
-    
-}
-
-import CoreGraphics
-
-extension UIView {
-    func getImageFromCurrentContext(bounds: CGRect? = nil) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(bounds?.size ?? self.bounds.size, false, 0.0)
-        self.drawHierarchy(in: bounds ?? self.bounds, afterScreenUpdates: true)
-
-        guard let currentImage = UIGraphicsGetImageFromCurrentImageContext() else {
-            return nil
-        }
-
-        UIGraphicsEndImageContext()
-
-        return currentImage
-    }
 }
