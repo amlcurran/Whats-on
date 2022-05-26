@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SwipeView<Content: View>: View {
     @State var offset: CGFloat = 0
+    @State var dragging = false
     let onDeleteTapped: () -> Void
     @ViewBuilder var content: () -> Content
     
@@ -29,14 +30,15 @@ struct SwipeView<Content: View>: View {
                         .padding()
                         .foregroundColor(.white)
                 }
+                .opacity(dragging ? 1 : 0)
                 .onTapGesture(perform: onDeleteTapped)
             }
             .gesture(
                 DragGesture()
                     .onChanged { gesture in
-                        let _ = print(gesture.translation.width)
+                        dragging = true
                         withAnimation(.easeInOut.speed(2)) {
-                        offset = min(gesture.translation.width, 0)
+                            offset = min(gesture.translation.width, 0)
                         }
                     }
                     .onEnded { _ in

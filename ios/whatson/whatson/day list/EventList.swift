@@ -11,58 +11,6 @@ import Core
 import MapKit
 import WidgetKit
 
-enum Multiple<T> {
-    case none
-    case single(T)
-    case multiple([T])
-}
-
-extension Array {
-    
-    var asMultiple: Multiple<Element> {
-        if count == 0 {
-            return .none
-        }
-        if count == 1 {
-            return .single(first!)
-        }
-        return .multiple(self)
-    }
-    
-}
-
-struct MultipleEventView: View {
-    
-    let events: [EventCalendarItem]
-    @State var contentSize: CGSize = .zero
-    
-    var body: some View {
-        ScrollView(.horizontal) {
-            HStack(alignment: .top) {
-                ForEach(events, id: \.eventId) { event in
-                    DetailsCard2(calendarItem: event) { coordinate in
-                        let item = MKMapItem(placemark: MKPlacemark(placemark: coordinate))
-                        item.openInMaps(launchOptions: [:])
-                    }
-                    .if(!contentSize.width.isZero) {
-                        $0.frame(width: 0.8 * contentSize.width)
-                    }
-                    
-                }
-            }.padding(.bottom, 4)
-                .padding([.leading, .trailing])
-        }
-        .overlay {
-            GeometryReader { geo in
-                Color.clear
-                    .onAppear {
-                        contentSize = geo.size
-                    }
-            }
-        }
-    }
-}
-
 struct EventList: View {
     
     @Binding var slots: [CalendarSlot]

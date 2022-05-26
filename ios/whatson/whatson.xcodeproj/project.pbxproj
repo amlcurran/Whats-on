@@ -101,6 +101,8 @@
 		9FA8B40D27D18A2800BF89B3 /* EmptySlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA8B40C27D18A2800BF89B3 /* EmptySlot.swift */; };
 		9FBE073827CD6C7E00C6BF96 /* DetailsCard2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBE073727CD6C7E00C6BF96 /* DetailsCard2.swift */; };
 		9FBE073A27D0087B00C6BF96 /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBE073927D0087B00C6BF96 /* EventList.swift */; };
+		9FDD6649283ADE5200846610 /* Multiple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDD6648283ADE5200846610 /* Multiple.swift */; };
+		9FDD664B283ADE7100846610 /* MultipleEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDD664A283ADE7100846610 /* MultipleEventView.swift */; };
 		9FF09B112804D0A300FDBCFE /* SwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF09B102804D0A300FDBCFE /* SwipeView.swift */; };
 		9FF09B8A282820E900FDBCFE /* ContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF09B89282820E900FDBCFE /* ContactView.swift */; };
 /* End PBXBuildFile section */
@@ -291,6 +293,8 @@
 		9FA8B40C27D18A2800BF89B3 /* EmptySlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySlot.swift; sourceTree = "<group>"; };
 		9FBE073727CD6C7E00C6BF96 /* DetailsCard2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCard2.swift; sourceTree = "<group>"; };
 		9FBE073927D0087B00C6BF96 /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
+		9FDD6648283ADE5200846610 /* Multiple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multiple.swift; sourceTree = "<group>"; };
+		9FDD664A283ADE7100846610 /* MultipleEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleEventView.swift; sourceTree = "<group>"; };
 		9FF09B102804D0A300FDBCFE /* SwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeView.swift; sourceTree = "<group>"; };
 		9FF09B89282820E900FDBCFE /* ContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -355,6 +359,7 @@
 				86FFFE481EC10E01009D772E /* Optional+Requirements.swift */,
 				8600B9A01F0946F9008578E5 /* UIView+Animations.swift */,
 				9F36175C2832ECEE00BA6CD5 /* View+Snapshot.swift */,
+				9FDD6648283ADE5200846610 /* Multiple.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -473,6 +478,7 @@
 				9FA8B40C27D18A2800BF89B3 /* EmptySlot.swift */,
 				9F30619C27DCE02D00DCFA2A /* CuteView.swift */,
 				9F36175A2830285D00BA6CD5 /* PresenterEventList.swift */,
+				9FDD664A283ADE7100846610 /* MultipleEventView.swift */,
 			);
 			path = "day list";
 			sourceTree = "<group>";
@@ -948,6 +954,7 @@
 				861BD0E01D9FC4290032FBAB /* Optional+Fluency.swift in Sources */,
 				866D2E771EEA045E008D76D5 /* GradientView.swift in Sources */,
 				9FA8B40D27D18A2800BF89B3 /* EmptySlot.swift in Sources */,
+				9FDD6649283ADE5200846610 /* Multiple.swift in Sources */,
 				8658A2301F375DF800BF219C /* TableSection.swift in Sources */,
 				9FBE073A27D0087B00C6BF96 /* EventList.swift in Sources */,
 				86A9E45F1DA80E9700E8D019 /* DateFormatter+Initialisers.swift in Sources */,
@@ -969,6 +976,7 @@
 				9F30619D27DCE02D00DCFA2A /* CuteView.swift in Sources */,
 				9F36175B2830285D00BA6CD5 /* PresenterEventList.swift in Sources */,
 				69853EDF767415596862180F /* Analytics.swift in Sources */,
+				9FDD664B283ADE7100846610 /* MultipleEventView.swift in Sources */,
 				86B638DB270F8ADE0054C85C /* OptionsView.swift in Sources */,
 				698531761CD39981ABD5B75B /* Completion.swift in Sources */,
 				9F3617592830283300BA6CD5 /* UIActivityView.swift in Sources */,
