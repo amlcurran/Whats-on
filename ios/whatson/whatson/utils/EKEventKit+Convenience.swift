@@ -3,7 +3,7 @@ import EventKitUI
 
 extension EKEventViewController {
 
-    convenience init(showing event: EKEvent, delegate: EKEventViewDelegate) {
+    convenience init(showing event: EKEvent, delegate: EKEventViewDelegate? = nil) {
         self.init()
         self.event = event
         self.delegate = delegate

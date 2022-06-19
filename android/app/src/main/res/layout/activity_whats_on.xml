@@ -37,29 +37,10 @@
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/activity_whats_on">
 
-            <LinearLayout
+            <androidx.compose.ui.platform.ComposeView
+                android:id="@+id/toolbar_compose"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingStart="16dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="16dp">
-
-                <TextView
-                    android:id="@+id/today_date"
-                    style="@style/TodayDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="Friday, 10 May" />
-
-                <TextView
-                    style="@style/WhatsOn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/app_name" />
-
-            </LinearLayout>
+                android:layout_height="wrap_content" />
 
         </androidx.appcompat.widget.Toolbar>
 

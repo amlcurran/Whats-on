@@ -1,24 +1,32 @@
 package uk.co.amlcurran.social
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import androidx.compose.foundation.Image
+import android.text.format.DateFormat
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import java.util.*
+
+val openSans = FontFamily(listOf(
+    Font(R.font.opensansreg),
+    Font(R.font.opensansbold, FontWeight.Bold),
+    Font(R.font.opensanssemi, FontWeight.SemiBold)
+))
 
 @Composable
-fun HeaderView() {
+fun WhatsOnTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         if (isSystemInDarkTheme()) darkColors(
             primary = colorResource(id = R.color.colorPrimary),
@@ -26,19 +34,35 @@ fun HeaderView() {
         ) else lightColors(
             primary = colorResource(id = R.color.colorPrimary),
             secondary = colorResource(id = R.color.colorOnBackground)
-        )
-    ) {
+        ),
+        typography = Typography(
+            h4 = Typography().h4.copy(fontFamily = openSans, fontWeight = FontWeight.Bold)
+        ),
+        content = content
+    )
+}
+
+@Composable
+fun HeaderView() {
+    WhatsOnTheme {
         Column(modifier = Modifier
             .background(MaterialTheme.colors.background)
-            .padding(8.dp)) {
-            Row {
+            .padding(16.dp)
+            .fillMaxWidth()
+        ) {
                 Column {
-                    Text(text = "Foodle", color = MaterialTheme.colors.primary, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
-                    Text(text = "What's on", color = MaterialTheme.colors.secondary, fontWeight = FontWeight.Black, letterSpacing = 0.sp, fontSize = 32.sp)
+                    Text(
+                        text = DateFormat.getMediumDateFormat(LocalContext.current).format(Date())
+                            .uppercase(Locale.getDefault()),
+                        style = MaterialTheme.typography.body1,
+                        color = MaterialTheme.colors.primary
+                    )
+                    Text(
+                        text = "What's on",
+                        style = MaterialTheme.typography.h4,
+                        color = MaterialTheme.colors.secondary
+                    )
                 }
-                Spacer(modifier = Modifier.width(16.dp))
-                Icon(Icons.Default.MoreVert, contentDescription = "More", tint = MaterialTheme.colors.onBackground)
-            }
         }
     }
 }

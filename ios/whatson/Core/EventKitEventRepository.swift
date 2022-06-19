@@ -40,7 +40,8 @@ public class EventKitEventRepository: EventsRepository {
                                      attendees: attendees
                 .map { Attendee(identifier: $0.identifier,
                                 givenName: $0.givenName,
-                                familyName: $0.familyName) })
+                                familyName: $0.familyName) },
+            event: ekEvent)
         }
     }
 

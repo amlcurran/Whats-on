@@ -7,7 +7,7 @@
 //
 
 import Contacts
-import Foundation
+import EventKit
 
 public struct EventCalendarItem: CalendarItem, Equatable, Hashable {
 
@@ -18,14 +18,16 @@ public struct EventCalendarItem: CalendarItem, Equatable, Hashable {
     public let endTime: Date
     public let isEmpty: Bool = false
     public let attendees: [Attendee]
+    public let event: EKEvent
 
-    public init(eventId: String, title: String, location: String?, startTime: Date, endTime: Date, attendees: [Attendee]) {
+    public init(eventId: String, title: String, location: String?, startTime: Date, endTime: Date, attendees: [Attendee], event: EKEvent) {
         self.eventId = eventId
         self.title = title
         self.location = location
         self.startTime = startTime
         self.endTime = endTime
         self.attendees = attendees
+        self.event = event
     }
 }
 

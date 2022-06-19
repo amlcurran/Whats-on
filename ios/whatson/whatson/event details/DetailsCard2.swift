@@ -44,6 +44,7 @@ struct DetailsCard2: View {
     @State var isExpanded: Bool = false
     @State var placemark: CLPlacemark?
     @State var selectedContact: CNContact?
+    @State var isShowingEvent = false
     let onMapTapped: (CLPlacemark) -> Void
     
     private let geocoder = CLGeocoder()
@@ -116,8 +117,18 @@ struct DetailsCard2: View {
             }
             showMoreDetails()
         }
+        .contextMenu {
+            Button {
+                isShowingEvent = true
+            } label: {
+                Label("Show full event", systemImage: "arrow.up.forward.square")
+            }
+        }
         .sheet(item: $selectedContact) { contact in
             ContactView(contact: contact)
+        }
+        .sheet(isPresented: $isShowingEvent) {
+            EKEventView(event: calendarItem.event)
         }
     }
     
@@ -138,44 +149,44 @@ struct DetailsCard2: View {
     
 }
 
-struct DetailsCard2_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            DetailsCard2(
-                calendarItem: .init(
-                    eventId: "def",
-                    title: "Foo",
-                    location: "Tate Modern",
-                    startTime: Date(),
-                    endTime: Date().addingTimeInterval(60 * 60),
-                    attendees: [
-                        Attendee(identifier: "contacts://joeBloggs", givenName: "Joe",
-                                 familyName: "Bloggs"),
-                        Attendee(identifier: "contacts://joeFloggs", givenName: "Joe",
-                                 familyName: "Floggs")
-                    ]),
-                isExpanded: true,
-                placemark: nil
-            ) { _ in }
-            DetailsCard2(
-                calendarItem: .init(
-                    eventId: "abc",
-                    title: "Foo",
-                    location: "Tate Modern",
-                    startTime: Date(),
-                    endTime: Date().addingTimeInterval(60 * 60),
-                    attendees: [
-                        Attendee(identifier: "contacts://joeBloggs",
-                                 givenName: "Joe",
-                                 familyName: "Bloggs")
-                    ]),
-                placemark: nil
-            ) { _ in }
-            Spacer(minLength: 0)
-        }
-        .padding()
-        .background(Color.green.opacity(0.2))
-        .previewDevice("iPhone 13 mini")
-//        .preferredColorScheme(.dark)
-    }
-}
+//struct DetailsCard2_Previews: PreviewProvider {
+//    static var previews: some View {
+//        VStack {
+//            DetailsCard2(
+//                calendarItem: .init(
+//                    eventId: "def",
+//                    title: "Foo",
+//                    location: "Tate Modern",
+//                    startTime: Date(),
+//                    endTime: Date().addingTimeInterval(60 * 60),
+//                    attendees: [
+//                        Attendee(identifier: "contacts://joeBloggs", givenName: "Joe",
+//                                 familyName: "Bloggs"),
+//                        Attendee(identifier: "contacts://joeFloggs", givenName: "Joe",
+//                                 familyName: "Floggs")
+//                    ],),
+//                isExpanded: true,
+//                placemark: nil
+//            ) { _ in }
+//            DetailsCard2(
+//                calendarItem: .init(
+//                    eventId: "abc",
+//                    title: "Foo",
+//                    location: "Tate Modern",
+//                    startTime: Date(),
+//                    endTime: Date().addingTimeInterval(60 * 60),
+//                    attendees: [
+//                        Attendee(identifier: "contacts://joeBloggs",
+//                                 givenName: "Joe",
+//                                 familyName: "Bloggs")
+//                    ]),
+//                placemark: nil
+//            ) { _ in }
+//            Spacer(minLength: 0)
+//        }
+//        .padding()
+//        .background(Color.green.opacity(0.2))
+//        .previewDevice("iPhone 13 mini")
+////        .preferredColorScheme(.dark)
+//    }
+//}

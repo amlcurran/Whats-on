@@ -9,6 +9,7 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -82,6 +83,9 @@ class WhatsOnActivity : AppCompatActivity() {
         }
 
         binding = ActivityWhatsOnBinding.inflate(LayoutInflater.from(this))
+        binding.toolbarCompose.setContent {
+            HeaderView()
+        }
         setContentView(binding.root)
 
         binding.toolbar.setOnMenuItemClickListener { item ->
@@ -94,22 +98,18 @@ class WhatsOnActivity : AppCompatActivity() {
             }
         }
 
-        val now = DateTime.now(DateTimeZone.getDefault())
-
         val calendarSource = CalendarSource(HashMap(), 0, JodaCalculator(), UserSettings(this))
         adapter = WhatsOnAdapter(LayoutInflater.from(this), eventSelectedListener, calendarSource)
         binding.listWhatsOn.layoutManager = LinearLayoutManager(this)
         binding.listWhatsOn.adapter = adapter
 
-        binding.todayDate.text = DateTimeFormat.forPattern("EEEE, dd MMMMM").print(now)
-
         ViewCompat.setOnApplyWindowInsetsListener(binding.toolbar) { _, insets ->
-            binding.toolbar.updatePadding(top = insets.systemWindowInsetTop)
+            binding.toolbar.updatePadding(top = insets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom)
             insets
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.listWhatsOn) { _, insets ->
-            binding.listWhatsOn.updatePadding(bottom = insets.systemWindowInsetBottom)
+            binding.listWhatsOn.updatePadding(bottom = insets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom)
             insets
         }
     }
