@@ -128,7 +128,16 @@ struct DetailsCard2: View {
             ContactView(contact: contact)
         }
         .sheet(isPresented: $isShowingEvent) {
-            EKEventView(event: calendarItem.event)
+            NavigationView {
+                EKEventView(event: calendarItem.event)
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Close") {
+                                isShowingEvent = false
+                            }
+                        }
+                    }
+            }
         }
     }
     
