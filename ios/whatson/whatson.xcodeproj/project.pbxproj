@@ -98,6 +98,7 @@
 		9F36175D2832ECEE00BA6CD5 /* View+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F36175C2832ECEE00BA6CD5 /* View+Snapshot.swift */; };
 		9F41E8E827A204DC0083C1EC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F41E8E727A204DC0083C1EC /* GoogleService-Info.plist */; };
 		9F6CC34A2852A5DE00700686 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6CC3492852A5DE00700686 /* SwiftUIView.swift */; };
+		9F9791F02865143400F2DC9D /* WatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9791EF2865143400F2DC9D /* WatchView.swift */; };
 		9FA8B40B27D1855C00BF89B3 /* DetailMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA8B40A27D1855C00BF89B3 /* DetailMap.swift */; };
 		9FA8B40D27D18A2800BF89B3 /* EmptySlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA8B40C27D18A2800BF89B3 /* EmptySlot.swift */; };
 		9FB1BCE2285F79020002ABD2 /* EKEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB1BCE1285F79020002ABD2 /* EKEventView.swift */; };
@@ -293,6 +294,7 @@
 		9F36175C2832ECEE00BA6CD5 /* View+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Snapshot.swift"; sourceTree = "<group>"; };
 		9F41E8E727A204DC0083C1EC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9F6CC3492852A5DE00700686 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		9F9791EF2865143400F2DC9D /* WatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchView.swift; sourceTree = "<group>"; };
 		9FA8B40A27D1855C00BF89B3 /* DetailMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMap.swift; sourceTree = "<group>"; };
 		9FA8B40C27D18A2800BF89B3 /* EmptySlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySlot.swift; sourceTree = "<group>"; };
 		9FB1BCE1285F79020002ABD2 /* EKEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EKEventView.swift; sourceTree = "<group>"; };
@@ -574,6 +576,7 @@
 				9F361756282C4FC100BA6CD5 /* ContactBadge.swift */,
 				9F6CC3492852A5DE00700686 /* SwiftUIView.swift */,
 				9FB1BCE1285F79020002ABD2 /* EKEventView.swift */,
+				9F9791EF2865143400F2DC9D /* WatchView.swift */,
 			);
 			path = "event details";
 			sourceTree = "<group>";
@@ -950,6 +953,7 @@
 			files = (
 				86C19EBF1BBF28E600BBCDF6 /* WhatsOnViewController.swift in Sources */,
 				868A16C926D257C30090D6E4 /* Widget3.intentdefinition in Sources */,
+				9F9791F02865143400F2DC9D /* WatchView.swift in Sources */,
 				86DEC9581FB3B40D000FF4CD /* NextStepTableItem.swift in Sources */,
 				8607847A1DAD7E6100AAE856 /* LabelStyle.swift in Sources */,
 				865C7B031EE56AE80047D8E0 /* BuildableTableSource.swift in Sources */,
@@ -1155,6 +1159,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = Core/Info.plist;
@@ -1195,6 +1200,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Core/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";

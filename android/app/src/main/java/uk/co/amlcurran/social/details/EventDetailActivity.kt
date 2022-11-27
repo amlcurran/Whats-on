@@ -128,7 +128,7 @@ class EventDetailActivity : AppCompatActivity() {
     }
 
     private fun findLocation(location: String): Maybe<LatLng> {
-        return Maybe.fromCallable { Geocoder(this).getFromLocationName(location, 10).firstOrNull() }
+        return Maybe.fromCallable { Geocoder(this).getFromLocationName(location, 10)?.firstOrNull() }
             .map { LatLng(it.latitude, it.longitude) }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
