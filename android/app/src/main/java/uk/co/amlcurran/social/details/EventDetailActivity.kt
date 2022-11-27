@@ -15,12 +15,11 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.google.maps.android.compose.*
 import io.reactivex.Maybe
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -28,16 +27,14 @@ import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
-import org.joda.time.format.DateTimeFormat
-import org.joda.time.format.DateTimeFormatter
 import uk.co.amlcurran.social.*
+import uk.co.amlcurran.social.R
 import uk.co.amlcurran.social.databinding.ActivityEventDetailsBinding
 
 class EventDetailActivity : AppCompatActivity() {
 
     private lateinit var eventId: String
     private val subscriptions = CompositeDisposable()
-    private val timeFormatter: DateTimeFormatter by lazy { DateTimeFormat.shortTime() }
     private val jodaCalculator = JodaCalculator()
     private val events by lazy {
         val calendarRepository = UserSettings(this)
@@ -74,7 +71,7 @@ class EventDetailActivity : AppCompatActivity() {
                 render(event)
             } catch (e: Error) {
                 e.printStackTrace()
-                Snackbar.make(binding.eventCard.root, R.string.something_went_wrong, Snackbar.LENGTH_LONG)
+                Snackbar.make(binding.root, R.string.something_went_wrong, Snackbar.LENGTH_LONG)
                     .show()
             }
         }
@@ -87,10 +84,6 @@ class EventDetailActivity : AppCompatActivity() {
         binding.eventCard2.setContent {
             EventCard(event = event)
         }
-        binding.eventCard.eventTitle.text = event.item.title
-        val startTime = event.item.startTime.format(timeFormatter)
-        val endTime = event.item.endTime.format(timeFormatter)
-        binding.eventCard.eventSubtitle.text = getString(R.string.start_to_end, startTime, endTime)
         binding.detailToolbar.menu.findItem(R.id.menu_open_outside).isVisible = true
         binding.detailToolbar.menu.findItem(R.id.menu_delete_event).isVisible = true
         binding.detailToolbar.menu.findItem(R.id.menu_hide_event).isVisible = true
@@ -108,21 +101,20 @@ class EventDetailActivity : AppCompatActivity() {
         Log.w("Failure", throwable)
     }
 
+
     private fun show(latLng: LatLng) {
-        val mapFragment = SupportMapFragment.newInstance()
-        supportFragmentManager.beginTransaction()
-            .add(R.id.mapHost, mapFragment)
-            .commit()
-        binding.mapHost.alpha = 0f
-        mapFragment.getMapAsync { map ->
-            map.uiSettings.setAllGesturesEnabled(false)
-            binding.mapHost.alphaIn(translate = true)
-            map.addMarker(MarkerOptions().position(latLng))
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-            binding.mapHost.setOnClickListener {
-                startActivity(Intent(Intent.ACTION_VIEW).apply {
-                    data = Uri.parse("https://www.google.com/maps/dir/?api=1&destination=${latLng.latitude},${latLng.longitude}")
-                })
+        binding.mapHost.setContent {
+            GoogleMap(
+                onMapClick = {
+                    startActivity(Intent(Intent.ACTION_VIEW).apply {
+                        data =
+                            Uri.parse("https://www.google.com/maps/dir/?api=1&destination=${latLng.latitude},${latLng.longitude}")
+                    })
+                },
+                uiSettings = MapUiSettings(zoomControlsEnabled = false, rotationGesturesEnabled = false, scrollGesturesEnabled = false, tiltGesturesEnabled = false, zoomGesturesEnabled = false),
+                cameraPositionState = CameraPositionState(CameraPosition.fromLatLngZoom(latLng, 15f))
+            ) {
+                Marker(state = MarkerState(position = latLng))
             }
         }
     }
