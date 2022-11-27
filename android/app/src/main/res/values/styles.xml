@@ -50,7 +50,7 @@
         <item name="fontFamily">@font/opensanssemi</item>
         <item name="fontWeight">700</item>
         <item name="android:letterSpacing">-0.01</item>
-        <item name="android:textColor">@color/colorSecondary</item>
+        <item name="android:textColor">@color/colorOnBackground</item>
     </style>
 
     <style name="Body2" parent="TextAppearance.MaterialComponents.Body2">

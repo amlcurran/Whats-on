@@ -3,7 +3,6 @@ package uk.co.amlcurran.social
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.text.format.DateFormat
 import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -11,36 +10,9 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import java.util.*
-
-val openSans = FontFamily(listOf(
-    Font(R.font.opensansreg),
-    Font(R.font.opensansbold, FontWeight.Bold),
-    Font(R.font.opensanssemi, FontWeight.SemiBold)
-))
-
-@Composable
-fun WhatsOnTheme(content: @Composable () -> Unit) {
-    MaterialTheme(
-        if (isSystemInDarkTheme()) darkColors(
-            primary = colorResource(id = R.color.colorPrimary),
-            secondary = colorResource(id = R.color.colorOnBackground)
-        ) else lightColors(
-            primary = colorResource(id = R.color.colorPrimary),
-            secondary = colorResource(id = R.color.colorOnBackground)
-        ),
-        typography = Typography(
-            h4 = Typography().h4.copy(fontFamily = openSans, fontWeight = FontWeight.Bold)
-        ),
-        content = content
-    )
-}
 
 @Composable
 fun HeaderView() {
