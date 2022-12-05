@@ -13,6 +13,10 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.model.CameraPosition
@@ -105,6 +109,7 @@ class EventDetailActivity : AppCompatActivity() {
     private fun show(latLng: LatLng) {
         binding.mapHost.setContent {
             GoogleMap(
+                modifier = Modifier.clip(RoundedCornerShape(topStart = 0.dp, topEnd = 0.dp, bottomStart = 8.dp, bottomEnd = 8.dp)),
                 onMapClick = {
                     startActivity(Intent(Intent.ACTION_VIEW).apply {
                         data =

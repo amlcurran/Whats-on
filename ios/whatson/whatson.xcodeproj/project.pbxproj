@@ -29,9 +29,6 @@
 		862D5477271381C800B66FA5 /* ShownCalendarPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862D5476271381C800B66FA5 /* ShownCalendarPicker.swift */; };
 		862D5479271787D000B66FA5 /* BoundaryPickerView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862D5478271787D000B66FA5 /* BoundaryPickerView2.swift */; };
 		862F0BAE26EFE8A200BE5350 /* NewEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862F0BAD26EFE8A200BE5350 /* NewEventView.swift */; };
-		862F235A26FD2E68000A8BFD /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 862F234826FD2DCF000A8BFD /* Intents.framework */; };
-		862F235D26FD2E68000A8BFD /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862F235C26FD2E68000A8BFD /* IntentHandler.swift */; };
-		862F236626FD2EAA000A8BFD /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86755DC522C7BC2000E91DF4 /* Core.framework */; };
 		862F236D26FD3591000A8BFD /* CheckCalendarHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862F236C26FD3591000A8BFD /* CheckCalendarHandler.swift */; };
 		86317A091EC258ED0009EE8A /* EventPredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86317A081EC258ED0009EE8A /* EventPredicateTests.swift */; };
 		8658A2301F375DF800BF219C /* TableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658A22F1F375DF800BF219C /* TableSection.swift */; };
@@ -112,13 +109,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		862F236826FD2EAA000A8BFD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 86CAD4911BACC9B1009C9CFD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 86755DC422C7BC2000E91DF4;
-			remoteInfo = Core;
-		};
 		86755DCF22C7BC2100E91DF4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 86CAD4911BACC9B1009C9CFD /* Project object */;
@@ -216,7 +206,6 @@
 		862D5478271787D000B66FA5 /* BoundaryPickerView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundaryPickerView2.swift; sourceTree = "<group>"; };
 		862F0BAD26EFE8A200BE5350 /* NewEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventView.swift; sourceTree = "<group>"; };
 		862F234826FD2DCF000A8BFD /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
-		862F235926FD2E68000A8BFD /* WhatsOnIntents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WhatsOnIntents.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		862F235C26FD2E68000A8BFD /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		862F235E26FD2E68000A8BFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		862F236226FD2E68000A8BFD /* WhatsOnIntents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhatsOnIntents.entitlements; sourceTree = "<group>"; };
@@ -308,15 +297,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		862F235626FD2E68000A8BFD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				862F235A26FD2E68000A8BFD /* Intents.framework in Frameworks */,
-				862F236626FD2EAA000A8BFD /* Core.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		86755DC222C7BC2000E91DF4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -529,7 +509,6 @@
 				86755DC522C7BC2000E91DF4 /* Core.framework */,
 				86755DCD22C7BC2100E91DF4 /* CoreTests.xctest */,
 				868A16BE26D257BF0090D6E4 /* Widget3Extension.appex */,
-				862F235926FD2E68000A8BFD /* WhatsOnIntents.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -641,24 +620,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		862F235826FD2E68000A8BFD /* WhatsOnIntents */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 862F236326FD2E68000A8BFD /* Build configuration list for PBXNativeTarget "WhatsOnIntents" */;
-			buildPhases = (
-				862F235526FD2E68000A8BFD /* Sources */,
-				862F235626FD2E68000A8BFD /* Frameworks */,
-				862F235726FD2E68000A8BFD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				862F236926FD2EAA000A8BFD /* PBXTargetDependency */,
-			);
-			name = WhatsOnIntents;
-			productName = WhatsOnIntents;
-			productReference = 862F235926FD2E68000A8BFD /* WhatsOnIntents.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		86755DC422C7BC2000E91DF4 /* Core */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 86755DE122C7BC2100E91DF4 /* Build configuration list for PBXNativeTarget "Core" */;
@@ -763,14 +724,9 @@
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Alex Curran";
 				TargetAttributes = {
-					862F235826FD2E68000A8BFD = {
-						CreatedOnToolsVersion = 13.0;
-						DevelopmentTeam = 3H3SBN3AYY;
-						ProvisioningStyle = Automatic;
-					};
 					86755DC422C7BC2000E91DF4 = {
 						CreatedOnToolsVersion = 11.0;
-						DevelopmentTeam = 3H3SBN3AYY;
+						DevelopmentTeam = LW2EJ7FEBP;
 						LastSwiftMigration = 1100;
 						ProvisioningStyle = Automatic;
 					};
@@ -782,7 +738,7 @@
 					};
 					868A16BD26D257BF0090D6E4 = {
 						CreatedOnToolsVersion = 13.0;
-						DevelopmentTeam = 3H3SBN3AYY;
+						DevelopmentTeam = LW2EJ7FEBP;
 						ProvisioningStyle = Automatic;
 					};
 					869DAC6F1D449EFB005AF315 = {
@@ -795,7 +751,7 @@
 					};
 					86CAD4981BACC9B1009C9CFD = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = 3H3SBN3AYY;
+						DevelopmentTeam = LW2EJ7FEBP;
 						DevelopmentTeamName = "Alexander Curran";
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
@@ -828,19 +784,11 @@
 				86755DC422C7BC2000E91DF4 /* Core */,
 				86755DCC22C7BC2100E91DF4 /* CoreTests */,
 				868A16BD26D257BF0090D6E4 /* Widget3Extension */,
-				862F235826FD2E68000A8BFD /* WhatsOnIntents */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		862F235726FD2E68000A8BFD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		86755DC322C7BC2000E91DF4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -885,14 +833,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		862F235526FD2E68000A8BFD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				862F235D26FD2E68000A8BFD /* IntentHandler.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		86755DC122C7BC2000E91DF4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1016,11 +956,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		862F236926FD2EAA000A8BFD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 86755DC422C7BC2000E91DF4 /* Core */;
-			targetProxy = 862F236826FD2EAA000A8BFD /* PBXContainerItemProxy */;
-		};
 		86755DD022C7BC2100E91DF4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 86755DC422C7BC2000E91DF4 /* Core */;
@@ -1065,79 +1000,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		862F236426FD2E68000A8BFD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = WhatsOnIntents/WhatsOnIntents.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3H3SBN3AYY;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WhatsOnIntents/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = WhatsOnIntents;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Alex Curran. All rights reserved.";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson.WhatsOnIntents;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		862F236526FD2E68000A8BFD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = WhatsOnIntents/WhatsOnIntents.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3H3SBN3AYY;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WhatsOnIntents/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = WhatsOnIntents;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Alex Curran. All rights reserved.";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.0;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson.WhatsOnIntents;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		86755DDD22C7BC2100E91DF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1155,7 +1017,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 3H3SBN3AYY;
+				DEVELOPMENT_TEAM = LW2EJ7FEBP;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1196,7 +1058,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 3H3SBN3AYY;
+				DEVELOPMENT_TEAM = LW2EJ7FEBP;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1289,7 +1151,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1000;
-				DEVELOPMENT_TEAM = 3H3SBN3AYY;
+				DEVELOPMENT_TEAM = LW2EJ7FEBP;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1301,7 +1163,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson.Widget3;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson2.Widget3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
@@ -1309,7 +1171,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Debug;
 		};
@@ -1330,7 +1192,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1000;
-				DEVELOPMENT_TEAM = 3H3SBN3AYY;
+				DEVELOPMENT_TEAM = LW2EJ7FEBP;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widget3/Info.plist;
@@ -1340,14 +1202,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson.Widget3;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson2.Widget3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Release;
 		};
@@ -1512,20 +1374,22 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 10000;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 3H3SBN3AYY;
+				DEVELOPMENT_TEAM = LW2EJ7FEBP;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = whatson/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.1;
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson2;
 				PRODUCT_MODULE_NAME = Whatson;
 				PRODUCT_NAME = "What’s on";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,6";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -1541,20 +1405,22 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 10000;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 3H3SBN3AYY;
+				DEVELOPMENT_TEAM = LW2EJ7FEBP;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = whatson/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.1;
 				OTHER_SWIFT_FLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson2;
 				PRODUCT_MODULE_NAME = Whatson;
 				PRODUCT_NAME = "What’s on";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,6";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
@@ -1562,15 +1428,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		862F236326FD2E68000A8BFD /* Build configuration list for PBXNativeTarget "WhatsOnIntents" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				862F236426FD2E68000A8BFD /* Debug */,
-				862F236526FD2E68000A8BFD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		86755DE122C7BC2100E91DF4 /* Build configuration list for PBXNativeTarget "Core" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

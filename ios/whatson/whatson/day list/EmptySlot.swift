@@ -20,15 +20,15 @@ struct EmptySlot: View {
             .contentShape(Rectangle())
             .background  {
                 ZStack {
-                RoundedRectangle(cornerRadius: 8)
-                    .strokeBorder(style: .init(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 8, dash: [8, 8], dashPhase: 0))
-                    .foregroundColor(Color("lightText"))
                     RoundedRectangle(cornerRadius: 8)
-                        .foregroundColor(Color("lightText"))
+                        .strokeBorder(style: .init(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 8, dash: [8, 8], dashPhase: 0))
+                        .foregroundColor(Color("emptyOutline"))
+                    RoundedRectangle(cornerRadius: 8)
+                        .foregroundColor(Color("emptyOutline"))
                         .opacity(isTapped ? 0.3 : 0.0)
                         .scaleEffect(x: isTapped ? 1.0 : 0.9, y: 1.0, anchor: .center)
                         .animation(.easeInOut.speed(3), value: isTapped)
-                        
+                    
                 }
             }
     }

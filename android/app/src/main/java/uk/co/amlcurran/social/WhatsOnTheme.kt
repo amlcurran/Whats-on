@@ -36,10 +36,14 @@ fun WhatsOnTheme(content: @Composable () -> Unit) {
         ),
         colors = if (isSystemInDarkTheme()) darkColors(
             primary = colorResource(id = R.color.colorPrimary),
-            secondary = colorResource(id = R.color.colorOnBackground)
+            secondary = colorResource(id = R.color.colorOnBackground),
+            surface = colorResource(id = R.color.colorSurface),
+            background = colorResource(id = R.color.background)
         ) else lightColors(
             primary = colorResource(id = R.color.colorPrimary),
-            secondary = colorResource(id = R.color.colorOnBackground)
+            secondary = colorResource(id = R.color.colorOnBackground),
+            surface = colorResource(id = R.color.colorSurface),
+            background = colorResource(id = R.color.background)
         ),
         content = content
     )

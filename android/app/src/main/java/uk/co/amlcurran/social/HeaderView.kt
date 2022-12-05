@@ -22,7 +22,6 @@ fun HeaderView() {
             .padding(16.dp)
             .fillMaxWidth()
         ) {
-                Column {
                     Text(
                         text = DateFormat.getMediumDateFormat(LocalContext.current).format(Date())
                             .uppercase(Locale.getDefault()),
@@ -34,7 +33,6 @@ fun HeaderView() {
                         style = MaterialTheme.typography.h4,
                         color = MaterialTheme.colors.secondary
                     )
-                }
         }
     }
 }

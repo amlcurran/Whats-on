@@ -32,7 +32,7 @@ struct Provider: TimelineProvider {
         let source = EventsService.default.fetchEvents(inNumberOfDays: 2, startingFrom: Date())
 
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
-        let refresh = Calendar.current.date(bySettingHour: 0, minute: 3, second: 0, of: tomorrow)
+        let refresh = Calendar.current.date(bySettingHour: 2, minute: 0, second: 0, of: tomorrow)
 
         let timeline = Timeline(entries: [
             EventsEntry(date: Date(), slots: source)

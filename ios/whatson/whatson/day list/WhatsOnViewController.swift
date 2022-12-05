@@ -21,6 +21,7 @@ struct WhatsOnView: View {
         .sheet(item: $shareUrl, onDismiss: presenter.unredact) { temporary in
             UIActivityView(url: temporary)
         }
+        .tint(Color("accent"))
     }
     
     private func snapshotAndShare() {

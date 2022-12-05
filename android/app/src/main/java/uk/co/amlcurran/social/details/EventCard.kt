@@ -51,7 +51,6 @@ fun EventCard(modifier: Modifier = Modifier, event: Event) {
     WhatsOnTheme {
         Card(
             modifier
-                .padding(16.dp)
                 .background(
                     color = colorResource(id = R.color.colorSurface),
                     shape = RoundedCornerShape(8.dp)

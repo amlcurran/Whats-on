@@ -3,7 +3,7 @@ import SwiftUI
 
 private let textColors: [LabelStyle: UIColor] = [
         .cta: .accent,
-        .lower: .lightText,
+        .lower: .emptyOutline,
         .header: .secondary,
         .selectableTime: .secondary
 ]
