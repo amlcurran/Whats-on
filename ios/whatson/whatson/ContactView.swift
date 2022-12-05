@@ -14,18 +14,18 @@ struct ContactView: UIViewControllerRepresentable {
         Coordinator(viewController: dismiss)
     }
     
-    typealias UIViewControllerType = CNContactViewController
+    typealias UIViewControllerType = UINavigationController
     
     let contact: CNContact
     @Environment(\.dismiss) var dismiss
     
-    func makeUIViewController(context: Context) -> CNContactViewController {
+    func makeUIViewController(context: Context) -> UINavigationController {
         let controller = CNContactViewController(for: contact)
         controller.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: context.coordinator, action: #selector(context.coordinator.didTapClose))
-        return controller
+        return UINavigationController(rootViewController: controller)
     }
     
-    func updateUIViewController(_ uiViewController: CNContactViewController, context: Context) {
+    func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
         
     }
     

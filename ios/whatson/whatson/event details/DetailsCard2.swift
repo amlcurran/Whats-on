@@ -64,17 +64,17 @@ struct DetailsCard2: View {
                     }
                 }
 //                if isExpanded {
-                    Spacer(minLength: 8)
-                    ZStack {
-                        ForEach(Array(calendarItem.attendees.enumerated()), id: \.element) { (index, attendee) in
-                            ContactBadge(attendee: attendee)
+                Spacer(minLength: 8)
+                ZStack {
+                    ForEach(Array(calendarItem.attendees.enumerated()), id: \.element) { (index, attendee) in
+                        ContactBadge(attendee: attendee)
                             .offset(x: -CGFloat(index * 16))
                             .onTapGesture {
                                 selectedContact = try? CNContactStore().unifiedContact(withIdentifier: attendee.identifier, keysToFetch: [CNContactViewController.descriptorForRequiredKeys()])
                                 
                             }
                     }
-                    }
+                }
 //                }
             }
             .padding([.leading, .top, .trailing])
