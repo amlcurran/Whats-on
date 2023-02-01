@@ -2,16 +2,14 @@ import EventKit
 
 struct EventPredicates {
 
-    private let timeRepository: BorderTimeRepository
-
-    init(timeRepository: BorderTimeRepository) {
-        self.timeRepository = timeRepository
-    }
+    let timeRepository: BorderTimeRepository
+    let eventPreferences: CalendarPreferenceStore
 
     var defaults: EventPredicate {
         return compound(from: notDeclinedOrCancelled(),
                         notAllDay(),
                         notMultiDay(),
+                        notYetConfirmed(eventPreferences: eventPreferences),
                         isWithinBorder(timeRepository: timeRepository, using: .autoupdatingCurrent))
     }
 
@@ -37,6 +35,18 @@ private func notDeclinedOrCancelled() -> EventPredicate {
         }
         if let organiser = event.organizer {
             return organiser.isCurrentUser
+        }
+        return false
+    }
+}
+
+private func notYetConfirmed(eventPreferences: CalendarPreferenceStore) -> EventPredicate {
+    return { event in
+        guard let attendees = event.attendees else {
+            return true
+        }
+        if let mainUser = attendees.mainUser {
+            return mainUser.participantStatus == .pending && eventPreferences.showUnansweredEvents
         }
         return false
     }

@@ -9,7 +9,7 @@ public class EventKitEventRepository: EventsRepository {
 
     public init(timeRepository: BorderTimeRepository,
                 calendarPreferenceStore: CalendarPreferenceStore) {
-        self.predicates = EventPredicates(timeRepository: timeRepository)
+        self.predicates = EventPredicates(timeRepository: timeRepository, eventPreferences: calendarPreferenceStore)
         self.calendarPreferenceStore = calendarPreferenceStore
     }
 

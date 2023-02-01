@@ -58,8 +58,8 @@ struct HeaderView2: View {
                 let calendarPreferenceStore = CalendarPreferenceStore()
                 let shownCalendars = CalendarLoader(preferenceStore: calendarPreferenceStore).load()
                 OptionsView(startDate: timeStore.startDateBinding,
-                                       endDate: timeStore.endDateBinding,
-                                       allCalendars: shownCalendars) {
+                            endDate: timeStore.endDateBinding,
+                            allCalendars: shownCalendars) {
                     shownSheet = nil
                 }
             }

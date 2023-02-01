@@ -64,6 +64,15 @@ public class CalendarPreferenceStore {
             }
         }
     }
+    
+    public var showUnansweredEvents: Bool {
+        get {
+            userDefaults.bool(forKey: "unansweredEvents")
+        }
+        set {
+            userDefaults.set(newValue, forKey: "unansweredEvents")
+        }
+    }
 
 }
 

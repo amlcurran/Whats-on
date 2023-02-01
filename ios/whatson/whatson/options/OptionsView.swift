@@ -34,6 +34,7 @@ struct OptionsView: View {
 
     @Binding var startDate: Date
     @Binding var endDate: Date
+    @AppStorage("showUnansweredEvents", store: .appGroup) var showUnansweredEvents: Bool = false
     @AppStorage("direction") var direction: DirectionType = .any
     let allCalendars: [EventCalendar]
     let onDismiss: () -> Void
@@ -47,6 +48,7 @@ struct OptionsView: View {
                             .padding()
                             .frame(maxWidth: .infinity, alignment: .center)
                         DefaultCalendarPicker(calendars: allCalendars)
+                        Toggle("Show unanswered events", isOn: $showUnansweredEvents)
                     }
                     Section(header: Text("Shown calendars"),
                             footer: Text("Only events from checked calendars will be shown in your schedule.")) {
@@ -68,7 +70,7 @@ struct OptionsView: View {
                 .listStyle(.insetGrouped)
             }.toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Done") {
+                    Button("Cancel") {
                         onDismiss()
                     }
                 }
@@ -102,6 +104,7 @@ struct OptionsView_Previews: PreviewProvider {
         OptionsView(
             startDate: .constant(Date()),
             endDate: .constant(Date().addingTimeInterval(-68000)),
+            showUnansweredEvents: false,
             allCalendars: [
                 EventCalendar(name: "Calendar 1", account: "Gmail", id: EventCalendar.Id(rawValue: "foo"), included: true, editable: false),
                 EventCalendar(name: "Calendar 2", account: "iCloud", id: EventCalendar.Id(rawValue: "bar"), included: false, editable: true),
