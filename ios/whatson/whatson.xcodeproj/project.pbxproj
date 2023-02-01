@@ -66,7 +66,6 @@
 		868A16C926D257C30090D6E4 /* Widget3.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 868A16C426D257BF0090D6E4 /* Widget3.intentdefinition */; };
 		868A16CC26D257C30090D6E4 /* Widget3Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 868A16BE26D257BF0090D6E4 /* Widget3Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8695D0281DA023670034D52A /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0271DA023670034D52A /* HeaderView.swift */; };
-		8695D0301DA185DB0034D52A /* SlotCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */; };
 		8695D0331DA1A2A20034D52A /* SlotDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D0321DA1A2A20034D52A /* SlotDetail.swift */; };
 		86A9355722C7C1B8003FC26C /* EmptyCalendarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9355622C7C1B8003FC26C /* EmptyCalendarItem.swift */; };
 		86A9355922C7C1F4003FC26C /* EventCalendarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9355822C7C1F4003FC26C /* EventCalendarItem.swift */; };
@@ -79,7 +78,6 @@
 		86C19EBF1BBF28E600BBCDF6 /* WhatsOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */; };
 		86CAD4A91BACC9B1009C9CFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */; };
 		86CAD4AC1BACC9B1009C9CFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CAD4AA1BACC9B1009C9CFD /* LaunchScreen.storyboard */; };
-		86D751131C7128EB00C0A607 /* RoundedRectBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */; };
 		86D751151C71316D00C0A607 /* UIColor+WhatsOn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D751141C71316D00C0A607 /* UIColor+WhatsOn.swift */; };
 		86DB90182676A05200F8BB72 /* WhatsOnPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F467F81C8AFFA500147F2E /* WhatsOnPresenter.swift */; };
 		86DB90192676A09100F8BB72 /* Delayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8600B99E1F09429D008578E5 /* Delayer.swift */; };
@@ -101,6 +99,7 @@
 		9FB1BCE2285F79020002ABD2 /* EKEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB1BCE1285F79020002ABD2 /* EKEventView.swift */; };
 		9FBE073827CD6C7E00C6BF96 /* DetailsCard2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBE073727CD6C7E00C6BF96 /* DetailsCard2.swift */; };
 		9FBE073A27D0087B00C6BF96 /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBE073927D0087B00C6BF96 /* EventList.swift */; };
+		9FCA375B298AC7D7002C706E /* SlotCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */; };
 		9FDD6649283ADE5200846610 /* Multiple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDD6648283ADE5200846610 /* Multiple.swift */; };
 		9FDD664B283ADE7100846610 /* MultipleEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDD664A283ADE7100846610 /* MultipleEventView.swift */; };
 		9FDD664D283FFAD800846610 /* AddNewEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDD664C283FFAD800846610 /* AddNewEventView.swift */; };
@@ -266,7 +265,6 @@
 		86CAD4A81BACC9B1009C9CFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		86CAD4AB1BACC9B1009C9CFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86CAD4AD1BACC9B1009C9CFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedRectBorderView.swift; sourceTree = "<group>"; };
 		86D751141C71316D00C0A607 /* UIColor+WhatsOn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+WhatsOn.swift"; sourceTree = "<group>"; };
 		86DE0FE61BB885E8004E20B5 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		86DE0FE81BB8863D004E20B5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -358,7 +356,6 @@
 				8658A22E1F375C8800BF219C /* buildable-table */,
 				8600B99C1F09383D008578E5 /* LoadingView.swift */,
 				860784791DAD7E6100AAE856 /* LabelStyle.swift */,
-				86D751121C7128EB00C0A607 /* RoundedRectBorderView.swift */,
 				6985328C217A9C753C09CFDE /* Line.swift */,
 				866D2E761EEA045E008D76D5 /* GradientView.swift */,
 				69853B71158DE94568DDC9FB /* BasicAnimator.swift */,
@@ -406,6 +403,7 @@
 		86755DC622C7BC2000E91DF4 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */,
 				860BD731270A4BD5000D46F7 /* Intents.intentdefinition */,
 				8687F8B82700AE4F00220163 /* DemoRepository.swift */,
 				86F467F81C8AFFA500147F2E /* WhatsOnPresenter.swift */,
@@ -459,7 +457,6 @@
 			children = (
 				86C19EBE1BBF28E600BBCDF6 /* WhatsOnViewController.swift */,
 				8695D0271DA023670034D52A /* HeaderView.swift */,
-				8695D02F1DA185DB0034D52A /* SlotCellStyle.swift */,
 				8695D0321DA1A2A20034D52A /* SlotDetail.swift */,
 				86DEC9551FB3A069000FF4CD /* AddEventView.swift */,
 				9FBE073927D0087B00C6BF96 /* EventList.swift */,
@@ -856,6 +853,7 @@
 				867C4A1426D812A800B718DD /* DayViews.swift in Sources */,
 				86A9355D22C7C261003FC26C /* EventsService.swift in Sources */,
 				86A9355922C7C1F4003FC26C /* EventCalendarItem.swift in Sources */,
+				9FCA375B298AC7D7002C706E /* SlotCellStyle.swift in Sources */,
 				8687F8BA2700B19C00220163 /* DemoRepository.swift in Sources */,
 				868119E32306D76A0035553B /* CalendarPreferenceStore.swift in Sources */,
 				86755DEE22C7BDF100E91DF4 /* CalendarSlot.swift in Sources */,
@@ -899,7 +897,6 @@
 				865C7B031EE56AE80047D8E0 /* BuildableTableSource.swift in Sources */,
 				8658A2381F375ED500BF219C /* CustomViewTableItem.swift in Sources */,
 				8695D0331DA1A2A20034D52A /* SlotDetail.swift in Sources */,
-				86D751131C7128EB00C0A607 /* RoundedRectBorderView.swift in Sources */,
 				86F8499B1D046AAE007C41B0 /* UIView+Constraints.swift in Sources */,
 				86A9E45B1DA80A4900E8D019 /* UIViewController+Navigation.swift in Sources */,
 				8658A2341F375E6100BF219C /* TitleTableItem.swift in Sources */,
@@ -918,7 +915,6 @@
 				86D751151C71316D00C0A607 /* UIColor+WhatsOn.swift in Sources */,
 				86FFFE491EC10E01009D772E /* Optional+Requirements.swift in Sources */,
 				9F36175D2832ECEE00BA6CD5 /* View+Snapshot.swift in Sources */,
-				8695D0301DA185DB0034D52A /* SlotCellStyle.swift in Sources */,
 				86DEC9561FB3A069000FF4CD /* AddEventView.swift in Sources */,
 				86A9C2CB1C444468009281A0 /* WhatsOnAppDelegate.swift in Sources */,
 				8600B9A11F0946F9008578E5 /* UIView+Animations.swift in Sources */,

@@ -74,31 +74,8 @@ struct FullSlot: View {
                 .font(.caption)
         }
         .padding(8)
-        .modifier(SlotStyle(empty: false))
+        .slot(style: .full)
     }
-}
-
-struct SlotStyle: ViewModifier {
-
-    let empty: Bool
-
-    func body(content: Content) -> some View {
-        if empty {
-            ZStack {
-                ContainerRelativeShape()
-                    .stroke(style: .init(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 0, dash: [8], dashPhase: 0))
-                    .foregroundColor(Color("emptyOutline"))
-                content
-            }
-        } else {
-            ZStack {
-                ContainerRelativeShape()
-                    .foregroundColor(Color("surface"))
-                content
-            }
-        }
-    }
-
 }
 
 struct EmptySlot: View {
@@ -120,7 +97,7 @@ struct EmptySlot: View {
                 .font(.caption)
         }
         .padding(8)
-        .modifier(SlotStyle(empty: true))
+        .slot(style: .empty)
     }
 
 }
