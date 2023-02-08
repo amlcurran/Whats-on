@@ -1,28 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.compose.ui.platform.ComposeView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="8dp"
-    android:background="@drawable/event_bg"
-    android:elevation="2dp"
-    android:orientation="vertical"
-    android:padding="16dp">
-
-    <TextView
-        android:id="@+id/event_title"
-        style="@style/Body1.Focus"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="A very exciting event" />
-
-    <TextView
-        android:id="@+id/event_subtitle"
-        style="@style/Body2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        tools:text="From 5:30pm" />
-
-</LinearLayout>
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/event_compose_host"/>
 

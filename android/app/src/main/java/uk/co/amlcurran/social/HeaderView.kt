@@ -31,7 +31,7 @@ fun HeaderView() {
                     Text(
                         text = "What's on",
                         style = MaterialTheme.typography.h4,
-                        color = MaterialTheme.colors.secondary
+                        color = MaterialTheme.colors.onBackground
                     )
         }
     }

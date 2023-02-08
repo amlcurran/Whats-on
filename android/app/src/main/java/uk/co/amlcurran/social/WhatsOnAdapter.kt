@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.compose.ui.platform.ComposeView
 import androidx.recyclerview.widget.RecyclerView
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
@@ -17,7 +18,7 @@ internal class WhatsOnAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarItemViewHolder<*> {
         return when (viewType) {
-            TYPE_EVENT -> EventViewHolder(layoutInflater.inflate(R.layout.item_event, parent, false), eventSelectedListener)
+            TYPE_EVENT -> EventViewHolder(layoutInflater.inflate(R.layout.item_event, parent, false) as ComposeView, eventSelectedListener)
             TYPE_EMPTY -> EmptyViewHolder(layoutInflater.inflate(R.layout.item_empty, parent, false), eventSelectedListener)
             TYPE_DAY -> DayViewHolder(layoutInflater.inflate(R.layout.item_day, parent, false))
             else -> TODO("Not implemented")

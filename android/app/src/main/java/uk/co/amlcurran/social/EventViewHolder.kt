@@ -2,21 +2,30 @@ package uk.co.amlcurran.social
 
 import android.view.View
 import android.widget.TextView
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
 import org.joda.time.DateTime
 
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 
-internal class EventViewHolder(itemView: View, private val eventSelectedListener: WhatsOnAdapter.EventSelectedListener) : CalendarItemViewHolder<EventCalendarItem>(itemView) {
-
-    private val textView: TextView = itemView.findViewById(R.id.event_title)
-    private val subtitle: TextView = itemView.findViewById(R.id.event_subtitle)
-    private val formatter = DateTimeFormat.shortTime()
+internal class EventViewHolder(private val composeView: ComposeView, private val eventSelectedListener: WhatsOnAdapter.EventSelectedListener) : CalendarItemViewHolder<EventCalendarItem>(composeView) {
 
     override fun bind(item: EventCalendarItem) {
-        textView.text = item.title
-        subtitle.text = itemView.resources.getString(R.string.event_from, item.startTime.format(formatter))
-        itemView.setOnClickListener { eventSelectedListener.eventSelected(item, itemView) }
+        composeView.setContent {
+            WhatsOnTheme {
+                EventView(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            eventSelectedListener.eventSelected(item, itemView)
+                        },
+                    event = item
+                )
+            }
+        }
     }
 
 }
