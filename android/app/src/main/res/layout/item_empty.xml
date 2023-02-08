@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.compose.ui.platform.ComposeView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/event_title"
-    style="@style/Body1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/item_margin"
-    android:background="@drawable/empty_border"
-    android:gravity="center_vertical"
-    android:padding="16dp"
-    android:paddingStart="16dip"
-    android:paddingEnd="16dip"
-    android:text="Large Text"
-    android:textColor="@color/empty_color" />
+    android:layout_margin="@dimen/item_margin" />

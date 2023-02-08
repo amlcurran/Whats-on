@@ -19,7 +19,7 @@ internal class WhatsOnAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarItemViewHolder<*> {
         return when (viewType) {
             TYPE_EVENT -> EventViewHolder(layoutInflater.inflate(R.layout.item_event, parent, false) as ComposeView, eventSelectedListener)
-            TYPE_EMPTY -> EmptyViewHolder(layoutInflater.inflate(R.layout.item_empty, parent, false), eventSelectedListener)
+            TYPE_EMPTY -> EmptyViewHolder(layoutInflater.inflate(R.layout.item_empty, parent, false) as ComposeView, eventSelectedListener)
             TYPE_DAY -> DayViewHolder(layoutInflater.inflate(R.layout.item_day, parent, false))
             else -> TODO("Not implemented")
         }

@@ -32,7 +32,10 @@ fun WhatsOnTheme(content: @Composable () -> Unit) {
                 fontFamily = openSans,
                 fontWeight = FontWeight.SemiBold
             ),
-            h4 = Typography().h4.copy(fontFamily = openSans, fontWeight = FontWeight.Bold)
+            h4 = Typography().h4.copy(
+                fontFamily = openSans,
+                fontWeight = FontWeight.Bold
+            )
         ),
         colors = if (isSystemInDarkTheme()) darkColors(
             primary = colorResource(id = R.color.colorPrimary),
