@@ -6,14 +6,14 @@ class CalendarSource(private val calendarItems: Map<Int, CalendarSlot>, private 
         return daysSize
     }
 
-    fun itemAt(position: Int): CalendarItem? {
+    fun itemAt(position: Int): CalendarItem {
         val calendarSlot = calendarItems[position]
         if (calendarSlot == null || calendarSlot.isEmpty) {
             val startTime = startOfTodayBlock(position)
             val endTime = endOfTodayBlock(position)
             return EmptyCalendarItem(startTime, endTime)
         }
-        return calendarSlot.firstItem()
+        return calendarSlot.firstItem()!!
     }
 
     private fun startOfTodayBlock(position: Int): Timestamp {

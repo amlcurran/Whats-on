@@ -35,6 +35,9 @@ fun WhatsOnTheme(content: @Composable () -> Unit) {
             h4 = Typography().h4.copy(
                 fontFamily = openSans,
                 fontWeight = FontWeight.Bold
+            ),
+            subtitle2 = Typography().subtitle2.copy(
+                fontFamily = openSans
             )
         ),
         colors = if (isSystemInDarkTheme()) darkColors(

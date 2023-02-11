@@ -7,7 +7,24 @@ import android.provider.CalendarContract
 import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Settings
+import androidx.compose.material3.*
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.unit.dp
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
@@ -17,41 +34,28 @@ import kotlinx.coroutines.launch
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import org.joda.time.format.DateTimeFormat
+import org.joda.time.format.DateTimeFormatter
 import uk.co.amlcurran.social.add.AddEventActivity
 import uk.co.amlcurran.social.databinding.ActivityWhatsOnBinding
 import uk.co.amlcurran.social.details.EventDetailActivity
 import uk.co.amlcurran.social.details.alphaIn
 import uk.co.amlcurran.social.details.alphaOut
+import uk.co.amlcurran.starlinginterview.AsyncContent
 
 class WhatsOnActivity : AppCompatActivity() {
     private lateinit var adapter: WhatsOnAdapter
     private var firstLoad = true
-    private val eventsRepository: AndroidEventsRepository by lazy { AndroidEventsRepository(contentResolver) }
-    private val eventsService: EventsService by lazy { EventsService(eventsRepository, JodaCalculator(), UserSettings(this)) }
     private lateinit var binding: ActivityWhatsOnBinding
+    private val viewModel: EventListViewModel by viewModels()
 
-    private val permissionRequest = registerForActivityResult(RequestMultiplePermissions()) { permissions ->
-        if (permissions.all { (_, granted) -> granted }) {
-            binding.progressBar.alphaIn()
-            val now = DateTime.now(DateTimeZone.getDefault())
-            val timestamp = Timestamp(now.millis)
-            lifecycleScope.launch {
-                try {
-                    val it = eventsService.getCalendarSource(14, timestamp)
-                    firstLoad = false
-                    adapter.onSuccess(it)
-                    binding.progressBar.alphaOut()
-                    binding.listWhatsOn.alphaIn()
-                } catch (e: Throwable) {
-                    firstLoad = false
-                    binding.progressBar.alphaOut()
-                    adapter.onError(e)
-
+    private val permissionRequest =
+        registerForActivityResult(RequestMultiplePermissions()) { permissions ->
+            if (permissions.all { (_, granted) -> granted }) {
+                lifecycleScope.launch {
+                    viewModel.load()
                 }
-
             }
         }
-    }
 
     private val eventSelectedListener = object : WhatsOnAdapter.EventSelectedListener {
         override fun eventSelected(calendarItem: EventCalendarItem, itemView: View) {
@@ -61,7 +65,10 @@ class WhatsOnActivity : AppCompatActivity() {
         override fun emptySelected(calendarItem: EmptyCalendarItem) {
             val intent = Intent(Intent.ACTION_INSERT)
             intent.data = CalendarContract.Events.CONTENT_URI
-            val day = DateTime(0, DateTimeZone.getDefault()).plusDays(calendarItem.startTime.daysSinceEpoch(JodaCalculator()))
+            val day = DateTime(
+                0,
+                DateTimeZone.getDefault()
+            ).plusDays(calendarItem.startTime.daysSinceEpoch(JodaCalculator()))
             val startTime = day.plusHours(18)
             val endTime = day.plusHours(22)
             intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime.millis)
@@ -75,39 +82,92 @@ class WhatsOnActivity : AppCompatActivity() {
 
     }
 
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityWhatsOnBinding.inflate(LayoutInflater.from(this))
-        binding.toolbarCompose.setContent {
-            HeaderView()
+        binding.eventListCompose.setContent {
+            WhatsOnTheme {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    topBar = {
+                        MediumTopAppBar(
+                            modifier = Modifier
+                                .background(colorResource(id = R.color.background)),
+                            title = {
+                                HeaderView()
+                            }, actions = {
+                                IconButton(onClick = { SettingsActivity.start(this@WhatsOnActivity) }) {
+                                    Icon(Icons.Rounded.Settings, contentDescription = "Settings")
+                                }
+                            })
+                    },
+                    containerColor = colorResource(id = R.color.background)
+                ) { padding ->
+                    val subscriptionsState = viewModel.source.collectAsState()
+                    AsyncContent(
+                        subscriptionsState = subscriptionsState.value,
+                        modifier = Modifier
+                            .padding(padding)
+                            .background(colorResource(id = R.color.background))
+                    ) { calendarSource ->
+                        LazyColumn(
+                            verticalArrangement = Arrangement.spacedBy(16.dp),
+                            modifier = Modifier.padding(16.dp)
+                        ) {
+                            items(calendarSource.count()) { index ->
+                                Text(
+                                    calendarSource.itemAt(index).startTime.format(DateTimeFormat.fullDate()),
+                                    color = MaterialTheme.colors.onBackground,
+                                    style = MaterialTheme.typography.subtitle2,
+                                    modifier = Modifier.padding(bottom = 8.dp, start = 16.dp, end = 16.dp)
+                                )
+                                if (calendarSource.isEmptySlot(index)) {
+                                    EmptyView(modifier = Modifier
+                                        .clickable {
+                                            eventSelectedListener.emptySelected(
+                                                calendarSource.itemAt(
+                                                    index
+                                                ) as EmptyCalendarItem
+                                            )
+                                        }
+                                        .fillMaxWidth())
+                                } else {
+                                    val event = calendarSource.itemAt(index) as EventCalendarItem
+                                    EventView(event = event,
+                                        modifier = Modifier
+                                            .clickable {
+                                                eventSelectedListener.eventSelected(
+                                                    event,
+                                                    View(this@WhatsOnActivity)
+                                                )
+                                            }
+                                            .fillMaxWidth()
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
         setContentView(binding.root)
 
-        binding.toolbar.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.pick_times -> {
-                    SettingsActivity.start(this)
-                    true
-                }
-                else -> false
-            }
-        }
 
-        val calendarSource = CalendarSource(HashMap(), 0, JodaCalculator(), UserSettings(this))
-        adapter = WhatsOnAdapter(LayoutInflater.from(this), eventSelectedListener, calendarSource)
-        binding.listWhatsOn.layoutManager = LinearLayoutManager(this)
-        binding.listWhatsOn.adapter = adapter
-
-        ViewCompat.setOnApplyWindowInsetsListener(binding.toolbar) { _, insets ->
-            binding.toolbar.updatePadding(top = insets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom)
-            insets
-        }
-
-        ViewCompat.setOnApplyWindowInsetsListener(binding.listWhatsOn) { _, insets ->
-            binding.listWhatsOn.updatePadding(bottom = insets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom)
-            insets
-        }
+//        adapter = WhatsOnAdapter(LayoutInflater.from(this), eventSelectedListener, calendarSource)
+//        binding.listWhatsOn.layoutManager = LinearLayoutManager(this)
+//        binding.listWhatsOn.adapter = adapter
+//
+//        ViewCompat.setOnApplyWindowInsetsListener(binding.toolbar) { _, insets ->
+//            binding.toolbar.updatePadding(top = insets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom)
+//            insets
+//        }
+//
+//        ViewCompat.setOnApplyWindowInsetsListener(binding.listWhatsOn) { _, insets ->
+//            binding.listWhatsOn.updatePadding(bottom = insets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom)
+//            insets
+//        }
     }
 
     override fun onResume() {
@@ -116,7 +176,12 @@ class WhatsOnActivity : AppCompatActivity() {
     }
 
     private fun reload() {
-        permissionRequest.launch(arrayOf(Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR))
+        permissionRequest.launch(
+            arrayOf(
+                Manifest.permission.READ_CALENDAR,
+                Manifest.permission.WRITE_CALENDAR
+            )
+        )
     }
 
 }
