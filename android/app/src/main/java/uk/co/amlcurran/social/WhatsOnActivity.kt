@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.provider.CalendarContract
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
@@ -11,11 +12,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Settings
@@ -90,18 +90,16 @@ class WhatsOnActivity : AppCompatActivity() {
         binding.eventListCompose.setContent {
             WhatsOnTheme {
                 Scaffold(
-                    modifier = Modifier.fillMaxSize(),
                     topBar = {
-                        MediumTopAppBar(
-                            modifier = Modifier
-                                .background(colorResource(id = R.color.background)),
-                            title = {
-                                HeaderView()
-                            }, actions = {
-                                IconButton(onClick = { SettingsActivity.start(this@WhatsOnActivity) }) {
-                                    Icon(Icons.Rounded.Settings, contentDescription = "Settings")
-                                }
-                            })
+                        Row {
+                            HeaderView(modifier = Modifier.weight(1f))
+                            IconButton(onClick = { SettingsActivity.start(this@WhatsOnActivity) },
+                            colors = IconButtonDefaults.iconButtonColors(
+                                contentColor = androidx.compose.material.MaterialTheme.colors.onBackground
+                            )) {
+                                Icon(Icons.Rounded.Settings, contentDescription = "Settings")
+                            }
+                        }
                     },
                     containerColor = colorResource(id = R.color.background)
                 ) { padding ->
@@ -114,7 +112,7 @@ class WhatsOnActivity : AppCompatActivity() {
                     ) { calendarSource ->
                         LazyColumn(
                             verticalArrangement = Arrangement.spacedBy(16.dp),
-                            modifier = Modifier.padding(16.dp)
+                            modifier = Modifier.padding()
                         ) {
                             items(calendarSource.count()) { index ->
                                 Text(
@@ -132,19 +130,42 @@ class WhatsOnActivity : AppCompatActivity() {
                                                 ) as EmptyCalendarItem
                                             )
                                         }
-                                        .fillMaxWidth())
+                                        .fillMaxWidth()
+                                        .padding(horizontal = 16.dp))
                                 } else {
-                                    val event = calendarSource.itemAt(index) as EventCalendarItem
-                                    EventView(event = event,
-                                        modifier = Modifier
-                                            .clickable {
-                                                eventSelectedListener.eventSelected(
-                                                    event,
-                                                    View(this@WhatsOnActivity)
-                                                )
+                                    val slotAt = calendarSource.slotAt(index)
+                                    if (slotAt.count() == 1) {
+                                        val event =
+                                            calendarSource.itemAt(index) as EventCalendarItem
+                                        EventView(event = event,
+                                            modifier = Modifier
+                                                .clickable {
+                                                    eventSelectedListener.eventSelected(
+                                                        event,
+                                                        View(this@WhatsOnActivity)
+                                                    )
+                                                }
+                                                .fillMaxWidth()
+                                                .padding(horizontal = 16.dp)
+                                        )
+                                    } else {
+                                        BoxWithConstraints {
+                                            LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp), contentPadding = PaddingValues(horizontal = 16.dp)) {
+                                                items(slotAt.items()) {item ->
+                                                    EventView(event = item as EventCalendarItem,
+                                                        modifier = Modifier
+                                                            .clickable {
+                                                                eventSelectedListener.eventSelected(
+                                                                    item,
+                                                                    View(this@WhatsOnActivity)
+                                                                )
+                                                            }
+                                                            .width(maxWidth.times(0.8f))
+                                                    )
+                                                }
                                             }
-                                            .fillMaxWidth()
-                                    )
+                                        }
+                                    }
                                 }
                             }
                         }
