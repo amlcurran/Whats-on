@@ -23,7 +23,6 @@ import java.time.Instant
 fun EventView(modifier: Modifier = Modifier, event: EventCalendarItem) {
     Column(
         modifier
-            .shadow(2.dp)
             .background(colorResource(id = R.color.colorSurface), shape = RoundedCornerShape(8.dp))
             .padding(16.dp)) {
         Text(

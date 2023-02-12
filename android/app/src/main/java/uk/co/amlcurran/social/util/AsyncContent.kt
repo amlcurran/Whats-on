@@ -13,12 +13,12 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun <T> AsyncContent(
-    subscriptionsState: AsyncResult<T>,
+    state: AsyncResult<T>,
     modifier: Modifier = Modifier,
     content: @Composable (T) -> Unit
 ) {
     Crossfade(
-        targetState = subscriptionsState, modifier = modifier
+        targetState = state, modifier = modifier
     ) { subscriptions ->
         when (subscriptions) {
             is AsyncResult.Error -> {

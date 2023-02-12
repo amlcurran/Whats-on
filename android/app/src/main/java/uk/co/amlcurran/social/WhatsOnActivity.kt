@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.provider.CalendarContract
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
@@ -18,33 +17,23 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Settings
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import org.joda.time.format.DateTimeFormat
-import org.joda.time.format.DateTimeFormatter
 import uk.co.amlcurran.social.add.AddEventActivity
 import uk.co.amlcurran.social.databinding.ActivityWhatsOnBinding
 import uk.co.amlcurran.social.details.EventDetailActivity
-import uk.co.amlcurran.social.details.alphaIn
-import uk.co.amlcurran.social.details.alphaOut
 import uk.co.amlcurran.starlinginterview.AsyncContent
 
 class WhatsOnActivity : AppCompatActivity() {
-    private lateinit var adapter: WhatsOnAdapter
-    private var firstLoad = true
     private lateinit var binding: ActivityWhatsOnBinding
     private val viewModel: EventListViewModel by viewModels()
 
@@ -95,9 +84,9 @@ class WhatsOnActivity : AppCompatActivity() {
                             HeaderView(modifier = Modifier.weight(1f))
                             IconButton(onClick = { SettingsActivity.start(this@WhatsOnActivity) },
                             colors = IconButtonDefaults.iconButtonColors(
-                                contentColor = androidx.compose.material.MaterialTheme.colors.onBackground
+                                contentColor = MaterialTheme.colors.onBackground
                             )) {
-                                Icon(Icons.Rounded.Settings, contentDescription = "Settings")
+                                Icon(Icons.Outlined.Settings, contentDescription = "Settings")
                             }
                         }
                     },
@@ -105,21 +94,21 @@ class WhatsOnActivity : AppCompatActivity() {
                 ) { padding ->
                     val subscriptionsState = viewModel.source.collectAsState()
                     AsyncContent(
-                        subscriptionsState = subscriptionsState.value,
+                        state = subscriptionsState.value,
                         modifier = Modifier
                             .padding(padding)
                             .background(colorResource(id = R.color.background))
                     ) { calendarSource ->
                         LazyColumn(
                             verticalArrangement = Arrangement.spacedBy(16.dp),
-                            modifier = Modifier.padding()
+                            contentPadding = PaddingValues(horizontal = 16.dp)
                         ) {
                             items(calendarSource.count()) { index ->
                                 Text(
                                     calendarSource.itemAt(index).startTime.format(DateTimeFormat.fullDate()),
                                     color = MaterialTheme.colors.onBackground,
                                     style = MaterialTheme.typography.subtitle2,
-                                    modifier = Modifier.padding(bottom = 8.dp, start = 16.dp, end = 16.dp)
+                                    modifier = Modifier.padding(bottom = 8.dp, start = 8.dp, end = 8.dp)
                                 )
                                 if (calendarSource.isEmptySlot(index)) {
                                     EmptyView(modifier = Modifier
@@ -131,7 +120,7 @@ class WhatsOnActivity : AppCompatActivity() {
                                             )
                                         }
                                         .fillMaxWidth()
-                                        .padding(horizontal = 16.dp))
+                                    )
                                 } else {
                                     val slotAt = calendarSource.slotAt(index)
                                     if (slotAt.count() == 1) {
@@ -146,11 +135,10 @@ class WhatsOnActivity : AppCompatActivity() {
                                                     )
                                                 }
                                                 .fillMaxWidth()
-                                                .padding(horizontal = 16.dp)
                                         )
                                     } else {
                                         BoxWithConstraints {
-                                            LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp), contentPadding = PaddingValues(horizontal = 16.dp)) {
+                                            LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp), contentPadding = PaddingValues(horizontal = 0.dp)) {
                                                 items(slotAt.items()) {item ->
                                                     EventView(event = item as EventCalendarItem,
                                                         modifier = Modifier
