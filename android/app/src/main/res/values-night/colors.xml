@@ -8,4 +8,5 @@
     <color name="empty_color">#bac2c7</color>
     <color name="colorOnSurface">@color/colorOnBackground</color>
     <color name="colorSurface">#4F4F5C</color>
+    <color name="colorOutline">@color/colorOnBackground</color>
 </resources>

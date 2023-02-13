@@ -22,4 +22,7 @@ expect class UserSettings {
 
     fun updateEndTime(timeOfDay: TimeOfDay)
 
+    fun showTentativeMeetings(): Boolean
+    fun shouldShowTentativeMeetings(boolean: Boolean)
+
 }

@@ -27,4 +27,5 @@
     <string name="dark">Dark</string>
     <string name="light">Light</string>
     <string name="default_theme">System</string>
+    <string name="show_events_you_ve_not_replied_to">Show events you\'ve not replied to</string>
 </resources>

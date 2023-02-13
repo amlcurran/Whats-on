@@ -8,6 +8,9 @@
         <item name="colorOnBackground">@color/colorOnBackground</item>
         <item name="colorOnSurface">@color/colorOnSurface</item>
         <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorSurfaceVariant">@color/colorSurface</item>
+        <item name="colorOnPrimary">@color/quantum_white_text</item>
+        <item name="colorOutline">@color/colorOutline</item>
         <item name="fontFamily">@font/open_sans</item>
         <item name="android:spotShadowAlpha">0.05</item>
         <item name="android:colorBackground">@color/background</item>

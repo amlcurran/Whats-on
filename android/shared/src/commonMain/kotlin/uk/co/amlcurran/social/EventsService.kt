@@ -20,7 +20,8 @@ class EventsService(
         val calendarItems = eventsRepository.getCalendarItems(nowTime, nextWeek, fivePm, elevenPm)
             .asSequence()
             .filter { it.allDay == false }
-            .filter { it.attendingStatus != CalendarContract.Events.STATUS_CANCELED }
+            .filter { it.attendingStatus != CalendarContract.Attendees.ATTENDEE_STATUS_DECLINED }
+            .filter { userSettings.showTentativeMeetings() || it.attendingStatus != CalendarContract.Attendees.ATTENDEE_STATUS_INVITED }
             .filter { it.isDeleted == false }
             .filter { (it.startMinute > elevenPm.minutesInDay() || it.endMinute < fivePm.minutesInDay()) == false }
             .filter { userSettings.shouldShowEvent(it.eventId) }

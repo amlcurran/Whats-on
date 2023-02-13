@@ -58,4 +58,10 @@ actual class UserSettings(context: Context) {
         putInt("endTime", timeOfDay.hoursInDay().toInt())
     }
 
+    actual fun showTentativeMeetings(): Boolean = preferences.getBoolean("showTentativeMeetings", false)
+
+    actual fun shouldShowTentativeMeetings(boolean: Boolean) = preferences.edit {
+        putBoolean("showTentativeMeetings", boolean)
+    }
+
 }

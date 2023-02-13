@@ -45,29 +45,14 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:textColorLink="@color/colorPrimary" />
 
-            <LinearLayout
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:id="@+id/settingsThemeChanger"
-                android:background="?attr/selectableItemBackground"
-                android:paddingVertical="@dimen/item_margin"
-                android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/app_theme" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/settingsTheme"
-                android:layout_marginTop="2dp"
-                style="@style/Body1"
-                tools:text="With system" />
-
-            </LinearLayout>
+                android:id="@+id/showTentativeMeetings"
+                app:showText="false"
+                android:checked="false"
+                style="@style/Widget.Material3.CompoundButton.MaterialSwitch"
+                android:text="@string/show_events_you_ve_not_replied_to"/>
 
             <TextView
                 android:layout_width="match_parent"

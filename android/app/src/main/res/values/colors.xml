@@ -8,4 +8,5 @@
     <color name="empty_color">#bac2c7</color>
     <color name="colorOnSurface">@color/colorSecondary</color>
     <color name="colorSurface">@android:color/white</color>
+    <color name="colorOutline">@color/colorSecondary</color>
 </resources>

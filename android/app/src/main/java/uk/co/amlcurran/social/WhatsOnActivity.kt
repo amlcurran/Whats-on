@@ -108,7 +108,7 @@ class WhatsOnActivity : AppCompatActivity() {
                                     calendarSource.itemAt(index).startTime.format(DateTimeFormat.fullDate()),
                                     color = MaterialTheme.colors.onBackground,
                                     style = MaterialTheme.typography.subtitle2,
-                                    modifier = Modifier.padding(bottom = 8.dp, start = 8.dp, end = 8.dp)
+                                    modifier = Modifier.padding(bottom = 8.dp, start = 0.dp, end = 0.dp)
                                 )
                                 if (calendarSource.isEmptySlot(index)) {
                                     EmptyView(modifier = Modifier

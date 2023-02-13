@@ -50,7 +50,10 @@ class SettingsFragment: Fragment() {
         binding.settingsFromToTiming.isClickable = true
         binding.settingsFromToTiming.movementMethod = LinkMovementMethod.getInstance()
 
-        updateTheme()
+        binding.showTentativeMeetings.isChecked = userSettings.showTentativeMeetings()
+        binding.showTentativeMeetings.setOnCheckedChangeListener { _, isChecked ->
+            userSettings.shouldShowTentativeMeetings(isChecked)
+        }
 
         LoaderManager.getInstance(this).initLoader(0, null, object : LoaderManager.LoaderCallbacks<Cursor> {
             override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
@@ -77,38 +80,6 @@ class SettingsFragment: Fragment() {
             }
 
         })
-    }
-
-    private fun updateTheme() {
-        val currentTheme = when (AppCompatDelegate.getDefaultNightMode()) {
-            AppCompatDelegate.MODE_NIGHT_YES -> "🌜 " + getString(R.string.dark)
-            AppCompatDelegate.MODE_NIGHT_NO -> "🌞 " + getString(R.string.light)
-            else -> "🌓 " + getString(R.string.default_theme)
-        }
-        binding.settingsTheme.text = currentTheme
-
-        binding.settingsThemeChanger.setOnClickListener { showThemeDialog() }
-    }
-
-    private fun showThemeDialog() {
-        val currentMode = when (AppCompatDelegate.getDefaultNightMode()) {
-            AppCompatDelegate.MODE_NIGHT_YES -> 2
-            AppCompatDelegate.MODE_NIGHT_NO -> 1
-            else -> 0
-        }
-        val themes = arrayOf(getString(R.string.default_theme), getString(R.string.light), getString(R.string.dark))
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(R.string.app_theme)
-            .setSingleChoiceItems(themes, currentMode) { di, selected: Int ->
-                when (selected) {
-                    0 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-                    1 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    else -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                }
-                di.dismiss()
-                updateTheme()
-            }
-            .show()
     }
 
     override fun onAttach(context: Context) {
