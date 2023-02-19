@@ -19,11 +19,11 @@ class EventsService(
 
         val calendarItems = eventsRepository.getCalendarItems(nowTime, nextWeek, fivePm, elevenPm)
             .asSequence()
-            .filter { it.allDay == false }
-            .filter { it.attendingStatus != CalendarContract.Attendees.ATTENDEE_STATUS_DECLINED }
+            .filterNot { it.allDay }
+            .filterNot { it.attendingStatus == CalendarContract.Attendees.ATTENDEE_STATUS_DECLINED }
             .filter { userSettings.showTentativeMeetings() || it.attendingStatus != CalendarContract.Attendees.ATTENDEE_STATUS_INVITED }
-            .filter { it.isDeleted == false }
-            .filter { (it.startMinute > elevenPm.minutesInDay() || it.endMinute < fivePm.minutesInDay()) == false }
+            .filterNot { it.isDeleted }
+            .filterNot { it.startMinute > elevenPm.minutesInDay() || it.endMinute < fivePm.minutesInDay() }
             .filter { userSettings.shouldShowEvent(it.eventId) }
             .map { EventCalendarItem(it.eventId, it.calendarId, it.title, it.time, it.endTime) }
             .filter { userSettings.shouldShow(it) }

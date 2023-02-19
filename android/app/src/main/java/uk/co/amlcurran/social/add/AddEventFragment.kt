@@ -36,6 +36,7 @@ class AddEventFragment : Fragment() {
         return binding.root
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         binding.addSelectPlace.create(savedInstanceState)
