@@ -25,7 +25,8 @@ class EventsService(
             .filterNot { it.isDeleted }
             .filterNot { it.startMinute > elevenPm.minutesInDay() || it.endMinute < fivePm.minutesInDay() }
             .filter { userSettings.shouldShowEvent(it.eventId) }
-            .map { EventCalendarItem(it.eventId, it.calendarId, it.title, it.time, it.endTime) }
+            .map { it to eventsRepository.attendeesForEvent(it) }
+            .map { (it, attendees) -> EventCalendarItem(it.eventId, it.calendarId, it.title, it.time, it.endTime, attendees) }
             .filter { userSettings.shouldShow(it) }
             .toList()
 

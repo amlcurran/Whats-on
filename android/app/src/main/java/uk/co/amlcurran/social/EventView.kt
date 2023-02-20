@@ -52,7 +52,8 @@ fun EventViewPreview() {
                 "defg",
                 "An exciting event",
                 Timestamp(Instant.now().minusMillis(40000L).toEpochMilli()),
-                Timestamp(Instant.now().toEpochMilli())
+                Timestamp(Instant.now().toEpochMilli()),
+                emptyList()
             )
         )
     }

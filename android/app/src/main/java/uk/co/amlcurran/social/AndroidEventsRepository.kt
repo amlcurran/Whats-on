@@ -5,6 +5,7 @@ import android.content.ContentUris
 import android.database.Cursor
 import android.provider.CalendarContract
 import android.provider.CalendarContract.Instances.CONTENT_URI
+import android.util.Log
 
 class AndroidEventsRepository(private val contentResolver: ContentResolver) : EventsRepository {
 
@@ -45,7 +46,7 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver) : Ev
             val title = accessor.title
             val time = accessor.dtStartTime
             val endTime = accessor.dtEndTime
-            val item = EventCalendarItem(eventId, "", title, time, endTime)
+            val item = EventCalendarItem(eventId, "", title, time, endTime, emptyList())
             val location = accessor.getString(CalendarContract.Events.EVENT_LOCATION)
             cursor.close()
             Event(item, location)
@@ -60,9 +61,40 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver) : Ev
         return contentResolver.delete(contentUri, null, null) == 1
     }
 
+    override fun attendeesForEvent(event: Foo): List<Attendee> {
+        val cursor = CalendarContract.Attendees.query(
+            contentResolver, event.eventId.toLong(), arrayOf(
+                CalendarContract.Attendees._ID,
+                CalendarContract.Attendees.ATTENDEE_NAME,
+                CalendarContract.Attendees.ATTENDEE_EMAIL
+            )
+        )
+        cursor.moveToPosition(-1)
+        val nameIndex = cursor.getColumnIndexOrThrow(CalendarContract.Attendees.ATTENDEE_NAME)
+        val idIndex = cursor.getColumnIndexOrThrow(CalendarContract.Attendees._ID)
+        val emailIndex = cursor.getColumnIndexOrThrow(CalendarContract.Attendees.ATTENDEE_EMAIL)
+        return cursor.iterateBy {
+            Attendee(
+                it.getString(idIndex),
+                it.getString(nameIndex),
+                it.getString(emailIndex)
+            )
+        }
+    }
+
     companion object {
 
         val SINGLE_PROJECTION = arrayOf(CalendarContract.Events.TITLE, CalendarContract.Events._ID, CalendarContract.Events.SELF_ATTENDEE_STATUS, CalendarContract.Events.EVENT_LOCATION, CalendarContract.Events.DTSTART, CalendarContract.Events.DTEND)
     }
 
+}
+
+fun <T> Cursor.iterateBy(mapper: (Cursor) -> T): List<T> {
+    moveToPosition(-1)
+    val list = mutableListOf<T>()
+    while (moveToNext()) {
+       list.add(mapper(this))
+    }
+    close()
+    return list
 }

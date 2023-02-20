@@ -5,7 +5,8 @@ class EventCalendarItem(
     val calendarId: String,
     override val title: String,
     override val startTime: Timestamp,
-    override val endTime: Timestamp
+    override val endTime: Timestamp,
+    val attendees: List<Attendee>
 ) : CalendarItem {
 
     fun id(): String {

@@ -26,7 +26,8 @@ fun PreviewEventCard() {
                 "calendar",
                 "A fun event",
                 Timestamp(System.currentTimeMillis()),
-                Timestamp(System.currentTimeMillis() - 60 * 60 * 1000 * 2)
+                Timestamp(System.currentTimeMillis() - 60 * 60 * 1000 * 2),
+                emptyList()
             ), null)
     )
 }
@@ -41,7 +42,8 @@ fun DarkPreviewEventCard() {
                 "calendar",
                 "A fun event",
                 Timestamp(System.currentTimeMillis()),
-                Timestamp(System.currentTimeMillis() - 60 * 60 * 1000 * 2)
+                Timestamp(System.currentTimeMillis() - 60 * 60 * 1000 * 2),
+                emptyList()
             ), null)
     )
 }
