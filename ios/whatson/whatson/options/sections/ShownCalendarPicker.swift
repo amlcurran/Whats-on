@@ -54,7 +54,6 @@ struct ShownCalendarPicker: View {
     @CodableAppStorage("excludedCalendars", store: .appGroup) var excludedCalendars: [EventCalendar.Id] = []
 
     var body: some View {
-        let _ = print(excludedCalendars)
         ForEach(allCalendars) { calendar in
             CalendarLine(
                 calendar: calendar,

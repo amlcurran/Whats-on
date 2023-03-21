@@ -18,7 +18,7 @@ public class EventKitEventRepository: EventsRepository {
         let calendars = eventStore.supportedCalendars(from: calendarPreferenceStore)
         let search = eventStore.predicateForEvents(withStart: startTime, end: endTime, calendars: calendars)
         let allEvents = eventStore.events(matching: search)
-        let filtered = allEvents.filter(predicates.defaults)
+        let filtered = allEvents.filter(predicates.defaults.0)
         return filtered.compactMap { ekEvent -> EventCalendarItem in
             let attendees: [CNContact] = (ekEvent.attendees ?? [])
                 .filter { $0.isCurrentUser == false }
