@@ -1,0 +1,9 @@
+name: Build iOS
+on: [push]
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: fastlane beta

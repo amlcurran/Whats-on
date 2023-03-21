@@ -19,20 +19,11 @@ platform :ios do
   lane :beta do
     cert
     sigh
-    version = prompt(text: "version number: ")
-    update_build(version)
-    gym(
-	scheme: "whatson",
-	export_method: "app-store"
+    build_app(
+	    scheme: "whatson",
+	    export_method: "app-store"
     )
-    pilot(skip_waiting_for_build_processing: true)
-    commit_version_bump(
-      xcodeproj: "whatson.xcodeproj"
-    )
-    add_git_tag(
-        tag: "#{version}"
-    )
-    push_git_tags
+    upload_to_testflight(skip_waiting_for_build_processing: true)
   end
 
   desc "Deploy a new version to the App Store"
