@@ -41,10 +41,6 @@ kotlin {
                 implementation("androidx.core:core-ktx:1.6.0")
             }
         }
-        val androidTest by getting {
-            dependencies {
-            }
-        }
         val iosMain by getting
         val iosTest by getting
     }

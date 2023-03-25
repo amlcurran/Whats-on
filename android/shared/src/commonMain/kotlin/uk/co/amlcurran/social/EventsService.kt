@@ -34,12 +34,28 @@ class EventsService(
         val epochToNow = now.daysSinceEpoch(timeCalculator)
         for (item in calendarItems) {
             val key = item.startTime.daysSinceEpoch(timeCalculator) - epochToNow
-            val slot = itemArray[key] ?: CalendarSlot()
+            val slot = itemArray[key] ?: CalendarSlot(
+                mutableListOf(),
+                startOfTodayBlock(key),
+                endOfTodayBlock(key)
+            )
             slot.addItem(item)
             itemArray[key] = slot
         }
 
         return CalendarSource(itemArray, numberOfDays, timeCalculator, userSettings)
+    }
+
+    private fun startOfTodayBlock(position: Int): Timestamp {
+        return timeCalculator.startOfToday()
+            .plusDays(position, timeCalculator)
+            .plusHoursOf(userSettings.borderTimeStart(), timeCalculator)
+    }
+
+    private fun endOfTodayBlock(position: Int): Timestamp {
+        return timeCalculator.startOfToday()
+            .plusDays(position, timeCalculator)
+            .plusHoursOf(userSettings.borderTimeEnd(), timeCalculator)
     }
 
     fun eventWithId(eventId: String): Event? = eventsRepository.event(eventId)

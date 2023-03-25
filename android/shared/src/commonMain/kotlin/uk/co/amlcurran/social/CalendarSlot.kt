@@ -1,26 +1,17 @@
 package uk.co.amlcurran.social
 
-import java.util.ArrayList
+data class CalendarSlot(
+    val items: MutableList<CalendarItem>,
+    val startTimestamp: Timestamp,
+    val endTimestamp: Timestamp
+) {
 
-class CalendarSlot {
-    private val calendarItems = ArrayList<CalendarItem>()
+    val isEmpty = items.isEmpty()
 
-    val isEmpty: Boolean
-        get() = calendarItems.isEmpty()
+    val firstItem = items.firstOrNull() ?: EmptyCalendarItem(startTimestamp, endTimestamp)
 
-    fun firstItem(): CalendarItem? {
-        return calendarItems[0]
+    fun addItem(calendarItem: CalendarItem) {
+        items.add(calendarItem)
     }
 
-    fun addItem(item: CalendarItem) {
-        this.calendarItems.add(item)
-    }
-
-    fun count(): Int {
-        return calendarItems.size
-    }
-
-    fun items(): List<CalendarItem> {
-        return calendarItems
-    }
 }

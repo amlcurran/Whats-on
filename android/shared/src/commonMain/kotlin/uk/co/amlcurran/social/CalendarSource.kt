@@ -13,7 +13,7 @@ class CalendarSource(private val calendarItems: Map<Int, CalendarSlot>, private 
             val endTime = endOfTodayBlock(position)
             return EmptyCalendarItem(startTime, endTime)
         }
-        return calendarSlot.firstItem()!!
+        return calendarSlot.firstItem!!
     }
 
     private fun startOfTodayBlock(position: Int): Timestamp {
@@ -29,7 +29,17 @@ class CalendarSource(private val calendarItems: Map<Int, CalendarSlot>, private 
     }
 
     fun slotAt(position: Int): CalendarSlot {
-        return calendarItems[position] ?: CalendarSlot()
+        return calendarItems[position] ?: CalendarSlot(
+            mutableListOf(),
+            startOfTodayBlock(position),
+            endOfTodayBlock(position)
+        )
+    }
+
+    fun allSlots(): List<CalendarSlot> {
+        return (0 until daysSize).map {
+            slotAt(it)
+        }
     }
 
     fun isEmptySlot(position: Int): Boolean {

@@ -103,54 +103,54 @@ class WhatsOnActivity : AppCompatActivity() {
                             verticalArrangement = Arrangement.spacedBy(16.dp),
                             contentPadding = PaddingValues(horizontal = 16.dp)
                         ) {
-                            items(calendarSource.count()) { index ->
+                            items(calendarSource.allSlots()) { slot ->
                                 Text(
-                                    calendarSource.itemAt(index).startTime.format(DateTimeFormat.fullDate()),
+                                    slot.startTimestamp.format(DateTimeFormat.fullDate()),
                                     color = MaterialTheme.colors.onBackground,
                                     style = MaterialTheme.typography.subtitle2,
-                                    modifier = Modifier.padding(bottom = 8.dp, start = 0.dp, end = 0.dp)
+                                    modifier = Modifier.padding(
+                                        bottom = 8.dp
+                                    )
                                 )
-                                if (calendarSource.isEmptySlot(index)) {
+                                if (slot.isEmpty) {
                                     EmptyView(modifier = Modifier
                                         .clickable {
                                             eventSelectedListener.emptySelected(
-                                                calendarSource.itemAt(
-                                                    index
-                                                ) as EmptyCalendarItem
+                                                slot.firstItem as EmptyCalendarItem
                                             )
                                         }
                                         .fillMaxWidth()
                                     )
+                                } else if (slot.items.count() == 1) {
+                                    // This is dodgy as heck
+                                    val event = slot.firstItem as EventCalendarItem
+                                    EventView(event = event,
+                                        modifier = Modifier
+                                            .clickable {
+                                                eventSelectedListener.eventSelected(
+                                                    event,
+                                                    View(this@WhatsOnActivity)
+                                                )
+                                            }
+                                            .fillMaxWidth()
+                                    )
                                 } else {
-                                    val slotAt = calendarSource.slotAt(index)
-                                    if (slotAt.count() == 1) {
-                                        val event =
-                                            calendarSource.itemAt(index) as EventCalendarItem
-                                        EventView(event = event,
-                                            modifier = Modifier
-                                                .clickable {
-                                                    eventSelectedListener.eventSelected(
-                                                        event,
-                                                        View(this@WhatsOnActivity)
-                                                    )
-                                                }
-                                                .fillMaxWidth()
-                                        )
-                                    } else {
-                                        BoxWithConstraints {
-                                            LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp), contentPadding = PaddingValues(horizontal = 0.dp)) {
-                                                items(slotAt.items()) {item ->
-                                                    EventView(event = item as EventCalendarItem,
-                                                        modifier = Modifier
-                                                            .clickable {
-                                                                eventSelectedListener.eventSelected(
-                                                                    item,
-                                                                    View(this@WhatsOnActivity)
-                                                                )
-                                                            }
-                                                            .width(maxWidth.times(0.8f))
-                                                    )
-                                                }
+                                    BoxWithConstraints {
+                                        LazyRow(
+                                            horizontalArrangement = Arrangement.spacedBy(16.dp),
+                                            contentPadding = PaddingValues(horizontal = 0.dp)
+                                        ) {
+                                            items(slot.items) { item ->
+                                                EventView(event = item as EventCalendarItem,
+                                                    modifier = Modifier
+                                                        .clickable {
+                                                            eventSelectedListener.eventSelected(
+                                                                item,
+                                                                View(this@WhatsOnActivity)
+                                                            )
+                                                        }
+                                                        .width(maxWidth.times(0.8f))
+                                                )
                                             }
                                         }
                                     }
