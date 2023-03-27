@@ -53,14 +53,8 @@ class WhatsOnActivity : AppCompatActivity() {
         override fun emptySelected(calendarItem: CalendarSlot) {
             val intent = Intent(Intent.ACTION_INSERT)
             intent.data = CalendarContract.Events.CONTENT_URI
-            val day = DateTime(
-                0,
-                DateTimeZone.getDefault()
-            ).plusDays(calendarItem.startTimestamp.daysSinceEpoch(JodaCalculator()))
-            val startTime = day.plusHours(18)
-            val endTime = day.plusHours(22)
-            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime.millis)
-            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.millis)
+            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, calendarItem.startTimestamp.millis)
+            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, calendarItem.endTimestamp.millis)
             if (false) {
                 startActivity(Intent(this@WhatsOnActivity, AddEventActivity::class.java))
             } else {

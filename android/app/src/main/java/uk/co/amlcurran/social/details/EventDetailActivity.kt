@@ -8,7 +8,6 @@ import android.location.Geocoder
 import android.net.Uri
 import android.os.Bundle
 import android.provider.CalendarContract
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -24,12 +23,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.maps.android.compose.*
-import io.reactivex.Maybe
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.plusAssign
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import uk.co.amlcurran.social.*
 import uk.co.amlcurran.social.R
@@ -38,7 +31,6 @@ import uk.co.amlcurran.social.databinding.ActivityEventDetailsBinding
 class EventDetailActivity : AppCompatActivity() {
 
     private lateinit var eventId: String
-    private val subscriptions = CompositeDisposable()
     private val jodaCalculator = JodaCalculator()
     private val events by lazy {
         val calendarRepository = UserSettings(this)
@@ -96,15 +88,11 @@ class EventDetailActivity : AppCompatActivity() {
 
     private fun updateMap(location: String?) {
         location?.let {
-            subscriptions += findLocation(location)
-                .subscribeBy(onSuccess = ::show, onError = ::doNothing)
+            lifecycleScope.launch {
+                findLocation(it)?.let { show(it) }
+            }
         }
     }
-
-    private fun doNothing(throwable: Throwable) {
-        Log.w("Failure", throwable)
-    }
-
 
     private fun show(latLng: LatLng) {
         binding.mapHost.setContent {
@@ -124,11 +112,9 @@ class EventDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun findLocation(location: String): Maybe<LatLng> {
-        return Maybe.fromCallable { Geocoder(this).getFromLocationName(location, 10)?.firstOrNull() }
-            .map { LatLng(it.latitude, it.longitude) }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+    private suspend fun findLocation(location: String): LatLng? {
+        val it = Geocoder(this).getFromLocationName(location, 10)?.firstOrNull()
+        return it?.let { LatLng(it.latitude, it.longitude) }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -1,10 +1,10 @@
 package uk.co.amlcurran.social.add
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken
 import com.google.android.libraries.places.api.model.Place.Field
@@ -12,16 +12,13 @@ import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FetchPlaceResponse
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.PlacesClient
-import io.reactivex.Maybe
-import io.reactivex.Observable
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import uk.co.amlcurran.social.R
-import java.util.concurrent.TimeUnit
+import kotlin.time.DurationUnit
+import kotlin.time.toDuration
 
 class AddEventViewModel(application: Application): AndroidViewModel(application) {
 
@@ -39,54 +36,46 @@ class AddEventViewModel(application: Application): AndroidViewModel(application)
         AutocompleteSessionToken.newInstance()
     }
 
-    fun bind(textChanges: Observable<String>, selectedPlace: Observable<AutocompletePlace>) {
-        textChanges.debounce(100, TimeUnit.MILLISECONDS)
-            .subscribeOn(Schedulers.io())
-            .doOnSubscribe { _placeSelectorState.postValue(PlaceSelectorState.Initial) }
-            .filter { it.length > 3 }
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext { _placeSelectorState.postValue(PlaceSelectorState.Loading) }
-            .observeOn(Schedulers.io())
-            .switchMapSingle { geocode(it) }
-            .subscribeBy(
-                onNext = { _placeSelectorState.postValue(it) },
-                onError = { Log.w("Foo", it) }
-            )
-            .addTo(disposables)
+    @OptIn(FlowPreview::class)
+    fun bind(textChanges: Flow<String>, selectedPlace: Flow<AutocompletePlace>) {
+        viewModelScope.launch {
+            textChanges.debounce(100.toDuration(DurationUnit.MILLISECONDS))
+                .onStart { _placeSelectorState.postValue(PlaceSelectorState.Initial) }
+                .filter { it.length > 3 }
+                .onEach { _placeSelectorState.postValue(PlaceSelectorState.Loading) }
+                .map { geocode(it) }
+                .collectLatest {
+                    _placeSelectorState.postValue(it)
+                }
+        }
 
-        selectedPlace
-            .flatMapMaybe { lookupPlace(it) }
-            .subscribeOn(Schedulers.io())
-            .map { Place(it.place.id!!, it.place.name!!, it.place.latLng!!) }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onNext = { _placeSelectorState.postValue(PlaceSelectorState.SelectedPlace(it)) },
-                onError = { Log.w("Error", it) }
-            )
-            .addTo(disposables)
+        viewModelScope.launch {
+            selectedPlace
+                .map { lookupPlace(it) }
+                .map { Place(it.place.id!!, it.place.name!!, it.place.latLng!!) }
+                .collectLatest { _placeSelectorState.postValue(PlaceSelectorState.SelectedPlace(it)) }
+        }
     }
 
-    private fun lookupPlace(place: AutocompletePlace): Maybe<FetchPlaceResponse> {
+    private suspend fun lookupPlace(place: AutocompletePlace): FetchPlaceResponse {
         val fields = listOf(Field.LAT_LNG, Field.ID, Field.NAME)
         val placeRequest = FetchPlaceRequest.builder(place.id, fields)
             .setSessionToken(token)
             .build()
         return placesClient.fetchPlace(placeRequest)
-        .reactive()
+            .suspend()
     }
 
-    fun geocode(string: String): Single<PlaceSelectorState> {
-        return Single.just(string)
-            .map { buildRequest(it) }
-            .flatMapMaybe { placesClient.findAutocompletePredictions(it).reactive() }
-            .map {
-                it.autocompletePredictions.map { prediction ->
-                    AutocompletePlace(prediction.placeId, prediction.getPrimaryText(null), prediction.getSecondaryText(null))
-                }
-            }
-            .toSingle(emptyList())
-            .map { PlaceSelectorState.PlaceList(it) }
-
+    suspend fun geocode(string: String): PlaceSelectorState {
+        val predictions = placesClient.findAutocompletePredictions(buildRequest(string)).suspend()
+        val places = predictions.autocompletePredictions.map { prediction ->
+            AutocompletePlace(
+                prediction.placeId,
+                prediction.getPrimaryText(null),
+                prediction.getSecondaryText(null)
+            )
+        }
+        return PlaceSelectorState.PlaceList(places)
     }
 
     private fun buildRequest(it: String): FindAutocompletePredictionsRequest {

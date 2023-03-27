@@ -24,6 +24,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
             }
         }
         val commonTest by getting {
@@ -39,6 +40,7 @@ kotlin {
                 implementation("androidx.preference:preference-ktx:1.1.1")
                 implementation("joda-time:joda-time:2.10.5")
                 implementation("androidx.core:core-ktx:1.6.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
             }
         }
         val iosMain by getting

@@ -2,26 +2,27 @@ package uk.co.amlcurran.social.add
 
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.widget.TimePicker
 import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TimePicker
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import com.google.android.gms.tasks.Task
 import com.google.android.material.textfield.TextInputEditText
-import io.reactivex.Maybe
-import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposables
-import io.reactivex.subjects.BehaviorSubject
-import uk.co.amlcurran.social.R
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.suspendCancellableCoroutine
 import uk.co.amlcurran.social.databinding.AddEventFragmentBinding
-import uk.co.amlcurran.social.databinding.SettingsBinding
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 class AddEventFragment : Fragment() {
 
@@ -40,7 +41,7 @@ class AddEventFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         binding.addSelectPlace.create(savedInstanceState)
-        val selectedPlace = BehaviorSubject.create<AutocompletePlace>()
+        val selectedPlace = MutableSharedFlow<AutocompletePlace>()
 
         viewModel.placeSelectorState.observe(viewLifecycleOwner) {
             binding.addSelectPlace.state = it
@@ -56,12 +57,12 @@ class AddEventFragment : Fragment() {
         }
 
         binding.eventInputBeginTime.setOnClickListener {
-            TimePickerDialog(requireContext(), TimePickerDialog.OnTimeSetListener { _: TimePicker, hour: Int, minute: Int ->
+            TimePickerDialog(requireContext(), { _: TimePicker, hour: Int, minute: Int ->
 
             }, 18, 0, DateFormat.is24HourFormat(requireActivity())).show()
         }
         binding.addSelectPlace.onPlaceSelected = { autocompletePlace ->
-            selectedPlace.onNext(autocompletePlace)
+            selectedPlace.tryEmit(autocompletePlace)
         }
     }
 
@@ -87,7 +88,7 @@ class AddEventFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding.addSelectPlace?.destroy()
+        binding.addSelectPlace.destroy()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -107,28 +108,27 @@ class AddEventFragment : Fragment() {
 
 }
 
-private fun TextInputEditText.textChanges(): Observable<String> {
-    return Observable.create<String> { emitter ->
+private fun TextInputEditText.textChanges(): Flow<String> {
+    return callbackFlow {
         val watcher = addTextChangedListener { text ->
-            emitter.onNext(text.toString())
+            this.trySend(text.toString())
         }
-        Disposables.fromAction {
+        awaitClose {
             removeTextChangedListener(watcher)
         }
     }
 }
 
-fun <Result> Task<Result>.reactive(): Maybe<Result> {
-    return Maybe.create<Result> { emitter ->
+suspend fun <Result> Task<Result>.suspend(): Result {
+    return suspendCancellableCoroutine { continuation ->
         addOnCanceledListener {
-            emitter.onComplete()
+            continuation.cancel(CancellationException())
         }
         addOnSuccessListener {
-            emitter.onSuccess(it)
+            continuation.resume(it)
         }
         addOnFailureListener {
-            emitter.onError(it)
+            continuation.resumeWithException(it)
         }
-        Disposables.empty()
     }
 }
