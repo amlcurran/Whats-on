@@ -37,7 +37,7 @@ internal class WhatsOnAdapter(
             }
             TYPE_DAY -> {
                 val eventCalendarItem = source.itemAt(itemPositionFromAdapterPosition(position + 1))
-                (holder as DayViewHolder).bind(eventCalendarItem!!)
+                (holder as DayViewHolder).bind(eventCalendarItem)
             }
         }
     }
@@ -69,9 +69,9 @@ internal class WhatsOnAdapter(
     }
 
     interface EventSelectedListener {
-        fun eventSelected(calendarItem: EventCalendarItem, itemView: View)
+        fun eventSelected(calendarItem: EventCalendarItem)
 
-        fun emptySelected(calendarItem: EmptyCalendarItem)
+        fun emptySelected(calendarItem: CalendarSlot)
     }
 
     companion object {

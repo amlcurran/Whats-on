@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.view.LayoutInflater
-import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -47,17 +46,17 @@ class WhatsOnActivity : AppCompatActivity() {
         }
 
     private val eventSelectedListener = object : WhatsOnAdapter.EventSelectedListener {
-        override fun eventSelected(calendarItem: EventCalendarItem, itemView: View) {
+        override fun eventSelected(calendarItem: EventCalendarItem) {
             startActivity(EventDetailActivity.show(calendarItem, this@WhatsOnActivity))
         }
 
-        override fun emptySelected(calendarItem: EmptyCalendarItem) {
+        override fun emptySelected(calendarItem: CalendarSlot) {
             val intent = Intent(Intent.ACTION_INSERT)
             intent.data = CalendarContract.Events.CONTENT_URI
             val day = DateTime(
                 0,
                 DateTimeZone.getDefault()
-            ).plusDays(calendarItem.startTime.daysSinceEpoch(JodaCalculator()))
+            ).plusDays(calendarItem.startTimestamp.daysSinceEpoch(JodaCalculator()))
             val startTime = day.plusHours(18)
             val endTime = day.plusHours(22)
             intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime.millis)
@@ -115,9 +114,7 @@ class WhatsOnActivity : AppCompatActivity() {
                                 if (slot.isEmpty) {
                                     EmptyView(modifier = Modifier
                                         .clickable {
-                                            eventSelectedListener.emptySelected(
-                                                slot.firstItem as EmptyCalendarItem
-                                            )
+                                            eventSelectedListener.emptySelected(slot)
                                         }
                                         .fillMaxWidth()
                                     )
@@ -128,8 +125,7 @@ class WhatsOnActivity : AppCompatActivity() {
                                         modifier = Modifier
                                             .clickable {
                                                 eventSelectedListener.eventSelected(
-                                                    event,
-                                                    View(this@WhatsOnActivity)
+                                                    event
                                                 )
                                             }
                                             .fillMaxWidth()
@@ -145,8 +141,7 @@ class WhatsOnActivity : AppCompatActivity() {
                                                     modifier = Modifier
                                                         .clickable {
                                                             eventSelectedListener.eventSelected(
-                                                                item,
-                                                                View(this@WhatsOnActivity)
+                                                                item
                                                             )
                                                         }
                                                         .width(maxWidth.times(0.8f))

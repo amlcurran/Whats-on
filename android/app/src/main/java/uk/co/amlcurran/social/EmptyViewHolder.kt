@@ -23,11 +23,11 @@ internal class EmptyViewHolder(private val composeView: ComposeView, private val
     override fun bind(item: EmptyCalendarItem) {
         composeView.setContent {
             WhatsOnTheme {
-                EmptyView(
-                    Modifier
-                        .padding(horizontal = 8.dp)
-                        .clickable { eventSelectedListener.emptySelected(item) }
-                )
+//                EmptyView(
+//                    Modifier
+//                        .padding(horizontal = 8.dp)
+//                        .clickable { eventSelectedListener.emptySelected(item) }
+//                )
             }
         }
     }

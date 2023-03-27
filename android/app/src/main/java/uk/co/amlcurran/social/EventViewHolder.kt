@@ -1,14 +1,11 @@
 package uk.co.amlcurran.social
 
-import android.view.View
-import android.widget.TextView
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import org.joda.time.DateTime
 
-import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 
 internal class EventViewHolder(private val composeView: ComposeView, private val eventSelectedListener: WhatsOnAdapter.EventSelectedListener) : CalendarItemViewHolder<EventCalendarItem>(composeView) {
@@ -20,7 +17,7 @@ internal class EventViewHolder(private val composeView: ComposeView, private val
                     modifier = Modifier
                         .fillMaxWidth()
                         .clickable {
-                            eventSelectedListener.eventSelected(item, itemView)
+                            eventSelectedListener.eventSelected(item)
                         },
                     event = item
                 )
