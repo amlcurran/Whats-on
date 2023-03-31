@@ -9,11 +9,7 @@ import androidx.activity.result.contract.ActivityResultContracts.RequestMultiple
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
@@ -21,12 +17,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
-import org.joda.time.DateTime
-import org.joda.time.DateTimeZone
-import org.joda.time.format.DateTimeFormat
 import uk.co.amlcurran.social.add.AddEventActivity
 import uk.co.amlcurran.social.databinding.ActivityWhatsOnBinding
 import uk.co.amlcurran.social.details.EventDetailActivity
@@ -45,12 +37,11 @@ class WhatsOnActivity : AppCompatActivity() {
             }
         }
 
-    private val eventSelectedListener = object : WhatsOnAdapter.EventSelectedListener {
-        override fun eventSelected(calendarItem: EventCalendarItem) {
+        private fun eventSelected(calendarItem: EventCalendarItem) {
             startActivity(EventDetailActivity.show(calendarItem, this@WhatsOnActivity))
         }
 
-        override fun emptySelected(calendarItem: CalendarSlot) {
+        private fun emptySelected(calendarItem: CalendarSlot) {
             val intent = Intent(Intent.ACTION_INSERT)
             intent.data = CalendarContract.Events.CONTENT_URI
             intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, calendarItem.startTimestamp.millis)
@@ -61,8 +52,6 @@ class WhatsOnActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-
-    }
 
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,60 +81,7 @@ class WhatsOnActivity : AppCompatActivity() {
                             .padding(padding)
                             .background(colorResource(id = R.color.background))
                     ) { calendarSource ->
-                        LazyColumn(
-                            verticalArrangement = Arrangement.spacedBy(16.dp),
-                            contentPadding = PaddingValues(horizontal = 16.dp)
-                        ) {
-                            items(calendarSource.allSlots()) { slot ->
-                                Text(
-                                    slot.startTimestamp.format(DateTimeFormat.fullDate()),
-                                    color = MaterialTheme.colors.onBackground,
-                                    style = MaterialTheme.typography.subtitle2,
-                                    modifier = Modifier.padding(
-                                        bottom = 8.dp
-                                    )
-                                )
-                                if (slot.isEmpty) {
-                                    EmptyView(modifier = Modifier
-                                        .clickable {
-                                            eventSelectedListener.emptySelected(slot)
-                                        }
-                                        .fillMaxWidth()
-                                    )
-                                } else if (slot.items.count() == 1) {
-                                    // This is dodgy as heck
-                                    val event = slot.firstItem as EventCalendarItem
-                                    EventView(event = event,
-                                        modifier = Modifier
-                                            .clickable {
-                                                eventSelectedListener.eventSelected(
-                                                    event
-                                                )
-                                            }
-                                            .fillMaxWidth()
-                                    )
-                                } else {
-                                    BoxWithConstraints {
-                                        LazyRow(
-                                            horizontalArrangement = Arrangement.spacedBy(16.dp),
-                                            contentPadding = PaddingValues(horizontal = 0.dp)
-                                        ) {
-                                            items(slot.items) { item ->
-                                                EventView(event = item as EventCalendarItem,
-                                                    modifier = Modifier
-                                                        .clickable {
-                                                            eventSelectedListener.eventSelected(
-                                                                item
-                                                            )
-                                                        }
-                                                        .width(maxWidth.times(0.8f))
-                                                )
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        SlotsView(calendarSource.allSlots(), ::eventSelected, ::emptySelected)
                     }
                 }
             }
@@ -167,6 +103,7 @@ class WhatsOnActivity : AppCompatActivity() {
 //            insets
 //        }
     }
+
 
     override fun onResume() {
         super.onResume()

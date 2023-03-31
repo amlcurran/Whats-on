@@ -1,6 +1,5 @@
 package uk.co.amlcurran.social
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -12,26 +11,10 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-
-internal class EmptyViewHolder(private val composeView: ComposeView, private val eventSelectedListener: WhatsOnAdapter.EventSelectedListener) : CalendarItemViewHolder<EmptyCalendarItem>(composeView) {
-
-    override fun bind(item: EmptyCalendarItem) {
-        composeView.setContent {
-            WhatsOnTheme {
-//                EmptyView(
-//                    Modifier
-//                        .padding(horizontal = 8.dp)
-//                        .clickable { eventSelectedListener.emptySelected(item) }
-//                )
-            }
-        }
-    }
-}
 
 @Composable
 fun EmptyView(modifier: Modifier = Modifier) {
