@@ -2,10 +2,7 @@ package uk.co.amlcurran.social
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import uk.co.amlcurran.starlinginterview.AsyncResult
@@ -18,7 +15,7 @@ class EventListViewModel(application: Application): AndroidViewModel(application
         AsyncResult.Loading<CalendarSource>()
     )
     private val eventsRepository: AndroidEventsRepository by lazy { AndroidEventsRepository(application.contentResolver) }
-    private val eventsService: EventsService by lazy { EventsService(eventsRepository, JodaCalculator(), UserSettings(application)) }
+    private val eventsService: EventsService by lazy { EventsService(eventsRepository, JodaCalculator(), UserSettings(application), EventPredicates(UserSettings(application)).defaultPredicate) }
 
     suspend fun load() {
         try {

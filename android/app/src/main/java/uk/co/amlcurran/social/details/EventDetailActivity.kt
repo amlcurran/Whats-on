@@ -35,7 +35,8 @@ class EventDetailActivity : AppCompatActivity() {
     private val events by lazy {
         val calendarRepository = UserSettings(this)
         val eventsRepository = AndroidEventsRepository(contentResolver)
-        EventsService(eventsRepository, jodaCalculator, calendarRepository)
+        val predicate = EventPredicates(UserSettings(application)).defaultPredicate
+        EventsService(eventsRepository, jodaCalculator, calendarRepository, predicate)
     }
     private lateinit var binding: ActivityEventDetailsBinding
 
