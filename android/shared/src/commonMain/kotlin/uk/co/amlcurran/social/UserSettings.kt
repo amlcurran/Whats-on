@@ -6,9 +6,6 @@ expect class UserSettings {
 
     fun include(calendar: Calendar)
 
-    @Deprecated("use showEventsFrom instead")
-    fun shouldShow(it: CalendarItem): Boolean
-
     fun showEventsFrom(calendarId: String): Boolean
 
     fun hide(eventId: String)

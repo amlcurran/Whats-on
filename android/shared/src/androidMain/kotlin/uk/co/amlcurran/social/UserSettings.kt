@@ -22,14 +22,6 @@ actual class UserSettings(context: Context) {
         }
     }
 
-    actual fun shouldShow(it: CalendarItem): Boolean {
-        return if (it is EventCalendarItem) {
-            !excludedCalendars().contains(it.calendarId)
-        } else {
-            true
-        }
-    }
-
     actual fun showEventsFrom(calendarId: String): Boolean {
         return !excludedCalendars().contains(calendarId)
     }

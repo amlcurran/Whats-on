@@ -17,14 +17,6 @@ actual class UserSettings {
         preferences.setObject(excludedCalendars().removing(calendar.id).toList(), "excluded")
     }
 
-    actual fun shouldShow(it: CalendarItem): Boolean {
-        return if (it is EventCalendarItem) {
-            !excludedCalendars().contains(it.calendarId)
-        } else {
-            true
-        }
-    }
-
     actual fun showEventsFrom(calendarId: String): Boolean {
         return !excludedCalendars().contains(calendarId)
     }
