@@ -22,11 +22,21 @@ public class WhatsOnPresenter: ObservableObject {
         notificationHandle = NotificationCenter.default.addObserver(forName: .EKEventStoreChanged, do: { [weak self] in
             self?.refreshEvents()
         })
-        eventStore.requestAccess(to: .event) { [weak self] (hasAccess, error) in
-            if hasAccess {
-                self?.refreshEvents()
-            } else if error != nil {
-//                self?.view?.showAccessFailure()
+        if #available(macCatalystApplicationExtension 17.0, *) {
+            eventStore.requestFullAccessToEvents { [weak self] (hasAccess, error) in
+                if hasAccess {
+                    self?.refreshEvents()
+                } else if error != nil {
+                    //                self?.view?.showAccessFailure()
+                }
+            }
+        } else {
+            eventStore.requestAccess(to: .event) { [weak self] (hasAccess, error) in
+                if hasAccess {
+                    self?.refreshEvents()
+                } else if error != nil {
+    //                self?.view?.showAccessFailure()
+                }
             }
         }
     }

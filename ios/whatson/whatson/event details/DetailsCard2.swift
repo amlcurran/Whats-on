@@ -25,14 +25,6 @@ struct Foo: Identifiable {
     var id: String
 }
 
-extension CNContact: Identifiable {
-    
-    public var id: String {
-        identifier
-    }
-    
-}
-
 struct DetailsCard2: View {
     
     struct Location: Equatable {
@@ -43,9 +35,51 @@ struct DetailsCard2: View {
     let calendarItem: EventCalendarItem
     @State var isExpanded: Bool = false
     @State var placemark: CLPlacemark?
-    @State var selectedContact: CNContact?
+    @State var selectedAttendee: Attendee?
     @State var isShowingEvent = false
     let onMapTapped: (CLPlacemark) -> Void
+    
+    @ViewBuilder
+    var expandedView: some View {
+        if isExpanded {
+            if let location = calendarItem.location {
+                Text(location)
+                    .labelStyle(.lower)
+                    .padding([.leading, .trailing])
+            }
+            if let placemark = placemark {
+                DetailMap(placemark: placemark)
+                    .onTapGesture {
+                        onMapTapped(placemark)
+                    }
+                    .padding(.top, 4)
+            } else {
+                HStack {
+                    
+                }
+                .frame(height: 8)
+            }
+        } else {
+            HStack {
+                
+            }
+            .frame(height: 8)
+        }
+    }
+    
+    @ViewBuilder
+    var contactIcons: some View {
+        ZStack {
+            ForEach(Array(calendarItem.attendees.enumerated()), id: \.element) { (index, attendee) in
+                ContactBadge(attendee: attendee)
+                    .offset(x: -CGFloat(index * 16))
+                    .onTapGesture {
+                        selectedAttendee = attendee
+                        
+                    }
+            }
+        }
+    }
     
     private let geocoder = CLGeocoder()
     
@@ -63,45 +97,11 @@ struct DetailsCard2: View {
                             .labelStyle(.lower)
                     }
                 }
-//                if isExpanded {
                 Spacer(minLength: 8)
-                ZStack {
-                    ForEach(Array(calendarItem.attendees.enumerated()), id: \.element) { (index, attendee) in
-                        ContactBadge(attendee: attendee)
-                            .offset(x: -CGFloat(index * 16))
-                            .onTapGesture {
-                                selectedContact = try? CNContactStore().unifiedContact(withIdentifier: attendee.identifier, keysToFetch: [CNContactViewController.descriptorForRequiredKeys()])
-                                
-                            }
-                    }
-                }
-//                }
+                contactIcons
             }
             .padding([.leading, .top, .trailing])
-            if isExpanded {
-                if let location = calendarItem.location {
-                    Text(location)
-                        .labelStyle(.lower)
-                        .padding([.leading, .trailing])
-                }
-                if let placemark = placemark {
-                    DetailMap(placemark: placemark)
-                        .onTapGesture {
-                            onMapTapped(placemark)
-                        }
-                        .padding(.top, 4)
-                } else {
-                    HStack {
-                        
-                    }
-                    .frame(height: 8)
-                }
-            } else {
-                HStack {
-                    
-                }
-                .frame(height: 8)
-            }
+            expandedView
         }
         .privacySensitive()
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -124,8 +124,8 @@ struct DetailsCard2: View {
                 Label("Show full event", systemImage: "arrow.up.forward.square")
             }
         }
-        .sheet(item: $selectedContact) { contact in
-            ContactView(contact: contact)
+        .sheet(item: $selectedAttendee) { attendee in
+            ContactView(contact: attendee)
         }
         .sheet(isPresented: $isShowingEvent) {
             NavigationView {

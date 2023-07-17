@@ -55,9 +55,21 @@ struct Widget3EntryView: View {
             Day(slot: entry.slots.reversed().first!)
         }
         .padding(10)
-        .background(Color("windowBackground"))
+        .backgroundCompat(Color("windowBackground"))
         .accentColor(Color("accent"))
     }
+}
+
+extension View {
+    
+    func backgroundCompat(_ color: Color) -> some View {
+        if #available(macCatalystApplicationExtension 17.0, *) {
+            return containerBackground(Color("windowBackground"), for: .widget)
+        } else {
+            return background(Color("windowBackground"))
+        }
+    }
+    
 }
 
 @main

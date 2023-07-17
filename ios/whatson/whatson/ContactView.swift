@@ -8,6 +8,7 @@
 
 import SwiftUI
 import ContactsUI
+import Core
 
 struct ContactView: UIViewControllerRepresentable {
     func makeCoordinator() -> Coordinator {
@@ -16,10 +17,11 @@ struct ContactView: UIViewControllerRepresentable {
     
     typealias UIViewControllerType = UINavigationController
     
-    let contact: CNContact
+    let contact: Attendee
     @Environment(\.dismiss) var dismiss
     
     func makeUIViewController(context: Context) -> UINavigationController {
+        let contact = try! CNContactStore().unifiedContact(withIdentifier: contact.identifier, keysToFetch: [CNContactViewController.descriptorForRequiredKeys()])
         let controller = CNContactViewController(for: contact)
         controller.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: context.coordinator, action: #selector(context.coordinator.didTapClose))
         return UINavigationController(rootViewController: controller)
