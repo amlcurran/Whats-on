@@ -6,7 +6,6 @@ on:
       buildNumber:
         required: true
         type: string
-
 jobs:
   build:
     runs-on: macos-latest
