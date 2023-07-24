@@ -795,7 +795,7 @@
 					};
 					86CAD4981BACC9B1009C9CFD = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = LW2EJ7FEBP;
+						DevelopmentTeam = 3H3SBN3AYY;
 						DevelopmentTeamName = "Alexander Curran";
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
@@ -1444,7 +1444,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 10000;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = LW2EJ7FEBP;
+				DEVELOPMENT_TEAM = 3H3SBN3AYY;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = whatson/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -1475,7 +1475,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 10000;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = LW2EJ7FEBP;
+				DEVELOPMENT_TEAM = 3H3SBN3AYY;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = whatson/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
