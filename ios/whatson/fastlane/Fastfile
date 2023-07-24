@@ -35,7 +35,10 @@ platform :ios do
       issuer_id: "69a6de8c-ee2d-47e3-e053-5b8c7c11a4d1",
       key_content: ENV["API_KEY"]
     )
-    sync_code_signing(type: "appstore")
+    sync_code_signing(
+      git_basic_authorization: ENV["PERSONAL_ACCESS_TOKEN"],
+      type: "appstore"
+    )
     build_app(scheme: "whatson", xcargs: "-allowProvisioningUpdates")
     upload_to_testflight(skip_waiting_for_build_processing: false)
     upload_to_appstore(force: true, build_number: version)
