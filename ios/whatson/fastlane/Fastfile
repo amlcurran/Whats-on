@@ -28,19 +28,11 @@ platform :ios do
 
   desc "Deploy a new version to the App Store"
   lane :release do
-    # match(type: "appstore")
-    # snapshot
-    version = prompt(text: "version number: ")
+    version = ENV["BUILD_NUMBER"]
     update_build(version)
     gym(scheme: "whatson")
-    deliver(force: true)
-    # frameit
-    commit_version_bump(
-      xcodeproj: "whatson.xcodeproj"
-    )
-    add_git_tag(
-        tag: "#{version}"
-    )
+    upload_to_testflight(skip_waiting_for_build_processing: false)
+    upload_to_appstore(force: true, build_number: version)
   end
 
 end
