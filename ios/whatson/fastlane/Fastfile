@@ -30,7 +30,7 @@ platform :ios do
   lane :release do
     version = ENV["BUILD_NUMBER"]
     update_build(version)
-    gym(scheme: "whatson")
+    gym(scheme: "whatson", xcargs: "-allowProvisioningUpdates")
     upload_to_testflight(skip_waiting_for_build_processing: false)
     upload_to_appstore(force: true, build_number: version)
   end
