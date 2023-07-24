@@ -824,7 +824,6 @@
 						DevelopmentTeam = 3H3SBN3AYY;
 						DevelopmentTeamName = "Alexander Curran";
 						LastSwiftMigration = 1020;
-						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -1485,7 +1484,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: aml.curran@gmail.com (33EDE4K7ZG)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1548,20 +1547,24 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "whatson/What’s on.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development: aml.curran@gmail.com (33EDE4K7ZG)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: aml.curran@gmail.com (33EDE4K7ZG)";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 3H3SBN3AYY;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 3H3SBN3AYY;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = whatson/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.1;
 				OTHER_SWIFT_FLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson2;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.amlcurran.whatson;
 				PRODUCT_MODULE_NAME = Whatson;
 				PRODUCT_NAME = "What’s on";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore uk.co.amlcurran.whatson";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
