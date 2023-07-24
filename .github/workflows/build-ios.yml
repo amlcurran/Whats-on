@@ -1,14 +1,21 @@
-name: Build iOS
-on: [push]
+on:
+  workflow_dispatch:
+    inputs:
+      buildNumber:
+        required: true
+        type: string
 jobs:
   build:
     runs-on: macos-latest
+    env:
+      BUILD_NUMBER: ${{ inputs.buildNumber }}
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out
+        uses: actions/checkout@v3
       - name: Set up Ruby
         uses: ruby/setup-ruby@359bebbc29cbe6c87da6bc9ea3bc930432750108
         with:
           ruby-version: '2.7.5'
       - name: Build
-        run: bundle install && bundle exec fastlane beta
+        run: bundle install && bundle exec fastlane release
         working-directory: ios/whatson

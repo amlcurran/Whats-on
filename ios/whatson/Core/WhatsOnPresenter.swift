@@ -22,7 +22,7 @@ public class WhatsOnPresenter: ObservableObject {
         notificationHandle = NotificationCenter.default.addObserver(forName: .EKEventStoreChanged, do: { [weak self] in
             self?.refreshEvents()
         })
-        if #available(macCatalystApplicationExtension 17.0, *) {
+        if #available(iOS 17.0, *) {
             eventStore.requestFullAccessToEvents { [weak self] (hasAccess, error) in
                 if hasAccess {
                     self?.refreshEvents()
