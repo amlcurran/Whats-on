@@ -10,6 +10,7 @@ jobs:
     env:
       BUILD_NUMBER: ${{ inputs.buildNumber }}
       API_KEY: ${{ secrets.API_KEY }}
+      MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
     steps:
       - name: Check out
         uses: actions/checkout@v3
