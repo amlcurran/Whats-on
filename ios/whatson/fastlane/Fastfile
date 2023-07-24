@@ -38,12 +38,7 @@ platform :ios do
 end
 
 def update_build(version)
-   splits = version.split(".") # ["0", "1", "4"]
-   buildnumber = "#{splits.first}#{splits[1].rjust(2, '0')}#{splits[2].rjust(2, '0')}"
    increment_build_number(
       build_number: buildnumber
-   )
-   increment_version_number(
-      version_number: version
    )
 end
