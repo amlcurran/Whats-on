@@ -8,7 +8,7 @@ jobs:
   build:
     runs-on: macos-latest
     env:
-      BUILD_NUMBER: ${{ inputs.buildNumber }}
+      BUILD_NUMBER: ${{ secrets.API_KEY }}
     steps:
       - name: Check out
         uses: actions/checkout@v3

@@ -14,3 +14,6 @@ ios/whatson/whatson.xcodeproj/xcuserdata/
 ios/whatson/whatson.xcodeproj/project.xcworkspace/xcuserdata/
 
 **/GoogleService-Info.plist
+
+ios/whatson/vendor/
+ios/whatson/Pods/
