@@ -39,6 +39,6 @@ end
 
 def update_build(version)
    increment_build_number(
-      build_number: buildnumber
+      build_number: version
    )
 end
