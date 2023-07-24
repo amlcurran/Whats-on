@@ -11,13 +11,13 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-      - env:
-          BUILD_NUMBER: ${{ inputs.buildNumber }}
       - uses: actions/checkout@v3
       - name: Set up Ruby
         uses: ruby/setup-ruby@359bebbc29cbe6c87da6bc9ea3bc930432750108
         with:
           ruby-version: '2.7.5'
+      - env:
+          BUILD_NUMBER: ${{ inputs.buildNumber }}
       - name: Build
         run: bundle install && bundle exec fastlane release
         working-directory: ios/whatson
