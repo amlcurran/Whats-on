@@ -30,11 +30,9 @@ fun WhatsOnTheme(content: @Composable () -> Unit) {
             ),
             body1 = Typography().body1.copy(
                 fontFamily = openSans,
-                fontWeight = FontWeight.SemiBold
             ),
             h4 = Typography().h4.copy(
                 fontFamily = openSans,
-                fontWeight = FontWeight.Bold
             ),
             subtitle2 = Typography().subtitle2.copy(
                 fontFamily = openSans

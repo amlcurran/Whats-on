@@ -14,9 +14,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Switch
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,7 +37,7 @@ import org.joda.time.format.DateTimeFormatter
 import uk.co.amlcurran.social.databinding.SettingsBinding
 
 @Composable
-fun SettingsView() {
+fun TimeEditView() {
     val context = LocalContext.current
     val userSettings = remember {
         UserSettings(context)
@@ -41,31 +48,63 @@ fun SettingsView() {
     val timeFormatter = remember {
         DateTimeFormat.shortTime()
     }
-    val startTime = timeCalculator.getDateTime(timeCalculator.startOfToday()
-        .plusHoursOf(userSettings.borderTimeStart(), timeCalculator))
-    val endTime = timeCalculator.getDateTime(timeCalculator.startOfToday()
-        .plusHoursOf(userSettings.borderTimeEnd(), timeCalculator))
+    val startTime = timeCalculator.getDateTime(
+        timeCalculator.startOfToday()
+            .plusHoursOf(userSettings.borderTimeStart(), timeCalculator)
+    )
+    val endTime = timeCalculator.getDateTime(
+        timeCalculator.startOfToday()
+            .plusHoursOf(userSettings.borderTimeEnd(), timeCalculator)
+    )
     val startText = timeFormatter.print(startTime)
     val endText = timeFormatter.print(endTime)
-    Column {
-        Column {
-            Text(text = "Show events from")
-            Text(text = startText)
-            Text(text = "to")
-            Text(text = endText)
 
-        }
+    Column {
+        Text(text = "Show events from")
+        Text(text = startText)
+        Text(text = "to")
+        Text(text = endText)
+    }
+}
+
+@Composable
+fun TentativeMeetingsSwitch() {
+    val context = LocalContext.current
+    val userSettings = remember {
+        UserSettings(context)
+    }
+    val (showTentative, setShowTentative) = remember {
+        mutableStateOf(userSettings.showTentativeMeetings())
+    }
+    SideEffect {
+        userSettings.shouldShowTentativeMeetings(showTentative)
+    }
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Text(
+            modifier = Modifier.weight(1f),
+            text = "Show events you've not replied to",
+            style = MaterialTheme.typography.body1
+        )
+        Switch(checked = showTentative, onCheckedChange = setShowTentative)
+    }
+}
+
+@Composable
+fun SettingsView() {
+    Column {
+        TimeEditView()
+        TentativeMeetingsSwitch()
     }
 }
 
 @Composable
 @Preview
 fun SettingsViewPreview() {
-
+    SettingsView()
 }
 
 
-class SettingsFragment: Fragment() {
+class SettingsFragment : Fragment() {
 
     private val userSettings: UserSettings by lazy { UserSettings(requireContext()) }
     private val timeFormatter: DateTimeFormatter by lazy { DateTimeFormat.shortTime() }
@@ -73,12 +112,18 @@ class SettingsFragment: Fragment() {
 
     private lateinit var delegate: SettingsDelegate
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = SettingsBinding.inflate(inflater, container, false)
         binding.settingsCompose.apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
-                SettingsView()
+                WhatsOnTheme {
+                    SettingsView()
+                }
             }
         }
         return binding.root
@@ -102,31 +147,39 @@ class SettingsFragment: Fragment() {
             userSettings.shouldShowTentativeMeetings(isChecked)
         }
 
-        LoaderManager.getInstance(this).initLoader(0, null, object : LoaderManager.LoaderCallbacks<Cursor> {
-            override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
-                return CursorLoader(requireContext(), CalendarContract.Calendars.CONTENT_URI, null, null, null, null)
-            }
-
-            override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
-                if (data != null) {
-                    val list = data.map {
-                        val calendarId = it.string(CalendarContract.Calendars._ID)
-                        Calendar(
-                            calendarId,
-                            it.string(CalendarContract.Calendars.NAME),
-                            it.int(CalendarContract.Calendars.CALENDAR_COLOR),
-                            userSettings.showEventsFrom(calendarId)
-                        )
-                    }
-                    adapter.update(list)
+        LoaderManager.getInstance(this)
+            .initLoader(0, null, object : LoaderManager.LoaderCallbacks<Cursor> {
+                override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
+                    return CursorLoader(
+                        requireContext(),
+                        CalendarContract.Calendars.CONTENT_URI,
+                        null,
+                        null,
+                        null,
+                        null
+                    )
                 }
-            }
 
-            override fun onLoaderReset(loader: Loader<Cursor>) {
-                adapter.update(emptyList())
-            }
+                override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
+                    if (data != null) {
+                        val list = data.map {
+                            val calendarId = it.string(CalendarContract.Calendars._ID)
+                            Calendar(
+                                calendarId,
+                                it.string(CalendarContract.Calendars.NAME),
+                                it.int(CalendarContract.Calendars.CALENDAR_COLOR),
+                                userSettings.showEventsFrom(calendarId)
+                            )
+                        }
+                        adapter.update(list)
+                    }
+                }
 
-        })
+                override fun onLoaderReset(loader: Loader<Cursor>) {
+                    adapter.update(emptyList())
+                }
+
+            })
     }
 
     override fun onAttach(context: Context) {
@@ -138,10 +191,14 @@ class SettingsFragment: Fragment() {
         val timeCalculator = JodaCalculator()
         binding.settingsFromToTiming.text = buildSpannedString {
             val jodaCalculator = JodaCalculator()
-            val startTime = jodaCalculator.getDateTime(jodaCalculator.startOfToday()
-                .plusHoursOf(userSettings.borderTimeStart(), timeCalculator))
-            val endTime = jodaCalculator.getDateTime(jodaCalculator.startOfToday()
-                .plusHoursOf(userSettings.borderTimeEnd(), timeCalculator))
+            val startTime = jodaCalculator.getDateTime(
+                jodaCalculator.startOfToday()
+                    .plusHoursOf(userSettings.borderTimeStart(), timeCalculator)
+            )
+            val endTime = jodaCalculator.getDateTime(
+                jodaCalculator.startOfToday()
+                    .plusHoursOf(userSettings.borderTimeEnd(), timeCalculator)
+            )
             val startText = timeFormatter.print(startTime)
             val endText = timeFormatter.print(endTime)
             append(getString(R.string.show_events_from_x_y, startText, endText))
@@ -187,7 +244,7 @@ interface SettingsDelegate {
     fun onCalendarSettingsChanged()
 }
 
-private class FunctionSpan(val onClick: () -> Unit): ClickableSpan() {
+private class FunctionSpan(val onClick: () -> Unit) : ClickableSpan() {
     override fun onClick(widget: View) = onClick()
 
 }
