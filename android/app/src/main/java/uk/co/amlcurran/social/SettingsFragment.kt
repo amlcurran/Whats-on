@@ -13,16 +13,56 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.text.buildSpannedString
 import androidx.fragment.app.Fragment
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 import uk.co.amlcurran.social.databinding.SettingsBinding
+
+@Composable
+fun SettingsView() {
+    val context = LocalContext.current
+    val userSettings = remember {
+        UserSettings(context)
+    }
+    val timeCalculator = remember {
+        JodaCalculator()
+    }
+    val timeFormatter = remember {
+        DateTimeFormat.shortTime()
+    }
+    val startTime = timeCalculator.getDateTime(timeCalculator.startOfToday()
+        .plusHoursOf(userSettings.borderTimeStart(), timeCalculator))
+    val endTime = timeCalculator.getDateTime(timeCalculator.startOfToday()
+        .plusHoursOf(userSettings.borderTimeEnd(), timeCalculator))
+    val startText = timeFormatter.print(startTime)
+    val endText = timeFormatter.print(endTime)
+    Column {
+        Column {
+            Text(text = "Show events from")
+            Text(text = startText)
+            Text(text = "to")
+            Text(text = endText)
+
+        }
+    }
+}
+
+@Composable
+@Preview
+fun SettingsViewPreview() {
+
+}
 
 
 class SettingsFragment: Fragment() {
@@ -35,6 +75,12 @@ class SettingsFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = SettingsBinding.inflate(inflater, container, false)
+        binding.settingsCompose.apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+            setContent {
+                SettingsView()
+            }
+        }
         return binding.root
     }
 

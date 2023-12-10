@@ -35,6 +35,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <androidx.compose.ui.platform.ComposeView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/settingsCompose"/>
+
             <TextView
                 android:id="@+id/settingsFromToTiming"
                 android:layout_width="match_parent"
