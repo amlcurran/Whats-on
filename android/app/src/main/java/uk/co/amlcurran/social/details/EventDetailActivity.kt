@@ -22,11 +22,23 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import com.google.maps.android.compose.*
+import com.google.maps.android.compose.CameraPositionState
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.MapUiSettings
+import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.MarkerState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import uk.co.amlcurran.social.*
+import uk.co.amlcurran.social.AndroidEventsRepository
+import uk.co.amlcurran.social.Event
+import uk.co.amlcurran.social.EventCalendarItem
+import uk.co.amlcurran.social.EventPredicates
+import uk.co.amlcurran.social.EventsService
+import uk.co.amlcurran.social.JodaCalculator
 import uk.co.amlcurran.social.R
+import uk.co.amlcurran.social.UserSettings
 import uk.co.amlcurran.social.databinding.ActivityEventDetailsBinding
+import kotlin.coroutines.suspendCoroutine
 
 class EventDetailActivity : AppCompatActivity() {
 
@@ -89,7 +101,7 @@ class EventDetailActivity : AppCompatActivity() {
 
     private fun updateMap(location: String?) {
         location?.let {
-            lifecycleScope.launch {
+            lifecycleScope.launch(Dispatchers.IO) {
                 findLocation(it)?.let { show(it) }
             }
         }
@@ -98,15 +110,33 @@ class EventDetailActivity : AppCompatActivity() {
     private fun show(latLng: LatLng) {
         binding.mapHost.setContent {
             GoogleMap(
-                modifier = Modifier.clip(RoundedCornerShape(topStart = 0.dp, topEnd = 0.dp, bottomStart = 8.dp, bottomEnd = 8.dp)),
+                modifier = Modifier.clip(
+                    RoundedCornerShape(
+                        topStart = 0.dp,
+                        topEnd = 0.dp,
+                        bottomStart = 8.dp,
+                        bottomEnd = 8.dp
+                    )
+                ),
                 onMapClick = {
                     startActivity(Intent(Intent.ACTION_VIEW).apply {
                         data =
                             Uri.parse("https://www.google.com/maps/dir/?api=1&destination=${latLng.latitude},${latLng.longitude}")
                     })
                 },
-                uiSettings = MapUiSettings(zoomControlsEnabled = false, rotationGesturesEnabled = false, scrollGesturesEnabled = false, tiltGesturesEnabled = false, zoomGesturesEnabled = false),
-                cameraPositionState = CameraPositionState(CameraPosition.fromLatLngZoom(latLng, 15f))
+                uiSettings = MapUiSettings(
+                    zoomControlsEnabled = false,
+                    rotationGesturesEnabled = false,
+                    scrollGesturesEnabled = false,
+                    tiltGesturesEnabled = false,
+                    zoomGesturesEnabled = false
+                ),
+                cameraPositionState = CameraPositionState(
+                    CameraPosition.fromLatLngZoom(
+                        latLng,
+                        15f
+                    )
+                )
             ) {
                 Marker(state = MarkerState(position = latLng))
             }
@@ -114,8 +144,15 @@ class EventDetailActivity : AppCompatActivity() {
     }
 
     private suspend fun findLocation(location: String): LatLng? {
-        val it = Geocoder(this).getFromLocationName(location, 10)?.firstOrNull()
-        return it?.let { LatLng(it.latitude, it.longitude) }
+        return suspendCoroutine { continuation ->
+            try {
+                val result = Geocoder(this).getFromLocationName(location, 10)?.firstOrNull()
+                val latLng = result?.let { LatLng(it.latitude, it.longitude) }
+                continuation.resumeWith(Result.success(latLng))
+            } catch (e: Throwable) {
+                continuation.resumeWith(Result.failure(e))
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

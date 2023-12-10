@@ -6,9 +6,11 @@ data class CalendarSlot(
     val endTimestamp: Timestamp
 ) {
 
-    val isEmpty = items.isEmpty()
+    val isEmpty: Boolean
+        get() = items.isEmpty()
 
-    val firstItem = items.firstOrNull() ?: EmptyCalendarItem(startTimestamp, endTimestamp)
+    val firstItem: CalendarItem
+        get() = items.firstOrNull() ?: EmptyCalendarItem(startTimestamp, endTimestamp)
 
     fun addItem(calendarItem: CalendarItem) {
         items.add(calendarItem)

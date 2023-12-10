@@ -1,7 +1,12 @@
 package uk.co.amlcurran.social
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -20,7 +25,7 @@ fun SlotsView(calendarSlots: List<CalendarSlot>, onEventClick: (EventCalendarIte
         verticalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(horizontal = 16.dp)
     ) {
-        items(calendarSlots) { slot ->
+        items(calendarSlots, key = { it.startTimestamp.millis }) { slot ->
             Text(
                 slot.startTimestamp.format(DateTimeFormat.fullDate()),
                 color = MaterialTheme.colors.onBackground,
@@ -48,7 +53,7 @@ fun SlotsView(calendarSlots: List<CalendarSlot>, onEventClick: (EventCalendarIte
                         horizontalArrangement = Arrangement.spacedBy(16.dp),
                         contentPadding = PaddingValues(horizontal = 0.dp)
                     ) {
-                        items(slot.items) { item ->
+                        items(slot.items, key = { (it as EventCalendarItem).id() }) { item ->
                             EventView(event = item as EventCalendarItem,
                                 modifier = Modifier
                                     .clickable { onEventClick(item) }
