@@ -19,23 +19,28 @@ val openSans = FontFamily(
     )
 )
 
+val afacad = FontFamily(
+    listOf(
+        Font(R.font.afacad_regular),
+        Font(R.font.afacad_bold, FontWeight.Bold),
+        Font(R.font.afacad_semibold, FontWeight.SemiBold)
+    )
+)
+
 @Composable
 fun WhatsOnTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         typography = Typography(
-            FontFamily(
-                Font(R.font.opensanssemi, FontWeight.SemiBold),
-                Font(R.font.opensansbold, FontWeight.Bold),
-                Font(R.font.opensansreg, FontWeight.Medium),
-            ),
+            afacad,
             body1 = Typography().body1.copy(
-                fontFamily = openSans,
+                fontFamily = afacad,
             ),
             h4 = Typography().h4.copy(
-                fontFamily = openSans,
+                fontFamily = afacad,
+                fontWeight = FontWeight.Bold
             ),
             subtitle2 = Typography().subtitle2.copy(
-                fontFamily = openSans
+                fontFamily = afacad
             )
         ),
         colors = if (isSystemInDarkTheme()) darkColors(

@@ -1,5 +1,6 @@
 package uk.co.amlcurran.social
 
+import android.app.Application
 import android.app.TimePickerDialog
 import android.content.Context
 import android.database.Cursor
@@ -29,9 +30,11 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.text.buildSpannedString
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.AndroidViewModel
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
+import kotlinx.coroutines.flow.flow
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 import uk.co.amlcurran.social.databinding.SettingsBinding
@@ -89,11 +92,50 @@ fun TentativeMeetingsSwitch() {
     }
 }
 
+class CalendarListViewModel(application: Application): AndroidViewModel(application) {
+
+    val userSettings = UserSettings(application)
+    val calendar = flow {
+        val cursor = application.contentResolver
+            .query(CalendarContract.Calendars.CONTENT_URI, null, null, null, null)
+        if (cursor != null) {
+            val list = cursor.map {
+                val calendarId = it.string(CalendarContract.Calendars._ID)
+                Calendar(
+                    calendarId,
+                    it.string(CalendarContract.Calendars.NAME),
+                    it.int(CalendarContract.Calendars.CALENDAR_COLOR),
+                    userSettings.showEventsFrom(calendarId)
+                )
+            }
+            this.emit(list)
+        } else {
+            throw NullPointerException()
+        }
+    }
+
+
+}
+
+@Composable
+fun CalendarList() {
+    val (calendars, setCalendars) = remember {
+        mutableStateOf(listOf<Calendar>())
+    }
+    SideEffect {
+
+    }
+    Column {
+
+    }
+}
+
 @Composable
 fun SettingsView() {
     Column {
         TimeEditView()
         TentativeMeetingsSwitch()
+        CalendarList()
     }
 }
 

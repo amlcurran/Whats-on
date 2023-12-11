@@ -11,7 +11,7 @@
         <item name="colorSurfaceVariant">@color/colorSurface</item>
         <item name="colorOnPrimary">@color/quantum_white_text</item>
         <item name="colorOutline">@color/colorOutline</item>
-        <item name="fontFamily">@font/open_sans</item>
+        <item name="fontFamily">@font/afacad</item>
         <item name="android:spotShadowAlpha">0.05</item>
         <item name="android:colorBackground">@color/background</item>
         <item name="android:navigationBarColor">@color/background_70</item>
@@ -30,34 +30,31 @@
     </style>
 
     <style name="TodayDate" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="fontFamily">@font/open_sans</item>
+        <item name="fontFamily">@font/afacad</item>
         <item name="android:textColor">?colorPrimary</item>
         <item name="android:textAllCaps">true</item>
     </style>
 
     <style name="WhatsOn" parent="TextAppearance.MaterialComponents.Headline4">
         <item name="android:textColor">?colorOnSurface</item>
-        <item name="fontFamily">@font/open_sans</item>
+        <item name="fontFamily">@font/afacad</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Day" parent="TextAppearance.MaterialComponents.Subtitle2">
-        <item name="fontFamily">@font/open_sans</item>
+        <item name="fontFamily">@font/afacad</item>
     </style>
 
     <style name="Body1" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="fontFamily">@font/open_sans</item>
+        <item name="fontFamily">@font/afacad</item>
     </style>
 
-    <style name="Body1.Focus" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="fontFamily">@font/opensanssemi</item>
-        <item name="fontWeight">700</item>
-        <item name="android:letterSpacing">-0.01</item>
+    <style name="Body1.Focus" parent="Body1">
         <item name="android:textColor">@color/colorOnBackground</item>
     </style>
 
     <style name="Body2" parent="TextAppearance.MaterialComponents.Body2">
-        <item name="fontFamily">@font/open_sans</item>
+        <item name="fontFamily">@font/afacad</item>
     </style>
 
 </resources>
