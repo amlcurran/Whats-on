@@ -27,7 +27,6 @@ fun SlotsView(calendarSlots: List<CalendarSlot>, onEventClick: (EventCalendarIte
     }
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
-        contentPadding = PaddingValues(horizontal = 16.dp)
     ) {
         items(calendarSlots, key = { it.startTimestamp.millis }) { slot ->
             Text(
@@ -35,12 +34,15 @@ fun SlotsView(calendarSlots: List<CalendarSlot>, onEventClick: (EventCalendarIte
                 color = MaterialTheme.colors.onBackground,
                 style = MaterialTheme.typography.subtitle2,
                 modifier = Modifier.padding(
+                    start = 16.dp,
+                    end = 16.dp,
                     bottom = 8.dp
                 )
             )
             if (slot.isEmpty) {
                 EmptyView(modifier = Modifier
                     .clickable { onEmptySlotClick(slot) }
+                    .padding(horizontal = 16.dp)
                     .fillMaxWidth()
                 )
             } else if (slot.items.count() == 1) {
@@ -49,13 +51,14 @@ fun SlotsView(calendarSlots: List<CalendarSlot>, onEventClick: (EventCalendarIte
                 EventView(event = event,
                     modifier = Modifier
                         .clickable { onEventClick(event) }
+                        .padding(horizontal = 16.dp)
                         .fillMaxWidth()
                 )
             } else {
                 BoxWithConstraints {
                     LazyRow(
                         horizontalArrangement = Arrangement.spacedBy(16.dp),
-                        contentPadding = PaddingValues(horizontal = 0.dp)
+                        contentPadding = PaddingValues(horizontal = 16.dp)
                     ) {
                         items(slot.items, key = { it.eventId }) { item ->
                             EventView(event = item,

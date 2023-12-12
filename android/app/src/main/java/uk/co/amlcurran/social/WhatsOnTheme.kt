@@ -10,6 +10,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 
 val openSans = FontFamily(
     listOf(
@@ -34,13 +35,16 @@ fun WhatsOnTheme(content: @Composable () -> Unit) {
             afacad,
             body1 = Typography().body1.copy(
                 fontFamily = afacad,
+                fontSize = 18.sp
             ),
             h4 = Typography().h4.copy(
                 fontFamily = afacad,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                fontSize = 36.sp
             ),
             subtitle2 = Typography().subtitle2.copy(
-                fontFamily = afacad
+                fontFamily = afacad,
+                fontSize = 16.sp
             )
         ),
         colors = if (isSystemInDarkTheme()) darkColors(
