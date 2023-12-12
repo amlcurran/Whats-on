@@ -2,19 +2,21 @@ package uk.co.amlcurran.social.details
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.joda.time.format.DateTimeFormat
-import uk.co.amlcurran.social.*
+import uk.co.amlcurran.social.Event
+import uk.co.amlcurran.social.EventCalendarItem
+import uk.co.amlcurran.social.Timestamp
+import uk.co.amlcurran.social.WhatsOnTheme
+import uk.co.amlcurran.social.format
 
 @Composable
 @Preview
@@ -54,22 +56,18 @@ fun EventCard(modifier: Modifier = Modifier, event: Event) {
         Card(
             modifier
                 .background(
-                    color = colorResource(id = R.color.colorSurface),
+                    color = MaterialTheme.colorScheme.surface,
                     shape = RoundedCornerShape(8.dp)
                 )
                 .padding(16.dp)
         ) {
-            Column(
-                Modifier.background(colorResource(id = R.color.colorSurface))
-            ) {
                 Text(
                     event.item.title,
-                    style = MaterialTheme.typography.body1,
-                    color = colorResource(id = R.color.colorOnSurface),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.padding(bottom = 4.dp)
                 )
-                Text("From ${event.item.startTime.format(DateTimeFormat.shortTime())} to ${event.item.endTime.format(DateTimeFormat.shortTime())}", style = MaterialTheme.typography.body2)
-            }
+                Text("From ${event.item.startTime.format(DateTimeFormat.shortTime())} to ${event.item.endTime.format(DateTimeFormat.shortTime())}", style = MaterialTheme.typography.bodySmall)
         }
     }
 }

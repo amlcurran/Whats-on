@@ -7,8 +7,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -30,16 +30,16 @@ fun EventView(modifier: Modifier = Modifier, event: EventCalendarItem) {
             .padding(16.dp)) {
         Text(
             text = event.title,
-            style = MaterialTheme.typography.body1,
-            color = MaterialTheme.colors.onBackground
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onBackground
         )
         Text(
             text = stringResource(
                 id = R.string.event_from,
                 event.startTime.format(formatter)
             ),
-            style = MaterialTheme.typography.body2,
-            color = MaterialTheme.colors.onSurface
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurface
         )
     }
 }

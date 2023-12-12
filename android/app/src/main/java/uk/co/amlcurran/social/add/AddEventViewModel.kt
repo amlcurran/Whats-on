@@ -12,9 +12,14 @@ import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FetchPlaceResponse
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.PlacesClient
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import uk.co.amlcurran.social.R
 import kotlin.time.DurationUnit
@@ -25,7 +30,6 @@ class AddEventViewModel(application: Application): AndroidViewModel(application)
     private val _placeSelectorState = MutableLiveData<PlaceSelectorState>()
     val placeSelectorState: LiveData<PlaceSelectorState> = _placeSelectorState
 
-    private val disposables = CompositeDisposable()
     private val placesClient: PlacesClient by lazy {
         if (!Places.isInitialized()) {
             Places.initialize(application, application.getString(R.string.maps_api_key))
@@ -87,7 +91,6 @@ class AddEventViewModel(application: Application): AndroidViewModel(application)
 
     override fun onCleared() {
         super.onCleared()
-        disposables.clear()
     }
 
 }

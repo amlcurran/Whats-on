@@ -3,7 +3,7 @@ package uk.co.amlcurran.social
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -43,7 +43,7 @@ fun EmptyView(modifier: Modifier = Modifier) {
             "Nothing on",
             modifier = Modifier
                 .padding(),
-            style = MaterialTheme.typography.body1,
+            style = MaterialTheme.typography.bodyMedium,
             color = colorResource(id = R.color.empty_color)
         )
     }

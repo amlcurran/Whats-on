@@ -16,9 +16,9 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Switch
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.mutableStateOf
@@ -86,7 +86,7 @@ fun TentativeMeetingsSwitch() {
         Text(
             modifier = Modifier.weight(1f),
             text = "Show events you've not replied to",
-            style = MaterialTheme.typography.body1
+            style = MaterialTheme.typography.bodyMedium
         )
         Switch(checked = showTentative, onCheckedChange = setShowTentative)
     }

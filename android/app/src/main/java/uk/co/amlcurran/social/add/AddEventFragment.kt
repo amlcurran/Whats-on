@@ -13,7 +13,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.tasks.Task
 import com.google.android.material.textfield.TextInputEditText
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -26,7 +25,6 @@ import kotlin.coroutines.resumeWithException
 
 class AddEventFragment : Fragment() {
 
-    private val disposable = CompositeDisposable()
     private val viewModel: AddEventViewModel by viewModels {
         ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
     }
@@ -103,7 +101,6 @@ class AddEventFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        disposable.clear()
     }
 
 }

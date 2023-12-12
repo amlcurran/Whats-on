@@ -1,10 +1,10 @@
 package uk.co.amlcurran.social
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Typography
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Typography
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.Font
@@ -32,29 +32,28 @@ val afacad = FontFamily(
 fun WhatsOnTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         typography = Typography(
-            afacad,
-            body1 = Typography().body1.copy(
+            bodyMedium = Typography().bodyMedium.copy(
                 fontFamily = afacad,
                 fontSize = 18.sp
             ),
-            h4 = Typography().h4.copy(
+            titleMedium = Typography().titleMedium.copy(
                 fontFamily = afacad,
                 fontWeight = FontWeight.Bold,
                 fontSize = 36.sp
             ),
-            subtitle2 = Typography().subtitle2.copy(
+            bodySmall = Typography().bodySmall.copy(
                 fontFamily = afacad,
                 fontSize = 16.sp
             )
         ),
-        colors = if (isSystemInDarkTheme()) darkColors(
+        colorScheme = if (isSystemInDarkTheme()) darkColorScheme(
             primary = colorResource(id = R.color.colorPrimary),
             secondary = colorResource(id = R.color.colorSecondary),
             surface = colorResource(id = R.color.colorSurface),
             background = colorResource(id = R.color.background),
             onBackground = colorResource(id = R.color.colorOnBackground),
             onSurface = colorResource(id = R.color.colorOnSurface)
-        ) else lightColors(
+        ) else lightColorScheme(
             primary = colorResource(id = R.color.colorPrimary),
             secondary = colorResource(id = R.color.colorOnBackground),
             surface = colorResource(id = R.color.colorSurface),
