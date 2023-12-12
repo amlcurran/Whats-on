@@ -60,7 +60,7 @@ fun SlotsView(calendarSlots: List<CalendarSlot>, onEventClick: (EventCalendarIte
                         horizontalArrangement = Arrangement.spacedBy(16.dp),
                         contentPadding = PaddingValues(horizontal = 16.dp)
                     ) {
-                        items(slot.items, key = { it.eventId }) { item ->
+                        items(slot.items.sortedBy { it.startTime.millis }, key = { it.eventId }) { item ->
                             EventView(event = item,
                                 modifier = Modifier
                                     .clickable { onEventClick(item) }
