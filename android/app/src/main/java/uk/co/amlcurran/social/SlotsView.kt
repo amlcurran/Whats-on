@@ -1,6 +1,5 @@
 package uk.co.amlcurran.social
 
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -14,6 +13,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -22,14 +22,16 @@ import java.util.concurrent.TimeUnit
 
 @Composable
 fun SlotsView(calendarSlots: List<CalendarSlot>, onEventClick: (EventCalendarItem) -> Unit, onEmptySlotClick: (CalendarSlot) -> Unit) {
-    Log.d("TAG", calendarSlots.map { it.startTimestamp.millis }.toString())
+    val formatter = remember {
+        DateTimeFormat.fullDate()
+    }
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(horizontal = 16.dp)
     ) {
         items(calendarSlots, key = { it.startTimestamp.millis }) { slot ->
             Text(
-                slot.startTimestamp.format(DateTimeFormat.fullDate()),
+                slot.startTimestamp.format(formatter),
                 color = MaterialTheme.colors.onBackground,
                 style = MaterialTheme.typography.subtitle2,
                 modifier = Modifier.padding(
@@ -55,8 +57,8 @@ fun SlotsView(calendarSlots: List<CalendarSlot>, onEventClick: (EventCalendarIte
                         horizontalArrangement = Arrangement.spacedBy(16.dp),
                         contentPadding = PaddingValues(horizontal = 0.dp)
                     ) {
-                        items(slot.items, key = { (it as EventCalendarItem).id() }) { item ->
-                            EventView(event = item as EventCalendarItem,
+                        items(slot.items, key = { it.eventId }) { item ->
+                            EventView(event = item,
                                 modifier = Modifier
                                     .clickable { onEventClick(item) }
                                     .width(maxWidth.times(0.8f))

@@ -59,7 +59,7 @@ class EventDetailActivity : AppCompatActivity() {
 
         fun show(event: EventCalendarItem, context: Context): Intent {
             val intent = Intent(context, EventDetailActivity::class.java)
-            intent.putExtra(KEY_EVENT_ID, event.id())
+            intent.putExtra(KEY_EVENT_ID, event.eventId)
             intent.putExtra(KEY_EVENT_TITLE, event.title)
             return intent
         }

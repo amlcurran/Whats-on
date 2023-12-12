@@ -10,8 +10,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,6 +21,9 @@ import java.time.Instant
 
 @Composable
 fun EventView(modifier: Modifier = Modifier, event: EventCalendarItem) {
+    val formatter = remember {
+        DateTimeFormat.shortTime()
+    }
     Column(
         modifier
             .background(colorResource(id = R.color.colorSurface), shape = RoundedCornerShape(8.dp))
@@ -33,7 +36,7 @@ fun EventView(modifier: Modifier = Modifier, event: EventCalendarItem) {
         Text(
             text = stringResource(
                 id = R.string.event_from,
-                event.startTime.format(DateTimeFormat.shortTime())
+                event.startTime.format(formatter)
             ),
             style = MaterialTheme.typography.body2,
             color = MaterialTheme.colors.onSurface

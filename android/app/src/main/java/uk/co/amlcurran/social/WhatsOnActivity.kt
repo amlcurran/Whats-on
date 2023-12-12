@@ -88,21 +88,6 @@ class WhatsOnActivity : AppCompatActivity() {
                 }
             }
         }
-
-
-//        adapter = WhatsOnAdapter(LayoutInflater.from(this), eventSelectedListener, calendarSource)
-//        binding.listWhatsOn.layoutManager = LinearLayoutManager(this)
-//        binding.listWhatsOn.adapter = adapter
-//
-//        ViewCompat.setOnApplyWindowInsetsListener(binding.toolbar) { _, insets ->
-//            binding.toolbar.updatePadding(top = insets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom)
-//            insets
-//        }
-//
-//        ViewCompat.setOnApplyWindowInsetsListener(binding.listWhatsOn) { _, insets ->
-//            binding.listWhatsOn.updatePadding(bottom = insets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom)
-//            insets
-//        }
     }
 
 
