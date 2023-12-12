@@ -56,7 +56,7 @@ fun EventCard(modifier: Modifier = Modifier, event: Event) {
         Card(
             modifier
                 .background(
-                    color = MaterialTheme.colorScheme.surface,
+                    color = MaterialTheme.colorScheme.surfaceVariant,
                     shape = RoundedCornerShape(8.dp)
                 )
                 .padding(16.dp)
