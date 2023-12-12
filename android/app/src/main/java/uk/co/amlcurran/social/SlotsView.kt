@@ -1,5 +1,6 @@
 package uk.co.amlcurran.social
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -21,6 +22,7 @@ import java.util.concurrent.TimeUnit
 
 @Composable
 fun SlotsView(calendarSlots: List<CalendarSlot>, onEventClick: (EventCalendarItem) -> Unit, onEmptySlotClick: (CalendarSlot) -> Unit) {
+    Log.d("TAG", calendarSlots.map { it.startTimestamp.millis }.toString())
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(horizontal = 16.dp)

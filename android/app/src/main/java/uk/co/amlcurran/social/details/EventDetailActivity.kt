@@ -102,7 +102,9 @@ class EventDetailActivity : AppCompatActivity() {
     private fun updateMap(location: String?) {
         location?.let {
             lifecycleScope.launch(Dispatchers.IO) {
-                findLocation(it)?.let { show(it) }
+                if (it.isNotBlank()) {
+                    findLocation(it)?.let { show(it) }
+                }
             }
         }
     }

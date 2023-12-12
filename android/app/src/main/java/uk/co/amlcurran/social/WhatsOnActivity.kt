@@ -4,35 +4,38 @@ import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.provider.CalendarContract
-import android.view.LayoutInflater
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import uk.co.amlcurran.social.add.AddEventActivity
-import uk.co.amlcurran.social.databinding.ActivityWhatsOnBinding
 import uk.co.amlcurran.social.details.EventDetailActivity
 import uk.co.amlcurran.starlinginterview.AsyncContent
 
 class WhatsOnActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityWhatsOnBinding
     private val viewModel: EventListViewModel by viewModels()
 
     private val permissionRequest =
-        registerForActivityResult(RequestMultiplePermissions()) { permissions ->
+        (this as ComponentActivity).registerForActivityResult(RequestMultiplePermissions()) { permissions ->
             if (permissions.all { (_, granted) -> granted }) {
                 lifecycleScope.launch {
-                    viewModel.load()
                 }
             }
         }
@@ -56,25 +59,24 @@ class WhatsOnActivity : AppCompatActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityWhatsOnBinding.inflate(LayoutInflater.from(this))
-        binding.eventListCompose.setContent {
+        setContent {
             WhatsOnTheme {
                 Scaffold(
                     topBar = {
                         Row {
                             HeaderView(modifier = Modifier.weight(1f))
                             IconButton(onClick = { SettingsActivity.start(this@WhatsOnActivity) },
-                            colors = IconButtonDefaults.iconButtonColors(
-                                contentColor = MaterialTheme.colors.onBackground
-                            )) {
+                                colors = IconButtonDefaults.iconButtonColors(
+                                    contentColor = MaterialTheme.colors.onBackground
+                                )) {
                                 Icon(Icons.Outlined.Settings, contentDescription = "Settings")
                             }
                         }
                     },
                     containerColor = colorResource(id = R.color.background)
                 ) { padding ->
-                    val subscriptionsState = viewModel.source.collectAsState()
+                    val subscriptionsState = viewModel.source
+                        .collectAsState()
                     AsyncContent(
                         state = subscriptionsState.value,
                         modifier = Modifier
@@ -86,7 +88,6 @@ class WhatsOnActivity : AppCompatActivity() {
                 }
             }
         }
-        setContentView(binding.root)
 
 
 //        adapter = WhatsOnAdapter(LayoutInflater.from(this), eventSelectedListener, calendarSource)
