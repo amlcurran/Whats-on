@@ -29,9 +29,15 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion '1.4.1'
+        kotlinCompilerExtensionVersion '1.5.5'
     }
     namespace 'uk.co.amlcurran.social'
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
 
 dependencies {
