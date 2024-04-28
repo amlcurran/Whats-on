@@ -25,7 +25,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
-import uk.co.amlcurran.social.add.AddEventActivity
 import uk.co.amlcurran.social.details.EventDetailActivity
 import uk.co.amlcurran.starlinginterview.AsyncContent
 
@@ -50,11 +49,8 @@ class WhatsOnActivity : AppCompatActivity() {
             intent.data = CalendarContract.Events.CONTENT_URI
             intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, calendarItem.startTimestamp.millis)
             intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, calendarItem.endTimestamp.millis)
-            if (false) {
-                startActivity(Intent(this@WhatsOnActivity, AddEventActivity::class.java))
-            } else {
-                startActivity(intent)
-            }
+//            startActivity(Intent(this@WhatsOnActivity, AddEventActivity::class.java))
+            startActivity(intent)
         }
 
     @OptIn(ExperimentalMaterial3Api::class)
