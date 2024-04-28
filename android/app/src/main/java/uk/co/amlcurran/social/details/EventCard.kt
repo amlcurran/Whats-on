@@ -2,9 +2,9 @@ package uk.co.amlcurran.social.details
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,7 +30,8 @@ fun PreviewEventCard() {
                 Timestamp(System.currentTimeMillis()),
                 Timestamp(System.currentTimeMillis() - 60 * 60 * 1000 * 2),
                 emptyList()
-            ), null)
+            ), null
+        )
     )
 }
 
@@ -46,28 +47,37 @@ fun DarkPreviewEventCard() {
                 Timestamp(System.currentTimeMillis()),
                 Timestamp(System.currentTimeMillis() - 60 * 60 * 1000 * 2),
                 emptyList()
-            ), null)
+            ), null
+        )
     )
 }
 
 @Composable
 fun EventCard(modifier: Modifier = Modifier, event: Event) {
     WhatsOnTheme {
-        Card(
+        Column(
             modifier
                 .background(
-                    color = MaterialTheme.colorScheme.surfaceVariant,
+                    color = MaterialTheme.colorScheme.surface,
                     shape = RoundedCornerShape(8.dp)
                 )
                 .padding(16.dp)
         ) {
-                Text(
-                    event.item.title,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.padding(bottom = 4.dp)
-                )
-                Text("From ${event.item.startTime.format(DateTimeFormat.shortTime())} to ${event.item.endTime.format(DateTimeFormat.shortTime())}", style = MaterialTheme.typography.bodySmall)
+            Text(
+                event.item.title,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.padding(bottom = 4.dp)
+            )
+            Text(
+                "From ${event.item.startTime.format(DateTimeFormat.shortTime())} to ${
+                    event.item.endTime.format(
+                        DateTimeFormat.shortTime()
+                    )
+                }",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
         }
     }
 }
