@@ -1,5 +1,6 @@
 package uk.co.amlcurran.social
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -25,6 +26,7 @@ fun SlotsView(calendarSlots: List<CalendarSlot>, onEventClick: (EventCalendarIte
     val formatter = remember {
         DateTimeFormat.fullDate()
     }
+    Log.d("TAG", calendarSlots.hashCode().toString())
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {

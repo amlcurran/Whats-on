@@ -1,6 +1,6 @@
 package uk.co.amlcurran.social
 
-class EventCalendarItem(
+data class EventCalendarItem(
     val eventId: String,
     val calendarId: String,
     override val title: String,

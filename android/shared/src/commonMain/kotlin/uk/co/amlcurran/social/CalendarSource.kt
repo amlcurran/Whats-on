@@ -1,6 +1,6 @@
 package uk.co.amlcurran.social
 
-class CalendarSource(private val calendarItems: Map<Int, CalendarSlot>, private val daysSize: Int, private val timeCalculator: TimeCalculator, private val userSettings: UserSettings) {
+data class CalendarSource(private val calendarItems: Map<Int, CalendarSlot>, private val daysSize: Int, private val timeCalculator: TimeCalculator, private val userSettings: UserSettings) {
 
     fun count(): Int {
         return daysSize

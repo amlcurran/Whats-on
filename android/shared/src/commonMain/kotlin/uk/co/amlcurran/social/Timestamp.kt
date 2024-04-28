@@ -1,6 +1,6 @@
 package uk.co.amlcurran.social
 
-class Timestamp(val millis: Long)
+data class Timestamp(val millis: Long)
 
 fun Timestamp.plusDays(days: Int, timeCalculator: TimeCalculator): Timestamp {
     return timeCalculator.plusDays(days, this)

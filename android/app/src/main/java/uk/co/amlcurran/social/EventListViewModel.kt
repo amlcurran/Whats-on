@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
@@ -13,9 +14,10 @@ import uk.co.amlcurran.starlinginterview.successOf
 
 class EventListViewModel(application: Application): AndroidViewModel(application) {
 
-    val source = MutableStateFlow<AsyncResult<CalendarSource>>(
+    private val _source = MutableStateFlow<AsyncResult<CalendarSource>>(
         AsyncResult.Loading()
     )
+    val source: StateFlow<AsyncResult<CalendarSource>> = _source
     private val eventsRepository: AndroidEventsRepository by lazy { AndroidEventsRepository(application.contentResolver) }
     private val eventsService: EventsService by lazy { EventsService(eventsRepository, JodaCalculator(), UserSettings(application), EventPredicates(UserSettings(application)).defaultPredicate) }
 
@@ -30,9 +32,9 @@ class EventListViewModel(application: Application): AndroidViewModel(application
             val now = DateTime.now(DateTimeZone.getDefault())
             val timestamp = Timestamp(now.millis)
             val it = eventsService.getCalendarSource(14, timestamp)
-            source.emit(successOf(it))
+            _source.emit(successOf(it))
         } catch (e: Throwable) {
-            source.emit(failureWith(e))
+            _source.emit(failureWith(e))
         }
     }
 

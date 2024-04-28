@@ -36,6 +36,7 @@ class WhatsOnActivity : AppCompatActivity() {
         (this as ComponentActivity).registerForActivityResult(RequestMultiplePermissions()) { permissions ->
             if (permissions.all { (_, granted) -> granted }) {
                 lifecycleScope.launch {
+                    viewModel.load()
                 }
             }
         }
