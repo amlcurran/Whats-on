@@ -18,9 +18,12 @@ import androidx.annotation.LayoutRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -43,9 +46,11 @@ import androidx.compose.ui.window.Dialog
 import androidx.core.text.buildSpannedString
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
@@ -128,8 +133,12 @@ private fun TimePickerDialog(
                     Text("Confirm")
                 }
             }, text = {
-
-                TimePicker(displayedState)
+                Column {
+                    TimePicker(displayedState)
+                    Surface {
+                        Text("Only the hour will be used to show events, not the minute")
+                    }
+                }
             })
     }
 }
@@ -158,7 +167,7 @@ fun TentativeMeetingsSwitch() {
 
 class CalendarListViewModel(application: Application): AndroidViewModel(application) {
 
-    val userSettings = UserSettings(application)
+    private val userSettings = UserSettings(application)
     val calendar = flow {
         val cursor = application.contentResolver
             .query(CalendarContract.Calendars.CONTENT_URI, null, null, null, null)
@@ -182,15 +191,21 @@ class CalendarListViewModel(application: Application): AndroidViewModel(applicat
 }
 
 @Composable
-fun CalendarList() {
+fun CalendarList(viewModel: CalendarListViewModel = viewModel()) {
     val (calendars, setCalendars) = remember {
         mutableStateOf(listOf<Calendar>())
     }
-    SideEffect {
-
+    LaunchedEffect(key1 = null) {
+        viewModel.calendar
+            .collectLatest {
+                Log.d("TAG", "${calendars.size}")
+                setCalendars(it)
+            }
     }
     Column {
-
+        for (calendar in calendars) {
+            Text(calendar.name)
+        }
     }
 }
 
