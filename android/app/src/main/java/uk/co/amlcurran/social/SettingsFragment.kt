@@ -10,24 +10,36 @@ import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TimePicker
+import androidx.compose.material3.TimePickerState
+import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.window.Dialog
 import androidx.core.text.buildSpannedString
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
@@ -39,6 +51,11 @@ import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 import uk.co.amlcurran.social.databinding.SettingsBinding
 
+const val PICKER_NONE = 0
+const val PICKER_START = 1
+const val PICKER_END = 2
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TimeEditView() {
     val context = LocalContext.current
@@ -61,12 +78,59 @@ fun TimeEditView() {
     )
     val startText = timeFormatter.print(startTime)
     val endText = timeFormatter.print(endTime)
+    val startState = rememberTimePickerState(startTime.hourOfDay)
+    val endState = rememberTimePickerState(endTime.hourOfDay)
+    val (showPicker, setShowPicker) = remember { mutableIntStateOf(PICKER_NONE) }
+    val dismiss = { setShowPicker(PICKER_NONE) }
+    val confirm = {
+        if (showPicker == PICKER_START) {
+            userSettings.updateStartTime(TimeOfDay.fromHours(startState.hour))
+        } else {
+            userSettings.updateEndTime(TimeOfDay.fromHours(endState.hour))
+        }
+    }
+    val displayedState = if (showPicker == PICKER_START) startState else endState
 
     Column {
+        if (showPicker != PICKER_NONE) {
+            TimePickerDialog(dismiss, confirm, displayedState)
+        }
         Text(text = "Show events from")
-        Text(text = startText)
+        Text(text = startText, modifier = Modifier.clickable {
+            setShowPicker(PICKER_START)
+        }, textDecoration = TextDecoration.Underline, color = MaterialTheme.colorScheme.primary)
         Text(text = "to")
-        Text(text = endText)
+        Text(text = endText, modifier = Modifier.clickable {
+            setShowPicker(PICKER_START)
+        }, textDecoration = TextDecoration.Underline, color = MaterialTheme.colorScheme.primary)
+    }
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun TimePickerDialog(
+    dismiss: () -> Unit,
+    confirm: () -> Unit,
+    displayedState: TimePickerState
+) {
+    WhatsOnTheme {
+        AlertDialog(
+            dismiss, dismissButton = {
+                TextButton(onClick = dismiss) {
+                    Text("Cancel")
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = {
+                    confirm()
+                    dismiss()
+                }) {
+                    Text("Confirm")
+                }
+            }, text = {
+
+                TimePicker(displayedState)
+            })
     }
 }
 
@@ -140,8 +204,8 @@ fun SettingsView() {
 }
 
 @Composable
-@Preview
-fun SettingsViewPreview() {
+@Preview(showBackground = true)
+fun SettingsViewPreview() = WhatsOnTheme {
     SettingsView()
 }
 
@@ -149,7 +213,6 @@ fun SettingsViewPreview() {
 class SettingsFragment : Fragment() {
 
     private val userSettings: UserSettings by lazy { UserSettings(requireContext()) }
-    private val timeFormatter: DateTimeFormatter by lazy { DateTimeFormat.shortTime() }
     private lateinit var binding: SettingsBinding
 
     private lateinit var delegate: SettingsDelegate
@@ -179,15 +242,6 @@ class SettingsFragment : Fragment() {
         val adapter = CalendarViewHolderAdapter(::calendarSelectionChange)
         binding.settingsList.adapter = adapter
         binding.settingsList.isNestedScrollingEnabled = false
-
-        updateToFromText()
-        binding.settingsFromToTiming.isClickable = true
-        binding.settingsFromToTiming.movementMethod = LinkMovementMethod.getInstance()
-
-        binding.showTentativeMeetings.isChecked = userSettings.showTentativeMeetings()
-        binding.showTentativeMeetings.setOnCheckedChangeListener { _, isChecked ->
-            userSettings.shouldShowTentativeMeetings(isChecked)
-        }
 
         LoaderManager.getInstance(this)
             .initLoader(0, null, object : LoaderManager.LoaderCallbacks<Cursor> {
@@ -227,48 +281,6 @@ class SettingsFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         delegate = context as SettingsDelegate
-    }
-
-    private fun updateToFromText() {
-        val timeCalculator = JodaCalculator()
-        binding.settingsFromToTiming.text = buildSpannedString {
-            val jodaCalculator = JodaCalculator()
-            val startTime = jodaCalculator.getDateTime(
-                jodaCalculator.startOfToday()
-                    .plusHoursOf(userSettings.borderTimeStart(), timeCalculator)
-            )
-            val endTime = jodaCalculator.getDateTime(
-                jodaCalculator.startOfToday()
-                    .plusHoursOf(userSettings.borderTimeEnd(), timeCalculator)
-            )
-            val startText = timeFormatter.print(startTime)
-            val endText = timeFormatter.print(endTime)
-            append(getString(R.string.show_events_from_x_y, startText, endText))
-            setSpan(startText, FunctionSpan { changeStartTime() })
-            setSpan(endText, FunctionSpan { changeEndTime() })
-        }
-    }
-
-    private fun changeStartTime() {
-        val hoursInDay = userSettings.borderTimeStart().hoursInDay().toInt()
-        TimePickerDialog(requireActivity(), ::updateStartTime, hoursInDay, 0, true).show()
-    }
-
-    @Suppress("UNUSED_PARAMETER")
-    private fun updateStartTime(view: View, hourOfDay: Int, minute: Int) {
-        userSettings.updateStartTime(TimeOfDay.fromHours(hourOfDay))
-        updateToFromText()
-    }
-
-    private fun changeEndTime() {
-        val hoursInDay = userSettings.borderTimeEnd().hoursInDay().toInt()
-        TimePickerDialog(requireActivity(), ::updateEndTime, hoursInDay, 0, true).show()
-    }
-
-    @Suppress("UNUSED_PARAMETER")
-    private fun updateEndTime(view: View, hourOfDay: Int, minute: Int) {
-        userSettings.updateEndTime(TimeOfDay.fromHours(hourOfDay))
-        updateToFromText()
     }
 
     private fun calendarSelectionChange(calendar: Calendar, enabled: Boolean) {
