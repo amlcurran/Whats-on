@@ -11,22 +11,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.LocationOn
-import androidx.compose.material3.AssistChip
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.SuggestionChip
-import androidx.compose.material3.SuggestionChipDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldColors
-import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.CornerRadius
@@ -43,9 +39,17 @@ fun EmptyView(modifier: Modifier = Modifier, editMode: Boolean = false) {
     val (isEditMode, setEditMode) = remember { mutableStateOf(editMode) }
     val color = colorResource(id = R.color.empty_color)
     val density = LocalContext.current.resources.displayMetrics.density
+    val context = LocalContext.current
+    val userSettings = remember { UserSettings(context) }
     Box(
         modifier
-            .clickable { setEditMode(true) }
+            .let {
+                if (userSettings.addInApp()) {
+                    it.clickable { setEditMode(true) }
+                } else {
+                    it
+                }
+            }
             .animateContentSize()
             .drawBehind {
                 drawRoundRect(
@@ -77,6 +81,7 @@ fun EmptyView(modifier: Modifier = Modifier, editMode: Boolean = false) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun EditMode(
     setEditMode: (Boolean) -> Unit
@@ -85,10 +90,10 @@ private fun EditMode(
     val context = LocalContext.current
     val userSettings = remember { UserSettings(context) }
     val calculator = remember { JodaCalculator() }
-    val startTime = remember { userSettings.borderTimeStart() }
-    val endTime = remember { userSettings.borderTimeEnd() }
-    val startFormatted = calculator.printTime(startTime)
-    val endFormatted = calculator.printTime(endTime)
+    val startTime = remember { mutableStateOf(userSettings.borderTimeStart()) }
+    val endTime = remember { mutableStateOf(userSettings.borderTimeEnd()) }
+    val startFormatted = calculator.printTime(startTime.value)
+    val endFormatted = calculator.printTime(endTime.value)
     Column {
         TextField(
             modifier = Modifier.fillMaxWidth(),
@@ -103,11 +108,20 @@ private fun EditMode(
             placeholder = { Text("Title") }
         )
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            val startState = rememberTimePickerState(calculator.toDateTime(startTime.value).hourOfDay)
+            val (showStart, setShowStart) = remember { mutableStateOf(false) }
             SuggestionChip({
-
+                setShowStart(true)
             }, label = {
                 Text("From $startFormatted")
             })
+            if (showStart) {
+                TimePickerDialog({
+                    setShowStart(false)
+                }, {
+                    startTime.value = TimeOfDay.fromHours(startState.hour)
+                }, startState)
+            }
             SuggestionChip({
 
             }, label = {
@@ -139,11 +153,15 @@ private fun EditMode(
 @Preview(showBackground = true)
 @Composable
 fun EmptyViewPreview() {
-    EmptyView(Modifier.fillMaxWidth().padding(16.dp))
+    EmptyView(Modifier
+        .fillMaxWidth()
+        .padding(16.dp))
 }
 
 @Preview(showBackground = true)
 @Composable
 fun EmptyViewPreviewEdit() {
-    EmptyView(Modifier.fillMaxWidth().padding(16.dp), editMode = true)
+    EmptyView(Modifier
+        .fillMaxWidth()
+        .padding(16.dp), editMode = true)
 }

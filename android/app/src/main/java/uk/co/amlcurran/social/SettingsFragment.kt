@@ -46,6 +46,7 @@ import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
+import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 import uk.co.amlcurran.social.databinding.SettingsBinding
@@ -58,11 +59,12 @@ fun JodaCalculator.printTime(
     timeOfDay: TimeOfDay,
     timeFormatter: DateTimeFormatter = DateTimeFormat.shortTime()
 ): String {
-    val time = getDateTime(
-        startOfToday()
-            .plusHoursOf(timeOfDay, this)
+    return timeFormatter.print(toDateTime(timeOfDay))
+}
+
+fun JodaCalculator.toDateTime(timeOfDay: TimeOfDay): DateTime {
+    return getDateTime(startOfToday().plusHoursOf(timeOfDay, this)
     )
-    return timeFormatter.print(time)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -75,14 +77,8 @@ fun TimeEditView() {
     val timeCalculator = remember {
         JodaCalculator()
     }
-    val startTime = timeCalculator.getDateTime(
-        timeCalculator.startOfToday()
-            .plusHoursOf(userSettings.borderTimeStart(), timeCalculator)
-    )
-    val endTime = timeCalculator.getDateTime(
-        timeCalculator.startOfToday()
-            .plusHoursOf(userSettings.borderTimeEnd(), timeCalculator)
-    )
+    val startTime = timeCalculator.toDateTime(userSettings.borderTimeStart())
+    val endTime = timeCalculator.toDateTime(userSettings.borderTimeEnd())
     val startText = timeCalculator.printTime(userSettings.borderTimeStart())
     val endText = timeCalculator.printTime(userSettings.borderTimeEnd())
     val startState = rememberTimePickerState(startTime.hourOfDay)
@@ -115,7 +111,7 @@ fun TimeEditView() {
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun TimePickerDialog(
+fun TimePickerDialog(
     dismiss: () -> Unit,
     confirm: () -> Unit,
     displayedState: TimePickerState
@@ -154,8 +150,12 @@ fun TentativeMeetingsSwitch() {
     val (showTentative, setShowTentative) = remember {
         mutableStateOf(userSettings.showTentativeMeetings())
     }
+    val (inAppAdd, setInAppAdd) = remember {
+        mutableStateOf(userSettings.addInApp())
+    }
     SideEffect {
         userSettings.shouldShowTentativeMeetings(showTentative)
+        userSettings.shouldAddInApp(inAppAdd)
     }
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(
@@ -164,6 +164,14 @@ fun TentativeMeetingsSwitch() {
             style = MaterialTheme.typography.bodyMedium
         )
         Switch(checked = showTentative, onCheckedChange = setShowTentative)
+    }
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Text(
+            modifier = Modifier.weight(1f),
+            text = "Add events in-app (beta)",
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Switch(checked = inAppAdd, onCheckedChange = setInAppAdd)
     }
 }
 

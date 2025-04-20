@@ -52,8 +52,13 @@ actual class UserSettings(context: Context) {
 
     actual fun showTentativeMeetings(): Boolean = preferences.getBoolean("showTentativeMeetings", false)
 
+    fun addInApp(): Boolean = preferences.getBoolean("addInApp", false)
+
     actual fun shouldShowTentativeMeetings(boolean: Boolean) = preferences.edit {
         putBoolean("showTentativeMeetings", boolean)
+    }
+    fun shouldAddInApp(boolean: Boolean) = preferences.edit {
+        putBoolean("addInApp", boolean)
     }
 
 }
