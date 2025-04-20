@@ -32,19 +32,22 @@ val afacad = FontFamily(
 fun WhatsOnTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         typography = Typography(
+            bodySmall = Typography().bodySmall.copy(
+                fontFamily = afacad,
+                fontSize = 18.sp
+            ),
             bodyMedium = Typography().bodyMedium.copy(
                 fontFamily = afacad,
                 fontSize = 18.sp
+            ),
+            bodyLarge = Typography().bodyLarge.copy(
+                fontFamily = afacad,
             ),
             titleMedium = Typography().titleMedium.copy(
                 fontFamily = afacad,
                 fontWeight = FontWeight.Bold,
                 fontSize = 36.sp
             ),
-            bodySmall = Typography().bodySmall.copy(
-                fontFamily = afacad,
-                fontSize = 16.sp
-            )
         ),
         colorScheme = if (isSystemInDarkTheme()) darkColorScheme(
             primary = colorResource(id = R.color.colorPrimary),
