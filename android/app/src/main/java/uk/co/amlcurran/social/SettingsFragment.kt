@@ -1,14 +1,12 @@
 package uk.co.amlcurran.social
 
 import android.app.Application
-import android.app.TimePickerDialog
 import android.content.Context
 import android.database.Cursor
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.text.Spannable
 import android.text.SpannableStringBuilder
-import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,8 +16,6 @@ import androidx.annotation.LayoutRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -42,8 +38,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.window.Dialog
-import androidx.core.text.buildSpannedString
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -60,6 +54,17 @@ const val PICKER_NONE = 0
 const val PICKER_START = 1
 const val PICKER_END = 2
 
+fun JodaCalculator.printTime(
+    timeOfDay: TimeOfDay,
+    timeFormatter: DateTimeFormatter = DateTimeFormat.shortTime()
+): String {
+    val time = getDateTime(
+        startOfToday()
+            .plusHoursOf(timeOfDay, this)
+    )
+    return timeFormatter.print(time)
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TimeEditView() {
@@ -70,9 +75,6 @@ fun TimeEditView() {
     val timeCalculator = remember {
         JodaCalculator()
     }
-    val timeFormatter = remember {
-        DateTimeFormat.shortTime()
-    }
     val startTime = timeCalculator.getDateTime(
         timeCalculator.startOfToday()
             .plusHoursOf(userSettings.borderTimeStart(), timeCalculator)
@@ -81,8 +83,8 @@ fun TimeEditView() {
         timeCalculator.startOfToday()
             .plusHoursOf(userSettings.borderTimeEnd(), timeCalculator)
     )
-    val startText = timeFormatter.print(startTime)
-    val endText = timeFormatter.print(endTime)
+    val startText = timeCalculator.printTime(userSettings.borderTimeStart())
+    val endText = timeCalculator.printTime(userSettings.borderTimeEnd())
     val startState = rememberTimePickerState(startTime.hourOfDay)
     val endState = rememberTimePickerState(endTime.hourOfDay)
     val (showPicker, setShowPicker) = remember { mutableIntStateOf(PICKER_NONE) }
