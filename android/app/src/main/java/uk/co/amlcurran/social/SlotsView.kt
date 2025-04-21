@@ -29,6 +29,7 @@ fun SlotsView(calendarSlots: List<CalendarSlot>, onEventClick: (EventCalendarIte
     Log.d("TAG", calendarSlots.hashCode().toString())
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues(bottom = 16.dp),
     ) {
         items(calendarSlots, key = { it.startTimestamp.millis }) { slot ->
             Text(
