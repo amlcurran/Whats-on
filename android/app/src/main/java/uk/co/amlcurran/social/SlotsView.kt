@@ -52,7 +52,7 @@ fun SlotsView(calendarSlots: List<CalendarSlot>, onEventClick: (EventCalendarIte
                 val event = slot.firstItem as EventCalendarItem
                 EventView(event = event,
                     modifier = Modifier
-//                        .clickable { onEventClick(event) }
+                        .clickable { onEventClick(event) }
                         .padding(horizontal = 16.dp)
                         .fillMaxWidth()
                 )

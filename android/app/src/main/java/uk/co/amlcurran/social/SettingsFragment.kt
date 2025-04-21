@@ -16,8 +16,12 @@ import androidx.annotation.LayoutRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -35,8 +39,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -221,6 +227,46 @@ class CalendarListViewModel(application: Application): AndroidViewModel(applicat
 }
 
 @Composable
+fun CalendarListInternal(calendars: List<Calendar>) {
+    val context = LocalContext.current
+    val userSettings = remember { UserSettings(context) }
+    Column {
+        Text("Show events from calendars:")
+        for (calendar in calendars) {
+            Row(
+                Modifier.fillMaxWidth()
+                    .toggleable(
+                        value = calendar.isSelected,
+                        onValueChange = {
+                            if (it) {
+                                userSettings.include(calendar)
+                            } else {
+                                userSettings.exclude(calendar)
+                            }
+                        },
+                        role = Role.Checkbox
+                    )
+                    .padding(vertical = 8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Checkbox(
+                    checked = calendar.isSelected,
+                    colors = CheckboxDefaults.colors(
+                        checkedColor = Color(calendar.color)
+                    ),
+                    onCheckedChange = null
+                )
+                Text(
+                    text = calendar.name,
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.padding(start = 16.dp)
+                )
+            }
+        }
+    }
+}
+
+@Composable
 fun CalendarList(viewModel: CalendarListViewModel = viewModel()) {
     val (calendars, setCalendars) = remember {
         mutableStateOf(listOf<Calendar>())
@@ -232,18 +278,21 @@ fun CalendarList(viewModel: CalendarListViewModel = viewModel()) {
                 setCalendars(it)
             }
     }
+    CalendarListInternal(calendars)
+}
+
+@Composable
+fun SettingsViewInternal(CalendarListComposable: @Composable () -> Unit = { CalendarList() }) {
     Column {
-        for (calendar in calendars) {
-            Text(calendar.name)
-        }
+        TimeEditView()
+        TentativeMeetingsSwitch()
+        CalendarListComposable()
     }
 }
 
 @Composable
 fun SettingsView() {
-    Column {
-        TimeEditView()
-        TentativeMeetingsSwitch()
+    SettingsViewInternal {
         CalendarList()
     }
 }
@@ -251,7 +300,12 @@ fun SettingsView() {
 @Composable
 @Preview(showBackground = true)
 fun SettingsViewPreview() = WhatsOnTheme {
-    SettingsView()
+    SettingsViewInternal {
+        CalendarListInternal(listOf(
+            Calendar("abcd", "Work", android.graphics.Color.BLUE, false),
+            Calendar("abcd", "Personal", android.graphics.Color.GREEN, true),
+        ))
+    }
 }
 
 
@@ -341,15 +395,6 @@ class SettingsFragment : Fragment() {
 interface SettingsDelegate {
     fun closeSettings()
     fun onCalendarSettingsChanged()
-}
-
-private class FunctionSpan(val onClick: () -> Unit) : ClickableSpan() {
-    override fun onClick(widget: View) = onClick()
-
-}
-
-fun SpannableStringBuilder.setSpan(text: String, span: Any) {
-    setSpan(span, indexOf(text), indexOf(text) + text.length, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
 }
 
 private fun Cursor.string(columnName: String): String = getString(getColumnIndexOrThrow(columnName))

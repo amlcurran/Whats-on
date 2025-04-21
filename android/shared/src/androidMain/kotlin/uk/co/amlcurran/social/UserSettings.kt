@@ -35,7 +35,7 @@ actual class UserSettings(context: Context) {
     }
 
     actual fun shouldShowEvent(eventId: String): Boolean {
-        return preferences.getStringSet("hidden_events", emptySet())!!.contains(eventId) == false
+        return !preferences.getStringSet("hidden_events", emptySet())!!.contains(eventId)
     }
 
     actual fun borderTimeStart() = preferences.getInt("startTime", 18).let { TimeOfDay.fromHours(it) }
