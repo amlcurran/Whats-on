@@ -282,8 +282,8 @@ fun CalendarList(viewModel: CalendarListViewModel = viewModel()) {
 }
 
 @Composable
-fun SettingsViewInternal(CalendarListComposable: @Composable () -> Unit = { CalendarList() }) {
-    Column {
+fun SettingsViewInternal(modifier: Modifier = Modifier, CalendarListComposable: @Composable () -> Unit = { CalendarList() }) {
+    Column(modifier.padding(16.dp)) {
         TimeEditView()
         TentativeMeetingsSwitch()
         CalendarListComposable()
@@ -291,8 +291,8 @@ fun SettingsViewInternal(CalendarListComposable: @Composable () -> Unit = { Cale
 }
 
 @Composable
-fun SettingsView() {
-    SettingsViewInternal {
+fun SettingsView(modifier: Modifier) {
+    SettingsViewInternal(modifier) {
         CalendarList()
     }
 }
@@ -306,95 +306,6 @@ fun SettingsViewPreview() = WhatsOnTheme {
             Calendar("abcd", "Personal", android.graphics.Color.GREEN, true),
         ))
     }
-}
-
-
-class SettingsFragment : Fragment() {
-
-    private val userSettings: UserSettings by lazy { UserSettings(requireContext()) }
-    private lateinit var binding: SettingsBinding
-
-    private lateinit var delegate: SettingsDelegate
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = SettingsBinding.inflate(inflater, container, false)
-        binding.settingsCompose.apply {
-            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-            setContent {
-                WhatsOnTheme {
-                    SettingsView()
-                }
-            }
-        }
-        return binding.root
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        binding.toolbar3.setNavigationOnClickListener { delegate.closeSettings() }
-        val adapter = CalendarViewHolderAdapter(::calendarSelectionChange)
-        binding.settingsList.adapter = adapter
-        binding.settingsList.isNestedScrollingEnabled = false
-
-        LoaderManager.getInstance(this)
-            .initLoader(0, null, object : LoaderManager.LoaderCallbacks<Cursor> {
-                override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
-                    return CursorLoader(
-                        requireContext(),
-                        CalendarContract.Calendars.CONTENT_URI,
-                        null,
-                        null,
-                        null,
-                        null
-                    )
-                }
-
-                override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
-                    if (data != null) {
-                        val list = data.map {
-                            val calendarId = it.string(CalendarContract.Calendars._ID)
-                            Calendar(
-                                calendarId,
-                                it.string(CalendarContract.Calendars.NAME),
-                                it.int(CalendarContract.Calendars.CALENDAR_COLOR),
-                                userSettings.showEventsFrom(calendarId)
-                            )
-                        }
-                        adapter.update(list)
-                    }
-                }
-
-                override fun onLoaderReset(loader: Loader<Cursor>) {
-                    adapter.update(emptyList())
-                }
-
-            })
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        delegate = context as SettingsDelegate
-    }
-
-    private fun calendarSelectionChange(calendar: Calendar, enabled: Boolean) {
-        if (enabled) {
-            userSettings.include(calendar)
-        } else {
-            userSettings.exclude(calendar)
-        }
-    }
-
-}
-
-interface SettingsDelegate {
-    fun closeSettings()
-    fun onCalendarSettingsChanged()
 }
 
 private fun Cursor.string(columnName: String): String = getString(getColumnIndexOrThrow(columnName))

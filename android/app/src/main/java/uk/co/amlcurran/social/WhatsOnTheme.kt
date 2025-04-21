@@ -43,10 +43,25 @@ fun WhatsOnTheme(content: @Composable () -> Unit) {
             bodyLarge = Typography().bodyLarge.copy(
                 fontFamily = afacad,
             ),
+            titleLarge = Typography().titleLarge.copy(
+                fontFamily = afacad
+            ),
             titleMedium = Typography().titleMedium.copy(
                 fontFamily = afacad,
                 fontWeight = FontWeight.Bold,
                 fontSize = 36.sp
+            ),
+            titleSmall = Typography().titleSmall.copy(
+                fontFamily = afacad,
+            ),
+            displayLarge = Typography().displayLarge.copy(
+                fontFamily = afacad,
+            ),
+            displayMedium = Typography().displayMedium.copy(
+                fontFamily = afacad,
+            ),
+            displaySmall = Typography().displaySmall.copy(
+                fontFamily = afacad,
             ),
         ),
         colorScheme = if (isSystemInDarkTheme()) darkColorScheme(
