@@ -11,8 +11,8 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver) : Ev
 
     private fun getCursor(searchStart: Timestamp, searchEnd: Timestamp): Cursor? {
         val builder = CONTENT_URI.buildUpon()
-        ContentUris.appendId(builder, searchStart.millis)
-        ContentUris.appendId(builder, searchEnd.millis)
+        ContentUris.appendId(builder, searchStart.toEpochMilliseconds())
+        ContentUris.appendId(builder, searchEnd.toEpochMilliseconds())
 
         return contentResolver.query(builder.build(), CursorEventRepositoryAccessor.projection, "", null, null)
     }

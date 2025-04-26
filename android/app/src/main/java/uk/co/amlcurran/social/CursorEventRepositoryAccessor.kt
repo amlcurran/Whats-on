@@ -70,25 +70,25 @@ class CursorEventRepositoryAccessor(private val calendarCursor: Cursor) {
     val startTime: Timestamp
         get() {
             val startMillis = calendarCursor.getLong(beginColumnIndex)
-            return Timestamp(startMillis)
+            return Timestamp.fromEpochMilliseconds(startMillis)
         }
 
     val endTime: Timestamp
         get() {
             val endMillis = calendarCursor.getLong(endColumnIndex)
-            return Timestamp(endMillis)
+            return Timestamp.fromEpochMilliseconds(endMillis)
         }
 
     val dtStartTime: Timestamp
         get() {
             val startMillis = calendarCursor.getLong(dtStartColumnIndex)
-            return Timestamp(startMillis)
+            return Timestamp.fromEpochMilliseconds(startMillis)
         }
 
     val dtEndTime: Timestamp
         get() {
             val endMillis = calendarCursor.getLong(dtEndColumnIndex)
-            return Timestamp(endMillis)
+            return Timestamp.fromEpochMilliseconds(endMillis)
         }
 
     val calendarId: String

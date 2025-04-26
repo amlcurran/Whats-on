@@ -47,8 +47,8 @@ class WhatsOnActivity : AppCompatActivity() {
         private fun emptySelected(calendarItem: CalendarSlot) {
             val intent = Intent(Intent.ACTION_INSERT)
             intent.data = CalendarContract.Events.CONTENT_URI
-            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, calendarItem.startTimestamp.millis)
-            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, calendarItem.endTimestamp.millis)
+            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, calendarItem.startTimestamp.toEpochMilliseconds())
+            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, calendarItem.endTimestamp.toEpochMilliseconds())
 //            startActivity(Intent(this@WhatsOnActivity, AddEventActivity::class.java))
             startActivity(intent)
         }

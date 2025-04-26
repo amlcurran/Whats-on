@@ -30,7 +30,7 @@ class EventListViewModel(application: Application): AndroidViewModel(application
     suspend fun load() {
         try {
             val now = DateTime.now(DateTimeZone.getDefault())
-            val timestamp = Timestamp(now.millis)
+            val timestamp = Timestamp.fromEpochMilliseconds(now.millis)
             val it = eventsService.getCalendarSource(14, timestamp)
             _source.emit(successOf(it))
         } catch (e: Throwable) {

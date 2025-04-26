@@ -61,6 +61,7 @@ dependencies {
     implementation 'joda-time:joda-time:2.10.5'
     implementation 'androidx.core:core-ktx:1.9.0'
 
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.0")
     def composeBom = platform('androidx.compose:compose-bom:2024.04.01')
     implementation composeBom
 

@@ -18,8 +18,12 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 import org.joda.time.format.DateTimeFormat
-import java.time.Instant
+import kotlin.time.Duration
+import kotlin.time.DurationUnit
+import kotlin.time.toDuration
 
 @Composable
 fun EventView(modifier: Modifier = Modifier, event: EventCalendarItem) {
@@ -56,8 +60,8 @@ fun EventViewPreview() {
                 "abcd",
                 "defg",
                 "An exciting event",
-                Timestamp(Instant.now().minusMillis(40000L).toEpochMilli()),
-                Timestamp(Instant.now().toEpochMilli()),
+                Clock.System.now().minus(40000.toDuration(DurationUnit.MILLISECONDS)),
+                Clock.System.now(),
                 emptyList()
             )
         )

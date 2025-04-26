@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.datetime.Instant
 import org.joda.time.format.DateTimeFormat
 import java.util.concurrent.TimeUnit
 
@@ -31,7 +32,7 @@ fun SlotsView(calendarSlots: List<CalendarSlot>, onEventClick: (EventCalendarIte
         verticalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(bottom = 16.dp),
     ) {
-        items(calendarSlots, key = { it.startTimestamp.millis }) { slot ->
+        items(calendarSlots, key = { it.startTimestamp.toEpochMilliseconds() }) { slot ->
             Text(
                 slot.startTimestamp.format(formatter),
                 color = MaterialTheme.colorScheme.onBackground,
@@ -63,7 +64,7 @@ fun SlotsView(calendarSlots: List<CalendarSlot>, onEventClick: (EventCalendarIte
                         horizontalArrangement = Arrangement.spacedBy(16.dp),
                         contentPadding = PaddingValues(horizontal = 16.dp)
                     ) {
-                        items(slot.items.sortedBy { it.startTime.millis }, key = { it.eventId }) { item ->
+                        items(slot.items.sortedBy { it.startTime }, key = { it.eventId }) { item ->
                             EventView(event = item,
                                 modifier = Modifier
                                     .clickable { onEventClick(item) }
@@ -84,8 +85,8 @@ fun SlotsViewPreview() = WhatsOnTheme {
         val start = it * TimeUnit.DAYS.toMillis(1)
         CalendarSlot(
             mutableListOf(),
-            Timestamp(start),
-            Timestamp(start + TimeUnit.HOURS.toMillis(3))
+            Instant.fromEpochMilliseconds(start),
+            Instant.fromEpochMilliseconds(start + TimeUnit.HOURS.toMillis(3))
         )
     }, onEventClick = {}, onEmptySlotClick = {})
 }
