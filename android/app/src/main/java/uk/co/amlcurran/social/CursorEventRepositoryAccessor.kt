@@ -2,6 +2,7 @@ package uk.co.amlcurran.social
 
 import android.database.Cursor
 import android.provider.CalendarContract
+import kotlinx.datetime.Instant
 
 class CursorEventRepositoryAccessor(private val calendarCursor: Cursor) {
 
@@ -67,28 +68,28 @@ class CursorEventRepositoryAccessor(private val calendarCursor: Cursor) {
         return calendarCursor.moveToNext()
     }
 
-    val startTime: Timestamp
+    val startTime: Instant
         get() {
             val startMillis = calendarCursor.getLong(beginColumnIndex)
-            return Timestamp.fromEpochMilliseconds(startMillis)
+            return Instant.fromEpochMilliseconds(startMillis)
         }
 
-    val endTime: Timestamp
+    val endTime: Instant
         get() {
             val endMillis = calendarCursor.getLong(endColumnIndex)
-            return Timestamp.fromEpochMilliseconds(endMillis)
+            return Instant.fromEpochMilliseconds(endMillis)
         }
 
-    val dtStartTime: Timestamp
+    val dtStartTime: Instant
         get() {
             val startMillis = calendarCursor.getLong(dtStartColumnIndex)
-            return Timestamp.fromEpochMilliseconds(startMillis)
+            return Instant.fromEpochMilliseconds(startMillis)
         }
 
-    val dtEndTime: Timestamp
+    val dtEndTime: Instant
         get() {
             val endMillis = calendarCursor.getLong(dtEndColumnIndex)
-            return Timestamp.fromEpochMilliseconds(endMillis)
+            return Instant.fromEpochMilliseconds(endMillis)
         }
 
     val calendarId: String

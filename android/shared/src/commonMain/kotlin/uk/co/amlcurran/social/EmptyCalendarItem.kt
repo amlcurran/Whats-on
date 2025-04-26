@@ -1,6 +1,11 @@
 package uk.co.amlcurran.social
 
-class EmptyCalendarItem(override val startTime: Timestamp, override val endTime: Timestamp) :
+import kotlinx.datetime.Instant
+
+class EmptyCalendarItem(
+    override val startTime: Instant,
+    override val endTime: Instant
+) :
     CalendarItem {
 
     override val title: String

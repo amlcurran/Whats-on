@@ -1,8 +1,15 @@
 package uk.co.amlcurran.social
 
+import kotlinx.datetime.Instant
+
 interface EventsRepository {
 
-    fun getCalendarItems(nowTime: Timestamp, nextWeek: Timestamp, fivePm: TimeOfDay, elevenPm: TimeOfDay): List<Foo>
+    fun getCalendarItems(
+        nowTime: Instant,
+        nextWeek: Instant,
+        fivePm: TimeOfDay,
+        elevenPm: TimeOfDay
+    ): List<Foo>
 
     fun event(eventId: String): Event?
 

@@ -2,16 +2,20 @@ package uk.co.amlcurran.social
 
 import kotlinx.datetime.Instant
 
-typealias Timestamp = Instant
-
-fun Timestamp.plusDays(days: Int, timeCalculator: TimeCalculator): Timestamp {
+fun Instant.plusDays(
+    days: Int,
+    timeCalculator: TimeCalculator
+): Instant {
     return timeCalculator.plusDays(days, this)
 }
 
-fun Timestamp.daysSinceEpoch(timeCalculator: TimeCalculator): Int {
+fun Instant.daysSinceEpoch(timeCalculator: TimeCalculator): Int {
     return timeCalculator.getDays(this)
 }
 
-fun Timestamp.plusHoursOf(timeOfDay: TimeOfDay, timeCalculator: TimeCalculator): Timestamp {
+fun Instant.plusHoursOf(
+    timeOfDay: TimeOfDay,
+    timeCalculator: TimeCalculator
+): Instant {
     return timeCalculator.plusHours(this, timeOfDay.hoursInDay().toInt())
 }

@@ -1,7 +1,20 @@
 package uk.co.amlcurran.social
 
+import kotlinx.datetime.Instant
+
 data class Event(val item: EventCalendarItem, val location: String?)
-data class Foo(val eventId: String, val calendarId: String, val title: String, val time: Timestamp, val endTime: Timestamp, val allDay: Boolean, val attendingStatus: Int, val isDeleted: Boolean, val startMinute: Int, val endMinute: Int)
+data class Foo(
+    val eventId: String,
+    val calendarId: String,
+    val title: String,
+    val time: Instant,
+    val endTime: Instant,
+    val allDay: Boolean,
+    val attendingStatus: Int,
+    val isDeleted: Boolean,
+    val startMinute: Int,
+    val endMinute: Int
+)
 
 data class EventPredicate(
     val id: String,
@@ -15,7 +28,10 @@ class EventsService(
     private val predicate: EventPredicate
 ) {
 
-    suspend fun getCalendarSource(numberOfDays: Int, now: Timestamp): CalendarSource {
+    suspend fun getCalendarSource(
+        numberOfDays: Int,
+        now: Instant
+    ): CalendarSource {
         val nowTime = timeCalculator.startOfToday()
         val nextWeek = nowTime.plusDays(numberOfDays, timeCalculator)
         val fivePm = userSettings.borderTimeStart()
@@ -26,7 +42,16 @@ class EventsService(
             .filter { predicate.predicate(it) }
             .filterNot { it.startMinute > elevenPm.minutesInDay() || it.endMinute < fivePm.minutesInDay() }
             .map { it to eventsRepository.attendeesForEvent(it) }
-            .map { (it, attendees) -> EventCalendarItem(it.eventId, it.calendarId, it.title, it.time, it.endTime, attendees) }
+            .map { (it, attendees) ->
+                EventCalendarItem(
+                    it.eventId,
+                    it.calendarId,
+                    it.title,
+                    it.time,
+                    it.endTime,
+                    attendees
+                )
+            }
             .toList()
 
         val itemArray = mutableMapOf<Int, CalendarSlot>()
@@ -45,13 +70,13 @@ class EventsService(
         return CalendarSource(itemArray, numberOfDays, timeCalculator, userSettings)
     }
 
-    private fun startOfTodayBlock(position: Int): Timestamp {
+    private fun startOfTodayBlock(position: Int): Instant {
         return timeCalculator.startOfToday()
             .plusDays(position, timeCalculator)
             .plusHoursOf(userSettings.borderTimeStart(), timeCalculator)
     }
 
-    private fun endOfTodayBlock(position: Int): Timestamp {
+    private fun endOfTodayBlock(position: Int): Instant {
         return timeCalculator.startOfToday()
             .plusDays(position, timeCalculator)
             .plusHoursOf(userSettings.borderTimeEnd(), timeCalculator)

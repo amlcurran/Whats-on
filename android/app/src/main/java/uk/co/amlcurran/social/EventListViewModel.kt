@@ -6,8 +6,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import org.joda.time.DateTime
-import org.joda.time.DateTimeZone
+import kotlinx.datetime.Clock
 import uk.co.amlcurran.starlinginterview.AsyncResult
 import uk.co.amlcurran.starlinginterview.failureWith
 import uk.co.amlcurran.starlinginterview.successOf
@@ -29,8 +28,7 @@ class EventListViewModel(application: Application): AndroidViewModel(application
 
     suspend fun load() {
         try {
-            val now = DateTime.now(DateTimeZone.getDefault())
-            val timestamp = Timestamp.fromEpochMilliseconds(now.millis)
+            val timestamp = Clock.System.now()
             val it = eventsService.getCalendarSource(14, timestamp)
             _source.emit(successOf(it))
         } catch (e: Throwable) {

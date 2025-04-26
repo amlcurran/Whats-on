@@ -15,7 +15,6 @@ import kotlinx.datetime.Instant
 import org.joda.time.format.DateTimeFormat
 import uk.co.amlcurran.social.Event
 import uk.co.amlcurran.social.EventCalendarItem
-import uk.co.amlcurran.social.Timestamp
 import uk.co.amlcurran.social.WhatsOnTheme
 import uk.co.amlcurran.social.format
 

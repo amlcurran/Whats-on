@@ -5,11 +5,14 @@ import android.content.ContentUris
 import android.database.Cursor
 import android.provider.CalendarContract
 import android.provider.CalendarContract.Instances.CONTENT_URI
-import android.util.Log
+import kotlinx.datetime.Instant
 
 class AndroidEventsRepository(private val contentResolver: ContentResolver) : EventsRepository {
 
-    private fun getCursor(searchStart: Timestamp, searchEnd: Timestamp): Cursor? {
+    private fun getCursor(
+        searchStart: Instant,
+        searchEnd: Instant
+    ): Cursor? {
         val builder = CONTENT_URI.buildUpon()
         ContentUris.appendId(builder, searchStart.toEpochMilliseconds())
         ContentUris.appendId(builder, searchEnd.toEpochMilliseconds())
@@ -17,7 +20,12 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver) : Ev
         return contentResolver.query(builder.build(), CursorEventRepositoryAccessor.projection, "", null, null)
     }
 
-    override fun getCalendarItems(nowTime: Timestamp, nextWeek: Timestamp, fivePm: TimeOfDay, elevenPm: TimeOfDay): List<Foo> {
+    override fun getCalendarItems(
+        nowTime: Instant,
+        nextWeek: Instant,
+        fivePm: TimeOfDay,
+        elevenPm: TimeOfDay
+    ): List<Foo> {
         val calendarCursor = getCursor(nowTime, nextWeek)
         val accessor = CursorEventRepositoryAccessor(calendarCursor!!)
         val calendarItems = ArrayList<Foo>()

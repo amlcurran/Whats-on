@@ -1,13 +1,15 @@
 package uk.co.amlcurran.social
 
+import kotlinx.datetime.Instant
+
 interface TimeCalculator {
 
-    fun plusDays(days: Int, time: Timestamp): Timestamp
+    fun plusDays(days: Int, time: Instant): Instant
 
-    fun getDays(time: Timestamp): Int
+    fun getDays(time: Instant): Int
 
-    fun plusHours(time: Timestamp, hours: Int): Timestamp
+    fun plusHours(time: Instant, hours: Int): Instant
 
-    fun startOfToday(): Timestamp
+    fun startOfToday(): Instant
 
 }
