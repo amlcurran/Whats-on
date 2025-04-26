@@ -34,11 +34,9 @@ fun WhatsOnTheme(content: @Composable () -> Unit) {
         typography = Typography(
             bodySmall = Typography().bodySmall.copy(
                 fontFamily = afacad,
-                fontSize = 18.sp
             ),
             bodyMedium = Typography().bodyMedium.copy(
                 fontFamily = afacad,
-                fontSize = 18.sp
             ),
             bodyLarge = Typography().bodyLarge.copy(
                 fontFamily = afacad,

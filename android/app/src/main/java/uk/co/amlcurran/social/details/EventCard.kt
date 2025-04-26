@@ -65,9 +65,9 @@ fun EventCard(modifier: Modifier = Modifier, event: Event) {
         ) {
             Text(
                 event.item.title,
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.padding(bottom = 4.dp)
+                modifier = Modifier.padding(bottom = 2.dp)
             )
             Text(
                 "From ${event.item.startTime.format(DateTimeFormat.shortTime())} to ${
@@ -75,8 +75,8 @@ fun EventCard(modifier: Modifier = Modifier, event: Event) {
                         DateTimeFormat.shortTime()
                     )
                 }",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }
     }

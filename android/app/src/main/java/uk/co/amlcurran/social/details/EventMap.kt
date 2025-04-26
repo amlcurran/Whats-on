@@ -40,7 +40,7 @@ private suspend fun findLocation(context: Context, location: String): LatLng? {
 }
 
 @Composable
-fun EventMap(event: Event) {
+fun EventMap(modifier: Modifier = Modifier, event: Event) {
     val (location, setLocation) = remember { mutableStateOf<LatLng?>(null) }
     val context = LocalContext.current
     LaunchedEffect(event.location) {
@@ -54,7 +54,7 @@ fun EventMap(event: Event) {
     }
     if (location != null) {
         GoogleMap(
-            modifier = Modifier
+            modifier = modifier
                 .height(200.dp)
                 .clip(
                     RoundedCornerShape(
@@ -63,8 +63,7 @@ fun EventMap(event: Event) {
                         bottomStart = 8.dp,
                         bottomEnd = 8.dp
                     )
-                )
-                .offset(y = (-8).dp),
+                ),
             onMapClick = {
                 context.startActivity(Intent(Intent.ACTION_VIEW).apply {
                     data =

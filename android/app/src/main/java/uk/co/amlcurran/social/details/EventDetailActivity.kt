@@ -12,12 +12,18 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
+import kotlinx.datetime.Instant
 import uk.co.amlcurran.social.AndroidEventsRepository
 import uk.co.amlcurran.social.Event
 import uk.co.amlcurran.social.EventCalendarItem
@@ -27,6 +33,14 @@ import uk.co.amlcurran.social.JodaCalculator
 import uk.co.amlcurran.social.R
 import uk.co.amlcurran.social.UserSettings
 import uk.co.amlcurran.social.databinding.ActivityEventDetailsBinding
+
+@Composable
+fun EventDetails(event: Event) {
+    Column {
+        EventCard(Modifier.fillMaxWidth(), event)
+        EventMap(Modifier.offset(y = (-8).dp).zIndex(-1f), event)
+    }
+}
 
 class EventDetailActivity : AppCompatActivity() {
 
@@ -79,10 +93,7 @@ class EventDetailActivity : AppCompatActivity() {
 
     private fun render(event: Event) {
         binding.eventCard2.setContent {
-            Column {
-                EventCard(event = event, modifier = Modifier.fillMaxWidth())
-                EventMap(event)
-            }
+            EventDetails(event)
         }
         binding.detailToolbar.menu.findItem(R.id.menu_open_outside).isVisible = true
         binding.detailToolbar.menu.findItem(R.id.menu_delete_event).isVisible = true
@@ -138,6 +149,21 @@ class ConfirmDelete : DialogFragment() {
             .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
             .create()
     }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun EventDetailPreview() {
+    EventDetails(Event(
+        EventCalendarItem(
+            "abc",
+            "calendar",
+            "A fun event",
+            Instant.fromEpochMilliseconds(System.currentTimeMillis()),
+            Instant.fromEpochMilliseconds(System.currentTimeMillis() - 60 * 60 * 1000 * 2),
+            emptyList()
+        ), "Kings Cross St. Pancras"
+    ))
 }
 
 fun View.alphaIn(translate: Boolean = false) {

@@ -27,7 +27,6 @@ fun SlotsView(calendarSlots: List<CalendarSlot>, onEventClick: (EventCalendarIte
     val formatter = remember {
         DateTimeFormat.fullDate()
     }
-    Log.d("TAG", calendarSlots.hashCode().toString())
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(bottom = 16.dp),
@@ -36,7 +35,7 @@ fun SlotsView(calendarSlots: List<CalendarSlot>, onEventClick: (EventCalendarIte
             Text(
                 slot.startTimestamp.format(formatter),
                 color = MaterialTheme.colorScheme.onBackground,
-                style = MaterialTheme.typography.bodySmall,
+                style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.padding(
                     start = 16.dp,
                     end = 16.dp,
