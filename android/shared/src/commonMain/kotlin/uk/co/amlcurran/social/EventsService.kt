@@ -54,20 +54,18 @@ class EventsService(
             }
             .toList()
 
-        val itemArray = mutableMapOf<Int, CalendarSlot>()
+        val itemArray = (0 until numberOfDays).map {
+            CalendarSlot(mutableListOf(), startOfTodayBlock(it), endOfTodayBlock(it))
+        }.toMutableList()
         val epochToNow = now.daysSinceEpoch(timeCalculator)
         for (item in calendarItems) {
             val key = item.startTime.daysSinceEpoch(timeCalculator) - epochToNow
-            val slot = itemArray[key] ?: CalendarSlot(
-                mutableListOf(),
-                startOfTodayBlock(key),
-                endOfTodayBlock(key)
-            )
+            val slot = itemArray[key]
             slot.addItem(item)
             itemArray[key] = slot
         }
 
-        return CalendarSource(itemArray, numberOfDays, timeCalculator, userSettings)
+        return CalendarSource(itemArray)
     }
 
     private fun startOfTodayBlock(position: Int): Instant {

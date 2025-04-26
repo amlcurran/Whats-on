@@ -4,8 +4,6 @@ import android.app.Dialog
 import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
-import android.location.Geocoder
-import android.net.Uri
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.view.LayoutInflater
@@ -14,30 +12,11 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import com.google.maps.android.compose.CameraPositionState
-import com.google.maps.android.compose.GoogleMap
-import com.google.maps.android.compose.MapUiSettings
-import com.google.maps.android.compose.Marker
-import com.google.maps.android.compose.MarkerState
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import uk.co.amlcurran.social.AndroidEventsRepository
 import uk.co.amlcurran.social.Event
@@ -48,71 +27,6 @@ import uk.co.amlcurran.social.JodaCalculator
 import uk.co.amlcurran.social.R
 import uk.co.amlcurran.social.UserSettings
 import uk.co.amlcurran.social.databinding.ActivityEventDetailsBinding
-import kotlin.coroutines.suspendCoroutine
-import androidx.core.net.toUri
-
-private suspend fun findLocation(context: Context, location: String): LatLng? {
-    return suspendCoroutine { continuation ->
-        try {
-            val result = Geocoder(context).getFromLocationName(location, 10)?.firstOrNull()
-            val latLng = result?.let { LatLng(it.latitude, it.longitude) }
-            continuation.resumeWith(Result.success(latLng))
-        } catch (e: Throwable) {
-            continuation.resumeWith(Result.failure(e))
-        }
-    }
-}
-
-@Composable
-private fun EventMap(event: Event) {
-    val (location, setLocation) = remember { mutableStateOf<LatLng?>(null) }
-    val context = LocalContext.current
-    LaunchedEffect(event.location) {
-        event.location?.let {
-            launch(Dispatchers.IO) {
-                if (it.isNotBlank()) {
-                    findLocation(context, it)?.let { setLocation(it) }
-                }
-            }
-        }
-    }
-    if (location != null) {
-        GoogleMap(
-            modifier = Modifier
-                .height(200.dp)
-                .clip(
-                    RoundedCornerShape(
-                        topStart = 0.dp,
-                        topEnd = 0.dp,
-                        bottomStart = 8.dp,
-                        bottomEnd = 8.dp
-                    )
-                )
-                .offset(y = (-8).dp),
-            onMapClick = {
-                context.startActivity(Intent(Intent.ACTION_VIEW).apply {
-                    data =
-                        "https://www.google.com/maps/dir/?api=1&destination=${location.latitude},${location.longitude}".toUri()
-                })
-            },
-            uiSettings = MapUiSettings(
-                zoomControlsEnabled = false,
-                rotationGesturesEnabled = false,
-                scrollGesturesEnabled = false,
-                tiltGesturesEnabled = false,
-                zoomGesturesEnabled = false
-            ),
-            cameraPositionState = CameraPositionState(
-                CameraPosition.fromLatLngZoom(
-                    location,
-                    15f
-                )
-            )
-        ) {
-            Marker(state = MarkerState(position = location))
-        }
-    }
-}
 
 class EventDetailActivity : AppCompatActivity() {
 
