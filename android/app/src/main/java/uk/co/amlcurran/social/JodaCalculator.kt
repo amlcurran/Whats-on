@@ -7,10 +7,6 @@ import org.joda.time.Days
 
 class JodaCalculator : TimeCalculator {
 
-    override fun plusHours(time: Instant, hours: Int): Instant {
-        return Instant.fromEpochMilliseconds(getDateTime(time).plusHours(hours).millis)
-    }
-
     override fun startOfToday(): Instant {
         return Instant.fromEpochMilliseconds(DateTime.now().withTimeAtStartOfDay().millis)
     }
@@ -19,12 +15,13 @@ class JodaCalculator : TimeCalculator {
         return Days.daysBetween(EPOCH, getDateTime(time)).days
     }
 
-    override fun plusDays(days: Int, time: Instant): Instant {
-        return Instant.fromEpochMilliseconds(getDateTime(time).plusDays(days).millis)
+    private fun getDateTime(time: Instant): DateTime {
+        return DateTime(time.toEpochMilliseconds(), DateTimeZone.getDefault())
     }
 
-    fun getDateTime(time: Instant): DateTime {
-        return DateTime(time.toEpochMilliseconds(), DateTimeZone.getDefault())
+    fun toDateTime(timeOfDay: TimeOfDay): DateTime {
+        return getDateTime(startOfToday().plusHoursOf(timeOfDay)
+        )
     }
 
     companion object {

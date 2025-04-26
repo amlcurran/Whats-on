@@ -1,13 +1,8 @@
 package uk.co.amlcurran.social
 
 import android.app.Application
-import android.content.Context
 import android.database.Cursor
-import android.os.Bundle
 import android.provider.CalendarContract
-import android.text.Spannable
-import android.text.SpannableStringBuilder
-import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +12,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -44,25 +38,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.min
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.loader.app.LoaderManager
-import androidx.loader.content.CursorLoader
-import androidx.loader.content.Loader
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
-import uk.co.amlcurran.social.databinding.SettingsBinding
 
 const val PICKER_NONE = 0
 const val PICKER_START = 1
@@ -73,11 +60,6 @@ fun JodaCalculator.printTime(
     timeFormatter: DateTimeFormatter = DateTimeFormat.shortTime()
 ): String {
     return timeFormatter.print(toDateTime(timeOfDay))
-}
-
-fun JodaCalculator.toDateTime(timeOfDay: TimeOfDay): DateTime {
-    return getDateTime(startOfToday().plusHoursOf(timeOfDay, this)
-    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

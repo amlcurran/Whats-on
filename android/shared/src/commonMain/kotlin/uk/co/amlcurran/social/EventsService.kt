@@ -33,7 +33,7 @@ class EventsService(
         now: Instant
     ): CalendarSource {
         val nowTime = timeCalculator.startOfToday()
-        val nextWeek = nowTime.plusDays(numberOfDays, timeCalculator)
+        val nextWeek = nowTime.plusDays(numberOfDays)
         val fivePm = userSettings.borderTimeStart()
         val elevenPm = userSettings.borderTimeEnd()
 
@@ -72,14 +72,14 @@ class EventsService(
 
     private fun startOfTodayBlock(position: Int): Instant {
         return timeCalculator.startOfToday()
-            .plusDays(position, timeCalculator)
-            .plusHoursOf(userSettings.borderTimeStart(), timeCalculator)
+            .plusDays(position)
+            .plusHoursOf(userSettings.borderTimeStart())
     }
 
     private fun endOfTodayBlock(position: Int): Instant {
         return timeCalculator.startOfToday()
-            .plusDays(position, timeCalculator)
-            .plusHoursOf(userSettings.borderTimeEnd(), timeCalculator)
+            .plusDays(position)
+            .plusHoursOf(userSettings.borderTimeEnd())
     }
 
     fun eventWithId(eventId: String): Event? = eventsRepository.event(eventId)

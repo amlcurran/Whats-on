@@ -4,30 +4,16 @@ import kotlinx.datetime.Instant
 
 data class CalendarSource(private val calendarItems: Map<Int, CalendarSlot>, private val daysSize: Int, private val timeCalculator: TimeCalculator, private val userSettings: UserSettings) {
 
-    fun count(): Int {
-        return daysSize
-    }
-
-    fun itemAt(position: Int): CalendarItem {
-        val calendarSlot = calendarItems[position]
-        if (calendarSlot == null || calendarSlot.isEmpty) {
-            val startTime = startOfTodayBlock(position)
-            val endTime = endOfTodayBlock(position)
-            return EmptyCalendarItem(startTime, endTime)
-        }
-        return calendarSlot.firstItem!!
-    }
-
     private fun startOfTodayBlock(position: Int): Instant {
         return timeCalculator.startOfToday()
-            .plusDays(position, timeCalculator)
-            .plusHoursOf(userSettings.borderTimeStart(), timeCalculator)
+            .plusDays(position)
+            .plusHoursOf(userSettings.borderTimeStart())
     }
 
     private fun endOfTodayBlock(position: Int): Instant {
         return timeCalculator.startOfToday()
-            .plusDays(position, timeCalculator)
-            .plusHoursOf(userSettings.borderTimeEnd(), timeCalculator)
+            .plusDays(position)
+            .plusHoursOf(userSettings.borderTimeEnd())
     }
 
     fun slotAt(position: Int): CalendarSlot {
