@@ -33,7 +33,7 @@ fun EventView(modifier: Modifier = Modifier, event: EventCalendarItem) {
         Text(
             text = event.title,
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onBackground
+            color = MaterialTheme.colorScheme.onSurface
         )
         Text(
             text = stringResource(
@@ -41,7 +41,7 @@ fun EventView(modifier: Modifier = Modifier, event: EventCalendarItem) {
                 event.startTime.format(formatter)
             ),
             style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurface
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
 }

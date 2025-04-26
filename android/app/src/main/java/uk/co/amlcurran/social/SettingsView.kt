@@ -16,7 +16,10 @@ import androidx.annotation.LayoutRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.AlertDialog
@@ -43,9 +46,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.min
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -231,7 +236,8 @@ fun CalendarListInternal(calendars: List<Calendar>) {
     val context = LocalContext.current
     val userSettings = remember { UserSettings(context) }
     Column {
-        Text("Show events from calendars:")
+        Spacer(Modifier.height(16.dp))
+        Text("Show events from calendars:", color = MaterialTheme.colorScheme.onSurfaceVariant)
         for (calendar in calendars) {
             Row(
                 Modifier.fillMaxWidth()
@@ -262,6 +268,10 @@ fun CalendarListInternal(calendars: List<Calendar>) {
                     modifier = Modifier.padding(start = 16.dp)
                 )
             }
+        }
+        if (calendars.isEmpty()) {
+            Text("No calendars found.", Modifier.padding(16.dp).fillMaxWidth(),
+                textAlign = TextAlign.Center)
         }
     }
 }
@@ -305,6 +315,14 @@ fun SettingsViewPreview() = WhatsOnTheme {
             Calendar("abcd", "Work", android.graphics.Color.BLUE, false),
             Calendar("abcd", "Personal", android.graphics.Color.GREEN, true),
         ))
+    }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun SettingsViewPreviewEmpty() = WhatsOnTheme {
+    SettingsViewInternal {
+        CalendarListInternal(listOf())
     }
 }
 
