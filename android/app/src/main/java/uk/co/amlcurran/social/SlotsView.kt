@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.datetime.Instant
 import org.joda.time.format.DateTimeFormat
+import uk.co.amlcurran.social.util.previewSlots
 import java.util.concurrent.TimeUnit
 
 @Composable
@@ -80,12 +81,5 @@ fun SlotsView(calendarSlots: List<CalendarSlot>, onEventClick: (EventCalendarIte
 @Composable
 @Preview(showBackground = true)
 fun SlotsViewPreview() = WhatsOnTheme {
-    SlotsView(calendarSlots = (0 until 10).map {
-        val start = it * TimeUnit.DAYS.toMillis(1)
-        CalendarSlot(
-            mutableListOf(),
-            Instant.fromEpochMilliseconds(start),
-            Instant.fromEpochMilliseconds(start + TimeUnit.HOURS.toMillis(3))
-        )
-    }, onEventClick = {}, onEmptySlotClick = {})
+    SlotsView(calendarSlots = previewSlots, onEventClick = {}, onEmptySlotClick = {})
 }
