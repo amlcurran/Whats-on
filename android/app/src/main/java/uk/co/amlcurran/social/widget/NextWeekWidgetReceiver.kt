@@ -3,8 +3,8 @@ package uk.co.amlcurran.social.widget
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
 import androidx.glance.GlanceTheme
@@ -14,6 +14,7 @@ import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.components.Scaffold
 import androidx.glance.appwidget.components.SquareIconButton
+import androidx.glance.appwidget.cornerRadius
 import androidx.glance.appwidget.lazy.LazyColumn
 import androidx.glance.appwidget.lazy.items
 import androidx.glance.appwidget.provideContent
@@ -25,10 +26,10 @@ import androidx.glance.layout.fillMaxWidth
 import androidx.glance.layout.padding
 import androidx.glance.layout.size
 import androidx.glance.preview.ExperimentalGlancePreviewApi
+import androidx.glance.preview.Preview
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
 import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
 import org.joda.time.format.DateTimeFormat
 import uk.co.amlcurran.social.AndroidEventsRepository
 import uk.co.amlcurran.social.CalendarSlot
@@ -40,56 +41,78 @@ import uk.co.amlcurran.social.UserSettings
 import uk.co.amlcurran.social.WhatsOnActivity
 import uk.co.amlcurran.social.format
 import uk.co.amlcurran.social.util.previewSlots
-import java.util.concurrent.TimeUnit
 
+val widgetPadding = 12.dp
 
 @Composable
 private fun NextWeek(
     source: List<CalendarSlot>,
 ) {
     val formatter = remember { DateTimeFormat.fullDate() }
+    val timeFormatter = remember { DateTimeFormat.shortTime() }
     GlanceTheme {
         Scaffold {
-            Box(contentAlignment = Alignment.BottomEnd) {
+            Box(contentAlignment = Alignment.BottomEnd, modifier = GlanceModifier.padding(vertical = 12.dp)) {
                 LazyColumn {
                     items(source, { it.startTimestamp.epochSeconds }) { slot ->
                         Column(GlanceModifier.padding(bottom = 8.dp)) {
                             Text(
                                 slot.startTimestamp.format(formatter),
+                                GlanceModifier.padding(bottom = 4.dp),
+                                style = TextStyle(
+                                    fontSize = 12.sp
+                                )
                             )
                             when (slot.items.count()) {
                                 0 -> {
                                     Text(
                                         modifier = GlanceModifier
+                                            .background(ImageProvider(R.drawable.empty_border))
                                             .fillMaxWidth()
-                                            .padding(8.dp),
+                                            .padding(widgetPadding),
                                         maxLines = 1,
                                         style = TextStyle(
-                                            color = GlanceTheme.colors.onBackground
+                                            color = GlanceTheme.colors.onBackground,
                                         ),
                                         text = "Nothing on"
                                     )
                                 }
 
                                 1 -> {
-                                    Text(
+                                    Column(
                                         modifier = GlanceModifier
                                             .background(GlanceTheme.colors.surface)
+                                            .cornerRadius(4.dp)
                                             .fillMaxWidth()
-                                            .padding(8.dp),
-                                        maxLines = 1,
-                                        style = TextStyle(
-                                            color = GlanceTheme.colors.onSurface
-                                        ),
-                                        text = slot.items.first().title
-                                    )
+                                            .padding(widgetPadding)
+                                    ) {
+                                        val calendarItem = slot.items.first()
+                                        Text(
+                                            maxLines = 1,
+                                            style = TextStyle(
+                                                color = GlanceTheme.colors.onSurface
+                                            ),
+                                            text = calendarItem.title
+                                        )
+                                        Text(
+                                            maxLines = 1,
+                                            style = TextStyle(
+                                                color = GlanceTheme.colors.onSurface
+                                            ),
+                                            text = "From ${
+                                                calendarItem.startTime.format(
+                                                    timeFormatter
+                                                )
+                                            }"
+                                        )
+                                    }
                                 }
 
                                 else -> {
                                     Text(
                                         modifier = GlanceModifier.background(GlanceTheme.colors.surface)
                                             .fillMaxWidth()
-                                            .padding(8.dp),
+                                            .padding(widgetPadding),
                                         style = TextStyle(
                                             color = GlanceTheme.colors.onSurface
                                         ),
@@ -138,7 +161,7 @@ class NextWeekWidgetReceiver: GlanceAppWidgetReceiver() {
 }
 
 @OptIn(ExperimentalGlancePreviewApi::class)
-@androidx.glance.preview.Preview
+@Preview
 @Composable
 fun NextWeekPreview() {
     NextWeek(previewSlots)
