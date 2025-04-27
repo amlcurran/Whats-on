@@ -31,6 +31,15 @@
         <activity android:name=".details.EventDetailActivity" />
         <activity android:name=".add.AddEventActivity" />
 
+        <receiver android:name=".widget.NextWeekWidgetReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/next_week_widget_info" />
+        </receiver>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/maps_api_key"/>

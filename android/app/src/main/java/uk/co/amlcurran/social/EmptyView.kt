@@ -1,5 +1,6 @@
 package uk.co.amlcurran.social
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -46,6 +47,9 @@ fun EmptyView(modifier: Modifier = Modifier, editMode: Boolean = false) {
     val density = LocalContext.current.resources.displayMetrics.density
     val context = LocalContext.current
     val userSettings = remember { UserSettings(context) }
+    BackHandler(enabled = isEditMode) {
+        setEditMode(false)
+    }
     Box(
         modifier
             .let {
