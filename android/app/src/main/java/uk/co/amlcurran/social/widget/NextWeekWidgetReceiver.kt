@@ -23,6 +23,7 @@ import androidx.glance.layout.Alignment
 import androidx.glance.layout.Box
 import androidx.glance.layout.Column
 import androidx.glance.layout.fillMaxWidth
+import androidx.glance.layout.height
 import androidx.glance.layout.padding
 import androidx.glance.layout.size
 import androidx.glance.preview.ExperimentalGlancePreviewApi
@@ -52,8 +53,11 @@ private fun NextWeek(
     val timeFormatter = remember { DateTimeFormat.shortTime() }
     GlanceTheme {
         Scaffold {
-            Box(contentAlignment = Alignment.BottomEnd, modifier = GlanceModifier.padding(vertical = 12.dp)) {
+            Box(contentAlignment = Alignment.BottomEnd) {
                 LazyColumn {
+                    item {
+                        Box(modifier = GlanceModifier.height(12.dp)) {  }
+                    }
                     items(source, { it.startTimestamp.epochSeconds }) { slot ->
                         Column(GlanceModifier.padding(bottom = 8.dp)) {
                             Text(
@@ -123,6 +127,9 @@ private fun NextWeek(
                             }
                         }
                     }
+                    item {
+                        Box(modifier = GlanceModifier.height(12.dp)) {  }
+                    }
                 }
                 Box(modifier = GlanceModifier.padding(bottom = 12.dp)) {
                     SquareIconButton(
@@ -161,7 +168,7 @@ class NextWeekWidgetReceiver: GlanceAppWidgetReceiver() {
 }
 
 @OptIn(ExperimentalGlancePreviewApi::class)
-@Preview
+@Preview(heightDp = 200)
 @Composable
 fun NextWeekPreview() {
     NextWeek(previewSlots)

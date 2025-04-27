@@ -9,4 +9,5 @@
     <color name="colorOnSurface">@color/colorSecondary</color>
     <color name="colorSurface">@android:color/white</color>
     <color name="colorOutline">@color/colorSecondary</color>
+    <color name="empty_widget_color">#34000000</color>
 </resources>

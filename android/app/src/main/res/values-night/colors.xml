@@ -9,4 +9,5 @@
     <color name="colorOnSurface">@color/colorOnBackground</color>
     <color name="colorSurface">#4F4F5C</color>
     <color name="colorOutline">@color/colorOnBackground</color>
+    <color name="empty_widget_color">#34FFFFFF</color>
 </resources>
