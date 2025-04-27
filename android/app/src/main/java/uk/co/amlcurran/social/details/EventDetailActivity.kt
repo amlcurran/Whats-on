@@ -57,7 +57,7 @@ class EventDetailActivity : AppCompatActivity() {
     companion object {
 
         private const val KEY_EVENT_TITLE = "title"
-        private const val KEY_EVENT_ID = "event_id"
+        const val KEY_EVENT_ID = "event_id"
 
         fun show(event: EventCalendarItem, context: Context): Intent {
             val intent = Intent(context, EventDetailActivity::class.java)

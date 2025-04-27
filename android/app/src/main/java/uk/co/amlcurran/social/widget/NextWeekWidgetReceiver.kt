@@ -9,7 +9,10 @@ import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
 import androidx.glance.GlanceTheme
 import androidx.glance.ImageProvider
+import androidx.glance.action.ActionParameters
+import androidx.glance.action.actionParametersOf
 import androidx.glance.action.actionStartActivity
+import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.components.Scaffold
@@ -32,6 +35,7 @@ import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
 import kotlinx.datetime.Clock
 import org.joda.time.format.DateTimeFormat
+import org.joda.time.format.DateTimeFormatter
 import uk.co.amlcurran.social.AndroidEventsRepository
 import uk.co.amlcurran.social.CalendarSlot
 import uk.co.amlcurran.social.EventPredicates
@@ -40,6 +44,7 @@ import uk.co.amlcurran.social.JodaCalculator
 import uk.co.amlcurran.social.R
 import uk.co.amlcurran.social.UserSettings
 import uk.co.amlcurran.social.WhatsOnActivity
+import uk.co.amlcurran.social.details.EventDetailActivity
 import uk.co.amlcurran.social.format
 import uk.co.amlcurran.social.util.previewSlots
 
@@ -59,12 +64,13 @@ private fun NextWeek(
                         Box(modifier = GlanceModifier.height(12.dp)) {  }
                     }
                     items(source, { it.startTimestamp.epochSeconds }) { slot ->
-                        Column(GlanceModifier.padding(bottom = 8.dp)) {
+                        Column(GlanceModifier.padding(bottom = 12.dp)) {
                             Text(
-                                slot.startTimestamp.format(formatter),
-                                GlanceModifier.padding(bottom = 4.dp),
+                                text = slot.startTimestamp.format(formatter),
+                                modifier = GlanceModifier.padding(bottom = 4.dp),
                                 style = TextStyle(
-                                    fontSize = 12.sp
+                                    fontSize = 12.sp,
+                                    color = GlanceTheme.colors.onBackground
                                 )
                             )
                             when (slot.items.count()) {
@@ -82,40 +88,13 @@ private fun NextWeek(
                                     )
                                 }
 
-                                1 -> {
-                                    Column(
-                                        modifier = GlanceModifier
-                                            .background(GlanceTheme.colors.surface)
-                                            .cornerRadius(4.dp)
-                                            .fillMaxWidth()
-                                            .padding(widgetPadding)
-                                    ) {
-                                        val calendarItem = slot.items.first()
-                                        Text(
-                                            maxLines = 1,
-                                            style = TextStyle(
-                                                color = GlanceTheme.colors.onSurface
-                                            ),
-                                            text = calendarItem.title
-                                        )
-                                        Text(
-                                            maxLines = 1,
-                                            style = TextStyle(
-                                                color = GlanceTheme.colors.onSurface
-                                            ),
-                                            text = "From ${
-                                                calendarItem.startTime.format(
-                                                    timeFormatter
-                                                )
-                                            }"
-                                        )
-                                    }
-                                }
+                                1 -> WidgetEventView(slot, timeFormatter)
 
                                 else -> {
                                     Text(
                                         modifier = GlanceModifier.background(GlanceTheme.colors.surface)
                                             .fillMaxWidth()
+                                            .cornerRadius(8.dp)
                                             .padding(widgetPadding),
                                         style = TextStyle(
                                             color = GlanceTheme.colors.onSurface
@@ -141,6 +120,50 @@ private fun NextWeek(
                 }
             }
         }
+    }
+}
+
+private val eventIdKey = ActionParameters.Key<String>(
+    EventDetailActivity.KEY_EVENT_ID
+)
+
+@Composable
+private fun WidgetEventView(
+    slot: CalendarSlot,
+    timeFormatter: DateTimeFormatter
+) {
+    val calendarItem = slot.items.first()
+    Column(
+        modifier = GlanceModifier
+            .background(GlanceTheme.colors.surface)
+            .cornerRadius(8.dp)
+            .clickable(
+                actionStartActivity<EventDetailActivity>(
+                    actionParametersOf(
+                        eventIdKey to calendarItem.eventId
+                    )
+            ))
+            .fillMaxWidth()
+            .padding(widgetPadding)
+    ) {
+        Text(
+            maxLines = 1,
+            style = TextStyle(
+                color = GlanceTheme.colors.onSurface
+            ),
+            text = calendarItem.title
+        )
+        Text(
+            maxLines = 1,
+            style = TextStyle(
+                color = GlanceTheme.colors.onSurface
+            ),
+            text = "From ${
+                calendarItem.startTime.format(
+                    timeFormatter
+                )
+            }"
+        )
     }
 }
 

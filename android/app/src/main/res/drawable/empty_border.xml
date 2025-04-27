@@ -7,7 +7,7 @@
                 android:color="@color/empty_widget_color"
                 android:dashWidth="8dip"
                 android:dashGap="4dip" />
-            <corners android:radius="4dip" />
+            <corners android:radius="8dip" />
         </shape>
     </item>
 <!--    <item>-->
