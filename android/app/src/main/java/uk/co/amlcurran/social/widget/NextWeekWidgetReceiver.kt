@@ -67,7 +67,7 @@ private fun NextWeek(
                         Column(GlanceModifier.padding(bottom = 12.dp)) {
                             Text(
                                 text = slot.startTimestamp.format(formatter),
-                                modifier = GlanceModifier.padding(bottom = 4.dp),
+                                modifier = GlanceModifier.padding(bottom = 6.dp),
                                 style = TextStyle(
                                     fontSize = 12.sp,
                                     color = GlanceTheme.colors.onBackground
@@ -175,7 +175,7 @@ class NextWeekWidget: GlanceAppWidget() {
             UserSettings(context)
         ).defaultPredicate) }
         val timestamp = Clock.System.now()
-        val source = eventsService.getCalendarSource(14, timestamp)
+        val source = eventsService.getCalendarSource(7, timestamp)
         provideContent {
             NextWeek(source.slots)
         }
