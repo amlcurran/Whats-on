@@ -3,6 +3,7 @@ package uk.co.amlcurran.social.details
 import android.content.Context
 import android.content.Intent
 import android.location.Geocoder
+import android.util.Log
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,9 +23,13 @@ import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.supervisorScope
+import kotlinx.coroutines.suspendCancellableCoroutine
 import uk.co.amlcurran.social.Event
+import java.io.IOException
 import kotlin.coroutines.suspendCoroutine
 
 private suspend fun findLocation(context: Context, location: String): LatLng? {
@@ -33,10 +38,14 @@ private suspend fun findLocation(context: Context, location: String): LatLng? {
             val result = Geocoder(context).getFromLocationName(location, 10)?.firstOrNull()
             val latLng = result?.let { LatLng(it.latitude, it.longitude) }
             continuation.resumeWith(Result.success(latLng))
-        } catch (e: Throwable) {
+        } catch (e: Exception) {
             continuation.resumeWith(Result.failure(e))
         }
     }
+}
+
+private val handler = CoroutineExceptionHandler { _, e ->
+    Log.e("Caught", e.toString())
 }
 
 @Composable
@@ -45,9 +54,11 @@ fun EventMap(modifier: Modifier = Modifier, event: Event) {
     val context = LocalContext.current
     LaunchedEffect(event.location) {
         event.location?.let {
-            launch(Dispatchers.IO) {
-                if (it.isNotBlank()) {
-                    findLocation(context, it)?.let { setLocation(it) }
+            supervisorScope {
+                launch(handler) {
+                    if (it.isNotBlank()) {
+                        findLocation(context, it)?.let { setLocation(it) }
+                    }
                 }
             }
         }

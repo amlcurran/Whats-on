@@ -1,5 +1,6 @@
 package uk.co.amlcurran.social
 
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.clickable
@@ -9,17 +10,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.LocationOn
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TimePickerSelectionMode
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -28,20 +26,26 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.atTime
+import kotlinx.datetime.toInstant
+import kotlinx.datetime.toLocalDateTime
+import java.sql.Time
 
 @Composable
-fun EmptyView(modifier: Modifier = Modifier, editMode: Boolean = false) {
+fun EmptyView(modifier: Modifier = Modifier, start: Instant, editMode: Boolean = false) {
     val (isEditMode, setEditMode) = remember { mutableStateOf(editMode) }
     val color = colorResource(id = R.color.empty_color)
     val density = LocalContext.current.resources.displayMetrics.density
@@ -77,7 +81,7 @@ fun EmptyView(modifier: Modifier = Modifier, editMode: Boolean = false) {
             }
     ) {
         if (isEditMode) {
-            EditMode(setEditMode)
+            EditMode(start, setEditMode, { Log.e("TAG", it.toString()) })
         } else {
             Text(
                 "Nothing on",
@@ -105,15 +109,24 @@ private fun TimeChip(initial: TimeOfDay, prefix: String, onEdit: (TimeOfDay) -> 
     if (showStart) {
         TimePickerDialog({
             setShowStart(false)
+            startState.selection = TimePickerSelectionMode.Hour
         }, {
             onEdit(TimeOfDay.fromHours(startState.hour))
         }, startState)
     }
 }
 
+fun Instant.withTimeOfDay(timeOfDay: TimeOfDay, timeZone: TimeZone = TimeZone.currentSystemDefault()): Instant {
+    return toLocalDateTime(timeZone).date.atTime(timeOfDay.hoursInDay().toInt(), 0).toInstant(timeZone)
+}
+
+data class AddEventRequest(val title: String, val start: Instant, val end: Instant)
+
 @Composable
 private fun EditMode(
-    setEditMode: (Boolean) -> Unit
+    start: Instant,
+    setEditMode: (Boolean) -> Unit,
+    onAdd: (request: AddEventRequest) -> Unit
 ) {
     val (title, setTitle) = remember { mutableStateOf("") }
     val context = LocalContext.current
@@ -126,7 +139,8 @@ private fun EditMode(
     }
     Column {
         TextField(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .focusRequester(focusRequester),
             colors = OutlinedTextFieldDefaults.colors(
                 errorBorderColor = Color.Transparent,
@@ -143,19 +157,19 @@ private fun EditMode(
                 startTime.value = it
             }
             TimeChip(endTime.value, "To") {
-                startTime.value = it
+                endTime.value = it
             }
-            SuggestionChip({
-
-            }, label = {
-                Text("Location")
-            }, icon = {
-                Icon(
-                    Icons.Rounded.LocationOn,
-                    modifier = Modifier.size(18.dp),
-                    contentDescription = null
-                )
-            })
+//            SuggestionChip({
+//
+//            }, label = {
+//                Text("Location")
+//            }, icon = {
+//                Icon(
+//                    Icons.Rounded.LocationOn,
+//                    modifier = Modifier.size(18.dp),
+//                    contentDescription = null
+//                )
+//            })
         }
         Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxWidth()) {
             TextButton({
@@ -163,6 +177,7 @@ private fun EditMode(
             }) { Text("Cancel") }
             TextButton({
                 setEditMode(false)
+                onAdd(AddEventRequest(title, start.withTimeOfDay(startTime.value), start.withTimeOfDay(endTime.value)))
             }) { Text("Add") }
         }
     }
@@ -173,7 +188,8 @@ private fun EditMode(
 fun EmptyViewPreview() {
     EmptyView(Modifier
         .fillMaxWidth()
-        .padding(16.dp))
+        .padding(16.dp),
+        Clock.System.now())
 }
 
 @Preview(showBackground = true)
@@ -181,5 +197,6 @@ fun EmptyViewPreview() {
 fun EmptyViewPreviewEdit() {
     EmptyView(Modifier
         .fillMaxWidth()
-        .padding(16.dp), editMode = true)
+        .padding(16.dp),
+        Clock.System.now(), editMode = true)
 }

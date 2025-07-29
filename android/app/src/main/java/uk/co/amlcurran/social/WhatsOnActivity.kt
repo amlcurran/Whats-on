@@ -2,6 +2,7 @@ package uk.co.amlcurran.social
 
 import android.Manifest
 import android.content.Intent
+import android.icu.util.TimeUnit
 import android.os.Bundle
 import android.provider.CalendarContract
 import androidx.activity.ComponentActivity
@@ -23,10 +24,24 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.glance.appwidget.GlanceAppWidgetManager
 import androidx.lifecycle.lifecycleScope
+import androidx.work.OneTimeWorkRequest
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.PeriodicWorkRequest
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import kotlinx.coroutines.launch
 import uk.co.amlcurran.social.details.EventDetailActivity
+import uk.co.amlcurran.social.widget.NextWeekWidget
+import uk.co.amlcurran.social.widget.WidgetUpdateWorker
 import uk.co.amlcurran.starlinginterview.AsyncContent
+import java.time.Duration
+import java.time.temporal.ChronoUnit
+import java.time.temporal.TemporalUnit
+import java.util.Calendar
+import kotlin.time.DurationUnit
+import kotlin.time.toDuration
 
 class WhatsOnActivity : AppCompatActivity() {
     private val viewModel: EventListViewModel by viewModels()
@@ -55,6 +70,21 @@ class WhatsOnActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        lifecycleScope.launch {
+            val manager = GlanceAppWidgetManager(this@WhatsOnActivity)
+            val widget = NextWeekWidget()
+            val glanceIds = manager.getGlanceIds(NextWeekWidget::class.java)
+            glanceIds.forEach { glanceId ->
+                widget.update(this@WhatsOnActivity, glanceId)
+            }
+            if (glanceIds.isNotEmpty()) {
+                val dailyWorkRequest = WidgetUpdateWorker.buildWorkRequest()
+                WorkManager.getInstance(applicationContext)
+                    .enqueue(dailyWorkRequest)
+            }
+         }
+
         setContent {
             WhatsOnTheme {
                 Scaffold(
@@ -85,7 +115,6 @@ class WhatsOnActivity : AppCompatActivity() {
             }
         }
     }
-
 
     override fun onResume() {
         super.onResume()

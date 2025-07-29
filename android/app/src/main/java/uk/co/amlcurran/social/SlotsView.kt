@@ -47,7 +47,8 @@ fun SlotsView(calendarSlots: List<CalendarSlot>, onEventClick: (EventCalendarIte
                 EmptyView(modifier = Modifier
                     .clickable { onEmptySlotClick(slot) }
                     .padding(horizontal = 16.dp)
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
+                    slot.startTimestamp
                 )
             } else if (slot.items.count() == 1) {
                 // This is dodgy as heck
