@@ -17,19 +17,12 @@ kotlin {
     }
 
     androidTarget()
+    iosArm64()
+    iosSimulatorArm64()
 
-    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
-        System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
-        else -> ::iosX64
-    }
+    // Apply the default hierarchy again. It'll create, for example, the iosMain source set:
+    applyDefaultHierarchyTemplate()
 
-    iosTarget("ios") {
-        binaries {
-            framework {
-                baseName = "shared"
-            }
-        }
-    }
     sourceSets {
         val commonMain by getting {
             dependencies {
