@@ -11,14 +11,39 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.Delete
+import androidx.compose.material.icons.rounded.ExitToApp
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.compose.LifecycleStartEffect
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -34,24 +59,94 @@ import uk.co.amlcurran.social.R
 import uk.co.amlcurran.social.UserSettings
 import uk.co.amlcurran.social.databinding.ActivityEventDetailsBinding
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EventDetails(event: Event) {
-    Column {
-        EventCard(Modifier.fillMaxWidth(), event)
-        EventMap(Modifier.offset(y = (-8).dp).zIndex(-1f), event)
+fun EventDetails(eventId: String, onNavigateBack: () -> Unit) {
+    val (event, setEvent) = remember { mutableStateOf<Event?>(null) }
+    val (showDialog, setShowDialog) = remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+    val snackbar = remember { SnackbarHostState() }
+    val eventsRepository = remember {
+        val calendarRepository = UserSettings(context)
+        val eventsRepository = AndroidEventsRepository(context.contentResolver)
+        val predicate = EventPredicates(UserSettings(context.applicationContext)).defaultPredicate
+        EventsService(eventsRepository, JodaCalculator(), calendarRepository, predicate)
+    }
+    LifecycleStartEffect(eventId) {
+        try {
+            val loadedEvent = eventsRepository.eventWithId(eventId)!!
+            setEvent(loadedEvent)
+        } catch (e: Error) {
+            e.printStackTrace()
+            coroutineScope.launch {
+                snackbar.showSnackbar("Something went wrong")
+            }
+        }
+        onStopOrDispose {
+
+        }
+    }
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbar) },
+        topBar = {
+            TopAppBar(
+                title = { },
+                navigationIcon = {
+                    IconButton(onNavigateBack) {
+                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, "Back")
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = colorResource(id = R.color.background)
+                ),
+            )
+        },
+        bottomBar = {
+            BottomAppBar {
+                IconButton({
+                    val id = eventId.toLong()
+                    val eventUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, id)
+                    context.startActivity(Intent(Intent.ACTION_VIEW).setData(eventUri))
+                }) {
+                    Icon(Icons.Rounded.ExitToApp, "Open in calendar")
+                }
+                IconButton({ setShowDialog(true) }) {
+                    Icon(Icons.Rounded.Delete, "Delete")
+                }
+            }
+        }
+    ) {
+        if (showDialog) {
+            AlertDialog(
+                onDismissRequest = { setShowDialog(false) },
+                confirmButton = { TextButton({
+                    eventsRepository.delete(eventId)
+                    onNavigateBack()
+                }) { Text("Confirm") } },
+                text = { Text(text = stringResource(R.string.confirm_delete_message)) }
+            )
+        }
+        if (event != null) {
+            EventCardLoaded(modifier = Modifier.padding(it), event)
+        }
+    }
+}
+
+@Composable
+private fun EventCardLoaded(modifier: Modifier = Modifier, event: Event) {
+    Column(Modifier.padding(horizontal = 16.dp)) {
+        EventCard(modifier.fillMaxWidth(), event)
+        EventMap(Modifier
+            .offset(y = (-32).dp)
+            .zIndex(-1f), event
+        )
     }
 }
 
 class EventDetailActivity : AppCompatActivity() {
 
     private lateinit var eventId: String
-    private val jodaCalculator = JodaCalculator()
-    private val events by lazy {
-        val calendarRepository = UserSettings(this)
-        val eventsRepository = AndroidEventsRepository(contentResolver)
-        val predicate = EventPredicates(UserSettings(application)).defaultPredicate
-        EventsService(eventsRepository, jodaCalculator, calendarRepository, predicate)
-    }
     private lateinit var binding: ActivityEventDetailsBinding
 
     companion object {
@@ -76,64 +171,15 @@ class EventDetailActivity : AppCompatActivity() {
         eventId = intent.getStringExtra(KEY_EVENT_ID)
             ?: throw IllegalStateException("missing event ID")
 
-        lifecycleScope.launchWhenCreated {
-            try {
-                val event = events.eventWithId(eventId)!!
-                render(event)
-            } catch (e: Error) {
-                e.printStackTrace()
-                Snackbar.make(binding.root, R.string.something_went_wrong, Snackbar.LENGTH_LONG)
-                    .show()
+        render(eventId)
+    }
+
+    private fun render(event: String) {
+        binding.eventCard2.setContent {
+            EventDetails(event) {
+                finish()
             }
         }
-
-        binding.detailToolbar.setOnMenuItemClickListener(::onOptionsItemSelected)
-        binding.detailToolbar.setNavigationOnClickListener { finish() }
-    }
-
-    private fun render(event: Event) {
-        binding.eventCard2.setContent {
-            EventDetails(event)
-        }
-        binding.detailToolbar.menu.findItem(R.id.menu_open_outside).isVisible = true
-        binding.detailToolbar.menu.findItem(R.id.menu_delete_event).isVisible = true
-        binding.detailToolbar.menu.findItem(R.id.menu_hide_event).isVisible = true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.menu_open_outside -> launchInExternalCalendar()
-            R.id.menu_delete_event -> confirmDelete()
-            R.id.menu_hide_event -> hideEvent()
-        }
-        return true
-    }
-
-    private fun hideEvent() {
-        val calendarRepository = UserSettings(this)
-        calendarRepository.hide(eventId)
-        finish()
-    }
-
-    private fun confirmDelete() {
-        ConfirmDelete().apply {
-            onConfirm = { deleteEvent() }
-            show(supportFragmentManager, null)
-        }
-
-    }
-
-    private fun deleteEvent() {
-        lifecycleScope.launch {
-            events.delete(eventId)
-            finish()
-        }
-    }
-
-    private fun launchInExternalCalendar() {
-        val id = eventId.toLong()
-        val eventUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, id)
-        startActivity(Intent(Intent.ACTION_VIEW).setData(eventUri))
     }
 
 }
@@ -154,7 +200,7 @@ class ConfirmDelete : DialogFragment() {
 @Composable
 @Preview(showBackground = true)
 fun EventDetailPreview() {
-    EventDetails(Event(
+    EventCardLoaded(event = Event(
         EventCalendarItem(
             "abc",
             "calendar",

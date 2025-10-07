@@ -1,8 +1,8 @@
 package uk.co.amlcurran.social
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
-import android.icu.util.TimeUnit
 import android.os.Bundle
 import android.provider.CalendarContract
 import androidx.activity.ComponentActivity
@@ -21,27 +21,27 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
+import androidx.compose.material3.adaptive.layout.AnimatedPane
+import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffoldRole
+import androidx.compose.material3.adaptive.navigation.NavigableListDetailPaneScaffold
+import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaffoldNavigator
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.glance.appwidget.GlanceAppWidgetManager
 import androidx.lifecycle.lifecycleScope
-import androidx.work.OneTimeWorkRequest
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.PeriodicWorkRequest
-import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import kotlinx.coroutines.launch
 import uk.co.amlcurran.social.details.EventDetailActivity
+import uk.co.amlcurran.social.details.EventDetails
 import uk.co.amlcurran.social.widget.NextWeekWidget
 import uk.co.amlcurran.social.widget.WidgetUpdateWorker
 import uk.co.amlcurran.starlinginterview.AsyncContent
-import java.time.Duration
-import java.time.temporal.ChronoUnit
-import java.time.temporal.TemporalUnit
-import java.util.Calendar
-import kotlin.time.DurationUnit
-import kotlin.time.toDuration
 
 class WhatsOnActivity : AppCompatActivity() {
     private val viewModel: EventListViewModel by viewModels()
@@ -68,6 +68,7 @@ class WhatsOnActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+    @OptIn(ExperimentalMaterial3AdaptiveApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -87,31 +88,37 @@ class WhatsOnActivity : AppCompatActivity() {
 
         setContent {
             WhatsOnTheme {
-                Scaffold(
-                    topBar = {
-                        Row(modifier = Modifier.statusBarsPadding()) {
-                            HeaderView(modifier = Modifier.weight(1f))
-                            IconButton(onClick = { SettingsActivity.start(this@WhatsOnActivity) },
-                                colors = IconButtonDefaults.iconButtonColors(
-                                    contentColor = MaterialTheme.colorScheme.onBackground
-                                )) {
-                                Icon(Icons.Outlined.Settings, contentDescription = "Settings")
+                val scaffoldNavigator = rememberListDetailPaneScaffoldNavigator<String>()
+                val scope = rememberCoroutineScope()
+                val context = LocalContext.current
+
+                NavigableListDetailPaneScaffold(
+                    navigator = scaffoldNavigator,
+                    listPane = {
+                        AnimatedPane {
+                            MainList(viewModel, { event ->
+                                scope.launch {
+                                    scaffoldNavigator.navigateTo(
+                                        ListDetailPaneScaffoldRole.Detail,
+                                        event.eventId
+                                    )
+                                }
+                            }, ::emptySelected)
+                        }
+                    },
+                    detailPane = {
+                        AnimatedPane {
+                            // Show the detail pane content if selected item is available
+                            scaffoldNavigator.currentDestination?.contentKey?.let { eventId ->
+                                EventDetails(eventId) {
+                                    scope.launch {
+                                        scaffoldNavigator.navigateBack()
+                                    }
+                                }
                             }
                         }
                     },
-                    containerColor = colorResource(id = R.color.background)
-                ) { padding ->
-                    val subscriptionsState = viewModel.source
-                        .collectAsState()
-                    AsyncContent(
-                        state = subscriptionsState.value,
-                        modifier = Modifier
-                            .padding(padding)
-                            .background(colorResource(id = R.color.background))
-                    ) { calendarSource ->
-                        SlotsView(calendarSource.slots, ::eventSelected, ::emptySelected)
-                    }
-                }
+                )
             }
         }
     }
@@ -130,4 +137,40 @@ class WhatsOnActivity : AppCompatActivity() {
         )
     }
 
+}
+
+@Composable
+private fun MainList(
+    viewModel: EventListViewModel,
+    eventSelected: (EventCalendarItem) -> Unit,
+    emptySelected: (CalendarSlot) -> Unit
+) {
+    val context = LocalContext.current
+    Scaffold(
+        topBar = {
+            Row(modifier = Modifier.statusBarsPadding()) {
+                HeaderView(modifier = Modifier.weight(1f))
+                IconButton(
+                    onClick = { SettingsActivity.start(context as Activity) },
+                    colors = IconButtonDefaults.iconButtonColors(
+                        contentColor = MaterialTheme.colorScheme.onBackground
+                    )
+                ) {
+                    Icon(Icons.Outlined.Settings, contentDescription = "Settings")
+                }
+            }
+        },
+        containerColor = colorResource(id = R.color.background)
+    ) { padding ->
+        val subscriptionsState = viewModel.source
+            .collectAsState()
+        AsyncContent(
+            state = subscriptionsState.value,
+            modifier = Modifier
+                .padding(padding)
+                .background(colorResource(id = R.color.background))
+        ) { calendarSource ->
+            SlotsView(calendarSource.slots, eventSelected, emptySelected)
+        }
+    }
 }

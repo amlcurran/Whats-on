@@ -25,6 +25,7 @@ import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -53,11 +54,14 @@ fun EventMap(modifier: Modifier = Modifier, event: Event) {
     val (location, setLocation) = remember { mutableStateOf<LatLng?>(null) }
     val context = LocalContext.current
     LaunchedEffect(event.location) {
+        delay(500)
         event.location?.let {
             supervisorScope {
                 launch(handler) {
                     if (it.isNotBlank()) {
-                        findLocation(context, it)?.let { setLocation(it) }
+                        findLocation(context, it)?.let {
+                            setLocation(it)
+                        }
                     }
                 }
             }

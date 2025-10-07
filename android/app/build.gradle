@@ -68,6 +68,10 @@ dependencies {
     implementation("androidx.glance:glance-appwidget-preview:1.1.1")
     implementation("androidx.glance:glance-preview:1.1.1")
 
+    implementation("androidx.compose.material3.adaptive:adaptive:1.2.0-beta03")
+    implementation("androidx.compose.material3.adaptive:adaptive-layout:1.2.0-beta03")
+    implementation("androidx.compose.material3.adaptive:adaptive-navigation:1.2.0-beta03")
+
     implementation "androidx.compose.ui:ui"
     debugImplementation "androidx.compose.ui:ui-tooling"
     implementation "androidx.compose.ui:ui-tooling-preview"
