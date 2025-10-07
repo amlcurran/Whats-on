@@ -1,17 +1,14 @@
 package uk.co.amlcurran.social.details
 
-import android.app.Dialog
 import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -42,11 +39,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.compose.LifecycleStartEffect
-import androidx.lifecycle.lifecycleScope
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Instant
 import uk.co.amlcurran.social.AndroidEventsRepository
@@ -182,19 +175,6 @@ class EventDetailActivity : AppCompatActivity() {
         }
     }
 
-}
-
-class ConfirmDelete : DialogFragment() {
-
-    lateinit var onConfirm: () -> Unit
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return MaterialAlertDialogBuilder(requireContext())
-            .setMessage(R.string.confirm_delete_message)
-            .setPositiveButton(R.string.delete) { _, _ -> onConfirm() }
-            .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
-            .create()
-    }
 }
 
 @Composable
