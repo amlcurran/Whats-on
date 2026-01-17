@@ -8,7 +8,9 @@ import android.provider.CalendarContract
 import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
@@ -34,6 +36,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
@@ -129,10 +132,10 @@ fun EventDetails(eventId: String, onNavigateBack: () -> Unit) {
 
 @Composable
 private fun EventCardLoaded(modifier: Modifier = Modifier, event: Event) {
-    Column(Modifier.padding(horizontal = 16.dp)) {
-        EventCard(modifier.fillMaxWidth(), event)
+    Column(modifier.padding(horizontal = 16.dp)) {
+        EventCard(Modifier.fillMaxWidth(), event)
         EventMap(Modifier
-            .offset(y = (-0).dp)
+            .offset(y = (-8).dp)
             .zIndex(-1f), event
         )
     }
@@ -158,6 +161,7 @@ class EventDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
 
         eventId = intent.getStringExtra(KEY_EVENT_ID)
             ?: throw IllegalStateException("missing event ID")

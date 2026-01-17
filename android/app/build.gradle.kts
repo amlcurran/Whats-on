@@ -24,7 +24,7 @@ android {
             //proguardFiles += listOf(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         debug {
-//            debuggable = false
+            isDebuggable = false
         }
     }
 

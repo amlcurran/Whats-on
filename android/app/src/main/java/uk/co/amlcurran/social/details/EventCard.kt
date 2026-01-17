@@ -55,30 +55,28 @@ fun DarkPreviewEventCard() {
 
 @Composable
 fun EventCard(modifier: Modifier = Modifier, event: Event) {
-    WhatsOnTheme {
-        Column(
-            modifier
-                .background(
-                    color = MaterialTheme.colorScheme.surface,
-                    shape = RoundedCornerShape(8.dp)
+    Column(
+        modifier
+            .background(
+                color = MaterialTheme.colorScheme.surface,
+                shape = RoundedCornerShape(8.dp)
+            )
+            .padding(16.dp)
+    ) {
+        Text(
+            event.item.title,
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier.padding(bottom = 2.dp)
+        )
+        Text(
+            "From ${event.item.startTime.format(DateTimeFormat.shortTime())} to ${
+                event.item.endTime.format(
+                    DateTimeFormat.shortTime()
                 )
-                .padding(16.dp)
-        ) {
-            Text(
-                event.item.title,
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.padding(bottom = 2.dp)
-            )
-            Text(
-                "From ${event.item.startTime.format(DateTimeFormat.shortTime())} to ${
-                    event.item.endTime.format(
-                        DateTimeFormat.shortTime()
-                    )
-                }",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-        }
+            }",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
     }
 }
