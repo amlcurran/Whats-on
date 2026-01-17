@@ -1,5 +1,6 @@
 package uk.co.amlcurran.social
 
+import kotlinx.collections.immutable.ImmutableList
 import kotlinx.datetime.Instant
 
 interface EventsRepository {
@@ -14,7 +15,7 @@ interface EventsRepository {
     fun event(eventId: String): Event?
 
     fun delete(eventId: String): Boolean
-    fun attendeesForEvent(event: Foo): List<Attendee>
+    fun attendeesForEvent(event: Foo): ImmutableList<Attendee>
 }
 
 data class Attendee(

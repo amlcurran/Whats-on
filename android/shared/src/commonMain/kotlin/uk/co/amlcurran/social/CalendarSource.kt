@@ -1,3 +1,5 @@
 package uk.co.amlcurran.social
 
-data class CalendarSource(val slots: List<CalendarSlot>)
+import kotlinx.collections.immutable.ImmutableList
+
+data class CalendarSource(val slots: ImmutableList<CalendarSlot>)

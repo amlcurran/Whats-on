@@ -1,5 +1,7 @@
 package uk.co.amlcurran.social
 
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.datetime.Instant
 
 data class Event(val item: EventCalendarItem, val location: String?)
@@ -55,17 +57,16 @@ class EventsService(
             .toList()
 
         val itemArray = (0 until numberOfDays).map {
-            CalendarSlot(mutableListOf(), startOfTodayBlock(it), endOfTodayBlock(it))
+            CalendarSlot(persistentListOf(), startOfTodayBlock(it), endOfTodayBlock(it))
         }.toMutableList()
         val epochToNow = now.daysSinceEpoch(timeCalculator)
         for (item in calendarItems) {
             val key = item.startTime.daysSinceEpoch(timeCalculator) - epochToNow
             val slot = itemArray[key]
-            slot.addItem(item)
-            itemArray[key] = slot
+            itemArray[key] = slot.appending(item)
         }
 
-        return CalendarSource(itemArray)
+        return CalendarSource(itemArray.toImmutableList())
     }
 
     private fun startOfTodayBlock(position: Int): Instant {

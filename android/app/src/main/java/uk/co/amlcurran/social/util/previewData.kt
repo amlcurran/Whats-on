@@ -1,5 +1,8 @@
 package uk.co.amlcurran.social.util
 
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import uk.co.amlcurran.social.CalendarSlot
@@ -15,23 +18,23 @@ val previewSlots = (0 until 10).map {
         startTimestamp,
         startTimestamp.plus(6.toDuration(DurationUnit.HOURS))
     )
-}
+}.toImmutableList()
 
 private fun makeEvents(
     position: Int,
     startTimestamp: Instant
-): MutableList<EventCalendarItem> {
+): ImmutableList<EventCalendarItem> {
     val hasEvent = position % 3 == 0
     val hasTwoEvents = position % 7 == 0
     return when {
-        hasTwoEvents -> mutableListOf(
+        hasTwoEvents -> persistentListOf(
             EventCalendarItem(
                 UUID.randomUUID().toString(),
                 "abc",
                 "Event ${position + 1}",
                 startTimestamp.plus(30.toDuration(DurationUnit.MINUTES)),
                 startTimestamp.plus(90.toDuration(DurationUnit.MINUTES)),
-                listOf()
+                persistentListOf()
             ),
             EventCalendarItem(
                 UUID.randomUUID().toString(),
@@ -39,19 +42,19 @@ private fun makeEvents(
                 "Other Event ${position + 1}",
                 startTimestamp.plus(45.toDuration(DurationUnit.MINUTES)),
                 startTimestamp.plus(90.toDuration(DurationUnit.MINUTES)),
-                listOf()
+                persistentListOf()
             )
         )
-        hasEvent -> mutableListOf(
+        hasEvent -> persistentListOf(
             EventCalendarItem(
                 UUID.randomUUID().toString(),
                 "abc",
                 "Event ${position + 1}",
                 startTimestamp.plus(30.toDuration(DurationUnit.MINUTES)),
                 startTimestamp.plus(90.toDuration(DurationUnit.MINUTES)),
-                listOf()
+                persistentListOf()
             )
         )
-        else -> mutableListOf()
+        else -> persistentListOf()
     }
 }

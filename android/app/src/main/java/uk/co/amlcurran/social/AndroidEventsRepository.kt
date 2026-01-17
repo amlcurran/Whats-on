@@ -5,6 +5,9 @@ import android.content.ContentUris
 import android.database.Cursor
 import android.provider.CalendarContract
 import android.provider.CalendarContract.Instances.CONTENT_URI
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.datetime.Instant
 
 class AndroidEventsRepository(private val contentResolver: ContentResolver) : EventsRepository {
@@ -54,7 +57,7 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver) : Ev
             val title = accessor.title
             val time = accessor.dtStartTime
             val endTime = accessor.dtEndTime
-            val item = EventCalendarItem(eventId, "", title, time, endTime, emptyList())
+            val item = EventCalendarItem(eventId, "", title, time, endTime, persistentListOf())
             val location = accessor.getString(CalendarContract.Events.EVENT_LOCATION)
             cursor.close()
             Event(item, location)
@@ -69,7 +72,7 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver) : Ev
         return contentResolver.delete(contentUri, null, null) == 1
     }
 
-    override fun attendeesForEvent(event: Foo): List<Attendee> {
+    override fun attendeesForEvent(event: Foo): ImmutableList<Attendee> {
         val cursor = CalendarContract.Attendees.query(
             contentResolver, event.eventId.toLong(), arrayOf(
                 CalendarContract.Attendees._ID,
@@ -87,7 +90,7 @@ class AndroidEventsRepository(private val contentResolver: ContentResolver) : Ev
                 it.getString(nameIndex),
                 it.getString(emailIndex)
             )
-        }
+        }.toImmutableList()
     }
 
     companion object {

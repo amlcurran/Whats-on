@@ -1,9 +1,11 @@
 package uk.co.amlcurran.social
 
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.datetime.Instant
 
 data class CalendarSlot(
-    val items: MutableList<EventCalendarItem>,
+    val items: ImmutableList<EventCalendarItem>,
     val startTimestamp: Instant,
     val endTimestamp: Instant
 ) {
@@ -14,8 +16,10 @@ data class CalendarSlot(
     val firstItem: CalendarItem
         get() = items.firstOrNull() ?: EmptyCalendarItem(startTimestamp, endTimestamp)
 
-    fun addItem(calendarItem: EventCalendarItem) {
-        items.add(calendarItem)
+    fun appending(calendarItem: EventCalendarItem): CalendarSlot {
+        return copy(
+            items = (items + calendarItem).toImmutableList()
+        )
     }
 
 }

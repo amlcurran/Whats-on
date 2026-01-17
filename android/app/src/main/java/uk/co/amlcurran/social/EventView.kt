@@ -16,6 +16,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.datetime.Clock
 import org.joda.time.format.DateTimeFormat
 import kotlin.time.DurationUnit
@@ -58,7 +59,7 @@ fun EventViewPreview() {
                 "An exciting event",
                 Clock.System.now().minus(40000.toDuration(DurationUnit.MILLISECONDS)),
                 Clock.System.now(),
-                emptyList()
+                persistentListOf()
             )
         )
     }

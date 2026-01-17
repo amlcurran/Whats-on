@@ -1,6 +1,7 @@
 package uk.co.amlcurran.social
 
 import android.util.Log
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -18,13 +19,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.ImmutableList
 import kotlinx.datetime.Instant
 import org.joda.time.format.DateTimeFormat
 import uk.co.amlcurran.social.util.previewSlots
 import java.util.concurrent.TimeUnit
 
 @Composable
-fun SlotsView(calendarSlots: List<CalendarSlot>, onEventClick: (EventCalendarItem) -> Unit, onEmptySlotClick: (CalendarSlot) -> Unit) {
+fun SlotsView(calendarSlots: ImmutableList<CalendarSlot>, onEventClick: (EventCalendarItem) -> Unit, onEmptySlotClick: (CalendarSlot) -> Unit) {
     val formatter = remember {
         DateTimeFormat.fullDate()
     }
@@ -45,6 +47,7 @@ fun SlotsView(calendarSlots: List<CalendarSlot>, onEventClick: (EventCalendarIte
             )
             if (slot.isEmpty) {
                 EmptyView(modifier = Modifier
+                    .animateContentSize()
                     .clickable { onEmptySlotClick(slot) }
                     .padding(horizontal = 16.dp)
                     .fillMaxWidth(),
@@ -55,12 +58,13 @@ fun SlotsView(calendarSlots: List<CalendarSlot>, onEventClick: (EventCalendarIte
                 val event = slot.firstItem as EventCalendarItem
                 EventView(event = event,
                     modifier = Modifier
+                        .animateContentSize()
                         .clickable { onEventClick(event) }
                         .padding(horizontal = 16.dp)
                         .fillMaxWidth()
                 )
             } else {
-                BoxWithConstraints {
+                BoxWithConstraints(Modifier.animateContentSize()) {
                     LazyRow(
                         horizontalArrangement = Arrangement.spacedBy(16.dp),
                         contentPadding = PaddingValues(horizontal = 16.dp)

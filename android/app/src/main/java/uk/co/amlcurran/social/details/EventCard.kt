@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.datetime.Instant
 import org.joda.time.format.DateTimeFormat
 import uk.co.amlcurran.social.Event
@@ -29,7 +30,7 @@ fun PreviewEventCard() {
                 "A fun event",
                 Instant.fromEpochMilliseconds(System.currentTimeMillis()),
                 Instant.fromEpochMilliseconds(System.currentTimeMillis() - 60 * 60 * 1000 * 2),
-                emptyList()
+                persistentListOf()
             ), null
         )
     )
@@ -46,7 +47,7 @@ fun DarkPreviewEventCard() {
                 "A fun event",
                 Instant.fromEpochMilliseconds(System.currentTimeMillis()),
                 Instant.fromEpochMilliseconds(System.currentTimeMillis() - 60 * 60 * 1000 * 2),
-                emptyList()
+                persistentListOf()
             ), null
         )
     )

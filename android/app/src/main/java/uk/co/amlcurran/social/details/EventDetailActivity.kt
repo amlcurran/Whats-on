@@ -41,6 +41,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.compose.LifecycleStartEffect
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Instant
 import uk.co.amlcurran.social.AndroidEventsRepository
@@ -180,7 +181,7 @@ fun EventDetailPreview() {
             "A fun event",
             Instant.fromEpochMilliseconds(System.currentTimeMillis()),
             Instant.fromEpochMilliseconds(System.currentTimeMillis() - 60 * 60 * 1000 * 2),
-            emptyList()
+            persistentListOf()
         ), "Kings Cross St. Pancras"
     ))
 }
