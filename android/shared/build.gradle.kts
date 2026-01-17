@@ -1,8 +1,7 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin("multiplatform")
-    id("com.android.library")
+    id("com.android.kotlin.multiplatform.library")
 }
 
 java {
@@ -16,7 +15,11 @@ kotlin {
         languageVersion.set(JavaLanguageVersion.of(21))
     }
 
-    androidTarget()
+    android {
+        compileSdk = 33
+            minSdk = 21
+        namespace = "uk.co.amlcurran.whatson.shared"
+    }
     iosArm64()
     iosSimulatorArm64()
 
@@ -48,13 +51,4 @@ kotlin {
         val iosMain by getting
         val iosTest by getting
     }
-}
-
-android {
-    compileSdk = 33
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdk = 21
-    }
-    namespace = "uk.co.amlcurran.whatson.shared"
 }
