@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.provider.CalendarContract
 import android.view.LayoutInflater
 import android.view.View
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -50,7 +51,6 @@ import uk.co.amlcurran.social.EventsService
 import uk.co.amlcurran.social.JodaCalculator
 import uk.co.amlcurran.social.R
 import uk.co.amlcurran.social.UserSettings
-import uk.co.amlcurran.social.databinding.ActivityEventDetailsBinding
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -131,7 +131,7 @@ private fun EventCardLoaded(modifier: Modifier = Modifier, event: Event) {
     Column(Modifier.padding(horizontal = 16.dp)) {
         EventCard(modifier.fillMaxWidth(), event)
         EventMap(Modifier
-            .offset(y = (-32).dp)
+            .offset(y = (-0).dp)
             .zIndex(-1f), event
         )
     }
@@ -140,7 +140,6 @@ private fun EventCardLoaded(modifier: Modifier = Modifier, event: Event) {
 class EventDetailActivity : AppCompatActivity() {
 
     private lateinit var eventId: String
-    private lateinit var binding: ActivityEventDetailsBinding
 
     companion object {
 
@@ -158,18 +157,12 @@ class EventDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityEventDetailsBinding.inflate(LayoutInflater.from(this))
-        setContentView(binding.root)
 
         eventId = intent.getStringExtra(KEY_EVENT_ID)
             ?: throw IllegalStateException("missing event ID")
 
-        render(eventId)
-    }
-
-    private fun render(event: String) {
-        binding.eventCard2.setContent {
-            EventDetails(event) {
+        setContent {
+            EventDetails(eventId) {
                 finish()
             }
         }

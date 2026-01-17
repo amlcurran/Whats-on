@@ -4,17 +4,7 @@ plugins {
     id("com.android.kotlin.multiplatform.library")
 }
 
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
-    }
-}
-
 kotlin {
-    jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
-    }
-
     android {
         compileSdk = 33
             minSdk = 21
